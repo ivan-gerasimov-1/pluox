@@ -1,0 +1,18 @@
+{
+  "name": "savee",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanJ0hnson/savee.git"
+  },
+  "author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.pw)",
+  "license": "UNLICENSED",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/EvanJ0hnson/savee/issues"
+  },
+  "homepage": "https://github.com/EvanJ0hnson/savee#readme"
+}
