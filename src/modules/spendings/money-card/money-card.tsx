@@ -11,7 +11,11 @@ export function MoneyCard(props: IMoneyCard) {
     <>
       <h3 className={styles.title}>{props.title}</h3>
 
-      <div className={styles.amount}>₽{props.amount?.toFixed(2) || '—'}</div>
+      <div className={styles.amount}>
+        {props.amount
+          ? `₽${Number.prototype.toLocaleString.call(props.amount)}`
+          : '—'}
+      </div>
     </>
   );
 }

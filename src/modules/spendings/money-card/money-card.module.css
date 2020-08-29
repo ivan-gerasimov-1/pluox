@@ -9,5 +9,9 @@
 .amount {
   font-family: system-ui;
   font-size: 2rem;
+
   text-align: right;
+  text-overflow: ellipsis;
+
+  overflow: hidden;
 }
