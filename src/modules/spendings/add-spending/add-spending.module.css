@@ -1,0 +1,15 @@
+.action {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+
+  width: 100%;
+
+  padding: 0.5rem 0.5rem 0.75rem 0.5rem;
+
+  font-family: inherit;
+  font-size: 2.5rem;
+
+  line-height: 1;
+}

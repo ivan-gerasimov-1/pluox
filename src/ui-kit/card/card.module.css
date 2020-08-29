@@ -1,0 +1,16 @@
+.card {
+  margin: 1.5rem 1rem;
+  padding: 1rem 1.25rem;
+
+  border: var(--border-light);
+  border-radius: var(--border-radius-default);
+
+  background-color: var(--color-pure-white);
+  /* box-shadow: 0 5px 10px -2px rgba(80, 80, 80, 0.125); */
+  box-shadow: 0 0.5em 1em -0.125em rgba(74, 74, 74, 0.1),
+    0 0px 0 1px rgba(74, 74, 74, 0.02);
+}
+
+.noPadding {
+  padding: 0;
+}
