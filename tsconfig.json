@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "build/",
+    "target": "ES5",
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "lib": ["ESNext"],
+    "sourceMap": true,
+    "jsx": "react",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@root/*": ["src/*"],
+      "@ui-kit/*": ["src/ui-kit/*"],
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
