@@ -5,16 +5,16 @@ import * as React from 'react';
 export function MainScreen() {
   return (
     <CardContainer>
-      <Card noPadding>
-        <AddSpending />
+      <Card>
+        <MoneyLeft />
       </Card>
 
       <Card>
         <MoneySpent />
       </Card>
 
-      <Card>
-        <MoneyLeft />
+      <Card noPadding>
+        <AddSpending />
       </Card>
     </CardContainer>
   );
