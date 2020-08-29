@@ -14,10 +14,10 @@ export let $globalState = createStore<IGlobalStateStore>(
 );
 
 export let $globalStateApi = createApi($globalState, {
-  setAdd(prevState) {
+  setAdd(prevState, payload: boolean) {
     return {
       ...prevState,
-      isAdd: true,
+      isAdd: payload,
     };
   },
 });

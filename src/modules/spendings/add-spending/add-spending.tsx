@@ -4,7 +4,7 @@ import styles from './add-spending.module.css';
 
 export function AddSpending() {
   let setAdd = React.useCallback(() => {
-    $globalStateApi.setAdd();
+    $globalStateApi.setAdd(true);
   }, []);
 
   return (
