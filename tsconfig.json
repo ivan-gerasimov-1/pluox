@@ -4,7 +4,7 @@
     "target": "ES5",
     "moduleResolution": "node",
     "module": "ESNext",
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "sourceMap": true,
     "jsx": "react",
     "skipLibCheck": true,
