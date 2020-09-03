@@ -9,7 +9,7 @@ export interface IMoneyCard {
 export function MoneyCard(props: IMoneyCard) {
   return (
     <>
-      <h3 className={styles.title}>{props.title}</h3>
+      <h2 className={styles.title}>{props.title}</h2>
 
       <div className={styles.amount}>
         {props.amount

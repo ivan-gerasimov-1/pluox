@@ -1,9 +1,7 @@
 .title {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
 
   margin-bottom: 2rem;
-
-  color: var(--color-grey-600);
 }
 
 .amount {
