@@ -34,7 +34,7 @@ let Enforce = {
 
 let config = {
   paths: {
-    entry: './src/index.tsx',
+    entry: './src/index.ts',
     dist: path.resolve(__dirname, 'build'),
     public: path.resolve(__dirname, 'public'),
     indexHtmlTemplate: path.resolve(__dirname, 'src', 'index.html'),
