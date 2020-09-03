@@ -1,0 +1,35 @@
+{
+  "name": "Savee",
+  "short_name": "Savee",
+  "description": "Start saving money today",
+  "icons": [
+    {
+      "src": "/icons/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#C5E1A5",
+  "theme_color": "#C5E1A5",
+  "shortcuts": [
+    {
+      "name": "Add expense",
+      "description": "Add new expense to the list",
+      "url": "/expenses/add",
+      "icons": [
+        {
+          "src": "/icons/icon_512.png",
+          "sizes": "512x512"
+        }
+      ]
+    }
+  ]
+}
