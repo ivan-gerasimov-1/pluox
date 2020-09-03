@@ -10,6 +10,8 @@
   --color-grey-500: #9e9e9e;
   --color-grey-600:  #757575;
 
+  --text-color: var(--color-black);
+
   /* border */
   --border-color: var(--color-grey-300);
   --border-color-light: var(--color-grey-200);

@@ -13,9 +13,9 @@ export function MainScreen() {
         <MoneySpent />
       </Card>
 
-      <Card noPadding>
+      {/* <Card noPadding>
         <AddSpending />
-      </Card>
+      </Card> */}
     </CardContainer>
   );
 }

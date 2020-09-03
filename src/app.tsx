@@ -1,12 +1,12 @@
+import { Navbar } from '@components/navbar';
 import { $globalState } from '@modules/global-state';
 import { AddSpendingScreen, LoadingScreen, MainScreen } from '@screens/index';
 import { logGroup } from '@utils/log-group';
 import { useStore } from 'effector-react';
 import * as React from 'react';
-import styles from './app.module.css';
-
-import './reset.css';
 import './app.css';
+import styles from './app.module.css';
+import './reset.css';
 
 export function useScreen() {
   let globalStateStore = useStore($globalState);
@@ -32,7 +32,9 @@ export function App() {
         <h1 className={styles.logo}>Savee</h1>
       </div>
 
-      {CurrentScreen}
+      <div className={styles.content}>{CurrentScreen}</div>
+
+      <Navbar />
     </div>
   );
 }
