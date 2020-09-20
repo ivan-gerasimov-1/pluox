@@ -1,6 +1,7 @@
 import { AddSpending } from '@modules/spendings';
 import * as React from 'react';
 import styles from './navbar.module.css';
+import { Icon } from '@ui-kit/icon';
 
 export function Navbar() {
   return (
@@ -9,7 +10,11 @@ export function Navbar() {
 
       <AddSpending />
 
-      <div />
+      <div>
+        {/* <button type="button" className={styles.navbarButton}>
+          <Icon name={Icon.IconName.Settings} />
+        </button> */}
+      </div>
     </footer>
   );
 }

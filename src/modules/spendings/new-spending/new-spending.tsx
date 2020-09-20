@@ -1,7 +1,7 @@
-import { $globalStateApi } from '@modules/global-state';
 import { generateId } from '@utils/id';
 import { createApi, createStore } from 'effector';
 import * as React from 'react';
+import { useNavigate } from 'react-router';
 import { $spendingApi } from '../spendings.store';
 import styles from './new-spending.module.css';
 
@@ -23,6 +23,8 @@ let $formApi = createApi($form, {
 });
 
 export function NewSpending() {
+  let navigate = useNavigate();
+
   let submitHandler = React.useCallback((event) => {
     event.preventDefault();
 
@@ -37,7 +39,7 @@ export function NewSpending() {
       amount: $form.getState().amount,
     });
 
-    $globalStateApi.setAdd(false);
+    navigate('/');
   }, []);
 
   let amountChangeHandler = React.useCallback((event) => {

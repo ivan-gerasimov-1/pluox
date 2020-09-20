@@ -24,11 +24,13 @@
     "classnames": "2.2.6",
     "effector": "21.2.2",
     "effector-react": "21.0.4",
+    "history": "5.0.0",
     "ionicons": "5.1.2",
     "nanoid": "3.1.12",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-router-dom": "5.2.0"
+    "react-router": "6.0.0-beta.0",
+    "react-router-dom": "6.0.0-beta.0"
   },
   "devDependencies": {
     "@svgr/webpack": "5.4.0",

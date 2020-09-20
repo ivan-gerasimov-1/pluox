@@ -172,7 +172,10 @@ module.exports = {
     overlay: {
       errors: true,
     },
-    port: 3000,
+    // host: '192.168.0.10',
+    disableHostCheck: true,
+    // useLocalIp: true,
+    port: 3002,
     hot: true,
     hotOnly: true,
     historyApiFallback: true,

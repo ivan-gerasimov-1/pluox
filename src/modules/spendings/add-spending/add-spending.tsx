@@ -1,20 +1,16 @@
-import { $globalStateApi } from '@modules/global-state';
 import { Icon } from '@ui-kit/icon';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './add-spending.module.css';
 
 export function AddSpending() {
-  let setAdd = React.useCallback(() => {
-    $globalStateApi.setAdd(true);
-  }, []);
-
   return (
     <div className={styles.wrapper}>
-      <button className={styles.action} type="button" onClick={setAdd}>
+      <Link className={styles.action} to="/add" title="Add spending">
         <span className={styles.iconWrapper}>
           <Icon name={Icon.IconName.Add} />
         </span>
-      </button>
+      </Link>
     </div>
   );
 }
