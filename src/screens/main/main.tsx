@@ -1,4 +1,5 @@
-import { AddSpending, MoneyLeft, MoneySpent } from '@modules/spendings';
+import { MoneyLeft, MoneySpent } from '@modules/spendings';
+import { AppPath } from '@root/app-path';
 import { Card, CardContainer } from '@root/ui-kit';
 import * as React from 'react';
 
@@ -9,13 +10,9 @@ export function MainScreen() {
         <MoneyLeft />
       </Card>
 
-      <Card>
+      <Card to={AppPath.SpendingList}>
         <MoneySpent />
       </Card>
-
-      {/* <Card noPadding>
-        <AddSpending />
-      </Card> */}
     </CardContainer>
   );
 }

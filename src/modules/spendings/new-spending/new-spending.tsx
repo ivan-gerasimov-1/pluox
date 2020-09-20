@@ -37,6 +37,7 @@ export function NewSpending() {
     $spendingApi.create({
       id: generateId(),
       amount: $form.getState().amount,
+      dateCreated: new Date().toISOString(),
     });
 
     navigate('/');

@@ -1,6 +1,8 @@
 import { Id } from '@root/utils/id';
 import { withPersist } from '@root/utils/store';
-import { createApi, createStore, sample } from 'effector';
+import { createApi, createStore } from 'effector';
+
+type ISODateString = string;
 
 export interface ISpendingOperation {
   id: Id;
@@ -9,6 +11,7 @@ export interface ISpendingOperation {
    * - Use specialized library to store big numbers
    */
   amount: number;
+  dateCreated: ISODateString;
 }
 
 interface ISpendingOperations {
@@ -52,3 +55,14 @@ export function totalSelector(): number {
 
   return total;
 }
+
+export let $spendingsSelector = {
+  list: {
+    field: 'operations',
+    fn() {
+      let { operations = [] } = $spendings.getState();
+
+      return Object.values(operations);
+    },
+  },
+};
