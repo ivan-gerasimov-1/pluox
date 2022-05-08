@@ -1,1 +1,1 @@
-export { generateId, Id } from './id';
+export { generateId } from './id';

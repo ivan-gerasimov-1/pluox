@@ -1,3 +1,4 @@
+import { Id } from '@modules/types';
 import { customAlphabet } from 'nanoid';
 
 const ALPHABET =
@@ -5,8 +6,6 @@ const ALPHABET =
 const LENGTH = 14;
 
 let nanoId = customAlphabet(ALPHABET, LENGTH);
-
-export type Id = string;
 
 export function generateId(): Id {
 	return nanoId();

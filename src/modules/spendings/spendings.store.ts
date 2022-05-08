@@ -1,4 +1,4 @@
-import { Id } from '@root/utils/id';
+import { Id } from '@root/modules/types';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
 
