@@ -1,16 +1,5 @@
-# Logs
-
-# Dependency directories
-node_modules/
-
-# dotenv environment variables file
-.env
-
-# VSCode settings
-.vscode/
-
-# Build
-build/
-
-# OS
 .DS_Store
+.env
+.vscode/
+build/
+node_modules/
