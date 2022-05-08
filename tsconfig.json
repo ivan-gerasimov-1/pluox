@@ -16,7 +16,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"incremental": true,
 
-		"jsx": "react",
+		"jsx": "react-jsx",
 
 		"paths": {
 			"@components/*": ["src/components/*"],

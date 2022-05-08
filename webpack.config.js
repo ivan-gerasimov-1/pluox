@@ -104,6 +104,11 @@ module.exports = {
 				use: [
 					{
 						loader: Loader.TS,
+						options: {
+							configFile: isDev
+								? path.resolve(__dirname, 'tsconfig.dev.json')
+								: path.resolve(__dirname, 'tsconfig.json'),
+						},
 					},
 				],
 			},
