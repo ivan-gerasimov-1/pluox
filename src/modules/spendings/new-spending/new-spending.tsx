@@ -25,7 +25,7 @@ let $formApi = createApi($form, {
 export function NewSpending() {
   let navigate = useNavigate();
 
-  let submitHandler = React.useCallback((event) => {
+  let submitHandler = React.useCallback((event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let { amount } = $form.getState();
@@ -43,7 +43,7 @@ export function NewSpending() {
     navigate('/');
   }, []);
 
-  let amountChangeHandler = React.useCallback((event) => {
+  let amountChangeHandler = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     let value = Number.parseFloat(event.target.value);
 
     $formApi.setAmount(value);
