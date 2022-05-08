@@ -6,7 +6,6 @@ import {
 } from '@modules/spendings/spendings.store';
 import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
-import * as React from 'react';
 
 export function SpendingList() {
   let spendingsList = useSelector<ISpendingsStore, ISpendingOperation[]>(

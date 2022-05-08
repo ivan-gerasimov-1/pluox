@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import { getIcon, IconName } from './icons';
 
 interface IIcon {
@@ -6,7 +6,7 @@ interface IIcon {
 }
 
 export function Icon(props: IIcon) {
-  let SvgIcon = React.useMemo(() => {
+  let SvgIcon = useMemo(() => {
     return getIcon(props.name);
   }, [props.name]);
 

@@ -1,7 +1,6 @@
 import { Navbar } from '@components/navbar';
 import { AppPath } from '@root/app-path';
 import { AddSpendingScreen, ErrorScreen, MainScreen } from '@screens/index';
-import * as React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
 import { SpendingListScreen } from './screens/spending-list/spending-list';

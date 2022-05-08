@@ -1,5 +1,4 @@
 import { Icon } from '@ui-kit/icon';
-import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './add-spending.module.css';
 

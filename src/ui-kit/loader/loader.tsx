@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import * as React from 'react';
 import styles from './loader.module.css';
 
 interface ILoader {

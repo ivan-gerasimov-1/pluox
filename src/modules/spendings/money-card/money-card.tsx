@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styles from './money-card.module.css';
 
 export interface IMoneyCard {

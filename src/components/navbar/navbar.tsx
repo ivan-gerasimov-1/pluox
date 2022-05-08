@@ -1,5 +1,4 @@
 import { AddSpending } from '@modules/spendings';
-import * as React from 'react';
 import styles from './navbar.module.css';
 import { Icon } from '@ui-kit/icon';
 
