@@ -3,17 +3,17 @@ import styles from './navbar.module.css';
 import { Icon } from '@ui-kit/icon';
 
 export function Navbar() {
-  return (
-    <footer className={styles.navbar}>
-      <div />
+	return (
+		<footer className={styles.navbar}>
+			<div />
 
-      <AddSpending />
+			<AddSpending />
 
-      <div>
-        {/* <button type="button" className={styles.navbarButton}>
+			<div>
+				{/* <button type="button" className={styles.navbarButton}>
           <Icon name={Icon.IconName.Settings} />
         </button> */}
-      </div>
-    </footer>
-  );
+			</div>
+		</footer>
+	);
 }

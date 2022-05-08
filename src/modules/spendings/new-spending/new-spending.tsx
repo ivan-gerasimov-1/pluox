@@ -6,68 +6,71 @@ import { $spendingApi } from '../spendings.store';
 import styles from './new-spending.module.css';
 
 interface IFormStore {
-  amount: number;
+	amount: number;
 }
 
 let $form = createStore<IFormStore>({
-  amount: 0,
+	amount: 0,
 });
 
 let $formApi = createApi($form, {
-  setAmount(prevState, amount: number) {
-    return {
-      ...prevState,
-      amount,
-    };
-  },
+	setAmount(prevState, amount: number) {
+		return {
+			...prevState,
+			amount,
+		};
+	},
 });
 
 export function NewSpending() {
-  let navigate = useNavigate();
+	let navigate = useNavigate();
 
-  let submitHandler = useCallback((event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+	let submitHandler = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
 
-    let { amount } = $form.getState();
+		let { amount } = $form.getState();
 
-    if (!amount || amount === 0) {
-      return;
-    }
+		if (!amount || amount === 0) {
+			return;
+		}
 
-    $spendingApi.create({
-      id: generateId(),
-      amount: $form.getState().amount,
-      dateCreated: new Date().toISOString(),
-    });
+		$spendingApi.create({
+			id: generateId(),
+			amount: $form.getState().amount,
+			dateCreated: new Date().toISOString(),
+		});
 
-    navigate('/');
-  }, []);
+		navigate('/');
+	}, []);
 
-  let amountChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    let value = Number.parseFloat(event.target.value);
+	let amountChangeHandler = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			let value = Number.parseFloat(event.target.value);
 
-    $formApi.setAmount(value);
-  }, []);
+			$formApi.setAmount(value);
+		},
+		[]
+	);
 
-  return (
-    <div style={{ margin: '1rem' }}>
-      <form name="newSpending" onSubmit={submitHandler}>
-        <input
-          id="amount"
-          name="amount"
-          type="number"
-          className={styles.textInput}
-          onChange={amountChangeHandler}
-          step="0.01"
-          min={0}
-          required
-          autoFocus
-        />
+	return (
+		<div style={{ margin: '1rem' }}>
+			<form name="newSpending" onSubmit={submitHandler}>
+				<input
+					id="amount"
+					name="amount"
+					type="number"
+					className={styles.textInput}
+					onChange={amountChangeHandler}
+					step="0.01"
+					min={0}
+					required
+					autoFocus
+				/>
 
-        <button className={styles.submitButton} type="submit">
-          OK
-        </button>
-      </form>
-    </div>
-  );
+				<button className={styles.submitButton} type="submit">
+					OK
+				</button>
+			</form>
+		</div>
+	);
 }

@@ -5,64 +5,64 @@ import { createApi, createStore } from 'effector';
 type ISODateString = string;
 
 export interface ISpendingOperation {
-  id: Id;
-  /**
-   * @todo
-   * - Use specialized library to store big numbers
-   */
-  amount: number;
-  dateCreated: ISODateString;
+	id: Id;
+	/**
+	 * @todo
+	 * - Use specialized library to store big numbers
+	 */
+	amount: number;
+	dateCreated: ISODateString;
 }
 
 interface ISpendingOperations {
-  [id: string]: ISpendingOperation;
+	[id: string]: ISpendingOperation;
 }
 
 export interface ISpendingsStore {
-  operations: ISpendingOperations;
+	operations: ISpendingOperations;
 }
 
 export let $spendings = withPersist(
-  createStore<ISpendingsStore>(
-    {
-      operations: {},
-    },
-    {
-      name: '$spendings',
-    },
-  ),
+	createStore<ISpendingsStore>(
+		{
+			operations: {},
+		},
+		{
+			name: '$spendings',
+		}
+	)
 );
 
 export let $spendingApi = createApi($spendings, {
-  create(prevState, spendingOperation: ISpendingOperation) {
-    return {
-      ...prevState,
-      operations: {
-        ...prevState.operations,
-        [spendingOperation.id]: spendingOperation,
-      },
-    };
-  },
+	create(prevState, spendingOperation: ISpendingOperation) {
+		return {
+			...prevState,
+			operations: {
+				...prevState.operations,
+				[spendingOperation.id]: spendingOperation,
+			},
+		};
+	},
 });
 
 export function totalSelector(): number {
-  let { operations } = $spendings.getState();
-  let total = 0;
+	let { operations } = $spendings.getState();
+	let total = 0;
 
-  for (let operation of Object.values(operations)) {
-    total += operation.amount;
-  }
+	for (let operation of Object.values(operations)) {
+		total += operation.amount;
+	}
 
-  return total;
+	return total;
 }
 
 export let $spendingsSelector = {
-  list: {
-    field: 'operations',
-    fn() {
-      let { operations = [] } = $spendings.getState();
+	list: {
+		field: 'operations',
+		fn() {
+			let { operations = [] } = $spendings.getState();
 
-      return Object.values(operations);
-    },
-  },
+			return Object.values(operations);
+		},
+	},
 };

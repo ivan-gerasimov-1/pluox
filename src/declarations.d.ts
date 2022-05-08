@@ -1,22 +1,22 @@
 declare module '*.module.css' {
-  interface IClassNames {
-    [className: string]: string;
-  }
+	interface IClassNames {
+		[className: string]: string;
+	}
 
-  const classNames: IClassNames;
+	const classNames: IClassNames;
 
-  export = classNames;
+	export = classNames;
 }
 
 declare const module: {
-  hot: {
-    accept: Function;
-  };
+	hot: {
+		accept: Function;
+	};
 };
 
 declare module 'chartjs-adapter-luxon' {}
 
 declare module '*.svg' {
-  const value: React.StatelessComponent<React.SVGAttributes<SVGElement>>;
-  export default value;
+	const value: React.StatelessComponent<React.SVGAttributes<SVGElement>>;
+	export default value;
 }

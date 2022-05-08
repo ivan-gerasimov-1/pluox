@@ -1,47 +1,47 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
-  height: 100vh;
+	height: 100vh;
 
-  cursor: default;
+	cursor: default;
 }
 
 .content {
-  flex-grow: 1;
+	flex-grow: 1;
 
-  width: 100%;
-  max-width: 280px;
+	width: 100%;
+	max-width: 280px;
 
-  margin: 0 auto;
+	margin: 0 auto;
 }
 
 .logoWrapper {
-  position: relative;
+	position: relative;
 
-  margin: 0 1rem;
-  padding: 0.875rem 0;
+	margin: 0 1rem;
+	padding: 0.875rem 0;
 }
 
 .logoWrapper::after {
-  display: block;
+	display: block;
 
-  position: absolute;
+	position: absolute;
 
-  bottom: 0.75rem;
-  left: 27%;
-  right: 27%;
-  height: 1px;
+	bottom: 0.75rem;
+	left: 27%;
+	right: 27%;
+	height: 1px;
 
-  background-color: var(--color-grey-500);
+	background-color: var(--color-grey-500);
 
-  content: '';
+	content: '';
 }
 
 .logo {
-  font-family: serif;
-  font-style: italic;
-  -webkit-font-smoothing: subpixel-antialiased;
-  text-align: center;
+	font-family: serif;
+	font-style: italic;
+	-webkit-font-smoothing: subpixel-antialiased;
+	text-align: center;
 }

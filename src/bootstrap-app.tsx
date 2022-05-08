@@ -24,6 +24,6 @@ function getRootElement(id: string): HTMLElement {
 
 class HTMLElementNotFoundError extends Error {
 	constructor() {
-		super('HTMLElement Not Found')
+		super('HTMLElement Not Found');
 	}
 }

@@ -1,36 +1,36 @@
 .textInput {
-  appearance: none;
+	appearance: none;
 
-  width: 100%;
+	width: 100%;
 
-  padding: 0.5rem 1rem;
+	padding: 0.5rem 1rem;
 
-  font-size: 1rem;
-  font-family: inherit;
+	font-size: 1rem;
+	font-family: inherit;
 
-  color: inherit;
+	color: inherit;
 
-  border: var(--border-defaults);
-  border-radius: var(--border-radius-default);
+	border: var(--border-defaults);
+	border-radius: var(--border-radius-default);
 
-  outline: none;
+	outline: none;
 }
 
 .submitButton {
-  appearance: none;
-  border: none;
-  background-color: transparent;
+	appearance: none;
+	border: none;
+	background-color: transparent;
 
-  width: 100%;
+	width: 100%;
 
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
+	margin-top: 1rem;
+	padding: 0.75rem 1rem;
 
-  font-family: inherit;
-  font-size: 1rem;
+	font-family: inherit;
+	font-size: 1rem;
 
-  border: var(--border-defaults);
-  border-width: 2px;
-  border-color: #7B1FA2;
-  border-radius: var(--border-radius-default);
+	border: var(--border-defaults);
+	border-width: 2px;
+	border-color: #7b1fa2;
+	border-radius: var(--border-radius-default);
 }

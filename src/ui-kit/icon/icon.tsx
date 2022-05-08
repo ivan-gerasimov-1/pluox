@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { getIcon, IconName } from './icons';
 
 interface IIcon {
-  name: IconName;
+	name: IconName;
 }
 
 export function Icon(props: IIcon) {
-  let SvgIcon = useMemo(() => {
-    return getIcon(props.name);
-  }, [props.name]);
+	let SvgIcon = useMemo(() => {
+		return getIcon(props.name);
+	}, [props.name]);
 
-  return <SvgIcon width="32px" height="32px" viewBox="0 0 512 512" />;
+	return <SvgIcon width="32px" height="32px" viewBox="0 0 512 512" />;
 }
 
 Icon.IconName = IconName;

@@ -1,23 +1,23 @@
 import { createApi, createStore } from 'effector';
 
 export interface IGlobalStateStore {
-  isAdd: boolean;
+	isAdd: boolean;
 }
 
 export let $globalState = createStore<IGlobalStateStore>(
-  {
-    isAdd: false,
-  },
-  {
-    name: '$globalState',
-  },
+	{
+		isAdd: false,
+	},
+	{
+		name: '$globalState',
+	}
 );
 
 export let $globalStateApi = createApi($globalState, {
-  setAdd(prevState, payload: boolean) {
-    return {
-      ...prevState,
-      isAdd: payload,
-    };
-  },
+	setAdd(prevState, payload: boolean) {
+		return {
+			...prevState,
+			isAdd: payload,
+		};
+	},
 });
