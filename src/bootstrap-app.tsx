@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './app';
 import './app.css';
@@ -6,7 +7,11 @@ import './reset.css';
 export function bootstrapApp() {
 	const rootElement = getRootElement('root');
 
-	createRoot(rootElement).render(<App />);
+	createRoot(rootElement).render(
+		<StrictMode>
+			<App />
+		</StrictMode>
+	);
 }
 
 /**
