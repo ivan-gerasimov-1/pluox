@@ -15,10 +15,10 @@ export function App() {
 
         <div className={styles.content}>
           <Routes>
-            <Route path={AppPath.Main} element={<MainScreen />} />
-            <Route path={AppPath.AddSpending} element={<AddSpendingScreen />} />
+            <Route path={AppPath.MAIN} element={<MainScreen />} />
+            <Route path={AppPath.ADD_SPENDING} element={<AddSpendingScreen />} />
             <Route
-              path={AppPath.SpendingList}
+              path={AppPath.SPENDING_LIST}
               element={<SpendingListScreen />}
             />
 

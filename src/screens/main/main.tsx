@@ -9,7 +9,7 @@ export function MainScreen() {
         <MoneyLeft />
       </Card>
 
-      <Card to={AppPath.SpendingList}>
+      <Card to={AppPath.SPENDING_LIST}>
         <MoneySpent />
       </Card>
     </CardContainer>

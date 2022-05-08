@@ -1,6 +1,5 @@
-/** @enum {string} */
-export const AppPath = {
-  AddSpending: '/add',
-  Main: '/',
-  SpendingList: '/list',
-};
+export enum AppPath {
+	ADD_SPENDING = '/add',
+	MAIN = '/',
+	SPENDING_LIST = '/list',
+}
