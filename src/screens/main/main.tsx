@@ -1,5 +1,6 @@
 import { MoneyLeft, MoneySpent } from '@modules/spendings';
 import { AppPath } from '@root/app-path';
+import { Navigable } from '@root/ui-kit/navigable/navigable';
 import { Card, CardContainer } from '@root/ui-kit';
 
 export function MainScreen() {
@@ -9,9 +10,11 @@ export function MainScreen() {
 				<MoneyLeft />
 			</Card>
 
-			<Card to={AppPath.SPENDING_LIST}>
-				<MoneySpent />
-			</Card>
+			<Navigable to={AppPath.SPENDING_LIST}>
+				<Card pressable>
+					<MoneySpent />
+				</Card>
+			</Navigable>
 		</CardContainer>
 	);
 }
