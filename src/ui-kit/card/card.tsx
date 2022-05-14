@@ -1,37 +1,21 @@
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import styles from './card.module.css';
 
 export interface ICard {
+	pressable?: boolean;
 	noPadding?: boolean;
-	to?: string;
 }
 
-function PlainCard(props: React.PropsWithChildren<ICard>) {
+export function Card(props: React.PropsWithChildren<ICard>) {
 	return (
 		<div
 			className={classnames(styles.card, {
 				[styles.noPadding]: props.noPadding,
+				[styles.pressableLink]: props.pressable,
 			})}
 		>
 			{props.children}
 		</div>
-	);
-}
-
-export function Card(props: React.PropsWithChildren<ICard>) {
-	if (!props.to) {
-		return <PlainCard {...props} />;
-	}
-
-	return (
-		<Link
-			to={props.to}
-			className={classnames(styles.card, styles.cardLink, {
-				[styles.noPadding]: props.noPadding,
-			})}
-		>
-			{props.children}
-		</Link>
 	);
 }
