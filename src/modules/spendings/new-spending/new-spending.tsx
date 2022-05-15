@@ -1,3 +1,5 @@
+import { useIntl } from '@modules/intl';
+import { newSpendingI18n } from '@modules/spendings/new-spending/new-spending.i18n';
 import { generateId } from '@utils/id';
 import { createApi, createStore } from 'effector';
 import { useCallback } from 'react';
@@ -24,6 +26,7 @@ let $formApi = createApi($form, {
 
 export function NewSpending() {
 	let navigate = useNavigate();
+	let intl = useIntl(newSpendingI18n);
 
 	let submitHandler = useCallback((event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -68,7 +71,7 @@ export function NewSpending() {
 				/>
 
 				<button className={styles.submitButton} type="submit">
-					OK
+					{intl.translate('submitButton')}
 				</button>
 			</form>
 		</div>
