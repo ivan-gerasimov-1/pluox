@@ -1,4 +1,6 @@
 :root {
+	--body-padding-bottom: calc(var(--navbar-height) + 2rem);
+
 	/* color */
 	--color-white: #fafafa;
 	--color-pure-white: #fff;
@@ -21,4 +23,7 @@
 
 	/* misc */
 	--transition-defaults: 0.15s ease-in-out;
+
+	/* navbar */
+	--navbar-height: 3rem;
 }

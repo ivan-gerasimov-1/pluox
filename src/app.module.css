@@ -3,9 +3,9 @@
 	flex-direction: column;
 	justify-content: space-between;
 
-	height: 100vh;
-
 	cursor: default;
+
+	padding-bottom: var(--body-padding-bottom);
 }
 
 .content {
