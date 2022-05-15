@@ -3,9 +3,12 @@ export function validateNumber(value: string): boolean {
 		return false;
 	}
 
-	if (value.includes(',')) {
+	/**
+	 * @todo Handle different decimal separators
+	 */
+	/* if (value.includes(',')) {
 		return false;
-	}
+	} */
 
 	if (value.split('.').length > 2) {
 		return false;
