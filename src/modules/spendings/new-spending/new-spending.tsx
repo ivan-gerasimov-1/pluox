@@ -1,71 +1,40 @@
 import { useIntl } from '@modules/intl';
+import { AmountInput } from '@modules/spendings/new-spending/components/amount-input/amount-input';
 import { newSpendingI18n } from '@modules/spendings/new-spending/new-spending.i18n';
 import { generateId } from '@utils/id';
-import { createApi, createStore } from 'effector';
-import { useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { $spendingApi } from '../spendings.store';
 import styles from './new-spending.module.css';
 
-interface IFormStore {
-	amount: number;
-}
-
-let $form = createStore<IFormStore>({
-	amount: 0,
-});
-
-let $formApi = createApi($form, {
-	setAmount(prevState, amount: number) {
-		return {
-			...prevState,
-			amount,
-		};
-	},
-});
-
 export function NewSpending() {
 	let navigate = useNavigate();
 	let intl = useIntl(newSpendingI18n);
+	let [formState, setFormState] = useState({
+		amount: 0,
+	});
 
-	let submitHandler = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		let { amount } = $form.getState();
-
-		if (!amount || amount === 0) {
+		if (!formState.amount || formState.amount === 0) {
 			return;
 		}
 
 		$spendingApi.create({
 			id: generateId(),
-			amount: $form.getState().amount,
+			amount: formState.amount,
 			dateCreated: new Date().toISOString(),
 		});
 
 		navigate('/');
-	}, []);
-
-	let amountChangeHandler = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			let value = Number.parseFloat(event.target.value);
-
-			$formApi.setAmount(value);
-		},
-		[]
-	);
+	}
 
 	return (
 		<div style={{ margin: '1rem' }}>
-			<form name="newSpending" onSubmit={submitHandler}>
-				<input
-					id="amount"
-					name="amount"
-					type="number"
-					className={styles.textInput}
-					onChange={amountChangeHandler}
-					step="0.01"
-					min={0}
+			<form name="newSpending" onSubmit={handleSubmit}>
+				<AmountInput
+					onChange={(amount) => setFormState({ amount })}
 					required
 					autoFocus
 				/>
