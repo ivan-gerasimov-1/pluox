@@ -38,7 +38,7 @@ export function AmountInput(props: TAmountInputProps) {
 			id="amount"
 			name="amount"
 			type="text"
-			inputMode="numeric"
+			inputMode="decimal"
 			className={styles.textInput}
 			value={amount}
 			onChange={handleChange}
