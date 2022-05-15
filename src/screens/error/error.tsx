@@ -1,15 +1,22 @@
-import styles from './error.module.css';
 import { Error } from '@components/error';
+import { useIntl } from '@modules/intl';
+import { errorScreenI18n } from '@root/screens/error/error.i18n';
+import styles from './error.module.css';
 
-interface IErrorScreen {
+interface IErrorScreenProps {
 	title?: string;
 	message: string;
 }
 
-export function ErrorScreen({ title = 'Error', ...props }: IErrorScreen) {
+export function ErrorScreen(props: IErrorScreenProps) {
+	let intl = useIntl(errorScreenI18n);
+
 	return (
 		<div className={styles.error}>
-			<Error title={title} message={props.message} />
+			<Error
+				title={props.title || intl.translate('defaultTitle')}
+				message={props.message}
+			/>
 		</div>
 	);
 }

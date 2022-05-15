@@ -1,3 +1,5 @@
+import { useIntl } from '@modules/intl';
+import { spendingListI18n } from '@modules/spendings/spending-list/spending-list.i18n';
 import {
 	$spendings,
 	$spendingsSelector,
@@ -8,6 +10,7 @@ import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
 
 export function SpendingList() {
+	let intl = useIntl(spendingListI18n);
 	let spendingsList = useSelector<ISpendingsStore, ISpendingOperation[]>(
 		$spendings,
 		$spendingsSelector.list.fn,
@@ -20,7 +23,7 @@ export function SpendingList() {
 	return (
 		<div>
 			<div style={{ display: 'flex', justifyContent: 'center' }}>
-				<h1>Spending List</h1>
+				<h1>{intl.translate('title')}</h1>
 			</div>
 
 			<ul>
