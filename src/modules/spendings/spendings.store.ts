@@ -1,4 +1,5 @@
 import { Id } from '@root/modules/types';
+import { generateId } from '@root/utils/id';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
 
@@ -18,6 +19,10 @@ interface ISpendingOperations {
 	[id: string]: ISpendingOperation;
 }
 
+type TSpendingCreatePayload = {
+	amount: number;
+};
+
 export interface ISpendingsStore {
 	operations: ISpendingOperations;
 }
@@ -34,7 +39,13 @@ export let $spendings = withPersist(
 );
 
 export let $spendingApi = createApi($spendings, {
-	create(prevState, spendingOperation: ISpendingOperation) {
+	create(prevState, payload: TSpendingCreatePayload) {
+		const spendingOperation: ISpendingOperation = {
+			id: generateId(),
+			amount: payload.amount,
+			dateCreated: new Date().toISOString(),
+		};
+
 		return {
 			...prevState,
 			operations: {

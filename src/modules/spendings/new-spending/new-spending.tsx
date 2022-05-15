@@ -22,9 +22,7 @@ export function NewSpending() {
 		}
 
 		$spendingApi.create({
-			id: generateId(),
 			amount: formState.amount,
-			dateCreated: new Date().toISOString(),
 		});
 
 		navigate('/');
