@@ -29,8 +29,10 @@
 	font-family: inherit;
 	font-size: 1rem;
 
+	color: inherit;
+
 	border: var(--border-defaults);
 	border-width: 2px;
-	border-color: #7b1fa2;
+	border-color: var(--text-color);
 	border-radius: var(--border-radius-default);
 }
