@@ -12,5 +12,7 @@
 	width: 100%;
 	height: var(--navbar-height);
 
+	padding-bottom: 1rem;
+
 	background-color: var(--text-color);
 }
