@@ -52,11 +52,10 @@ function identity(value) {
 }
 
 /**
- * @param {string} [value]
  * @returns {boolean}
  */
-function isBundleAnalyzerEnabled(value) {
-	return value === 'on';
+function isBundleAnalyzerEnabled() {
+	return process.env.BUNDLE_ANALYZER === 'on';
 }
 
 module.exports = {
@@ -90,8 +89,7 @@ module.exports = {
 			inject: 'body',
 			scriptLoading: 'defer',
 		}),
-		isBundleAnalyzerEnabled(process.env.BUNDLE_ANALYZER) &&
-			new BundleAnalyzerPlugin(),
+		isBundleAnalyzerEnabled() && new BundleAnalyzerPlugin(),
 		new MiniCssExtractPlugin({
 			filename: config.isDevelopment
 				? '[name].css'
