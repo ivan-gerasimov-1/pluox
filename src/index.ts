@@ -1,12 +1,12 @@
 import { bootstrapApp } from './bootstrap-app';
 import { environment } from './config';
 
-enum ServiceWorkerEvent {
+enum EServiceWorkerEvent {
 	LOAD = 'load',
 }
 
 if ('serviceWorker' in navigator) {
-	window.addEventListener(ServiceWorkerEvent.LOAD, () => {
+	window.addEventListener(EServiceWorkerEvent.LOAD, () => {
 		navigator.serviceWorker.register('/sw.js');
 	});
 } else {
