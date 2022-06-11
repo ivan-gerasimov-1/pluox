@@ -8,7 +8,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssNested = require('postcss-nested');
-const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 class NodeEnvNotProvidedError extends Error {
 	constructor() {
@@ -77,7 +77,7 @@ module.exports = {
 	devtool: config.isDevelopment && 'eval-cheap-module-source-map',
 	resolve: {
 		extensions: ['.js', '.ts', '.tsx'],
-		plugins: [new TsConfigPathsPlugin()],
+		plugins: [new TsconfigPathsPlugin()],
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
