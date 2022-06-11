@@ -9,6 +9,10 @@ const postcssPresetEnv = require('postcss-preset-env');
 const postcssNested = require('postcss-nested');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
+const EEnvironment = {
+	DEVELOPMENT: 'development',
+};
+
 let Loader = {
 	CSS: 'css-loader',
 	MiniCssExtract: MiniCssExtractPlugin.loader,
@@ -33,6 +37,7 @@ let Enforce = {
 };
 
 let config = {
+	isDevelopment: isDevelopment(),
 	paths: {
 		entry: './src/index.ts',
 		dist: path.resolve(__dirname, 'build'),
@@ -41,8 +46,6 @@ let config = {
 		indexHtmlDist: path.resolve(__dirname, 'build', 'index.html'),
 	},
 };
-
-let isDev = process.env.NODE_ENV === Mode.Development;
 
 function identity(value) {
 	return value;
@@ -59,7 +62,7 @@ function isBundleAnalyzerEnabled(value) {
 module.exports = {
 	entry: config.paths.entry,
 	mode: Mode.Development,
-	devtool: isDev && 'eval-cheap-module-source-map',
+	devtool: config.isDevelopment && 'eval-cheap-module-source-map',
 	resolve: {
 		extensions: ['.js', '.ts', '.tsx'],
 		plugins: [new TsConfigPathsPlugin()],
@@ -69,7 +72,7 @@ module.exports = {
 		new webpack.EnvironmentPlugin({
 			NODE_ENV: getNodeEnv(),
 		}),
-		!isDev &&
+		!config.isDevelopment &&
 			new CopyPlugin({
 				patterns: [
 					{
@@ -90,8 +93,12 @@ module.exports = {
 		isBundleAnalyzerEnabled(process.env.BUNDLE_ANALYZER) &&
 			new BundleAnalyzerPlugin(),
 		new MiniCssExtractPlugin({
-			filename: isDev ? '[name].css' : '[name].[contenthash].css',
-			chunkFilename: isDev ? '[id].css' : '[id].[contenthash].css',
+			filename: config.isDevelopment
+				? '[name].css'
+				: '[name].[contenthash].css',
+			chunkFilename: config.isDevelopment
+				? '[id].css'
+				: '[id].[contenthash].css',
 			ignoreOrder: true,
 		}),
 	].filter(identity),
@@ -105,7 +112,7 @@ module.exports = {
 					{
 						loader: Loader.TS,
 						options: {
-							configFile: isDev
+							configFile: config.isDevelopment
 								? path.resolve(__dirname, 'tsconfig.dev.json')
 								: path.resolve(__dirname, 'tsconfig.json'),
 						},
@@ -125,7 +132,7 @@ module.exports = {
 					{
 						loader: Loader.MiniCssExtract,
 						options: {
-							hmr: isDev,
+							hmr: config.isDevelopment,
 							reloadAll: true,
 						},
 					},
@@ -136,7 +143,7 @@ module.exports = {
 							importLoaders: 1,
 							modules: {
 								auto: true,
-								localIdentName: isDev
+								localIdentName: config.isDevelopment
 									? '[name]__[local]--[hash:base64:5]'
 									: undefined,
 							},
@@ -161,7 +168,9 @@ module.exports = {
 	},
 	output: {
 		path: config.paths.dist,
-		filename: isDev ? '[name].[hash].js' : '[name].[chunkhash].js',
+		filename: config.isDevelopment
+			? '[name].[hash].js'
+			: '[name].[chunkhash].js',
 		publicPath: '/',
 	},
 	externals: {
@@ -193,6 +202,12 @@ module.exports = {
 		},
 	},
 };
+
+function isDevelopment() {
+	const nodeEnv = getNodeEnv();
+
+	return nodeEnv === EEnvironment.DEVELOPMENT;
+}
 
 /**
  * @throws NodeEnvNotProvidedError
