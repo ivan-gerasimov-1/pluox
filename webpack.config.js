@@ -16,9 +16,25 @@ class NodeEnvNotProvidedError extends Error {
 	}
 }
 
+class UnknownNodeEnvError extends Error {
+	constructor() {
+		super('Unknown NODE_ENV value');
+	}
+}
+
+/** @enum {string} */
 const EEnvironment = {
 	DEVELOPMENT: 'development',
+	PRODUCTION: 'production',
 };
+
+/** @enum {string} */
+const EWebpackMode = {
+	DEVELOPMENT: 'development',
+	PRODUCTION: 'production',
+};
+
+const ENVIRONMENT = getNodeEnv();
 
 let Loader = {
 	CSS: 'css-loader',
@@ -44,7 +60,8 @@ let Enforce = {
 };
 
 let config = {
-	isDevelopment: isDevelopment(),
+	nodeEnv: ENVIRONMENT,
+	isDevelopment: isDevelopment(ENVIRONMENT),
 	paths: {
 		entry: './src/index.ts',
 		dist: path.resolve(__dirname, 'build'),
@@ -56,7 +73,7 @@ let config = {
 
 module.exports = {
 	entry: config.paths.entry,
-	mode: Mode.Development,
+	mode: getWebpackMode(config.nodeEnv),
 	devtool: config.isDevelopment && 'eval-cheap-module-source-map',
 	resolve: {
 		extensions: ['.js', '.ts', '.tsx'],
@@ -197,9 +214,11 @@ module.exports = {
 	},
 };
 
-function isDevelopment() {
-	const nodeEnv = getNodeEnv();
-
+/**
+ * @param {EEnvironment} nodeEnv
+ * @returns {boolean}
+ */
+function isDevelopment(nodeEnv) {
 	return nodeEnv === EEnvironment.DEVELOPMENT;
 }
 
@@ -219,12 +238,39 @@ function isBundleAnalyzerEnabled() {
 }
 
 /**
- * @throws NodeEnvNotProvidedError
+ * @returns {EEnvironment}
+ * @throws {NodeEnvNotProvidedError | UnknownNodeEnvError}
  */
 function getNodeEnv() {
 	if (!process.env.NODE_ENV) {
 		throw new NodeEnvNotProvidedError();
 	}
 
+	const isValidNodeEnv = Object.values(EEnvironment).includes(
+		process.env.NODE_ENV
+	);
+
+	if (!isValidNodeEnv) {
+		throw new UnknownNodeEnvError();
+	}
+
 	return process.env.NODE_ENV;
+}
+
+/**
+ * @param {EEnvironment} nodeEnv
+ * @returns {EWebpackMode}
+ * @throws {NodeEnvNotProvidedError}
+ */
+function getWebpackMode(nodeEnv) {
+	switch (nodeEnv) {
+		case EEnvironment.DEVELOPMENT: {
+			return EWebpackMode.DEVELOPMENT;
+		}
+		case EEnvironment.PRODUCTION: {
+			return EWebpackMode.PRODUCTION;
+		}
+		default:
+			throw new UnknownNodeEnvError();
+	}
 }
