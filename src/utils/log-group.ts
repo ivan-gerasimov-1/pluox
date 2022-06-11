@@ -1,7 +1,7 @@
-import { env } from '@root/config';
+import { environment } from '@root/config';
 
 export function logGroup(title: string, ...values: any): void {
-	if (!env.isDev) {
+	if (!environment.isDev) {
 		return;
 	}
 

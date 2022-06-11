@@ -1,5 +1,5 @@
 import { bootstrapApp } from './bootstrap-app';
-import { env } from './config';
+import { environment } from './config';
 
 enum ServiceWorkerEvent {
 	LOAD = 'load',
@@ -16,6 +16,6 @@ if ('serviceWorker' in navigator) {
 bootstrapApp();
 
 /** @description Enable base HMR */
-if (env.isDev) {
+if (environment.isDev) {
 	(module as any).hot?.accept();
 }
