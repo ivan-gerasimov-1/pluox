@@ -67,7 +67,7 @@ module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(),
 		new webpack.EnvironmentPlugin({
-			NODE_ENV: 'development',
+			NODE_ENV: getNodeEnv(),
 		}),
 		!isDev &&
 			new CopyPlugin({
@@ -193,3 +193,20 @@ module.exports = {
 		},
 	},
 };
+
+/**
+ * @throws NodeEnvNotProvidedError
+ */
+function getNodeEnv() {
+	if (!process.env.NODE_ENV) {
+		throw new NodeEnvNotProvidedError();
+	}
+
+	return process.env.NODE_ENV;
+}
+
+class NodeEnvNotProvidedError extends Error {
+	constructor() {
+		super('NODE_ENV is not provided');
+	}
+}
