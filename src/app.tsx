@@ -13,10 +13,6 @@ export function App() {
 	return (
 		<Router>
 			<div className={styles.wrapper}>
-				<div className={styles.logoWrapper}>
-					<h1 className={styles.logo}>Savee</h1>
-				</div>
-
 				<div className={styles.content}>
 					<Routes>
 						<Route path={AppPath.MAIN} element={<MainScreen />} />

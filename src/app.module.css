@@ -17,13 +17,6 @@
 	margin: 0 auto;
 }
 
-.logoWrapper {
-	position: relative;
-
-	margin: 0 1rem;
-	padding: 0.875rem 0;
-}
-
 .logoWrapper::after {
 	display: block;
 
@@ -37,11 +30,4 @@
 	background-color: var(--color-grey-500);
 
 	content: '';
-}
-
-.logo {
-	font-family: serif;
-	font-style: italic;
-	-webkit-font-smoothing: subpixel-antialiased;
-	text-align: center;
 }
