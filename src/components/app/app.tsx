@@ -1,11 +1,11 @@
+import { AppPath } from '@root/app-path';
+import { appI18n } from '@components/app/app.i18n';
 import { Navbar } from '@components/navbar';
 import { useIntl } from '@modules/intl';
-import { AppPath } from '@root/app-path';
-import { appI18n } from '@root/app.i18n';
+import { SpendingListScreen } from '@root/screens/spending-list/spending-list';
 import { AddSpendingScreen, ErrorScreen, MainScreen } from '@screens/index';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
-import { SpendingListScreen } from './screens/spending-list/spending-list';
 
 export function App() {
 	let intl = useIntl(appI18n);
