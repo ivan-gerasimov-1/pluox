@@ -47,17 +47,6 @@ let config = {
 	},
 };
 
-function identity(value) {
-	return value;
-}
-
-/**
- * @returns {boolean}
- */
-function isBundleAnalyzerEnabled() {
-	return process.env.BUNDLE_ANALYZER === 'on';
-}
-
 module.exports = {
 	entry: config.paths.entry,
 	mode: Mode.Development,
@@ -205,6 +194,21 @@ function isDevelopment() {
 	const nodeEnv = getNodeEnv();
 
 	return nodeEnv === EEnvironment.DEVELOPMENT;
+}
+
+/**
+ * @param {T} value
+ * @returns {T}
+ */
+function identity(value) {
+	return value;
+}
+
+/**
+ * @returns {boolean}
+ */
+function isBundleAnalyzerEnabled() {
+	return process.env.BUNDLE_ANALYZER === 'on';
 }
 
 /**
