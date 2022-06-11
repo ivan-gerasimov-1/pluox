@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { classnames } from '@root/utils/classnames';
 import React from 'react';
 import styles from './card.module.css';
 

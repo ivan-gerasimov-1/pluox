@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { classnames } from '@root/utils/classnames';
 import styles from './loader.module.css';
 
 interface ILoader {
