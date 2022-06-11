@@ -1,6 +1,6 @@
 type TEnvironment = {
 	currentYear: number;
-	isDev: boolean;
+	isDevelopment: boolean;
 	NODE_ENV: string;
 };
 
@@ -10,6 +10,6 @@ enum EEnvironment {
 
 export let environment: TEnvironment = {
 	currentYear: new Date().getFullYear(),
-	isDev: process.env.NODE_ENV === EEnvironment.DEVELOPMENT,
+	isDevelopment: process.env.NODE_ENV === EEnvironment.DEVELOPMENT,
 	NODE_ENV: process.env.NODE_ENV as string,
 };
