@@ -14,8 +14,3 @@ if ('serviceWorker' in navigator) {
 }
 
 bootstrapApp();
-
-/** @description Enable base HMR */
-if (environment.isDevelopment) {
-	(module as any).hot?.accept();
-}

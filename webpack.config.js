@@ -9,6 +9,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssNested = require('postcss-nested');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshTypeScript = require('react-refresh-typescript');
 
 class NodeEnvNotProvidedError extends Error {
 	constructor() {
@@ -112,6 +114,7 @@ module.exports = {
 				: '[id].[contenthash].css',
 			ignoreOrder: true,
 		}),
+		config.isDevelopment && new ReactRefreshPlugin(),
 	].filter(identity),
 	module: {
 		rules: [
@@ -126,6 +129,11 @@ module.exports = {
 							configFile: config.isDevelopment
 								? path.resolve(__dirname, 'tsconfig.dev.json')
 								: path.resolve(__dirname, 'tsconfig.json'),
+							getCustomTransformers: () => ({
+								before: [
+									config.isDevelopment && ReactRefreshTypeScript(),
+								].filter(Boolean),
+							}),
 						},
 					},
 				],
