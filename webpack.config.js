@@ -9,6 +9,12 @@ const postcssPresetEnv = require('postcss-preset-env');
 const postcssNested = require('postcss-nested');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
+class NodeEnvNotProvidedError extends Error {
+	constructor() {
+		super('NODE_ENV is not provided');
+	}
+}
+
 const EEnvironment = {
 	DEVELOPMENT: 'development',
 };
@@ -220,10 +226,4 @@ function getNodeEnv() {
 	}
 
 	return process.env.NODE_ENV;
-}
-
-class NodeEnvNotProvidedError extends Error {
-	constructor() {
-		super('NODE_ENV is not provided');
-	}
 }
