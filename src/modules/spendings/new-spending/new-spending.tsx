@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import { $spendingApi } from '../spendings.store';
 import styles from './new-spending.module.css';
 
+/** @deprecated */
 export function NewSpending() {
 	let navigate = useNavigate();
 	let intl = useIntl(newSpendingI18n);

@@ -9,6 +9,7 @@ type TAmountInputProps = {
 	required?: boolean;
 };
 
+/** @deprecated */
 export function AmountInput(props: TAmountInputProps) {
 	let [amount, setAmount] = useState<string>(() => {
 		if (!props.value) {
