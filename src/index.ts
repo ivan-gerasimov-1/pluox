@@ -1,5 +1,4 @@
 import { bootstrapApp } from '@root/bootstrap-app';
-import { environment } from '@root/config';
 
 enum EServiceWorkerEvent {
 	LOAD = 'load',
