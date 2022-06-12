@@ -1,3 +1,4 @@
+import { formatCurrency } from '@root/utils/currency';
 import styles from './money-card.module.css';
 
 export interface IMoneyCard {
@@ -11,9 +12,7 @@ export function MoneyCard(props: IMoneyCard) {
 			<h2 className={styles.title}>{props.title}</h2>
 
 			<div className={styles.amount}>
-				{props.amount
-					? `₽${Number.prototype.toLocaleString.call(props.amount)}`
-					: '—'}
+				{props.amount ? formatCurrency(props.amount) : '—'}
 			</div>
 		</>
 	);
