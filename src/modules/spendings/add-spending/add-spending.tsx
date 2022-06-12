@@ -4,6 +4,7 @@ import { Icon } from '@ui-kit/icon';
 import { Link } from 'react-router-dom';
 import styles from './add-spending.module.css';
 
+/** @deprecated */
 export function AddSpending() {
 	let intl = useIntl(addSpendingI18n);
 
