@@ -8,12 +8,6 @@ declare module '*.module.css' {
 	export = classNames;
 }
 
-declare const module: {
-	hot: {
-		accept: Function;
-	};
-};
-
 declare module '*.svg' {
 	const value: React.StatelessComponent<React.SVGAttributes<SVGElement>>;
 	export default value;
