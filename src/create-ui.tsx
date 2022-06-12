@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 
-export function bootstrapApp() {
+export function createUI() {
 	const rootElement = getRootElement('root');
 
 	createRoot(rootElement).render(
@@ -14,10 +14,10 @@ export function bootstrapApp() {
 }
 
 /**
- * @throws HTMLElementNotFoundError
+ * @throws {HTMLElementNotFoundError}
  */
 function getRootElement(id: string): HTMLElement {
-	const element = document.getElementById('root');
+	const element = document.getElementById(id);
 
 	if (element === null) {
 		throw new HTMLElementNotFoundError();

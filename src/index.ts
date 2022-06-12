@@ -1,4 +1,4 @@
-import { bootstrapApp } from '@root/bootstrap-app';
+import { createUI } from '@root/create-ui';
 
 enum EServiceWorkerEvent {
 	LOAD = 'load',
@@ -12,4 +12,8 @@ if ('serviceWorker' in navigator) {
 	console.log('Service worker is not supported in this browser');
 }
 
-bootstrapApp();
+function main() {
+	createUI();
+}
+
+main();
