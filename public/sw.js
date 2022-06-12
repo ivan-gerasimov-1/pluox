@@ -1,11 +1,14 @@
-const ServiceWorkerEvent = {
-  Activate: 'activate',
-  Fetch: 'fetch',
-  Install: 'install',
+const EServiceWorkerEvent = {
+	ACTIVACTE: 'activate',
+	FETCH: 'fetch',
+	INSTALL: 'install',
 };
 
+/**
+ * @returns {void}
+ */
 function noop() {}
 
-self.addEventListener(ServiceWorkerEvent.Install, noop);
-self.addEventListener(ServiceWorkerEvent.Activate, noop);
-self.addEventListener(ServiceWorkerEvent.Fetch, noop);
+self.addEventListener(EServiceWorkerEvent.INSTALL, noop);
+self.addEventListener(EServiceWorkerEvent.ACTIVACTE, noop);
+self.addEventListener(EServiceWorkerEvent.FETCH, noop);
