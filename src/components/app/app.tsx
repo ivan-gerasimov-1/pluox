@@ -1,4 +1,4 @@
-import { AppPath } from '@root/app-path';
+import { EAppPath } from '@root/app-path';
 import { appI18n } from '@components/app/app.i18n';
 import { Navbar } from '@components/navbar';
 import { useIntl } from '@modules/intl';
@@ -15,13 +15,13 @@ export function App() {
 			<div className={styles.wrapper}>
 				<div className={styles.content}>
 					<Routes>
-						<Route path={AppPath.MAIN} element={<MainScreen />} />
+						<Route path={EAppPath.MAIN} element={<MainScreen />} />
 						<Route
-							path={AppPath.ADD_SPENDING}
+							path={EAppPath.ADD_SPENDING}
 							element={<AddSpendingScreen />}
 						/>
 						<Route
-							path={AppPath.SPENDING_LIST}
+							path={EAppPath.SPENDING_LIST}
 							element={<SpendingListScreen />}
 						/>
 
