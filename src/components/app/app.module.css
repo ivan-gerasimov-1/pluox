@@ -1,16 +1,4 @@
-.wrapper {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
-	cursor: default;
-
-	padding-bottom: var(--body-padding-bottom);
-}
-
 .content {
-	flex-grow: 1;
-
 	width: 100%;
 	max-width: 350px;
 

@@ -11,29 +11,24 @@ export function App() {
 
 	return (
 		<Router>
-			<div className={styles.wrapper}>
-				<div className={styles.content}>
-					<Routes>
-						<Route path={EAppPath.MAIN} element={<MainScreen />} />
-						<Route
-							path={EAppPath.ADD_SPENDING}
-							element={<AddSpendingScreen />}
-						/>
-						<Route
-							path={EAppPath.SPENDING_LIST}
-							element={<SpendingListScreen />}
-						/>
+			<div className={styles.content}>
+				<Routes>
+					<Route path={EAppPath.MAIN} element={<MainScreen />} />
+					<Route path={EAppPath.ADD_SPENDING} element={<AddSpendingScreen />} />
+					<Route
+						path={EAppPath.SPENDING_LIST}
+						element={<SpendingListScreen />}
+					/>
 
-						<Route
-							path="*"
-							element={
-								<ErrorScreen
-									message={intl.translate('errorMessages').pageNotFound}
-								/>
-							}
-						/>
-					</Routes>
-				</div>
+					<Route
+						path="*"
+						element={
+							<ErrorScreen
+								message={intl.translate('errorMessages').pageNotFound}
+							/>
+						}
+					/>
+				</Routes>
 			</div>
 		</Router>
 	);
