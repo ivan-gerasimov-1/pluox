@@ -1,0 +1,8 @@
+.actionSheetWrapper {
+	width: 100%;
+
+	padding: 1rem;
+
+	border-top-left-radius: var(--border-radius-default);
+	border-top-right-radius: var(--border-radius-default);
+}
