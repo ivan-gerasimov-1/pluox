@@ -1,6 +1,5 @@
 import { EAppPath } from '@root/app-path';
 import { appI18n } from '@components/app/app.i18n';
-import { Navbar } from '@components/navbar';
 import { useIntl } from '@modules/intl';
 import { SpendingListScreen } from '@root/screens/spending-list/spending-list';
 import { AddSpendingScreen, ErrorScreen, MainScreen } from '@screens/index';
@@ -35,8 +34,6 @@ export function App() {
 						/>
 					</Routes>
 				</div>
-
-				<Navbar />
 			</div>
 		</Router>
 	);
