@@ -21,6 +21,8 @@
 	--border-color-light: var(--color-grey-200);
 	--border-defaults: 1px solid var(--border-color);
 	--border-light: 1px solid var(--border-color-light);
+
+	--border-radius-small: 7px;
 	--border-radius-default: 17px;
 
 	/* misc */
