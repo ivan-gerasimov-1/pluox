@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './card.module.css';
 
 export interface ICard {
-	pressable?: boolean;
+	touchable?: boolean;
 	noPadding?: boolean;
 }
 
@@ -12,7 +12,7 @@ export function Card(props: React.PropsWithChildren<ICard>) {
 		<div
 			className={classnames(styles.card, {
 				[styles.noPadding]: props.noPadding,
-				[styles.pressableLink]: props.pressable,
+				[styles.pressableLink]: props.touchable,
 			})}
 		>
 			{props.children}
