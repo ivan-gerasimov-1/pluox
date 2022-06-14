@@ -5,6 +5,6 @@ export const newSpendingCardI18n = {
 		submitButton: 'Внести',
 	},
 	[ELocaleCode.EN_US]: {
-		submitButton: 'OK',
+		submitButton: 'Add',
 	},
 };

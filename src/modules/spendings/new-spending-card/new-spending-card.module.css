@@ -3,9 +3,6 @@
 	border: none;
 	background-color: transparent;
 
-	width: 100%;
-
-	margin-top: 1rem;
 	padding: 0.75rem 1rem;
 
 	font-family: inherit;
@@ -16,5 +13,12 @@
 	border: var(--border-defaults);
 	border-width: 2px;
 	border-color: var(--text-color);
-	border-radius: var(--border-radius-default);
+	border-radius: var(--border-radius-small);
+
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.formGroup {
+	display: flex;
 }

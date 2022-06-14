@@ -1,8 +1,12 @@
+import { useIntl } from '@modules/intl';
 import { AmountInput } from '@modules/spendings/new-spending-card/components/amount-input/amount-input';
+import { newSpendingCardI18n } from '@modules/spendings/new-spending-card/new-spending-card.i18n';
 import { $spendingApi } from '@modules/spendings/spendings.store';
 import { useState } from 'react';
+import styles from './new-spending-card.module.css';
 
 export function NewSpendingCard() {
+	let intl = useIntl(newSpendingCardI18n);
 	let [formState, setFormState] = useState({
 		amount: 0,
 	});
@@ -31,12 +35,17 @@ export function NewSpendingCard() {
 
 	return (
 		<form name="newSpending" onSubmit={handleSubmit}>
-			<AmountInput
-				value={formState.amount}
-				onChange={handleAmountChange}
-				required
-				autoFocus
-			/>
+			<div className={styles.formGroup}>
+				<AmountInput
+					value={formState.amount}
+					onChange={handleAmountChange}
+					required
+					autoFocus
+				/>
+				<button type="submit" className={styles.submitButton}>
+					{intl.translate('submitButton')}
+				</button>
+			</div>
 		</form>
 	);
 }
