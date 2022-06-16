@@ -4,14 +4,14 @@ import { createEvent, Store } from 'effector';
 export function withPersist<TState>(store: Store<TState>) {
 	logger.group(`WithPersist`, store.shortName);
 
-	let persistKey = getPersistKey(store.shortName);
 	let rehydrateEvent = createEvent('@persist/rehydrate');
+	let persistKey = getPersistKey(store.shortName);
 
-	let storeSnapshot = localStorage.getItem(persistKey);
+	const storeSnapshot = localStorage.getItem(persistKey);
 
 	if (storeSnapshot) {
 		store.on(rehydrateEvent, () => {
-			return JSON.parse(storeSnapshot as string);
+			return JSON.parse(storeSnapshot);
 		});
 
 		rehydrateEvent();
