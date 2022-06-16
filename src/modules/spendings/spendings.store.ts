@@ -1,7 +1,7 @@
 import { Id, TISODateString } from '@root/modules/types';
 import { generateId } from '@root/utils/id';
 import { withPersist } from '@root/utils/store';
-import { createApi, createStore, Store } from 'effector';
+import { createApi, createStore } from 'effector';
 
 export type TSpendingOperation = {
 	id: Id;
