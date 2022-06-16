@@ -1,6 +1,6 @@
 import { Store } from 'effector';
 import { useStore } from 'effector-react';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function useSelector<T extends { [key: string]: any }, K>(
 	$store: Store<T>,
@@ -14,7 +14,7 @@ export function useSelector<T extends { [key: string]: any }, K>(
 	let [result, setResult] = useState<K | undefined>(options?.defaultValue);
 	let dependency = options?.field ? store[options?.field] : store;
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		let _result = selectorFn();
 
 		setResult(_result);
