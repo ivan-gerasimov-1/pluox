@@ -1,28 +1,20 @@
 import { logGroup } from '@utils/log-group';
 import { createEvent, Store } from 'effector';
 
-export function withPersist<State>(
-	store: Store<State> /* , config: PersistConfig = defaultConfig */
-) {
+export function withPersist<TState>(store: Store<TState>) {
 	logGroup(`WithPersist :: ${store.shortName}`);
 
-	let name = store.shortName;
-	// let { key, expire } = config;
-	let persistKey = `@savee/store/${name}`;
-	let rehydrate = createEvent('@persist/rehydrate');
+	let persistKey = getPersistKey(store.shortName);
+	let rehydrateEvent = createEvent('@persist/rehydrate');
 
-	// if (expire && isExpired(expire)) {
-	//   localStorage.removeItem(persistKey);
-	// }
+	let storeSnapshot = localStorage.getItem(persistKey);
 
-	let snapshot = localStorage.getItem(persistKey);
-
-	if (snapshot) {
-		store.on(rehydrate, () => {
-			return JSON.parse(snapshot as string);
+	if (storeSnapshot) {
+		store.on(rehydrateEvent, () => {
+			return JSON.parse(storeSnapshot as string);
 		});
 
-		rehydrate();
+		rehydrateEvent();
 	}
 
 	store.updates.watch((state) => {
@@ -32,4 +24,8 @@ export function withPersist<State>(
 	});
 
 	return store;
+}
+
+function getPersistKey(storeName: string): string {
+	return `@savee/store/${storeName}`;
 }
