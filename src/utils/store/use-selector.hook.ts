@@ -2,7 +2,7 @@ import { Store } from 'effector';
 import { useStore } from 'effector-react';
 import { useEffect, useState } from 'react';
 
-export function useSelector<T extends { [key: string]: any }, K>(
+export function useSelector<T extends Record<string, unknown>, K>(
 	$store: Store<T>,
 	selectorFn: Function,
 	options?: {
