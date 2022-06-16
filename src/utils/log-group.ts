@@ -1,6 +1,13 @@
 import { environment } from '@root/config';
 
-export function logGroup(title: string, ...values: any): void {
+export interface ILogger {
+	group<T extends unknown[]>(title: string, ...values: T): void;
+}
+
+export function logGroup<T extends unknown[]>(
+	title: string,
+	...values: T
+): void {
 	if (!environment.isDevelopment) {
 		return;
 	}
@@ -13,3 +20,7 @@ export function logGroup(title: string, ...values: any): void {
 
 	console.groupEnd();
 }
+
+export const logger: ILogger = {
+	group: logGroup,
+};
