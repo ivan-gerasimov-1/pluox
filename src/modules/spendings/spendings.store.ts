@@ -1,17 +1,16 @@
 import { Spending } from '@modules/spendings/spending';
 import { TSpending } from '@modules/spendings/spending/types';
-import { Id } from '@root/modules/types';
+import type { TSpendings } from '@modules/spendings/spendings';
+import { Spendings } from '@modules/spendings/spendings';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
-
-type TSpendingOperations = Record<Id, TSpending>;
 
 type TSpendingCreatePayload = {
 	amount: number;
 };
 
 export type TSpendingsStore = {
-	operations: TSpendingOperations;
+	operations: TSpendings;
 };
 
 export let $spendings = withPersist(
@@ -27,14 +26,14 @@ export let $spendings = withPersist(
 
 export let $spendingApi = createApi($spendings, {
 	create(prevState, payload: TSpendingCreatePayload) {
-		const spendingOperation = new Spending(payload.amount);
+		const spending = new Spending(payload.amount);
+		const spendings = new Spendings(prevState.operations);
+
+		spendings.add(spending);
 
 		return {
 			...prevState,
-			operations: {
-				...prevState.operations,
-				[spendingOperation.id]: spendingOperation.toObject(),
-			},
+			operations: spendings.getAll(),
 		};
 	},
 });
@@ -44,21 +43,18 @@ export let $spendingsSelector = {
 		field: 'operations',
 		fn(): number {
 			let state = $spendings.getState();
-			let total = 0;
+			let spending = new Spendings(state.operations);
 
-			for (let operation of Object.values(state.operations)) {
-				total += operation.amount;
-			}
-
-			return total;
+			return spending.getTotalAmount();
 		},
 	},
 	list: {
 		field: 'operations',
 		fn(): TSpending[] {
-			let { operations = [] } = $spendings.getState();
+			let state = $spendings.getState();
+			let spendings = new Spendings(state.operations);
 
-			return Object.values(operations);
+			return spendings.list();
 		},
 	},
 };
