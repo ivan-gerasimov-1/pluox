@@ -1,5 +1,5 @@
+import { Spending } from '@modules/spendings/spending';
 import { Id, TISODateString } from '@root/modules/types';
-import { generateId } from '@root/utils/id';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
 
@@ -36,17 +36,13 @@ export let $spendings = withPersist(
 
 export let $spendingApi = createApi($spendings, {
 	create(prevState, payload: TSpendingCreatePayload) {
-		const spendingOperation: TSpendingOperation = {
-			id: generateId(),
-			amount: payload.amount,
-			dateCreated: new Date().toISOString(),
-		};
+		const spendingOperation = new Spending(payload.amount);
 
 		return {
 			...prevState,
 			operations: {
 				...prevState.operations,
-				[spendingOperation.id]: spendingOperation,
+				[spendingOperation.id]: spendingOperation.toObject(),
 			},
 		};
 	},
