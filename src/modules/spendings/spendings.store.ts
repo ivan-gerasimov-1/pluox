@@ -64,6 +64,19 @@ export function totalSelector(): number {
 }
 
 export let $spendingsSelector = {
+	total: {
+		field: 'operations',
+		fn(): number {
+			let state = $spendings.getState();
+			let total = 0;
+
+			for (let operation of Object.values(state.operations)) {
+				total += operation.amount;
+			}
+
+			return total;
+		},
+	},
 	list: {
 		field: 'operations',
 		fn(): TSpendingOperation[] {
