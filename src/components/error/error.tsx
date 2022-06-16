@@ -1,7 +1,6 @@
 import { errorI18n } from '@components/error/error.i18n';
 import { useIntl } from '@modules/intl';
-import { EAppPath } from '@root/app-path';
-import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '@modules/navigation/use-navigation';
 
 type TErrorProps = {
 	title: string;
@@ -10,13 +9,7 @@ type TErrorProps = {
 
 export function Error(props: TErrorProps) {
 	const intl = useIntl(errorI18n);
-	const navigate = useNavigate();
-
-	function goToMainPage() {
-		navigate(EAppPath.MAIN, {
-			replace: true,
-		});
-	}
+	const navigation = useNavigation();
 
 	return (
 		<>
@@ -25,7 +18,7 @@ export function Error(props: TErrorProps) {
 
 			<br />
 
-			<button type="button" onClick={goToMainPage}>
+			<button type="button" onClick={navigation.mainPage}>
 				{intl.translate('mainPageButtonLabel')}
 			</button>
 		</>
