@@ -1,8 +1,8 @@
-import { logGroup } from '@utils/log-group';
+import { logger } from '@utils/log-group';
 import { createEvent, Store } from 'effector';
 
 export function withPersist<TState>(store: Store<TState>) {
-	logGroup(`WithPersist :: ${store.shortName}`);
+	logger.group(`WithPersist`, store.shortName);
 
 	let persistKey = getPersistKey(store.shortName);
 	let rehydrateEvent = createEvent('@persist/rehydrate');
