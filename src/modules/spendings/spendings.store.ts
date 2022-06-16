@@ -1,10 +1,10 @@
 import { Spending } from '@modules/spendings/spending';
-import { TSpendingOperation } from '@modules/spendings/spending/types';
+import { TSpending } from '@modules/spendings/spending/types';
 import { Id } from '@root/modules/types';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
 
-type TSpendingOperations = Record<Id, TSpendingOperation>;
+type TSpendingOperations = Record<Id, TSpending>;
 
 type TSpendingCreatePayload = {
 	amount: number;
@@ -55,7 +55,7 @@ export let $spendingsSelector = {
 	},
 	list: {
 		field: 'operations',
-		fn(): TSpendingOperation[] {
+		fn(): TSpending[] {
 			let { operations = [] } = $spendings.getState();
 
 			return Object.values(operations);

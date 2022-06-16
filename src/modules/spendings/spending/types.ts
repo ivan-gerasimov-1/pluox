@@ -2,10 +2,10 @@ import type { Id, TISODateString } from '@modules/types';
 
 export interface ISpending {
 	readonly id: Id;
-	toObject(): TSpendingOperation;
+	toObject(): TSpending;
 }
 
-export type TSpendingOperation = {
+export type TSpending = {
 	id: Id;
 	/**
 	 * @todo

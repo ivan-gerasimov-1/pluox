@@ -1,6 +1,6 @@
 import { useIntl } from '@modules/intl';
 import { spendingListI18n } from '@modules/spendings/spending-list/spending-list.i18n';
-import type { TSpendingOperation } from '@modules/spendings/spending/types';
+import type { TSpending } from '@modules/spendings/spending/types';
 import {
 	$spendings,
 	$spendingsSelector,
@@ -11,7 +11,7 @@ import { useSelector } from '@root/utils/store';
 
 export function SpendingList() {
 	let intl = useIntl(spendingListI18n);
-	let spendingsList = useSelector<TSpendingsStore, TSpendingOperation[]>(
+	let spendingsList = useSelector<TSpendingsStore, TSpending[]>(
 		$spendings,
 		$spendingsSelector.list.fn,
 		{
