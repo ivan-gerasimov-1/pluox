@@ -3,15 +3,15 @@ import { spendingListI18n } from '@modules/spendings/spending-list/spending-list
 import {
 	$spendings,
 	$spendingsSelector,
-	ISpendingOperation,
-	ISpendingsStore,
+	TSpendingOperation,
+	TSpendingsStore,
 } from '@modules/spendings/spendings.store';
 import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
 
 export function SpendingList() {
 	let intl = useIntl(spendingListI18n);
-	let spendingsList = useSelector<ISpendingsStore, ISpendingOperation[]>(
+	let spendingsList = useSelector<TSpendingsStore, TSpendingOperation[]>(
 		$spendings,
 		$spendingsSelector.list.fn,
 		{

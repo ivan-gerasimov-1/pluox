@@ -1,34 +1,30 @@
-import { Id } from '@root/modules/types';
+import { Id, TISODateString } from '@root/modules/types';
 import { generateId } from '@root/utils/id';
 import { withPersist } from '@root/utils/store';
-import { createApi, createStore } from 'effector';
+import { createApi, createStore, Store } from 'effector';
 
-type ISODateString = string;
-
-export interface ISpendingOperation {
+export type TSpendingOperation = {
 	id: Id;
 	/**
 	 * @todo
 	 * - Use specialized library to store big numbers
 	 */
 	amount: number;
-	dateCreated: ISODateString;
-}
+	dateCreated: TISODateString;
+};
 
-interface ISpendingOperations {
-	[id: string]: ISpendingOperation;
-}
+type TSpendingOperations = Record<Id, TSpendingOperation>;
 
 type TSpendingCreatePayload = {
 	amount: number;
 };
 
-export interface ISpendingsStore {
-	operations: ISpendingOperations;
-}
+export type TSpendingsStore = {
+	operations: TSpendingOperations;
+};
 
 export let $spendings = withPersist(
-	createStore<ISpendingsStore>(
+	createStore<TSpendingsStore>(
 		{
 			operations: {},
 		},
@@ -40,7 +36,7 @@ export let $spendings = withPersist(
 
 export let $spendingApi = createApi($spendings, {
 	create(prevState, payload: TSpendingCreatePayload) {
-		const spendingOperation: ISpendingOperation = {
+		const spendingOperation: TSpendingOperation = {
 			id: generateId(),
 			amount: payload.amount,
 			dateCreated: new Date().toISOString(),
@@ -70,7 +66,7 @@ export function totalSelector(): number {
 export let $spendingsSelector = {
 	list: {
 		field: 'operations',
-		fn() {
+		fn(): TSpendingOperation[] {
 			let { operations = [] } = $spendings.getState();
 
 			return Object.values(operations);
