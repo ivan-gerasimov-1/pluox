@@ -3,12 +3,12 @@ import { useIntl } from '@modules/intl';
 import { EAppPath } from '@root/app-path';
 import { useNavigate } from 'react-router-dom';
 
-interface IError {
+type TErrorProps = {
 	title: string;
 	message: string;
-}
+};
 
-export function Error(props: IError) {
+export function Error(props: TErrorProps) {
 	const intl = useIntl(errorI18n);
 	const navigate = useNavigate();
 
