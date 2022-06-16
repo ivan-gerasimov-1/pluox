@@ -1,4 +1,5 @@
 import { useIntl } from '@modules/intl';
+import { MoneyCard } from '@modules/spendings/money-card/money-card';
 import { moneySpentI18n } from '@modules/spendings/money-spent/money-spent.i18n';
 import {
 	$spendings,
@@ -6,7 +7,6 @@ import {
 	totalSelector,
 } from '@modules/spendings/spendings.store';
 import { useSelector } from '@root/utils/store';
-import { MoneyCard } from '../money-card/money-card';
 
 export function MoneySpent() {
 	let intl = useIntl(moneySpentI18n);
