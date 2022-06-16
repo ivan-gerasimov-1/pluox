@@ -52,17 +52,6 @@ export let $spendingApi = createApi($spendings, {
 	},
 });
 
-export function totalSelector(): number {
-	let { operations } = $spendings.getState();
-	let total = 0;
-
-	for (let operation of Object.values(operations)) {
-		total += operation.amount;
-	}
-
-	return total;
-}
-
 export let $spendingsSelector = {
 	total: {
 		field: 'operations',
