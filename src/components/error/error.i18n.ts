@@ -1,0 +1,10 @@
+import { ELocaleCode } from '@modules/intl/enums';
+
+export const errorI18n = {
+	[ELocaleCode.RU_RU]: {
+		mainPageButtonLabel: 'На главную',
+	},
+	[ELocaleCode.EN_US]: {
+		mainPageButtonLabel: 'Main page',
+	},
+};
