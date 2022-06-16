@@ -1,9 +1,9 @@
 import { useIntl } from '@modules/intl';
 import { spendingListI18n } from '@modules/spendings/spending-list/spending-list.i18n';
+import type { TSpendingOperation } from '@modules/spendings/spending/types';
 import {
 	$spendings,
 	$spendingsSelector,
-	TSpendingOperation,
 	TSpendingsStore,
 } from '@modules/spendings/spendings.store';
 import { formatCurrency } from '@root/utils/currency';

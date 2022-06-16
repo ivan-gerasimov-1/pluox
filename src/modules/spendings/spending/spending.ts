@@ -1,5 +1,7 @@
-import type { ISpending } from '@modules/spendings/spending/types';
-import type { TSpendingOperation } from '@modules/spendings/spendings.store';
+import type {
+	ISpending,
+	TSpendingOperation,
+} from '@modules/spendings/spending/types';
 import type { Id, TISODateString } from '@modules/types';
 import { generateId } from '@root/utils/id';
 

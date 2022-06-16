@@ -1,17 +1,8 @@
 import { Spending } from '@modules/spendings/spending';
-import { Id, TISODateString } from '@root/modules/types';
+import { TSpendingOperation } from '@modules/spendings/spending/types';
+import { Id } from '@root/modules/types';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
-
-export type TSpendingOperation = {
-	id: Id;
-	/**
-	 * @todo
-	 * - Use specialized library to store big numbers
-	 */
-	amount: number;
-	dateCreated: TISODateString;
-};
 
 type TSpendingOperations = Record<Id, TSpendingOperation>;
 
