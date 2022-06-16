@@ -27,7 +27,6 @@ export function AmountInput(props: TAmountInputProps) {
 	});
 
 	useEffect(() => {
-		console.log(props);
 		setAmount(toViewValue(props.value));
 	}, [props.value]);
 
