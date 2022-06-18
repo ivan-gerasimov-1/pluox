@@ -19,15 +19,16 @@
 		"jsx": "react-jsx",
 
 		"paths": {
+			"@domain/*": ["src/core/domain/*"],
+			"@core/*": ["src/core/*"],
+
 			"@components/*": ["src/components/*"],
 			"@modules/*": ["src/modules/*"],
-			"@root/*": ["src/*"],
 			"@screens/*": ["src/screens/*"],
 			"@ui-kit/*": ["src/ui-kit/*"],
 			"@utils/*": ["src/utils/*"],
 
-			"@core/*": ["src/core/*"],
-			"@domain/*": ["src/core/domain/*"]
+			"@root/*": ["src/*"]
 		}
 	},
 	"include": ["src/**/*"]
