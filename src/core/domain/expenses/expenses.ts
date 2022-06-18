@@ -48,6 +48,9 @@ export class Expenses implements IExpenses {
 		return Object.fromEntries(this.#expenses.entries());
 	}
 
+	/**
+	 * @throws {ExpenseNotFoundError}
+	 */
 	private getOne(id: Id): TExpense {
 		const expense = this.#expenses.get(id);
 
