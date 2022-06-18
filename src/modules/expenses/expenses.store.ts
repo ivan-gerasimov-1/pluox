@@ -25,7 +25,7 @@ export let $expenses = withPersist(
 
 export let $expensesApi = createApi($expenses, {
 	create(prevState, payload: TExpenseCreatePayload) {
-		const expense = new Expense(payload.amount);
+		const expense = Expense.create(payload.amount);
 		const expenses = new Expenses(prevState.operations);
 
 		expenses.add(expense);
