@@ -32,7 +32,7 @@ export let $expensesApi = createApi($expenses, {
 
 		return {
 			...prevState,
-			operations: expenses.getAll(),
+			operations: expenses.get(),
 		};
 	},
 });

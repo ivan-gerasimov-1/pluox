@@ -3,7 +3,10 @@ import type { Id } from '@domain/types';
 
 export interface IExpenses {
 	add(expense: IExpense): this;
-	getAll(): TExpenses;
+
+	get(): TExpenses;
+	get(id: Id): TExpense;
+	get(id?: Id): TExpenses | TExpense;
 
 	list(): TExpense[];
 
