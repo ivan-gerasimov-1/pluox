@@ -1,4 +1,4 @@
-import { ExpenseList } from '@modules/spendings';
+import { ExpenseList } from '@modules/expenses';
 
 export function SpendingListScreen() {
 	return <ExpenseList />;

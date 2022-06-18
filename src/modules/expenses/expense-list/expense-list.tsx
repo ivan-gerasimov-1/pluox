@@ -1,11 +1,11 @@
 import { useIntl } from '@modules/intl';
-import { expenseListI18n } from '@modules/spendings/expense-list/expense-list.i18n';
-import type { TExpense } from '@modules/spendings/expense/types';
+import { expenseListI18n } from '@modules/expenses/expense-list/expense-list.i18n';
+import type { TExpense } from '@modules/expenses/expense/types';
 import {
 	$expenses,
 	$expensesSelector,
 	TExpensesStore,
-} from '@modules/spendings/expenses.store';
+} from '@modules/expenses/expenses.store';
 import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
 

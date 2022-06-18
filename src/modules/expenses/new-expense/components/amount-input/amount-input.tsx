@@ -1,4 +1,4 @@
-import { validateNumber } from '@modules/spendings/new-expense/components/amount-input/helpers';
+import { validateNumber } from '@modules/expenses/new-expense/components/amount-input/helpers';
 import { useEffect, useState } from 'react';
 import styles from './amount-input.module.css';
 

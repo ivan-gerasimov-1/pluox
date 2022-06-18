@@ -1,5 +1,5 @@
-import { Expenses } from '@modules/spendings/expenses/expenses';
-import { TExpenses } from '@modules/spendings/expenses/types';
+import { Expenses } from '@modules/expenses/expenses/expenses';
+import { TExpenses } from '@modules/expenses/expenses/types';
 
 export { Expenses, TExpenses };
 

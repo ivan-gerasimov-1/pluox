@@ -1,6 +1,6 @@
-import { Expense } from '@modules/spendings/expense';
-import type { TExpense } from '@modules/spendings/expense/types';
-import { Expenses, type TExpenses } from '@modules/spendings/expenses';
+import { Expense } from '@modules/expenses/expense';
+import type { TExpense } from '@modules/expenses/expense/types';
+import { Expenses, type TExpenses } from '@modules/expenses/expenses';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
 

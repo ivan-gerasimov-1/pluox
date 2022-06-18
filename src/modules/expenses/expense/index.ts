@@ -1,5 +1,5 @@
-import { Expense } from '@modules/spendings/expense/expense';
-import { IExpense } from '@modules/spendings/expense/types';
+import { Expense } from '@modules/expenses/expense/expense';
+import { IExpense } from '@modules/expenses/expense/types';
 
 export { Expense, IExpense };
 

@@ -1,5 +1,5 @@
 import { useIntl } from '@modules/intl';
-import { moneyLeftI18n } from '@modules/spendings/money-left/money-left.i18n';
+import { moneyLeftI18n } from '@modules/expenses/money-left/money-left.i18n';
 import { useState } from 'react';
 import { MoneyCard } from '../money-card/money-card';
 

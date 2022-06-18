@@ -1,6 +1,6 @@
 import { ActionSheet } from '@components/action-sheet';
-import { MoneyLeft, MoneySpent } from '@modules/spendings';
-import { NewExpense } from '@modules/spendings/new-expense';
+import { MoneyLeft, MoneySpent } from '@modules/expenses';
+import { NewExpense } from '@modules/expenses/new-expense';
 import { EAppPath } from '@root/app-path';
 import { ActionSheetContainer } from '@root/screens/main/components/action-sheet-container /action-sheet-container';
 import { Card, CardContainer } from '@root/ui-kit';

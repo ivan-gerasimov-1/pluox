@@ -1,7 +1,7 @@
 import { useIntl } from '@modules/intl';
-import { AmountInput } from '@modules/spendings/new-expense/components/amount-input/amount-input';
-import { newExpenseI18n } from '@modules/spendings/new-expense/new-expense.i18n';
-import { $expensesApi } from '@modules/spendings/expenses.store';
+import { AmountInput } from '@modules/expenses/new-expense/components/amount-input/amount-input';
+import { newExpenseI18n } from '@modules/expenses/new-expense/new-expense.i18n';
+import { $expensesApi } from '@modules/expenses/expenses.store';
 import { useState } from 'react';
 import styles from './new-expense.module.css';
 

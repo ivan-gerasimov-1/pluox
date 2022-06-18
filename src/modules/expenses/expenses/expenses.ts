@@ -1,5 +1,5 @@
-import type { IExpense, TExpense } from '@modules/spendings/expense/types';
-import type { IExpenses, TExpenses } from '@modules/spendings/expenses/types';
+import type { IExpense, TExpense } from '@modules/expenses/expense/types';
+import type { IExpenses, TExpenses } from '@modules/expenses/expenses/types';
 import type { Id } from '@modules/types';
 
 export class Expenses implements IExpenses {

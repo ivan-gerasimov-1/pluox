@@ -1,4 +1,4 @@
-import type { IExpense, TExpense } from '@modules/spendings/expense/types';
+import type { IExpense, TExpense } from '@modules/expenses/expense/types';
 import type { Id } from '@modules/types';
 
 export interface IExpenses {
