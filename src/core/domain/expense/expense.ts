@@ -1,5 +1,5 @@
-import type { IExpense, TExpense } from '@modules/expenses/expense/types';
-import type { Id, TISODateString } from '@modules/types';
+import type { IExpense, TExpense } from '@domain/expense/types';
+import type { Id, TISODateString } from '@domain/types';
 import { generateId } from '@root/utils/id';
 
 export class Expense implements IExpense {

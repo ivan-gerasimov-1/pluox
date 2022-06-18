@@ -1,6 +1,6 @@
-import type { IExpense, TExpense } from '@modules/expenses/expense/types';
-import type { IExpenses, TExpenses } from '@modules/expenses/expenses/types';
-import type { Id } from '@modules/types';
+import type { IExpense, TExpense } from '@domain/expense/types';
+import type { IExpenses, TExpenses } from '@domain/expenses/types';
+import type { Id } from '@domain/types';
 
 export class Expenses implements IExpenses {
 	#expenses: Map<Id, TExpense>;

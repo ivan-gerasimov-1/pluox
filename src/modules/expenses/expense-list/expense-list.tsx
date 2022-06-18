@@ -1,6 +1,6 @@
 import { useIntl } from '@modules/intl';
 import { expenseListI18n } from '@modules/expenses/expense-list/expense-list.i18n';
-import type { TExpense } from '@modules/expenses/expense/types';
+import type { TExpense } from '@domain/expense/types';
 import {
 	$expenses,
 	$expensesSelector,

@@ -1,5 +1,5 @@
-import type { IExpense, TExpense } from '@modules/expenses/expense/types';
-import type { Id } from '@modules/types';
+import type { IExpense, TExpense } from '@domain/expense/types';
+import type { Id } from '@domain/types';
 
 export interface IExpenses {
 	add(expense: IExpense): this;

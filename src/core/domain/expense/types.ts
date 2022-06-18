@@ -1,4 +1,4 @@
-import type { Id, TISODateString } from '@modules/types';
+import type { Id, TISODateString } from '@domain/types';
 
 export interface IExpense {
 	readonly id: Id;

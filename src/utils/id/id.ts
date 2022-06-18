@@ -1,4 +1,4 @@
-import { Id } from '@modules/types';
+import { Id } from '@domain/types';
 import { customAlphabet } from 'nanoid';
 
 const ALPHABET =
