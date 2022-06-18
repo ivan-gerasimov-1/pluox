@@ -7,7 +7,7 @@ export class Expense implements IExpense {
 	#amount: number;
 	#dateCreated: TISODateString;
 
-	constructor(amount: number) {
+	private constructor(amount: number) {
 		this.#id = generateId();
 		this.#amount = amount;
 		this.#dateCreated = new Date().toISOString();
