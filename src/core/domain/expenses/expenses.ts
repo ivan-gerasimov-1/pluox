@@ -5,7 +5,7 @@ import type { Id } from '@domain/types';
 export class Expenses implements IExpenses {
 	#expenses: Map<Id, TExpense>;
 
-	constructor(expenses: TExpenses) {
+	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));
 	}
 
