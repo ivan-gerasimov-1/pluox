@@ -23,9 +23,9 @@ export function ExpenseList() {
 			{expenseList?.map((item) => {
 				return (
 					<li key={item.id}>
-						{formatDate(item.dateCreated)}
-						<br />
 						<strong>{formatCurrency(item.amount)}</strong>
+						<br />
+						{formatDate(item.dateCreated)}
 					</li>
 				);
 			})}
