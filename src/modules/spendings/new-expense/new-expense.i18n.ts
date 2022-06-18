@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@modules/intl';
 
-export const newSpendingCardI18n = {
+export const newExpenseI18n = {
 	[ELocaleCode.RU_RU]: {
 		submitButton: 'Внести',
 	},

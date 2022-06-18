@@ -1,6 +1,6 @@
 import { ActionSheet } from '@components/action-sheet';
 import { MoneyLeft, MoneySpent } from '@modules/spendings';
-import { NewSpendingCard } from '@modules/spendings/new-spending-card';
+import { NewExpense } from '@modules/spendings/new-expense';
 import { EAppPath } from '@root/app-path';
 import { ActionSheetContainer } from '@root/screens/main/components/action-sheet-container /action-sheet-container';
 import { Card, CardContainer } from '@root/ui-kit';
@@ -23,7 +23,7 @@ export function MainScreen() {
 
 			<ActionSheetContainer>
 				<ActionSheet>
-					<NewSpendingCard />
+					<NewExpense />
 				</ActionSheet>
 			</ActionSheetContainer>
 		</>

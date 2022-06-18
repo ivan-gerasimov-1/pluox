@@ -1,12 +1,12 @@
 import { useIntl } from '@modules/intl';
-import { AmountInput } from '@modules/spendings/new-spending-card/components/amount-input/amount-input';
-import { newSpendingCardI18n } from '@modules/spendings/new-spending-card/new-spending-card.i18n';
+import { AmountInput } from '@modules/spendings/new-expense/components/amount-input/amount-input';
+import { newExpenseI18n } from '@modules/spendings/new-expense/new-expense.i18n';
 import { $expensesApi } from '@modules/spendings/expenses.store';
 import { useState } from 'react';
-import styles from './new-spending-card.module.css';
+import styles from './new-expense.module.css';
 
-export function NewSpendingCard() {
-	let intl = useIntl(newSpendingCardI18n);
+export function NewExpense() {
+	let intl = useIntl(newExpenseI18n);
 	let [formState, setFormState] = useState({
 		amount: 0,
 	});
@@ -34,7 +34,7 @@ export function NewSpendingCard() {
 	}
 
 	return (
-		<form name="newSpending" onSubmit={handleSubmit}>
+		<form name="newExpense" onSubmit={handleSubmit}>
 			<div className={styles.formGroup}>
 				<AmountInput
 					value={formState.amount}
