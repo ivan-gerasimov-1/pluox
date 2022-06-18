@@ -24,7 +24,10 @@
 			"@root/*": ["src/*"],
 			"@screens/*": ["src/screens/*"],
 			"@ui-kit/*": ["src/ui-kit/*"],
-			"@utils/*": ["src/utils/*"]
+			"@utils/*": ["src/utils/*"],
+
+			"@core/*": ["src/core/*"],
+			"@domain/*": ["src/core/domain/*"]
 		}
 	},
 	"include": ["src/**/*"]
