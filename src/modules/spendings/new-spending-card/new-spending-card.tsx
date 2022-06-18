@@ -1,7 +1,7 @@
 import { useIntl } from '@modules/intl';
 import { AmountInput } from '@modules/spendings/new-spending-card/components/amount-input/amount-input';
 import { newSpendingCardI18n } from '@modules/spendings/new-spending-card/new-spending-card.i18n';
-import { $spendingApi } from '@modules/spendings/spendings.store';
+import { $expensesApi } from '@modules/spendings/expenses.store';
 import { useState } from 'react';
 import styles from './new-spending-card.module.css';
 
@@ -18,7 +18,7 @@ export function NewSpendingCard() {
 			return;
 		}
 
-		$spendingApi.create({
+		$expensesApi.create({
 			amount: formState.amount,
 		});
 

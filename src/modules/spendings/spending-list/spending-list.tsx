@@ -2,20 +2,20 @@ import { useIntl } from '@modules/intl';
 import { spendingListI18n } from '@modules/spendings/spending-list/spending-list.i18n';
 import type { TExpense } from '@modules/spendings/expense/types';
 import {
-	$spendings,
-	$spendingsSelector,
-	TSpendingsStore,
-} from '@modules/spendings/spendings.store';
+	$expenses,
+	$expensesSelector,
+	TExpensesStore,
+} from '@modules/spendings/expenses.store';
 import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
 
 export function SpendingList() {
 	let intl = useIntl(spendingListI18n);
-	let spendingsList = useSelector<TSpendingsStore, TExpense[]>(
-		$spendings,
-		$spendingsSelector.list.fn,
+	let spendingsList = useSelector<TExpensesStore, TExpense[]>(
+		$expenses,
+		$expensesSelector.list.fn,
 		{
-			field: $spendingsSelector.list.field,
+			field: $expensesSelector.list.field,
 			defaultValue: [],
 		}
 	);

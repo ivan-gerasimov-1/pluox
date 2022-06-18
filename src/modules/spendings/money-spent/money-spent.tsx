@@ -2,19 +2,19 @@ import { useIntl } from '@modules/intl';
 import { MoneyCard } from '@modules/spendings/money-card/money-card';
 import { moneySpentI18n } from '@modules/spendings/money-spent/money-spent.i18n';
 import {
-	$spendings,
-	$spendingsSelector,
-	TSpendingsStore,
-} from '@modules/spendings/spendings.store';
+	$expenses,
+	$expensesSelector,
+	TExpensesStore,
+} from '@modules/spendings/expenses.store';
 import { useSelector } from '@root/utils/store';
 
 export function MoneySpent() {
 	let intl = useIntl(moneySpentI18n);
-	let total = useSelector<TSpendingsStore, number>(
-		$spendings,
-		$spendingsSelector.total.fn,
+	let total = useSelector<TExpensesStore, number>(
+		$expenses,
+		$expensesSelector.total.fn,
 		{
-			field: $spendingsSelector.total.field,
+			field: $expensesSelector.total.field,
 			defaultValue: 0,
 		}
 	);
