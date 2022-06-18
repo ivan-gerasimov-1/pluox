@@ -15,7 +15,7 @@ export class Expenses implements IExpenses {
 	}
 
 	public add(expense: IExpense): this {
-		this.#expenses.set(expense.id, expense.toObject());
+		this.#expenses.set(expense.id, Object.freeze(expense.toObject()));
 
 		return this;
 	}
