@@ -13,6 +13,10 @@ export class Expense implements IExpense {
 		this.#dateCreated = new Date().toISOString();
 	}
 
+	public static create(amount: number): IExpense {
+		return new Expense(amount);
+	}
+
 	public get id(): Id {
 		return this.#id;
 	}
