@@ -1,12 +1,12 @@
 import { formatCurrency } from '@root/utils/currency';
 import styles from './money-card.module.css';
 
-export interface IMoneyCard {
+type TMoneyCardProps = {
 	title: string;
 	amount?: number;
-}
+};
 
-export function MoneyCard(props: IMoneyCard) {
+export function MoneyCard(props: TMoneyCardProps) {
 	return (
 		<>
 			<h2 className={styles.title}>{props.title}</h2>

@@ -3,12 +3,12 @@ import { useIntl } from '@modules/intl';
 import { errorScreenI18n } from '@root/screens/error/error.i18n';
 import styles from './error.module.css';
 
-interface IErrorScreenProps {
+type TErrorScreenProps = {
 	title?: string;
 	message: string;
-}
+};
 
-export function ErrorScreen(props: IErrorScreenProps) {
+export function ErrorScreen(props: TErrorScreenProps) {
 	let intl = useIntl(errorScreenI18n);
 
 	return (

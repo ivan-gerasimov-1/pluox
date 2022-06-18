@@ -2,12 +2,12 @@ import { classnames } from '@root/utils/classnames';
 import React from 'react';
 import styles from './card.module.css';
 
-export interface ICard {
+type TCardProps = {
 	touchable?: boolean;
 	noPadding?: boolean;
-}
+};
 
-export function Card(props: React.PropsWithChildren<ICard>) {
+export function Card(props: React.PropsWithChildren<TCardProps>) {
 	return (
 		<div
 			className={classnames(styles.card, {

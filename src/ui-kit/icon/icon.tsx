@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { getIcon, IconName } from './icons';
 
-interface IIcon {
+type TIconProps = {
 	name: IconName;
-}
+};
 
-export function Icon(props: IIcon) {
+export function Icon(props: TIconProps) {
 	let SvgIcon = useMemo(() => {
 		return getIcon(props.name);
 	}, [props.name]);

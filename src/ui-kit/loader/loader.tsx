@@ -1,12 +1,12 @@
 import { classnames } from '@root/utils/classnames';
 import styles from './loader.module.css';
 
-interface ILoader {
+type TLoaderProps = {
 	className?: string;
 	style?: React.CSSProperties;
-}
+};
 
-export function Loader(props: ILoader) {
+export function Loader(props: TLoaderProps) {
 	return (
 		<div
 			style={props.style}
