@@ -6,6 +6,7 @@ import {
 } from '@modules/expenses/expenses.store';
 import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
+import { formatDate } from '@utils/date';
 
 export function ExpenseList() {
 	let expenseList = useSelector<TExpensesStore, TExpense[]>(
@@ -22,7 +23,7 @@ export function ExpenseList() {
 			{expenseList?.map((item) => {
 				return (
 					<li key={item.id}>
-						{new Date(item.dateCreated).toLocaleString()}
+						{formatDate(item.dateCreated)}
 						<br />
 						<strong>{formatCurrency(item.amount)}</strong>
 					</li>
