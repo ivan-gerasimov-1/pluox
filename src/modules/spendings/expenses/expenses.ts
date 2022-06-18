@@ -1,14 +1,11 @@
 import type { IExpense, TExpense } from '@modules/spendings/expense/types';
-import type {
-	ISpendings,
-	TSpendings,
-} from '@modules/spendings/spendings/types';
+import type { IExpenses, TExpenses } from '@modules/spendings/expenses/types';
 import type { Id } from '@modules/types';
 
-export class Spendings implements ISpendings {
+export class Expenses implements IExpenses {
 	#spendings: Map<Id, TExpense>;
 
-	constructor(spendings: TSpendings) {
+	constructor(spendings: TExpenses) {
 		this.#spendings = new Map(Object.entries(spendings));
 	}
 
@@ -18,7 +15,7 @@ export class Spendings implements ISpendings {
 		return this;
 	}
 
-	public getAll(): TSpendings {
+	public getAll(): TExpenses {
 		return Object.fromEntries(this.#spendings.entries());
 	}
 

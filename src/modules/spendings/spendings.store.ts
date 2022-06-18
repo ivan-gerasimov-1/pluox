@@ -1,7 +1,7 @@
 import { Spending } from '@modules/spendings/expense';
 import { TExpense } from '@modules/spendings/expense/types';
-import type { TSpendings } from '@modules/spendings/spendings';
-import { Spendings } from '@modules/spendings/spendings';
+import type { TSpendings } from '@modules/spendings/expenses';
+import { Spendings } from '@modules/spendings/expenses';
 import { withPersist } from '@root/utils/store';
 import { createApi, createStore } from 'effector';
 
