@@ -26,7 +26,7 @@ export let $expenses = withPersist(
 export let $expensesApi = createApi($expenses, {
 	create(prevState, payload: TExpenseCreatePayload) {
 		const expense = Expense.create(payload.amount);
-		const expenses = new Expenses(prevState.operations);
+		const expenses = Expenses.create(prevState.operations);
 
 		expenses.add(expense);
 
@@ -42,7 +42,7 @@ export let $expensesSelector = {
 		field: 'operations',
 		fn(): number {
 			let state = $expenses.getState();
-			let expense = new Expenses(state.operations);
+			let expense = Expenses.create(state.operations);
 
 			return expense.getTotalAmount();
 		},
@@ -51,7 +51,7 @@ export let $expensesSelector = {
 		field: 'operations',
 		fn(): TExpense[] {
 			let state = $expenses.getState();
-			let expense = new Expenses(state.operations);
+			let expense = Expenses.create(state.operations);
 
 			return expense.list();
 		},
