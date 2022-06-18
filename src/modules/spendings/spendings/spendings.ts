@@ -1,4 +1,4 @@
-import type { ISpending, TSpending } from '@modules/spendings/spending/types';
+import type { IExpense, TExpense } from '@modules/spendings/expense/types';
 import type {
 	ISpendings,
 	TSpendings,
@@ -6,13 +6,13 @@ import type {
 import type { Id } from '@modules/types';
 
 export class Spendings implements ISpendings {
-	#spendings: Map<Id, TSpending>;
+	#spendings: Map<Id, TExpense>;
 
 	constructor(spendings: TSpendings) {
 		this.#spendings = new Map(Object.entries(spendings));
 	}
 
-	public add(spending: ISpending): this {
+	public add(spending: IExpense): this {
 		this.#spendings.set(spending.id, spending.toObject());
 
 		return this;
@@ -22,7 +22,7 @@ export class Spendings implements ISpendings {
 		return Object.fromEntries(this.#spendings.entries());
 	}
 
-	public list(): TSpending[] {
+	public list(): TExpense[] {
 		return Array.from(this.#spendings.values());
 	}
 

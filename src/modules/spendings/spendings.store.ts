@@ -1,5 +1,5 @@
-import { Spending } from '@modules/spendings/spending';
-import { TSpending } from '@modules/spendings/spending/types';
+import { Spending } from '@modules/spendings/expense';
+import { TExpense } from '@modules/spendings/expense/types';
 import type { TSpendings } from '@modules/spendings/spendings';
 import { Spendings } from '@modules/spendings/spendings';
 import { withPersist } from '@root/utils/store';
@@ -50,7 +50,7 @@ export let $spendingsSelector = {
 	},
 	list: {
 		field: 'operations',
-		fn(): TSpending[] {
+		fn(): TExpense[] {
 			let state = $spendings.getState();
 			let spendings = new Spendings(state.operations);
 

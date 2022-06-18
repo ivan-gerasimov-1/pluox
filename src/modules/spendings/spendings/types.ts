@@ -1,13 +1,13 @@
-import type { ISpending, TSpending } from '@modules/spendings/spending/types';
+import type { IExpense, TExpense } from '@modules/spendings/expense/types';
 import type { Id } from '@modules/types';
 
 export interface ISpendings {
-	add(spending: ISpending): this;
+	add(spending: IExpense): this;
 	getAll(): TSpendings;
 
-	list(): TSpending[];
+	list(): TExpense[];
 
 	getTotalAmount(): number;
 }
 
-export type TSpendings = Record<Id, TSpending>;
+export type TSpendings = Record<Id, TExpense>;

@@ -1,8 +1,8 @@
-import type { ISpending, TSpending } from '@modules/spendings/spending/types';
+import type { IExpense, TExpense } from '@modules/spendings/expense/types';
 import type { Id, TISODateString } from '@modules/types';
 import { generateId } from '@root/utils/id';
 
-export class Spending implements ISpending {
+export class Expense implements IExpense {
 	#id: Id;
 	#amount: number;
 	#dateCreated: TISODateString;
@@ -17,7 +17,7 @@ export class Spending implements ISpending {
 		return this.#id;
 	}
 
-	public toObject(): TSpending {
+	public toObject(): TExpense {
 		return {
 			id: this.#id,
 			amount: this.#amount,

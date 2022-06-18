@@ -1,11 +1,11 @@
 import type { Id, TISODateString } from '@modules/types';
 
-export interface ISpending {
+export interface IExpense {
 	readonly id: Id;
-	toObject(): TSpending;
+	toObject(): TExpense;
 }
 
-export type TSpending = {
+export type TExpense = {
 	id: Id;
 	/**
 	 * @todo
