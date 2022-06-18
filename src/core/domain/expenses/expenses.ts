@@ -10,7 +10,7 @@ export class Expenses implements IExpenses {
 		this.#expenses = new Map(Object.entries(expenses));
 	}
 
-	public static create(expenses: TExpenses): IExpenses {
+	public static create(expenses: TExpenses = {}): IExpenses {
 		return new Expenses(expenses);
 	}
 
