@@ -5,6 +5,6 @@ export const expenseListI18n = {
 		title: 'Расходы',
 	},
 	[ELocaleCode.EN_US]: {
-		title: 'Spending List',
+		title: 'Expenses',
 	},
 };

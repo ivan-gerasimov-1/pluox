@@ -3,30 +3,30 @@ import type { IExpenses, TExpenses } from '@modules/expenses/expenses/types';
 import type { Id } from '@modules/types';
 
 export class Expenses implements IExpenses {
-	#spendings: Map<Id, TExpense>;
+	#expenses: Map<Id, TExpense>;
 
-	constructor(spendings: TExpenses) {
-		this.#spendings = new Map(Object.entries(spendings));
+	constructor(expenses: TExpenses) {
+		this.#expenses = new Map(Object.entries(expenses));
 	}
 
-	public add(spending: IExpense): this {
-		this.#spendings.set(spending.id, spending.toObject());
+	public add(expense: IExpense): this {
+		this.#expenses.set(expense.id, expense.toObject());
 
 		return this;
 	}
 
 	public getAll(): TExpenses {
-		return Object.fromEntries(this.#spendings.entries());
+		return Object.fromEntries(this.#expenses.entries());
 	}
 
 	public list(): TExpense[] {
-		return Array.from(this.#spendings.values());
+		return Array.from(this.#expenses.values());
 	}
 
 	public getTotalAmount(): number {
 		let total = 0;
 
-		for (let [, operation] of this.#spendings) {
+		for (let [, operation] of this.#expenses) {
 			total += operation.amount;
 		}
 

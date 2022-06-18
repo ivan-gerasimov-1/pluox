@@ -25,14 +25,14 @@ export let $expenses = withPersist(
 
 export let $expensesApi = createApi($expenses, {
 	create(prevState, payload: TExpenseCreatePayload) {
-		const spending = new Expense(payload.amount);
-		const spendings = new Expenses(prevState.operations);
+		const expense = new Expense(payload.amount);
+		const expenses = new Expenses(prevState.operations);
 
-		spendings.add(spending);
+		expenses.add(expense);
 
 		return {
 			...prevState,
-			operations: spendings.getAll(),
+			operations: expenses.getAll(),
 		};
 	},
 });

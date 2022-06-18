@@ -1,4 +1,4 @@
 export enum EAppPath {
 	MAIN = '/',
-	SPENDING_LIST = '/list',
+	EXPENSE_LIST = '/list',
 }

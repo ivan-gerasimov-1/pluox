@@ -2,7 +2,7 @@ import type { IExpense, TExpense } from '@modules/expenses/expense/types';
 import type { Id } from '@modules/types';
 
 export interface IExpenses {
-	add(spending: IExpense): this;
+	add(expense: IExpense): this;
 	getAll(): TExpenses;
 
 	list(): TExpense[];

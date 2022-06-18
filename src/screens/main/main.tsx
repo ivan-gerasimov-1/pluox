@@ -14,7 +14,7 @@ export function MainScreen() {
 					<MoneyLeft />
 				</Card>
 
-				<Navigable to={EAppPath.SPENDING_LIST}>
+				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
 						<MoneySpent />
 					</Card>
