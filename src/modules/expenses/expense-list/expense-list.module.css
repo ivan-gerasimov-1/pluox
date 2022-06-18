@@ -1,0 +1,29 @@
+.list {
+	margin: 1rem 0;
+	padding: 0;
+
+	list-style-type: none;
+
+	font-family: monospace;
+
+	& > :nth-child(n) {
+		margin: 0.75rem 0;
+	}
+
+	& > :first-child {
+		margin-top: 0;
+	}
+
+	& > :last-child {
+		margin-bottom: 0;
+	}
+}
+
+.listItem {
+	display: flex;
+	justify-content: space-between;
+
+	padding-bottom: 0.25rem;
+
+	border-bottom: var(--border-light);
+}

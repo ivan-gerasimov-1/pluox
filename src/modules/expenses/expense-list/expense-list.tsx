@@ -7,6 +7,7 @@ import {
 import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
 import { formatDate } from '@utils/date';
+import styles from './expense-list.module.css';
 
 export function ExpenseList() {
 	let expenseList = useSelector<TExpensesStore, TExpense[]>(
@@ -19,13 +20,13 @@ export function ExpenseList() {
 	);
 
 	return (
-		<ul>
+		<ul className={styles.list}>
 			{expenseList?.map((item) => {
 				return (
-					<li key={item.id}>
+					<li key={item.id} className={styles.listItem}>
 						<strong>{formatCurrency(item.amount)}</strong>
-						<br />
-						{formatDate(item.dateCreated)}
+
+						<span>{formatDate(item.dateCreated)}</span>
 					</li>
 				);
 			})}
