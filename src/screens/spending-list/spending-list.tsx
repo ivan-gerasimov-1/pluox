@@ -1,5 +1,5 @@
-import { SpendingList } from '@modules/spendings';
+import { ExpenseList } from '@modules/spendings';
 
 export function SpendingListScreen() {
-	return <SpendingList />;
+	return <ExpenseList />;
 }

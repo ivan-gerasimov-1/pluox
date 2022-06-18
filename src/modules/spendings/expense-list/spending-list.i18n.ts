@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@modules/intl';
 
-export const spendingListI18n = {
+export const expenseListI18n = {
 	[ELocaleCode.RU_RU]: {
 		title: 'Расходы',
 	},

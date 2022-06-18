@@ -1,5 +1,5 @@
 import { useIntl } from '@modules/intl';
-import { spendingListI18n } from '@modules/spendings/spending-list/spending-list.i18n';
+import { expenseListI18n } from '@modules/spendings/expense-list/spending-list.i18n';
 import type { TExpense } from '@modules/spendings/expense/types';
 import {
 	$expenses,
@@ -9,9 +9,9 @@ import {
 import { formatCurrency } from '@root/utils/currency';
 import { useSelector } from '@root/utils/store';
 
-export function SpendingList() {
-	let intl = useIntl(spendingListI18n);
-	let spendingsList = useSelector<TExpensesStore, TExpense[]>(
+export function ExpenseList() {
+	let intl = useIntl(expenseListI18n);
+	let expenseList = useSelector<TExpensesStore, TExpense[]>(
 		$expenses,
 		$expensesSelector.list.fn,
 		{
@@ -27,7 +27,7 @@ export function SpendingList() {
 			</div>
 
 			<ul>
-				{spendingsList?.map((item) => {
+				{expenseList?.map((item) => {
 					return (
 						<li key={item.id}>
 							{new Date(item.dateCreated).toLocaleString()}
