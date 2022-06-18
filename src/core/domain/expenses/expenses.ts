@@ -9,6 +9,10 @@ export class Expenses implements IExpenses {
 		this.#expenses = new Map(Object.entries(expenses));
 	}
 
+	public static create(expenses: TExpenses): IExpenses {
+		return new Expenses(expenses);
+	}
+
 	public add(expense: IExpense): this {
 		this.#expenses.set(expense.id, expense.toObject());
 
