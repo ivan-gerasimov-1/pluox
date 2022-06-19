@@ -26,13 +26,12 @@ export let $expenses = withPersist(
 export let $expensesApi = createApi($expenses, {
 	create(prevState, payload: TExpenseCreatePayload) {
 		const expense = Expense.create(payload.amount);
-		const expenses = Expenses.create(prevState.operations);
-
-		expenses.add(expense);
 
 		return {
 			...prevState,
-			operations: expenses.get(),
+			operations: Expenses.create(prevState.operations) //
+				.add(expense)
+				.get(),
 		};
 	},
 });
@@ -42,18 +41,18 @@ export let $expensesSelector = {
 		field: 'operations',
 		fn(): number {
 			let state = $expenses.getState();
-			let expense = Expenses.create(state.operations);
 
-			return expense.getTotalAmount();
+			return Expenses.create(state.operations) //
+				.getTotalAmount();
 		},
 	},
 	list: {
 		field: 'operations',
 		fn(): TExpense[] {
 			let state = $expenses.getState();
-			let expense = Expenses.create(state.operations);
 
-			return expense.list();
+			return Expenses.create(state.operations) //
+				.list();
 		},
 	},
 };
