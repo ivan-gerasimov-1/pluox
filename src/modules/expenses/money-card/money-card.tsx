@@ -1,4 +1,4 @@
-import { formatCurrency } from '@root/utils/currency';
+import { IntlService } from '@modules/intl';
 import styles from './money-card.module.css';
 
 type TMoneyCardProps = {
@@ -12,7 +12,7 @@ export function MoneyCard(props: TMoneyCardProps) {
 			<h2 className={styles.title}>{props.title}</h2>
 
 			<div className={styles.amount}>
-				{props.amount ? formatCurrency(props.amount) : '—'}
+				{props.amount ? IntlService.formatCurrency(props.amount) : '—'}
 			</div>
 		</>
 	);

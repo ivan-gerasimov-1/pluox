@@ -1,6 +1,5 @@
 import { useExpensesStore } from '@modules/expenses';
-import { formatCurrency } from '@root/utils/currency';
-import { formatDate } from '@utils/date';
+import { IntlService } from '@modules/intl';
 import styles from './expense-list.module.css';
 
 export function ExpenseList() {
@@ -11,9 +10,9 @@ export function ExpenseList() {
 			{expenseList?.map((item) => {
 				return (
 					<li key={item.id} className={styles.listItem}>
-						<strong>{formatCurrency(item.amount)}</strong>
+						<strong>{IntlService.formatCurrency(item.amount)}</strong>
 
-						<span>{formatDate(item.dateCreated)}</span>
+						<span>{IntlService.formatDate(item.dateCreated)}</span>
 					</li>
 				);
 			})}
