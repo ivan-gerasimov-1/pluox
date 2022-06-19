@@ -1,58 +1,59 @@
 import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
-import { withPersist } from '@root/utils/store';
-import { createApi, createStore } from 'effector';
+import create from 'zustand';
+import { persist } from 'zustand/middleware';
 
 type TExpenseCreatePayload = {
 	amount: number;
 };
 
-export type TExpensesStore = {
-	operations: TExpenses;
-};
+interface IExpensesStore {
+	readonly operations: TExpenses;
 
-export let $expenses = withPersist(
-	createStore<TExpensesStore>(
-		{
-			operations: {},
+	addExpense(payload: TExpenseCreatePayload): void;
+
+	getTotalAmount(): number;
+	getList(): TExpense[];
+}
+
+export let useExpensesStore = create(
+	persist<IExpensesStore>(
+		(set, get) => {
+			return {
+				operations: {},
+
+				addExpense(payload: TExpenseCreatePayload): void {
+					set((prevState) => {
+						const expense = Expense.create(payload.amount);
+
+						return {
+							...prevState,
+							operations: Expenses.create(prevState.operations) //
+								.add(expense)
+								.get(),
+						};
+					});
+				},
+
+				getTotalAmount(): number {
+					const state = get();
+
+					return Expenses.create(state.operations) //
+						.getTotalAmount();
+				},
+
+				getList(): TExpense[] {
+					const state = get();
+
+					return Expenses.create(state.operations) //
+						.list();
+				},
+			};
 		},
 		{
-			name: '$expenses',
+			name: '@savee/store/$expenses',
+			getStorage: () => localStorage,
 		}
 	)
 );
-
-export let $expensesApi = createApi($expenses, {
-	create(prevState, payload: TExpenseCreatePayload) {
-		const expense = Expense.create(payload.amount);
-
-		return {
-			...prevState,
-			operations: Expenses.create(prevState.operations) //
-				.add(expense)
-				.get(),
-		};
-	},
-});
-
-export let $expensesSelector = {
-	total: {
-		field: 'operations',
-		fn(): number {
-			let state = $expenses.getState();
-
-			return Expenses.create(state.operations) //
-				.getTotalAmount();
-		},
-	},
-	list: {
-		field: 'operations',
-		fn(): TExpense[] {
-			let state = $expenses.getState();
-
-			return Expenses.create(state.operations) //
-				.list();
-		},
-	},
-};

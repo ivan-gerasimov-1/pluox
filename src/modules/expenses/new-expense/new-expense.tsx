@@ -1,12 +1,13 @@
-import { useIntl } from '@modules/intl';
+import { useExpensesStore } from '@modules/expenses';
 import { AmountInput } from '@modules/expenses/new-expense/components/amount-input/amount-input';
 import { newExpenseI18n } from '@modules/expenses/new-expense/new-expense.i18n';
-import { $expensesApi } from '@modules/expenses/expenses.store';
+import { useIntl } from '@modules/intl';
 import { useState } from 'react';
 import styles from './new-expense.module.css';
 
 export function NewExpense() {
 	let intl = useIntl(newExpenseI18n);
+	let addExpense = useExpensesStore((state) => state.addExpense);
 	let [formState, setFormState] = useState({
 		amount: 0,
 	});
@@ -18,7 +19,7 @@ export function NewExpense() {
 			return;
 		}
 
-		$expensesApi.create({
+		addExpense({
 			amount: formState.amount,
 		});
 

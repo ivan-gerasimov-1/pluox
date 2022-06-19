@@ -1,23 +1,11 @@
-import { useIntl } from '@modules/intl';
+import { useExpensesStore } from '@modules/expenses';
 import { MoneyCard } from '@modules/expenses/money-card/money-card';
 import { moneySpentI18n } from '@modules/expenses/money-spent/money-spent.i18n';
-import {
-	$expenses,
-	$expensesSelector,
-	TExpensesStore,
-} from '@modules/expenses/expenses.store';
-import { useSelector } from '@root/utils/store';
+import { useIntl } from '@modules/intl';
 
 export function MoneySpent() {
 	let intl = useIntl(moneySpentI18n);
-	let total = useSelector<TExpensesStore, number>(
-		$expenses,
-		$expensesSelector.total.fn,
-		{
-			field: $expensesSelector.total.field,
-			defaultValue: 0,
-		}
-	);
+	let total = useExpensesStore((state) => state.getTotalAmount());
 
 	return <MoneyCard title={intl.translate('title')} amount={total} />;
 }

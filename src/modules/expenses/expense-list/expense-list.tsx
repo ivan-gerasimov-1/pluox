@@ -1,23 +1,10 @@
-import type { TExpense } from '@domain/expense/types';
-import {
-	$expenses,
-	$expensesSelector,
-	TExpensesStore,
-} from '@modules/expenses/expenses.store';
+import { useExpensesStore } from '@modules/expenses';
 import { formatCurrency } from '@root/utils/currency';
-import { useSelector } from '@root/utils/store';
 import { formatDate } from '@utils/date';
 import styles from './expense-list.module.css';
 
 export function ExpenseList() {
-	let expenseList = useSelector<TExpensesStore, TExpense[]>(
-		$expenses,
-		$expensesSelector.list.fn,
-		{
-			field: $expensesSelector.list.field,
-			defaultValue: [],
-		}
-	);
+	let expenseList = useExpensesStore((state) => state.getList());
 
 	return (
 		<ul className={styles.list}>
