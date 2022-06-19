@@ -17,8 +17,13 @@ interface IExpensesStore {
 	getList(): TExpense[];
 }
 
-export let useExpensesStore = create(
-	persist<IExpensesStore>(
+export let useExpensesStore = create<
+	IExpensesStore,
+	[
+		['zustand/persist', IExpensesStore] //
+	]
+>(
+	persist(
 		(set, get) => {
 			return {
 				operations: {},
