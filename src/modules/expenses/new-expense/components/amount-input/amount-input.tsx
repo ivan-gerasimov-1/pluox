@@ -1,5 +1,9 @@
-import { validateNumber } from '@modules/expenses/new-expense/components/amount-input/helpers';
-import { useEffect, useState } from 'react';
+import {
+	validateKey,
+	validateNumber,
+} from '@modules/expenses/new-expense/components/amount-input/helpers';
+import { IntlService } from '@modules/intl';
+import React, { useEffect, useState } from 'react';
 import styles from './amount-input.module.css';
 
 type TAmountInputProps = {
@@ -8,18 +12,6 @@ type TAmountInputProps = {
 	autoFocus?: boolean;
 	required?: boolean;
 };
-
-function toViewValue(value: number): string {
-	if (!value) {
-		return '';
-	}
-
-	return value.toString();
-}
-
-function toModelValue(value: string): number {
-	return Number.parseFloat(value);
-}
 
 export function AmountInput(props: TAmountInputProps) {
 	let [amount, setAmount] = useState<string>(() => {
@@ -54,8 +46,21 @@ export function AmountInput(props: TAmountInputProps) {
 			className={styles.textInput}
 			value={amount}
 			onChange={handleChange}
+			onKeyDown={validateKey}
 			required={props.required}
 			autoFocus={props.autoFocus}
 		/>
 	);
+}
+
+function toViewValue(value: number): string {
+	if (!value) {
+		return '';
+	}
+
+	return value.toLocaleString(IntlService.locale);
+}
+
+function toModelValue(value: string): number {
+	return IntlService.numberParser.parse(value);
 }
