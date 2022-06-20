@@ -31,7 +31,7 @@ export class Expenses implements IExpenses {
 	}
 
 	public list(): TExpense[] {
-		return Array.from(this.#expenses.values());
+		return Array.from(this.#expenses.values()).reverse();
 	}
 
 	public delete(id: Id): this {
