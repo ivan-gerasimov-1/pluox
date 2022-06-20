@@ -1,9 +1,23 @@
 import { classnames } from '@utils/classnames';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './action-sheet-container.module.css';
 
 export function ActionSheetContainer(props: React.PropsWithChildren<{}>) {
 	let [isActive, setActive] = useState(false);
+
+	function open() {
+		if (isActive) {
+			return;
+		}
+
+		setActive(true);
+	}
+
+	function close(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+		event.stopPropagation();
+
+		setActive(false);
+	}
 
 	return (
 		<div
@@ -11,25 +25,11 @@ export function ActionSheetContainer(props: React.PropsWithChildren<{}>) {
 				[styles.isActive]: isActive,
 				[styles.cursorPointer]: !isActive,
 			})}
-			onClick={(even) => {
-				if (isActive) {
-					return;
-				}
-
-				setActive(true);
-			}}
+			onClick={open}
 		>
 			{isActive && (
 				<div className={styles.header}>
-					<button
-						type="button"
-						className={styles.closeButton}
-						onClick={(event) => {
-							event.stopPropagation();
-
-							setActive(false);
-						}}
-					>
+					<button type="button" className={styles.closeButton} onClick={close}>
 						X
 					</button>
 				</div>
