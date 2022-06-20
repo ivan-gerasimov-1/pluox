@@ -12,8 +12,8 @@ enum ENumberFormatStyle {
 	CURRENCY = 'currency',
 }
 
-export function formatCurrency(value: number): string {
-	return Intl.NumberFormat(ELocaleCode.RU_RU, {
+export function formatCurrency(value: number, locale: ELocaleCode): string {
+	return Intl.NumberFormat(locale, {
 		style: ENumberFormatStyle.CURRENCY,
 		currency: ECurrency.RUSSIAN_RUBLE,
 		currencyDisplay: ECurrencyDisplay.NARROW_SYMBOL,
