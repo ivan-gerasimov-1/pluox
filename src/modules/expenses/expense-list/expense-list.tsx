@@ -4,6 +4,7 @@ import styles from './expense-list.module.css';
 
 export function ExpenseList() {
 	let expenseList = useExpensesStore((state) => state.getList());
+	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
 
 	return (
 		<ul className={styles.list}>
@@ -13,6 +14,10 @@ export function ExpenseList() {
 						<strong>{IntlService.formatCurrency(item.amount)}</strong>
 
 						<span>{IntlService.formatDate(item.dateCreated)}</span>
+
+						<button type="button" onClick={() => deleteExpense(item.id)}>
+							X
+						</button>
 					</li>
 				);
 			})}
