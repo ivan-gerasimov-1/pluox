@@ -1,6 +1,8 @@
 .actionSheetContainer {
 	position: fixed;
 
+	height: 100vh;
+
 	right: 0;
 	bottom: 0;
 	left: 0;
@@ -13,4 +15,49 @@
 
 	border-top-left-radius: var(--border-radius-default);
 	border-top-right-radius: var(--border-radius-default);
+
+	transform: translateY(85%);
+}
+
+.header {
+	display: flex;
+	justify-content: flex-end;
+
+	padding: 0 1rem;
+}
+
+.isActive {
+	transform: translateY(10%);
+	animation: moveit 0.25s ease forwards;
+}
+
+.cursorPointer {
+	cursor: pointer;
+}
+
+.noPointerEvents {
+	pointer-events: none;
+}
+
+.closeButton {
+	margin: 0;
+	padding: 0.625rem 0.875rem;
+
+	line-height: 1;
+
+	border: var(--border-defaults);
+	background: 0 none;
+
+	border-radius: var(--border-radius-default);
+
+	appearence: none;
+}
+
+@keyframes moveit {
+	0% {
+		transform: translateY(85%) scale3d(1, 1, 1);
+	}
+	100% {
+		transform: translateY(10%) scale3d(0.93, 0.93, 1);
+	}
 }
