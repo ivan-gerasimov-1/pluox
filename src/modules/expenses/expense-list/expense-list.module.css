@@ -22,8 +22,23 @@
 .listItem {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 
 	padding-bottom: 0.25rem;
 
 	border-bottom: var(--border-light);
+}
+
+.deleteButton {
+	margin: 0;
+	padding: 0.75rem 1.125rem;
+
+	line-height: 1;
+
+	border: var(--border-defaults);
+	border-radius: var(--border-radius-small);
+
+	background: none;
+
+	appearance: none;
 }

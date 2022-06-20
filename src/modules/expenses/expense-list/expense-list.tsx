@@ -15,7 +15,11 @@ export function ExpenseList() {
 
 						<span>{IntlService.formatDate(item.dateCreated)}</span>
 
-						<button type="button" onClick={() => deleteExpense(item.id)}>
+						<button
+							type="button"
+							className={styles.deleteButton}
+							onClick={() => deleteExpense(item.id)}
+						>
 							X
 						</button>
 					</li>
