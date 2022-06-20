@@ -1,6 +1,7 @@
 import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
+import { Id } from '@domain/types';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -12,6 +13,7 @@ interface IExpensesStore {
 	readonly operations: TExpenses;
 
 	addExpense(payload: TExpenseCreatePayload): void;
+	deleteExpense(id: Id): void;
 
 	getTotalAmount(): number;
 	getList(): TExpense[];
@@ -36,6 +38,17 @@ export let useExpensesStore = create<
 							...prevState,
 							operations: Expenses.create(prevState.operations) //
 								.add(expense)
+								.get(),
+						};
+					});
+				},
+
+				deleteExpense(id: Id): void {
+					set((state) => {
+						return {
+							...state,
+							operations: Expenses.create(state.operations) //
+								.delete(id)
 								.get(),
 						};
 					});
