@@ -34,6 +34,16 @@ export class Expenses implements IExpenses {
 		return Array.from(this.#expenses.values());
 	}
 
+	public delete(id: Id): this {
+		if (!this.#expenses.has(id)) {
+			throw new ExpenseNotFoundError(id);
+		}
+
+		this.#expenses.delete(id);
+
+		return this;
+	}
+
 	public getTotalAmount(): number {
 		let total = 0;
 

@@ -9,6 +9,7 @@ export interface IExpenses {
 	get(id?: Id): TExpenses | TExpense;
 
 	list(): TExpense[];
+	delete(id: Id): IExpenses;
 
 	getTotalAmount(): number;
 }
