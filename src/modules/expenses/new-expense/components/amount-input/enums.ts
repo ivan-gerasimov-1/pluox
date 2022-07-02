@@ -15,4 +15,5 @@ export enum EKey {
 	ArrowRight = 'ArrowRight',
 	Backspace = 'Backspace',
 	Enter = 'Enter',
+	Tab = 'Tab',
 }
