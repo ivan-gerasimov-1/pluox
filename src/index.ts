@@ -1,9 +1,14 @@
-import { createUI } from '@root/create-ui';
+import { ReactUI } from '@root/create-ui';
 import { registerServiceWorker } from '@root/service-worker';
 
-function main() {
+async function main() {
+	const ui = new ReactUI(window, {
+		containerId: 'root',
+	});
+
 	registerServiceWorker();
-	createUI();
+
+	await ui.render();
 }
 
 main();

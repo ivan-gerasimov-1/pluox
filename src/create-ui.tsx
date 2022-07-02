@@ -1,29 +1,65 @@
 import { App } from '@components/app/app';
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
+import { createRoot, type Root } from 'react-dom/client';
 
-export function createUI() {
-	const rootElement = getRootElement('root');
-
-	createRoot(rootElement).render(
-		<StrictMode>
-			<App />
-		</StrictMode>
-	);
+export interface IUserInterface {
+	render(): Promise<void>;
+	unmount(): void;
 }
 
-/**
- * @throws {HTMLElementNotFoundError}
- */
-function getRootElement(id: string): HTMLElement {
-	const element = document.getElementById(id);
+export class ReactUI implements IUserInterface {
+	#window: Window;
 
-	if (element === null) {
-		throw new HTMLElementNotFoundError();
+	#containerId: string;
+	#container?: Root;
+
+	constructor(window: Window, params: { containerId: string }) {
+		this.#window = window;
+		this.#containerId = params.containerId;
 	}
 
-	return element;
+	private get root(): Root {
+		if (!this.#container) {
+			throw new Error('Not initialized');
+		}
+
+		return this.#container;
+	}
+
+	public async render(): Promise<void> {
+		if (!this.#container) {
+			this.create();
+		}
+
+		this.root.render(
+			<StrictMode>
+				<App />
+			</StrictMode>
+		);
+	}
+
+	public unmount(): void {
+		this.root.unmount();
+	}
+
+	private create(): void {
+		const rootElement = this.getRootElement(this.#containerId);
+
+		this.#container = createRoot(rootElement);
+	}
+
+	/**
+	 * @throws {HTMLElementNotFoundError}
+	 */
+	private getRootElement(id: string): HTMLElement {
+		const element = this.#window.document.getElementById(id);
+
+		if (element === null) {
+			throw new HTMLElementNotFoundError();
+		}
+
+		return element;
+	}
 }
 
 class HTMLElementNotFoundError extends Error {
