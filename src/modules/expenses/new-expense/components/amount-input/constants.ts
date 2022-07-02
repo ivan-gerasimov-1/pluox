@@ -19,4 +19,5 @@ export const ALLOWED_SYMBOLS = [
 	EKey.ArrowRight,
 	EKey.Backspace,
 	EKey.Enter,
+	EKey.Tab,
 ];
