@@ -1,5 +1,7 @@
+import { ECurrency } from '@domain/expense/types';
 import { useExpensesStore } from '@modules/expenses';
 import { AmountInput } from '@modules/expenses/new-expense/components/amount-input/amount-input';
+import { CurrencyInput } from '@modules/expenses/new-expense/components/currency-input/currency-input';
 import { newExpenseI18n } from '@modules/expenses/new-expense/new-expense.i18n';
 import { useIntl } from '@modules/intl';
 import { useState } from 'react';
@@ -10,6 +12,7 @@ export function NewExpense() {
 	let addExpense = useExpensesStore((state) => state.addExpense);
 	let [formState, setFormState] = useState({
 		amount: 0,
+		currency: ECurrency.RUB,
 	});
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -21,17 +24,27 @@ export function NewExpense() {
 
 		addExpense({
 			amount: formState.amount,
+			currency: formState.currency,
 		});
 
-		setFormState({
+		setFormState((state) => ({
 			amount: 0,
-		});
+			currency: state.currency,
+		}));
 	}
 
 	function handleAmountChange(amount: number) {
-		setFormState({
+		setFormState((state) => ({
 			amount,
-		});
+			currency: state.currency,
+		}));
+	}
+
+	function handleCurrencyChange(currency: ECurrency) {
+		setFormState((state) => ({
+			amount: state.amount,
+			currency,
+		}));
 	}
 
 	return (
@@ -43,10 +56,21 @@ export function NewExpense() {
 					required
 					autoFocus
 				/>
+
 				<button type="submit" className={styles.submitButton}>
 					{intl.translate('submitButton')}
 				</button>
 			</div>
+
+			<br />
+			<br />
+
+			<fieldset>
+				<CurrencyInput
+					value={formState.currency}
+					onChange={handleCurrencyChange}
+				/>
+			</fieldset>
 		</form>
 	);
 }

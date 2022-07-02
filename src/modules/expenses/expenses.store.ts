@@ -1,5 +1,5 @@
 import { Expense } from '@domain/expense';
-import { ECurrency, TExpense } from '@domain/expense/types';
+import type { ECurrency, TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import { Id } from '@domain/types';
 import create from 'zustand';
@@ -7,6 +7,7 @@ import { persist } from 'zustand/middleware';
 
 type TExpenseCreatePayload = {
 	amount: number;
+	currency: ECurrency;
 };
 
 interface IExpensesStore {
@@ -32,7 +33,7 @@ export let useExpensesStore = create<
 
 				addExpense(payload: TExpenseCreatePayload): void {
 					set((prevState) => {
-						const expense = Expense.create(payload.amount, ECurrency.RUB);
+						const expense = Expense.create(payload.amount, payload.currency);
 
 						return {
 							...prevState,
