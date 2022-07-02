@@ -12,5 +12,12 @@ export type TExpense = {
 	 * - Use specialized library to store big numbers
 	 */
 	amount: number;
+	currency: ECurrency;
 	dateCreated: TISODateString;
 };
+
+export const enum ECurrency {
+	USD = 'USD',
+	RUB = 'RUB',
+	GEL = 'GEL',
+}
