@@ -1,4 +1,4 @@
-import { ECurrency, IExpense, TExpense } from '@domain/expense/types';
+import type { ECurrency, IExpense, TExpense } from '@domain/expense/types';
 import type { Id, TISODateString } from '@domain/types';
 import { generateId } from '@root/utils/id';
 
@@ -15,8 +15,8 @@ export class Expense implements IExpense {
 		this.#dateCreated = new Date().toISOString();
 	}
 
-	public static create(amount: number): IExpense {
-		return new Expense(amount, ECurrency.RUB);
+	public static create(amount: number, currency: ECurrency): IExpense {
+		return new Expense(amount, currency);
 	}
 
 	public get id(): Id {
