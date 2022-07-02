@@ -4,6 +4,7 @@ import { useIntl } from '@modules/intl';
 import { ExpenseListScreen } from '@root/screens/expense-list/expense-list';
 import { ErrorScreen, MainScreen } from '@screens/index';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import '@root/root.css';
 import styles from './app.module.css';
 
 export function App() {
