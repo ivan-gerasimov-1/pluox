@@ -1,7 +1,11 @@
+import { CurrencyConverter } from '@domain/currency/currency-converter/CurrencyConverter';
+import { ECurrency } from '@domain/expense/types';
 import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@modules/intl';
 import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
+
+let currencyConverter = CurrencyConverter.create();
 
 export function ExpenseList() {
 	let expenseList = useExpensesStore((state) => state.getList());
@@ -13,9 +17,21 @@ export function ExpenseList() {
 				return (
 					<li key={item.id} className={styles.listItem}>
 						<div className={styles.info}>
-							<strong>
-								{IntlService.formatCurrency(item.amount, item.currency)}
-							</strong>
+							<span className={styles.expenseInMainCurrency}>
+								{IntlService.formatCurrency(
+									currencyConverter.convertToRub(
+										item.amount,
+										item.currency || ECurrency.RUB
+									),
+									ECurrency.RUB
+								)}
+							</span>
+
+							{item.currency && item.currency !== ECurrency.RUB && (
+								<span className={styles.expense}>
+									{IntlService.formatCurrency(item.amount, item.currency)}
+								</span>
+							)}
 
 							<em>{IntlService.formatDate(item.dateCreated)}</em>
 						</div>

@@ -48,3 +48,14 @@
 	background: none;
 	appearance: none;
 }
+
+.expenseInMainCurrency {
+	margin-bottom: 0.25rem;
+
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.expense {
+	margin-bottom: 0.5rem;
+}
