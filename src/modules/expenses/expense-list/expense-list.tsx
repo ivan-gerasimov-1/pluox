@@ -18,13 +18,19 @@ export function ExpenseList() {
 
 						<span>{IntlService.formatDate(item.dateCreated)}</span>
 
-						<button
-							type="button"
-							className={styles.deleteButton}
-							onClick={() => deleteExpense(item.id)}
-						>
-							<Icon name={Icon.IconName.Trash} />
-						</button>
+						<div className={styles.buttonGroup}>
+							<button type="button" className={styles.actionButton}>
+								<Icon name={Icon.IconName.Edit} />
+							</button>
+
+							<button
+								type="button"
+								className={styles.actionButton}
+								onClick={() => deleteExpense(item.id)}
+							>
+								<Icon name={Icon.IconName.Trash} />
+							</button>
+						</div>
 					</li>
 				);
 			})}
