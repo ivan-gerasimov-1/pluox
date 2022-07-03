@@ -1,3 +1,4 @@
+import { ECurrency } from '@domain/expense/types';
 import { formatCurrency } from '@modules/intl/currency';
 import { formatDate } from '@modules/intl/date';
 import { ELocaleCode } from '@modules/intl/enums';
@@ -9,6 +10,7 @@ type TDecimalSeparator = typeof DECIMAL_SEPARATORS[number];
 
 export class IntlService {
 	static #locale = ELocaleCode.RU_RU;
+	static #currency = ECurrency.RUB;
 
 	public static get locale(): ELocaleCode {
 		return this.#locale;
@@ -22,8 +24,8 @@ export class IntlService {
 		return NumberParser.create(this.#locale);
 	}
 
-	public static formatCurrency(value: number): string {
-		return formatCurrency(value, this.#locale);
+	public static formatCurrency(value: number, currency?: ECurrency): string {
+		return formatCurrency(value, currency || this.#currency, this.#locale);
 	}
 
 	public static formatDate(value: number | string | Date) {
