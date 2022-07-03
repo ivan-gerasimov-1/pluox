@@ -5,7 +5,7 @@ import { TotalAmountUseCase } from '@domain/expenses/use-cases/total-amount-use-
 import type { Id } from '@domain/types';
 
 export class Expenses implements IExpenses {
-	#expenses: Map<Id, TExpense>;
+	readonly #expenses: Map<Id, TExpense>;
 
 	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));

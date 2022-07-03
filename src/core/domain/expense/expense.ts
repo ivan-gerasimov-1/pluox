@@ -3,10 +3,10 @@ import type { Id, TISODateString } from '@domain/types';
 import { generateId } from '@root/utils/id';
 
 export class Expense implements IExpense {
-	#id: Id;
-	#amount: number;
-	#dateCreated: TISODateString;
-	#currency: ECurrency;
+	readonly #id: Id;
+	readonly #amount: number;
+	readonly #dateCreated: TISODateString;
+	readonly #currency: ECurrency;
 
 	private constructor(amount: number, currency: ECurrency) {
 		this.#id = generateId();
