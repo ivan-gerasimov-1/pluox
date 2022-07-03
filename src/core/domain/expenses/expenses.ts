@@ -1,14 +1,23 @@
 import { ECurrency, IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
-import { TotalAmountUseCase } from '@domain/expenses/use-cases/total-amount-use-case';
+import {
+	ITotalAmountUseCase,
+	TotalAmountUseCase,
+} from '@domain/expenses/use-cases/total-amount-use-case';
 import type { Id } from '@domain/types';
 
 export class Expenses implements IExpenses {
 	readonly #expenses: Map<Id, TExpense>;
+	readonly #totalAmountUseCase: ITotalAmountUseCase;
 
 	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));
+
+		/**
+		 * @todo Use DI instead of direct instantiation
+		 */
+		this.#totalAmountUseCase = TotalAmountUseCase.create(this);
 	}
 
 	public static create(expenses: TExpenses = {}): IExpenses {
@@ -46,7 +55,7 @@ export class Expenses implements IExpenses {
 	}
 
 	public getTotalAmount(): number {
-		return TotalAmountUseCase.create(this).run(ECurrency.RUB);
+		return this.#totalAmountUseCase.run(ECurrency.RUB);
 	}
 
 	private getAll(): TExpenses {
