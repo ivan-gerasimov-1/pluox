@@ -1,4 +1,5 @@
-import type { IExpense, TExpense } from '@domain/expense/types';
+import { ECurrency, IExpense, TExpense } from '@domain/expense/types';
+import { CURRENCY_RATE_TO_RUB } from '@domain/expenses/constants';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import type { Id } from '@domain/types';
@@ -48,7 +49,13 @@ export class Expenses implements IExpenses {
 		let total = 0;
 
 		for (let [, operation] of this.#expenses) {
-			total += operation.amount;
+			let amount = operation.amount;
+
+			if (operation.currency && operation.currency !== ECurrency.RUB) {
+				amount = amount * CURRENCY_RATE_TO_RUB[operation.currency];
+			}
+
+			total += amount;
 		}
 
 		return total;
