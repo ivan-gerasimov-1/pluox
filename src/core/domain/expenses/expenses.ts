@@ -25,7 +25,7 @@ export class Expenses implements IExpenses {
 	public get(id: Id): TExpense;
 	public get(id?: Id): TExpenses | TExpense {
 		if (id !== undefined) {
-			return this.getOne('id');
+			return this.getOne(id);
 		}
 
 		return this.getAll();
