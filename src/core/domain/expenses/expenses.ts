@@ -1,7 +1,7 @@
 import { ECurrency, IExpense, TExpense } from '@domain/expense/types';
-import { CURRENCY_RATE_TO_RUB } from '@domain/expenses/constants';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
+import { TotalAmountUseCase } from '@domain/expenses/use-cases/total-amount-use-case';
 import type { Id } from '@domain/types';
 
 export class Expenses implements IExpenses {
@@ -46,19 +46,7 @@ export class Expenses implements IExpenses {
 	}
 
 	public getTotalAmount(): number {
-		let total = 0;
-
-		for (let [, operation] of this.#expenses) {
-			let amount = operation.amount;
-
-			if (operation.currency && operation.currency !== ECurrency.RUB) {
-				amount = amount * CURRENCY_RATE_TO_RUB[operation.currency];
-			}
-
-			total += amount;
-		}
-
-		return total;
+		return TotalAmountUseCase.create(this).run(ECurrency.RUB);
 	}
 
 	private getAll(): TExpenses {
