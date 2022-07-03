@@ -1,3 +1,4 @@
+import { Icon } from '@ui-kit/icon';
 import { classnames } from '@utils/classnames';
 import React, { useState } from 'react';
 import styles from './action-sheet-container.module.css';
@@ -30,7 +31,7 @@ export function ActionSheetContainer(props: React.PropsWithChildren<{}>) {
 			{isActive && (
 				<div className={styles.header}>
 					<button type="button" className={styles.closeButton} onClick={close}>
-						X
+						<Icon name={Icon.IconName.Close} />
 					</button>
 				</div>
 			)}
