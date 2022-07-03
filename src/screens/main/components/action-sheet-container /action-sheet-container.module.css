@@ -28,7 +28,7 @@
 
 .isActive {
 	transform: translateY(10%);
-	animation: moveit 0.25s ease forwards;
+	animation: moveit 150ms ease forwards;
 }
 
 .cursorPointer {
@@ -55,9 +55,9 @@
 
 @keyframes moveit {
 	0% {
-		transform: translateY(85%) scale3d(1, 1, 1);
+		transform: translateY(85%);
 	}
 	100% {
-		transform: translateY(10%) scale3d(0.93, 0.93, 1);
+		transform: translateY(10%);
 	}
 }
