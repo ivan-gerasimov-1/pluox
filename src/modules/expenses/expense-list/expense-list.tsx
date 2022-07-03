@@ -11,7 +11,9 @@ export function ExpenseList() {
 			{expenseList?.map((item) => {
 				return (
 					<li key={item.id} className={styles.listItem}>
-						<strong>{IntlService.formatCurrency(item.amount)}</strong>
+						<strong>
+							{IntlService.formatCurrency(item.amount, item.currency)}
+						</strong>
 
 						<span>{IntlService.formatDate(item.dateCreated)}</span>
 
