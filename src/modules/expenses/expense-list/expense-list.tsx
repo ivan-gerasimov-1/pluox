@@ -12,11 +12,13 @@ export function ExpenseList() {
 			{expenseList?.map((item) => {
 				return (
 					<li key={item.id} className={styles.listItem}>
-						<strong>
-							{IntlService.formatCurrency(item.amount, item.currency)}
-						</strong>
+						<div className={styles.info}>
+							<strong>
+								{IntlService.formatCurrency(item.amount, item.currency)}
+							</strong>
 
-						<span>{IntlService.formatDate(item.dateCreated)}</span>
+							<em>{IntlService.formatDate(item.dateCreated)}</em>
+						</div>
 
 						<div className={styles.buttonGroup}>
 							<button type="button" className={styles.actionButton}>
