@@ -30,15 +30,12 @@
 }
 
 .deleteButton {
+	display: flex;
+
 	margin: 0;
-	padding: 0.75rem 1.125rem;
+	padding: 0.75rem;
 
-	line-height: 1;
-
-	border: var(--border-defaults);
-	border-radius: var(--border-radius-small);
-
+	border: 0 none;
 	background: none;
-
 	appearance: none;
 }

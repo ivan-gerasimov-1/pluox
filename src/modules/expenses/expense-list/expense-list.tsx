@@ -1,5 +1,6 @@
 import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@modules/intl';
+import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
 
 export function ExpenseList() {
@@ -22,7 +23,7 @@ export function ExpenseList() {
 							className={styles.deleteButton}
 							onClick={() => deleteExpense(item.id)}
 						>
-							X
+							<Icon name={Icon.IconName.Trash} />
 						</button>
 					</li>
 				);
