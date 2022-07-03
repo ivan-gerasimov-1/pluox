@@ -1,6 +1,7 @@
+import { CurrencyConverter } from '@domain/currency/currency-converter/CurrencyConverter';
+import { type ICurrencyConverter } from '@domain/currency/currency-converter/types';
 import { ECurrency } from '@domain/expense/types';
-import { CURRENCY_RATE_TO_RUB } from '@domain/expenses/constants';
-import { IExpenses } from '@domain/expenses/types';
+import { type IExpenses } from '@domain/expenses/types';
 
 export interface ITotalAmountUseCase {
 	run(currency: ECurrency): number;
@@ -8,9 +9,15 @@ export interface ITotalAmountUseCase {
 
 export class TotalAmountUseCase implements ITotalAmountUseCase {
 	readonly #expenses: IExpenses;
+	readonly #currencyConverter: ICurrencyConverter;
 
 	private constructor(expenses: IExpenses) {
 		this.#expenses = expenses;
+
+		/**
+		 * @todo Use DI instead of direct instantiation
+		 */
+		this.#currencyConverter = CurrencyConverter.create();
 	}
 
 	public static create(expenses: IExpenses) {
@@ -28,12 +35,9 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 
 		for (let expense of Object.values(expenses)) {
 			let amount = expense.amount;
+			let expenseCurrency = expense.currency || ECurrency.RUB;
 
-			if (expense.currency && expense.currency !== currency) {
-				amount = amount * CURRENCY_RATE_TO_RUB[expense.currency];
-			}
-
-			total += amount;
+			total += this.#currencyConverter.convertToRub(amount, expenseCurrency);
 		}
 
 		return total;
