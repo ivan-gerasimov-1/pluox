@@ -43,7 +43,7 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 			<label htmlFor="currency_gel">
 				<input
 					name="currency"
-					id="currency_rub"
+					id="currency_gel"
 					type="radio"
 					checked={props.value === ECurrency.GEL}
 					value={ECurrency.GEL}
