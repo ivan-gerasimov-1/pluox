@@ -9,10 +9,6 @@ export class CurrencyConverter implements ICurrencyConverter {
 		return new CurrencyConverter();
 	}
 
-	public convertToRub(amount: number, from: ECurrency): number {
-		return this.convert(amount, from, ECurrency.RUB);
-	}
-
 	/**
 	 * RUB → GEL = RUB → USD → GEL
 	 * GEL → RUB = GEL → USD → RUB
