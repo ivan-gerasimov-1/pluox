@@ -1,7 +1,7 @@
 import { ECurrency } from '@domain/expense/types';
 
-export const CURRENCY_RATE_TO_RUB = {
-	[ECurrency.RUB]: 1,
-	[ECurrency.USD]: 57.0,
-	[ECurrency.GEL]: 19.39,
+export const CURRENCY_RATE = {
+	[ECurrency.RUB]: 63.5,
+	[ECurrency.USD]: 1,
+	[ECurrency.GEL]: 2.94,
 };
