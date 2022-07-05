@@ -24,7 +24,7 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 		return new TotalAmountUseCase(expenses);
 	}
 
-	public run(currency: ECurrency) {
+	public run(currency: ECurrency = ECurrency.RUB) {
 		return this.calculateAmount(currency);
 	}
 
@@ -37,7 +37,11 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 			let amount = expense.amount;
 			let expenseCurrency = expense.currency || ECurrency.RUB;
 
-			total += this.#currencyConverter.convertToRub(amount, expenseCurrency);
+			total += this.#currencyConverter.convert(
+				amount,
+				expenseCurrency,
+				currency
+			);
 		}
 
 		return total;

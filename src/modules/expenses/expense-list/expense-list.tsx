@@ -19,9 +19,10 @@ export function ExpenseList() {
 						<div className={styles.info}>
 							<span className={styles.expenseInMainCurrency}>
 								{IntlService.formatCurrency(
-									currencyConverter.convertToRub(
+									currencyConverter.convert(
 										item.amount,
-										item.currency || ECurrency.RUB
+										item.currency || ECurrency.RUB,
+										ECurrency.RUB
 									),
 									ECurrency.RUB
 								)}
