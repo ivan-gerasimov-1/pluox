@@ -1,4 +1,4 @@
-import { CurrencyConverter } from '@domain/currency/currency-converter/CurrencyConverter';
+import { CurrencyConverter } from '@domain/currency/currency-converter/currency-converter';
 import { type ICurrencyConverter } from '@domain/currency/currency-converter/types';
 import { ECurrency } from '@domain/expense/types';
 import { type IExpenses } from '@domain/expenses/types';
