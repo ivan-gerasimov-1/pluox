@@ -11,7 +11,7 @@
 			"request": "launch"
 		},
 		{
-			"type": "pwa-chrome",
+			"type": "chrome",
 			"request": "launch",
 			"name": "Launch Chrome",
 			"url": "http://localhost:3002",
