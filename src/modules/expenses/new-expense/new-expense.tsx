@@ -2,12 +2,14 @@ import { ECurrency } from '@domain/expense/types';
 import { useExpensesStore } from '@modules/expenses';
 import { AmountInput } from '@modules/expenses/new-expense/components/amount-input/amount-input';
 import { CurrencyInput } from '@modules/expenses/new-expense/components/currency-input/currency-input';
+import { NumericKeyboard } from '@modules/expenses/new-expense/components/numeric-keyboard/numeric-keyboard';
 import { newExpenseI18n } from '@modules/expenses/new-expense/new-expense.i18n';
-import { useIntl } from '@modules/intl';
+import { IntlService, useIntl } from '@modules/intl';
 import { useState } from 'react';
 import styles from './new-expense.module.css';
 
 export function NewExpense() {
+	let [testAmount, setTestAmount] = useState<string>('0');
 	let intl = useIntl(newExpenseI18n);
 	let addExpense = useExpensesStore((state) => state.addExpense);
 	let [formState, setFormState] = useState({
@@ -34,6 +36,13 @@ export function NewExpense() {
 	}
 
 	function handleAmountChange(amount: number) {
+		setFormState((state) => ({
+			amount,
+			currency: state.currency,
+		}));
+	}
+
+	function _handleAmountChange(amount: number) {
 		setFormState((state) => ({
 			amount,
 			currency: state.currency,
@@ -71,6 +80,31 @@ export function NewExpense() {
 					onChange={handleCurrencyChange}
 				/>
 			</fieldset>
+
+			<span>{testAmount}</span>
+
+			<NumericKeyboard
+				value={testAmount}
+				onClick={(value: string | number) => {
+					console.log(value);
+					if (value === ',') {
+						setTestAmount((prevTestAmount) => {
+							return `${prevTestAmount}${value}`;
+						});
+						return;
+					}
+
+					setTestAmount((prevTestAmount) => {
+						return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
+							IntlService.locale
+						);
+					});
+				}}
+			/>
 		</form>
 	);
+}
+
+function toModelValue(value: string): number {
+	return IntlService.numberParser.parse(value);
 }
