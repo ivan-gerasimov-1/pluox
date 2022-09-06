@@ -5,6 +5,10 @@ import { createRoot, type Root } from 'react-dom/client';
 interface IWindow extends Window {}
 interface IRoot extends Root {}
 
+interface IReactUIConstructorParams {
+	containerId: string;
+}
+
 export interface IUserInterface {
 	mount(): Promise<void>;
 	unmount(): IUserInterface;
@@ -16,7 +20,7 @@ export class ReactUI implements IUserInterface {
 	#containerId: string;
 	#container?: IRoot;
 
-	constructor(window: IWindow, params: { containerId: string }) {
+	constructor(window: IWindow, params: IReactUIConstructorParams) {
 		this.#window = window;
 		this.#containerId = params.containerId;
 	}
