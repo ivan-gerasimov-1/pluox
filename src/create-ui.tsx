@@ -7,7 +7,7 @@ interface IRoot extends Root {}
 
 export interface IUserInterface {
 	mount(): Promise<void>;
-	unmount(): void;
+	unmount(): IUserInterface;
 }
 
 export class ReactUI implements IUserInterface {
@@ -41,8 +41,10 @@ export class ReactUI implements IUserInterface {
 		);
 	}
 
-	public unmount(): void {
+	public unmount(): this {
 		this.root.unmount();
+
+		return this;
 	}
 
 	private create(): void {
