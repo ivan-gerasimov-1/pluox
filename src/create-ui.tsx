@@ -3,6 +3,7 @@ import { StrictMode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 
 interface IWindow extends Window {}
+interface IRoot extends Root {}
 
 export interface IUserInterface {
 	mount(): Promise<void>;
@@ -13,14 +14,14 @@ export class ReactUI implements IUserInterface {
 	#window: IWindow;
 
 	#containerId: string;
-	#container?: Root;
+	#container?: IRoot;
 
 	constructor(window: IWindow, params: { containerId: string }) {
 		this.#window = window;
 		this.#containerId = params.containerId;
 	}
 
-	private get root(): Root {
+	private get root(): IRoot {
 		if (!this.#container) {
 			throw new Error('Not initialized');
 		}
