@@ -5,7 +5,7 @@ import { createRoot, type Root } from 'react-dom/client';
 interface IWindow extends Window {}
 
 export interface IUserInterface {
-	render(): Promise<void>;
+	mount(): Promise<void>;
 	unmount(): void;
 }
 
@@ -28,7 +28,7 @@ export class ReactUI implements IUserInterface {
 		return this.#container;
 	}
 
-	public async render(): Promise<void> {
+	public async mount(): Promise<void> {
 		if (!this.#container) {
 			this.create();
 		}

@@ -8,7 +8,7 @@ async function main() {
 
 	registerServiceWorker();
 
-	await ui.render();
+	await ui.mount();
 }
 
 main();
