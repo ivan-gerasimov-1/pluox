@@ -2,18 +2,20 @@ import { App } from '@components/app/app';
 import { StrictMode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 
+interface IWindow extends Window {}
+
 export interface IUserInterface {
 	render(): Promise<void>;
 	unmount(): void;
 }
 
 export class ReactUI implements IUserInterface {
-	#window: Window;
+	#window: IWindow;
 
 	#containerId: string;
 	#container?: Root;
 
-	constructor(window: Window, params: { containerId: string }) {
+	constructor(window: IWindow, params: { containerId: string }) {
 		this.#window = window;
 		this.#containerId = params.containerId;
 	}
