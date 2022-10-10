@@ -1,7 +1,7 @@
 import { ReactUI, type IUserInterface } from '@root/create-ui';
 import { registerServiceWorker } from '@root/service-worker';
 
-async function main() {
+async function main(): Promise<void> {
 	const ui: IUserInterface = new ReactUI(window, {
 		containerId: 'root',
 	});
