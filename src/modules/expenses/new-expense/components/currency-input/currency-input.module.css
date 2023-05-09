@@ -24,6 +24,6 @@
 	border-radius: var(--border-radius-small);
 
 	&:checked {
-		border-color: green;
+		border-color: #50C878;
 	}
 }
