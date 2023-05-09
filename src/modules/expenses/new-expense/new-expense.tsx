@@ -79,26 +79,30 @@ export function NewExpense() {
 				onChange={handleCurrencyChange}
 			/>
 
-			<span>{testAmount}</span>
+			{false && (
+				<>
+					<span>{testAmount}</span>
 
-			<NumericKeyboard
-				value={testAmount}
-				onClick={(value: string | number) => {
-					console.log(value);
-					if (value === ',') {
-						setTestAmount((prevTestAmount) => {
-							return `${prevTestAmount}${value}`;
-						});
-						return;
-					}
+					<NumericKeyboard
+						value={testAmount}
+						onClick={(value: string | number) => {
+							console.log(value);
+							if (value === ',') {
+								setTestAmount((prevTestAmount) => {
+									return `${prevTestAmount}${value}`;
+								});
+								return;
+							}
 
-					setTestAmount((prevTestAmount) => {
-						return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
-							IntlService.locale
-						);
-					});
-				}}
-			/>
+							setTestAmount((prevTestAmount) => {
+								return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
+									IntlService.locale
+								);
+							});
+						}}
+					/>
+				</>
+			)}
 		</form>
 	);
 }
