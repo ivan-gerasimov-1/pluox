@@ -15,7 +15,7 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 	}
 
 	return (
-		<>
+		<fieldset className={styles.container}>
 			<label htmlFor="currency_usd">
 				<input
 					name="currency"
@@ -51,6 +51,6 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 				/>
 				{ECurrency.GEL}
 			</label>
-		</>
+		</fieldset>
 	);
 }

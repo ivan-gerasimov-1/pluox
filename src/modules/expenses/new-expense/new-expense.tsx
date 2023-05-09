@@ -74,12 +74,10 @@ export function NewExpense() {
 			<br />
 			<br />
 
-			<fieldset>
-				<CurrencyInput
-					value={formState.currency}
-					onChange={handleCurrencyChange}
-				/>
-			</fieldset>
+			<CurrencyInput
+				value={formState.currency}
+				onChange={handleCurrencyChange}
+			/>
 
 			<span>{testAmount}</span>
 
