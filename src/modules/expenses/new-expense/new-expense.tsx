@@ -72,7 +72,6 @@ export function NewExpense() {
 			</div>
 
 			<br />
-			<br />
 
 			<CurrencyInput
 				value={formState.currency}
