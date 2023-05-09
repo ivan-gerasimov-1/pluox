@@ -1,4 +1,5 @@
 import { ECurrency } from '@domain/expense/types';
+import styles from './currency-input.module.css';
 
 type TCurrencyInputProps = {
 	value: ECurrency;
@@ -16,11 +17,12 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 
 	return (
 		<fieldset className={styles.container}>
-			<label htmlFor="currency_usd">
+			<label htmlFor="currency_usd" className={styles.radioInput}>
 				<input
 					name="currency"
 					id="currency_usd"
 					type="radio"
+					className={styles.nativeRadioInput}
 					checked={props.value === ECurrency.USD}
 					value={ECurrency.USD}
 					onChange={handleCurrencyChange}
@@ -28,11 +30,12 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 				{ECurrency.USD}
 			</label>
 
-			<label htmlFor="currency_rub">
+			<label htmlFor="currency_rub" className={styles.radioInput}>
 				<input
 					name="currency"
 					id="currency_rub"
 					type="radio"
+					className={styles.nativeRadioInput}
 					checked={props.value === ECurrency.RUB}
 					value={ECurrency.RUB}
 					onChange={handleCurrencyChange}
@@ -40,11 +43,12 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 				{ECurrency.RUB}
 			</label>
 
-			<label htmlFor="currency_gel">
+			<label htmlFor="currency_gel" className={styles.radioInput}>
 				<input
 					name="currency"
 					id="currency_gel"
 					type="radio"
+					className={styles.nativeRadioInput}
 					checked={props.value === ECurrency.GEL}
 					value={ECurrency.GEL}
 					onChange={handleCurrencyChange}
