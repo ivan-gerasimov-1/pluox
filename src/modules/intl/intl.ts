@@ -6,7 +6,7 @@ import { NumberParser } from '@modules/intl/number-parser';
 
 const DECIMAL_SEPARATORS = [',', '.'] as const;
 
-type TDecimalSeparator = typeof DECIMAL_SEPARATORS[number];
+type TDecimalSeparator = (typeof DECIMAL_SEPARATORS)[number];
 
 export class IntlService {
 	static #locale = ELocaleCode.RU_RU;
