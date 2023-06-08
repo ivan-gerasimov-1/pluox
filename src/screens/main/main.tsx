@@ -1,5 +1,6 @@
 import { ActionSheet } from '@components/action-sheet';
 import { MoneyLeft, MoneySpent } from '@modules/expenses';
+import { MoneySpentCurrentMonth } from '@modules/expenses/money-spent-current-month';
 import { NewExpense } from '@modules/expenses/new-expense';
 import { EAppPath } from '@root/app-path';
 import { ActionSheetContainer } from '@root/screens/main/components/action-sheet-container /action-sheet-container';
@@ -15,6 +16,10 @@ export function MainScreen() {
 						<MoneySpent />
 					</Card>
 				</Navigable>
+
+				<Card>
+					<MoneySpentCurrentMonth />
+				</Card>
 
 				<Card>
 					<MoneyLeft />
