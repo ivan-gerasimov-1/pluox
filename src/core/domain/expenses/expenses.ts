@@ -16,6 +16,8 @@ export class Expenses implements IExpenses {
 	readonly #totalAmountUseCase: ITotalAmountUseCase;
 	readonly #monthlyAmountUseCase: IMonthlyAmountUseCase;
 
+	readonly #defaultCurrency: ECurrency = ECurrency.RUB;
+
 	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));
 
@@ -61,11 +63,11 @@ export class Expenses implements IExpenses {
 	}
 
 	public getTotalAmount(): number {
-		return this.#totalAmountUseCase.run(ECurrency.RUB);
+		return this.#totalAmountUseCase.run(this.#defaultCurrency);
 	}
 
 	public getMonthlyAmount(): number {
-		return this.#monthlyAmountUseCase.run(ECurrency.RUB);
+		return this.#monthlyAmountUseCase.run(this.#defaultCurrency);
 	}
 
 	private getAll(): TExpenses {
