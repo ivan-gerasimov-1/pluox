@@ -58,6 +58,10 @@ export class Expenses implements IExpenses {
 		return this.#totalAmountUseCase.run(ECurrency.RUB);
 	}
 
+	public getMonthlyAmount(): number {
+		return 1;
+	}
+
 	private getAll(): TExpenses {
 		return Object.fromEntries(this.#expenses.entries());
 	}

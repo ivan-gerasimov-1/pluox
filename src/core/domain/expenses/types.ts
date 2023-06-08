@@ -12,6 +12,7 @@ export interface IExpenses {
 	delete(id: Id): IExpenses;
 
 	getTotalAmount(): number;
+	getMonthlyAmount(): number;
 }
 
 export type TExpenses = Record<Id, TExpense>;
