@@ -3,6 +3,7 @@ import { ELocaleCode } from '@modules/intl';
 
 enum ECurrencyDisplay {
 	NARROW_SYMBOL = 'narrowSymbol',
+	CODE = 'code',
 }
 
 enum ENumberFormatStyle {
@@ -17,6 +18,6 @@ export function formatCurrency(
 	return Intl.NumberFormat(locale, {
 		style: ENumberFormatStyle.CURRENCY,
 		currency,
-		currencyDisplay: ECurrencyDisplay.NARROW_SYMBOL,
+		currencyDisplay: ECurrencyDisplay.CODE,
 	}).format(value);
 }
