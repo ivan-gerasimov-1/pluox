@@ -14,7 +14,7 @@ export function NewExpense() {
 	let addExpense = useExpensesStore((state) => state.addExpense);
 	let [formState, setFormState] = useState({
 		amount: 0,
-		currency: ECurrency.RUB,
+		currency: ECurrency.GEL,
 	});
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
