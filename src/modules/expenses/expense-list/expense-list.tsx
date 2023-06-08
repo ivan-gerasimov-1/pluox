@@ -11,6 +11,8 @@ export function ExpenseList() {
 	let expenseList = useExpensesStore((state) => state.getList());
 	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
 
+	let defaultCurrency = ECurrency.USD;
+
 	return (
 		<ul className={styles.list}>
 			{expenseList?.map((item) => {
@@ -21,14 +23,14 @@ export function ExpenseList() {
 								{IntlService.formatCurrency(
 									currencyConverter.convert(
 										item.amount,
-										item.currency || ECurrency.RUB,
-										ECurrency.RUB
+										item.currency,
+										defaultCurrency
 									),
-									ECurrency.RUB
+									defaultCurrency
 								)}
 							</span>
 
-							{item.currency && item.currency !== ECurrency.RUB && (
+							{item.currency && item.currency !== defaultCurrency && (
 								<span className={styles.expense}>
 									{IntlService.formatCurrency(item.amount, item.currency)}
 								</span>
