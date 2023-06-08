@@ -16,7 +16,7 @@ export class Expenses implements IExpenses {
 	readonly #totalAmountUseCase: ITotalAmountUseCase;
 	readonly #monthlyAmountUseCase: IMonthlyAmountUseCase;
 
-	readonly #defaultCurrency: ECurrency = ECurrency.RUB;
+	readonly #defaultCurrency: ECurrency = ECurrency.USD;
 
 	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));

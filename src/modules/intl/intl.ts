@@ -10,7 +10,7 @@ type TDecimalSeparator = typeof DECIMAL_SEPARATORS[number];
 
 export class IntlService {
 	static #locale = ELocaleCode.RU_RU;
-	static #currency = ECurrency.RUB;
+	static #currency = ECurrency.USD;
 
 	public static get locale(): ELocaleCode {
 		return this.#locale;
