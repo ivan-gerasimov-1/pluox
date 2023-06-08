@@ -11,15 +11,15 @@ export function MainScreen() {
 	return (
 		<>
 			<CardContainer>
+				<Card>
+					<MoneySpentCurrentMonth />
+				</Card>
+
 				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
 						<MoneySpent />
 					</Card>
 				</Navigable>
-
-				<Card>
-					<MoneySpentCurrentMonth />
-				</Card>
 
 				<Card>
 					<MoneyLeft />
