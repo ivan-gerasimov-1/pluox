@@ -30,7 +30,7 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		return new MonthlyAmountUseCase(expenses);
 	}
 
-	public run(currency: ECurrency = ECurrency.RUB) {
+	public run(currency: ECurrency) {
 		return this.calculateAmount(currency);
 	}
 
@@ -47,7 +47,7 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 			}
 
 			let amount = expense.amount;
-			let expenseCurrency = expense.currency || ECurrency.RUB;
+			let expenseCurrency = expense.currency;
 
 			total += this.#currencyConverter.convert(
 				amount,
