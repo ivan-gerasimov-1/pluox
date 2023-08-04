@@ -15,6 +15,7 @@ export function NewExpense() {
 	let [formState, setFormState] = useState({
 		amount: 0,
 		currency: ECurrency.GEL,
+		comment: '',
 	});
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -29,30 +30,46 @@ export function NewExpense() {
 			currency: formState.currency,
 		});
 
-		setFormState((state) => ({
+		resetFormState();
+	}
+
+	function resetFormState() {
+		setFormState((prevState) => ({
 			amount: 0,
-			currency: state.currency,
+			currency: prevState.currency,
+			comment: '',
 		}));
 	}
 
 	function handleAmountChange(amount: number) {
-		setFormState((state) => ({
+		setFormState((prevState) => ({
+			...prevState,
 			amount,
-			currency: state.currency,
 		}));
 	}
 
 	function _handleAmountChange(amount: number) {
-		setFormState((state) => ({
+		setFormState((prevState) => ({
+			...prevState,
 			amount,
-			currency: state.currency,
 		}));
 	}
 
 	function handleCurrencyChange(currency: ECurrency) {
-		setFormState((state) => ({
-			amount: state.amount,
+		setFormState((prevState) => ({
+			...prevState,
 			currency,
+		}));
+	}
+
+	function handleCommentChange(
+		event: React.ChangeEvent<HTMLTextAreaElement>
+	): void {
+		const comment = event.target.value;
+
+		setFormState((prevState) => ({
+			...prevState,
+			comment: comment,
 		}));
 	}
 
@@ -88,6 +105,8 @@ export function NewExpense() {
 						width: '100%',
 						height: '5rem',
 					}}
+					value={formState.comment}
+					onChange={handleCommentChange}
 				></textarea>
 			</div>
 
