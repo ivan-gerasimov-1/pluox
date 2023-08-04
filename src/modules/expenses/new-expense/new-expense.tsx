@@ -78,6 +78,19 @@ export function NewExpense() {
 				onChange={handleCurrencyChange}
 			/>
 
+			<br />
+
+			<div>
+				<textarea
+					name="newExpense_comment"
+					id="newExpense_comment"
+					style={{
+						width: '100%',
+						height: '5rem',
+					}}
+				></textarea>
+			</div>
+
 			{false && (
 				<>
 					<span>{testAmount}</span>
