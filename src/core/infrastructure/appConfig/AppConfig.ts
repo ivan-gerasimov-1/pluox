@@ -54,7 +54,7 @@ export class AppConfig implements IAppConfig {
 		return this.#openExchangeRates;
 	}
 
-	public static create(): IAppConfig {
+	public static getInstance(): IAppConfig {
 		if (!this.#instance) {
 			this.#instance = new AppConfig(ELocaleCode.RU_RU, ECurrency.USD);
 		}

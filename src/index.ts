@@ -18,13 +18,13 @@ async function main(): Promise<void> {
 main();
 
 async function getCurrencyRates(): Promise<void> {
-	let currencyRatesStorage = CurrencyRatesStorage.create();
+	let currencyRatesStorage = CurrencyRatesStorage.getInstance();
 
 	if (!currencyRatesStorage.isEmpty()) {
 		return;
 	}
 
-	let result = await CurrencyRatesAPI.create() //
+	let result = await CurrencyRatesAPI.getInstance() //
 		.get();
 
 	currencyRatesStorage.setRates(result);

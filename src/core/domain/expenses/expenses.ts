@@ -29,7 +29,7 @@ export class Expenses implements IExpenses {
 		/**
 		 * @todo Use DI instead of direct instantiation
 		 */
-		let appConfig: IAppConfig = AppConfig.create();
+		let appConfig: IAppConfig = AppConfig.getInstance();
 		this.#totalAmountUseCase = TotalAmountUseCase.create(this);
 		this.#monthlyAmountUseCase = MonthlyAmountUseCase.create(this);
 

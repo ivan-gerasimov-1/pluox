@@ -20,9 +20,9 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 		this.#availableCurrencies = availableCurrencies;
 	}
 
-	public static create(): ICurrencyRatesAPI {
+	public static getInstance(): ICurrencyRatesAPI {
 		if (!this.#instance) {
-			let appConfig = AppConfig.create();
+			let appConfig = AppConfig.getInstance();
 
 			this.#instance = new CurrencyRatesAPI(
 				appConfig.openExchangeRates.apiUrl,

@@ -12,7 +12,7 @@ import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 export function App() {
 	let intl = useIntl(appI18n);
 
-	const appConfig = AppConfig.create();
+	const appConfig = AppConfig.getInstance();
 
 	return (
 		<AppConfigContext.Provider value={appConfig}>

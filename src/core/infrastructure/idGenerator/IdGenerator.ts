@@ -14,7 +14,7 @@ export class IdGenerator implements IIdGenerator {
 
 	private constructor(private readonly idProvider: TIdProvider) {}
 
-	public static create() {
+	public static getInstance() {
 		if (!this.#instance) {
 			let nanoId = customAlphabet(this.#ID_ALPHABET, this.#ID_LENGTH);
 

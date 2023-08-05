@@ -8,7 +8,7 @@ export function ExpenseList() {
 	let expenseList = useExpensesStore((state) => state.getList());
 	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
 
-	let currencyConverter = CurrencyConverter.create();
+	let currencyConverter = CurrencyConverter.getInstance();
 
 	return (
 		<ul className={styles.list}>

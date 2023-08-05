@@ -15,9 +15,9 @@ export class CurrencyRates implements ICurrencyRates {
 		this.#rates = rates;
 	}
 
-	public static create(): ICurrencyRates {
+	public static getInstance(): ICurrencyRates {
 		if (!this.#instance) {
-			let currencyRates = CurrencyRatesStorage.create() //
+			let currencyRates = CurrencyRatesStorage.getInstance() //
 				.getRates();
 
 			this.#instance = new CurrencyRates(currencyRates);

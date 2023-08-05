@@ -23,7 +23,7 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		/**
 		 * @todo Use DI instead of direct instantiation
 		 */
-		this.#currencyConverter = CurrencyConverter.create();
+		this.#currencyConverter = CurrencyConverter.getInstance();
 	}
 
 	public static create(expenses: IExpenses) {

@@ -6,7 +6,7 @@ export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 	readonly #id: Id;
 
 	constructor() {
-		let idGenerator = IdGenerator.create();
+		let idGenerator = IdGenerator.getInstance();
 
 		this.#id = idGenerator.getId();
 	}

@@ -15,7 +15,7 @@ export class CurrencyRatesStorage
 		super();
 	}
 
-	public static create(): ICurrencyRatesStorage {
+	public static getInstance(): ICurrencyRatesStorage {
 		if (!this.#instance) {
 			this.#instance = new CurrencyRatesStorage();
 		}

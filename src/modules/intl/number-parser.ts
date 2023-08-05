@@ -28,7 +28,7 @@ export class NumberParser {
 		this.#index = (d: string) => index.get(d);
 	}
 
-	public static create(locale: ELocaleCode): NumberParser {
+	public static getInstance(locale: ELocaleCode): NumberParser {
 		if (!this.#instance) {
 			this.#instance = new NumberParser(locale);
 		}

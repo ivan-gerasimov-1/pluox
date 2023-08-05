@@ -13,7 +13,7 @@ const DECIMAL_SEPARATORS = [',', '.'] as const;
 type TDecimalSeparator = (typeof DECIMAL_SEPARATORS)[number];
 
 export class IntlService {
-	static #appConfig: IAppConfig = AppConfig.create();
+	static #appConfig: IAppConfig = AppConfig.getInstance();
 
 	static #locale = this.#appConfig.locale;
 	static #currency = this.#appConfig.currency;
@@ -31,7 +31,7 @@ export class IntlService {
 	}
 
 	public static get numberParser(): NumberParser {
-		return NumberParser.create(this.#locale);
+		return NumberParser.getInstance(this.#locale);
 	}
 
 	public static formatCurrency(value: number, currency?: ECurrency): string {

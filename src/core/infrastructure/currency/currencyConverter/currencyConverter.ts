@@ -10,9 +10,9 @@ export class CurrencyConverter implements ICurrencyConverter {
 
 	private constructor(private readonly currencyRates: ICurrencyRates) {}
 
-	public static create(): ICurrencyConverter {
+	public static getInstance(): ICurrencyConverter {
 		if (!this.#instance) {
-			let currencyRates = CurrencyRates.create();
+			let currencyRates = CurrencyRates.getInstance();
 
 			this.#instance = new CurrencyConverter(currencyRates);
 		}
