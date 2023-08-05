@@ -8,6 +8,7 @@ import { persist } from 'zustand/middleware';
 type TExpenseCreatePayload = {
 	amount: number;
 	currency: ECurrency;
+	comment: string;
 };
 
 interface IExpensesStore {
@@ -35,7 +36,11 @@ export let useExpensesStore = create<
 
 				addExpense(payload: TExpenseCreatePayload): void {
 					set((prevState) => {
-						const expense = Expense.create(payload.amount, payload.currency);
+						const expense = Expense.create(
+							payload.amount,
+							payload.currency,
+							payload.comment
+						);
 
 						return {
 							...prevState,

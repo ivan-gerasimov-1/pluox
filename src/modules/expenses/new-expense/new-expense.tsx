@@ -28,6 +28,7 @@ export function NewExpense() {
 		addExpense({
 			amount: formState.amount,
 			currency: formState.currency,
+			comment: formState.comment,
 		});
 
 		resetFormState();
