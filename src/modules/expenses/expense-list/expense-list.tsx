@@ -1,4 +1,4 @@
-import { CurrencyConverter } from '@domain/currency/currency-converter/currency-converter';
+import { CurrencyConverter } from '@domain/currency/currencyConverter/currencyConverter';
 import { ECurrency } from '@domain/expense/types';
 import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@modules/intl';

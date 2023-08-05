@@ -1,4 +1,4 @@
-import { type ICurrencyConverter } from '@domain/currency/currency-converter/types';
+import { type ICurrencyConverter } from '@domain/currency/currencyConverter/types';
 import {
 	CurrencyRates,
 	type ICurrencyRates,
