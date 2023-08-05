@@ -1,7 +1,11 @@
-import { ECurrency } from '@core/infrastructure/currency/types';
+import {
+	AppConfig,
+	type IAppConfig,
+} from '@core/infrastructure/appConfig/AppConfig';
+import { type ECurrency } from '@core/infrastructure/currency/types';
 import { formatCurrency } from '@modules/intl/currency';
 import { formatDate } from '@modules/intl/date';
-import { ELocaleCode } from '@modules/intl/enums';
+import { type ELocaleCode } from '@modules/intl/enums';
 import { NumberParser } from '@modules/intl/number-parser';
 
 const DECIMAL_SEPARATORS = [',', '.'] as const;
@@ -9,8 +13,10 @@ const DECIMAL_SEPARATORS = [',', '.'] as const;
 type TDecimalSeparator = (typeof DECIMAL_SEPARATORS)[number];
 
 export class IntlService {
-	static #locale = ELocaleCode.RU_RU;
-	static #currency = ECurrency.USD;
+	static #appConfig: IAppConfig = AppConfig.create();
+
+	static #locale = this.#appConfig.locale;
+	static #currency = this.#appConfig.currency;
 
 	public static get locale(): ELocaleCode {
 		return this.#locale;
