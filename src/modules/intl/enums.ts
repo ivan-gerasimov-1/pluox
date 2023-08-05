@@ -1,4 +1,4 @@
-export enum ELocaleCode {
+export const enum ELocaleCode {
 	EN_US = 'en-US',
 	RU_RU = 'ru-RU',
 }
