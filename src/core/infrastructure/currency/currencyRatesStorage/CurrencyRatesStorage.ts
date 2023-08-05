@@ -40,4 +40,8 @@ export class CurrencyRatesStorage
 	public setRates(rates: TCurrencyRates): void {
 		this.set(this.#STORAGE_ID, rates);
 	}
+
+	public isEmpty(): boolean {
+		return this.get() === null;
+	}
 }

@@ -6,4 +6,6 @@ export interface ICurrencyRatesStorage extends IAppStorage<TCurrencyRates> {
 
 	getRates(): TCurrencyRates;
 	setRates(rates: TCurrencyRates): void;
+
+	isEmpty(): boolean;
 }
