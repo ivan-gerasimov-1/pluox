@@ -6,27 +6,36 @@ import { ErrorScreen, MainScreen } from '@screens/index';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '@root/root.css';
 import styles from './app.module.css';
+import { AppConfigContext } from '@modules/appConfig/AppConfigContext';
+import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 
 export function App() {
 	let intl = useIntl(appI18n);
 
-	return (
-		<Router>
-			<div className={styles.content}>
-				<Routes>
-					<Route path={EAppPath.MAIN} element={<MainScreen />} />
-					<Route path={EAppPath.EXPENSE_LIST} element={<ExpenseListScreen />} />
+	const appConfig = AppConfig.create();
 
-					<Route
-						path="*"
-						element={
-							<ErrorScreen
-								message={intl.translate('errorMessages').pageNotFound}
-							/>
-						}
-					/>
-				</Routes>
-			</div>
-		</Router>
+	return (
+		<AppConfigContext.Provider value={appConfig}>
+			<Router>
+				<div className={styles.content}>
+					<Routes>
+						<Route path={EAppPath.MAIN} element={<MainScreen />} />
+						<Route
+							path={EAppPath.EXPENSE_LIST}
+							element={<ExpenseListScreen />}
+						/>
+
+						<Route
+							path="*"
+							element={
+								<ErrorScreen
+									message={intl.translate('errorMessages').pageNotFound}
+								/>
+							}
+						/>
+					</Routes>
+				</div>
+			</Router>
+		</AppConfigContext.Provider>
 	);
 }
