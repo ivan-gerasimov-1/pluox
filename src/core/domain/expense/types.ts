@@ -1,5 +1,5 @@
 import { type ECurrency } from '@core/infrastructure/currency/types';
-import { type IEntity } from '@core/infrastructure/entity/Entity';
+import { type IEntity } from '@core/infrastructure/entity/types';
 import type { Id, TISODateString } from '@domain/types';
 
 export interface IExpense extends IEntity<TExpense> {
