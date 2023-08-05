@@ -7,16 +7,22 @@ export class Expense implements IExpense {
 	readonly #amount: number;
 	readonly #dateCreated: TISODateString;
 	readonly #currency: ECurrency;
+	readonly #comment: string;
 
-	private constructor(amount: number, currency: ECurrency) {
+	private constructor(amount: number, currency: ECurrency, comment: string) {
 		this.#id = generateId();
 		this.#amount = amount;
 		this.#currency = currency;
+		this.#comment = comment;
 		this.#dateCreated = new Date().toISOString();
 	}
 
-	public static create(amount: number, currency: ECurrency): IExpense {
-		return new Expense(amount, currency);
+	public static create(
+		amount: number,
+		currency: ECurrency,
+		comment: string
+	): IExpense {
+		return new Expense(amount, currency, comment);
 	}
 
 	public get id(): Id {
@@ -28,6 +34,7 @@ export class Expense implements IExpense {
 			id: this.#id,
 			amount: this.#amount,
 			currency: this.#currency,
+			comment: this.#comment,
 			dateCreated: this.#dateCreated,
 		};
 	}

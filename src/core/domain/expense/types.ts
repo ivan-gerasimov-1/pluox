@@ -13,6 +13,7 @@ export type TExpense = {
 	 */
 	amount: number;
 	currency: ECurrency;
+	comment: string;
 	dateCreated: TISODateString;
 };
 
