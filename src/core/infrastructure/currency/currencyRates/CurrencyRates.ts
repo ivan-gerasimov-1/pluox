@@ -1,4 +1,5 @@
-import { CURRENCY_RATE } from '@core/infrastructure/currency/currencyRates/constants';
+import { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
+import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { type ECurrency } from '@core/infrastructure/currency/types';
 
 export interface ICurrencyRates {
@@ -8,17 +9,24 @@ export interface ICurrencyRates {
 export class CurrencyRates implements ICurrencyRates {
 	static #instance?: ICurrencyRates;
 
-	private constructor() {}
+	#rates: TCurrencyRates;
+
+	private constructor(rates: TCurrencyRates) {
+		this.#rates = rates;
+	}
 
 	public static create(): ICurrencyRates {
 		if (!this.#instance) {
-			this.#instance = new CurrencyRates();
+			let currencyRates = CurrencyRatesStorage.create() //
+				.getRates();
+
+			this.#instance = new CurrencyRates(currencyRates);
 		}
 
 		return this.#instance;
 	}
 
 	public get(currency: ECurrency): number {
-		return CURRENCY_RATE[currency];
+		return this.#rates[currency];
 	}
 }
