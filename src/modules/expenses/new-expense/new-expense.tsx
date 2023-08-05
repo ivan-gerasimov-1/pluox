@@ -102,10 +102,7 @@ export function NewExpense() {
 				<textarea
 					name="newExpense_comment"
 					id="newExpense_comment"
-					style={{
-						width: '100%',
-						height: '5rem',
-					}}
+					className={styles.commentField}
 					value={formState.comment}
 					onChange={handleCommentChange}
 				></textarea>
