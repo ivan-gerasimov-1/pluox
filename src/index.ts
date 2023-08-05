@@ -1,7 +1,11 @@
+import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
+import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ReactUI, type IUserInterface } from '@root/create-ui';
 import { registerServiceWorker } from '@root/service-worker';
 
 async function main(): Promise<void> {
+	await getCurrencyRates();
+
 	const ui: IUserInterface = new ReactUI(window, {
 		containerId: 'root',
 	});
@@ -12,3 +16,15 @@ async function main(): Promise<void> {
 }
 
 main();
+
+async function getCurrencyRates(): Promise<void> {
+	let currencyRatesStorage = CurrencyRatesStorage.create();
+	let currencyRates = CurrencyRatesStorage.create().get();
+
+	if (!currencyRates) {
+		let currencyRatesApi = new CurrencyRatesAPI();
+		let result = await currencyRatesApi.get();
+
+		currencyRatesStorage.setRates(result);
+	}
+}
