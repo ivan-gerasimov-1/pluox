@@ -1,5 +1,5 @@
 import { type Id } from '@domain/types';
-import type { TIdProvider, IIdGenerator } from '@utils/id/types';
+import type { TIdProvider, IIdGenerator } from '@core/infrastructure/id/types';
 import { customAlphabet } from 'nanoid';
 
 export class IdGenerator implements IIdGenerator {
