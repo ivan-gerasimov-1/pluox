@@ -1,5 +1,9 @@
-import { ECurrency } from '@core/infrastructure/currency/types';
-import { IExpense, TExpense } from '@domain/expense/types';
+import {
+	AppConfig,
+	type IAppConfig,
+} from '@core/infrastructure/appConfig/AppConfig';
+import type { ECurrency } from '@core/infrastructure/currency/types';
+import type { IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import {
@@ -7,7 +11,7 @@ import {
 	MonthlyAmountUseCase,
 } from '@domain/expenses/use-cases/monthly-amount-use-case';
 import {
-	ITotalAmountUseCase,
+	type ITotalAmountUseCase,
 	TotalAmountUseCase,
 } from '@domain/expenses/use-cases/total-amount-use-case';
 import type { Id } from '@domain/types';
@@ -17,7 +21,7 @@ export class Expenses implements IExpenses {
 	readonly #totalAmountUseCase: ITotalAmountUseCase;
 	readonly #monthlyAmountUseCase: IMonthlyAmountUseCase;
 
-	readonly #defaultCurrency: ECurrency = ECurrency.USD;
+	readonly #defaultCurrency: ECurrency;
 
 	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));
@@ -25,8 +29,11 @@ export class Expenses implements IExpenses {
 		/**
 		 * @todo Use DI instead of direct instantiation
 		 */
+		let appConfig: IAppConfig = AppConfig.create();
 		this.#totalAmountUseCase = TotalAmountUseCase.create(this);
 		this.#monthlyAmountUseCase = MonthlyAmountUseCase.create(this);
+
+		this.#defaultCurrency = appConfig.currency;
 	}
 
 	public static create(expenses: TExpenses = {}): IExpenses {
