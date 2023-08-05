@@ -15,6 +15,7 @@ export type TExpense = {
 	currency: ECurrency;
 	comment: string;
 	dateCreated: TISODateString;
+	dateModified: TISODateString;
 };
 
 export const enum ECurrency {

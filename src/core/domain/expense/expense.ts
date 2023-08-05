@@ -6,6 +6,7 @@ export class Expense implements IExpense {
 	readonly #id: Id;
 	readonly #amount: number;
 	readonly #dateCreated: TISODateString;
+	readonly #dateModified: TISODateString;
 	readonly #currency: ECurrency;
 	readonly #comment: string;
 
@@ -15,6 +16,7 @@ export class Expense implements IExpense {
 		this.#currency = currency;
 		this.#comment = comment;
 		this.#dateCreated = new Date().toISOString();
+		this.#dateModified = new Date().toISOString();
 	}
 
 	public static create(
@@ -36,6 +38,7 @@ export class Expense implements IExpense {
 			currency: this.#currency,
 			comment: this.#comment,
 			dateCreated: this.#dateCreated,
+			dateModified: this.#dateModified,
 		};
 	}
 }
