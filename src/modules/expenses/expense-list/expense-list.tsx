@@ -4,11 +4,11 @@ import { IntlService } from '@modules/intl';
 import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
 
-let currencyConverter = CurrencyConverter.create();
-
 export function ExpenseList() {
 	let expenseList = useExpensesStore((state) => state.getList());
 	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
+
+	let currencyConverter = CurrencyConverter.create();
 
 	return (
 		<ul className={styles.list}>
