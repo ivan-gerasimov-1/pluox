@@ -27,6 +27,9 @@ export class CurrencyRatesStorage
 		return super.get(this.#STORAGE_ID);
 	}
 
+	/**
+	 * @throws {CurrencyRatesNotAvailableError}
+	 */
 	public getRates(): TCurrencyRates {
 		let currencyRates = this.get();
 
