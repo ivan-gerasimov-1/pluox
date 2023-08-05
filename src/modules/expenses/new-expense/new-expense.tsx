@@ -109,7 +109,7 @@ export function NewExpense() {
 				></textarea>
 			</div>
 
-			{false && (
+			{true && (
 				<>
 					<span>{testAmount}</span>
 
