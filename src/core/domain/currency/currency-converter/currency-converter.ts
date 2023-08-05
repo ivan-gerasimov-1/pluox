@@ -1,15 +1,20 @@
-import { CURRENCY_RATE } from '@domain/currency/currency-converter/constants';
 import { type ICurrencyConverter } from '@domain/currency/currency-converter/types';
+import {
+	CurrencyRates,
+	type ICurrencyRates,
+} from '@domain/currency/currencyRates/CurrencyRates';
 import { ECurrency } from '@domain/expense/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
 	static #instance?: ICurrencyConverter;
 
-	private constructor() {}
+	private constructor(private readonly currencyRates: ICurrencyRates) {}
 
 	public static create(): ICurrencyConverter {
 		if (!this.#instance) {
-			this.#instance = new CurrencyConverter();
+			const currencyRates = CurrencyRates.create();
+
+			this.#instance = new CurrencyConverter(currencyRates);
 		}
 
 		return this.#instance;
@@ -34,10 +39,10 @@ export class CurrencyConverter implements ICurrencyConverter {
 			return amountInUsd;
 		}
 
-		return amountInUsd * CURRENCY_RATE[to];
+		return amountInUsd * this.currencyRates.get(to);
 	}
 
 	private convertToUsd(amount: number, from: ECurrency): number {
-		return amount / CURRENCY_RATE[from];
+		return amount / this.currencyRates.get(from);
 	}
 }
