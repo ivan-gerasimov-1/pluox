@@ -1,6 +1,8 @@
 import { ELocaleCode } from '@modules/intl';
 
 export class NumberParser {
+	static #instance?: NumberParser;
+
 	#group: RegExp = new RegExp('');
 	#decimal: RegExp = new RegExp('');
 	#numeral: RegExp = new RegExp('');
@@ -27,7 +29,11 @@ export class NumberParser {
 	}
 
 	public static create(locale: ELocaleCode): NumberParser {
-		return new NumberParser(locale);
+		if (!this.#instance) {
+			this.#instance = new NumberParser(locale);
+		}
+
+		return this.#instance;
 	}
 
 	public parse(value: string): number {
