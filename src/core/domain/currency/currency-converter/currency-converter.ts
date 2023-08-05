@@ -3,10 +3,16 @@ import { type ICurrencyConverter } from '@domain/currency/currency-converter/typ
 import { ECurrency } from '@domain/expense/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
+	static #instance?: ICurrencyConverter;
+
 	private constructor() {}
 
 	public static create(): ICurrencyConverter {
-		return new CurrencyConverter();
+		if (!this.#instance) {
+			this.#instance = new CurrencyConverter();
+		}
+
+		return this.#instance;
 	}
 
 	/**
