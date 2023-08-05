@@ -1,10 +1,9 @@
 import { type ECurrency } from '@core/infrastructure/currency/types';
+import { Entity } from '@core/infrastructure/entity/Entity';
 import type { IExpense, TExpense } from '@domain/expense/types';
-import type { Id, TISODateString } from '@domain/types';
-import { generateId } from '@root/utils/id';
+import type { TISODateString } from '@domain/types';
 
-export class Expense implements IExpense {
-	readonly #id: Id;
+export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #amount: number;
 	readonly #dateCreated: TISODateString;
 	readonly #dateModified: TISODateString;
@@ -12,7 +11,8 @@ export class Expense implements IExpense {
 	readonly #comment: string;
 
 	private constructor(amount: number, currency: ECurrency, comment: string) {
-		this.#id = generateId();
+		super();
+
 		this.#amount = amount;
 		this.#currency = currency;
 		this.#comment = comment;
@@ -28,13 +28,9 @@ export class Expense implements IExpense {
 		return new Expense(amount, currency, comment);
 	}
 
-	public get id(): Id {
-		return this.#id;
-	}
-
 	public toObject(): TExpense {
 		return {
-			id: this.#id,
+			id: this.id,
 			amount: this.#amount,
 			currency: this.#currency,
 			comment: this.#comment,
