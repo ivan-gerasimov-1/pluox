@@ -3,15 +3,12 @@ import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@modules/intl';
 import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
-import { ECurrency } from '@core/infrastructure/currency/types';
 
 let currencyConverter = CurrencyConverter.create();
 
 export function ExpenseList() {
 	let expenseList = useExpensesStore((state) => state.getList());
 	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
-
-	let defaultCurrency = ECurrency.USD;
 
 	return (
 		<ul className={styles.list}>
@@ -24,13 +21,13 @@ export function ExpenseList() {
 									currencyConverter.convert(
 										item.amount,
 										item.currency,
-										defaultCurrency
+										IntlService.currency
 									),
-									defaultCurrency
+									IntlService.currency
 								)}
 							</span>
 
-							{item.currency && item.currency !== defaultCurrency && (
+							{item.currency && item.currency !== IntlService.currency && (
 								<span className={styles.expense}>
 									{IntlService.formatCurrency(item.amount, item.currency)}
 								</span>
