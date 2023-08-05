@@ -12,7 +12,7 @@ export class CurrencyConverter implements ICurrencyConverter {
 
 	public static create(): ICurrencyConverter {
 		if (!this.#instance) {
-			const currencyRates = CurrencyRates.create();
+			let currencyRates = CurrencyRates.create();
 
 			this.#instance = new CurrencyConverter(currencyRates);
 		}
