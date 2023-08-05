@@ -44,9 +44,11 @@ export function ExpenseList() {
 						</div>
 
 						<div className={styles.buttonGroup}>
-							<button type="button" className={styles.actionButton}>
-								<Icon name={Icon.IconName.Edit} />
-							</button>
+							{false && (
+								<button type="button" className={styles.actionButton}>
+									<Icon name={Icon.IconName.Edit} />
+								</button>
+							)}
 
 							<button
 								type="button"
