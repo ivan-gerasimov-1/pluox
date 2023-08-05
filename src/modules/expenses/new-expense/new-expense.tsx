@@ -105,6 +105,7 @@ export function NewExpense() {
 					className={styles.commentField}
 					value={formState.comment}
 					onChange={handleCommentChange}
+					placeholder={intl.translate('commentPlaceholder')}
 				></textarea>
 			</div>
 
