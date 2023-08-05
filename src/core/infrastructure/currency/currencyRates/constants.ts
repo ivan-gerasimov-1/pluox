@@ -1,4 +1,4 @@
-import { type TCurrencyRates } from '@domain/currency/currencyRates/types';
+import { type TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
 import { ECurrency } from '@domain/expense/types';
 
 export const CURRENCY_RATE: TCurrencyRates = {

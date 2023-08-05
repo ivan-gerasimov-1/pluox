@@ -1,5 +1,5 @@
-import { CURRENCY_RATE } from '@domain/currency/currencyRates/constants';
-import { type TCurrencyRates } from '@domain/currency/currencyRates/types';
+import { CURRENCY_RATE } from '@core/infrastructure/currency/currencyRates/constants';
+import { type TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
 import { ECurrency } from '@domain/expense/types';
 
 export interface ICurrencyRates {

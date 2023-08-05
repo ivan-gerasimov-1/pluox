@@ -1,8 +1,8 @@
-import { type ICurrencyConverter } from '@domain/currency/currencyConverter/types';
+import { type ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import {
 	CurrencyRates,
 	type ICurrencyRates,
-} from '@domain/currency/currencyRates/CurrencyRates';
+} from '@core/infrastructure/currency/currencyRates/CurrencyRates';
 import { ECurrency } from '@domain/expense/types';
 
 export class CurrencyConverter implements ICurrencyConverter {

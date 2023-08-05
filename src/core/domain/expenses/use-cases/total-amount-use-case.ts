@@ -1,5 +1,5 @@
-import { CurrencyConverter } from '@domain/currency/currencyConverter/currencyConverter';
-import { type ICurrencyConverter } from '@domain/currency/currencyConverter/types';
+import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
+import { type ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import { ECurrency } from '@domain/expense/types';
 import { type IExpenses } from '@domain/expenses/types';
 
