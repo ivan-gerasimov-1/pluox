@@ -36,6 +36,10 @@ export function ExpenseList() {
 								</span>
 							)}
 
+							{item.comment && (
+								<div className={styles.comment}>{item.comment}</div>
+							)}
+
 							<em>{IntlService.formatDate(item.dateCreated)}</em>
 						</div>
 
