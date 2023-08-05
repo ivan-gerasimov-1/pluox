@@ -1,3 +1,4 @@
+import { type ECurrency } from '@core/infrastructure/currency/types';
 import type { Id, TISODateString } from '@domain/types';
 
 export interface IExpense {
@@ -17,9 +18,3 @@ export type TExpense = {
 	dateCreated: TISODateString;
 	dateModified: TISODateString;
 };
-
-export const enum ECurrency {
-	USD = 'USD',
-	RUB = 'RUB',
-	GEL = 'GEL',
-}

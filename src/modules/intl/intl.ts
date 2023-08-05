@@ -1,4 +1,4 @@
-import { ECurrency } from '@domain/expense/types';
+import { ECurrency } from '@core/infrastructure/currency/types';
 import { formatCurrency } from '@modules/intl/currency';
 import { formatDate } from '@modules/intl/date';
 import { ELocaleCode } from '@modules/intl/enums';

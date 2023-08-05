@@ -1,5 +1,5 @@
-import { type ECurrency } from '@domain/expense/types';
-import { ELocaleCode } from '@modules/intl';
+import { type ECurrency } from '@core/infrastructure/currency/types';
+import { type ELocaleCode } from '@modules/intl';
 
 enum ECurrencyDisplay {
 	NARROW_SYMBOL = 'narrowSymbol',

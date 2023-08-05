@@ -1,6 +1,6 @@
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import { type ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
-import { ECurrency } from '@domain/expense/types';
+import { type ECurrency } from '@core/infrastructure/currency/types';
 import { type IExpenses } from '@domain/expenses/types';
 import { InvalidMonthError } from '@domain/expenses/use-cases/errors';
 import { monthGuard } from '@domain/expenses/use-cases/typeGuards';

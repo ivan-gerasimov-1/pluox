@@ -1,5 +1,6 @@
+import { type ECurrency } from '@core/infrastructure/currency/types';
 import { Expense } from '@domain/expense';
-import type { ECurrency, TExpense } from '@domain/expense/types';
+import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import { Id } from '@domain/types';
 import create from 'zustand';

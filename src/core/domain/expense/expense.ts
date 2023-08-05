@@ -1,4 +1,5 @@
-import type { ECurrency, IExpense, TExpense } from '@domain/expense/types';
+import { type ECurrency } from '@core/infrastructure/currency/types';
+import type { IExpense, TExpense } from '@domain/expense/types';
 import type { Id, TISODateString } from '@domain/types';
 import { generateId } from '@root/utils/id';
 

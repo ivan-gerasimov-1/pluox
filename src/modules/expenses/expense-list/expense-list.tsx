@@ -1,9 +1,9 @@
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
-import { ECurrency } from '@domain/expense/types';
 import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@modules/intl';
 import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
+import { ECurrency } from '@core/infrastructure/currency/types';
 
 let currencyConverter = CurrencyConverter.create();
 

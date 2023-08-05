@@ -1,4 +1,5 @@
-import { ECurrency, IExpense, TExpense } from '@domain/expense/types';
+import { ECurrency } from '@core/infrastructure/currency/types';
+import { IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import {

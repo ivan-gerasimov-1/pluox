@@ -1,4 +1,3 @@
-import { ECurrency } from '@domain/expense/types';
 import { useExpensesStore } from '@modules/expenses';
 import { AmountInput } from '@modules/expenses/new-expense/components/amount-input/amount-input';
 import { CurrencyInput } from '@modules/expenses/new-expense/components/currency-input/currency-input';
@@ -7,6 +6,7 @@ import { newExpenseI18n } from '@modules/expenses/new-expense/new-expense.i18n';
 import { IntlService, useIntl } from '@modules/intl';
 import { useState } from 'react';
 import styles from './new-expense.module.css';
+import { ECurrency } from '@core/infrastructure/currency/types';
 
 export function NewExpense() {
 	let [testAmount, setTestAmount] = useState<string>('0');

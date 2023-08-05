@@ -1,6 +1,5 @@
 import { CURRENCY_RATE } from '@core/infrastructure/currency/currencyRates/constants';
-import { type TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
-import { ECurrency } from '@domain/expense/types';
+import { type ECurrency } from '@core/infrastructure/currency/types';
 
 export interface ICurrencyRates {
 	get(currency: ECurrency): number;

@@ -3,7 +3,7 @@ import {
 	CurrencyRates,
 	type ICurrencyRates,
 } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
-import { ECurrency } from '@domain/expense/types';
+import { ECurrency } from '@core/infrastructure/currency/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
 	static #instance?: ICurrencyConverter;

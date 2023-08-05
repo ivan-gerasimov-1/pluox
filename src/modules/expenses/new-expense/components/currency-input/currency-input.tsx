@@ -1,4 +1,4 @@
-import { ECurrency } from '@domain/expense/types';
+import { ECurrency } from '@core/infrastructure/currency/types';
 import styles from './currency-input.module.css';
 
 type TCurrencyInputProps = {
