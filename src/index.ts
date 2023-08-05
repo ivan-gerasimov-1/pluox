@@ -22,8 +22,8 @@ async function getCurrencyRates(): Promise<void> {
 	let currencyRates = CurrencyRatesStorage.create().get();
 
 	if (!currencyRates) {
-		let currencyRatesApi = new CurrencyRatesAPI();
-		let result = await currencyRatesApi.get();
+		let result = await CurrencyRatesAPI.create() //
+			.get();
 
 		currencyRatesStorage.setRates(result);
 	}

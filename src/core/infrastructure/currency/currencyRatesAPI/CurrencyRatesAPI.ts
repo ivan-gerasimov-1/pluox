@@ -1,26 +1,48 @@
+import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
 import type { ICurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/types';
 import { ECurrency } from '@core/infrastructure/currency/types';
 
 export class CurrencyRatesAPI implements ICurrencyRatesAPI {
-	readonly #API_ENDPOINT: string = 'https://openexchangerates.org/api';
-	readonly #API_KEY: string = 'fd33278c63404c26b51d7d37ae50731d';
+	static #instance: ICurrencyRatesAPI;
 
-	readonly #currencies: ECurrency[] = [
-		ECurrency.USD,
-		ECurrency.RUB,
-		ECurrency.GEL,
-	];
+	readonly #apiEndpoint: string;
+	readonly #apiKey: string;
+	readonly #availableCurrencies: ECurrency[];
+
+	private constructor(
+		apiEndpoint: string,
+		apiKey: string,
+		availableCurrencies: ECurrency[]
+	) {
+		this.#apiEndpoint = apiEndpoint;
+		this.#apiKey = apiKey;
+		this.#availableCurrencies = availableCurrencies;
+	}
+
+	public static create(): ICurrencyRatesAPI {
+		if (!this.#instance) {
+			let appConfig = AppConfig.create();
+
+			this.#instance = new CurrencyRatesAPI(
+				appConfig.openExchangeRates.apiUrl,
+				appConfig.openExchangeRates.apiKey,
+				appConfig.availabelCurrencies
+			);
+		}
+
+		return this.#instance;
+	}
 
 	public async get(): Promise<TCurrencyRates> {
 		let queryParams = this.makeQueryParams();
 
 		let response = await window.fetch(
-			`${this.#API_ENDPOINT}/latest.json${queryParams}`,
+			`${this.#apiEndpoint}/latest.json${queryParams}`,
 			{
 				method: 'GET',
 				headers: {
-					Authorization: `Token ${this.#API_KEY}`,
+					Authorization: `Token ${this.#apiKey}`,
 				},
 			}
 		);
@@ -33,7 +55,7 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 	private makeQueryParams(): string {
 		let query = '?';
 		let queryParams = {
-			symbols: this.#currencies.join(','),
+			symbols: this.#availableCurrencies.join(','),
 			prettyprint: 0,
 		};
 
