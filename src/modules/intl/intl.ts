@@ -22,6 +22,10 @@ export class IntlService {
 		return this.#locale;
 	}
 
+	public static get currency(): ECurrency {
+		return this.#currency;
+	}
+
 	public static get DECIMAL_SEPARATOR(): TDecimalSeparator {
 		return this.getDecimalSeparator(this.#locale);
 	}
