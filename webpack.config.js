@@ -52,11 +52,6 @@ let PostCssPlugin = {
 	PresetEnv: postcssPresetEnv,
 };
 
-let Mode = {
-	Development: 'development',
-	Production: 'production',
-};
-
 let Enforce = {
 	Pre: 'pre',
 };
@@ -66,6 +61,7 @@ let config = {
 	isDevelopment: isDevelopment(ENVIRONMENT),
 	paths: {
 		entry: './src/index.ts',
+		src: path.resolve(__dirname, 'src'),
 		dist: path.resolve(__dirname, 'build'),
 		public: path.resolve(__dirname, 'public'),
 		indexHtmlTemplate: path.resolve(__dirname, 'src', 'index.html'),
@@ -148,13 +144,7 @@ module.exports = {
 			{
 				test: /\.css$/,
 				use: [
-					{
-						loader: Loader.MiniCssExtract,
-						options: {
-							hmr: config.isDevelopment,
-							reloadAll: true,
-						},
-					},
+					Loader.MiniCssExtract,
 					{
 						loader: Loader.CSS,
 						options: {
@@ -163,16 +153,18 @@ module.exports = {
 							modules: {
 								auto: true,
 								localIdentName: config.isDevelopment
-									? '[name]__[local]--[hash:base64:5]'
-									: undefined,
+									? '[local]_[name]_[contenthash:base64:5]'
+									: '[contenthash:base64:5]',
 							},
 						},
 					},
 					{
 						loader: Loader.PostCss,
 						options: {
-							plugins: [PostCssPlugin.PresetEnv(), PostCssPlugin.Nested()],
 							sourceMap: true,
+							postcssOptions: {
+								plugins: [PostCssPlugin.PresetEnv(), PostCssPlugin.Nested()],
+							},
 						},
 					},
 				],
@@ -188,7 +180,7 @@ module.exports = {
 	output: {
 		path: config.paths.dist,
 		filename: config.isDevelopment
-			? '[name].[hash].js'
+			? '[name].[contenthash].js'
 			: '[name].[chunkhash].js',
 		publicPath: '/',
 	},
@@ -196,29 +188,19 @@ module.exports = {
 		moment: 'moment',
 	},
 	optimization: {
-		moduleIds: 'hashed',
-		runtimeChunk: 'single',
+		moduleIds: 'deterministic',
 		splitChunks: {
 			chunks: 'all',
 		},
 	},
 	devServer: {
-		overlay: {
-			errors: true,
-		},
-		// host: '192.168.0.10',
-		disableHostCheck: true,
-		// useLocalIp: true,
-		port: 3002,
+		port: 3000,
 		hot: true,
-		hotOnly: true,
 		historyApiFallback: true,
-		compress: true,
-		contentBase: config.paths.public,
-		watchOptions: {
-			aggregateTimeout: 500,
-			ignored: /node_modules/,
+		static: {
+			directory: config.paths.public,
 		},
+		watchFiles: [config.paths.src],
 	},
 };
 
