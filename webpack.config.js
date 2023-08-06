@@ -197,6 +197,8 @@ module.exports = {
 	},
 	stats: {
 		preset: 'minimal',
+		version: false,
+		warnings: true,
 	},
 	devServer: {
 		port: 3000,
@@ -205,7 +207,6 @@ module.exports = {
 		static: {
 			directory: config.paths.public,
 		},
-		watchFiles: [config.paths.src],
 	},
 };
 
