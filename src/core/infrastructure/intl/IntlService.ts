@@ -3,8 +3,8 @@ import {
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
 import { type ECurrency } from '@core/infrastructure/currency/types';
-import { formatCurrency } from '@modules/intl/currency';
-import { formatDate } from '@modules/intl/date';
+import { formatCurrency } from '@core/infrastructure/intl/currency';
+import { formatDate } from '@core/infrastructure/intl/date';
 import { type ELocaleCode } from '@core/infrastructure/intl/enums';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 
