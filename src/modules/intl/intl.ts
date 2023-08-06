@@ -6,7 +6,7 @@ import { type ECurrency } from '@core/infrastructure/currency/types';
 import { formatCurrency } from '@modules/intl/currency';
 import { formatDate } from '@modules/intl/date';
 import { type ELocaleCode } from '@core/infrastructure/intl/enums';
-import { NumberParser } from '@modules/intl/number-parser';
+import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 
 const DECIMAL_SEPARATORS = [',', '.'] as const;
 
