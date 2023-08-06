@@ -7,6 +7,7 @@ import { DECIMAL_SEPARATORS } from '@core/infrastructure/intl/constants';
 import { formatCurrency } from '@core/infrastructure/intl/currency';
 import { formatDate } from '@core/infrastructure/intl/date';
 import { type ELocaleCode } from '@core/infrastructure/intl/enums';
+import { UnsupportedDecimalSeparatorError } from '@core/infrastructure/intl/intlService/errors';
 import { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import { type TDecimalSeparator } from '@core/infrastructure/intl/types';
@@ -67,11 +68,5 @@ export class IntlService implements IIntlService {
 
 	private isDecimalSeparator(value: any): value is TDecimalSeparator {
 		return DECIMAL_SEPARATORS.includes(value);
-	}
-}
-
-class UnsupportedDecimalSeparatorError extends Error {
-	constructor(separator: string) {
-		super(`Unsupported decimal separator: ${separator}`);
 	}
 }
