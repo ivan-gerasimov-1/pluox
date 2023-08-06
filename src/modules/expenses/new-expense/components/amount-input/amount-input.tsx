@@ -58,9 +58,9 @@ function toViewValue(value: number): string {
 		return '';
 	}
 
-	return value.toLocaleString(IntlService.locale);
+	return value.toLocaleString(IntlService.getInstance().locale);
 }
 
 function toModelValue(value: string): number {
-	return IntlService.numberParser.parse(value);
+	return IntlService.getInstance().parseNumber(value);
 }

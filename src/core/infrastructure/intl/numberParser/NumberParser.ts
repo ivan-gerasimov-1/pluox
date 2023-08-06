@@ -3,10 +3,10 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 export class NumberParser {
 	static #instance?: NumberParser;
 
-	#group: RegExp = new RegExp('');
-	#decimal: RegExp = new RegExp('');
-	#numeral: RegExp = new RegExp('');
-	#index: any;
+	readonly #group: RegExp = new RegExp('');
+	readonly #decimal: RegExp = new RegExp('');
+	readonly #numeral: RegExp = new RegExp('');
+	readonly #index: any;
 
 	private constructor(locale: ELocaleCode) {
 		const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);

@@ -2,7 +2,7 @@ import { EKey } from '@modules/expenses/new-expense/components/amount-input/enum
 import { IntlService } from '@core/infrastructure/intl/IntlService';
 
 export const ALLOWED_SYMBOLS = [
-	IntlService.DECIMAL_SEPARATOR,
+	IntlService.getInstance().DECIMAL_SEPARATOR,
 	EKey.Digit0,
 	EKey.Digit1,
 	EKey.Digit2,

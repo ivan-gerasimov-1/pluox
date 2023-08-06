@@ -3,49 +3,58 @@ import {
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
 import { type ECurrency } from '@core/infrastructure/currency/types';
+import { DECIMAL_SEPARATORS } from '@core/infrastructure/intl/constants';
 import { formatCurrency } from '@core/infrastructure/intl/currency';
 import { formatDate } from '@core/infrastructure/intl/date';
 import { type ELocaleCode } from '@core/infrastructure/intl/enums';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
-
-const DECIMAL_SEPARATORS = [',', '.'] as const;
-
-type TDecimalSeparator = (typeof DECIMAL_SEPARATORS)[number];
+import { type TDecimalSeparator } from '@core/infrastructure/intl/types';
 
 export class IntlService {
-	static #appConfig: IAppConfig = AppConfig.getInstance();
+	static #instance?: IntlService;
 
-	static #locale = this.#appConfig.locale;
-	static #currency = this.#appConfig.currency;
+	private constructor(private readonly appConfig: IAppConfig) {}
 
-	public static get locale(): ELocaleCode {
-		return this.#locale;
+	public static getInstance(): IntlService {
+		if (!this.#instance) {
+			let appConfig = AppConfig.getInstance();
+
+			this.#instance = new IntlService(appConfig);
+		}
+
+		return this.#instance;
 	}
 
-	public static get currency(): ECurrency {
-		return this.#currency;
+	public get locale(): ELocaleCode {
+		return this.appConfig.locale;
 	}
 
-	public static get DECIMAL_SEPARATOR(): TDecimalSeparator {
-		return this.getDecimalSeparator(this.#locale);
+	public get currency(): ECurrency {
+		return this.appConfig.currency;
 	}
 
-	public static get numberParser(): NumberParser {
-		return NumberParser.getInstance(this.#locale);
+	public get DECIMAL_SEPARATOR(): TDecimalSeparator {
+		return this.getDecimalSeparator(this.locale);
 	}
 
-	public static formatCurrency(value: number, currency?: ECurrency): string {
-		return formatCurrency(value, currency || this.#currency, this.#locale);
+	public formatCurrency(value: number, currency?: ECurrency): string {
+		return formatCurrency(value, currency || this.currency, this.locale);
 	}
 
-	public static formatDate(value: number | string | Date) {
-		return formatDate(value, this.#locale);
+	public formatDate(value: number | string | Date) {
+		return formatDate(value, this.locale);
+	}
+
+	public parseNumber(value: string): number {
+		let numberParser = NumberParser.getInstance(this.locale);
+
+		return numberParser.parse(value);
 	}
 
 	/**
 	 * @throws {UnsupportedDecimalSeparatorError}
 	 */
-	private static getDecimalSeparator(locale: ELocaleCode): TDecimalSeparator {
+	private getDecimalSeparator(locale: ELocaleCode): TDecimalSeparator {
 		let decimalSeaparator = (1.1).toLocaleString(locale).substring(1, 2);
 
 		if (!this.isDecimalSeparator(decimalSeaparator)) {
@@ -55,7 +64,7 @@ export class IntlService {
 		return decimalSeaparator;
 	}
 
-	private static isDecimalSeparator(value: any): value is TDecimalSeparator {
+	private isDecimalSeparator(value: any): value is TDecimalSeparator {
 		return DECIMAL_SEPARATORS.includes(value);
 	}
 }

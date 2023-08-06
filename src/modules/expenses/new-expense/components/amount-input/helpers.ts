@@ -6,7 +6,7 @@ export function validateNumber(value: string): boolean {
 		return false;
 	}
 
-	let decimalSeaparator = IntlService.DECIMAL_SEPARATOR;
+	let decimalSeaparator = IntlService.getInstance().DECIMAL_SEPARATOR;
 
 	if (value.split(decimalSeaparator).length > 2) {
 		return false;

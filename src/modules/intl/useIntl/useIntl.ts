@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 export function useIntl<TScope extends TBaseScope>(
 	scope: Record<ELocaleCode, TScope>
 ): TUseIntl<TScope> {
-	let localeCode = IntlService.locale;
+	let localeCode = IntlService.getInstance().locale;
 
 	const intl: TUseIntl<TScope> = useMemo((): TUseIntl<TScope> => {
 		return {

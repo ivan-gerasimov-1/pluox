@@ -7,12 +7,14 @@ type TMoneyCardProps = {
 };
 
 export function MoneyCard(props: TMoneyCardProps) {
+	let intlService = IntlService.getInstance();
+
 	return (
 		<>
 			<h2 className={styles.title}>{props.title}</h2>
 
 			<div className={styles.amount}>
-				{props.amount ? IntlService.formatCurrency(props.amount) : '—'}
+				{props.amount ? intlService.formatCurrency(props.amount) : '—'}
 			</div>
 		</>
 	);

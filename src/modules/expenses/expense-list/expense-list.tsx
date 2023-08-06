@@ -5,10 +5,11 @@ import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
 
 export function ExpenseList() {
+	let intlService = IntlService.getInstance();
+	let currencyConverter = CurrencyConverter.getInstance();
+
 	let expenseList = useExpensesStore((state) => state.getList());
 	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
-
-	let currencyConverter = CurrencyConverter.getInstance();
 
 	return (
 		<ul className={styles.list}>
@@ -17,19 +18,19 @@ export function ExpenseList() {
 					<li key={item.id} className={styles.listItem}>
 						<div className={styles.info}>
 							<span className={styles.expenseInMainCurrency}>
-								{IntlService.formatCurrency(
+								{intlService.formatCurrency(
 									currencyConverter.convert(
 										item.amount,
 										item.currency,
-										IntlService.currency
+										intlService.currency
 									),
-									IntlService.currency
+									intlService.currency
 								)}
 							</span>
 
-							{item.currency && item.currency !== IntlService.currency && (
+							{item.currency && item.currency !== intlService.currency && (
 								<span className={styles.expense}>
-									{IntlService.formatCurrency(item.amount, item.currency)}
+									{intlService.formatCurrency(item.amount, item.currency)}
 								</span>
 							)}
 
@@ -37,7 +38,7 @@ export function ExpenseList() {
 								<div className={styles.comment}>{item.comment}</div>
 							)}
 
-							<em>{IntlService.formatDate(item.dateCreated)}</em>
+							<em>{intlService.formatDate(item.dateCreated)}</em>
 						</div>
 
 						<div className={styles.buttonGroup}>

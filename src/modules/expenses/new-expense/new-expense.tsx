@@ -127,7 +127,7 @@ export function NewExpense() {
 
 							setTestAmount((prevTestAmount) => {
 								return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
-									IntlService.locale
+									IntlService.getInstance().locale
 								);
 							});
 						}}
@@ -139,5 +139,5 @@ export function NewExpense() {
 }
 
 function toModelValue(value: string): number {
-	return IntlService.numberParser.parse(value);
+	return IntlService.getInstance().parseNumber(value);
 }
