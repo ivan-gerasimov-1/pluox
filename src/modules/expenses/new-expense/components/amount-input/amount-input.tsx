@@ -2,7 +2,7 @@ import {
 	validateKey,
 	validateNumber,
 } from '@modules/expenses/new-expense/components/amount-input/helpers';
-import { IntlService } from '@modules/intl';
+import { IntlService } from '@core/infrastructure/intl/IntlService';
 import React, { useEffect, useState } from 'react';
 import styles from './amount-input.module.css';
 

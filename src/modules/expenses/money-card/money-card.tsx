@@ -1,4 +1,4 @@
-import { IntlService } from '@modules/intl';
+import { IntlService } from '@core/infrastructure/intl/IntlService';
 import styles from './money-card.module.css';
 
 type TMoneyCardProps = {

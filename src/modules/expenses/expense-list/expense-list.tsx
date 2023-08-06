@@ -1,6 +1,6 @@
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import { useExpensesStore } from '@modules/expenses';
-import { IntlService } from '@modules/intl';
+import { IntlService } from '@core/infrastructure/intl/IntlService';
 import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
 

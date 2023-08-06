@@ -3,7 +3,8 @@ import { AmountInput } from '@modules/expenses/new-expense/components/amount-inp
 import { CurrencyInput } from '@modules/expenses/new-expense/components/currency-input/currency-input';
 import { NumericKeyboard } from '@modules/expenses/new-expense/components/numeric-keyboard/numeric-keyboard';
 import { newExpenseI18n } from '@modules/expenses/new-expense/new-expense.i18n';
-import { IntlService, useIntl } from '@modules/intl';
+import { IntlService } from '@core/infrastructure/intl/IntlService';
+import { useIntl } from '@modules/intl';
 import { useState } from 'react';
 import styles from './new-expense.module.css';
 import { ECurrency } from '@core/infrastructure/currency/types';
