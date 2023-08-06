@@ -3,8 +3,8 @@ import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import { Id } from '@domain/types';
-import create from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 type TExpenseCreatePayload = {
 	amount: number;
@@ -87,7 +87,7 @@ export let useExpensesStore = create<
 		},
 		{
 			name: '@savee/store/$expenses',
-			getStorage: () => localStorage,
+			storage: createJSONStorage(() => localStorage),
 		}
 	)
 );
