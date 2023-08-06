@@ -7,15 +7,16 @@ import { DECIMAL_SEPARATORS } from '@core/infrastructure/intl/constants';
 import { formatCurrency } from '@core/infrastructure/intl/currency';
 import { formatDate } from '@core/infrastructure/intl/date';
 import { type ELocaleCode } from '@core/infrastructure/intl/enums';
+import { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import { type TDecimalSeparator } from '@core/infrastructure/intl/types';
 
-export class IntlService {
-	static #instance?: IntlService;
+export class IntlService implements IIntlService {
+	static #instance?: IIntlService;
 
 	private constructor(private readonly appConfig: IAppConfig) {}
 
-	public static getInstance(): IntlService {
+	public static getInstance(): IIntlService {
 		if (!this.#instance) {
 			let appConfig = AppConfig.getInstance();
 
@@ -33,7 +34,7 @@ export class IntlService {
 		return this.appConfig.currency;
 	}
 
-	public get DECIMAL_SEPARATOR(): TDecimalSeparator {
+	public get decimalSeparator(): TDecimalSeparator {
 		return this.getDecimalSeparator(this.locale);
 	}
 
@@ -41,7 +42,7 @@ export class IntlService {
 		return formatCurrency(value, currency || this.currency, this.locale);
 	}
 
-	public formatDate(value: number | string | Date) {
+	public formatDate(value: number | string | Date): string {
 		return formatDate(value, this.locale);
 	}
 
