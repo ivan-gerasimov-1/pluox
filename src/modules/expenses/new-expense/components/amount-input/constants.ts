@@ -1,5 +1,5 @@
 import { EKey } from '@modules/expenses/new-expense/components/amount-input/enums';
-import { IntlService } from '@core/infrastructure/intl/IntlService';
+import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
 export const ALLOWED_SYMBOLS = [
 	IntlService.getInstance().DECIMAL_SEPARATOR,

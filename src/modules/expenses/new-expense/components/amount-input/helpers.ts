@@ -1,5 +1,5 @@
 import { ALLOWED_SYMBOLS } from '@modules/expenses/new-expense/components/amount-input/constants';
-import { IntlService } from '@core/infrastructure/intl/IntlService';
+import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
 export function validateNumber(value: string): boolean {
 	if (RegExp('[A-z]+').test(value)) {
