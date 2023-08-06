@@ -1,5 +1,5 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
-import { ELocaleCode } from '@modules/intl';
+import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 export interface IAppConfig {
 	readonly locale: ELocaleCode;

@@ -1,4 +1,4 @@
-import { ELocaleCode } from '@modules/intl';
+import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 export class NumberParser {
 	static #instance?: NumberParser;

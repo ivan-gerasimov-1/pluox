@@ -1,4 +1,4 @@
-import { ELocaleCode } from '@modules/intl/enums';
+import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 export const errorI18n = {
 	[ELocaleCode.RU_RU]: {

@@ -1,4 +1,5 @@
-import { ELocaleCode, IntlService } from '@modules/intl';
+import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import { IntlService } from '@modules/intl';
 import { createScopedTranslateFunction } from '@modules/intl/useIntl/translateFunction';
 import { TBaseScope, TUseIntl } from '@modules/intl/useIntl/types';
 import { useMemo } from 'react';
