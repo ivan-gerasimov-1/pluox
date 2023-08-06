@@ -17,43 +17,46 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 
 	return (
 		<fieldset className={styles.container}>
-			<label htmlFor="currency_usd" className={styles.radioInput}>
+			<label htmlFor={ECurrency.USD} className={styles.radioInput}>
+				<span className={styles.radioInputTitle}>{ECurrency.USD}</span>
+
 				<input
-					name="currency"
-					id="currency_usd"
 					type="radio"
+					id={ECurrency.USD}
+					name="currency"
 					className={styles.nativeRadioInput}
 					checked={props.value === ECurrency.USD}
 					value={ECurrency.USD}
 					onChange={handleCurrencyChange}
 				/>
-				{ECurrency.USD}
 			</label>
 
-			<label htmlFor="currency_rub" className={styles.radioInput}>
+			<label htmlFor={ECurrency.RUB} className={styles.radioInput}>
+				<span className={styles.radioInputTitle}>{ECurrency.RUB}</span>
+
 				<input
-					name="currency"
-					id="currency_rub"
 					type="radio"
+					id={ECurrency.RUB}
+					name="currency"
 					className={styles.nativeRadioInput}
 					checked={props.value === ECurrency.RUB}
 					value={ECurrency.RUB}
 					onChange={handleCurrencyChange}
 				/>
-				{ECurrency.RUB}
 			</label>
 
-			<label htmlFor="currency_gel" className={styles.radioInput}>
+			<label htmlFor={ECurrency.GEL} className={styles.radioInput}>
+				<span className={styles.radioInputTitle}>{ECurrency.GEL}</span>
+
 				<input
-					name="currency"
-					id="currency_gel"
 					type="radio"
+					id={ECurrency.GEL}
+					name="currency"
 					className={styles.nativeRadioInput}
 					checked={props.value === ECurrency.GEL}
 					value={ECurrency.GEL}
 					onChange={handleCurrencyChange}
 				/>
-				{ECurrency.GEL}
 			</label>
 		</fieldset>
 	);
