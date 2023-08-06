@@ -195,6 +195,9 @@ module.exports = {
 		},
 		minimizer: ['...', new CssMinimizerPlugin()],
 	},
+	stats: {
+		preset: 'minimal',
+	},
 	devServer: {
 		port: 3000,
 		hot: true,
