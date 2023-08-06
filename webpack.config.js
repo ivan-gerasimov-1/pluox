@@ -11,6 +11,7 @@ const postcssNested = require('postcss-nested');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ReactRefreshTypeScript = require('react-refresh-typescript');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 class NodeEnvNotProvidedError extends Error {
 	constructor() {
@@ -192,6 +193,7 @@ module.exports = {
 		splitChunks: {
 			chunks: 'all',
 		},
+		minimizer: ['...', new CssMinimizerPlugin()],
 	},
 	devServer: {
 		port: 3000,
