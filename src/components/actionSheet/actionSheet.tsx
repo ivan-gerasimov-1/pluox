@@ -1,8 +1,8 @@
 import { Icon } from '@ui-kit/icon';
 import { classnames } from '@utils/classnames';
 import type React from 'react';
-import styles from './action-sheet.module.css';
-import { useActionSheetContainer } from '@components/action-sheet/useActionSheetContainer';
+import styles from './actionSheet.module.css';
+import { useActionSheetContainer } from '@components/actionSheet/useActionSheetContainer';
 
 export type TActionSheetProps = {
 	isOpen?: boolean;
