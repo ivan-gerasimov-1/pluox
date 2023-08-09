@@ -1,24 +1,31 @@
 import { useState } from 'react';
 
-export function useActionSheetContainer() {
-	let [isActive, setActive] = useState(false);
+export type TUseActionSheetContainer = {
+	isOpen: boolean;
+	open(): void;
+	close(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
+};
+
+export function useActionSheetContainer(): TUseActionSheetContainer {
+	let [isOpen, setOpen] = useState<boolean>(false);
 
 	function open() {
-		if (isActive) {
+		if (isOpen) {
 			return;
 		}
 
-		setActive(true);
+		setOpen(true);
 	}
 
 	function close(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		event.stopPropagation();
 
-		setActive(false);
+		setOpen(false);
 	}
 
 	return {
-		isOpen: isActive,
+		isOpen,
+
 		open,
 		close,
 	};
