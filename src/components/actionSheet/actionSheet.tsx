@@ -12,39 +12,51 @@ export type TActionSheetProps = {
 export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let { isOpen, open, close } = useActionSheetContainer(props.isOpen);
 
+	function closeActionSheet(event: React.MouseEvent<any, MouseEvent>) {
+		if (props.onClose) {
+			props.onClose();
+		}
+
+		close(event);
+	}
+
 	return (
-		<div
-			className={classnames(styles.actionSheetContainer, {
-				[styles.isActive]: isOpen,
-				[styles.cursorPointer]: !isOpen,
-			})}
-			onClick={open}
-		>
-			{isOpen && (
-				<div className={styles.header}>
-					<button
-						type="button"
-						className={styles.closeButton}
-						onClick={(event) => {
-							if (props.onClose) {
-								props.onClose();
-							}
-
-							close(event);
-						}}
-					>
-						<Icon name={Icon.IconName.Close} />
-					</button>
-				</div>
-			)}
-
+		<>
 			<div
-				className={classnames(styles.actionSheetWrapper, {
+				className={classnames(styles.backdrop, {
+					[styles.backdropIsActive]: isOpen,
+					[styles.cursorPointer]: isOpen,
 					[styles.noPointerEvents]: !isOpen,
 				})}
+				onClick={closeActionSheet}
+			/>
+			<div
+				className={classnames(styles.actionSheetContainer, {
+					[styles.isActive]: isOpen,
+					[styles.cursorPointer]: !isOpen,
+				})}
+				onClick={open}
 			>
-				{props.children}
+				{isOpen && (
+					<div className={styles.header}>
+						<button
+							type="button"
+							className={styles.closeButton}
+							onClick={closeActionSheet}
+						>
+							<Icon name={Icon.IconName.Close} />
+						</button>
+					</div>
+				)}
+
+				<div
+					className={classnames(styles.actionSheetWrapper, {
+						[styles.noPointerEvents]: !isOpen,
+					})}
+				>
+					{props.children}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
