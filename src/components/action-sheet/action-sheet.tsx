@@ -4,8 +4,13 @@ import type React from 'react';
 import styles from './action-sheet.module.css';
 import { useActionSheetContainer } from '@components/action-sheet/useActionSheetContainer';
 
-export function ActionSheet(props: React.PropsWithChildren<{}>) {
-	let { isOpen, open, close } = useActionSheetContainer();
+export type TActionSheetProps = {
+	isOpen?: boolean;
+	onClose?(): void;
+};
+
+export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
+	let { isOpen, open, close } = useActionSheetContainer(props.isOpen);
 
 	return (
 		<div
@@ -17,18 +22,28 @@ export function ActionSheet(props: React.PropsWithChildren<{}>) {
 		>
 			{isOpen && (
 				<div className={styles.header}>
-					<button type="button" className={styles.closeButton} onClick={close}>
+					<button
+						type="button"
+						className={styles.closeButton}
+						onClick={(event) => {
+							if (props.onClose) {
+								props.onClose();
+							}
+
+							close(event);
+						}}
+					>
 						<Icon name={Icon.IconName.Close} />
 					</button>
 				</div>
 			)}
 
 			<div
-				className={classnames({
+				className={classnames(styles.actionSheetWrapper, {
 					[styles.noPointerEvents]: !isOpen,
 				})}
 			>
-				<div className={styles.actionSheetWrapper}>{props.children}</div>
+				{props.children}
 			</div>
 		</div>
 	);

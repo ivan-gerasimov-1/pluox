@@ -6,8 +6,10 @@ export type TUseActionSheetContainer = {
 	close(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
 };
 
-export function useActionSheetContainer(): TUseActionSheetContainer {
-	let [isOpen, setOpen] = useState<boolean>(false);
+export function useActionSheetContainer(
+	isDefaultOpen: boolean = false
+): TUseActionSheetContainer {
+	let [isOpen, setOpen] = useState<boolean>(isDefaultOpen);
 
 	function open() {
 		if (isOpen) {
