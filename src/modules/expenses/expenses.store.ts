@@ -21,6 +21,7 @@ interface IExpensesStore {
 	getTotalAmount(): number;
 	getMonthlyAmount(): number;
 
+	getOne(id: Id): TExpense;
 	getList(): TExpense[];
 }
 
@@ -75,6 +76,13 @@ export let useExpensesStore = create<
 
 					return Expenses.create(state.operations) //
 						.getMonthlyAmount();
+				},
+
+				getOne(id: Id): TExpense {
+					const state = get();
+
+					return Expenses.create(state.operations) //
+						.get(id);
 				},
 
 				getList(): TExpense[] {
