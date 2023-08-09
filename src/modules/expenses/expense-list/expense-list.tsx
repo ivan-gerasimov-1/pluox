@@ -3,8 +3,13 @@ import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
+import { type Id } from '@domain/types';
 
-export function ExpenseList() {
+export type TExpenseListProps = {
+	onEdit(itemId: Id): void;
+};
+
+export function ExpenseList(props: TExpenseListProps) {
 	let intlService = IntlService.getInstance();
 	let currencyConverter = CurrencyConverter.getInstance();
 
@@ -42,11 +47,13 @@ export function ExpenseList() {
 						</div>
 
 						<div className={styles.buttonGroup}>
-							{false && (
-								<button type="button" className={styles.actionButton}>
-									<Icon name={Icon.IconName.Edit} />
-								</button>
-							)}
+							<button
+								type="button"
+								className={styles.actionButton}
+								onClick={() => props.onEdit(item.id)}
+							>
+								<Icon name={Icon.IconName.Edit} />
+							</button>
 
 							<button
 								type="button"
