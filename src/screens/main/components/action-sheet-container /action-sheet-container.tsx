@@ -1,34 +1,21 @@
 import { Icon } from '@ui-kit/icon';
 import { classnames } from '@utils/classnames';
-import React, { useState } from 'react';
+import type React from 'react';
 import styles from './action-sheet-container.module.css';
+import { useActionSheetContainer } from '@screens/main/components/action-sheet-container /useActionSheetContainer';
 
 export function ActionSheetContainer(props: React.PropsWithChildren<{}>) {
-	let [isActive, setActive] = useState(false);
-
-	function open() {
-		if (isActive) {
-			return;
-		}
-
-		setActive(true);
-	}
-
-	function close(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-		event.stopPropagation();
-
-		setActive(false);
-	}
+	let { isOpen, open, close } = useActionSheetContainer();
 
 	return (
 		<div
 			className={classnames(styles.actionSheetContainer, {
-				[styles.isActive]: isActive,
-				[styles.cursorPointer]: !isActive,
+				[styles.isActive]: isOpen,
+				[styles.cursorPointer]: !isOpen,
 			})}
 			onClick={open}
 		>
-			{isActive && (
+			{isOpen && (
 				<div className={styles.header}>
 					<button type="button" className={styles.closeButton} onClick={close}>
 						<Icon name={Icon.IconName.Close} />
@@ -38,7 +25,7 @@ export function ActionSheetContainer(props: React.PropsWithChildren<{}>) {
 
 			<div
 				className={classnames({
-					[styles.noPointerEvents]: !isActive,
+					[styles.noPointerEvents]: !isOpen,
 				})}
 			>
 				{props.children}
