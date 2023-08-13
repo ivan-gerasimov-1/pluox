@@ -2,12 +2,12 @@ import { Icon } from '@ui-kit/icon';
 import { classnames } from '@utils/classnames';
 import type React from 'react';
 import styles from './actionSheet.module.css';
-import { useActionSheetContainer } from '@components/actionSheet/useActionSheetContainer';
+import { useActionSheetContainer } from '@components/actionSheet/hooks/useActionSheetContainer';
 import { Backdrop } from '@components/actionSheet/components/backdrop/Backdrop';
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import actionSheetContainerStyles from './actionSheetContainer.module.css';
-import { useScrollLock } from '@components/actionSheet/useScrollLock';
+import { useScrollLock } from '@ui-kit/hooks/useScrollLock';
 
 export type TActionSheetProps = {
 	isOpen?: boolean;
