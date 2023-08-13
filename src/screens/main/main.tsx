@@ -1,4 +1,4 @@
-import { ActionSheet } from '@components/actionSheet';
+import { ActionSheet } from '@ui-kit/actionSheet';
 import { MoneyLeft, MoneySpent } from '@modules/expenses';
 import { MoneySpentCurrentMonth } from '@modules/expenses/money-spent-current-month';
 import { NewExpense } from '@modules/expenses/new-expense';

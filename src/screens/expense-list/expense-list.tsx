@@ -2,7 +2,7 @@ import { ExpenseList } from '@modules/expenses';
 import { useIntl } from '@modules/intl';
 import { expenseListI18n } from '@screens/expense-list/expense-list.i18n';
 import styles from './expense-list.module.css';
-import { ActionSheet } from '@components/actionSheet';
+import { ActionSheet } from '@ui-kit/actionSheet';
 import { EditExpense } from '@modules/expenses/editExpense/editExpense';
 import { type Id } from '@domain/types';
 import { useState } from 'react';
