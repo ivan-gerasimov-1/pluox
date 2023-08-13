@@ -18,7 +18,7 @@
 
 	transform: translateY(85%);
 
-	transition: translateY 0.25s ease-in-out;
+	transition: transform 0.15s linear;
 }
 
 .actionSheetContainerEmpty {
