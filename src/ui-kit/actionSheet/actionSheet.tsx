@@ -17,6 +17,13 @@ export type TActionSheetProps = {
 export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let { isOpen, open, close } = useActionSheetContainer(props.isOpen);
 	let actionSheetContainerRef = useRef<HTMLDivElement>(null);
+	let [actionSheetEnd] = useState(() => {
+		return Number.parseFloat(
+			getComputedStyle(document.documentElement).getPropertyValue(
+				'--action-sheet-end'
+			)
+		);
+	});
 
 	useScrollLock(isOpen);
 
@@ -37,32 +44,39 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	function onDragEnd(event: React.TouchEvent<HTMLDivElement>) {
 		let diff = event.changedTouches[0]?.clientY - dragStart;
 
-		if (diff >= 50) {
+		if (diff >= 100) {
+			/** @todo remove ts-expect-error */
 			// @ts-expect-error
 			close(event);
 		} else {
-			// @ts-expect-error
-			actionSheetContainerRef.current.style.transform = '';
+			document.documentElement.style.setProperty(
+				'--action-sheet-end',
+				`${actionSheetEnd}%`
+			);
 		}
 	}
 
 	function onDrag(event: React.TouchEvent<HTMLDivElement>) {
 		let touchData = event.targetTouches[0];
 
-		// dragStart = 100
-		// currentDrag = X
-		// dragStart * X = 100 * currentDrag
-		// x = currentDrag * 100 / dragStart
+		let diff = (touchData.clientY * 100) / dragStart;
+		let currentTranslate = 85 - diff;
 
-		// 85 - X
-		// X →
+		if (currentTranslate >= 0) {
+			return;
+		}
 
-		let foo = (touchData.clientY * 100) / dragStart;
-		let currentTranslate = 85 - foo;
-		// console.log(touchData.clientY);
-		// @ts-expect-error
-		actionSheetContainerRef.current.style.transform = `translateY(${-currentTranslate}%)`;
-		// console.log(actionSheetContainerRef.current?.style.translate);
+		document.documentElement.style.setProperty(
+			'--action-sheet-end',
+			`${-currentTranslate}%`
+		);
+	}
+
+	function onExited() {
+		document.documentElement.style.setProperty(
+			'--action-sheet-end',
+			`${actionSheetEnd}%`
+		);
 	}
 
 	return (
@@ -74,10 +88,7 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 				in={isOpen}
 				timeout={250}
 				classNames={{ ...actionSheetContainerStyles }}
-				onExited={() => {
-					// @ts-expect-error
-					actionSheetContainerRef.current.style.transform = '';
-				}}
+				onExited={onExited}
 			>
 				<div
 					ref={actionSheetContainerRef}

@@ -16,9 +16,9 @@
 	border-top-left-radius: var(--border-radius-default);
 	border-top-right-radius: var(--border-radius-default);
 
-	transform: translateY(85%);
+	transform: translateY(var(--action-sheet-start));
 
-	transition: transform 0.05s linear;
+	transition: transform 0.15s linear;
 
 	will-change: transform;
 }
@@ -28,47 +28,47 @@
 }
 
 .appear {
-	transform: translateY(85%);
+	transform: translateY(var(--action-sheet-start));
 }
 
 .appearActive {
-	transform: translateY(10%);
-	animation: bounceIn 250ms ease;
+	transform: translateY(var(--action-sheet-end));
+	animation: bounceIn 0.25s ease;
 }
 
 .appearDone {
-	transform: translateY(10%);
+	transform: translateY(var(--action-sheet-end));
 }
 
 .enter {
-	transform: translateY(85%);
+	transform: translateY(var(--action-sheet-start));
 }
 
 .enterActive {
-	transform: translateY(10%);
-	animation: bounceIn 250ms ease;
+	transform: translateY(var(--action-sheet-end));
+	animation: bounceIn 0.25s ease;
 }
 
 .enterDone {
-	transform: translateY(10%);
+	transform: translateY(var(--action-sheet-end));
 }
 
 .exit {
-  transform: translateY(85%);
+  transform: translateY(var(--action-sheet-start));
 }
 
 .exitActive {
-	transform: translateY(85%);
-	animation: bounceOut 250ms ease;
+	transform: translateY(var(--action-sheet-start));
+	animation: bounceOut 0.25s ease;
 }
 
 .exitDone {
-	transform: translateY(85%);
+	transform: translateY(var(--action-sheet-start));
 }
 
 @keyframes bounceIn {
 	0% {
-		transform: translateY(85%);
+		transform: translateY(var(--action-sheet-start));
 	}
 	50% {
     transform: translateY(9%);
@@ -77,16 +77,16 @@
 		transform: translateY(12%);
 	}
 	100% {
-		transform: translateY(10%);
+		transform: translateY(var(--action-sheet-end));
 	}
 }
 
 @keyframes bounceOut {
 	0% {
-		transform: translateY(10%);
+		transform: translateY(var(--action-sheet-end));
 	}
 	100% {
-		transform: translateY(85%);
+		transform: translateY(var(--action-sheet-start));
 	}
 }
 

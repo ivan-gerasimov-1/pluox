@@ -30,4 +30,8 @@
 
 	/* navbar */
 	--navbar-height: 4rem;
+
+	/* ActionSheet */
+	--action-sheet-start: 85%;
+	--action-sheet-end: 10%;
 }
