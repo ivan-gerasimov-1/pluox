@@ -67,10 +67,10 @@
 		transform: translateY(85%);
 	}
 	50% {
-    transform: translateY(8%);
+    transform: translateY(7%);
   }
   70% {
-		transform: translateY(11%);
+		transform: translateY(12%);
 	}
 	100% {
 		transform: translateY(10%);
