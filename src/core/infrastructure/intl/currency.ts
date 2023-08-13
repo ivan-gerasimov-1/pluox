@@ -18,6 +18,6 @@ export function formatCurrency(
 	return Intl.NumberFormat(locale, {
 		style: ENumberFormatStyle.CURRENCY,
 		currency,
-		currencyDisplay: ECurrencyDisplay.CODE,
+		currencyDisplay: ECurrencyDisplay.NARROW_SYMBOL,
 	}).format(value);
 }
