@@ -18,8 +18,6 @@
 
 	transform: translateY(var(--action-sheet-start));
 
-	transition: transform 0.15s linear;
-
 	will-change: transform;
 }
 
