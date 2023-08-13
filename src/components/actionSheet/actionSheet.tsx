@@ -4,9 +4,10 @@ import type React from 'react';
 import styles from './actionSheet.module.css';
 import { useActionSheetContainer } from '@components/actionSheet/useActionSheetContainer';
 import { Backdrop } from '@components/actionSheet/components/backdrop/Backdrop';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import actionSheetContainerStyles from './actionSheetContainer.module.css';
+import { useScrollLock } from '@components/actionSheet/useScrollLock';
 
 export type TActionSheetProps = {
 	isOpen?: boolean;
@@ -16,6 +17,8 @@ export type TActionSheetProps = {
 export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let { isOpen, open, close } = useActionSheetContainer(props.isOpen);
 	let actionSheetContainerRef = useRef(null);
+
+	useScrollLock(isOpen);
 
 	function closeActionSheet(event: React.MouseEvent<any, MouseEvent>) {
 		if (props.onClose) {
