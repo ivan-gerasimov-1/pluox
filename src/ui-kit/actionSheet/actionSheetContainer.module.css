@@ -20,7 +20,7 @@
 
 	transition: transform 0.05s linear;
 
-	will-change: true;
+	will-change: transform;
 }
 
 .actionSheetContainerEmpty {
