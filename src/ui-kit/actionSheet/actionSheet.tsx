@@ -40,8 +40,6 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 
 		let diff = event.changedTouches[0]?.clientY - dragStart;
 
-		console.log(diff);
-
 		if (diff >= 50) {
 			// @ts-expect-error
 			close(event);
