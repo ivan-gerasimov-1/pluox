@@ -17,6 +17,8 @@
 	border-top-right-radius: var(--border-radius-default);
 
 	transform: translateY(85%);
+
+	transition: translateY 0.25s ease-in-out;
 }
 
 .actionSheetContainerEmpty {
