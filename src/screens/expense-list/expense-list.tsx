@@ -19,11 +19,9 @@ export function ExpenseListScreen() {
 
 			<ExpenseList onEdit={(id: Id) => setEditItem(id)} />
 
-			{editItem && (
-				<ActionSheet onClose={() => setEditItem(null)} isOpen>
-					<EditExpense itemId={editItem} />
-				</ActionSheet>
-			)}
+			<ActionSheet isOpen={editItem !== null} onClose={() => setEditItem(null)}>
+				{editItem ? <EditExpense itemId={editItem} /> : <div>—</div>}
+			</ActionSheet>
 		</>
 	);
 }

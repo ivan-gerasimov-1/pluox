@@ -4,6 +4,9 @@ import type React from 'react';
 import styles from './actionSheet.module.css';
 import { useActionSheetContainer } from '@components/actionSheet/useActionSheetContainer';
 import { Backdrop } from '@components/actionSheet/components/backdrop/Backdrop';
+import { useEffect, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import actionSheetContainerStyles from './actionSheetContainer.module.css';
 
 export type TActionSheetProps = {
 	isOpen?: boolean;
@@ -12,6 +15,7 @@ export type TActionSheetProps = {
 
 export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let { isOpen, open, close } = useActionSheetContainer(props.isOpen);
+	let actionSheetContainerRef = useRef(null);
 
 	function closeActionSheet(event: React.MouseEvent<any, MouseEvent>) {
 		if (props.onClose) {
@@ -25,33 +29,38 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 		<>
 			<Backdrop isVisible={isOpen} onClick={closeActionSheet} />
 
-			<div
-				className={classnames(styles.actionSheetContainer, {
-					[styles.isActive]: isOpen,
-					[styles.cursorPointer]: !isOpen,
-				})}
-				onClick={open}
+			<CSSTransition
+				nodeRef={actionSheetContainerRef}
+				in={isOpen}
+				timeout={250}
+				classNames={{ ...actionSheetContainerStyles }}
 			>
-				{isOpen && (
-					<div className={styles.header}>
-						<button
-							type="button"
-							className={styles.closeButton}
-							onClick={closeActionSheet}
-						>
-							<Icon name={Icon.IconName.Close} />
-						</button>
-					</div>
-				)}
-
 				<div
-					className={classnames(styles.actionSheetWrapper, {
-						[styles.noPointerEvents]: !isOpen,
-					})}
+					ref={actionSheetContainerRef}
+					className={actionSheetContainerStyles.actionSheetContainer}
+					onClick={open}
 				>
-					{props.children}
+					{isOpen && (
+						<div className={styles.header}>
+							<button
+								type="button"
+								className={styles.closeButton}
+								onClick={closeActionSheet}
+							>
+								<Icon name={Icon.IconName.Close} />
+							</button>
+						</div>
+					)}
+
+					<div
+						className={classnames(styles.actionSheetWrapper, {
+							[styles.noPointerEvents]: !isOpen,
+						})}
+					>
+						{props.children}
+					</div>
 				</div>
-			</div>
+			</CSSTransition>
 		</>
 	);
 }
