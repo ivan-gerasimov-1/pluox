@@ -7,5 +7,7 @@ export function MoneySpentCurrentMonth() {
 	let intl = useIntl(moneySpentI18n);
 	let total = useExpensesStore((state) => state.getMonthlyAmount());
 
-	return <MoneyCard title={intl.translate('title')} amount={total} />;
+	return (
+		<MoneyCard title={intl.translate('title')} amount={total} total={4800} />
+	);
 }
