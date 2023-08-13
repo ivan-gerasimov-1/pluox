@@ -45,6 +45,9 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 		if (diff >= 50) {
 			// @ts-expect-error
 			close(event);
+		} else {
+			// @ts-expect-error
+			actionSheetContainerRef.current.style.transform = '';
 		}
 	}
 
