@@ -57,25 +57,6 @@
 	border-top-right-radius: var(--border-radius-default);
 }
 
-.backdrop {
-	position: fixed;
-
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-
-	background-color: var(--color-black);
-
-	opacity: 0;
-}
-
-.backdropIsActive {
-	opacity: 0.5;
-
-	animation: changeOpacity 0.25s ease;
-}
-
 
 @keyframes moveit {
 	0% {
@@ -85,13 +66,3 @@
 		transform: translateY(10%);
 	}
 }
-
-@keyframes changeOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 0.5;
-	}
-}
-

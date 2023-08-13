@@ -2,7 +2,10 @@ import { Icon } from '@ui-kit/icon';
 import { classnames } from '@utils/classnames';
 import type React from 'react';
 import styles from './actionSheet.module.css';
+import backdropStyles from './backdrop.module.css';
 import { useActionSheetContainer } from '@components/actionSheet/useActionSheetContainer';
+import { CSSTransition } from 'react-transition-group';
+import { useRef } from 'react';
 
 export type TActionSheetProps = {
 	isOpen?: boolean;
@@ -11,6 +14,7 @@ export type TActionSheetProps = {
 
 export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let { isOpen, open, close } = useActionSheetContainer(props.isOpen);
+	let backdropRef = useRef(null);
 
 	function closeActionSheet(event: React.MouseEvent<any, MouseEvent>) {
 		if (props.onClose) {
@@ -22,14 +26,24 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 
 	return (
 		<>
-			<div
-				className={classnames(styles.backdrop, {
-					[styles.backdropIsActive]: isOpen,
-					[styles.cursorPointer]: isOpen,
-					[styles.noPointerEvents]: !isOpen,
-				})}
-				onClick={closeActionSheet}
-			/>
+			<CSSTransition
+				nodeRef={backdropRef}
+				in={isOpen}
+				timeout={250}
+				classNames={{ ...backdropStyles }}
+				mountOnEnter
+				unmountOnExit
+			>
+				<div
+					ref={backdropRef}
+					className={classnames(backdropStyles.backdrop, {
+						[styles.cursorPointer]: isOpen,
+						[styles.noPointerEvents]: !isOpen,
+					})}
+					onClick={closeActionSheet}
+				/>
+			</CSSTransition>
+
 			<div
 				className={classnames(styles.actionSheetContainer, {
 					[styles.isActive]: isOpen,
