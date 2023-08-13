@@ -13,3 +13,13 @@
 
 	overflow: hidden;
 }
+
+.leftover {
+	margin-top: 0.5rem;
+	text-align: right;
+
+	font-size: 0.75rem;
+	font-weight: bold;
+
+	color: var(--color-grey-500);
+}

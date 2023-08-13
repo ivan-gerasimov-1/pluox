@@ -4,10 +4,17 @@ import styles from './money-card.module.css';
 type TMoneyCardProps = {
 	title: string;
 	amount?: number;
+	total?: number;
 };
 
 export function MoneyCard(props: TMoneyCardProps) {
 	let intlService = IntlService.getInstance();
+
+	let leftover: number | null = null;
+
+	if (props.amount && props.total) {
+		leftover = props.total - props.amount;
+	}
 
 	return (
 		<>
@@ -16,6 +23,14 @@ export function MoneyCard(props: TMoneyCardProps) {
 			<div className={styles.amount}>
 				{props.amount ? intlService.formatCurrency(props.amount) : '—'}
 			</div>
+
+			{props.total && leftover !== null && (
+				<div className={styles.leftover}>
+					{intlService.formatCurrency(leftover)}
+					<span> / </span>
+					{intlService.formatCurrency(props.total)}
+				</div>
+			)}
 		</>
 	);
 }
