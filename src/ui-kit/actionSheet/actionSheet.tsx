@@ -21,7 +21,6 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	useScrollLock(isOpen);
 
 	let [dragStart, setDragStart] = useState(0);
-	let [dragEnd, setDragEnd] = useState(0);
 
 	function closeActionSheet(event: React.MouseEvent<any, MouseEvent>) {
 		if (props.onClose) {
@@ -36,8 +35,6 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	}
 
 	function onDragEnd(event: React.TouchEvent<HTMLDivElement>) {
-		setDragEnd(event.changedTouches[0]?.clientY);
-
 		let diff = event.changedTouches[0]?.clientY - dragStart;
 
 		if (diff >= 50) {
