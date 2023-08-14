@@ -5,6 +5,7 @@ export interface IAppConfig {
 	readonly locale: ELocaleCode;
 	readonly currency: ECurrency;
 	readonly availabelCurrencies: ECurrency[];
+	readonly budget: number | null;
 
 	readonly openExchangeRates: {
 		apiUrl: string;
@@ -18,6 +19,7 @@ export class AppConfig implements IAppConfig {
 	#locale: ELocaleCode;
 	#currency: ECurrency;
 	#availableCurrencies: ECurrency[];
+	#budget: number | null;
 
 	#openExchangeRates: {
 		apiUrl: string;
@@ -28,6 +30,7 @@ export class AppConfig implements IAppConfig {
 		this.#locale = locale;
 		this.#currency = currency;
 		this.#availableCurrencies = [ECurrency.GEL, ECurrency.RUB, ECurrency.USD];
+		this.#budget = 4800;
 
 		this.#openExchangeRates = {
 			apiUrl: 'https://openexchangerates.org/api',
@@ -45,6 +48,10 @@ export class AppConfig implements IAppConfig {
 
 	public get availabelCurrencies(): ECurrency[] {
 		return this.#availableCurrencies;
+	}
+
+	public get budget(): number | null {
+		return this.#budget;
 	}
 
 	public get openExchangeRates(): {
