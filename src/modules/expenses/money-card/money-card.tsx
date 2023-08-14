@@ -4,7 +4,7 @@ import styles from './money-card.module.css';
 type TMoneyCardProps = {
 	title: string;
 	amount?: number;
-	total?: number;
+	total?: number | null;
 };
 
 export function MoneyCard(props: TMoneyCardProps) {
