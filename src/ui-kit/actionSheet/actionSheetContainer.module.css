@@ -68,12 +68,9 @@
 	0% {
 		transform: translateY(var(--action-sheet-start));
 	}
-	50% {
-    transform: translateY(9%);
+	60% {
+    transform: translateY(8%);
   }
-  70% {
-		transform: translateY(12%);
-	}
 	100% {
 		transform: translateY(var(--action-sheet-end));
 	}
