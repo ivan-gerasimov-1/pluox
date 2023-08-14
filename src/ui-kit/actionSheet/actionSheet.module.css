@@ -7,9 +7,9 @@
 
 .header {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 
-	padding: 0 1rem;
+	padding: 0.25rem 0 1rem 0;
 }
 
 .cursorPointer {
@@ -29,4 +29,15 @@
 	border: 0 none;
 	background: 0 none;
 	appearance: none;
+}
+
+.pinch {
+	display: block;
+
+	width: 30px;
+	height: 7px;
+
+	border-radius: 3px;
+
+	background-color: var(--color-grey-500);
 }

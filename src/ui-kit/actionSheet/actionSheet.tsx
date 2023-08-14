@@ -1,4 +1,3 @@
-import { Icon } from '@ui-kit/icon';
 import { classnames } from '@utils/classnames';
 import type React from 'react';
 import styles from './actionSheet.module.css';
@@ -98,17 +97,9 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 					onTouchEnd={onDragEnd}
 					onTouchMove={onDrag}
 				>
-					{isOpen && (
-						<div className={styles.header}>
-							<button
-								type="button"
-								className={styles.closeButton}
-								onClick={closeActionSheet}
-							>
-								<Icon name={Icon.IconName.Close} />
-							</button>
-						</div>
-					)}
+					<div className={styles.header}>
+						<div className={styles.pinch} />
+					</div>
 
 					<div
 						className={classnames(styles.actionSheetWrapper, {
