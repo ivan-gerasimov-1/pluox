@@ -13,7 +13,7 @@ enum ENumberFormatStyle {
 export function formatCurrency(
 	value: number,
 	currency: ECurrency,
-	locale: ELocaleCode
+	locale: ELocaleCode,
 ): string {
 	return Intl.NumberFormat(locale, {
 		style: ENumberFormatStyle.CURRENCY,

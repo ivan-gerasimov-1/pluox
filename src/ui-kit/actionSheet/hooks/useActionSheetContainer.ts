@@ -7,7 +7,7 @@ export type TUseActionSheetContainer = {
 };
 
 export function useActionSheetContainer(
-	isDefaultOpen: boolean = false
+	isDefaultOpen: boolean = false,
 ): TUseActionSheetContainer {
 	let [isOpen, setOpen] = useState<boolean>(isDefaultOpen);
 

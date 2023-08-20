@@ -8,7 +8,7 @@ export type TUseIntl<TScope extends TBaseScope> = {
 };
 
 export type TScopedTranslateFunction<TScope extends TBaseScope> = <
-	TKey extends keyof TScope
+	TKey extends keyof TScope,
 >(
-	key: TKey
+	key: TKey,
 ) => TScope[TKey];

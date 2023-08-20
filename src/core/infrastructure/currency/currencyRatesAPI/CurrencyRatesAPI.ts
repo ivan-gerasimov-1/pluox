@@ -13,7 +13,7 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 	private constructor(
 		apiEndpoint: string,
 		apiKey: string,
-		availableCurrencies: ECurrency[]
+		availableCurrencies: ECurrency[],
 	) {
 		this.#apiEndpoint = apiEndpoint;
 		this.#apiKey = apiKey;
@@ -27,7 +27,7 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 			this.#instance = new CurrencyRatesAPI(
 				appConfig.openExchangeRates.apiUrl,
 				appConfig.openExchangeRates.apiKey,
-				appConfig.availabelCurrencies
+				appConfig.availabelCurrencies,
 			);
 		}
 
@@ -44,7 +44,7 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 				headers: {
 					Authorization: `Token ${this.#apiKey}`,
 				},
-			}
+			},
 		);
 
 		let result = await response.json();

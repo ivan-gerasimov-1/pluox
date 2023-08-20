@@ -28,7 +28,7 @@ interface IExpensesStore {
 export let useExpensesStore = create<
 	IExpensesStore,
 	[
-		['zustand/persist', IExpensesStore] //
+		['zustand/persist', IExpensesStore], //
 	]
 >(
 	persist(
@@ -41,7 +41,7 @@ export let useExpensesStore = create<
 						const expense = Expense.create(
 							payload.amount,
 							payload.currency,
-							payload.comment
+							payload.comment,
 						);
 
 						return {
@@ -96,6 +96,6 @@ export let useExpensesStore = create<
 		{
 			name: '@savee/store/$expenses',
 			storage: createJSONStorage(() => localStorage),
-		}
-	)
+		},
+	),
 );

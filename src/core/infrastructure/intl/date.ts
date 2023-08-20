@@ -22,7 +22,7 @@ enum EMinute {
 
 export function formatDate(
 	value: number | string | Date,
-	locale: ELocaleCode
+	locale: ELocaleCode,
 ): string {
 	let date = value;
 

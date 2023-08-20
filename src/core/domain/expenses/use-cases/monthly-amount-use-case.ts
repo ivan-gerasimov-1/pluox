@@ -52,7 +52,7 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 			total += this.#currencyConverter.convert(
 				amount,
 				expenseCurrency,
-				currency
+				currency,
 			);
 		}
 

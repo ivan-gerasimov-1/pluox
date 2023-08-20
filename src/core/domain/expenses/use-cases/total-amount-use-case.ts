@@ -40,7 +40,7 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 			total += this.#currencyConverter.convert(
 				amount,
 				expenseCurrency,
-				currency
+				currency,
 			);
 		}
 

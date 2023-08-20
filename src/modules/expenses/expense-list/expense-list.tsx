@@ -27,9 +27,9 @@ export function ExpenseList(props: TExpenseListProps) {
 									currencyConverter.convert(
 										item.amount,
 										item.currency,
-										intlService.currency
+										intlService.currency,
 									),
-									intlService.currency
+									intlService.currency,
 								)}
 							</span>
 

@@ -23,7 +23,7 @@ export function validateKey(event: React.KeyboardEvent<HTMLInputElement>) {
 	if (
 		!ALLOWED_SYMBOLS.includes(
 			// @ts-expect-error
-			event.key
+			event.key,
 		)
 	) {
 		event.preventDefault();

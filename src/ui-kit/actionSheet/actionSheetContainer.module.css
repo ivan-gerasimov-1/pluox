@@ -52,7 +52,7 @@
 }
 
 .exit {
-  transform: translateY(var(--action-sheet-start));
+	transform: translateY(var(--action-sheet-start));
 }
 
 .exitActive {
@@ -69,8 +69,8 @@
 		transform: translateY(var(--action-sheet-start));
 	}
 	60% {
-    transform: translateY(8%);
-  }
+		transform: translateY(8%);
+	}
 	100% {
 		transform: translateY(var(--action-sheet-end));
 	}
@@ -84,4 +84,3 @@
 		transform: translateY(var(--action-sheet-start));
 	}
 }
-

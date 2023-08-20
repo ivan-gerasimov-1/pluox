@@ -65,7 +65,7 @@ export function NewExpense() {
 	}
 
 	function handleCommentChange(
-		event: React.ChangeEvent<HTMLTextAreaElement>
+		event: React.ChangeEvent<HTMLTextAreaElement>,
 	): void {
 		const comment = event.target.value;
 
@@ -127,7 +127,7 @@ export function NewExpense() {
 
 							setTestAmount((prevTestAmount) => {
 								return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
-									IntlService.getInstance().locale
+									IntlService.getInstance().locale,
 								);
 							});
 						}}

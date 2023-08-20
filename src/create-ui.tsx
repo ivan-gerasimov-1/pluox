@@ -41,7 +41,7 @@ export class ReactUI implements IUserInterface {
 		this.root.render(
 			<StrictMode>
 				<App />
-			</StrictMode>
+			</StrictMode>,
 		);
 	}
 

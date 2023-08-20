@@ -12,17 +12,17 @@ export class NumberParser {
 		const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);
 		const numerals = [
 			...new Intl.NumberFormat(locale, { useGrouping: false }).format(
-				9876543210
+				9876543210,
 			),
 		].reverse();
 		const index = new Map(numerals.map((d, i) => [d, i]));
 
 		this.#group = new RegExp(
 			`[${parts.find((d): boolean => d.type === 'group')?.value}]`,
-			'g'
+			'g',
 		);
 		this.#decimal = new RegExp(
-			`[${parts.find((d): boolean => d.type === 'decimal')?.value}]`
+			`[${parts.find((d): boolean => d.type === 'decimal')?.value}]`,
 		);
 		this.#numeral = new RegExp(`[${numerals.join('')}]`, 'g');
 		this.#index = (d: string) => index.get(d);

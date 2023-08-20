@@ -19,8 +19,8 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let [actionSheetEnd] = useState(() => {
 		return Number.parseFloat(
 			getComputedStyle(document.documentElement).getPropertyValue(
-				'--action-sheet-end'
-			)
+				'--action-sheet-end',
+			),
 		);
 	});
 
@@ -50,7 +50,7 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 		} else {
 			document.documentElement.style.setProperty(
 				'--action-sheet-end',
-				`${actionSheetEnd}%`
+				`${actionSheetEnd}%`,
 			);
 		}
 	}
@@ -67,14 +67,14 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 
 		document.documentElement.style.setProperty(
 			'--action-sheet-end',
-			`${-currentTranslate}%`
+			`${-currentTranslate}%`,
 		);
 	}
 
 	function onExited() {
 		document.documentElement.style.setProperty(
 			'--action-sheet-end',
-			`${actionSheetEnd}%`
+			`${actionSheetEnd}%`,
 		);
 	}
 

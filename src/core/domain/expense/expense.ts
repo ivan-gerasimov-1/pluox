@@ -23,7 +23,7 @@ export class Expense extends Entity<TExpense> implements IExpense {
 	public static create(
 		amount: number,
 		currency: ECurrency,
-		comment: string
+		comment: string,
 	): IExpense {
 		return new Expense(amount, currency, comment);
 	}

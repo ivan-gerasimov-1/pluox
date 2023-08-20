@@ -3,12 +3,12 @@ import styles from './numeric-keyboard.module.css';
 
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 
-type TDigit = typeof DIGITS[number];
+type TDigit = (typeof DIGITS)[number];
 
 function isNumber(value: unknown): value is number {
 	const result = Number.parseInt(
 		// @ts-expect-error
-		value
+		value,
 	);
 
 	return !Number.isNaN(result);
@@ -17,7 +17,7 @@ function isNumber(value: unknown): value is number {
 function isDigit(value: string | number): value is TDigit {
 	const possibleDigit = Number.parseInt(
 		// @ts-expect-error
-		value
+		value,
 	);
 
 	if (Number.isNaN(possibleDigit)) {
@@ -31,7 +31,7 @@ function isDigit(value: string | number): value is TDigit {
 
 const SEPARATORS = [',', '.'] as const;
 
-type TSeparator = typeof SEPARATORS[number];
+type TSeparator = (typeof SEPARATORS)[number];
 
 function isSeparator(value: string): value is TSeparator {
 	return SEPARATORS.some((separator) => {
@@ -46,7 +46,7 @@ type TNumericKeyboardProps = {
 
 export function NumericKeyboard(props: TNumericKeyboardProps) {
 	function handleInput(
-		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	): void {
 		let value: string =
 			// @ts-expect-error

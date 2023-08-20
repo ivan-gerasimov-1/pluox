@@ -6,7 +6,7 @@ import {
 
 export function createScopedTranslateFunction<TScope extends TBaseScope>(
 	scope: Record<ELocaleCode, TScope>,
-	localeCode: ELocaleCode
+	localeCode: ELocaleCode,
 ): TScopedTranslateFunction<TScope> {
 	return function <TKey extends keyof TScope>(key: TKey): TScope[TKey] {
 		return scope[localeCode][key];
