@@ -1,5 +1,5 @@
 const EServiceWorkerEvent = {
-	ACTIVACTE: 'activate',
+	ACTIVATE: 'activate',
 	FETCH: 'fetch',
 	INSTALL: 'install',
 };
@@ -10,5 +10,5 @@ const EServiceWorkerEvent = {
 function noop() {}
 
 self.addEventListener(EServiceWorkerEvent.INSTALL, noop);
-self.addEventListener(EServiceWorkerEvent.ACTIVACTE, noop);
+self.addEventListener(EServiceWorkerEvent.ACTIVATE, noop);
 self.addEventListener(EServiceWorkerEvent.FETCH, noop);
