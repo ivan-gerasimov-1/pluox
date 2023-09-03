@@ -15,17 +15,21 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 	readonly #expenses: IExpenses;
 	readonly #currencyConverter: ICurrencyConverter;
 
-	private constructor(expenses: IExpenses) {
+	private constructor(
+		expenses: IExpenses,
+		currencyConverter: ICurrencyConverter,
+	) {
 		this.#expenses = expenses;
-
-		/**
-		 * @todo Use DI instead of direct instantiation
-		 */
-		this.#currencyConverter = CurrencyConverter.getInstance();
+		this.#currencyConverter = currencyConverter;
 	}
 
 	public static create(expenses: IExpenses) {
-		return new MonthlyAmountUseCase(expenses);
+		/**
+		 * @todo Use DI instead of direct instantiation
+		 */
+		let currencyConverter = CurrencyConverter.getInstance();
+
+		return new MonthlyAmountUseCase(expenses, currencyConverter);
 	}
 
 	public run(currentDate: TISODateString, currency: ECurrency) {
