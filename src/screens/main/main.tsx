@@ -11,13 +11,9 @@ export function MainScreen() {
 	return (
 		<>
 			<CardContainer>
-				<Card>
-					<MoneySpentCurrentMonth currentDate={new Date().toISOString()} />
-				</Card>
-
 				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
-						<MoneySpent />
+						<MoneySpentCurrentMonth currentDate={new Date().toISOString()} />
 					</Card>
 				</Navigable>
 
