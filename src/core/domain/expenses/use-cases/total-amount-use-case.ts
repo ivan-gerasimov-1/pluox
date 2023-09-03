@@ -11,17 +11,21 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 	readonly #expenses: IExpenses;
 	readonly #currencyConverter: ICurrencyConverter;
 
-	private constructor(expenses: IExpenses) {
+	private constructor(
+		expenses: IExpenses,
+		currencyConverter: ICurrencyConverter,
+	) {
 		this.#expenses = expenses;
-
-		/**
-		 * @todo Use DI instead of direct instantiation
-		 */
-		this.#currencyConverter = CurrencyConverter.getInstance();
+		this.#currencyConverter = currencyConverter;
 	}
 
 	public static create(expenses: IExpenses) {
-		return new TotalAmountUseCase(expenses);
+		/**
+		 * @todo Use DI instead of direct instantiation
+		 */
+		let currencyConverter = CurrencyConverter.getInstance();
+
+		return new TotalAmountUseCase(expenses, currencyConverter);
 	}
 
 	public run(currency: ECurrency) {
