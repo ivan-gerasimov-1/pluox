@@ -23,9 +23,10 @@ export function MainScreen() {
 					</Card>
 				</Navigable>
 
-				<Card>
+				{/* @todo turn on */}
+				{/* <Card>
 					<MoneyLeft />
-				</Card>
+				</Card> */}
 			</CardContainer>
 
 			<ActionSheet>
