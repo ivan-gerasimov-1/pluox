@@ -9,23 +9,33 @@ export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #dateModified: TISODateString;
 	readonly #currency: ECurrency;
 	readonly #comment: string;
+	readonly #date: string;
 
-	private constructor(amount: number, currency: ECurrency, comment: string) {
+	private constructor(
+		amount: number,
+		currency: ECurrency,
+		comment: string,
+		date?: TISODateString,
+	) {
 		super();
+
+		let currentDate = new Date().toISOString();
 
 		this.#amount = amount;
 		this.#currency = currency;
 		this.#comment = comment;
-		this.#dateCreated = new Date().toISOString();
-		this.#dateModified = new Date().toISOString();
+		this.#date = date || currentDate;
+		this.#dateCreated = currentDate;
+		this.#dateModified = currentDate;
 	}
 
 	public static create(
 		amount: number,
 		currency: ECurrency,
 		comment: string,
+		date?: TISODateString,
 	): IExpense {
-		return new Expense(amount, currency, comment);
+		return new Expense(amount, currency, comment, date);
 	}
 
 	public toObject(): TExpense {
@@ -34,6 +44,10 @@ export class Expense extends Entity<TExpense> implements IExpense {
 			amount: this.#amount,
 			currency: this.#currency,
 			comment: this.#comment,
+			/**
+			 * @todo remove backwards compatibility
+			 */
+			date: this.#date || this.#dateCreated,
 			dateCreated: this.#dateCreated,
 			dateModified: this.#dateModified,
 		};

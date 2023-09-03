@@ -46,7 +46,12 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		let total = 0;
 
 		for (let expense of Object.values(expenses)) {
-			let expenseMonth = this.getMonthFromDate(expense.dateCreated);
+			let expenseMonth = this.getMonthFromDate(
+				/**
+				 * @todo remove backward compatibility
+				 */
+				expense.date || expense.dateCreated,
+			);
 
 			if (expenseMonth !== currentMonth) {
 				continue;

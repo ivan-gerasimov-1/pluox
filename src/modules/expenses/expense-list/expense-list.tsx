@@ -43,7 +43,14 @@ export function ExpenseList(props: TExpenseListProps) {
 								<div className={styles.comment}>{item.comment}</div>
 							)}
 
-							<em>{intlService.formatDate(item.dateCreated)}</em>
+							<em>
+								{intlService.formatDate(
+									/**
+									 * @todo remove backward compatibility
+									 */
+									item.date || item.dateCreated,
+								)}
+							</em>
 						</div>
 
 						<div className={styles.buttonGroup}>
