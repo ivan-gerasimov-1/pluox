@@ -2,7 +2,7 @@ import { type ECurrency } from '@core/infrastructure/currency/types';
 import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
-import { Id } from '@domain/types';
+import { Id, TISODateString } from '@domain/types';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -19,7 +19,7 @@ interface IExpensesStore {
 	deleteExpense(id: Id): void;
 
 	getTotalAmount(): number;
-	getMonthlyAmount(): number;
+	getMonthlyAmount(currentDate: TISODateString): number;
 
 	getOne(id: Id): TExpense;
 	getList(): TExpense[];
@@ -71,11 +71,11 @@ export let useExpensesStore = create<
 						.getTotalAmount();
 				},
 
-				getMonthlyAmount(): number {
+				getMonthlyAmount(currentDate: TISODateString): number {
 					const state = get();
 
 					return Expenses.create(state.operations) //
-						.getMonthlyAmount();
+						.getMonthlyAmount(currentDate);
 				},
 
 				getOne(id: Id): TExpense {

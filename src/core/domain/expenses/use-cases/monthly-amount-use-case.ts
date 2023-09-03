@@ -8,17 +8,15 @@ import { type TMonth } from '@domain/expenses/use-cases/types';
 import { type TISODateString } from '@domain/types';
 
 export interface IMonthlyAmountUseCase {
-	run(currency: ECurrency): number;
+	run(currentDate: TISODateString, currency: ECurrency): number;
 }
 
 export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 	readonly #expenses: IExpenses;
 	readonly #currencyConverter: ICurrencyConverter;
-	readonly #currentMonth: TMonth;
 
 	private constructor(expenses: IExpenses) {
 		this.#expenses = expenses;
-		this.#currentMonth = this.getMonthFromDate(new Date().toISOString());
 
 		/**
 		 * @todo Use DI instead of direct instantiation
@@ -30,19 +28,23 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		return new MonthlyAmountUseCase(expenses);
 	}
 
-	public run(currency: ECurrency) {
-		return this.calculateAmount(currency);
+	public run(currentDate: TISODateString, currency: ECurrency) {
+		return this.calculateAmount(currency, currentDate);
 	}
 
-	private calculateAmount(currency: ECurrency): number {
+	private calculateAmount(
+		currency: ECurrency,
+		currentDate: TISODateString,
+	): number {
 		let expenses = this.#expenses.get();
+		let currentMonth = this.getMonthFromDate(currentDate);
 
 		let total = 0;
 
 		for (let expense of Object.values(expenses)) {
 			let expenseMonth = this.getMonthFromDate(expense.dateCreated);
 
-			if (expenseMonth !== this.#currentMonth) {
+			if (expenseMonth !== currentMonth) {
 				continue;
 			}
 

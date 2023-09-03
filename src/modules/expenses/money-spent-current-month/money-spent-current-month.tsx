@@ -6,7 +6,9 @@ import { useIntl } from '@modules/intl';
 
 export function MoneySpentCurrentMonth() {
 	let intl = useIntl(moneySpentI18n);
-	let total = useExpensesStore((state) => state.getMonthlyAmount());
+	let total = useExpensesStore((state) =>
+		state.getMonthlyAmount(new Date().toISOString()),
+	);
 	let appConfig = useAppConfig();
 
 	return (

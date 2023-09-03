@@ -1,5 +1,5 @@
 import type { IExpense, TExpense } from '@domain/expense/types';
-import type { Id } from '@domain/types';
+import type { Id, TISODateString } from '@domain/types';
 
 export interface IExpenses {
 	add(expense: IExpense): this;
@@ -12,7 +12,7 @@ export interface IExpenses {
 	delete(id: Id): IExpenses;
 
 	getTotalAmount(): number;
-	getMonthlyAmount(): number;
+	getMonthlyAmount(currentDate: TISODateString): number;
 }
 
 export type TExpenses = Record<Id, TExpense>;

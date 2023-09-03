@@ -14,7 +14,7 @@ import {
 	type ITotalAmountUseCase,
 	TotalAmountUseCase,
 } from '@domain/expenses/use-cases/total-amount-use-case';
-import type { Id } from '@domain/types';
+import type { Id, TISODateString } from '@domain/types';
 
 export class Expenses implements IExpenses {
 	readonly #expenses: Map<Id, TExpense>;
@@ -74,8 +74,8 @@ export class Expenses implements IExpenses {
 		return this.#totalAmountUseCase.run(this.#defaultCurrency);
 	}
 
-	public getMonthlyAmount(): number {
-		return this.#monthlyAmountUseCase.run(this.#defaultCurrency);
+	public getMonthlyAmount(currentDate: TISODateString): number {
+		return this.#monthlyAmountUseCase.run(currentDate, this.#defaultCurrency);
 	}
 
 	private getAll(): TExpenses {
