@@ -23,13 +23,9 @@ export class Expenses implements IExpenses {
 
 	readonly #defaultCurrency: ECurrency;
 
-	private constructor(expenses: TExpenses) {
+	private constructor(expenses: TExpenses, appConfig: IAppConfig) {
 		this.#expenses = new Map(Object.entries(expenses));
 
-		/**
-		 * @todo Use DI instead of direct instantiation
-		 */
-		let appConfig: IAppConfig = AppConfig.getInstance();
 		this.#totalAmountUseCase = TotalAmountUseCase.create(this);
 		this.#monthlyAmountUseCase = MonthlyAmountUseCase.create(this);
 
@@ -37,7 +33,12 @@ export class Expenses implements IExpenses {
 	}
 
 	public static create(expenses: TExpenses = {}): IExpenses {
-		return new Expenses(expenses);
+		/**
+		 * @todo Use DI instead of direct instantiation
+		 */
+		let appConfig = AppConfig.getInstance();
+
+		return new Expenses(expenses, appConfig);
 	}
 
 	public add(expense: IExpense): this {
