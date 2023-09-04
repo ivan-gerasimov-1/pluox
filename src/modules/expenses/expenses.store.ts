@@ -23,7 +23,10 @@ interface IExpensesStore {
 	getMonthlyAmount(currentDate: TISODateString): number;
 
 	getOne(id: Id): TExpense;
-	getList(): TExpense[];
+	getList(query?: {
+		dateFrom?: TISODateString;
+		dateTo?: TISODateString;
+	}): TExpense[];
 }
 
 export let useExpensesStore = create<
@@ -72,11 +75,19 @@ export let useExpensesStore = create<
 						.get(id);
 				},
 
-				getList(): TExpense[] {
+				getList(query?: {
+					dateFrom?: TISODateString;
+					dateTo?: TISODateString;
+				}): TExpense[] {
 					const state = get();
 
 					return Expenses.create(state.operations) //
-						.list();
+						.list(
+							query && {
+								dateFrom: query?.dateFrom,
+								dateTo: query?.dateTo,
+							},
+						);
 				},
 
 				getTotalAmount(): number {

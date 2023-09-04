@@ -3,9 +3,12 @@ import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { Icon } from '@ui-kit/icon';
 import styles from './expense-list.module.css';
-import { type Id } from '@domain/types';
+import type { TISODateString, Id } from '@domain/types';
 
 export type TExpenseListProps = {
+	dateFrom?: TISODateString;
+	dateTo?: TISODateString;
+
 	onEdit(itemId: Id): void;
 };
 
@@ -13,7 +16,12 @@ export function ExpenseList(props: TExpenseListProps) {
 	let intlService = IntlService.getInstance();
 	let currencyConverter = CurrencyConverter.getInstance();
 
-	let expenseList = useExpensesStore((state) => state.getList());
+	let expenseList = useExpensesStore((state) =>
+		state.getList({
+			dateFrom: props.dateFrom,
+			dateTo: props.dateTo,
+		}),
+	);
 	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
 
 	return (

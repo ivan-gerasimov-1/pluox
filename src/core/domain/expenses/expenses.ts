@@ -1,7 +1,7 @@
 import type { IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
-import type { Id } from '@domain/types';
+import type { Id, TISODateString } from '@domain/types';
 
 export class Expenses implements IExpenses {
 	readonly #expenses: Map<Id, TExpense>;
@@ -30,8 +30,40 @@ export class Expenses implements IExpenses {
 		return this.getAll();
 	}
 
-	public list(): TExpense[] {
-		return Array.from(this.#expenses.values()).reverse();
+	public list(query?: {
+		dateFrom?: TISODateString;
+		dateTo?: TISODateString;
+	}): TExpense[] {
+		let expenses = Array.from(this.#expenses.values());
+
+		if (!query) {
+			return expenses.reverse();
+		}
+
+		return expenses
+			.filter((expense) => {
+				let meetConditions = true;
+				let expenseTimestamp = new Date(
+					/** @todo remove backwards compatibility */
+					expense.date || expense.dateCreated,
+				).getTime();
+
+				if (query.dateFrom) {
+					meetConditions =
+						expenseTimestamp >= new Date(query.dateFrom).getTime();
+
+					if (!meetConditions) {
+						return false;
+					}
+				}
+
+				if (query.dateTo) {
+					meetConditions = expenseTimestamp <= new Date(query.dateTo).getTime();
+				}
+
+				return meetConditions;
+			})
+			.reverse();
 	}
 
 	public delete(id: Id): this {

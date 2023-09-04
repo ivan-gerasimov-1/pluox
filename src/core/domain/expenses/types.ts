@@ -8,7 +8,10 @@ export interface IExpenses {
 	get(id: Id): TExpense;
 	get(id?: Id): TExpenses | TExpense;
 
-	list(): TExpense[];
+	list(query?: {
+		dateFrom?: TISODateString;
+		dateTo?: TISODateString;
+	}): TExpense[];
 	delete(id: Id): IExpenses;
 }
 
