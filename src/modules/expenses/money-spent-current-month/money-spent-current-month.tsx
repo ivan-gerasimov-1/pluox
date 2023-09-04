@@ -1,4 +1,4 @@
-import { TMonth } from '@domain/expenses/use-cases/types';
+import { TMonth } from '@domain/amount/use-cases/types';
 import { TISODateString } from '@domain/types';
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { useExpensesStore } from '@modules/expenses';

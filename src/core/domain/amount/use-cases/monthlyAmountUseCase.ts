@@ -2,9 +2,9 @@ import { CurrencyConverter } from '@core/infrastructure/currency/currencyConvert
 import { type ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import { type ECurrency } from '@core/infrastructure/currency/types';
 import { type IExpenses } from '@domain/expenses/types';
-import { InvalidMonthError } from '@domain/expenses/use-cases/errors';
-import { monthGuard } from '@domain/expenses/use-cases/typeGuards';
-import { type TMonth } from '@domain/expenses/use-cases/types';
+import { InvalidMonthError } from '@domain/amount/use-cases/errors';
+import { monthGuard } from '@domain/amount/use-cases/typeGuards';
+import { type TMonth } from '@domain/amount/use-cases/types';
 import { type TISODateString } from '@domain/types';
 
 export interface IMonthlyAmountUseCase {

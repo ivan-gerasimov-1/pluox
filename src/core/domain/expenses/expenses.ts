@@ -1,44 +1,17 @@
-import {
-	AppConfig,
-	type IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
-import type { ECurrency } from '@core/infrastructure/currency/types';
 import type { IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
-import {
-	type IMonthlyAmountUseCase,
-	MonthlyAmountUseCase,
-} from '@domain/expenses/use-cases/monthly-amount-use-case';
-import {
-	type ITotalAmountUseCase,
-	TotalAmountUseCase,
-} from '@domain/expenses/use-cases/total-amount-use-case';
-import type { Id, TISODateString } from '@domain/types';
+import type { Id } from '@domain/types';
 
 export class Expenses implements IExpenses {
 	readonly #expenses: Map<Id, TExpense>;
-	readonly #totalAmountUseCase: ITotalAmountUseCase;
-	readonly #monthlyAmountUseCase: IMonthlyAmountUseCase;
 
-	readonly #defaultCurrency: ECurrency;
-
-	private constructor(expenses: TExpenses, appConfig: IAppConfig) {
+	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));
-
-		this.#totalAmountUseCase = TotalAmountUseCase.create(this);
-		this.#monthlyAmountUseCase = MonthlyAmountUseCase.create(this);
-
-		this.#defaultCurrency = appConfig.currency;
 	}
 
 	public static create(expenses: TExpenses = {}): IExpenses {
-		/**
-		 * @todo Use DI instead of direct instantiation
-		 */
-		let appConfig = AppConfig.getInstance();
-
-		return new Expenses(expenses, appConfig);
+		return new Expenses(expenses);
 	}
 
 	public add(expense: IExpense): this {
@@ -69,16 +42,6 @@ export class Expenses implements IExpenses {
 		this.#expenses.delete(id);
 
 		return this;
-	}
-
-	/** @deprecated */
-	public getTotalAmount(): number {
-		return this.#totalAmountUseCase.run(this.#defaultCurrency);
-	}
-
-	/** @deprecated */
-	public getMonthlyAmount(currentDate: TISODateString): number {
-		return this.#monthlyAmountUseCase.run(currentDate, this.#defaultCurrency);
 	}
 
 	private getAll(): TExpenses {

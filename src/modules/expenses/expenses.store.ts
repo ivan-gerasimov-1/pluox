@@ -1,4 +1,5 @@
 import { type ECurrency } from '@core/infrastructure/currency/types';
+import { Amount } from '@domain/amount';
 import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
@@ -64,20 +65,6 @@ export let useExpensesStore = create<
 					});
 				},
 
-				getTotalAmount(): number {
-					const state = get();
-
-					return Expenses.create(state.operations) //
-						.getTotalAmount();
-				},
-
-				getMonthlyAmount(currentDate: TISODateString): number {
-					const state = get();
-
-					return Expenses.create(state.operations) //
-						.getMonthlyAmount(currentDate);
-				},
-
 				getOne(id: Id): TExpense {
 					const state = get();
 
@@ -90,6 +77,22 @@ export let useExpensesStore = create<
 
 					return Expenses.create(state.operations) //
 						.list();
+				},
+
+				getTotalAmount(): number {
+					let state = get();
+					let expenses = Expenses.create(state.operations);
+					let amount = Amount.create(expenses);
+
+					return amount.getTotal();
+				},
+
+				getMonthlyAmount(currentDate: TISODateString): number {
+					let state = get();
+					let expenses = Expenses.create(state.operations);
+					let amount = Amount.create(expenses);
+
+					return amount.getMonthly(currentDate);
 				},
 			};
 		},
