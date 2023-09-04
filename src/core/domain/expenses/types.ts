@@ -11,7 +11,9 @@ export interface IExpenses {
 	list(): TExpense[];
 	delete(id: Id): IExpenses;
 
+	/** @deprecated */
 	getTotalAmount(): number;
+	/** @deprecated */
 	getMonthlyAmount(currentDate: TISODateString): number;
 }
 

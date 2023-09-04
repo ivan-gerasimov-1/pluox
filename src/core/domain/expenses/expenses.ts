@@ -71,10 +71,12 @@ export class Expenses implements IExpenses {
 		return this;
 	}
 
+	/** @deprecated */
 	public getTotalAmount(): number {
 		return this.#totalAmountUseCase.run(this.#defaultCurrency);
 	}
 
+	/** @deprecated */
 	public getMonthlyAmount(currentDate: TISODateString): number {
 		return this.#monthlyAmountUseCase.run(currentDate, this.#defaultCurrency);
 	}
