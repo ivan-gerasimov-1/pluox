@@ -8,6 +8,37 @@ import { useIntl } from '@modules/intl';
 import { useState } from 'react';
 import styles from './new-expense.module.css';
 import { ECurrency } from '@core/infrastructure/currency/types';
+import { TISODateString } from '@domain/types';
+import { DateInput } from '@modules/expenses/new-expense/components/dateInput/DateInput';
+
+function createFromattedDate(): string {
+	let datetime = new Date().toISOString();
+
+	let [date, time] = datetime.split('T');
+	let [hours, minutes] = time.split(':');
+
+	return `${date}T${hours}:${minutes}`;
+}
+
+function createDateViewValue(): TISODateString {
+	const date = new Date();
+
+	function format(value: number): string {
+		if (value < 10) {
+			return `0${value}`;
+		}
+
+		return `${value}`;
+	}
+
+	return `${date.getFullYear()}-${format(date.getMonth() + 1)}-${format(
+		date.getDay(),
+	)}T${format(date.getHours())}:${format(date.getMinutes())}`;
+}
+
+function convertDateToModelValue(date: string): TISODateString {
+	return new Date(date).toISOString();
+}
 
 export function NewExpense() {
 	let [testAmount, setTestAmount] = useState<string>('0');
@@ -17,6 +48,7 @@ export function NewExpense() {
 		amount: 0,
 		currency: ECurrency.GEL,
 		comment: '',
+		date: createDateViewValue(),
 	});
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -30,6 +62,7 @@ export function NewExpense() {
 			amount: formState.amount,
 			currency: formState.currency,
 			comment: formState.comment,
+			date: convertDateToModelValue(formState.date),
 		});
 
 		resetFormState();
@@ -40,6 +73,7 @@ export function NewExpense() {
 			amount: 0,
 			currency: prevState.currency,
 			comment: '',
+			date: createFromattedDate(),
 		}));
 	}
 
@@ -75,6 +109,13 @@ export function NewExpense() {
 		}));
 	}
 
+	function handleDateChange(date: string) {
+		setFormState((prevState) => ({
+			...prevState,
+			date,
+		}));
+	}
+
 	return (
 		<form name="newExpense" onSubmit={handleSubmit}>
 			<div className={styles.formGroup}>
@@ -92,10 +133,12 @@ export function NewExpense() {
 
 			<br />
 
-			<CurrencyInput
-				value={formState.currency}
-				onChange={handleCurrencyChange}
-			/>
+			<div>
+				<CurrencyInput
+					value={formState.currency}
+					onChange={handleCurrencyChange}
+				/>
+			</div>
 
 			<br />
 
@@ -108,6 +151,12 @@ export function NewExpense() {
 					onChange={handleCommentChange}
 					placeholder={intl.translate('commentPlaceholder')}
 				></textarea>
+			</div>
+
+			<br />
+
+			<div>
+				<DateInput initialValue={formState.date} onChange={handleDateChange} />
 			</div>
 
 			{false && (

@@ -11,6 +11,7 @@ type TExpenseCreatePayload = {
 	amount: number;
 	currency: ECurrency;
 	comment: string;
+	date?: TISODateString;
 };
 
 interface IExpensesStore {
@@ -46,6 +47,7 @@ export let useExpensesStore = create<
 							payload.amount,
 							payload.currency,
 							payload.comment,
+							payload.date,
 						);
 
 						return {
