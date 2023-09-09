@@ -34,8 +34,5 @@ export function formatDate(
 		day: EDay.NUMERIC,
 		month: EMonth.LONG,
 		year: EYear.NUMERIC,
-
-		hour: EHour.NUMERIC,
-		minute: EMinute.NUMERIC,
 	}).format(date);
 }
