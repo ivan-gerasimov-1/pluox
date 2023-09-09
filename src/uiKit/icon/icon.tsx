@@ -1,10 +1,10 @@
 import { EIconSize, iconSizeToPx } from '@root/uiKit/icon/iconSize';
 import { useMemo } from 'react';
-import { getIcon, IconName } from './icons';
+import { getIcon, EIconName } from './icons';
 import styles from './icon.module.css';
 
 type TIconProps = {
-	name: IconName;
+	name: EIconName;
 	size?: EIconSize;
 };
 
@@ -24,5 +24,5 @@ export function Icon(props: TIconProps) {
 	);
 }
 
-Icon.IconName = IconName;
+Icon.IconName = EIconName;
 Icon.Size = EIconSize;
