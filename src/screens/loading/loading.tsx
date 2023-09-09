@@ -1,4 +1,4 @@
-import { Loader } from '@ui-kit/loader';
+import { Loader } from '@root/uiKit/loader';
 
 export function LoadingScreen() {
 	return <Loader />;

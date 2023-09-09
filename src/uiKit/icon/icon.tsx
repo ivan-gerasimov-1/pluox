@@ -1,4 +1,4 @@
-import { EIconSize, iconSizeToPx } from '@ui-kit/icon/iconSize';
+import { EIconSize, iconSizeToPx } from '@root/uiKit/icon/iconSize';
 import { useMemo } from 'react';
 import { getIcon, IconName } from './icons';
 

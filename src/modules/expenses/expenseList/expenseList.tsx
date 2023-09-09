@@ -1,7 +1,7 @@
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import { useExpensesStore } from '@modules/expenses';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
-import { Icon } from '@ui-kit/icon';
+import { Icon } from '@root/uiKit/icon';
 import styles from './expenseList.module.css';
 import type { TISODateString, Id } from '@domain/types';
 

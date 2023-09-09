@@ -25,7 +25,7 @@
 			"@components/*": ["src/components/*"],
 			"@modules/*": ["src/modules/*"],
 			"@screens/*": ["src/screens/*"],
-			"@ui-kit/*": ["src/ui-kit/*"],
+			"@uiKit/*": ["src/uiKit/*"],
 			"@utils/*": ["src/utils/*"],
 
 			"@root/*": ["src/*"]
