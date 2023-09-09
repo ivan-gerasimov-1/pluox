@@ -1,6 +1,6 @@
 .list {
 	margin: 1rem 0;
-	padding: 0;
+	padding: 0 0 0 1.5rem;
 
 	list-style-type: none;
 
@@ -70,6 +70,7 @@
 
 .date {
 	margin-top: 2rem;
+	margin-left: 1rem;
 
 	font-size: 0.75rem;
 	font-weight: 800;
