@@ -61,14 +61,11 @@ export class Expenses implements IExpenses {
 		return expenses
 			.filter((expense) => {
 				let meetConditions = true;
-				let expenseTimestamp = new Date(
-					/** @todo remove backwards compatibility */
-					expense.date || expense.dateCreated,
-				).getTime();
+				/** @todo remove backwards compatibility */
+				let expenseTimestamp = expense.date || expense.dateCreated;
 
 				if (query.dateFrom) {
-					meetConditions =
-						expenseTimestamp >= new Date(query.dateFrom).getTime();
+					meetConditions = expenseTimestamp >= query.dateFrom;
 
 					if (!meetConditions) {
 						return false;
@@ -76,7 +73,7 @@ export class Expenses implements IExpenses {
 				}
 
 				if (query.dateTo) {
-					meetConditions = expenseTimestamp <= new Date(query.dateTo).getTime();
+					meetConditions = expenseTimestamp <= query.dateTo;
 				}
 
 				return meetConditions;
