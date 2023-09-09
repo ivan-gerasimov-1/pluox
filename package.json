@@ -2,7 +2,8 @@
 	"name": "savee",
 	"version": "0.1.0",
 	"scripts": {
-		"analyze-bundle": "cross-env NODE_ENV='production' BUNDLE_ANALYZER='on' npx webpack --mode production",
+		"analyze": "npm run analyze@prod",
+		"analyze@prod": "cross-env NODE_ENV='production' BUNDLE_ANALYZER='on' npx webpack --mode production",
 		"build": "npm run build@production",
 		"build@development": "cross-env NODE_ENV='development' npx webpack",
 		"build@production": "cross-env NODE_ENV='production' npx webpack",
