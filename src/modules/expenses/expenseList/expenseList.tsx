@@ -70,7 +70,7 @@ export function ExpenseList(props: TExpenseListProps) {
 										</div>
 
 										<div className={styles.buttonGroup}>
-											<button
+											{/* <button
 												type="button"
 												className={styles.actionButton}
 												onClick={() => {
@@ -82,7 +82,7 @@ export function ExpenseList(props: TExpenseListProps) {
 												}}
 											>
 												<Icon name={Icon.IconName.Edit} />
-											</button>
+											</button> */}
 
 											<button
 												type="button"
