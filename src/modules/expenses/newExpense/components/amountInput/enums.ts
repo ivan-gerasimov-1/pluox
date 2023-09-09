@@ -1,4 +1,4 @@
-export enum EKey {
+export const enum EKey {
 	Digit0 = '0',
 	Digit1 = '1',
 	Digit2 = '2',
