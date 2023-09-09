@@ -1,7 +1,7 @@
 import { useIntl } from '@modules/intl';
 import { expenseListMonthlyI18n } from '@screens/expenseListMonthly/expenseListMonthly.i18n';
 import styles from './expenseListMonthly.module.css';
-import { MoneySpentCurrentMonth } from '@modules/expenses/money-spent-current-month';
+import { MoneySpentCurrentMonth } from '@modules/expenses/moneySpentCurrentMonth';
 import { Card } from '@ui-kit/card';
 import { Fragment } from 'react';
 import { generateMonths } from '@screens/expenseListMonthly/helpers/generateMonths';

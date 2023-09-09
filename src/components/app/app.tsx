@@ -1,4 +1,4 @@
-import { EAppPath } from '@root/app-path';
+import { EAppPath } from '@root/appPath';
 import { appI18n } from '@components/app/app.i18n';
 import { useIntl } from '@modules/intl';
 import { ErrorScreen, MainScreen } from '@screens/index';
@@ -8,7 +8,7 @@ import styles from './app.module.css';
 import { AppConfigContext } from '@modules/appConfig/AppConfigContext';
 import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
-import { ExpenseListScreen } from '@screens/expense-list';
+import { ExpenseListScreen } from '@screens/expenseList';
 
 export function App() {
 	let intl = useIntl(appI18n);

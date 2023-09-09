@@ -1,1 +1,1 @@
-export { logGroup } from './log-group';
+export { logGroup } from './logGroup';

@@ -5,11 +5,11 @@ import type { IExpenses } from '@domain/expenses/types';
 import {
 	MonthlyAmountUseCase,
 	type IMonthlyAmountUseCase,
-} from '@domain/amount/use-cases/monthlyAmountUseCase';
+} from '@domain/amount/useCases/monthlyAmountUseCase';
 import {
 	TotalAmountUseCase,
 	type ITotalAmountUseCase,
-} from '@domain/amount/use-cases/totalAmountUseCase';
+} from '@domain/amount/useCases/totalAmountUseCase';
 import { type TISODateString } from '@domain/types';
 
 export class Amount implements IAmount {

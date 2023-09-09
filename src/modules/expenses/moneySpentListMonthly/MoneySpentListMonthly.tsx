@@ -1,5 +1,5 @@
 import { useExpensesStore } from '@modules/expenses/expenses.store';
-import { MoneyCard } from '@modules/expenses/money-card/money-card';
+import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 import { moneySpentListMonthlyI18n } from '@modules/expenses/moneySpentListMonthly/moneySpentListMonthly.i18n';
 import { useIntl } from '@modules/intl';
 

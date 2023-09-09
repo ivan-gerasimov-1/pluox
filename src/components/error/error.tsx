@@ -1,6 +1,6 @@
 import { errorI18n } from '@components/error/error.i18n';
 import { useIntl } from '@modules/intl';
-import { useNavigation } from '@modules/navigation/use-navigation';
+import { useNavigation } from '@modules/navigation/useNavigation';
 
 type TErrorProps = {
 	title: string;
