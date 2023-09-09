@@ -14,6 +14,24 @@ export class Expenses implements IExpenses {
 		return new Expenses(expenses);
 	}
 
+	private static sortExpensesByISO8601Date(
+		expenseA: TExpense,
+		expenseB: TExpense,
+	): -1 | 0 | 1 {
+		const dateA = expenseA.date || expenseA.dateCreated;
+		const dateB = expenseB.date || expenseB.dateCreated;
+
+		if (dateA < dateB) {
+			return 1;
+		}
+
+		if (dateA > dateB) {
+			return -1;
+		}
+
+		return 0;
+	}
+
 	public add(expense: IExpense): this {
 		this.#expenses.set(expense.id, Object.freeze(expense.toObject()));
 
@@ -63,7 +81,7 @@ export class Expenses implements IExpenses {
 
 				return meetConditions;
 			})
-			.reverse();
+			.sort(Expenses.sortExpensesByISO8601Date);
 	}
 
 	public delete(id: Id): this {
