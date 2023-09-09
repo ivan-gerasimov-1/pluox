@@ -64,7 +64,7 @@ export function ExpenseList(props: TExpenseListProps) {
 								return (
 									<SwipeableListItem
 										key={item.id}
-										maxSwipe={0.5}
+										maxSwipe={1}
 										listType={Type.IOS}
 										className={styles.listItem}
 										trailingActions={
@@ -76,11 +76,7 @@ export function ExpenseList(props: TExpenseListProps) {
 													}}
 													destructive
 												>
-													<button
-														type="button"
-														className={styles.actionButton}
-														onClick={() => deleteExpense(item.id)}
-													>
+													<button type="button" className={styles.actionButton}>
 														<Icon name={Icon.IconName.Trash} />
 													</button>
 												</SwipeAction>
