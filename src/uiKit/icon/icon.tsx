@@ -1,6 +1,7 @@
 import { EIconSize, iconSizeToPx } from '@root/uiKit/icon/iconSize';
 import { useMemo } from 'react';
 import { getIcon, IconName } from './icons';
+import styles from './icon.module.css';
 
 type TIconProps = {
 	name: IconName;
@@ -13,7 +14,14 @@ export function Icon(props: TIconProps) {
 		return getIcon(props.name);
 	}, [props.name]);
 
-	return <SvgIcon width={size} height={size} viewBox="0 0 512 512" />;
+	return (
+		<SvgIcon
+			width={size}
+			height={size}
+			viewBox="0 0 512 512"
+			className={styles.icon}
+		/>
+	);
 }
 
 Icon.IconName = IconName;
