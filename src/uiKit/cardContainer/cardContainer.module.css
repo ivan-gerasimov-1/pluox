@@ -3,7 +3,9 @@
 	flex-direction: column;
 
 	margin-top: 1rem;
+	margin-right: 1rem;
 	margin-bottom: 8.5rem;
+	margin-left: 1rem;
 
 	& > :nth-child(n) {
 		margin: 0.75rem 0;
