@@ -41,12 +41,16 @@
 .actionButton {
 	display: flex;
 
+	align-items: center;
+
 	margin: 0;
 	padding: 0.75rem;
 
 	border: 0 none;
 	background: none;
 	appearance: none;
+
+	background-color: var(--color-red-400);
 }
 
 .expenseInMainCurrency {

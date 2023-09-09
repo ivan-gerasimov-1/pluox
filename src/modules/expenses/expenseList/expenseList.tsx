@@ -5,6 +5,14 @@ import { useExpensesStore } from '@modules/expenses';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
 import { Icon } from '@root/uiKit/icon';
 import styles from './expenseList.module.css';
+import {
+	SwipeAction,
+	SwipeableList,
+	SwipeableListItem,
+	TrailingActions,
+	Type,
+} from 'react-swipeable-list';
+import 'react-swipeable-list/dist/styles.css';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -27,6 +35,19 @@ export function ExpenseList(props: TExpenseListProps) {
 
 	let expenseGroups = groupExpenseListByDay(expenseList);
 
+	function trailingActions() {
+		return (
+			<TrailingActions>
+				<SwipeAction
+					destructive={true}
+					onClick={() => console.info('swipe action triggered')}
+				>
+					Delete
+				</SwipeAction>
+			</TrailingActions>
+		);
+	}
+
 	return (
 		<>
 			{Object.values(expenseGroups).map((group) => {
@@ -38,10 +59,35 @@ export function ExpenseList(props: TExpenseListProps) {
 							{intlService.formatDate(group.date)}
 						</div>
 
-						<ul className={styles.list}>
+						<SwipeableList className={styles.list}>
 							{expenseList?.map((item) => {
 								return (
-									<li key={item.id} className={styles.listItem}>
+									<SwipeableListItem
+										key={item.id}
+										maxSwipe={0.5}
+										listType={Type.IOS}
+										className={styles.listItem}
+										trailingActions={
+											<TrailingActions>
+												<SwipeAction
+													Tag="div"
+													onClick={() => {
+														deleteExpense(item.id);
+													}}
+													destructive
+												>
+													<button
+														type="button"
+														className={styles.actionButton}
+														onClick={() => deleteExpense(item.id)}
+													>
+														<Icon name={Icon.IconName.Trash} />
+													</button>
+												</SwipeAction>
+											</TrailingActions>
+										}
+										fullSwipe
+									>
 										<div className={styles.info}>
 											<span className={styles.expenseInMainCurrency}>
 												{intlService.formatCurrency(
@@ -83,19 +129,11 @@ export function ExpenseList(props: TExpenseListProps) {
 											>
 												<Icon name={Icon.IconName.Edit} />
 											</button> */}
-
-											<button
-												type="button"
-												className={styles.actionButton}
-												onClick={() => deleteExpense(item.id)}
-											>
-												<Icon name={Icon.IconName.Trash} />
-											</button>
 										</div>
-									</li>
+									</SwipeableListItem>
 								);
 							})}
-						</ul>
+						</SwipeableList>
 					</div>
 				);
 			})}
