@@ -62,6 +62,8 @@ export function NewExpense() {
 			amount: formState.amount,
 			currency: formState.currency,
 			comment: formState.comment,
+			/** @todo Handle category */
+			category: null,
 			date: convertDateToModelValue(formState.date),
 		});
 

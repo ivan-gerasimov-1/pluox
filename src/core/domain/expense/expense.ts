@@ -1,7 +1,7 @@
 import { type ECurrency } from '@core/infrastructure/currency/types';
 import { Entity } from '@core/infrastructure/entity/Entity';
 import type { IExpense, TExpense } from '@domain/expense/types';
-import type { TISODateString } from '@domain/types';
+import type { TCategory, TISODateString } from '@domain/types';
 
 export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #amount: number;
@@ -9,12 +9,14 @@ export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #dateModified: TISODateString;
 	readonly #currency: ECurrency;
 	readonly #comment: string;
+	readonly #category: TCategory;
 	readonly #date: string;
 
 	private constructor(
 		amount: number,
 		currency: ECurrency,
 		comment: string,
+		category: TCategory,
 		date?: TISODateString,
 	) {
 		super();
@@ -24,6 +26,7 @@ export class Expense extends Entity<TExpense> implements IExpense {
 		this.#amount = amount;
 		this.#currency = currency;
 		this.#comment = comment;
+		this.#category = category;
 		this.#date = date || currentDate;
 		this.#dateCreated = currentDate;
 		this.#dateModified = currentDate;
@@ -33,9 +36,10 @@ export class Expense extends Entity<TExpense> implements IExpense {
 		amount: number,
 		currency: ECurrency,
 		comment: string,
+		category: TCategory = null,
 		date?: TISODateString,
 	): IExpense {
-		return new Expense(amount, currency, comment, date);
+		return new Expense(amount, currency, comment, category, date);
 	}
 
 	public toObject(): TExpense {

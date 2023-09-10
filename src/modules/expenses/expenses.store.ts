@@ -3,7 +3,7 @@ import { Amount } from '@domain/amount';
 import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
-import { Id, TISODateString } from '@domain/types';
+import type { Id, TCategory, TISODateString } from '@domain/types';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -11,6 +11,7 @@ type TExpenseCreatePayload = {
 	amount: number;
 	currency: ECurrency;
 	comment: string;
+	category: TCategory;
 	date?: TISODateString;
 };
 
@@ -47,6 +48,7 @@ export let useExpensesStore = create<
 							payload.amount,
 							payload.currency,
 							payload.comment,
+							payload.category,
 							payload.date,
 						);
 
