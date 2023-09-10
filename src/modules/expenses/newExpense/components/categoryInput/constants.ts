@@ -11,4 +11,16 @@ export const categoryList = [
 		id: 'rent',
 		name: 'Аренда',
 	},
+	{
+		id: 'coffee',
+		name: 'Кофе',
+	},
+	{
+		id: 'food',
+		name: 'Еда',
+	},
+	{
+		id: 'groceries',
+		name: 'Продукты, дом',
+	},
 ];
