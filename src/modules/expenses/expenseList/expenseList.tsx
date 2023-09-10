@@ -91,26 +91,31 @@ export function ExpenseList(props: TExpenseListProps) {
 										</div>
 
 										<div className={styles.info}>
-											<span className={styles.expenseInMainCurrency}>
-												{intlService.formatCurrency(
-													currencyConverter.convert(
-														item.amount,
-														item.currency,
-														intlService.currency,
-													),
-													intlService.currency,
-												)}
-											</span>
-
-											{item.currency &&
-												item.currency !== intlService.currency && (
-													<span className={styles.expense}>
-														{intlService.formatCurrency(
+											<div className={styles.amount}>
+												<span className={styles.expenseInMainCurrency}>
+													{intlService.formatCurrency(
+														currencyConverter.convert(
 															item.amount,
 															item.currency,
-														)}
-													</span>
-												)}
+															intlService.currency,
+														),
+														intlService.currency,
+													)}
+												</span>
+
+												{item.currency &&
+													item.currency !== intlService.currency && (
+														<>
+															<span className={styles.dotFilledSpace} />
+															<span className={styles.expense}>
+																{intlService.formatCurrency(
+																	item.amount,
+																	item.currency,
+																)}
+															</span>
+														</>
+													)}
+											</div>
 
 											{item.comment && (
 												<div className={styles.comment}>{item.comment}</div>

@@ -32,6 +32,7 @@
 .info {
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 }
 
 .buttonGroup {
@@ -53,15 +54,33 @@
 	background-color: var(--color-red-400);
 }
 
-.expenseInMainCurrency {
-	margin-bottom: 0.25rem;
+.amount {
+	display: flex;
 
+	margin-bottom: 0.5rem;
+
+	justify-content: flex-start;
+	align-items: baseline;
+}
+
+.expenseInMainCurrency {
 	font-size: 1.125rem;
 	font-weight: 600;
 }
 
 .expense {
-	margin-bottom: 0.5rem;
+	margin-right: 0.5rem;
+
+	flex-grow: 1;
+
+	text-align: right;
+}
+
+.dotFilledSpace {
+	width: 100%; /* Adjust the width and height as needed */
+	height: 1rem;
+	background-image: radial-gradient(circle, var(--color-black) 1px, transparent 0);
+	background-size: 10px 30px; /* Adjust the size to control dot density */
 }
 
 .comment {
