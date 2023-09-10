@@ -75,3 +75,21 @@
 	font-size: 0.75rem;
 	font-weight: 800;
 }
+
+.iconContainer {
+	margin-right: 0.875rem;
+}
+
+.icon {
+	display: flex;
+
+	width: 2.5rem;
+	height: 2.5rem;
+
+	align-items: center;
+	justify-content: center;
+
+	background-color: var(--color-grey-300);
+
+	border-radius: 7px;
+}

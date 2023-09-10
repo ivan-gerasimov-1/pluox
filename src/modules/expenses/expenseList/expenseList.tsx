@@ -84,6 +84,11 @@ export function ExpenseList(props: TExpenseListProps) {
 										}
 										fullSwipe
 									>
+										<div className={styles.iconContainer}>
+											<div className={styles.icon}>
+												{item.category ? item.category[0].toUpperCase() : '?'}
+											</div>
+										</div>
 										<div className={styles.info}>
 											<span className={styles.expenseInMainCurrency}>
 												{intlService.formatCurrency(
