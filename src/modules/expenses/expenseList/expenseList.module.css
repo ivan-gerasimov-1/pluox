@@ -79,7 +79,7 @@
 .dotFilledSpace {
 	width: 100%; /* Adjust the width and height as needed */
 	height: 1rem;
-	background-image: radial-gradient(circle, var(--color-black) 1px, transparent 0);
+	background-image: radial-gradient(circle, var(--color-grey-500) 1px, transparent 0);
 	background-size: 10px 30px; /* Adjust the size to control dot density */
 }
 
