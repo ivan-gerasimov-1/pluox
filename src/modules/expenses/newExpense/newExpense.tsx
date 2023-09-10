@@ -32,7 +32,7 @@ function createDateViewValue(): TISODateString {
 	}
 
 	return `${date.getFullYear()}-${format(date.getMonth() + 1)}-${format(
-		date.getDay(),
+		date.getDate(),
 	)}T${format(date.getHours())}:${format(date.getMinutes())}`;
 }
 
