@@ -59,6 +59,8 @@
 
 	margin-bottom: 0.5rem;
 
+	padding-right: 1rem;
+
 	justify-content: flex-start;
 	align-items: baseline;
 }
@@ -69,16 +71,15 @@
 }
 
 .expense {
-	margin-right: 1rem;
-
 	flex-grow: 1;
 
-	text-align: right;
+	text-align: left;
 }
 
 .dotFilledSpace {
 	width: 100%; /* Adjust the width and height as needed */
 	height: 1rem;
+	margin-right: 0.375rem;
 	background-image: radial-gradient(circle, var(--color-grey-500) 1px, transparent 0);
 	background-size: 10px 30px; /* Adjust the size to control dot density */
 }

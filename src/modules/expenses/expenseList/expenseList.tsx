@@ -92,6 +92,15 @@ export function ExpenseList(props: TExpenseListProps) {
 
 										<div className={styles.info}>
 											<div className={styles.amount}>
+												<span className={styles.expense}>
+													{intlService.formatCurrency(
+														item.amount,
+														item.currency,
+													)}
+												</span>
+
+												<span className={styles.dotFilledSpace} />
+
 												<span className={styles.expenseInMainCurrency}>
 													{intlService.formatCurrency(
 														currencyConverter.convert(
@@ -102,19 +111,6 @@ export function ExpenseList(props: TExpenseListProps) {
 														intlService.currency,
 													)}
 												</span>
-
-												{item.currency &&
-													item.currency !== intlService.currency && (
-														<>
-															<span className={styles.dotFilledSpace} />
-															<span className={styles.expense}>
-																{intlService.formatCurrency(
-																	item.amount,
-																	item.currency,
-																)}
-															</span>
-														</>
-													)}
 											</div>
 
 											{item.comment && (
