@@ -86,9 +86,10 @@ export function ExpenseList(props: TExpenseListProps) {
 									>
 										<div className={styles.iconContainer}>
 											<div className={styles.icon}>
-												{item.category ? item.category[0].toUpperCase() : '?'}
+												{getCategorySign(item.category)}
 											</div>
 										</div>
+
 										<div className={styles.info}>
 											<span className={styles.expenseInMainCurrency}>
 												{intlService.formatCurrency(
@@ -140,4 +141,39 @@ export function ExpenseList(props: TExpenseListProps) {
 			})}
 		</>
 	);
+}
+
+export function getCategorySign(category: string | null): string {
+	let defaultSign = '?';
+
+	if (!category) {
+		return defaultSign;
+	}
+
+	let emoji = getCategoryEmoji(category);
+
+	if (!emoji) {
+		return category[0].toUpperCase();
+	}
+
+	return emoji;
+}
+
+export function getCategoryEmoji(category: string): string | null {
+	switch (category) {
+		case 'auto':
+			return '🚗';
+		case 'pharmacy':
+			return '💊';
+		case 'rent':
+			return '🏡';
+		case 'coffee':
+			return '☕';
+		case 'food':
+			return '🍲';
+		case 'groceries':
+			return '🛒';
+		default:
+			return null;
+	}
 }
