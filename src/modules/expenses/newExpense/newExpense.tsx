@@ -10,6 +10,7 @@ import styles from './newExpense.module.css';
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { TISODateString } from '@domain/types';
 import { DateInput } from '@modules/expenses/newExpense/components/dateInput/DateInput';
+import { CategoryInput } from '@modules/expenses/newExpense/components/categoryInput/CategoryInput';
 
 function createFromattedDate(): string {
 	let datetime = new Date().toISOString();
@@ -48,6 +49,7 @@ export function NewExpense() {
 		amount: 0,
 		currency: ECurrency.GEL,
 		comment: '',
+		category: '',
 		date: createDateViewValue(),
 	});
 
@@ -62,8 +64,7 @@ export function NewExpense() {
 			amount: formState.amount,
 			currency: formState.currency,
 			comment: formState.comment,
-			/** @todo Handle category */
-			category: null,
+			category: formState.category || null,
 			date: convertDateToModelValue(formState.date),
 		});
 
@@ -75,6 +76,7 @@ export function NewExpense() {
 			amount: 0,
 			currency: prevState.currency,
 			comment: '',
+			category: '',
 			date: createFromattedDate(),
 		}));
 	}
@@ -118,6 +120,13 @@ export function NewExpense() {
 		}));
 	}
 
+	function handleCategoryChange(id: string) {
+		setFormState((prevState) => ({
+			...prevState,
+			category: id,
+		}));
+	}
+
 	return (
 		<form name="newExpense" onSubmit={handleSubmit}>
 			<div className={styles.formGroup}>
@@ -139,6 +148,15 @@ export function NewExpense() {
 				<CurrencyInput
 					value={formState.currency}
 					onChange={handleCurrencyChange}
+				/>
+			</div>
+
+			<br />
+
+			<div>
+				<CategoryInput
+					value={formState.category}
+					onChange={handleCategoryChange}
 				/>
 			</div>
 
