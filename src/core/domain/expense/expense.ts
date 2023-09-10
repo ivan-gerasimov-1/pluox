@@ -48,6 +48,7 @@ export class Expense extends Entity<TExpense> implements IExpense {
 			amount: this.#amount,
 			currency: this.#currency,
 			comment: this.#comment,
+			category: this.#category,
 			/**
 			 * @todo remove backwards compatibility
 			 */
