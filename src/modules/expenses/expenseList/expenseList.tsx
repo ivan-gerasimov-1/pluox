@@ -50,7 +50,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 	return (
 		<>
-			{Object.values(expenseGroups).map((group) => {
+			{expenseGroups.map((group) => {
 				let expenseList = group.items;
 
 				return (
