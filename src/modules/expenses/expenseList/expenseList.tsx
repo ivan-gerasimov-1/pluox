@@ -87,7 +87,7 @@ export function ExpenseList(props: TExpenseListProps) {
 									>
 										<div className={styles.iconContainer}>
 											<div className={styles.icon}>
-												{getCategorySign(item.category)}
+												{getCategoryIcon(item.category)}
 											</div>
 										</div>
 
@@ -145,7 +145,7 @@ export function ExpenseList(props: TExpenseListProps) {
 	);
 }
 
-export function getCategorySign(categoryId: string | null): string {
+export function getCategoryIcon(categoryId: string | null): string {
 	let defaultIcon = '?';
 
 	if (!categoryId) {
