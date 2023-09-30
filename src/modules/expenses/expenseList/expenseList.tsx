@@ -13,7 +13,7 @@ import {
 	Type,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
-import { categoryList } from '@domain/categories/constants';
+import { getCategoryIcon } from '@domain/categories/getCategoryIcon';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -143,20 +143,4 @@ export function ExpenseList(props: TExpenseListProps) {
 			})}
 		</>
 	);
-}
-
-export function getCategoryIcon(categoryId: string | null): string {
-	let defaultIcon = '?';
-
-	if (!categoryId) {
-		return defaultIcon;
-	}
-
-	let category = categoryList.find((category) => categoryId === category.id);
-
-	if (!category) {
-		return categoryId[0].toUpperCase();
-	}
-
-	return category.icon;
 }
