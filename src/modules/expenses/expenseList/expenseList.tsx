@@ -36,19 +36,6 @@ export function ExpenseList(props: TExpenseListProps) {
 
 	let expenseGroups = groupExpenseListByDay(expenseList);
 
-	function trailingActions() {
-		return (
-			<TrailingActions>
-				<SwipeAction
-					destructive={true}
-					onClick={() => console.info('swipe action triggered')}
-				>
-					Delete
-				</SwipeAction>
-			</TrailingActions>
-		);
-	}
-
 	return (
 		<>
 			{expenseGroups.map((group) => {
