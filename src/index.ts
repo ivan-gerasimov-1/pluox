@@ -12,7 +12,7 @@ async function main(): Promise<void> {
 
 	registerServiceWorker();
 
-	await ui.mount();
+	await ui.render();
 }
 
 main();

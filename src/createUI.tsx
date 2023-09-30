@@ -10,8 +10,8 @@ interface IReactUIConstructorParams {
 }
 
 export interface IUserInterface {
-	mount(): Promise<void>;
-	unmount(): IUserInterface;
+	render(): Promise<void>;
+	dispose(): IUserInterface;
 }
 
 export class ReactUI implements IUserInterface {
@@ -33,7 +33,7 @@ export class ReactUI implements IUserInterface {
 		return this.#container;
 	}
 
-	public async mount(): Promise<void> {
+	public async render(): Promise<void> {
 		if (!this.#container) {
 			this.create();
 		}
@@ -45,7 +45,7 @@ export class ReactUI implements IUserInterface {
 		);
 	}
 
-	public unmount(): this {
+	public dispose(): this {
 		this.root.unmount();
 
 		return this;
