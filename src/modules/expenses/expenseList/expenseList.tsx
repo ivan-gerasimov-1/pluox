@@ -13,6 +13,7 @@ import {
 	Type,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
+import { categoryList } from '@modules/expenses/newExpense/components/categoryInput/constants';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -144,37 +145,18 @@ export function ExpenseList(props: TExpenseListProps) {
 	);
 }
 
-export function getCategorySign(category: string | null): string {
-	let defaultSign = '?';
+export function getCategorySign(categoryId: string | null): string {
+	let defaultIcon = '?';
+
+	if (!categoryId) {
+		return defaultIcon;
+	}
+
+	let category = categoryList.find((category) => categoryId === category.id);
 
 	if (!category) {
-		return defaultSign;
+		return categoryId[0].toUpperCase();
 	}
 
-	let emoji = getCategoryEmoji(category);
-
-	if (!emoji) {
-		return category[0].toUpperCase();
-	}
-
-	return emoji;
-}
-
-export function getCategoryEmoji(category: string): string | null {
-	switch (category) {
-		case 'auto':
-			return '🚗';
-		case 'pharmacy':
-			return '💊';
-		case 'rent':
-			return '🏡';
-		case 'coffee':
-			return '☕';
-		case 'food':
-			return '🍲';
-		case 'groceries':
-			return '🛒';
-		default:
-			return null;
-	}
+	return category.icon;
 }
