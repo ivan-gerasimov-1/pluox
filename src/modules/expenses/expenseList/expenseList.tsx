@@ -1,10 +1,9 @@
-import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
+import { getCategoryIcon } from '@domain/categories/getCategoryIcon';
 import type { Id, TISODateString } from '@domain/types';
 import { useExpensesStore } from '@modules/expenses';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
+import { EService, useService } from '@modules/serviceContainer/useService';
 import { Icon } from '@root/uiKit/icon';
-import styles from './expenseList.module.css';
 import {
 	SwipeAction,
 	SwipeableList,
@@ -13,7 +12,7 @@ import {
 	Type,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
-import { getCategoryIcon } from '@domain/categories/getCategoryIcon';
+import styles from './expenseList.module.css';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -23,8 +22,8 @@ export type TExpenseListProps = {
 };
 
 export function ExpenseList(props: TExpenseListProps) {
-	let intlService = IntlService.getInstance();
-	let currencyConverter = CurrencyConverter.getInstance();
+	let intlService = useService(EService.INTL);
+	let currencyConverter = useService(EService.CURRENCY_CONVERTER);
 
 	let expenseList = useExpensesStore((state) =>
 		state.getList({
