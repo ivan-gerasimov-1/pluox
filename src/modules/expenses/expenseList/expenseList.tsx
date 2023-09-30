@@ -13,7 +13,7 @@ import {
 	Type,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
-import { categoryList } from '@modules/expenses/newExpense/components/categoryInput/constants';
+import { categoryList } from '@domain/categories/constants';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;

@@ -1,4 +1,4 @@
-import { categoryList } from '@modules/expenses/newExpense/components/categoryInput/constants';
+import { categoryList } from '@domain/categories/constants';
 import { classnames } from '@utils/classnames';
 import styles from './categoryInput.module.css';
 import { useIntl } from '@modules/intl';
