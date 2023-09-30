@@ -24,6 +24,30 @@ export const categoryList = [
 		name: 'Продукты, дом',
 	},
 	{
+		id: 'tobacco',
+		name: 'Табак',
+	},
+	{
+		id: 'subscriptions',
+		name: 'Подписки',
+	},
+	{
+		id: 'transport',
+		name: 'Транспорт',
+	},
+	{
+		id: 'taxes',
+		name: 'Налоги',
+	},
+	{
+		id: 'leisure',
+		name: 'Досуг',
+	},
+	{
+		id: 'pets',
+		name: 'Питомцы',
+	},
+	{
 		id: 'other',
 		name: 'Другое',
 	},
