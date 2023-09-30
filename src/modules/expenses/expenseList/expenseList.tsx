@@ -36,78 +36,71 @@ export function ExpenseList(props: TExpenseListProps) {
 
 	let expenseGroups = groupExpenseListByDay(expenseList);
 
-	return (
-		<>
-			{expenseGroups.map((group) => {
-				let expenseList = group.items;
+	return expenseGroups.map((group) => {
+		let expenseList = group.items;
 
-				return (
-					<div key={group.date}>
-						<div className={styles.date}>
-							{intlService.formatDate(group.date)}
-						</div>
+		return (
+			<div key={group.date}>
+				<div className={styles.date}>{intlService.formatDate(group.date)}</div>
 
-						<SwipeableList className={styles.list}>
-							{expenseList?.map((item) => {
-								return (
-									<SwipeableListItem
-										key={item.id}
-										maxSwipe={1}
-										listType={Type.IOS}
-										className={styles.listItem}
-										trailingActions={
-											<TrailingActions>
-												<SwipeAction
-													Tag="div"
-													onClick={() => {
-														deleteExpense(item.id);
-													}}
-													destructive
-												>
-													<button type="button" className={styles.actionButton}>
-														<Icon name={Icon.IconName.Trash} />
-													</button>
-												</SwipeAction>
-											</TrailingActions>
-										}
-										fullSwipe
-									>
-										<div className={styles.iconContainer}>
-											<div className={styles.icon}>
-												{getCategoryIcon(item.category)}
-											</div>
-										</div>
+				<SwipeableList className={styles.list}>
+					{expenseList?.map((item) => {
+						return (
+							<SwipeableListItem
+								key={item.id}
+								maxSwipe={1}
+								listType={Type.IOS}
+								className={styles.listItem}
+								trailingActions={
+									<TrailingActions>
+										<SwipeAction
+											Tag="div"
+											onClick={() => {
+												deleteExpense(item.id);
+											}}
+											destructive
+										>
+											<button type="button" className={styles.actionButton}>
+												<Icon name={Icon.IconName.Trash} />
+											</button>
+										</SwipeAction>
+									</TrailingActions>
+								}
+								fullSwipe
+							>
+								<div className={styles.iconContainer}>
+									<div className={styles.icon}>
+										{getCategoryIcon(item.category)}
+									</div>
+								</div>
 
-										<div className={styles.info}>
-											<div className={styles.amount}>
-												<span className={styles.expense}>
-													{intlService.formatCurrency(
-														item.amount,
-														item.currency,
-													)}
-												</span>
+								<div className={styles.info}>
+									<div className={styles.amount}>
+										<span className={styles.expense}>
+											{intlService.formatCurrency(item.amount, item.currency)}
+										</span>
 
-												<span className={styles.dotFilledSpace} />
+										<span className={styles.dotFilledSpace} />
 
-												<span className={styles.expenseInMainCurrency}>
-													{intlService.formatCurrency(
-														currencyConverter.convert(
-															item.amount,
-															item.currency,
-															intlService.currency,
-														),
-														intlService.currency,
-													)}
-												</span>
-											</div>
-
-											{item.comment && (
-												<div className={styles.comment}>{item.comment}</div>
+										<span className={styles.expenseInMainCurrency}>
+											{intlService.formatCurrency(
+												currencyConverter.convert(
+													item.amount,
+													item.currency,
+													intlService.currency,
+												),
+												intlService.currency,
 											)}
-										</div>
+										</span>
+									</div>
 
-										<div className={styles.buttonGroup}>
-											{/* <button
+									{item.comment && (
+										<div className={styles.comment}>{item.comment}</div>
+									)}
+								</div>
+
+								<div className={styles.buttonGroup}>
+									{/* <button
 												type="button"
 												className={styles.actionButton}
 												onClick={() => {
@@ -120,14 +113,12 @@ export function ExpenseList(props: TExpenseListProps) {
 											>
 												<Icon name={Icon.IconName.Edit} />
 											</button> */}
-										</div>
-									</SwipeableListItem>
-								);
-							})}
-						</SwipeableList>
-					</div>
-				);
-			})}
-		</>
-	);
+								</div>
+							</SwipeableListItem>
+						);
+					})}
+				</SwipeableList>
+			</div>
+		);
+	});
 }
