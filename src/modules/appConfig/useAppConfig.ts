@@ -1,6 +1,6 @@
 import { type IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { AppConfigContext } from '@modules/appConfig/AppConfigContext';
-import { ReactContextNotInitializedError } from '@modules/errors/_reactContextNotInitializedError';
+import { ReactContextNotInitializedError } from '@modules/errors/ReactContextNotInitializedError';
 import { useContext } from 'react';
 
 export function useAppConfig(): IAppConfig {
