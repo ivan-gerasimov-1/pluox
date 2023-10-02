@@ -1,7 +1,6 @@
 import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { ECurrency } from '@core/infrastructure/currency/types';
-import { IAmount } from '@domain/amount/types';
-import type { IExpenses } from '@domain/expenses/types';
+import type { IAmount } from '@domain/amount/types';
 import {
 	MonthlyAmountUseCase,
 	type IMonthlyAmountUseCase,
@@ -10,7 +9,8 @@ import {
 	TotalAmountUseCase,
 	type ITotalAmountUseCase,
 } from '@domain/amount/useCases/totalAmountUseCase';
-import { type TISODateString } from '@domain/types';
+import type { TMonth } from '@domain/amount/useCases/types';
+import type { IExpenses } from '@domain/expenses/types';
 
 export class Amount implements IAmount {
 	readonly #defaultCurrency: ECurrency;
@@ -42,7 +42,7 @@ export class Amount implements IAmount {
 		return this.totalAmountUseCase.run(this.#defaultCurrency);
 	}
 
-	public getMonthly(currentDate: TISODateString): number {
-		return this.monthlyAmountUseCase.run(currentDate, this.#defaultCurrency);
+	public getMonthly(month: TMonth): number {
+		return this.monthlyAmountUseCase.run(month, this.#defaultCurrency);
 	}
 }

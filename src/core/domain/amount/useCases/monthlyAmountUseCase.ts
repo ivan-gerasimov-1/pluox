@@ -8,7 +8,7 @@ import { type TMonth } from '@domain/amount/useCases/types';
 import { type TISODateString } from '@domain/types';
 
 export interface IMonthlyAmountUseCase {
-	run(currentDate: TISODateString, currency: ECurrency): number;
+	run(month: TMonth, currency: ECurrency): number;
 }
 
 export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
@@ -32,16 +32,12 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		return new MonthlyAmountUseCase(expenses, currencyConverter);
 	}
 
-	public run(currentDate: TISODateString, currency: ECurrency) {
-		return this.calculateAmount(currency, currentDate);
+	public run(currentMonth: TMonth, currency: ECurrency) {
+		return this.calculateAmount(currency, currentMonth);
 	}
 
-	private calculateAmount(
-		currency: ECurrency,
-		currentDate: TISODateString,
-	): number {
+	private calculateAmount(currency: ECurrency, currentMonth: TMonth): number {
 		let expenses = this.#expenses.get();
-		let currentMonth = this.getMonthFromDate(currentDate);
 
 		let total = 0;
 

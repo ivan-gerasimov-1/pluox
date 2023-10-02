@@ -1,18 +1,21 @@
-import { ActionSheet } from '@root/uiKit/actionSheet';
 import { MoneySpentMonthly } from '@modules/expenses/MoneySpentMonthly';
+import { MoneySpentListMonthly } from '@modules/expenses/moneySpentListMonthly';
 import { NewExpense } from '@modules/expenses/newExpense';
 import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
+import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
-import { MoneySpentListMonthly } from '@modules/expenses/moneySpentListMonthly';
+import { getCurrentMonth } from '@screens/main/helpers';
 
 export function MainScreen() {
+	const currentMonth = getCurrentMonth();
+
 	return (
 		<>
 			<CardContainer>
 				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
-						<MoneySpentMonthly currentDate={new Date().toISOString()} />
+						<MoneySpentMonthly month={currentMonth} />
 					</Card>
 				</Navigable>
 

@@ -1,31 +1,27 @@
 import { TMonth } from '@domain/amount/useCases/types';
-import { TISODateString } from '@domain/types';
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { useExpensesStore } from '@modules/expenses';
 import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 
 export type TMoneySpentCurrentMonthProps = {
-	currentDate: TISODateString;
+	month: TMonth;
 };
 
 export function MoneySpentMonthly(props: TMoneySpentCurrentMonthProps) {
-	let total = useExpensesStore((state) =>
-		state.getMonthlyAmount(props.currentDate),
-	);
 	let appConfig = useAppConfig();
+	let total = useExpensesStore((state) => state.getMonthlyAmount(props.month));
+
 	/**
 	 * @todo add localization
 	 */
-	let currentMonth = getMonthByIndex(
-		new Date(props.currentDate).getMonth() as TMonth,
-	);
+	let currentMonth = getMonthNameByIndex(props.month);
 
 	return (
 		<MoneyCard title={currentMonth} amount={total} total={appConfig.budget} />
 	);
 }
 
-function getMonthByIndex(index: TMonth): string {
+function getMonthNameByIndex(month: TMonth): string {
 	let months = {
 		0: 'Январь',
 		1: 'Февраль',
@@ -41,11 +37,11 @@ function getMonthByIndex(index: TMonth): string {
 		11: 'Декабрь',
 	};
 
-	let currentMonth = months[index];
+	let monthName = months[month];
 
-	if (!currentMonth) {
+	if (!monthName) {
 		return '';
 	}
 
-	return currentMonth;
+	return monthName;
 }

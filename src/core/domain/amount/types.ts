@@ -1,6 +1,6 @@
-import type { TISODateString } from '@domain/types';
+import type { TMonth } from '@domain/amount/useCases/types';
 
 export interface IAmount {
 	getTotal(): number;
-	getMonthly(currentDate: TISODateString): number;
+	getMonthly(month: TMonth): number;
 }

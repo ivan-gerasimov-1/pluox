@@ -1,5 +1,6 @@
-import { type ECurrency } from '@core/infrastructure/currency/types';
+import type { ECurrency } from '@core/infrastructure/currency/types';
 import { Amount } from '@domain/amount';
+import { TMonth } from '@domain/amount/useCases/types';
 import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
@@ -22,7 +23,7 @@ interface IExpensesStore {
 	deleteExpense(id: Id): void;
 
 	getTotalAmount(): number;
-	getMonthlyAmount(currentDate: TISODateString): number;
+	getMonthlyAmount(month: TMonth): number;
 
 	getOne(id: Id): TExpense;
 	getList(query?: {
@@ -102,12 +103,12 @@ export let useExpensesStore = create<
 					return amount.getTotal();
 				},
 
-				getMonthlyAmount(currentDate: TISODateString): number {
+				getMonthlyAmount(month: TMonth): number {
 					let state = get();
 					let expenses = Expenses.create(state.operations);
 					let amount = Amount.create(expenses);
 
-					return amount.getMonthly(currentDate);
+					return amount.getMonthly(month);
 				},
 			};
 		},
