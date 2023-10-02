@@ -1,11 +1,15 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import { InvalidMonthError } from '@domain/amount/useCases/errors';
+import { monthGuard } from '@domain/amount/useCases/typeGuards';
+import type { TMonth } from '@domain/amount/useCases/types';
 
 export interface IAppConfig {
 	readonly locale: ELocaleCode;
 	readonly currency: ECurrency;
 	readonly availabelCurrencies: ECurrency[];
 	readonly budget: number | null;
+	readonly currentMonth: TMonth;
 
 	readonly openExchangeRates: {
 		apiUrl: string;
@@ -21,6 +25,8 @@ export class AppConfig implements IAppConfig {
 	#availableCurrencies: ECurrency[];
 	#budget: number | null;
 
+	#currentMonth: TMonth;
+
 	#openExchangeRates: {
 		apiUrl: string;
 		apiKey: string;
@@ -31,6 +37,7 @@ export class AppConfig implements IAppConfig {
 		this.#currency = currency;
 		this.#availableCurrencies = [ECurrency.GEL, ECurrency.RUB, ECurrency.USD];
 		this.#budget = 4800;
+		this.#currentMonth = this.getCurrentMonth();
 
 		this.#openExchangeRates = {
 			apiUrl: 'https://openexchangerates.org/api',
@@ -54,6 +61,10 @@ export class AppConfig implements IAppConfig {
 		return this.#budget;
 	}
 
+	public get currentMonth(): TMonth {
+		return this.#currentMonth;
+	}
+
 	public get openExchangeRates(): {
 		apiUrl: string;
 		apiKey: string;
@@ -67,5 +78,15 @@ export class AppConfig implements IAppConfig {
 		}
 
 		return this.#instance;
+	}
+
+	private getCurrentMonth(): TMonth {
+		const month = new Date().getMonth();
+
+		if (!monthGuard(month)) {
+			throw new InvalidMonthError(month);
+		}
+
+		return month;
 	}
 }
