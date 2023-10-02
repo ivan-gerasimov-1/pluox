@@ -1,5 +1,4 @@
 import { ActionSheet } from '@root/uiKit/actionSheet';
-import { MoneyLeft, MoneySpent } from '@modules/expenses';
 import { MoneySpentCurrentMonth } from '@modules/expenses/moneySpentCurrentMonth';
 import { NewExpense } from '@modules/expenses/newExpense';
 import { EAppPath } from '@root/appPath';
@@ -22,11 +21,6 @@ export function MainScreen() {
 						<MoneySpentListMonthly />
 					</Card>
 				</Navigable>
-
-				{/* @todo turn on */}
-				{/* <Card>
-					<MoneyLeft />
-				</Card> */}
 			</CardContainer>
 
 			<ActionSheet>
