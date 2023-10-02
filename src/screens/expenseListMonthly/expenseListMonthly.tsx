@@ -1,15 +1,15 @@
-import { useIntl } from '@modules/intl';
-import { expenseListMonthlyI18n } from '@screens/expenseListMonthly/expenseListMonthly.i18n';
-import { CardContainer } from '@uiKit/cardContainer';
-import styles from './expenseListMonthly.module.css';
 import { MoneySpentCurrentMonth } from '@modules/expenses/moneySpentCurrentMonth';
+import { useIntl } from '@modules/intl';
 import { Card } from '@root/uiKit/card';
+import { expenseListMonthlyI18n } from '@screens/expenseListMonthly/expenseListMonthly.i18n';
+import { useMonths } from '@screens/expenseListMonthly/hooks/useMonths';
+import { CardContainer } from '@uiKit/cardContainer';
 import { Fragment } from 'react';
-import { generateMonths } from '@screens/expenseListMonthly/helpers/generateMonths';
+import styles from './expenseListMonthly.module.css';
 
 export function ExpenseListMonthlyScreen() {
 	let intl = useIntl(expenseListMonthlyI18n);
-	let months = generateMonths();
+	let months = useMonths();
 
 	return (
 		<CardContainer>
