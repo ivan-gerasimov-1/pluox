@@ -1,1 +1,0 @@
-export { MoneySpent } from './moneySpent';
