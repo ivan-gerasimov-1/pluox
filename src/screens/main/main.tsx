@@ -1,3 +1,4 @@
+import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { MoneySpentMonthly } from '@modules/expenses/MoneySpentMonthly';
 import { MoneySpentListMonthly } from '@modules/expenses/moneySpentListMonthly';
 import { NewExpense } from '@modules/expenses/newExpense';
@@ -8,14 +9,14 @@ import { Navigable } from '@root/uiKit/navigable/navigable';
 import { getCurrentMonth } from '@screens/main/helpers';
 
 export function MainScreen() {
-	const currentMonth = getCurrentMonth();
+	let appConfig = useAppConfig();
 
 	return (
 		<>
 			<CardContainer>
 				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
-						<MoneySpentMonthly month={currentMonth} />
+						<MoneySpentMonthly month={appConfig.currentMonth} />
 					</Card>
 				</Navigable>
 
