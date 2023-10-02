@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
-export const moneySpentListMonthlyI18n = {
+export const moneySpentYearI18n = {
 	[ELocaleCode.RU_RU]: {
 		title: 'Расходы за год',
 	},

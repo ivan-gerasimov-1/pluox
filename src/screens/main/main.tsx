@@ -1,6 +1,6 @@
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
-import { MoneySpentMonthly } from '@modules/expenses/MoneySpentMonthly';
-import { MoneySpentListMonthly } from '@modules/expenses/moneySpentListMonthly';
+import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
+import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
 import { NewExpense } from '@modules/expenses/newExpense';
 import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
@@ -15,13 +15,13 @@ export function MainScreen() {
 			<CardContainer>
 				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
-						<MoneySpentMonthly month={appConfig.currentMonth} />
+						<MoneySpentMonth month={appConfig.currentMonth} />
 					</Card>
 				</Navigable>
 
 				<Navigable to={EAppPath.EXPENSE_LIST_MONTHLY}>
 					<Card touchable>
-						<MoneySpentListMonthly />
+						<MoneySpentYear />
 					</Card>
 				</Navigable>
 			</CardContainer>

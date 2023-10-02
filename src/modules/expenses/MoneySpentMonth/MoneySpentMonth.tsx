@@ -3,11 +3,11 @@ import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { useExpensesStore } from '@modules/expenses';
 import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 
-export type TMoneySpentCurrentMonthProps = {
+export type TMoneySpentMonthProps = {
 	month: TMonth;
 };
 
-export function MoneySpentMonthly(props: TMoneySpentCurrentMonthProps) {
+export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 	let appConfig = useAppConfig();
 	let total = useExpensesStore((state) => state.getMonthlyAmount(props.month));
 
