@@ -1,5 +1,6 @@
 import { useIntl } from '@modules/intl';
 import { expenseListMonthlyI18n } from '@screens/expenseListMonthly/expenseListMonthly.i18n';
+import { CardContainer } from '@uiKit/cardContainer';
 import styles from './expenseListMonthly.module.css';
 import { MoneySpentCurrentMonth } from '@modules/expenses/moneySpentCurrentMonth';
 import { Card } from '@root/uiKit/card';
@@ -11,7 +12,7 @@ export function ExpenseListMonthlyScreen() {
 	let months = generateMonths();
 
 	return (
-		<>
+		<CardContainer>
 			<div className={styles.header}>
 				<h1>{intl.translate('title')}</h1>
 			</div>
@@ -29,6 +30,6 @@ export function ExpenseListMonthlyScreen() {
 					</Fragment>
 				);
 			})}
-		</>
+		</CardContainer>
 	);
 }
