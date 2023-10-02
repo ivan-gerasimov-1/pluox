@@ -6,7 +6,6 @@ import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
-import { getCurrentMonth } from '@screens/main/helpers';
 
 export function MainScreen() {
 	let appConfig = useAppConfig();
