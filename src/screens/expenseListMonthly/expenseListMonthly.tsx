@@ -1,4 +1,4 @@
-import { MoneySpentCurrentMonth } from '@modules/expenses/moneySpentCurrentMonth';
+import { MoneySpentMonthly } from '@modules/expenses/MoneySpentMonthly';
 import { useIntl } from '@modules/intl';
 import { Card } from '@root/uiKit/card';
 import { expenseListMonthlyI18n } from '@screens/expenseListMonthly/expenseListMonthly.i18n';
@@ -23,7 +23,7 @@ export function ExpenseListMonthlyScreen() {
 				return (
 					<Fragment key={month}>
 						<Card>
-							<MoneySpentCurrentMonth currentDate={month} />
+							<MoneySpentMonthly currentDate={month} />
 						</Card>
 
 						<br />

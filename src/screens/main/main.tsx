@@ -1,5 +1,5 @@
 import { ActionSheet } from '@root/uiKit/actionSheet';
-import { MoneySpentCurrentMonth } from '@modules/expenses/moneySpentCurrentMonth';
+import { MoneySpentMonthly } from '@modules/expenses/MoneySpentMonthly';
 import { NewExpense } from '@modules/expenses/newExpense';
 import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
@@ -12,7 +12,7 @@ export function MainScreen() {
 			<CardContainer>
 				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
-						<MoneySpentCurrentMonth currentDate={new Date().toISOString()} />
+						<MoneySpentMonthly currentDate={new Date().toISOString()} />
 					</Card>
 				</Navigable>
 

@@ -1,0 +1,1 @@
+export { MoneySpentMonthly } from './MoneySpentMonthly';

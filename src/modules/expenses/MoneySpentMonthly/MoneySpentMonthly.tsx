@@ -8,7 +8,7 @@ export type TMoneySpentCurrentMonthProps = {
 	currentDate: TISODateString;
 };
 
-export function MoneySpentCurrentMonth(props: TMoneySpentCurrentMonthProps) {
+export function MoneySpentMonthly(props: TMoneySpentCurrentMonthProps) {
 	let total = useExpensesStore((state) =>
 		state.getMonthlyAmount(props.currentDate),
 	);
