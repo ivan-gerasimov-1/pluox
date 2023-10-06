@@ -153,11 +153,22 @@ export function NewExpense() {
 
 			<br />
 
-			<div>
-				<CategoryInput
-					value={formState.category}
-					onChange={handleCategoryChange}
-				/>
+			<div className={styles.formGroup}>
+				<div>
+					<CategoryInput
+						value={formState.category}
+						onChange={handleCategoryChange}
+					/>
+				</div>
+
+				<div className={styles.spacer} />
+
+				<div className={styles['formGroupItem--2-3']}>
+					<DateInput
+						initialValue={formState.date}
+						onChange={handleDateChange}
+					/>
+				</div>
 			</div>
 
 			<br />
@@ -173,11 +184,11 @@ export function NewExpense() {
 				></textarea>
 			</div>
 
-			<br />
+			{/* <br />
 
 			<div>
-				<DateInput initialValue={formState.date} onChange={handleDateChange} />
-			</div>
+
+			</div> */}
 
 			{false && (
 				<>
