@@ -6,7 +6,7 @@ export const categoryList = [
 	},
 	{
 		id: 'pharmacy',
-		name: 'Лекарства',
+		name: 'Аптеки',
 		icon: '💊',
 	},
 	{
