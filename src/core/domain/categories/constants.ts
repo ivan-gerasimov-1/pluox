@@ -6,7 +6,7 @@ export const categoryList = [
 	},
 	{
 		id: 'pharmacy',
-		name: 'Аптеки',
+		name: 'Медицина',
 		icon: '💊',
 	},
 	{
@@ -31,7 +31,7 @@ export const categoryList = [
 	},
 	{
 		id: 'groceries',
-		name: 'Продукты, дом',
+		name: 'Продукты / дом',
 		icon: '🛒',
 	},
 	{
