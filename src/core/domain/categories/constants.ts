@@ -10,6 +10,11 @@ export const categoryList = [
 		icon: '💊',
 	},
 	{
+		id: 'hygiene',
+		name: 'Гигиена / Уход',
+		icon: '🧴',
+	},
+	{
 		id: 'rent',
 		name: 'Аренда',
 		icon: '🏡',
