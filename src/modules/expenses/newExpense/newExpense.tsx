@@ -184,12 +184,6 @@ export function NewExpense() {
 				></textarea>
 			</div>
 
-			{/* <br />
-
-			<div>
-
-			</div> */}
-
 			{false && (
 				<>
 					<span>{testAmount}</span>
