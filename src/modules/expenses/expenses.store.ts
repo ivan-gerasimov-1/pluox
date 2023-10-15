@@ -20,6 +20,8 @@ interface IExpensesStore {
 	readonly operations: TExpenses;
 
 	addExpense(payload: TExpenseCreatePayload): void;
+	/** @todo Not Implemented */
+	editExpense(payload: unknown): void;
 	deleteExpense(id: Id): void;
 
 	getTotalAmount(): number;
@@ -60,6 +62,11 @@ export let useExpensesStore = create<
 								.get(),
 						};
 					});
+				},
+
+				/** @todo Not Implemented */
+				editExpense(payload: unknown): void {
+					//
 				},
 
 				deleteExpense(id: Id): void {

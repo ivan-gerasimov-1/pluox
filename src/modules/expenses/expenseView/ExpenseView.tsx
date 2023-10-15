@@ -13,10 +13,26 @@ export type TExpenseViewProps = {
 
 export function ExpenseView(props: TExpenseViewProps) {
 	let addExpense = useExpensesStore((state) => state.addExpense);
+	let editExpense = useExpensesStore((state) => state.editExpense);
+
+	/** @todo Not Implemented */
+	let action: any;
+
+	if (
+		props.amount !== undefined &&
+		props.currency !== undefined &&
+		props.comment !== undefined &&
+		props.category !== undefined &&
+		props.date !== undefined
+	) {
+		action = editExpense;
+	} else {
+		action = addExpense;
+	}
 
 	return (
 		<ExpenseForm
-			onSubmit={addExpense}
+			onSubmit={action}
 			amount={props.amount || 0}
 			currency={props.currency || ECurrency.GEL}
 			comment={props.comment || ''}
