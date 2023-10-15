@@ -3,6 +3,29 @@ import type { TISODateString } from '@domain/types';
 import { useExpensesStore } from '@modules/expenses';
 import { ExpenseForm } from '@modules/expenses/expenseView/ExpenseForm';
 
+export type TExpenseViewProps = {
+	amount?: number;
+	currency?: ECurrency;
+	comment?: string;
+	category?: string;
+	date?: string;
+};
+
+export function ExpenseView(props: TExpenseViewProps) {
+	let addExpense = useExpensesStore((state) => state.addExpense);
+
+	return (
+		<ExpenseForm
+			onSubmit={addExpense}
+			amount={props.amount || 0}
+			currency={props.currency || ECurrency.GEL}
+			comment={props.comment || ''}
+			category={props.category || ''}
+			date={props.date || createDateViewValue()}
+		/>
+	);
+}
+
 function createDateViewValue(): TISODateString {
 	const date = new Date();
 
@@ -17,19 +40,4 @@ function createDateViewValue(): TISODateString {
 	return `${date.getFullYear()}-${format(date.getMonth() + 1)}-${format(
 		date.getDate(),
 	)}T${format(date.getHours())}:${format(date.getMinutes())}`;
-}
-
-export function ExpenseView() {
-	let addExpense = useExpensesStore((state) => state.addExpense);
-
-	return (
-		<ExpenseForm
-			onSubmit={addExpense}
-			amount={0}
-			currency={ECurrency.GEL}
-			comment=""
-			category=""
-			date={createDateViewValue()}
-		/>
-	);
 }
