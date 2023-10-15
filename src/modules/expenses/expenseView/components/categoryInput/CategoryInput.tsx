@@ -2,7 +2,7 @@ import { categoryList } from '@domain/categories/constants';
 import { classnames } from '@utils/classnames';
 import styles from './categoryInput.module.css';
 import { useIntl } from '@modules/intl';
-import { categoryInputI18n } from '@modules/expenses/newExpense/components/categoryInput/categoryInput.i18n';
+import { categoryInputI18n } from '@modules/expenses/expenseView/components/categoryInput/categoryInput.i18n';
 
 export type TCategoryInputProps = {
 	value: string;

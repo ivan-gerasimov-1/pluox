@@ -1,16 +1,16 @@
-import { useExpensesStore } from '@modules/expenses';
-import { AmountInput } from '@modules/expenses/newExpense/components/amountInput/amountInput';
-import { CurrencyInput } from '@modules/expenses/newExpense/components/currencyInput/currencyInput';
-import { NumericKeyboard } from '@modules/expenses/newExpense/components/numericKeyboard/numericKeyboard';
-import { newExpenseI18n } from '@modules/expenses/newExpense/newExpense.i18n';
+import { ECurrency } from '@core/infrastructure/currency/types';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
+import { TISODateString } from '@domain/types';
+import { useExpensesStore } from '@modules/expenses';
+import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
+import { CategoryInput } from '@modules/expenses/expenseView/components/categoryInput/CategoryInput';
+import { CurrencyInput } from '@modules/expenses/expenseView/components/currencyInput/currencyInput';
+import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
+import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
+import { newExpenseI18n } from '@modules/expenses/expenseView/expenseView.i18n';
 import { useIntl } from '@modules/intl';
 import { useState } from 'react';
-import styles from './newExpense.module.css';
-import { ECurrency } from '@core/infrastructure/currency/types';
-import { TISODateString } from '@domain/types';
-import { DateInput } from '@modules/expenses/newExpense/components/dateInput/DateInput';
-import { CategoryInput } from '@modules/expenses/newExpense/components/categoryInput/CategoryInput';
+import styles from './expenseView.module.css';
 
 function createFromattedDate(): string {
 	let datetime = new Date().toISOString();
@@ -41,7 +41,7 @@ function convertDateToModelValue(date: string): TISODateString {
 	return new Date(date).toISOString();
 }
 
-export function NewExpense() {
+export function ExpenseView() {
 	let [testAmount, setTestAmount] = useState<string>('0');
 	let intl = useIntl(newExpenseI18n);
 	let addExpense = useExpensesStore((state) => state.addExpense);

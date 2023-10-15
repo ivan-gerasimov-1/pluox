@@ -1,4 +1,4 @@
-import { EKey } from '@modules/expenses/newExpense/components/amountInput/enums';
+import { EKey } from '@modules/expenses/expenseView/components/amountInput/enums';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
 export const ALLOWED_SYMBOLS = [

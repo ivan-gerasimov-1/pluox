@@ -1,4 +1,4 @@
-import { ALLOWED_SYMBOLS } from '@modules/expenses/newExpense/components/amountInput/constants';
+import { ALLOWED_SYMBOLS } from '@modules/expenses/expenseView/components/amountInput/constants';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
 export function validateNumber(value: string): boolean {
