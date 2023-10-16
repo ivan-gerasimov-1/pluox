@@ -3,6 +3,7 @@ import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import type { TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryInput } from '@modules/expenses/expenseView/components/categoryInput/CategoryInput';
+import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/CommentInput';
 import { CurrencyInput } from '@modules/expenses/expenseView/components/currencyInput/currencyInput';
 import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
 import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
@@ -88,14 +89,10 @@ export function ExpenseForm(props: TExpenseFormProps) {
 		}));
 	}
 
-	function handleCommentChange(
-		event: React.ChangeEvent<HTMLTextAreaElement>,
-	): void {
-		const comment = event.target.value;
-
+	function handleCommentChange(comment: string): void {
 		setFormState((prevState) => ({
 			...prevState,
-			comment: comment,
+			comment,
 		}));
 	}
 
@@ -160,14 +157,10 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			<br />
 
 			<div>
-				<textarea
-					name="newExpense_comment"
-					id="newExpense_comment"
-					className={styles.commentField}
+				<CommentInput
 					value={formState.comment}
 					onChange={handleCommentChange}
-					placeholder={intl.translate('commentPlaceholder')}
-				></textarea>
+				/>
 			</div>
 
 			{false && (
