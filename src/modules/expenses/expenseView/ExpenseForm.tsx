@@ -1,12 +1,10 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import type { TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryInput } from '@modules/expenses/expenseView/components/categoryInput/CategoryInput';
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/CommentInput';
 import { CurrencyInput } from '@modules/expenses/expenseView/components/currencyInput/currencyInput';
 import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
-import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
 import { newExpenseI18n } from '@modules/expenses/expenseView/expenseView.i18n';
 import { useIntl } from '@modules/intl';
 import { useState } from 'react';
@@ -29,7 +27,6 @@ export type TExpenseFormProps = {
 };
 
 export function ExpenseForm(props: TExpenseFormProps) {
-	let [testAmount, setTestAmount] = useState<string>('0');
 	let intl = useIntl(newExpenseI18n);
 
 	let [formState, setFormState] = useState({
@@ -69,13 +66,6 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	}
 
 	function handleAmountChange(amount: number) {
-		setFormState((prevState) => ({
-			...prevState,
-			amount,
-		}));
-	}
-
-	function _handleAmountChange(amount: number) {
 		setFormState((prevState) => ({
 			...prevState,
 			amount,
@@ -162,35 +152,10 @@ export function ExpenseForm(props: TExpenseFormProps) {
 					onChange={handleCommentChange}
 				/>
 			</div>
-
-			{false && (
-				<NumericKeyboard
-					value={testAmount}
-					onClick={(value: string | number) => {
-						if (value === ',') {
-							setTestAmount((prevTestAmount) => {
-								return `${prevTestAmount}${value}`;
-							});
-
-							return;
-						}
-
-						setTestAmount((prevTestAmount) => {
-							return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
-								IntlService.getInstance().locale,
-							);
-						});
-					}}
-				/>
-			)}
 		</form>
 	);
 }
 
 function convertDateToModelValue(date: string): TISODateString {
 	return new Date(date).toISOString();
-}
-
-function toModelValue(value: string): number {
-	return IntlService.getInstance().parseNumber(value);
 }
