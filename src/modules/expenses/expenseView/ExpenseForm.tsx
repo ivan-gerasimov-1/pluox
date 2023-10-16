@@ -57,6 +57,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	function resetFormState() {
 		dispatch({
 			type: EExpenseFormReducerAction.RESET,
+
 			amount: props.amount,
 			currency: props.currency,
 			comment: props.comment,
@@ -150,56 +151,89 @@ function convertDateToModelValue(date: string): TISODateString {
 	return new Date(date).toISOString();
 }
 
-export const EExpenseFormReducerAction = {
-	SET_AMOUNT: Symbol('setAmount'),
-	SET_CURRENCY: Symbol('setCurrency'),
-	SET_COMMENT: Symbol('setComment'),
-	SET_DATE: Symbol('setDate'),
-	SET_CATEGORY: Symbol('setCategory'),
-	RESET: Symbol('reset'),
+export const enum EExpenseFormReducerAction {
+	SET_AMOUNT = 'setAmount',
+	SET_CURRENCY = 'setCurrency',
+	SET_COMMENT = 'setComment',
+	SET_DATE = 'setDate',
+	SET_CATEGORY = 'setCategory',
+	RESET = 'reset',
+}
+
+type TExpenseFormReducerAction = Partial<TExpenseFormReducerState> & {
+	type: EExpenseFormReducerAction;
 };
 
-/** @todo Add types */
-// @ts-expect-error
-function expenseFormReducer(state, action) {
+type TExpenseFormReducerState = {
+	amount: number;
+	currency: ECurrency;
+	comment: string;
+	category: string;
+	date: string;
+};
+
+/**
+ * @todo Get rid of "as"
+ */
+function expenseFormReducer(
+	state: TExpenseFormReducerState,
+	action: TExpenseFormReducerAction & Partial<TExpenseFormReducerState>,
+) {
 	switch (action.type) {
 		case EExpenseFormReducerAction.SET_AMOUNT: {
+			let amount = action.amount as number;
+
 			return {
 				...state,
-				amount: action.amount,
+				amount,
 			};
 		}
 		case EExpenseFormReducerAction.SET_CURRENCY: {
+			let currency = action.currency as ECurrency;
+
 			return {
 				...state,
-				currency: action.currency,
+				currency,
 			};
 		}
 		case EExpenseFormReducerAction.SET_COMMENT: {
+			let comment = action.comment as string;
+
 			return {
 				...state,
-				comment: action.comment,
+				comment,
 			};
 		}
 		case EExpenseFormReducerAction.SET_DATE: {
+			let date = action.date as string;
+
 			return {
 				...state,
-				date: action.date,
+				date,
 			};
 		}
 		case EExpenseFormReducerAction.SET_CATEGORY: {
+			let category = action.category as string;
+
 			return {
 				...state,
-				category: action.category,
+				category,
 			};
 		}
 		case EExpenseFormReducerAction.RESET: {
+			let amount = action.amount as number;
+			let currency = action.currency as ECurrency;
+			let comment = action.comment as string;
+			let date = action.date as string;
+			let category = action.category as string;
+
 			return {
-				amount: action.amount,
-				currency: action.currency,
-				comment: action.comment,
-				date: action.date,
-				category: action.category,
+				...state,
+				amount,
+				currency,
+				comment,
+				date,
+				category,
 			};
 		}
 	}
