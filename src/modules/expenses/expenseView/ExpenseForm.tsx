@@ -164,28 +164,24 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			</div>
 
 			{false && (
-				<>
-					<span>{testAmount}</span>
-
-					<NumericKeyboard
-						value={testAmount}
-						onClick={(value: string | number) => {
-							console.log(value);
-							if (value === ',') {
-								setTestAmount((prevTestAmount) => {
-									return `${prevTestAmount}${value}`;
-								});
-								return;
-							}
-
+				<NumericKeyboard
+					value={testAmount}
+					onClick={(value: string | number) => {
+						if (value === ',') {
 							setTestAmount((prevTestAmount) => {
-								return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
-									IntlService.getInstance().locale,
-								);
+								return `${prevTestAmount}${value}`;
 							});
-						}}
-					/>
-				</>
+
+							return;
+						}
+
+						setTestAmount((prevTestAmount) => {
+							return toModelValue(`${prevTestAmount}${value}`).toLocaleString(
+								IntlService.getInstance().locale,
+							);
+						});
+					}}
+				/>
 			)}
 		</form>
 	);
