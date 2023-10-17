@@ -1,7 +1,7 @@
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
-import { ExpenseView } from '@modules/expenses/expenseView';
+import { AddExpense } from '@modules/expenses/addExpense/AddExpense';
 import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
@@ -27,7 +27,7 @@ export function MainScreen() {
 			</CardContainer>
 
 			<ActionSheet>
-				<ExpenseView />
+				<AddExpense />
 			</ActionSheet>
 		</>
 	);
