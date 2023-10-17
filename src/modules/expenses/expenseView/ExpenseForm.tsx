@@ -1,5 +1,5 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
-import type { TISODateString } from '@domain/types';
+import type { TCategory, TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryInput } from '@modules/expenses/expenseView/components/categoryInput/CategoryInput';
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/CommentInput';
@@ -22,7 +22,7 @@ export type TExpenseFormProps = {
 	amount: number;
 	currency: ECurrency;
 	comment: string;
-	category: string;
+	category: TCategory;
 	date: string;
 };
 
@@ -168,7 +168,7 @@ type TExpenseFormReducerState = {
 	amount: number;
 	currency: ECurrency;
 	comment: string;
-	category: string;
+	category: TCategory;
 	date: string;
 };
 

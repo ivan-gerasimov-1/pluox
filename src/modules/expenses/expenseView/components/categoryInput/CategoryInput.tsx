@@ -3,9 +3,10 @@ import { classnames } from '@utils/classnames';
 import styles from './categoryInput.module.css';
 import { useIntl } from '@modules/intl';
 import { categoryInputI18n } from '@modules/expenses/expenseView/components/categoryInput/categoryInput.i18n';
+import type { TCategory } from '@domain/types';
 
 export type TCategoryInputProps = {
-	value: string;
+	value: TCategory;
 	onChange?(id: string): void;
 };
 
@@ -27,7 +28,7 @@ export function CategoryInput(props: TCategoryInputProps) {
 			className={classnames(styles.categoryInput, {
 				[styles.isEmpty]: props.value === '',
 			})}
-			value={props.value}
+			value={props.value || ''}
 			onChange={handleChange}
 		>
 			<option value="" disabled>
