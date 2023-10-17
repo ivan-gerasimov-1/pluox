@@ -1,18 +1,23 @@
 import { type Id } from '@domain/types';
-import { useExpensesStore } from '@modules/expenses';
+import { ExpenseForm } from '@modules/expenses/expenseView/ExpenseForm';
+import { useExpensesStore } from '@modules/expenses/expenses.store';
 
-type TEditExpense = {
-	itemId: Id;
+type TEditExpenseProps = {
+	id: Id;
 };
 
-export function EditExpense(props: TEditExpense) {
-	let expense = useExpensesStore((state) => state.getOne(props.itemId));
+export function EditExpense(props: TEditExpenseProps) {
+	let expense = useExpensesStore((state) => state.getOne(props.id));
+	let editExpense = useExpensesStore((state) => state.editExpense);
 
 	return (
-		<div>
-			<div>Amount: {expense.amount}</div>
-			<div>Currency: {expense.currency}</div>
-			<div>Comment: {expense.comment}</div>
-		</div>
+		<ExpenseForm
+			onSubmit={editExpense}
+			amount={expense.amount}
+			currency={expense.currency}
+			comment={expense.comment}
+			category={expense.category}
+			date={expense.date}
+		/>
 	);
 }
