@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
-export const newExpenseI18n = {
+export const expenseFormI18n = {
 	[ELocaleCode.RU_RU]: {
 		submitButton: 'Внести',
 	},

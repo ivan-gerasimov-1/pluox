@@ -5,10 +5,10 @@ import { CategoryInput } from '@modules/expenses/expenseView/components/category
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/CommentInput';
 import { CurrencyInput } from '@modules/expenses/expenseView/components/currencyInput/currencyInput';
 import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
-import { newExpenseI18n } from '@modules/expenses/expenseView/expenseView.i18n';
+import { expenseFormI18n } from '@modules/expenses/expenseView/expenseForm.i18n';
 import { useIntl } from '@modules/intl';
 import { useReducer } from 'react';
-import styles from './expenseView.module.css';
+import styles from './expenseForm.module.css';
 
 export type TExpenseFormProps = {
 	onSubmit(payload: {
@@ -27,7 +27,7 @@ export type TExpenseFormProps = {
 };
 
 export function ExpenseForm(props: TExpenseFormProps) {
-	let intl = useIntl(newExpenseI18n);
+	let intl = useIntl(expenseFormI18n);
 	let [formState, dispatch] = useReducer(expenseFormReducer, {
 		amount: props.amount,
 		currency: props.currency,
