@@ -22,6 +22,7 @@
 	},
 	"homepage": "https://github.com/EvanJ0hnson/savee#readme",
 	"dependencies": {
+		"@supabase/supabase-js": "2.38.2",
 		"clsx": "2.0.0",
 		"ionicons": "7.2.1",
 		"nanoid": "5.0.2",
