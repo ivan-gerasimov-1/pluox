@@ -2,8 +2,15 @@ import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
+import { initializeSupabase } from '@root/supabase';
 
 async function main(): Promise<void> {
+	try {
+		await initializeSupabase();
+	} finally {
+		console.warn('Supabase connection is failed');
+	}
+
 	await getCurrencyRates();
 
 	const ui: IUserInterface = new ReactUI(window, {
