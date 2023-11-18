@@ -1,8 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { SupabaseClient as ISupabaseClient } from '@supabase/supabase-js';
-
-export interface IDatabaseClient {}
+import type { IDatabaseClient } from '@core/infrastructure/databaseClient/types';
 
 export class DatabaseClient implements IDatabaseClient {
 	static #instance?: IDatabaseClient;
@@ -25,5 +24,9 @@ export class DatabaseClient implements IDatabaseClient {
 		}
 
 		return this.#instance;
+	}
+
+	public async add<T>(target: string, payload: T): Promise<void> {
+		await this.client.from(target).upsert(payload);
 	}
 }
