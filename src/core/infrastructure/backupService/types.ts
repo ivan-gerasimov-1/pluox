@@ -1,3 +1,3 @@
 export interface IBackupService {
-	run(): Promise<void>;
+	run<T>(payload: T): Promise<void>;
 }
