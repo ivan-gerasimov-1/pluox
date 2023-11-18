@@ -7,7 +7,5 @@ export function useMonthName(month: TMonth): string {
 	let intl = useIntl(useMonthNameI18n);
 	let currentMonth = getMonthNameByIndex(month);
 
-	console.log('useMonthName');
-
 	return intl.translate(currentMonth);
 }
