@@ -8,7 +8,7 @@ export class AuthService implements IAuthSerivce {
 	private constructor(private readonly client: ISupabaseClient) {}
 
 	public static getInstance(): IAuthSerivce {
-		if (this.#instance) {
+		if (!this.#instance) {
 			const supabaseClient = SupabaseClient.getInstance();
 
 			this.#instance = new AuthService(supabaseClient);
