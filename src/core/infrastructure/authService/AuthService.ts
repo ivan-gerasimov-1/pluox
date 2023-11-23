@@ -5,6 +5,9 @@ import type { ISupabaseClient } from '@core/infrastructure/supabaseClient/types'
 export class AuthService implements IAuthSerivce {
 	static #instance: IAuthSerivce;
 
+	public userId: string = '';
+	public email: string = '';
+
 	private constructor(private readonly client: ISupabaseClient) {}
 
 	public static getInstance(): IAuthSerivce {
@@ -17,12 +20,24 @@ export class AuthService implements IAuthSerivce {
 		return this.#instance;
 	}
 
-	public async signIn(email: string, password: string): Promise<void> {
+	public async signIn(
+		email: string,
+		password: string,
+	): Promise<{
+		userId: string;
+		email: string;
+	}> {
 		let response = await this.client.auth.signInWithPassword({
 			email,
 			password,
 		});
 
-		console.log(response);
+		this.userId = response.data.user?.id || '';
+		this.email = response.data.user?.email || '';
+
+		return {
+			userId: this.userId,
+			email: this.email,
+		};
 	}
 }

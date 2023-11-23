@@ -1,3 +1,12 @@
 export interface IAuthSerivce {
-	signIn(email: string, password: string): Promise<void>;
+	readonly userId: string;
+	readonly email: string;
+
+	signIn(
+		email: string,
+		password: string,
+	): Promise<{
+		userId: string;
+		email: string;
+	}>;
 }
