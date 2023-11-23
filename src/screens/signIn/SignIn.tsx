@@ -1,8 +1,19 @@
 import styles from './signIn.module.css';
+import { AuthService } from '@core/infrastructure/authService/AuthService';
 
 export function SignIn() {
+	let authService = AuthService.getInstance();
+
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+
+		// @ts-expect-error
+		const formElements = event.target.elements;
+
+		const email = formElements.email.value;
+		const password = formElements.password.value;
+
+		authService.signIn(email, password);
 	}
 
 	return (
