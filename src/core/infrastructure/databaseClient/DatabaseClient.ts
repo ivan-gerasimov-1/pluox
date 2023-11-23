@@ -1,26 +1,17 @@
-import { createClient } from '@supabase/supabase-js';
-import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
-import type { SupabaseClient as ISupabaseClient } from '@supabase/supabase-js';
 import type { IDatabaseClient } from '@core/infrastructure/databaseClient/types';
+import { SupabaseClient } from '@core/infrastructure/supabaseClient/SupabaseClient';
+import type { ISupabaseClient } from '@core/infrastructure/supabaseClient/types';
 
 export class DatabaseClient implements IDatabaseClient {
 	static #instance?: IDatabaseClient;
 
-	private readonly client: ISupabaseClient;
-
-	private constructor(config: { apiUrl: string; apiKey: string }) {
-		this.client = createClient(config.apiUrl, config.apiKey);
-	}
+	private constructor(private readonly client: ISupabaseClient) {}
 
 	public static getInstance(): IDatabaseClient {
 		if (!this.#instance) {
-			const appConfig = AppConfig.getInstance();
-			const supabase = appConfig.supabase;
+			const supabaseClient = SupabaseClient.getInstance();
 
-			this.#instance = new DatabaseClient({
-				apiUrl: supabase.apiUrl,
-				apiKey: supabase.apiKey,
-			});
+			this.#instance = new DatabaseClient(supabaseClient);
 		}
 
 		return this.#instance;
