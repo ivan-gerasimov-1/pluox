@@ -21,6 +21,9 @@
 		"url": "https://github.com/EvanJ0hnson/savee/issues"
 	},
 	"homepage": "https://github.com/EvanJ0hnson/savee#readme",
+	"workspaces": [
+		"packages/backend"
+	],
 	"dependencies": {
 		"@supabase/supabase-js": "2.38.2",
 		"clsx": "2.0.0",

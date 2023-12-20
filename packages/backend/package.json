@@ -1,0 +1,23 @@
+{
+	"name": "@savee/backend",
+	"version": "1.0.0",
+	"description": "Savee app backend",
+	"scripts": {
+		"build:clear": "rm -f ./.cache/.tsbuildinfo && rm -rf ./build",
+		"prebuild": "npm run build:clear",
+		"build": "tsc",
+		"start": "nodemon --watch ./src --ext ts ./src/index.ts",
+		"preview": "node ./build/index.js"
+	},
+	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.pw)",
+	"license": "UNLICENSED",
+	"private": true,
+	"devDependencies": {
+		"nodemon": "3.0.2",
+		"ts-node": "10.9.2",
+		"typescript": "5.2.2"
+	},
+	"dependencies": {
+		"tslib": "2.6.2"
+	}
+}
