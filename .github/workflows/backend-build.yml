@@ -26,8 +26,8 @@ jobs:
         npm --workspace=@savee/backend run build
     - name: Copy files
       run: |
-        mkdir -p artifacts/build
-        cp -r packages/backend/build/ artifacts/build/
+        mkdir -p artifacts/
+        cp -r packages/backend/build/ artifacts/
         cp packages/backend/package.json artifacts/build/
         cp package-lock.json artifacts/build/
 
@@ -48,7 +48,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: build
-        path: artifacts
+        path: artifacts/build
     - name: Show content of artifacts
       run: |
-        ls artifacts
+        ls artifacts/build
