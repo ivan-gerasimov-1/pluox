@@ -25,8 +25,22 @@ jobs:
         npm ci
         npm --workspace=@savee/backend run build
 
-    - name: Create backend build artifact
+    - name: Upload build artifact
       uses: actions/upload-artifact@v4
       with:
         name: build-server
         path: packages/backend/build
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+    - name: Download build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: build-server
+        path: artifacts/
+    - name: Show content of artifacts
+      run: ls artifacts
