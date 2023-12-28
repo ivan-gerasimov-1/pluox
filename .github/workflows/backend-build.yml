@@ -26,7 +26,7 @@ jobs:
         npm --workspace=@savee/backend run build
     - name: Copy files
       run: |
-        cp -r packages/backend/build/ artifacts/build/
+        cp -t -r packages/backend/build/ artifacts/build/
         cp packages/backend/package.json artifacts/build/
         cp packages/backend/package-lock.json artifacts/build/
 
