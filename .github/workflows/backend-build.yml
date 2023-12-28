@@ -65,3 +65,8 @@ jobs:
         mkdir "$HOME/.ssh"
         echo "$SSH_KEY" > "$HOME/.ssh/id_rsa"
         chmod 600 "$HOME/.ssh/id_rsa"
+    - name: Connect to SSH
+      run: |
+        ssh root@95.216.175.114
+        cd /
+        ls /srv
