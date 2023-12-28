@@ -41,6 +41,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
+    env:
+      SSH_KEY: ${{secrets.SSH_KEY}}
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -56,3 +59,9 @@ jobs:
     - name: Show content of artifacts
       run: |
         ls artifacts/build
+    - name: Setup SSH
+      run: |
+        set -eu
+        mkdir "$HOME/.ssh"
+        echo "$SSH_KEY" > "$HOME/.ssh/id_rsa"
+        chmod 600 "$HOME/.ssh/id_rsa"
