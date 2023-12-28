@@ -19,14 +19,3 @@ jobs:
       with:
         node-version: '16.20.2'
         cache: 'npm'
-
-    - name: Build
-    - run:  |
-        npm ci
-        npm --workspace=@savee/backend run build
-
-    - name: Upload backend build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-server
-        path: packages/backend/build
