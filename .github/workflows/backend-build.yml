@@ -49,6 +49,10 @@ jobs:
       with:
         name: build
         path: artifacts/build
+    - name: Install production dependencies
+      run: |
+        cd artifacts/build
+        npm ci --include=prod
     - name: Show content of artifacts
       run: |
         ls artifacts/build
