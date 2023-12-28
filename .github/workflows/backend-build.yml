@@ -29,7 +29,7 @@ jobs:
         mkdir -p artifacts/build
         cp -r packages/backend/build/ artifacts/build/
         cp packages/backend/package.json artifacts/build/
-        cp packages/backend/package-lock.json artifacts/build/
+        cp packages/package-lock.json artifacts/build/
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
