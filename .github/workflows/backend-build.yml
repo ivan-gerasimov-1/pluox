@@ -50,4 +50,6 @@ jobs:
         name: build
         path: artifacts/build
     - name: Show content of artifacts
-      run: ls artifacts
+      run: |
+        ls artifacts
+        ls artifacts/build
