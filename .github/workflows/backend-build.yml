@@ -19,3 +19,8 @@ jobs:
       with:
         node-version: '16.20.2'
         cache: 'npm'
+
+    - name: Build
+    - run: |
+        npm ci
+  
