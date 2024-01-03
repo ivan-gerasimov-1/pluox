@@ -3,7 +3,7 @@
 
 	top: 0;
 	right: 0;
-	bottom: 0;
+	bottom: calc(var(--action-sheet-start) + 3%);
 	left: 0;
 
 	background-color: var(--color-black);
@@ -21,6 +21,7 @@
 }
 
 .exit {
+	bottom: 0;
 	opacity: 0.5;
 }
 

@@ -15,7 +15,7 @@ export function Backdrop(props: TBackdropProps) {
 		<CSSTransition
 			nodeRef={backdropRef}
 			in={props.isVisible}
-			timeout={250}
+			timeout={500}
 			classNames={{ ...styles }}
 			mountOnEnter
 			unmountOnExit

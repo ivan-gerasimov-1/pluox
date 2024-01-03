@@ -60,6 +60,8 @@
 	border: 0 none;
 	border-radius: 0;
 
+	background-color: var(--color-pure-white);
+
 	transition: background-color 0.25s ease-in-out;
 
 	appearance: none;

@@ -10,7 +10,8 @@
 	padding-top: 0.75rem;
 	padding-bottom: 1.5rem;
 
-	background-color: var(--color-pure-white);
+	background-color: rgba(255, 255, 255, 0);
+	backdrop-filter: blur(20px);
 	box-shadow: 0 -0.5em 2.5em -0.5em rgba(0, 0, 0, 0.125);
 
 	border-top-left-radius: var(--border-radius-default);
