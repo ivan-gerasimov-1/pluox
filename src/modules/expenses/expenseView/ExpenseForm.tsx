@@ -69,6 +69,33 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	return (
 		<form name="expenseForm" onSubmit={handleSubmit}>
 			<div className={styles.formGroup}>
+				<select
+					name="newExpense_currencySelect"
+					id="newExpense_currencySelect"
+					value={formState.currency}
+					onChange={(event) => {
+						const currency = event.target.value as ECurrency;
+
+						dispatch({
+							type: EExpenseFormReducerAction.SET_CURRENCY,
+							currency,
+						});
+					}}
+				>
+					{/* @todo Add a placeholder */}
+					{/* <option value="" disabled /> */}
+
+					<option key={ECurrency.USD} value={ECurrency.USD}>
+						{ECurrency.USD}
+					</option>
+					<option key={ECurrency.RUB} value={ECurrency.RUB}>
+						{ECurrency.RUB}
+					</option>
+					<option key={ECurrency.GEL} value={ECurrency.GEL}>
+						{ECurrency.GEL}
+					</option>
+				</select>
+
 				<AmountInput
 					value={formState.amount}
 					onChange={(amount: number) => {
