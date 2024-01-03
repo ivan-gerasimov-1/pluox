@@ -45,7 +45,12 @@ export class AppConfig implements IAppConfig {
 	private constructor(locale: ELocaleCode, currency: ECurrency) {
 		this.#locale = locale;
 		this.#currency = currency;
-		this.#availableCurrencies = [ECurrency.GEL, ECurrency.RUB, ECurrency.USD];
+		this.#availableCurrencies = [
+			ECurrency.GEL,
+			ECurrency.RUB,
+			ECurrency.USD,
+			ECurrency.EUR,
+		];
 		this.#budget = 4800;
 		this.#currentMonth = this.getCurrentMonth();
 
