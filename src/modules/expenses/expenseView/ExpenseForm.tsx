@@ -85,14 +85,17 @@ export function ExpenseForm(props: TExpenseFormProps) {
 					{/* @todo Add a placeholder */}
 					{/* <option value="" disabled /> */}
 
-					<option key={ECurrency.USD} value={ECurrency.USD}>
-						{ECurrency.USD}
+					<option key={ECurrency.EUR} value={ECurrency.EUR}>
+						{ECurrency.EUR}
+					</option>
+					<option key={ECurrency.GEL} value={ECurrency.GEL}>
+						{ECurrency.GEL}
 					</option>
 					<option key={ECurrency.RUB} value={ECurrency.RUB}>
 						{ECurrency.RUB}
 					</option>
-					<option key={ECurrency.GEL} value={ECurrency.GEL}>
-						{ECurrency.GEL}
+					<option key={ECurrency.USD} value={ECurrency.USD}>
+						{ECurrency.USD}
 					</option>
 				</select>
 
