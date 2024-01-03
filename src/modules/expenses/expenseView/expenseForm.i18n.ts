@@ -2,9 +2,9 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 export const expenseFormI18n = {
 	[ELocaleCode.RU_RU]: {
-		submitButton: 'Внести',
+		submitButton: '→',
 	},
 	[ELocaleCode.EN_US]: {
-		submitButton: 'Add',
+		submitButton: '→',
 	},
 };
