@@ -207,6 +207,14 @@ module.exports = {
 		static: {
 			directory: config.paths.public,
 		},
+		proxy: {
+			'/api': {
+				target: 'http://localhost:3001',
+				pathRewrite: {
+					'^/api': '',
+				},
+			},
+		},
 	},
 };
 
@@ -243,7 +251,7 @@ function getNodeEnv() {
 	}
 
 	const isValidNodeEnv = Object.values(EEnvironment).includes(
-		process.env.NODE_ENV
+		process.env.NODE_ENV,
 	);
 
 	if (!isValidNodeEnv) {
