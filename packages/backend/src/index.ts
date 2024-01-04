@@ -8,6 +8,7 @@ import Fastify from 'fastify';
 	fastify.get('/', async function handler() {
 		return {
 			hello: 'world',
+			version: '1.0.0',
 		};
 	});
 
