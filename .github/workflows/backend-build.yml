@@ -83,8 +83,9 @@ jobs:
       - name: Start the app
         run: |
           ssh $USER@$HOST '
-            ln -s "$NVM_DIR/versions/node/v16.20.2/bin/node" "/usr/local/bin/node"
+            whereis node &&
+            ln -s "$NVM_DIR/versions/node/v16.20.2/bin/node" "/usr/local/bin/node" &&
             cd /srv/savee/api &&
-            sudo node -v &&
+            node -v &&
             /root/.nvm/versions/node/v16.20.2/bin/pm2 start ecosystem.config.js
           '
