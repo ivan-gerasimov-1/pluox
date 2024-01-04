@@ -5,9 +5,15 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Backend",
+			"command": "npm --workspace=@savee/backend start",
+			"request": "launch",
+			"type": "node-terminal"
+		},
+		{
+			"name": "UI",
 			"type": "node-terminal",
 			"command": "npm start",
-			"name": "start",
 			"request": "launch"
 		},
 		{
@@ -16,6 +22,18 @@
 			"name": "Launch Chrome",
 			"url": "http://localhost:3002",
 			"webRoot": "${workspaceFolder}"
+		}
+	],
+	"compounds": [
+		{
+			"name": "App",
+			"configurations": ["UI", "Backend"],
+			"stopAll": false,
+			"presentation": {
+				"hidden": false,
+				"group": "App",
+				"order": 1
+			}
 		}
 	]
 }
