@@ -83,7 +83,10 @@ jobs:
       - name: Start the app
         run: |
           ssh $USER@$HOST '
+            echo "$NVM_DIR" &&
             whereis node &&
+            whereis npm &&
+            whereis pm2 &&
             node -v &&
             ln -s "$NVM_DIR/versions/node/v16.20.2/bin/node" "/usr/local/bin/node" &&
             cd /srv/savee/api &&
