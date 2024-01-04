@@ -84,6 +84,6 @@ jobs:
         run: |
           ssh $USER@$HOST '
             cd /srv/savee/api &&
-            ls / &&
-            pm2 start ecosystem.config.js
+            ls &&
+            /root/.nvm/versions/node/v16.20.2/bin/pm2 start ecosystem.config.js
           '
