@@ -73,4 +73,4 @@ jobs:
           chmod 600 $HOME/.ssh/config
       - name: Deploy new code
         run: |
-          rsync --archive --compress --delete artifacts/build/* $USER@$HOST:~/srv/savee/api
+          rsync --archive --compress --delete artifacts/build/* $USER@$HOST:/srv/savee/api
