@@ -44,6 +44,7 @@ jobs:
     env:
       SSH_KEY: ${{secrets.SSH_KEY}}
       HOST: 95.216.175.114
+      USER: root
 
     steps:
       - uses: actions/checkout@v4
@@ -69,4 +70,4 @@ jobs:
           ssh-keyscan -t rsa "$HOST" > $HOME/.ssh/known_hosts
       - name: Connect to SSH
         run: |
-          ssh -i $HOME/.ssh/id_rsa root@"$HOST" 'cd / && ls /srv'
+          ssh -i $HOME/.ssh/id_rsa $USER@"$HOST" 'cd / && ls /srv'
