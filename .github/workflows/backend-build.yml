@@ -84,9 +84,8 @@ jobs:
         run: |
           ssh $USER@$HOST '
             cd /srv/savee/api &&
-            ls &&
-            node -v &&
-            npm -v &&
-            npm ls -g --depth=0 &&
+            sudo node -v &&
+            sudo npm -v &&
+            sudo npm ls -g --depth=0 &&
             /root/.nvm/versions/node/v16.20.2/bin/pm2 start ecosystem.config.js
           '
