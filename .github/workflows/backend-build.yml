@@ -43,6 +43,7 @@ jobs:
 
     env:
       SSH_KEY: ${{secrets.SSH_KEY}}
+      HOST: 95.216.175.114
 
     steps:
       - uses: actions/checkout@v4
@@ -65,7 +66,7 @@ jobs:
           mkdir "$HOME/.ssh"
           echo "$SSH_KEY" > "$HOME/.ssh/id_rsa"
           chmod 600 "$HOME/.ssh/id_rsa"
-          ssh-keyscan -t rsa 95.216.175.114 > $HOME/.ssh/known_hosts
+          ssh-keyscan -t rsa "$HOST" > $HOME/.ssh/known_hosts
       - name: Connect to SSH
         run: |
-          ssh -i $HOME/.ssh/id_rsa root@95.216.175.114 'cd / && ls /srv'
+          ssh -i $HOME/.ssh/id_rsa root@"$HOST" 'cd / && ls /srv'
