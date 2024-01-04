@@ -8,10 +8,12 @@ on:
     branches: ['main']
     paths:
       - 'packages/backend/**'
+      - '.github/**'
   pull_request:
     branches: ['main']
     paths:
       - 'packages/backend/**'
+      - '.github/**'
 
 jobs:
   build:
