@@ -73,4 +73,7 @@ jobs:
           chmod 600 $HOME/.ssh/config
       - name: Connect to SSH
         run: |
-          ssh $USER@$HOST 'cd / && ls /srv'
+          ssh $USER@$HOST '
+            cd / &&
+            ls /srv
+          '
