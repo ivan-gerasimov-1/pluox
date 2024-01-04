@@ -6,8 +6,12 @@ name: Node.js CI
 on:
   push:
     branches: ['main']
+    paths:
+      - 'packages/backend/**'
   pull_request:
     branches: ['main']
+    paths:
+      - 'packages/backend/**'
 
 jobs:
   build:
@@ -78,5 +82,6 @@ jobs:
         run: |
           ssh $USER@$HOST '
             cd /srv/savee/api &&
+            ls / &&
             pm2 start ecosystem.config.js
           '
