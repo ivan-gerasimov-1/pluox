@@ -35,6 +35,7 @@ jobs:
           mkdir -p artifacts/
           cp -r packages/backend/build/ artifacts/
           cp packages/backend/package.json artifacts/build/
+          cp packages/backend/ecosystem.config.js artifacts/build/
           cp package-lock.json artifacts/build/
 
       - name: Upload build artifact
@@ -85,11 +86,6 @@ jobs:
           ssh $USER@$HOST '
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            echo "$NVM_DIR" &&
-            whereis node &&
-            whereis npm &&
-            whereis pm2 &&
-            node -v &&
             cd /srv/savee/api &&
             /root/.nvm/versions/node/v16.20.2/bin/pm2 start ecosystem.config.js
           '
