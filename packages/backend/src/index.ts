@@ -14,7 +14,7 @@ import Fastify from 'fastify';
 
 	try {
 		await fastify.listen({
-			port: 3000,
+			port: 3001,
 		});
 	} catch (error) {
 		fastify.log.error(error);
