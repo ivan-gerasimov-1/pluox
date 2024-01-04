@@ -68,6 +68,9 @@ jobs:
           echo "$SSH_KEY" > $HOME/.ssh/id_rsa
           chmod 600 $HOME/.ssh/id_rsa
           ssh-keyscan -t rsa $HOST > $HOME/.ssh/known_hosts
+          chmod 600 $HOME/.ssh/known_hosts
+          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/id_rsa" > $HOME/.ssh/config
+          chmod 600 $HOME/.ssh/config
       - name: Connect to SSH
         run: |
-          ssh -i $HOME/.ssh/id_rsa $USER@$HOST 'cd / && ls /srv'
+          ssh $USER@$HOST 'cd / && ls /srv'
