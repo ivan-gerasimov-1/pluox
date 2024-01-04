@@ -64,16 +64,13 @@ jobs:
       - name: Setup SSH
         run: |
           set -eu
-          mkdir "$HOME/.ssh"
+          mkdir $HOME/.ssh
           echo "$SSH_KEY" > $HOME/.ssh/id_rsa
           chmod 600 $HOME/.ssh/id_rsa
           ssh-keyscan -t rsa $HOST > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
           echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/id_rsa" > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
-      - name: Connect to SSH
+      - name: Deploy new code
         run: |
-          ssh $USER@$HOST '
-            cd / &&
-            ls /srv
-          '
+          rsync --archive --compress --delete artifacts/build/* $USER@$HOST:~/srv/savee/api
