@@ -84,8 +84,8 @@ jobs:
         run: |
           ssh $USER@$HOST '
             whereis node &&
+            node -v &&
             ln -s "$NVM_DIR/versions/node/v16.20.2/bin/node" "/usr/local/bin/node" &&
             cd /srv/savee/api &&
-            node -v &&
             /root/.nvm/versions/node/v16.20.2/bin/pm2 start ecosystem.config.js
           '
