@@ -5,37 +5,37 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '16.20.2'
-        cache: 'npm'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '16.20.2'
+          cache: 'npm'
 
-    - name: Build
-      run: |
-        npm ci
-        npm --workspace=@savee/backend run build
-    - name: Copy files
-      run: |
-        mkdir -p artifacts/
-        cp -r packages/backend/build/ artifacts/
-        cp packages/backend/package.json artifacts/build/
-        cp package-lock.json artifacts/build/
+      - name: Build
+        run: |
+          npm ci
+          npm --workspace=@savee/backend run build
+      - name: Copy files
+        run: |
+          mkdir -p artifacts/
+          cp -r packages/backend/build/ artifacts/
+          cp packages/backend/package.json artifacts/build/
+          cp package-lock.json artifacts/build/
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: build
-        path: artifacts/build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: artifacts/build
 
   deploy:
     needs: build
@@ -45,28 +45,28 @@ jobs:
       SSH_KEY: ${{secrets.SSH_KEY}}
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-    - name: Download build artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: build
-        path: artifacts/build
-    - name: Install production dependencies
-      run: |
-        cd artifacts/build
-        npm ci --include=prod
-    - name: Show content of artifacts
-      run: |
-        ls artifacts/build
-    - name: Setup SSH
-      run: |
-        set -eu
-        mkdir "$HOME/.ssh"
-        echo "$SSH_KEY" > "$HOME/.ssh/id_rsa"
-        chmod 600 "$HOME/.ssh/id_rsa"
-    - name: Connect to SSH
-      run: |
-        ssh -o StrictHostKeyChecking=no root@95.216.175.114
-        cd /
-        ls /srv
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: artifacts/build
+      - name: Install production dependencies
+        run: |
+          cd artifacts/build
+          npm ci --include=prod
+      - name: Show content of artifacts
+        run: |
+          ls artifacts/build
+      - name: Setup SSH
+        run: |
+          set -eu
+          mkdir "$HOME/.ssh"
+          echo "$SSH_KEY" > "$HOME/.ssh/id_rsa"
+          chmod 600 "$HOME/.ssh/id_rsa"
+      - name: Connect to SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no root@95.216.175.114
+          cd /
+          ls /srv
