@@ -45,6 +45,7 @@ jobs:
       SSH_KEY: ${{secrets.SSH_KEY}}
       HOST: 95.216.175.114
       USER: root
+      $FOO: $HOME
 
     steps:
       - uses: actions/checkout@v4
