@@ -52,9 +52,7 @@ async function runBackup(): Promise<void> {
 
 async function testApiCall(): Promise<void> {
 	try {
-		const foo = await fetch(environment.apiUrl, {
-			mode: 'no-cors',
-		});
+		const foo = await fetch(environment.apiUrl);
 
 		window.alert(JSON.stringify(await foo.json()));
 	} catch (error) {
