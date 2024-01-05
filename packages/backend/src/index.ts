@@ -1,8 +1,13 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 
 (async function main() {
 	const fastify = Fastify({
 		logger: true,
+	});
+
+	await fastify.register(cors, {
+		origin: ['https://savee.vercel.app', 'http://localhost:3000'],
 	});
 
 	fastify.get('/', async function handler() {
