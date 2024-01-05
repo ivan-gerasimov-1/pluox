@@ -14,6 +14,6 @@ function isDevelopment(environment?: string | EEnvironment) {
 export let environment: TEnvironment = {
 	isDevelopment: isDevelopment(process.env.NODE_ENV),
 	apiUrl: isDevelopment(process.env.NODE_ENV)
-		? 'http://localhost:3001/api'
-		: 'http://savee.gerasimov.pw/api',
+		? '/api'
+		: 'https://savee.gerasimov.pw/api',
 };
