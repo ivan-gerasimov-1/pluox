@@ -12,7 +12,7 @@ import mongodb from '@fastify/mongodb';
 	});
 
 	await fastify.register(mongodb, {
-		url: 'mongodb://localhost:27017/staging',
+		url: 'mongodb://staging:fZmbFziM-8onskLQUf-oXifPyaaJgs2j@localhost:27017/staging',
 		forceClose: true,
 	});
 
