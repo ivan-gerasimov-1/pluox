@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+import mongodb from '@fastify/mongodb';
 
 (async function main() {
 	const fastify = Fastify({
@@ -10,10 +11,19 @@ import cors from '@fastify/cors';
 		origin: ['https://savee.vercel.app', 'http://localhost:3000'],
 	});
 
+	await fastify.register(mongodb, {
+		url: 'mongodb://localhost:27017/staging',
+		forceClose: true,
+	});
+
 	fastify.get('/', async function handler() {
+		const usersCollection = fastify.mongo.db?.collection('users');
+		const users = await usersCollection?.find({}).toArray();
+
 		return {
 			hello: 'world',
 			version: '1.0.0',
+			users: users?.length,
 		};
 	});
 
