@@ -2,10 +2,12 @@ import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
 import { BackupService } from '@core/infrastructure/backupService/BackupService';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
+import { environment } from '@root/config';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 async function main(): Promise<void> {
+	await testApiCall();
 	runBackup();
 
 	await getCurrencyRates();
@@ -46,4 +48,19 @@ async function runBackup(): Promise<void> {
 		// @ts-expect-error
 		store?.state?.operations,
 	);
+}
+
+async function testApiCall(): Promise<void> {
+	try {
+		const foo = await fetch(environment.apiUrl, {
+			mode: 'no-cors',
+		});
+
+		window.alert(JSON.stringify(await foo.json()));
+	} catch (error) {
+		// @ts-expect-error
+		console.log(error.message);
+
+		window.alert(error);
+	}
 }
