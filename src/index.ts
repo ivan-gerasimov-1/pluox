@@ -7,7 +7,8 @@ import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 async function main(): Promise<void> {
-	await testApiCall();
+	/** @todo Remove */
+	// await testApiCall();
 	runBackup();
 
 	await getCurrencyRates();
