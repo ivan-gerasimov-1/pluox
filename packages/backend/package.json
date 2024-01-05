@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@fastify/cors": "8.5.0",
+		"@fastify/mongodb": "8.0.0",
 		"fastify": "4.25.2",
 		"tslib": "2.6.2"
 	}
