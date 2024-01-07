@@ -19,7 +19,7 @@ import { appConfig } from './config';
 	});
 
 	await fastify.register(mongodb, {
-		url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@localhost:27017/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
+		url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@127.0.0.1:27017/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
 		forceClose: true,
 	});
 
