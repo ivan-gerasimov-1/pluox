@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import mongodb from '@fastify/mongodb';
+import { appConfig } from './config';
 
 (async function main() {
 	const fastify = Fastify({
@@ -18,7 +19,7 @@ import mongodb from '@fastify/mongodb';
 	});
 
 	await fastify.register(mongodb, {
-		url: 'mongodb://staging:fZmbFziM-8onskLQUf-oXifPyaaJgs2j@localhost:27017/staging',
+		url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@localhost:27017/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
 		forceClose: true,
 	});
 
@@ -35,7 +36,7 @@ import mongodb from '@fastify/mongodb';
 
 	try {
 		await fastify.listen({
-			port: 3001,
+			port: appConfig.port,
 		});
 	} catch (error) {
 		fastify.log.error(error);
