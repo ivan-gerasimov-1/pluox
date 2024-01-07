@@ -6,7 +6,7 @@
 		"build:clear": "rm -f ./.cache/.tsbuildinfo && rm -rf ./build",
 		"prebuild": "npm run build:clear",
 		"build": "tsc",
-		"start": "nodemon --watch ./src --ext ts ./src/index.ts",
+		"start": "nodemon --watch ./src --ext ts -r dotenv/config ./src/index.ts",
 		"preview": "node ./build/index.js"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.pw)",
@@ -20,6 +20,7 @@
 	"dependencies": {
 		"@fastify/cors": "8.5.0",
 		"@fastify/mongodb": "8.0.0",
+		"dotenv": "16.3.1",
 		"fastify": "4.25.2",
 		"tslib": "2.6.2"
 	}
