@@ -7,8 +7,14 @@ import mongodb from '@fastify/mongodb';
 		logger: true,
 	});
 
+	const allowedOrigins = ['https://savee.vercel.app'];
+
+	if (isDevelopment(process.env.NODE_ENV)) {
+		allowedOrigins.push('http://localhost:3000');
+	}
+
 	await fastify.register(cors, {
-		origin: ['https://savee.vercel.app', 'http://localhost:3000'],
+		origin: allowedOrigins,
 	});
 
 	await fastify.register(mongodb, {
@@ -37,3 +43,7 @@ import mongodb from '@fastify/mongodb';
 		process.exit(1);
 	}
 })();
+
+function isDevelopment(environment?: string) {
+	return environment === 'development';
+}
