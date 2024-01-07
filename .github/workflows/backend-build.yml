@@ -87,5 +87,5 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd /srv/savee/api &&
-            /root/.nvm/versions/node/v16.20.2/bin/pm2 start --env .env ecosystem.config.js
+            pm2 start --env .env ecosystem.config.js
           '
