@@ -13,13 +13,16 @@
 	"license": "UNLICENSED",
 	"private": true,
 	"devDependencies": {
+		"@types/bcrypt": "5.0.2",
 		"nodemon": "3.0.2",
 		"ts-node": "10.9.2",
 		"typescript": "5.2.2"
 	},
 	"dependencies": {
 		"@fastify/cors": "8.5.0",
+		"@fastify/jwt": "8.0.0",
 		"@fastify/mongodb": "8.0.0",
+		"bcrypt": "5.1.1",
 		"dotenv": "16.3.1",
 		"fastify": "4.25.2",
 		"tslib": "2.6.2"
