@@ -1,7 +1,9 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import mongodb from '@fastify/mongodb';
+import jwt from '@fastify/jwt';
 import { appConfig } from './config';
+import bcrypt from 'bcrypt';
 
 (async function main() {
 	const fastify = Fastify({
@@ -23,6 +25,10 @@ import { appConfig } from './config';
 		forceClose: true,
 	});
 
+	await fastify.register(jwt, {
+		secret: appConfig.jwt.secret,
+	});
+
 	fastify.get('/', async function handler() {
 		const usersCollection = fastify.mongo.db?.collection('users');
 		const users = await usersCollection?.find({}).toArray();
@@ -32,6 +38,71 @@ import { appConfig } from './config';
 			version: '1.0.0',
 			users: users?.length,
 		};
+	});
+
+	fastify.post('/signup', async function handler(request, response) {
+		// @ts-expect-error
+		const { email, password } = request.body;
+		const hashedPassword = await bcrypt.hash(password, 10);
+
+		const usersCollection = fastify.mongo.db?.collection('users');
+
+		await usersCollection?.insertOne({
+			email,
+			password: hashedPassword,
+		});
+
+		response.send({
+			email,
+		});
+	});
+
+	fastify.post('/login', async (request, reply) => {
+		// @ts-expect-error
+		const { email, password } = request.body;
+
+		const usersCollection = fastify.mongo.db?.collection('users');
+		const user = await usersCollection?.findOne({
+			email,
+		});
+
+		const isPasswordValid = await bcrypt.compare(password, user?.password);
+
+		if (!isPasswordValid) {
+			reply.code(401).send({
+				status: 'error',
+				message: 'Invalid credentials',
+			});
+			return;
+		}
+
+		const token = fastify.jwt.sign({
+			email: user?.email,
+		});
+
+		reply.send({
+			token,
+		});
+	});
+
+	fastify.addHook('preHandler', async (request, reply) => {
+		if (request.url === '/test') {
+			try {
+				await request.jwtVerify();
+			} catch (err) {
+				reply.code(401).send({
+					status: 'error',
+					message: 'Unauthorized',
+				});
+			}
+		}
+	});
+
+	fastify.get('/test', async (request, reply) => {
+		reply.send({
+			status: 'success',
+			message: 'You are authenticated',
+		});
 	});
 
 	try {
