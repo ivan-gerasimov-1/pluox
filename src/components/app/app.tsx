@@ -10,6 +10,7 @@ import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
 import { ExpenseListScreen } from '@screens/expenseList';
 import { SignIn } from '@screens/signIn';
+import { LogIn } from '@screens/logIn/LogIn';
 
 export function App() {
 	let intl = useIntl(appI18n);
@@ -22,6 +23,7 @@ export function App() {
 				<div className={styles.content}>
 					<Routes>
 						<Route path={EAppPath.SIGNIN} element={<SignIn />} />
+						<Route path={EAppPath.LOGIN} element={<LogIn />} />
 
 						<Route path={EAppPath.MAIN} element={<MainScreen />} />
 						<Route
