@@ -77,7 +77,7 @@ import { appConfig } from './config';
 		}
 
 		const token = fastify.jwt.sign({
-			email: user?.email,
+			id: user?.id,
 		});
 
 		reply.send({
