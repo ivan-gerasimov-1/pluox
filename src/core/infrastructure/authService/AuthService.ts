@@ -1,6 +1,8 @@
+import {
+	AppConfig,
+	type IAppConfig,
+} from '@core/infrastructure/appConfig/AppConfig';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
-import { SupabaseClient } from '@core/infrastructure/supabaseClient/SupabaseClient';
-import type { ISupabaseClient } from '@core/infrastructure/supabaseClient/types';
 
 export class AuthService implements IAuthSerivce {
 	static #instance: IAuthSerivce;
@@ -8,13 +10,13 @@ export class AuthService implements IAuthSerivce {
 	public userId: string = '';
 	public email: string = '';
 
-	private constructor(private readonly client: ISupabaseClient) {}
+	private constructor(private readonly appConfig: IAppConfig) {}
 
 	public static getInstance(): IAuthSerivce {
 		if (!this.#instance) {
-			const supabaseClient = SupabaseClient.getInstance();
+			const appConfig = AppConfig.getInstance();
 
-			this.#instance = new AuthService(supabaseClient);
+			this.#instance = new AuthService(appConfig);
 		}
 
 		return this.#instance;
@@ -27,17 +29,28 @@ export class AuthService implements IAuthSerivce {
 		userId: string;
 		email: string;
 	}> {
-		let response = await this.client.auth.signInWithPassword({
+		const response = await this.request({
 			email,
 			password,
 		});
 
-		this.userId = response.data.user?.id || '';
-		this.email = response.data.user?.email || '';
-
 		return {
-			userId: this.userId,
-			email: this.email,
+			userId: '',
+			email: response.email,
 		};
+	}
+
+	private async request(payload: Record<string, unknown>): Promise<{
+		email: string;
+	}> {
+		const response = await fetch(`${this.appConfig.apiUrl}/signup`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(payload),
+		});
+
+		return response.json();
 	}
 }
