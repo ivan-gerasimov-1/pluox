@@ -29,6 +29,13 @@ export function MainScreen() {
 						<MoneySpentYear />
 					</Card>
 				</Navigable>
+
+				<br />
+				<br />
+
+				<Navigable to={EAppPath.SIGNIN}>
+					<Card touchable>Регистрация</Card>
+				</Navigable>
 			</CardContainer>
 
 			<ActionSheet>
