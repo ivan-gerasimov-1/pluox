@@ -64,7 +64,7 @@ jobs:
       - name: Install production dependencies
         run: |
           cd artifacts/build
-          npm ci --include=prod
+          npm install --include=prod
       - name: Show content of artifacts
         run: |
           ls artifacts/build
