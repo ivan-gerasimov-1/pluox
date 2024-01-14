@@ -20,6 +20,8 @@ export function SignIn() {
 		<div className={styles.formContainer}>
 			<h1>Savee</h1>
 
+			<h2>Создать аккаунт</h2>
+
 			<form name="signIn" className={styles.signInForm} onSubmit={onSubmit}>
 				<label htmlFor="email" className={styles.inputGroup}>
 					<div className={styles.label}>Имейл</div>
