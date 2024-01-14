@@ -31,13 +31,8 @@ import { appConfig } from './config';
 	});
 
 	fastify.get('/', async function handler() {
-		const usersCollection = fastify.mongo.db?.collection('users');
-		const users = await usersCollection?.find({}).toArray();
-
 		return {
-			hello: 'world',
-			version: '1.0.0',
-			users: users?.length,
+			version: '0.1.0',
 		};
 	});
 
