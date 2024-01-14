@@ -3,7 +3,7 @@ import jwt from '@fastify/jwt';
 import mongodb from '@fastify/mongodb';
 import bcrypt from 'bcrypt';
 import Fastify from 'fastify';
-import { gererateUserId } from 'generateId';
+import { generateUserId } from './generateId';
 import { appConfig } from './config';
 
 (async function main() {
@@ -48,7 +48,7 @@ import { appConfig } from './config';
 
 		const usersCollection = fastify.mongo.db?.collection('users');
 
-		const userId = gererateUserId();
+		const userId = generateUserId();
 
 		await usersCollection?.insertOne({
 			id: userId,
