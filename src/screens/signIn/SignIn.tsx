@@ -48,7 +48,7 @@ export function SignIn() {
 
 				<div className={styles.inputGroup}>
 					<button type="submit" className={styles.submitButton}>
-						Войти
+						Зарегистрироваться
 					</button>
 				</div>
 			</form>
