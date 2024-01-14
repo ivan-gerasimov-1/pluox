@@ -6,7 +6,6 @@ import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
-import { SignIn } from '@screens/signIn';
 
 export function MainScreen() {
 	let appConfig = useAppConfig();
@@ -31,6 +30,10 @@ export function MainScreen() {
 
 				<Navigable to={EAppPath.SIGNIN}>
 					<Card touchable>Регистрация</Card>
+				</Navigable>
+
+				<Navigable to={EAppPath.LOGIN}>
+					<Card touchable>Вход</Card>
 				</Navigable>
 			</CardContainer>
 
