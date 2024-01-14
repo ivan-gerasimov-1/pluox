@@ -11,10 +11,6 @@ import { SignIn } from '@screens/signIn';
 export function MainScreen() {
 	let appConfig = useAppConfig();
 
-	if (false) {
-		return <SignIn />;
-	}
-
 	return (
 		<>
 			<CardContainer>
