@@ -3,6 +3,7 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { InvalidMonthError } from '@domain/amount/useCases/errors';
 import { monthGuard } from '@domain/amount/useCases/typeGuards';
 import type { TMonth } from '@domain/amount/useCases/types';
+import { environment } from '@root/config';
 
 export interface IAppConfig {
 	readonly locale: ELocaleCode;
@@ -10,6 +11,7 @@ export interface IAppConfig {
 	readonly availabelCurrencies: ECurrency[];
 	readonly budget: number | null;
 	readonly currentMonth: TMonth;
+	readonly apiUrl: string;
 
 	readonly openExchangeRates: {
 		apiUrl: string;
@@ -42,7 +44,13 @@ export class AppConfig implements IAppConfig {
 		apiKey: string;
 	};
 
-	private constructor(locale: ELocaleCode, currency: ECurrency) {
+	#apiUrl: string;
+
+	private constructor(
+		locale: ELocaleCode,
+		currency: ECurrency,
+		apiUrl: string,
+	) {
 		this.#locale = locale;
 		this.#currency = currency;
 		this.#availableCurrencies = [
@@ -64,6 +72,8 @@ export class AppConfig implements IAppConfig {
 			apiKey:
 				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldmdnbmVweGh3andqd2tpc29xIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc5Njk0MjAsImV4cCI6MjAxMzU0NTQyMH0._CWTZYsq6KT4Hf5msUc4gjimFEW21dUFriVqq0TkC9M',
 		};
+
+		this.#apiUrl = apiUrl;
 	}
 
 	public get locale(): ELocaleCode {
@@ -100,9 +110,15 @@ export class AppConfig implements IAppConfig {
 		return this.#supabase;
 	}
 
+	public get apiUrl(): string {
+		return this.#apiUrl;
+	}
+
 	public static getInstance(): IAppConfig {
 		if (!this.#instance) {
-			this.#instance = new AppConfig(ELocaleCode.RU_RU, ECurrency.USD);
+			const apiUrl = environment.apiUrl;
+
+			this.#instance = new AppConfig(ELocaleCode.RU_RU, ECurrency.USD, apiUrl);
 		}
 
 		return this.#instance;
