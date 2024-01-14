@@ -7,6 +7,6 @@ export function generateId(prefix: string = 'I'): string {
 	return `I${nanoidPrefix()}${nanoid()}`;
 }
 
-export function gererateUserId(): string {
+export function generateUserId(): string {
 	return generateId('U');
 }
