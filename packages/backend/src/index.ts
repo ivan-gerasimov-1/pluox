@@ -81,6 +81,8 @@ import { appConfig } from './config';
 		});
 
 		reply.send({
+			id: user?.id,
+			email: user?.email,
 			token,
 		});
 	});
