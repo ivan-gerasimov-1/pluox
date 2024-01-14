@@ -40,8 +40,25 @@ export class AuthService implements IAuthSerivce {
 		};
 	}
 
+	public async logIn(
+		email: string,
+		password: string,
+	): Promise<{
+		token: string;
+	}> {
+		const response = await this.request({
+			email,
+			password,
+		});
+
+		return {
+			token: response.token || '',
+		};
+	}
+
 	private async request(payload: Record<string, unknown>): Promise<{
 		email: string;
+		token?: string;
 	}> {
 		const response = await fetch(`${this.appConfig.apiUrl}/signup`, {
 			method: 'POST',

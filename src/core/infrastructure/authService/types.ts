@@ -9,4 +9,11 @@ export interface IAuthSerivce {
 		userId: string;
 		email: string;
 	}>;
+
+	logIn(
+		email: string,
+		password: string,
+	): Promise<{
+		token: string;
+	}>;
 }
