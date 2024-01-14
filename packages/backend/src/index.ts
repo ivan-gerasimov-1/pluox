@@ -1,9 +1,10 @@
-import Fastify from 'fastify';
 import cors from '@fastify/cors';
-import mongodb from '@fastify/mongodb';
 import jwt from '@fastify/jwt';
-import { appConfig } from './config';
+import mongodb from '@fastify/mongodb';
 import bcrypt from 'bcrypt';
+import Fastify from 'fastify';
+import { gererateUserId } from 'generateId';
+import { appConfig } from './config';
 
 (async function main() {
 	const fastify = Fastify({
@@ -47,12 +48,16 @@ import bcrypt from 'bcrypt';
 
 		const usersCollection = fastify.mongo.db?.collection('users');
 
+		const userId = gererateUserId();
+
 		await usersCollection?.insertOne({
+			id: userId,
 			email,
 			password: hashedPassword,
 		});
 
 		response.send({
+			id: userId,
 			email,
 		});
 	});
