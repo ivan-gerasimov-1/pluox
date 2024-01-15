@@ -26,16 +26,14 @@ export class AuthService implements IAuthSerivce {
 		email: string,
 		password: string,
 	): Promise<{
-		userId: string;
 		email: string;
 	}> {
-		const response = await this.request({
+		const response = await this.request('/signin', {
 			email,
 			password,
 		});
 
 		return {
-			userId: '',
 			email: response.email,
 		};
 	}
@@ -44,23 +42,29 @@ export class AuthService implements IAuthSerivce {
 		email: string,
 		password: string,
 	): Promise<{
-		token: string;
+		id: string;
+		email: string;
 	}> {
-		const response = await this.request({
+		const response = await this.request('/login', {
 			email,
 			password,
 		});
 
 		return {
-			token: response.token || '',
+			id: response.id || '',
+			email: response.email || '',
 		};
 	}
 
-	private async request(payload: Record<string, unknown>): Promise<{
+	private async request(
+		path: string,
+		payload?: Record<string, unknown>,
+	): Promise<{
 		email: string;
+		id?: string;
 		token?: string;
 	}> {
-		const response = await fetch(`${this.appConfig.apiUrl}/signup`, {
+		const response = await fetch(`${this.appConfig.apiUrl}${path}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

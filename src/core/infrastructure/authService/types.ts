@@ -6,7 +6,6 @@ export interface IAuthSerivce {
 		email: string,
 		password: string,
 	): Promise<{
-		userId: string;
 		email: string;
 	}>;
 
@@ -14,6 +13,7 @@ export interface IAuthSerivce {
 		email: string,
 		password: string,
 	): Promise<{
-		token: string;
+		id: string;
+		email: string;
 	}>;
 }
