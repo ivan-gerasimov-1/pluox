@@ -13,4 +13,6 @@ export interface IAuthSerivce {
 		id: string;
 		email: string;
 	}>;
+
+	check(): boolean;
 }

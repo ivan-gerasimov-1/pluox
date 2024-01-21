@@ -68,6 +68,12 @@ export class AuthService implements IAuthSerivce {
 			email: result.email || '',
 		};
 	}
+
+	public check(): boolean {
+		const hasToken = this.authStorage.get();
+
+		return !!hasToken;
+	}
 }
 
 export class UserStorage extends AppStorage<{
