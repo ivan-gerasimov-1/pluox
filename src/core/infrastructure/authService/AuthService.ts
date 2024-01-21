@@ -120,7 +120,7 @@ export class AuthApi {
 	}> {
 		const response = await this.request<{
 			email: string;
-		}>('/signin', {
+		}>('/signup', {
 			email,
 			password,
 		});
