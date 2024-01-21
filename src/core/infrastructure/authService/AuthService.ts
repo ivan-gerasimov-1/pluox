@@ -8,20 +8,19 @@ import type { IAuthSerivce } from '@core/infrastructure/authService/types';
 export class AuthService implements IAuthSerivce {
 	static #instance: IAuthSerivce;
 
-	public userId: string = '';
-	public email: string = '';
-
 	private constructor(
 		private readonly authApi: AuthApi,
 		private readonly authStorage: AuthStorage,
+		private readonly userStorage: UserStorage,
 	) {}
 
 	public static getInstance(): IAuthSerivce {
 		if (!this.#instance) {
 			const authStorage = AuthStorage.getInstance();
+			const userStorage = UserStorage.getInstance();
 			const authApi = AuthApi.getInstance();
 
-			this.#instance = new AuthService(authApi, authStorage);
+			this.#instance = new AuthService(authApi, authStorage, userStorage);
 		}
 
 		return this.#instance;
@@ -35,9 +34,9 @@ export class AuthService implements IAuthSerivce {
 	}> {
 		const result = await this.authApi.signIn(email, password);
 
-		// this.userStorage.set({
-		// 	email,
-		// });
+		this.userStorage.update({
+			email,
+		});
 
 		return {
 			email: result.email,
@@ -57,10 +56,10 @@ export class AuthService implements IAuthSerivce {
 			throw new Error('User not found');
 		}
 
-		// this.userStorage.set({
-		// 	id: result.id || '',
-		// 	email: result.email || '',
-		// });
+		this.userStorage.update({
+			id: result.id || '',
+			email: result.email || '',
+		});
 
 		this.authStorage.set(result.token);
 
@@ -68,6 +67,41 @@ export class AuthService implements IAuthSerivce {
 			id: result.id || '',
 			email: result.email || '',
 		};
+	}
+}
+
+export class UserStorage extends AppStorage<{
+	id: string;
+	email: string;
+}> {
+	static #instance: UserStorage;
+
+	private readonly STORAGE_ID: string = 'user';
+
+	private constructor() {
+		super();
+	}
+
+	public static getInstance(): UserStorage {
+		if (!this.#instance) {
+			this.#instance = new UserStorage();
+		}
+
+		return this.#instance;
+	}
+
+	public update(payload: { id?: string; email?: string }): void {
+		const currentUser = this.get();
+		super.set(this.STORAGE_ID, {
+			id: '',
+			email: '',
+			...currentUser,
+			...payload,
+		});
+	}
+
+	public override get(): { id: string; email: string } | null {
+		return super.get(this.STORAGE_ID);
 	}
 }
 
