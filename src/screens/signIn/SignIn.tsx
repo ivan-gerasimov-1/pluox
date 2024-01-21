@@ -1,10 +1,15 @@
+import { useNavigation } from '@modules/navigation/useNavigation';
 import styles from './signIn.module.css';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
+import { usePending } from '@screens/hooks/usePending';
+import { delay } from '@utils/delay';
 
 export function SignIn() {
 	let authService = AuthService.getInstance();
+	const navigation = useNavigation();
+	const { pending, setPending } = usePending();
 
-	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
 		// @ts-expect-error
@@ -13,7 +18,17 @@ export function SignIn() {
 		const email = formElements.email.value;
 		const password = formElements.password.value;
 
-		authService.signIn(email, password);
+		try {
+			setPending(true);
+
+			await authService.signIn(email, password);
+			navigation.loginPage();
+		} catch (error) {
+			console.log(error);
+		} finally {
+			await delay(500);
+			setPending(false);
+		}
 	}
 
 	return (
@@ -49,9 +64,13 @@ export function SignIn() {
 				</label>
 
 				<div className={styles.inputGroup}>
-					<button type="submit" className={styles.submitButton}>
-						Зарегистрироваться
-					</button>
+					{!pending ? (
+						<button type="submit" className={styles.submitButton}>
+							Зарегистрироваться
+						</button>
+					) : (
+						<div>Регистрация…</div>
+					)}
 				</div>
 			</form>
 		</div>
