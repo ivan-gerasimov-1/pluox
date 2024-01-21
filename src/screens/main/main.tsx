@@ -1,3 +1,4 @@
+import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
@@ -9,6 +10,7 @@ import { Navigable } from '@root/uiKit/navigable/navigable';
 
 export function MainScreen() {
 	let appConfig = useAppConfig();
+	let isAuthenticated = AuthService.getInstance().check();
 
 	return (
 		<>
@@ -28,13 +30,17 @@ export function MainScreen() {
 				<br />
 				<br />
 
-				<Navigable to={EAppPath.SIGNIN}>
-					<Card touchable>Регистрация</Card>
-				</Navigable>
+				{!isAuthenticated && (
+					<>
+						<Navigable to={EAppPath.SIGNIN}>
+							<Card touchable>Регистрация</Card>
+						</Navigable>
 
-				<Navigable to={EAppPath.LOGIN}>
-					<Card touchable>Вход</Card>
-				</Navigable>
+						<Navigable to={EAppPath.LOGIN}>
+							<Card touchable>Вход</Card>
+						</Navigable>
+					</>
+				)}
 			</CardContainer>
 
 			<ActionSheet>
