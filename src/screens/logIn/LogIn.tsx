@@ -24,7 +24,7 @@ export function LogIn() {
 
 			<form name="signIn" className={styles.signInForm} onSubmit={onSubmit}>
 				<label htmlFor="email" className={styles.inputGroup}>
-					<div className={styles.label}>Имейл</div>
+					<div className={styles.label}>Эл. почта</div>
 
 					<input
 						type="email"
