@@ -1,25 +1,8 @@
-import { redirect } from 'react-router-dom';
-import styles from './logIn.module.css';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { useNavigation } from '@modules/navigation/useNavigation';
-import { useState } from 'react';
-
-function usePending() {
-	const [pending, setPending] = useState<boolean>(false);
-
-	return {
-		pending,
-		setPending,
-	};
-}
-
-async function delay(timeoutMs: number = 0): Promise<void> {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(void 0);
-		}, timeoutMs);
-	});
-}
+import { usePending } from '@screens/hooks/usePending';
+import { delay } from '@utils/delay';
+import styles from './logIn.module.css';
 
 export function LogIn() {
 	let authService = AuthService.getInstance();
