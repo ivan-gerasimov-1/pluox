@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 
 interface INavigation {
 	mainPage(): void;
+	loginPage(): void;
 }
 
 export function useNavigation(): INavigation {
@@ -14,7 +15,14 @@ export function useNavigation(): INavigation {
 		});
 	}
 
+	function goToLoginPage() {
+		navigate(EAppPath.LOGIN, {
+			replace: true,
+		});
+	}
+
 	return {
 		mainPage: goToMainPage,
+		loginPage: goToLoginPage,
 	};
 }
