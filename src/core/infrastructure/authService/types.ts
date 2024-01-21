@@ -13,6 +13,7 @@ export interface IAuthSerivce {
 		id: string;
 		email: string;
 	}>;
+	signOut(): Promise<void>;
 
 	check(): boolean;
 }

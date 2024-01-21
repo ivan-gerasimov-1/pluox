@@ -69,6 +69,14 @@ export class AuthService implements IAuthSerivce {
 		};
 	}
 
+	public async signOut(): Promise<void> {
+		this.authStorage.set('');
+		this.userStorage.update({
+			id: '',
+			email: '',
+		});
+	}
+
 	public check(): boolean {
 		const hasToken = this.authStorage.get();
 
