@@ -8,5 +8,9 @@ export function generateId(prefix: string = 'I'): string {
 }
 
 export function generateUserId(): string {
-	return generateId('U');
+	return generateId('USR');
+}
+
+export function generateExpenseId(): string {
+	return generateId('EXP');
 }
