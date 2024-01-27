@@ -4,4 +4,5 @@ export const enum EAppPath {
 	EXPENSE_LIST_MONTHLY = '/list-monthly',
 	SIGNIN = '/signin',
 	LOGIN = '/login',
+	SETTINGS = '/settings',
 }

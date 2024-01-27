@@ -45,8 +45,7 @@ export function MainScreen() {
 							<br />
 
 							<div>
-								{/** @todo Use real path to user settings */}
-								<Navigable to={EAppPath.MAIN}>
+								<Navigable to={EAppPath.SETTINGS}>
 									<button>Настройки</button>
 								</Navigable>
 							</div>

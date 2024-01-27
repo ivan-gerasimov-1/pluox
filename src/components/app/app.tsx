@@ -11,6 +11,7 @@ import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
 import { ExpenseListScreen } from '@screens/expenseList';
 import { SignIn } from '@screens/signIn';
 import { LogIn } from '@screens/logIn/LogIn';
+import { Settings } from '@screens/settings/settings';
 
 export function App() {
 	let intl = useIntl(appI18n);
@@ -34,6 +35,8 @@ export function App() {
 							path={EAppPath.EXPENSE_LIST_MONTHLY}
 							element={<ExpenseListMonthlyScreen />}
 						/>
+
+						<Route path={EAppPath.SETTINGS} element={<Settings />} />
 
 						<Route
 							path="*"
