@@ -3,8 +3,8 @@ import jwt from '@fastify/jwt';
 import mongodb from '@fastify/mongodb';
 import bcrypt from 'bcrypt';
 import Fastify from 'fastify';
-import { generateUserId } from './generateId';
 import { appConfig } from './config';
+import { generateExpenseId, generateUserId } from './generateId';
 import { isDevelopment } from './helpers/isDevelopment';
 
 (async function main() {
@@ -106,6 +106,168 @@ import { isDevelopment } from './helpers/isDevelopment';
 			reply.send({
 				status: 'success',
 				message: 'You are authenticated',
+			});
+		});
+	});
+
+	fastify.register(async (plugin) => {
+		plugin.addHook('preHandler', async (request, reply) => {
+			try {
+				await request.jwtVerify();
+			} catch (error) {
+				reply.code(401).send({
+					status: 'error',
+					message: 'Unauthorized',
+				});
+			}
+		});
+
+		plugin.post('/expenses', async (request, reply) => {
+			const userJwt = request.user as { id: string };
+			const userId = userJwt.id;
+
+			const usersCollection = plugin.mongo.db?.collection('users');
+			const user = await usersCollection?.findOne({ id: userId });
+
+			if (!user) {
+				reply.code(404).send({
+					status: 'error',
+					message: 'User Not Found',
+				});
+			}
+
+			const expensesCollection = plugin.mongo.db?.collection('expenses');
+			const date = new Date();
+			await expensesCollection?.insertOne({
+				id: generateExpenseId(),
+				ownerId: user?._id,
+				// @ts-expect-error
+				amount: request.body.amount,
+				// @ts-expect-error
+				amountInUSD: request.body.amountInUSD,
+				// @ts-expect-error
+				currency: request.body.currency,
+				createdAt: date,
+				updatedAt: date,
+			});
+
+			reply.code(200).send({
+				status: 'success',
+			});
+		});
+
+		plugin.get('/expenses/:id', async (request, reply) => {
+			const userJwt = request.user as { id: string };
+			const userId = userJwt.id;
+
+			const usersCollection = plugin.mongo.db?.collection('users');
+			const user = await usersCollection?.findOne({ id: userId });
+
+			if (!user) {
+				reply.code(404).send({
+					status: 'error',
+					message: 'User Not Found',
+				});
+			}
+
+			const expensesCollection = plugin.mongo.db?.collection('expenses');
+			const expense = await expensesCollection?.findOne({
+				ownerId: user?._id,
+				// @ts-expect-error
+				id: request.params.id,
+			});
+
+			if (!expense) {
+				reply.code(404).send({
+					status: 'error',
+					message: 'Expense Not Found',
+				});
+				return;
+			}
+
+			reply.send({
+				id: expense.id,
+				amount: expense.amount,
+				amountInUSD: expense.amountInUSD,
+				createdAt: expense.createdAt,
+				updatedAt: expense.updatedAt,
+			});
+		});
+
+		plugin.put('/expenses/:id', async (request, reply) => {
+			const userJwt = request.user as { id: string };
+			const userId = userJwt.id;
+
+			const usersCollection = plugin.mongo.db?.collection('users');
+			const user = await usersCollection?.findOne({ id: userId });
+
+			if (!user) {
+				reply.code(404).send({
+					status: 'error',
+					message: 'User Not Found',
+				});
+			}
+
+			const expensesCollection = plugin.mongo.db?.collection('expenses');
+			const expense = await expensesCollection?.findOneAndUpdate(
+				{
+					ownerId: user?._id,
+					// @ts-expect-error
+					id: request.params.id,
+				},
+				{
+					$set: {
+						// @ts-expect-error
+						amount: request.body.amount,
+						updatedAt: new Date(),
+					},
+				},
+			);
+
+			if (!expense) {
+				reply.code(404).send({
+					status: 'error',
+					message: 'Expense Not Found',
+				});
+				return;
+			}
+
+			reply.send({
+				status: 'success',
+			});
+		});
+
+		plugin.delete('/expenses/:id', async (request, reply) => {
+			const userJwt = request.user as { id: string };
+			const userId = userJwt.id;
+
+			const usersCollection = plugin.mongo.db?.collection('users');
+			const user = await usersCollection?.findOne({ id: userId });
+
+			if (!user) {
+				reply.code(404).send({
+					status: 'error',
+					message: 'User Not Found',
+				});
+			}
+
+			const expensesCollection = plugin.mongo.db?.collection('expenses');
+			const expense = await expensesCollection?.deleteOne({
+				ownerId: user?._id,
+				// @ts-expect-error
+				id: request.params.id,
+			});
+
+			if (!expense) {
+				reply.code(404).send({
+					status: 'error',
+					message: 'Expense Not Found',
+				});
+				return;
+			}
+
+			reply.send({
+				status: 'success',
 			});
 		});
 	});
