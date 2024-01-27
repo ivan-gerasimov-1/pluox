@@ -137,9 +137,18 @@ import { isDevelopment } from './helpers/isDevelopment';
 			}
 
 			const expensesCollection = plugin.mongo.db?.collection('expenses');
-			const date = new Date();
+			const id = generateExpenseId();
+			const date =
+				// @ts-expect-error
+				request.body.dateCreated
+					? new Date(
+							// @ts-expect-error
+							request.body.dateCreated,
+					  )
+					: new Date();
+
 			await expensesCollection?.insertOne({
-				id: generateExpenseId(),
+				id,
 				ownerId: user?._id,
 				// @ts-expect-error
 				amount: request.body.amount,
@@ -147,12 +156,20 @@ import { isDevelopment } from './helpers/isDevelopment';
 				amountInUSD: request.body.amountInUSD,
 				// @ts-expect-error
 				currency: request.body.currency,
+				// @ts-expect-error
+				comment: request.body.comment,
+				// @ts-expect-error
+				category: request.body.category,
+				date: new Date(
+					// @ts-expect-error
+					request.body.date,
+				),
 				createdAt: date,
 				updatedAt: date,
 			});
 
 			reply.code(200).send({
-				status: 'success',
+				id,
 			});
 		});
 
@@ -189,6 +206,10 @@ import { isDevelopment } from './helpers/isDevelopment';
 				id: expense.id,
 				amount: expense.amount,
 				amountInUSD: expense.amountInUSD,
+				currency: expense.currency,
+				comment: expense.comment,
+				category: expense.category,
+				date: expense.date,
 				createdAt: expense.createdAt,
 				updatedAt: expense.updatedAt,
 			});
