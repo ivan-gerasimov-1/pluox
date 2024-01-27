@@ -91,7 +91,7 @@ import { appConfig } from './config';
 		if (request.url === '/test') {
 			try {
 				await request.jwtVerify();
-			} catch (err) {
+			} catch (error) {
 				reply.code(401).send({
 					status: 'error',
 					message: 'Unauthorized',
