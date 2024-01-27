@@ -37,59 +37,61 @@ import { isDevelopment } from './helpers/isDevelopment';
 		};
 	});
 
-	fastify.post('/signup', async function handler(request, response) {
-		// @ts-expect-error
-		const { email, password } = request.body;
-		const hashedPassword = await bcrypt.hash(password, 10);
+	fastify.register(async (plugin) => {
+		plugin.post('/signup', async function handler(request, response) {
+			// @ts-expect-error
+			const { email, password } = request.body;
+			const hashedPassword = await bcrypt.hash(password, 10);
 
-		const usersCollection = fastify.mongo.db?.collection('users');
+			const usersCollection = plugin.mongo.db?.collection('users');
 
-		const userId = generateUserId();
+			const userId = generateUserId();
 
-		await usersCollection?.insertOne({
-			id: userId,
-			email,
-			password: hashedPassword,
-		});
-
-		response.send({
-			id: userId,
-			email,
-		});
-	});
-
-	fastify.post('/login', async (request, reply) => {
-		// @ts-expect-error
-		const { email, password } = request.body;
-
-		const usersCollection = fastify.mongo.db?.collection('users');
-		const user = await usersCollection?.findOne({
-			email,
-		});
-
-		const isPasswordValid = await bcrypt.compare(password, user?.password);
-
-		if (!isPasswordValid) {
-			reply.code(401).send({
-				status: 'error',
-				message: 'Invalid credentials',
+			await usersCollection?.insertOne({
+				id: userId,
+				email,
+				password: hashedPassword,
 			});
-			return;
-		}
 
-		const token = fastify.jwt.sign({
-			id: user?.id,
+			response.send({
+				id: userId,
+				email,
+			});
 		});
 
-		reply.send({
-			id: user?.id,
-			email: user?.email,
-			token,
+		plugin.post('/login', async (request, reply) => {
+			// @ts-expect-error
+			const { email, password } = request.body;
+
+			const usersCollection = plugin.mongo.db?.collection('users');
+			const user = await usersCollection?.findOne({
+				email,
+			});
+
+			const isPasswordValid = await bcrypt.compare(password, user?.password);
+
+			if (!isPasswordValid) {
+				reply.code(401).send({
+					status: 'error',
+					message: 'Invalid credentials',
+				});
+				return;
+			}
+
+			const token = plugin.jwt.sign({
+				id: user?.id,
+			});
+
+			reply.send({
+				id: user?.id,
+				email: user?.email,
+				token,
+			});
 		});
 	});
 
-	fastify.addHook('preHandler', async (request, reply) => {
-		if (request.url === '/test') {
+	fastify.register(async (plugin) => {
+		plugin.addHook('preHandler', async (request, reply) => {
 			try {
 				await request.jwtVerify();
 			} catch (error) {
@@ -98,13 +100,13 @@ import { isDevelopment } from './helpers/isDevelopment';
 					message: 'Unauthorized',
 				});
 			}
-		}
-	});
+		});
 
-	fastify.get('/test', async (request, reply) => {
-		reply.send({
-			status: 'success',
-			message: 'You are authenticated',
+		plugin.get('/test', async (request, reply) => {
+			reply.send({
+				status: 'success',
+				message: 'You are authenticated',
+			});
 		});
 	});
 
