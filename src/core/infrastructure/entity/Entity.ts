@@ -16,4 +16,14 @@ export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 	}
 
 	public abstract toObject(): TEntityDTO;
+
+	/**
+	 * @todo Remove public setter when server sync is ready
+	 */
+	private __dangerouslyUpdateId(value: Id): this {
+		// @ts-expect-error
+		this.#id = value;
+
+		return this;
+	}
 }
