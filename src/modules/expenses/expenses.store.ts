@@ -1,14 +1,16 @@
 import type { ECurrency } from '@core/infrastructure/currency/types';
+import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { Amount } from '@domain/amount';
 import { TMonth } from '@domain/amount/useCases/types';
 import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import type { Id, TCategory, TISODateString } from '@domain/types';
+import { delay } from '@utils/delay';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-type TExpenseCreatePayload = {
+export type TExpenseCreatePayload = {
 	amount: number;
 	currency: ECurrency;
 	comment: string;
@@ -19,7 +21,7 @@ type TExpenseCreatePayload = {
 interface IExpensesStore {
 	readonly operations: TExpenses;
 
-	addExpense(payload: TExpenseCreatePayload): void;
+	addExpense(payload: TExpenseCreatePayload): Promise<void>;
 	/** @todo Not Implemented */
 	editExpense(payload: unknown): void;
 	deleteExpense(id: Id): void;
@@ -45,22 +47,33 @@ export let useExpensesStore = create<
 			return {
 				operations: {},
 
-				addExpense(payload: TExpenseCreatePayload): void {
-					set((prevState) => {
-						const expense = Expense.create(
-							payload.amount,
-							payload.currency,
-							payload.comment,
-							payload.category,
-							payload.date,
-						);
+				async addExpense(payload: TExpenseCreatePayload): Promise<void> {
+					const prevState = get();
 
-						return {
-							...prevState,
-							operations: Expenses.create(prevState.operations) //
-								.add(expense)
-								.get(),
-						};
+					const expense = Expense.create(
+						payload.amount,
+						payload.currency,
+						payload.comment,
+						payload.category,
+						payload.date,
+					);
+
+					try {
+						const expensesApi = ExpensesApi.getInstance();
+						const response = await expensesApi.create(expense.toObject());
+
+						// @ts-expect-error
+						expense.__dangerouslyUpdateId(response.id);
+					} catch {
+						// DO NOTHING FOR NOW
+					}
+
+					const expenses = Expenses.create(prevState.operations);
+
+					set({
+						operations: expenses //
+							.add(expense)
+							.get(),
 					});
 				},
 
