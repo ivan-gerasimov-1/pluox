@@ -3,8 +3,6 @@ import { type IEntity } from '@core/infrastructure/entity/types';
 import type { Id, TCategory, TISODateString } from '@domain/types';
 
 export interface IExpense extends IEntity<TExpense> {
-	readonly id: Id;
-
 	toObject(): TExpense;
 }
 
