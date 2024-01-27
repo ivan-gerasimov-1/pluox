@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import Fastify from 'fastify';
 import { generateUserId } from './generateId';
 import { appConfig } from './config';
+import { isDevelopment } from './helpers/isDevelopment';
 
 (async function main() {
 	const fastify = Fastify({
@@ -117,7 +118,3 @@ import { appConfig } from './config';
 		process.exit(1);
 	}
 })();
-
-function isDevelopment(environment?: string) {
-	return environment === 'development';
-}
