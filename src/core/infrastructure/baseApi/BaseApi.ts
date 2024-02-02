@@ -47,6 +47,10 @@ export class BaseApi implements IBaseApi {
 			body: JSON.stringify(payload),
 		});
 
+		if (!response.ok) {
+			return Promise.reject(response.json());
+		}
+
 		return response.json();
 	}
 }
