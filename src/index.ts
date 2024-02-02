@@ -1,7 +1,7 @@
-import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
 import { BackupService } from '@core/infrastructure/backupService/BackupService';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
+import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { environment } from '@root/config';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
@@ -38,17 +38,10 @@ async function getCurrencyRates(): Promise<void> {
 }
 
 async function runBackup(): Promise<void> {
-	let appStorage = new AppStorage();
-	let store = appStorage.get('store/$expenses');
+	let expensesStorage = ExpensesStorage.getInstance();
+	let expenses = expensesStorage.getItems();
 
-	if (!store) {
-		return;
-	}
-
-	return BackupService.getInstance().run(
-		// @ts-expect-error
-		store?.state?.operations,
-	);
+	return BackupService.getInstance().run(expenses);
 }
 
 async function testApiCall(): Promise<void> {
