@@ -2,13 +2,15 @@ import { BackupService } from '@core/infrastructure/backupService/BackupService'
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
+import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
 import { Expenses } from '@domain/expenses/expenses';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 async function main(): Promise<void> {
-	runBackup();
+	fixBrokenExpense();
 
+	runBackup();
 	await getCurrencyRates();
 	loadExpenses();
 
@@ -47,4 +49,25 @@ function loadExpenses(): void {
 	let rawExpenses = ExpensesStorage.getInstance().getItems();
 
 	Expenses.getInstance().__addRawExpenses(rawExpenses);
+}
+
+/**
+ * @description
+ * Generate proper ID for expense with undefined id
+ */
+function fixBrokenExpense(): void {
+	let expensesStorage = ExpensesStorage.getInstance();
+	let { undefined: brokenExpense, ...restExpenses } =
+		expensesStorage.getItems();
+
+	if (brokenExpense) {
+		let id = IdGenerator.getInstance().getId();
+
+		brokenExpense.id = id;
+
+		expensesStorage.setItems({
+			...restExpenses,
+			[id]: brokenExpense,
+		});
+	}
 }
