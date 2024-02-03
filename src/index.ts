@@ -2,6 +2,7 @@ import { BackupService } from '@core/infrastructure/backupService/BackupService'
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
+import { Expenses } from '@domain/expenses/expenses';
 import { environment } from '@root/config';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
@@ -12,6 +13,7 @@ async function main(): Promise<void> {
 	runBackup();
 
 	await getCurrencyRates();
+	loadExpenses();
 
 	const ui: IUserInterface = new ReactUI(window, {
 		containerId: 'root',
@@ -55,4 +57,10 @@ async function testApiCall(): Promise<void> {
 
 		window.alert(error);
 	}
+}
+
+function loadExpenses(): void {
+	let rawExpenses = ExpensesStorage.getInstance().getItems();
+
+	Expenses.getInstance().addRawExpenses(rawExpenses);
 }
