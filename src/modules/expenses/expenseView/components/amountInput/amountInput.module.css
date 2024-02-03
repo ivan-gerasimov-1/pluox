@@ -13,6 +13,10 @@
 	border: var(--border-defaults);
 	border-width: 2px;
 	border-radius: var(--border-radius-small);
+
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+
 	border-right-width: 0;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;

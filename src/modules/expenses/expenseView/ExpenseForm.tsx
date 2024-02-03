@@ -72,6 +72,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 				<select
 					name="newExpense_currencySelect"
 					id="newExpense_currencySelect"
+					className={styles.currencySelect}
 					value={formState.currency}
 					onChange={(event) => {
 						const currency = event.target.value as ECurrency;
