@@ -4,14 +4,37 @@ import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';
 
 export class Expenses implements IExpenses {
+	static #instance?: IExpenses;
+
 	readonly #expenses: Map<Id, TExpense>;
 
 	private constructor(expenses: TExpenses) {
 		this.#expenses = new Map(Object.entries(expenses));
 	}
 
+	public static getInstance(): IExpenses {
+		if (!this.#instance) {
+			this.#instance = new Expenses({});
+		}
+
+		return this.#instance;
+	}
+
+	/** @deprecated */
 	public static create(expenses: TExpenses = {}): IExpenses {
+		if (this.#instance) {
+			return this.#instance;
+		}
+
 		return new Expenses(expenses);
+	}
+
+	public addRawExpenses(expenses: TExpenses): IExpenses {
+		for (const [id, value] of Object.entries(expenses)) {
+			this.#expenses.set(id, value);
+		}
+
+		return this;
 	}
 
 	private static sortExpensesByISO8601Date(

@@ -13,6 +13,9 @@ export interface IExpenses {
 		dateTo?: TISODateString;
 	}): TExpense[];
 	delete(id: Id): IExpenses;
+
+	/** @description temporary solution */
+	addRawExpenses(expenses: TExpenses): IExpenses;
 }
 
 export type TExpenses = Record<Id, TExpense>;
