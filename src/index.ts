@@ -8,8 +8,6 @@ import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 async function main(): Promise<void> {
-	/** @todo Remove */
-	// await testApiCall();
 	runBackup();
 
 	await getCurrencyRates();
@@ -44,19 +42,6 @@ async function runBackup(): Promise<void> {
 	let expenses = expensesStorage.getItems();
 
 	return BackupService.getInstance().run(expenses);
-}
-
-async function testApiCall(): Promise<void> {
-	try {
-		const foo = await fetch(environment.apiUrl);
-
-		window.alert(JSON.stringify(await foo.json()));
-	} catch (error) {
-		// @ts-expect-error
-		console.log(error.message);
-
-		window.alert(error);
-	}
 }
 
 function loadExpenses(): void {
