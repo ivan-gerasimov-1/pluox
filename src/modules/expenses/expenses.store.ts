@@ -6,7 +6,6 @@ import { Expense } from '@domain/expense';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import type { Id, TCategory, TISODateString } from '@domain/types';
-import { delay } from '@utils/delay';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -43,13 +42,11 @@ export let useExpensesStore = create<
 	]
 >(
 	persist(
-		(set, get) => {
+		(set) => {
 			return {
 				operations: {},
 
 				async addExpense(payload: TExpenseCreatePayload): Promise<void> {
-					const prevState = get();
-
 					const expense = Expense.create(
 						payload.amount,
 						payload.currency,
@@ -68,10 +65,8 @@ export let useExpensesStore = create<
 						// DO NOTHING FOR NOW
 					}
 
-					const expenses = Expenses.create(prevState.operations);
-
 					set({
-						operations: expenses //
+						operations: Expenses.getInstance() //
 							.add(expense)
 							.get(),
 					});
@@ -86,7 +81,7 @@ export let useExpensesStore = create<
 					set((state) => {
 						return {
 							...state,
-							operations: Expenses.create(state.operations) //
+							operations: Expenses.getInstance() //
 								.delete(id)
 								.get(),
 						};
@@ -94,9 +89,7 @@ export let useExpensesStore = create<
 				},
 
 				getOne(id: Id): TExpense {
-					const state = get();
-
-					return Expenses.create(state.operations) //
+					return Expenses.getInstance() //
 						.get(id);
 				},
 
@@ -104,9 +97,7 @@ export let useExpensesStore = create<
 					dateFrom?: TISODateString;
 					dateTo?: TISODateString;
 				}): TExpense[] {
-					const state = get();
-
-					return Expenses.create(state.operations) //
+					return Expenses.getInstance() //
 						.list(
 							query && {
 								dateFrom: query?.dateFrom,
@@ -116,16 +107,14 @@ export let useExpensesStore = create<
 				},
 
 				getTotalAmount(): number {
-					let state = get();
-					let expenses = Expenses.create(state.operations);
+					let expenses = Expenses.getInstance();
 					let amount = Amount.create(expenses);
 
 					return amount.getTotal();
 				},
 
 				getMonthlyAmount(month: TMonth): number {
-					let state = get();
-					let expenses = Expenses.create(state.operations);
+					let expenses = Expenses.getInstance();
 					let amount = Amount.create(expenses);
 
 					return amount.getMonthly(month);

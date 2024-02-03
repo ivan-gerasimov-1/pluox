@@ -15,7 +15,7 @@ export interface IExpenses {
 	delete(id: Id): IExpenses;
 
 	/** @description temporary solution */
-	addRawExpenses(expenses: TExpenses): IExpenses;
+	__addRawExpenses(expenses: TExpenses): IExpenses;
 }
 
 export type TExpenses = Record<Id, TExpense>;

@@ -62,5 +62,5 @@ async function testApiCall(): Promise<void> {
 function loadExpenses(): void {
 	let rawExpenses = ExpensesStorage.getInstance().getItems();
 
-	Expenses.getInstance().addRawExpenses(rawExpenses);
+	Expenses.getInstance().__addRawExpenses(rawExpenses);
 }

@@ -8,28 +8,19 @@ export class Expenses implements IExpenses {
 
 	readonly #expenses: Map<Id, TExpense>;
 
-	private constructor(expenses: TExpenses) {
-		this.#expenses = new Map(Object.entries(expenses));
+	private constructor() {
+		this.#expenses = new Map();
 	}
 
 	public static getInstance(): IExpenses {
 		if (!this.#instance) {
-			this.#instance = new Expenses({});
+			this.#instance = new Expenses();
 		}
 
 		return this.#instance;
 	}
 
-	/** @deprecated */
-	public static create(expenses: TExpenses = {}): IExpenses {
-		if (this.#instance) {
-			return this.#instance;
-		}
-
-		return new Expenses(expenses);
-	}
-
-	public addRawExpenses(expenses: TExpenses): IExpenses {
+	public __addRawExpenses(expenses: TExpenses): IExpenses {
 		for (const [id, value] of Object.entries(expenses)) {
 			this.#expenses.set(id, value);
 		}
