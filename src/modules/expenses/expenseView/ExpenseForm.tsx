@@ -108,7 +108,6 @@ export function ExpenseForm(props: TExpenseFormProps) {
 						});
 					}}
 					required
-					autoFocus
 				/>
 
 				<button type="submit" className={styles.submitButton}>
