@@ -28,12 +28,26 @@ export class ExpensesStorage
 	}
 
 	public getItems(): Record<Id, TExpense> {
-		const value = super.get(this.STORAGE_ID);
+		const value = this.get(this.STORAGE_ID);
 
 		if (!value || !value.state) {
 			return {};
 		}
 
 		return value.state.operations;
+	}
+
+	public setItems(values: Record<Id, TExpense>): IExpensesStorage {
+		const value = this.get(this.STORAGE_ID);
+
+		this.set(this.STORAGE_ID, {
+			...value,
+			state: {
+				...value?.state,
+				operations: values,
+			},
+		});
+
+		return this;
 	}
 }
