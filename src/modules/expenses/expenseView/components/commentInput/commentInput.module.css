@@ -17,5 +17,7 @@
 	border-width: 2px;
 	border-radius: var(--border-radius-small);
 
+	background-color: var(--color-pure-white);
+
 	outline: none;
 }
