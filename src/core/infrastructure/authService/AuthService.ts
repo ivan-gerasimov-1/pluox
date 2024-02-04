@@ -1,17 +1,19 @@
-import {
-	AppConfig,
-	type IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
-import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
+import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
+import type { IAuthApi } from '@core/infrastructure/authApi/types';
+import { UserNotFoundError } from '@core/infrastructure/authService/errors';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
+import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
+import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
+import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
+import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 
 export class AuthService implements IAuthSerivce {
 	static #instance: IAuthSerivce;
 
 	private constructor(
-		private readonly authApi: AuthApi,
-		private readonly authStorage: AuthStorage,
-		private readonly userStorage: UserStorage,
+		private readonly authApi: IAuthApi,
+		private readonly authStorage: IAuthStorage,
+		private readonly userStorage: IUserStorage,
 	) {}
 
 	public static getInstance(): IAuthSerivce {
@@ -53,7 +55,7 @@ export class AuthService implements IAuthSerivce {
 		const result = await this.authApi.logIn(email, password);
 
 		if (!result.id || !result.email) {
-			throw new Error('User not found');
+			throw new UserNotFoundError();
 		}
 
 		this.userStorage.update({
@@ -81,139 +83,5 @@ export class AuthService implements IAuthSerivce {
 		const hasToken = this.authStorage.get();
 
 		return !!hasToken;
-	}
-}
-
-export class UserStorage extends AppStorage<{
-	id: string;
-	email: string;
-}> {
-	static #instance: UserStorage;
-
-	private readonly STORAGE_ID: string = 'user';
-
-	private constructor() {
-		super();
-	}
-
-	public static getInstance(): UserStorage {
-		if (!this.#instance) {
-			this.#instance = new UserStorage();
-		}
-
-		return this.#instance;
-	}
-
-	public update(payload: { id?: string; email?: string }): void {
-		const currentUser = this.get();
-		super.set(this.STORAGE_ID, {
-			id: '',
-			email: '',
-			...currentUser,
-			...payload,
-		});
-	}
-
-	public override get(): { id: string; email: string } | null {
-		return super.get(this.STORAGE_ID);
-	}
-}
-
-export class AuthStorage extends AppStorage<string> {
-	static #instance: AuthStorage;
-
-	private readonly STORAGE_ID: string = 'token';
-
-	private constructor() {
-		super();
-	}
-
-	public static getInstance(): AuthStorage {
-		if (!this.#instance) {
-			this.#instance = new AuthStorage();
-		}
-
-		return this.#instance;
-	}
-
-	public override set(payload: string): void {
-		super.set(this.STORAGE_ID, payload);
-	}
-
-	public override get(): string | null {
-		return super.get(this.STORAGE_ID);
-	}
-}
-
-export class AuthApi {
-	static #instance: AuthApi;
-
-	private constructor(private readonly appConfig: IAppConfig) {}
-
-	public static getInstance(): AuthApi {
-		if (!this.#instance) {
-			const appConfig = AppConfig.getInstance();
-
-			this.#instance = new AuthApi(appConfig);
-		}
-
-		return this.#instance;
-	}
-
-	public async signIn(
-		email: string,
-		password: string,
-	): Promise<{
-		email: string;
-	}> {
-		const response = await this.request<{
-			email: string;
-		}>('/signup', {
-			email,
-			password,
-		});
-
-		return {
-			email: response.email,
-		};
-	}
-
-	public async logIn(
-		email: string,
-		password: string,
-	): Promise<{
-		id: string;
-		email: string;
-		token: string;
-	}> {
-		const response = await this.request<{
-			id: string;
-			email: string;
-			token: string;
-		}>('/login', {
-			email,
-			password,
-		});
-
-		return {
-			id: response.id || '',
-			email: response.email || '',
-			token: response.token || '',
-		};
-	}
-
-	private async request<T>(
-		path: string,
-		payload?: Record<string, unknown>,
-	): Promise<T> {
-		const response = await fetch(`${this.appConfig.apiUrl}${path}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(payload),
-		});
-
-		return response.json();
 	}
 }
