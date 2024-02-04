@@ -35,6 +35,10 @@ export class BaseApi implements IBaseApi {
 		return token;
 	}
 
+	private get authorizationHeader(): string {
+		return `Bearer ${this.authToken}`;
+	}
+
 	public async request<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
@@ -43,7 +47,7 @@ export class BaseApi implements IBaseApi {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${this.authToken}`,
+				Authorization: this.authorizationHeader,
 			},
 			body: JSON.stringify(payload),
 		});
