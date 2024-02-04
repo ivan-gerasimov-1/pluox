@@ -1,19 +1,17 @@
-import {
-	AppConfig,
-	type IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
+import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
+import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 
 export class AuthApi implements IAuthApi {
 	static #instance: AuthApi;
 
-	private constructor(private readonly appConfig: IAppConfig) {}
+	private constructor(private readonly api: IBaseApi) {}
 
 	public static getInstance(): AuthApi {
 		if (!this.#instance) {
-			const appConfig = AppConfig.getInstance();
+			const baseApi = BaseApi.getInstance();
 
-			this.#instance = new AuthApi(appConfig);
+			this.#instance = new AuthApi(baseApi);
 		}
 
 		return this.#instance;
@@ -25,9 +23,13 @@ export class AuthApi implements IAuthApi {
 	): Promise<{
 		email: string;
 	}> {
-		const response = await this.request<{
-			email: string;
-		}>('/signup', {
+		const response = await this.api.request<
+			{
+				email: string;
+				password: string;
+			},
+			{ email: string }
+		>('/signup', {
 			email,
 			password,
 		});
@@ -45,11 +47,17 @@ export class AuthApi implements IAuthApi {
 		email: string;
 		token: string;
 	}> {
-		const response = await this.request<{
-			id: string;
-			email: string;
-			token: string;
-		}>('/login', {
+		const response = await this.api.request<
+			{
+				email: string;
+				password: string;
+			},
+			{
+				id: string;
+				email: string;
+				token: string;
+			}
+		>('/login', {
 			email,
 			password,
 		});
@@ -59,20 +67,5 @@ export class AuthApi implements IAuthApi {
 			email: response.email || '',
 			token: response.token || '',
 		};
-	}
-
-	private async request<T>(
-		path: string,
-		payload?: Record<string, unknown>,
-	): Promise<T> {
-		const response = await fetch(`${this.appConfig.apiUrl}${path}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(payload),
-		});
-
-		return response.json();
 	}
 }
