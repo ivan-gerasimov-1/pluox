@@ -1,7 +1,11 @@
 import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import { useAppConfigStore } from '@modules/appConfig/appConfig.store';
 
 export function Settings() {
 	const appConfig = AppConfig.getInstance();
+
+	const config = useAppConfigStore();
 
 	return (
 		<div>
@@ -22,7 +26,24 @@ export function Settings() {
 			<div>
 				<h2>Приложение</h2>
 				<div>
-					<strong>Язык:</strong> {appConfig.locale}
+					<strong>Язык:</strong>
+					<select
+						name="locale"
+						id="locale"
+						value={config.locale}
+						onChange={(event) => {
+							const locale = event.target.value as ELocaleCode;
+
+							config.update({ locale });
+						}}
+					>
+						<option key={ELocaleCode.RU_RU} value={ELocaleCode.RU_RU}>
+							Русский
+						</option>
+						<option key={ELocaleCode.EN_US} value={ELocaleCode.EN_US}>
+							English
+						</option>
+					</select>
 				</div>
 
 				<div>
@@ -35,7 +56,17 @@ export function Settings() {
 				</div>
 
 				<div>
-					<strong>Бюджет:</strong> {appConfig.budget} {appConfig.currency}
+					<strong>Бюджет:</strong>
+					<input
+						type="number"
+						value={config.budget || 0}
+						onChange={(event) => {
+							const budget = Number.parseInt(event.target.value);
+
+							config.update({ budget });
+						}}
+					/>
+					<span> {appConfig.currency}</span>
 				</div>
 			</div>
 		</div>
