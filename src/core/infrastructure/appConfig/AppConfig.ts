@@ -6,10 +6,10 @@ import type { TMonth } from '@domain/amount/useCases/types';
 import { environment } from '@root/config';
 
 export interface IAppConfig {
-	readonly locale: ELocaleCode;
+	locale: ELocaleCode;
 	readonly currency: ECurrency;
 	readonly availabelCurrencies: ECurrency[];
-	readonly budget: number | null;
+	budget: number | null;
 	readonly currentMonth: TMonth;
 	readonly apiUrl: string;
 
@@ -80,6 +80,10 @@ export class AppConfig implements IAppConfig {
 		return this.#locale;
 	}
 
+	public set locale(locale: ELocaleCode) {
+		this.#locale = locale;
+	}
+
 	public get currency(): ECurrency {
 		return this.#currency;
 	}
@@ -90,6 +94,10 @@ export class AppConfig implements IAppConfig {
 
 	public get budget(): number | null {
 		return this.#budget;
+	}
+
+	public set budget(value: number | null) {
+		this.#budget = value;
 	}
 
 	public get currentMonth(): TMonth {
