@@ -1,7 +1,5 @@
-import {
-	AuthService,
-	UserStorage,
-} from '@core/infrastructure/authService/AuthService';
+import { AuthService } from '@core/infrastructure/authService/AuthService';
+import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';

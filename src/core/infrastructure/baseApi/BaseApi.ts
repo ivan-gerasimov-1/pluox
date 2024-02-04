@@ -2,15 +2,16 @@ import {
 	AppConfig,
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
-import { AuthStorage } from '@core/infrastructure/authService/AuthService';
-import { type IBaseApi } from '@core/infrastructure/baseApi/types';
+import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
+import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
+import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 
 export class BaseApi implements IBaseApi {
 	static #instance: IBaseApi;
 
 	private constructor(
 		private readonly appConfig: IAppConfig,
-		private readonly authStorage: AuthStorage,
+		private readonly authStorage: IAuthStorage,
 	) {}
 
 	public static getInstance(): IBaseApi {
