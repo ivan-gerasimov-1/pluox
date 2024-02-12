@@ -1,7 +1,7 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
 import type { TCategory, TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
-import { CategoryInput } from '@modules/expenses/expenseView/components/categoryInput/CategoryInput';
+import { CategoryPills } from '@modules/expenses/expenseView/components/categoryPills/CategoryPills';
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/CommentInput';
 import { CurrencyInput } from '@modules/expenses/expenseView/components/currencyInput/currencyInput';
 import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
@@ -133,31 +133,28 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			<br />
 
 			<div className={styles.formGroup}>
-				<div>
-					<CategoryInput
-						value={formState.category}
-						onChange={(id: string) => {
-							dispatch({
-								type: EExpenseFormReducerAction.SET_CATEGORY,
-								category: id,
-							});
-						}}
-					/>
-				</div>
+				<CategoryPills
+					onSelect={(id?: string) => {
+						dispatch({
+							type: EExpenseFormReducerAction.SET_CATEGORY,
+							category: id,
+						});
+					}}
+				/>
+			</div>
 
-				<div className={styles.spacer} />
+			<br />
 
-				<div className={styles['formGroupItem--2-3']}>
-					<DateInput
-						initialValue={formState.date}
-						onChange={(date: string) => {
-							dispatch({
-								type: EExpenseFormReducerAction.SET_DATE,
-								date,
-							});
-						}}
-					/>
-				</div>
+			<div className={styles.formGroup}>
+				<DateInput
+					initialValue={formState.date}
+					onChange={(date: string) => {
+						dispatch({
+							type: EExpenseFormReducerAction.SET_DATE,
+							date,
+						});
+					}}
+				/>
 			</div>
 
 			<br />
