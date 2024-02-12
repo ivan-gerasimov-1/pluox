@@ -3,7 +3,6 @@ import type { TCategory, TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryPills } from '@modules/expenses/expenseView/components/categoryPills/CategoryPills';
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/CommentInput';
-import { CurrencyInput } from '@modules/expenses/expenseView/components/currencyInput/currencyInput';
 import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
 import { expenseFormI18n } from '@modules/expenses/expenseView/expenseForm.i18n';
 import { useIntl } from '@modules/intl';
@@ -116,9 +115,9 @@ export function ExpenseForm(props: TExpenseFormProps) {
 				</button>
 			</div>
 
-			<br />
+			{/* <br /> */}
 
-			<div>
+			{/* <div>
 				<CurrencyInput
 					value={formState.currency}
 					onChange={(currency: ECurrency) => {
@@ -128,7 +127,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 						});
 					}}
 				/>
-			</div>
+			</div> */}
 
 			<br />
 
