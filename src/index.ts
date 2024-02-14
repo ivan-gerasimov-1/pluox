@@ -7,6 +7,9 @@ import { Expenses } from '@domain/expenses/expenses';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
 
+/**
+ * @description Main function
+ */
 async function main(): Promise<void> {
 	fixBrokenExpense();
 
