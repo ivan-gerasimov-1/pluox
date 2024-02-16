@@ -11,7 +11,7 @@ export function CategoryPills(props: TCategoryPillsProps) {
 	let categoryList = useMemo(() => getCategoryList(), []);
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			{categoryList.map((category) => {
 				return (
 					<button
