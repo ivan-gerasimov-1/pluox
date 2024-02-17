@@ -1,3 +1,5 @@
+import { Categories } from '@domain/categories/Categories';
+import type { ICategories } from '@domain/categories/types';
 import type { IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
@@ -8,13 +10,15 @@ export class Expenses implements IExpenses {
 
 	readonly #expenses: Map<Id, TExpense>;
 
-	private constructor() {
+	private constructor(private readonly categories: ICategories) {
 		this.#expenses = new Map();
 	}
 
 	public static getInstance(): IExpenses {
 		if (!this.#instance) {
-			this.#instance = new Expenses();
+			let categories = Categories.getInstance();
+
+			this.#instance = new Expenses(categories);
 		}
 
 		return this.#instance;
@@ -23,6 +27,10 @@ export class Expenses implements IExpenses {
 	public __addRawExpenses(expenses: TExpenses): IExpenses {
 		for (const [id, value] of Object.entries(expenses)) {
 			this.#expenses.set(id, value);
+
+			if (value.category) {
+				this.categories.increaseWeight(value.category);
+			}
 		}
 
 		return this;
@@ -47,7 +55,13 @@ export class Expenses implements IExpenses {
 	}
 
 	public add(expense: IExpense): this {
-		this.#expenses.set(expense.id, Object.freeze(expense.toObject()));
+		let expenseDTO = expense.toObject();
+
+		this.#expenses.set(expense.id, Object.freeze(expenseDTO));
+
+		if (expenseDTO.category) {
+			this.categories.increaseWeight(expenseDTO.category);
+		}
 
 		return this;
 	}
@@ -96,11 +110,13 @@ export class Expenses implements IExpenses {
 	}
 
 	public delete(id: Id): this {
-		if (!this.#expenses.has(id)) {
-			throw new ExpenseNotFoundError(id);
-		}
+		let expense = this.get(id);
 
-		this.#expenses.delete(id);
+		this.#expenses.delete(expense.id);
+
+		if (expense.category) {
+			this.categories.decreaseWeight(expense.category);
+		}
 
 		return this;
 	}
