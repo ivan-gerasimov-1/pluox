@@ -3,6 +3,8 @@ import { useNavigation } from '@modules/navigation/useNavigation';
 import { usePending } from '@screens/hooks/usePending';
 import { delay } from '@utils/delay';
 import styles from './logInForm.module.css';
+import { EAppPath } from '@root/appPath';
+import { Navigable } from '@uiKit/navigable/navigable';
 
 export function useLoginForm() {
 	let authService = useAuthService();
@@ -53,6 +55,10 @@ export function LogInForm() {
 
 				<FormGroup>
 					<span>Забыли пароль?</span>
+
+					<br />
+
+					<Navigable to={EAppPath.SIGNIN}>Регистрация</Navigable>
 				</FormGroup>
 
 				<FormGroup>
