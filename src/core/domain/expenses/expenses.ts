@@ -1,3 +1,8 @@
+import {
+	AppConfig,
+	type IAppConfig,
+} from '@core/infrastructure/appConfig/AppConfig';
+import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import { Categories } from '@domain/categories/Categories';
 import type { ICategories } from '@domain/categories/types';
 import type { IExpense, TExpense } from '@domain/expense/types';
@@ -10,15 +15,19 @@ export class Expenses implements IExpenses {
 
 	readonly #expenses: Map<Id, TExpense>;
 
-	private constructor(private readonly categories: ICategories) {
+	private constructor(
+		private readonly appConfig: IAppConfig,
+		private readonly categories: ICategories,
+	) {
 		this.#expenses = new Map();
 	}
 
 	public static getInstance(): IExpenses {
 		if (!this.#instance) {
+			let appConfig = AppConfig.getInstance();
 			let categories = Categories.getInstance();
 
-			this.#instance = new Expenses(categories);
+			this.#instance = new Expenses(appConfig, categories);
 		}
 
 		return this.#instance;
@@ -119,6 +128,44 @@ export class Expenses implements IExpenses {
 		}
 
 		return this;
+	}
+
+	public getMonthlyExpensesByCategory() {
+		let currencyConverter = CurrencyConverter.getInstance();
+		let currency = this.appConfig.currency;
+		let expensesByCategory: Record<Id, number> = {};
+
+		const date = new Date(
+			new Date(new Date().getFullYear(), this.appConfig.currentMonth, 1),
+		);
+
+		let expenses = this.list({
+			dateFrom: date.toISOString(),
+		});
+
+		console.log(expenses);
+
+		for (let expense of expenses) {
+			let category = expense.category || 'uncategorized';
+
+			if (!expensesByCategory[category]) {
+				expensesByCategory[category] = 0;
+			}
+
+			let amount = expense.amount;
+			let expenseCurrency = expense.currency;
+
+			// expensesByCategory[category] += Number.parseFloat(
+			// 	currencyConverter.convert(amount, expenseCurrency, currency).toFixed(2),
+			// );
+			expensesByCategory[category] += currencyConverter.convert(
+				amount,
+				expenseCurrency,
+				currency,
+			);
+		}
+
+		return expensesByCategory;
 	}
 
 	private getAll(): TExpenses {
