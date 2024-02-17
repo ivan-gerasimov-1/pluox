@@ -1,14 +1,33 @@
 import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { useAppConfigStore } from '@modules/appConfig/appConfig.store';
+import { useNavigation } from '@modules/navigation/useNavigation';
+import { Icon } from '@uiKit/icon/icon';
 
 export function Settings() {
 	const appConfig = AppConfig.getInstance();
 
 	const config = useAppConfigStore();
+	let navigation = useNavigation();
 
 	return (
 		<div>
+			<div>
+				<button
+					type="button"
+					onClick={() => {
+						AuthService.getInstance().signOut();
+
+						navigation.mainPage();
+					}}
+				>
+					<Icon name={Icon.IconName.LogOut} />
+				</button>
+			</div>
+
+			<br />
+
 			<h1>Настройки</h1>
 			<div>
 				<h2>Пользователь</h2>
