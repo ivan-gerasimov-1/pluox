@@ -1,14 +1,19 @@
-import { categoryList } from '@domain/categories/constants';
-import styles from './categoryPills.module.css';
-import { Expenses } from '@domain/expenses/expenses';
+import { Categories } from '@domain/categories/Categories';
 import { useMemo } from 'react';
+import styles from './categoryPills.module.css';
 
 type TCategoryPillsProps = {
 	onSelect(categoryId?: string): void;
 };
 
 export function CategoryPills(props: TCategoryPillsProps) {
-	let categoryList = useMemo(() => getCategoryList(), []);
+	let categoryList = useMemo(
+		() =>
+			Categories.getInstance().list({
+				useWeights: true,
+			}),
+		[],
+	);
 
 	return (
 		<div className={styles.wrapper}>
@@ -46,37 +51,4 @@ export function CategoryPills(props: TCategoryPillsProps) {
 			})}
 		</div>
 	);
-}
-
-function getCategoryList() {
-	const categoryWeights = new Map<string, number>();
-
-	for (const exp of Expenses.getInstance().list()) {
-		if (!exp.category) {
-			continue;
-		}
-
-		const currentWeight = categoryWeights.get(exp.category);
-
-		if (currentWeight === undefined) {
-			categoryWeights.set(exp.category, 1);
-		} else {
-			categoryWeights.set(exp.category, currentWeight + 1);
-		}
-	}
-
-	return [...categoryList].sort((a, b) => {
-		const aWeight = categoryWeights.get(a.id) || 0;
-		const bWeight = categoryWeights.get(b.id) || 0;
-
-		if (aWeight > bWeight) {
-			return -1;
-		}
-
-		if (aWeight < bWeight) {
-			return 1;
-		}
-
-		return 0;
-	});
 }
