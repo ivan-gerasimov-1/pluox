@@ -133,7 +133,7 @@ export class Expenses implements IExpenses {
 	public getMonthlyExpensesByCategory() {
 		let currencyConverter = CurrencyConverter.getInstance();
 		let currency = this.appConfig.currency;
-		let expensesByCategory: Record<Id, number> = {};
+		let expensesByCategory: Record<Id, { id: Id; total: number }> = {};
 
 		const date = new Date(
 			new Date(new Date().getFullYear(), this.appConfig.currentMonth, 1),
@@ -149,23 +149,22 @@ export class Expenses implements IExpenses {
 			let category = expense.category || 'uncategorized';
 
 			if (!expensesByCategory[category]) {
-				expensesByCategory[category] = 0;
+				expensesByCategory[category] = {
+					id: category,
+					total: 0,
+				};
 			}
 
-			let amount = expense.amount;
-			let expenseCurrency = expense.currency;
-
-			// expensesByCategory[category] += Number.parseFloat(
-			// 	currencyConverter.convert(amount, expenseCurrency, currency).toFixed(2),
-			// );
-			expensesByCategory[category] += currencyConverter.convert(
-				amount,
-				expenseCurrency,
+			expensesByCategory[category].total += currencyConverter.convert(
+				expense.amount,
+				expense.currency,
 				currency,
 			);
 		}
 
-		return expensesByCategory;
+		let arr = Object.values(expensesByCategory);
+
+		return arr.sort((a, b) => b.total - a.total);
 	}
 
 	private getAll(): TExpenses {

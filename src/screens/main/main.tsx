@@ -10,6 +10,7 @@ import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
 import { Header } from '@screens/main/components /header';
+import { Fragment } from 'react';
 
 export function MainScreen() {
 	let appConfig = useAppConfig();
@@ -17,8 +18,6 @@ export function MainScreen() {
 	let expenses = Expenses.getInstance()
 		// @ts-expect-error
 		.getMonthlyExpensesByCategory();
-
-	console.log(expenses);
 
 	return (
 		<>
@@ -30,26 +29,31 @@ export function MainScreen() {
 					</Card>
 				</Navigable>
 
-				<Card>
-					{Object.entries(expenses).map(([category, amount]) => {
-						return (
-							<>
-								<div>
-									{getCategoryName(category)}:{' '}
-									<strong>
-										{IntlService.getInstance().formatCurrency(amount as number)}
-									</strong>
-								</div>
-							</>
-						);
-					})}
-				</Card>
-
 				<Navigable to={EAppPath.EXPENSE_LIST_MONTHLY}>
 					<Card touchable>
 						<MoneySpentYear />
 					</Card>
 				</Navigable>
+
+				<Card>
+					{expenses.map(
+						(
+							// @ts-expect-error
+							{ id, total },
+						) => {
+							return (
+								<Fragment key={id}>
+									<div>
+										{getCategoryName(id)}:{' '}
+										<strong>
+											{IntlService.getInstance().formatCurrency(total)}
+										</strong>
+									</div>
+								</Fragment>
+							);
+						},
+					)}
+				</Card>
 			</CardContainer>
 
 			<ActionSheet>
