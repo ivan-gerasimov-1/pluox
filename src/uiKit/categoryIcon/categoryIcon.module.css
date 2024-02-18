@@ -1,0 +1,15 @@
+.icon {
+	display: flex;
+
+	width: 2.5rem;
+	height: 2.5rem;
+
+	align-items: center;
+	justify-content: center;
+
+	background-color: var(--color-grey-200);
+
+	border-radius: 9px;
+
+	font-size: 1.5rem;
+}
