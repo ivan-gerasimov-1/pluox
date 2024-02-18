@@ -1,6 +1,3 @@
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
-import { getCategoryName } from '@domain/categories/getCategoryName';
-import { Expenses } from '@domain/expenses/expenses';
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
@@ -9,36 +6,8 @@ import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
+import { ExpensesByCategory } from '@screens/main/components /expensesByCategory/ExpensesByCategory';
 import { Header } from '@screens/main/components /header';
-import { Fragment } from 'react';
-
-export function ExpensesByCategory() {
-	let expenses = Expenses.getInstance()
-		// @ts-expect-error
-		.getMonthlyExpensesByCategory();
-
-	return (
-		<>
-			{expenses.map(
-				(
-					// @ts-expect-error
-					{ id, total },
-				) => {
-					return (
-						<Fragment key={id}>
-							<div>
-								{getCategoryName(id)}:{' '}
-								<strong>
-									{IntlService.getInstance().formatCurrency(total)}
-								</strong>
-							</div>
-						</Fragment>
-					);
-				},
-			)}
-		</>
-	);
-}
 
 export function MainScreen() {
 	let appConfig = useAppConfig();

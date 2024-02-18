@@ -16,6 +16,8 @@ export interface IExpenses {
 
 	/** @description temporary solution */
 	__addRawExpenses(expenses: TExpenses): IExpenses;
+
+	getMonthlyExpensesByCategory(): { id: Id; total: number }[];
 }
 
 export type TExpenses = Record<Id, TExpense>;
