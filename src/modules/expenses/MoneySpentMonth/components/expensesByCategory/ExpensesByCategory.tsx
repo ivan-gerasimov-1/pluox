@@ -1,15 +1,18 @@
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { getCategoryName } from '@domain/categories/getCategoryName';
 import { Expenses } from '@domain/expenses';
-import styles from './ExpensesByCategory.module.css';
 import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
+import { useState } from 'react';
+import styles from './ExpensesByCategory.module.css';
 
 export function ExpensesByCategory() {
+	let [showAll, setShowAll] = useState<boolean>(false);
 	let expenses = Expenses.getInstance().getMonthlyExpensesByCategory();
+	let expensesToRender = showAll ? expenses : expenses.slice(0, 3);
 
 	return (
 		<>
-			{expenses.map(({ id, total }) => {
+			{expensesToRender.map(({ id, total }) => {
 				return (
 					<div key={id} className={styles.categoryRow}>
 						<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -32,6 +35,32 @@ export function ExpensesByCategory() {
 					</div>
 				);
 			})}
+
+			<button
+				type="button"
+				style={{
+					width: '100%',
+					margin: '0',
+					padding: '10px 10px',
+
+					color: 'var(--primary)',
+					background: 'none',
+
+					border: 'none',
+
+					fontSize: '14px',
+					fontFamily: 'inherit',
+
+					cursor: 'pointer',
+				}}
+				onClick={(event) => {
+					event.preventDefault();
+
+					setShowAll(!showAll);
+				}}
+			>
+				{showAll ? 'Свернуть ↑' : 'Ещё ↓'}
+			</button>
 		</>
 	);
 }
