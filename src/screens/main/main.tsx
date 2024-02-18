@@ -12,17 +12,42 @@ import { Navigable } from '@root/uiKit/navigable/navigable';
 import { Header } from '@screens/main/components /header';
 import { Fragment } from 'react';
 
-export function MainScreen() {
-	let appConfig = useAppConfig();
-
+export function ExpensesByCategory() {
 	let expenses = Expenses.getInstance()
 		// @ts-expect-error
 		.getMonthlyExpensesByCategory();
 
 	return (
 		<>
+			{expenses.map(
+				(
+					// @ts-expect-error
+					{ id, total },
+				) => {
+					return (
+						<Fragment key={id}>
+							<div>
+								{getCategoryName(id)}:{' '}
+								<strong>
+									{IntlService.getInstance().formatCurrency(total)}
+								</strong>
+							</div>
+						</Fragment>
+					);
+				},
+			)}
+		</>
+	);
+}
+
+export function MainScreen() {
+	let appConfig = useAppConfig();
+
+	return (
+		<>
 			<CardContainer>
 				<Header />
+
 				<Navigable to={EAppPath.EXPENSE_LIST}>
 					<Card touchable>
 						<MoneySpentMonth month={appConfig.currentMonth} />
@@ -36,23 +61,7 @@ export function MainScreen() {
 				</Navigable>
 
 				<Card>
-					{expenses.map(
-						(
-							// @ts-expect-error
-							{ id, total },
-						) => {
-							return (
-								<Fragment key={id}>
-									<div>
-										{getCategoryName(id)}:{' '}
-										<strong>
-											{IntlService.getInstance().formatCurrency(total)}
-										</strong>
-									</div>
-								</Fragment>
-							);
-						},
-					)}
+					<ExpensesByCategory />
 				</Card>
 			</CardContainer>
 
