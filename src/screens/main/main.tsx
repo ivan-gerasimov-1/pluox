@@ -6,7 +6,6 @@ import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
-import { ExpensesByCategory } from '@screens/main/components /expensesByCategory/ExpensesByCategory';
 import { Header } from '@screens/main/components /header';
 
 export function MainScreen() {
@@ -28,10 +27,6 @@ export function MainScreen() {
 						<MoneySpentYear />
 					</Card>
 				</Navigable>
-
-				<Card>
-					<ExpensesByCategory />
-				</Card>
 			</CardContainer>
 
 			<ActionSheet>

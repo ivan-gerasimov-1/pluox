@@ -1,8 +1,10 @@
 import { TMonth } from '@domain/amount/useCases/types';
 import { useAppConfig } from '@modules/appConfig/useAppConfig';
-import { useExpensesStore } from '@modules/expenses';
 import { useMonthName } from '@modules/common/hooks/useMonthName/useMonthName';
+import { useExpensesStore } from '@modules/expenses';
 import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
+import { ExpensesByCategory } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
+import styles from './moneySpentMonth.module.css';
 
 export type TMoneySpentMonthProps = {
 	month: TMonth;
@@ -14,6 +16,12 @@ export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 	let currentMonth = useMonthName(props.month);
 
 	return (
-		<MoneyCard title={currentMonth} amount={total} total={appConfig.budget} />
+		<>
+			<MoneyCard title={currentMonth} amount={total} total={appConfig.budget} />
+
+			<hr className={styles.separator} />
+
+			<ExpensesByCategory />
+		</>
 	);
 }
