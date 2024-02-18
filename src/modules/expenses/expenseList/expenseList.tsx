@@ -1,4 +1,3 @@
-import { getCategoryIcon } from '@domain/categories/getCategoryIcon';
 import type { Id, TISODateString } from '@domain/types';
 import { useExpensesStore } from '@modules/expenses';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
@@ -13,6 +12,7 @@ import {
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
 import styles from './expenseList.module.css';
+import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -68,9 +68,7 @@ export function ExpenseList(props: TExpenseListProps) {
 								fullSwipe
 							>
 								<div className={styles.iconContainer}>
-									<div className={styles.icon}>
-										{getCategoryIcon(item.category)}
-									</div>
+									<CategoryIcon categoryId={item.category} />
 								</div>
 
 								<div className={styles.info}>
