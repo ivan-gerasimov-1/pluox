@@ -1,7 +1,9 @@
 import { ExpenseList } from '@modules/expenses';
 import { useIntl } from '@modules/intl';
+
 import { expenseListI18n } from '@screens/expenseList/expenseList.i18n';
-import styles from './expenseList.module.css';
+
+import { Header } from '@uiKit/header/header';
 /* import { ActionSheet } from '@root/uiKit/actionSheet';
 import { EditExpense } from '@modules/expenses/editExpense/editExpense';
 import { type Id } from '@domain/types';
@@ -20,9 +22,7 @@ export function ExpenseListScreen() {
 
 	return (
 		<>
-			<div className={styles.header}>
-				<h1>{intl.translate('title')}</h1>
-			</div>
+			<Header title={intl.translate('title')} />
 
 			<ExpenseList
 				/* onEdit={(id: Id) => setEditItem(id)} */ dateFrom={dateFrom}
