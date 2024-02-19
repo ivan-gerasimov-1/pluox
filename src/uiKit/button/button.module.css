@@ -1,0 +1,29 @@
+.button {
+	display: inline-block;
+
+	margin: 0;
+	padding: 16px 44px;
+
+	color: var(--color-white);
+	background-color: var(--color-red-400);
+
+	border: none;
+	border-radius: var(--border-radius-small);
+
+	font-size: 16px;
+	font-family: inherit;
+	text-align: center;
+
+	outline: none;
+
+	transition: box-shadow var(--transition-defaults);
+
+	&:hover,
+	&:focus {
+		box-shadow: 0px 10px 30px -10px var(--color-red-400);
+	}
+
+	&:active {
+		box-shadow: 0px 5px 30px -10px var(--color-red-400);
+	}
+}
