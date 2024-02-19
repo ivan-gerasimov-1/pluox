@@ -6,8 +6,9 @@ import { useNavigation } from '@modules/navigation/useNavigation';
 import { EService, useService } from '@modules/serviceContainer/useService';
 
 import { Header } from '@uiKit/header/header';
-
 import { Button } from '@uiKit/button/button';
+
+import styles from './settings.module.css';
 
 export function Settings() {
 	const appConfig = useService(EService.APP_CONFIG);
@@ -20,23 +21,23 @@ export function Settings() {
 			<Header title="Настройки" />
 
 			<div>
-				<div>
-					<h2>Пользователь</h2>
-					<div>
-						<strong>Имя:</strong> —
+				<div className={styles.section}>
+					<h2 className={styles.sectionHeader}>Пользователь</h2>
+
+					<div className={styles.field}>
+						<span className={styles.fieldLabel}>Имя:</span> —
 					</div>
 
-					<div>
-						<strong>Эл. почта:</strong> —
+					<div className={styles.field}>
+						<span className={styles.fieldLabel}>Эл. почта:</span> —
 					</div>
 				</div>
 
-				<br />
+				<div className={styles.section}>
+					<h2 className={styles.sectionHeader}>Приложение</h2>
 
-				<div>
-					<h2>Приложение</h2>
-					<div>
-						<strong>Язык:</strong>
+					<div className={styles.field}>
+						<span className={styles.fieldLabel}>Язык:</span>
 						<select
 							name="locale"
 							id="locale"
@@ -56,17 +57,18 @@ export function Settings() {
 						</select>
 					</div>
 
-					<div>
-						<strong>Валюта:</strong> {appConfig.currency}
+					<div className={styles.field}>
+						<span className={styles.fieldLabel}>Валюта:</span>{' '}
+						{appConfig.currency}
 					</div>
 
-					<div>
-						<strong>Доступные валюты:</strong>{' '}
+					<div className={styles.field}>
+						<span className={styles.fieldLabel}>Доступные валюты:</span>{' '}
 						{appConfig.availabelCurrencies.join(', ')}
 					</div>
 
-					<div>
-						<strong>Бюджет:</strong>
+					<div className={styles.field}>
+						<span className={styles.fieldLabel}>Бюджет:</span>
 						<input
 							type="number"
 							value={config.budget || 0}
