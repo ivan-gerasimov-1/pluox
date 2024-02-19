@@ -4,6 +4,7 @@ import TrashOutlineIcon from 'ionicons/dist/svg/trash-outline.svg';
 import PersonCircleOutlineIcon from 'ionicons/dist/svg/person-circle-outline.svg';
 import LogInOutlineIcon from 'ionicons/dist/svg/log-in-outline.svg';
 import LogOutOutlineIcon from 'ionicons/dist/svg/log-out-outline.svg';
+import BackOutlineIcon from 'ionicons/dist/svg/chevron-back-outline.svg';
 
 export enum EIconName {
 	Close = 'close',
@@ -12,6 +13,7 @@ export enum EIconName {
 	User = 'user',
 	LogIn = 'logIn',
 	LogOut = 'logOut',
+	Back = 'back',
 }
 
 const IconComponent = {
@@ -21,6 +23,7 @@ const IconComponent = {
 	[EIconName.User]: PersonCircleOutlineIcon,
 	[EIconName.LogIn]: LogInOutlineIcon,
 	[EIconName.LogOut]: LogOutOutlineIcon,
+	[EIconName.Back]: BackOutlineIcon,
 };
 
 export function getIcon(iconName: EIconName) {
