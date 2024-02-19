@@ -6,7 +6,8 @@ import { useAppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
 
 import { Header } from '@uiKit/header/header';
-import { Icon } from '@uiKit/icon/icon';
+
+import styles from './button.module.css';
 
 export function Settings() {
 	const appConfig = AppConfig.getInstance();
@@ -19,21 +20,6 @@ export function Settings() {
 			<Header title="Настройки" />
 
 			<div>
-				<div>
-					<button
-						type="button"
-						onClick={() => {
-							AuthService.getInstance().signOut();
-
-							navigation.mainPage();
-						}}
-					>
-						<Icon name={Icon.IconName.LogOut} />
-					</button>
-				</div>
-
-				<br />
-
 				<div>
 					<h2>Пользователь</h2>
 					<div>
@@ -93,6 +79,20 @@ export function Settings() {
 						<span> {appConfig.currency}</span>
 					</div>
 				</div>
+			</div>
+
+			<div>
+				<button
+					type="button"
+					className={styles.button}
+					onClick={() => {
+						AuthService.getInstance().signOut();
+
+						navigation.mainPage();
+					}}
+				>
+					Выйти
+				</button>
 			</div>
 		</>
 	);
