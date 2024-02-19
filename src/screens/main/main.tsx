@@ -6,7 +6,7 @@ import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
-import { Header } from '@screens/main/components /header';
+import { Header } from '@uiKit/header/header';
 
 export function MainScreen() {
 	let appConfig = useAppConfig();

@@ -3,11 +3,13 @@ import { EAppPath } from '@root/appPath';
 import { Icon } from '@uiKit/icon/icon';
 import { Navigable } from '@uiKit/navigable/navigable';
 
+import styles from './header.module.css';
+
 export function Header() {
 	let isAuthenticated = AuthService.getInstance().check();
 
 	return (
-		<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+		<div className={styles.container}>
 			{isAuthenticated ? (
 				<Navigable to={EAppPath.SETTINGS}>
 					<Icon name={Icon.IconName.User} size={Icon.Size.LARGE} />
