@@ -89,6 +89,10 @@ export function Settings() {
 					className={styles.button}
 					style={{ width: '100%' }}
 					onClick={() => {
+						if (!window.confirm('Вы уверены, что хотите выйти?')) {
+							return;
+						}
+
 						AuthService.getInstance().signOut();
 
 						navigation.mainPage();
