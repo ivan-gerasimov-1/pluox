@@ -81,10 +81,13 @@ export function Settings() {
 				</div>
 			</div>
 
+			<br />
+
 			<div>
 				<button
 					type="button"
 					className={styles.button}
+					style={{ width: '100%' }}
 					onClick={() => {
 						AuthService.getInstance().signOut();
 
