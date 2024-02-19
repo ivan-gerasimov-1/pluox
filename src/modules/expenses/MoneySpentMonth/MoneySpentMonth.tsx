@@ -1,9 +1,9 @@
 import { TMonth } from '@domain/amount/useCases/types';
-import { useAppConfig } from '@modules/appConfig/useAppConfig';
 import { useMonthName } from '@modules/common/hooks/useMonthName/useMonthName';
 import { useExpensesStore } from '@modules/expenses';
-import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 import { ExpensesByCategory } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
+import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
+import { EService, useService } from '@modules/serviceContainer/useService';
 import styles from './moneySpentMonth.module.css';
 
 export type TMoneySpentMonthProps = {
@@ -11,7 +11,7 @@ export type TMoneySpentMonthProps = {
 };
 
 export function MoneySpentMonth(props: TMoneySpentMonthProps) {
-	let appConfig = useAppConfig();
+	let appConfig = useService(EService.APP_CONFIG);
 	let total = useExpensesStore((state) => state.getMonthlyAmount(props.month));
 	let currentMonth = useMonthName(props.month);
 

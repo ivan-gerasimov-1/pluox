@@ -1,16 +1,16 @@
-import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 import { useAppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
+import { EService, useService } from '@modules/serviceContainer/useService';
 
 import { Header } from '@uiKit/header/header';
 
 import styles from './button.module.css';
 
 export function Settings() {
-	const appConfig = AppConfig.getInstance();
+	const appConfig = useService(EService.APP_CONFIG);
 
 	const config = useAppConfigStore();
 	let navigation = useNavigation();
