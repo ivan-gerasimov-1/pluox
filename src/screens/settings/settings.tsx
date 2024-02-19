@@ -7,7 +7,7 @@ import { EService, useService } from '@modules/serviceContainer/useService';
 
 import { Header } from '@uiKit/header/header';
 
-import styles from './button.module.css';
+import { Button } from '@uiKit/button/button';
 
 export function Settings() {
 	const appConfig = useService(EService.APP_CONFIG);
@@ -84,9 +84,7 @@ export function Settings() {
 			<br />
 
 			<div>
-				<button
-					type="button"
-					className={styles.button}
+				<Button
 					style={{ width: '100%' }}
 					onClick={() => {
 						if (!window.confirm('Вы уверены, что хотите выйти?')) {
@@ -99,7 +97,7 @@ export function Settings() {
 					}}
 				>
 					Выйти
-				</button>
+				</Button>
 			</div>
 		</>
 	);
