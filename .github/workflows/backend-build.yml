@@ -26,15 +26,6 @@ jobs:
           node-version: '16.20.2'
           cache: 'npm'
 
-      - name: Load secrets from 1Password
-        uses: 1Password/load-secrets-action@v1.3.1
-        with:
-          # Export loaded secrets as environment variables
-          export-env: true
-        env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SSH_KEY: 'op://Savee/Hetzner/private key'
-
       - name: Build
         run: |
           npm ci
@@ -57,13 +48,21 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
-    env:
-      HOST: 95.216.175.114
-      USER: root
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+
+      - name: Load secrets from 1Password
+        uses: 1Password/load-secrets-action@v1.3.1
+        with:
+          # Export loaded secrets as environment variables
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          SSH_KEY: 'op://Savee/Hetzner/SSH Private Key'
+          HOST: 'op://Savee/Hetzner/Host'
+          USER: 'op://Savee/Hetzner/User'
+
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
