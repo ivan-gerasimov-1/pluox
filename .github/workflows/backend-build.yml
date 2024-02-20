@@ -16,36 +16,36 @@ on:
       - '.github/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '16.20.2'
-          cache: 'npm'
+  #   steps:
+  #     - uses: actions/checkout@v4
+  # - uses: actions/setup-node@v4
+  #   with:
+  #     node-version: '16.20.2'
+  #     cache: 'npm'
 
-      - name: Build
-        run: |
-          npm ci
-          npm --workspace=@savee/backend run build
-      - name: Copy files
-        run: |
-          mkdir -p artifacts/
-          cp -r packages/backend/build/ artifacts/
-          cp packages/backend/package.json artifacts/build/
-          cp packages/backend/ecosystem.config.js artifacts/build/
-          cp package-lock.json artifacts/build/
+  # - name: Build
+  #   run: |
+  #     npm ci
+  #     npm --workspace=@savee/backend run build
+  # - name: Copy files
+  #   run: |
+  #     mkdir -p artifacts/
+  #     cp -r packages/backend/build/ artifacts/
+  #     cp packages/backend/package.json artifacts/build/
+  #     cp packages/backend/ecosystem.config.js artifacts/build/
+  #     cp package-lock.json artifacts/build/
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: artifacts/build
+  # - name: Upload build artifact
+  #   uses: actions/upload-artifact@v4
+  #   with:
+  #     name: build
+  #     path: artifacts/build
 
   deploy:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
 
     steps:
