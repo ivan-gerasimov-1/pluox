@@ -48,7 +48,7 @@ jobs:
     # needs: build
     runs-on: ubuntu-latest
     env:
-      SSH_KEY: ${{ secrets.SSH_KEY }}
+      # SSH_KEY: ${{ secrets.SSH_KEY }}
       HOST: 95.216.175.114
       USER: root
 
@@ -63,7 +63,7 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          # SSH_KEY: 'op://Savee/Server/SSH Private Key'
+          SSH_KEY: 'op://Savee/HETZNER TEST GH ACTIONS/private Key'
           # HOST: 'op://Savee/Server/Host'
           # USER: 'op://Savee/Server/User'
 
