@@ -86,9 +86,9 @@ jobs:
           echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-ed25519" > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
           ls $HOME/.ssh
-          echo $HOME/.ssh/config
-          echo $HOME/.ssh/known_hosts
-          echo $HOME/.ssh/ssh-ed25519
+          cat $HOME/.ssh/config
+          cat $HOME/.ssh/known_hosts
+          cat $HOME/.ssh/ssh-ed25519
       # - name: Deploy new code
       #   run: |
       #     rsync --archive --compress --delete artifacts/build/* $USER@$HOST:/srv/savee/api
