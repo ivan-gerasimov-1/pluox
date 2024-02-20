@@ -83,16 +83,16 @@ jobs:
         run: |
           set -eu
           mkdir $HOME/.ssh
-          echo "$SSH_KEY" > $HOME/.ssh/ssh-ed25519
-          chmod 600 $HOME/.ssh/ssh-ed25519
-          ssh-keyscan -t ed25519 $HOST > $HOME/.ssh/known_hosts
+          echo "$SSH_KEY" > $HOME/.ssh/ssh-rsa
+          chmod 600 $HOME/.ssh/ssh-rsa
+          ssh-keyscan -t rsa $HOST > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
-          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-ed25519" > $HOME/.ssh/config
+          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
           ls $HOME/.ssh
           cat $HOME/.ssh/config
           cat $HOME/.ssh/known_hosts
-          cat $HOME/.ssh/ssh-ed25519
+          cat $HOME/.ssh/ssh-rsa
       # - name: Deploy new code
       #   run: |
       #     rsync --archive --compress --delete artifacts/build/* $USER@$HOST:/srv/savee/api
