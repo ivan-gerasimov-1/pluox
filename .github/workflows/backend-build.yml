@@ -47,6 +47,10 @@ jobs:
   deploy:
     # needs: build
     runs-on: ubuntu-latest
+    env:
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      HOST: ${{ secrets.HOST }}
+      USER: ${{ secrets.USER }}
 
     steps:
       - uses: actions/checkout@v4
@@ -59,9 +63,9 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SSH_KEY: 'op://Savee/Server/SSH Private Key'
-          HOST: 'op://Savee/Server/Host'
-          USER: 'op://Savee/Server/User'
+          # SSH_KEY: 'op://Savee/Server/SSH Private Key'
+          # HOST: 'op://Savee/Server/Host'
+          # USER: 'op://Savee/Server/User'
 
       # - name: Download build artifact
       #   uses: actions/download-artifact@v4
