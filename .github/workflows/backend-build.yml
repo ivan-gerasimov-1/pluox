@@ -81,7 +81,7 @@ jobs:
           mkdir $HOME/.ssh
           echo "$SSH_KEY" > $HOME/.ssh/ssh-ed25519
           chmod 600 $HOME/.ssh/ssh-ed25519
-          ssh-keyscan -t ecdsa $HOST > $HOME/.ssh/known_hosts
+          ssh-keyscan -t ed25519 $HOST > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
           echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-ed25519" > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
