@@ -4,7 +4,7 @@ import mongodb from '@fastify/mongodb';
 import bcrypt from 'bcrypt';
 import Fastify from 'fastify';
 import { appConfig } from './config';
-import { generateExpenseId, generateUserId } from './generateId';
+import { generateExpenseId, generateUserId } from './helpers/generateId';
 import { isDevelopment } from './helpers/isDevelopment';
 
 const ALLOWED_ORIGINS = ['https://savee.vercel.app'];
