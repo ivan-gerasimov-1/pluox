@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { FastifyInstance } from 'fastify';
-import { generateUserId } from '../../helpers/generateId';
+import { generateUserId } from './helpers/generateUserId';
 
 export async function authenticationRouter(plugin: FastifyInstance) {
 	plugin.post('/signup', async function handler(request, response) {
