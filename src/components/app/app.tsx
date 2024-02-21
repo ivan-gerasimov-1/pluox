@@ -9,37 +9,34 @@ import { LogIn } from '@screens/logIn/LogIn';
 import { Settings } from '@screens/settings/settings';
 import { SignIn } from '@screens/signIn';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import styles from './app.module.css';
 
 export function App() {
 	let intl = useIntl(appI18n);
 
 	return (
 		<Router>
-			<div className={styles.content}>
-				<Routes>
-					<Route path={EAppPath.SIGNIN} element={<SignIn />} />
-					<Route path={EAppPath.LOGIN} element={<LogIn />} />
+			<Routes>
+				<Route path={EAppPath.SIGNIN} element={<SignIn />} />
+				<Route path={EAppPath.LOGIN} element={<LogIn />} />
 
-					<Route path={EAppPath.MAIN} element={<MainScreen />} />
-					<Route path={EAppPath.EXPENSE_LIST} element={<ExpenseListScreen />} />
-					<Route
-						path={EAppPath.EXPENSE_LIST_MONTHLY}
-						element={<ExpenseListMonthlyScreen />}
-					/>
+				<Route path={EAppPath.MAIN} element={<MainScreen />} />
+				<Route path={EAppPath.EXPENSE_LIST} element={<ExpenseListScreen />} />
+				<Route
+					path={EAppPath.EXPENSE_LIST_MONTHLY}
+					element={<ExpenseListMonthlyScreen />}
+				/>
 
-					<Route path={EAppPath.SETTINGS} element={<Settings />} />
+				<Route path={EAppPath.SETTINGS} element={<Settings />} />
 
-					<Route
-						path="*"
-						element={
-							<ErrorScreen
-								message={intl.translate('errorMessages').pageNotFound}
-							/>
-						}
-					/>
-				</Routes>
-			</div>
+				<Route
+					path="*"
+					element={
+						<ErrorScreen
+							message={intl.translate('errorMessages').pageNotFound}
+						/>
+					}
+				/>
+			</Routes>
 		</Router>
 	);
 }
