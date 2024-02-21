@@ -2,115 +2,44 @@ import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
 import mongodb from '@fastify/mongodb';
 import bcrypt from 'bcrypt';
-import Fastify from 'fastify';
+import Fastify, { FastifyInstance } from 'fastify';
 import { appConfig } from './config';
 import { generateExpenseId, generateUserId } from './helpers/generateId';
 import { isDevelopment } from './helpers/isDevelopment';
+import { authenticationRouter } from './routes/authentication/authentication';
 
-const ALLOWED_ORIGINS = ['https://savee.vercel.app'];
+let allowedOrigins = ['https://savee.vercel.app'];
 
 export function createApp() {
-	const fastify = Fastify({
+	const app = Fastify({
 		logger: true,
 	});
 
 	if (isDevelopment(process.env.NODE_ENV)) {
-		ALLOWED_ORIGINS.push('http://localhost:3000');
+		allowedOrigins.push('http://localhost:3000');
 	}
 
-	fastify.register(cors, {
-		origin: ALLOWED_ORIGINS,
-	});
+	app
+		.register(cors, {
+			origin: allowedOrigins,
+		})
+		.register(mongodb, {
+			url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@localhost:27017/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
+			forceClose: true,
+		})
+		.register(jwt, {
+			secret: appConfig.jwt.secret,
+		});
 
-	fastify.register(mongodb, {
-		url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@localhost:27017/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
-		forceClose: true,
-	});
-
-	fastify.register(jwt, {
-		secret: appConfig.jwt.secret,
-	});
-
-	fastify.get('/', async function handler() {
+	app.get('/', async function handler() {
 		return {
 			version: '0.1.0',
 		};
 	});
 
-	fastify.register(async (plugin) => {
-		plugin.post('/signup', async function handler(request, response) {
-			// @ts-expect-error
-			const { email, password } = request.body;
-			const hashedPassword = await bcrypt.hash(password, 10);
+	app.register(authenticationRouter);
 
-			const usersCollection = plugin.mongo.db?.collection('users');
-
-			const userId = generateUserId();
-
-			await usersCollection?.insertOne({
-				id: userId,
-				email,
-				password: hashedPassword,
-			});
-
-			response.send({
-				id: userId,
-				email,
-			});
-		});
-
-		plugin.post('/login', async (request, reply) => {
-			// @ts-expect-error
-			const { email, password } = request.body;
-
-			const usersCollection = plugin.mongo.db?.collection('users');
-			const user = await usersCollection?.findOne({
-				email,
-			});
-
-			const isPasswordValid = await bcrypt.compare(password, user?.password);
-
-			if (!isPasswordValid) {
-				reply.code(401).send({
-					status: 'error',
-					message: 'Invalid credentials',
-				});
-				return;
-			}
-
-			const token = plugin.jwt.sign({
-				id: user?.id,
-			});
-
-			reply.send({
-				id: user?.id,
-				email: user?.email,
-				token,
-			});
-		});
-	});
-
-	fastify.register(async (plugin) => {
-		plugin.addHook('preHandler', async (request, reply) => {
-			try {
-				await request.jwtVerify();
-			} catch (error) {
-				reply.code(401).send({
-					status: 'error',
-					message: 'Unauthorized',
-				});
-			}
-		});
-
-		plugin.get('/test', async (request, reply) => {
-			reply.send({
-				status: 'success',
-				message: 'You are authenticated',
-			});
-		});
-	});
-
-	fastify.register(async (plugin) => {
+	app.register(async (plugin) => {
 		plugin.addHook('preHandler', async (request, reply) => {
 			try {
 				await request.jwtVerify();
@@ -293,5 +222,5 @@ export function createApp() {
 		});
 	});
 
-	return fastify;
+	return app;
 }
