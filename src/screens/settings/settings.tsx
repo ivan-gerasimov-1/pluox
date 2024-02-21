@@ -5,6 +5,7 @@ import { useAppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
 import { EService, useService } from '@modules/serviceContainer/useService';
 
+import { Screen } from '@uiKit/screen/screen';
 import { Header } from '@uiKit/header/header';
 import { Button } from '@uiKit/button/button';
 
@@ -17,7 +18,7 @@ export function Settings() {
 	let navigation = useNavigation();
 
 	return (
-		<>
+		<Screen>
 			<Header title="Настройки" />
 
 			<div>
@@ -83,8 +84,6 @@ export function Settings() {
 				</div>
 			</div>
 
-			<br />
-
 			<div>
 				<Button
 					style={{ width: '100%' }}
@@ -101,6 +100,6 @@ export function Settings() {
 					Выйти
 				</Button>
 			</div>
-		</>
+		</Screen>
 	);
 }
