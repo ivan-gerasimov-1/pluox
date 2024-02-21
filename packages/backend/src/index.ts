@@ -2,7 +2,7 @@ import { createApp } from './app';
 import { appConfig } from './config';
 
 async function main() {
-	let app = await createApp();
+	let app = createApp();
 
 	try {
 		await app.listen({

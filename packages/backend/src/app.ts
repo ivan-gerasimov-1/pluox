@@ -9,7 +9,7 @@ import { isDevelopment } from './helpers/isDevelopment';
 
 const ALLOWED_ORIGINS = ['https://savee.vercel.app'];
 
-export async function createApp() {
+export function createApp() {
 	const fastify = Fastify({
 		logger: true,
 	});
@@ -18,16 +18,16 @@ export async function createApp() {
 		ALLOWED_ORIGINS.push('http://localhost:3000');
 	}
 
-	await fastify.register(cors, {
+	fastify.register(cors, {
 		origin: ALLOWED_ORIGINS,
 	});
 
-	await fastify.register(mongodb, {
+	fastify.register(mongodb, {
 		url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@localhost:27017/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
 		forceClose: true,
 	});
 
-	await fastify.register(jwt, {
+	fastify.register(jwt, {
 		secret: appConfig.jwt.secret,
 	});
 
