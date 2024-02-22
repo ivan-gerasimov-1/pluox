@@ -7,8 +7,8 @@ import { environment } from '@root/config';
 
 export interface IAppConfig {
 	locale: ELocaleCode;
-	readonly currency: ECurrency;
-	readonly availabelCurrencies: ECurrency[];
+	currency: ECurrency;
+	availabelCurrencies: ECurrency[];
 	budget: number | null;
 	readonly currentMonth: TMonth;
 	readonly apiUrl: string;
@@ -88,8 +88,16 @@ export class AppConfig implements IAppConfig {
 		return this.#currency;
 	}
 
+	public set currency(value: ECurrency) {
+		this.#currency = value;
+	}
+
 	public get availabelCurrencies(): ECurrency[] {
 		return this.#availableCurrencies;
+	}
+
+	public set availabelCurrencies(value: ECurrency[]) {
+		this.#availableCurrencies = value;
 	}
 
 	public get budget(): number | null {
