@@ -2,6 +2,7 @@ import { type TCurrencyRates } from '@core/infrastructure/currency/currencyRates
 import { CurrencyRatesNotAvailableError } from '@core/infrastructure/currency/currencyRatesStorage/errors';
 import { type ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
 import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
+import type { ECurrency } from '@core/infrastructure/currency/types';
 
 export class CurrencyRatesStorage
 	extends AppStorage<TCurrencyRates>
@@ -46,5 +47,15 @@ export class CurrencyRatesStorage
 
 	public isEmpty(): boolean {
 		return this.get() === null;
+	}
+
+	public has(currency: ECurrency): boolean {
+		if (this.isEmpty()) {
+			return false;
+		}
+
+		let rates = this.getRates();
+
+		return !!rates[currency];
 	}
 }
