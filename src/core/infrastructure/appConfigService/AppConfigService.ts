@@ -39,7 +39,6 @@ export class AppConfigService implements IAppConfigService {
 					continue;
 				}
 
-				console.log(key, value);
 				// @ts-expect-error
 				this.appConfig[key] = value;
 			}
