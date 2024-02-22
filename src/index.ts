@@ -3,7 +3,6 @@ import { BackupService } from '@core/infrastructure/backupService/BackupService'
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
-import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
 import { Expenses } from '@domain/expenses/expenses';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { registerServiceWorker } from '@root/serviceWorker';
