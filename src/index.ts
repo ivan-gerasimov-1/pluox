@@ -14,8 +14,6 @@ import { registerServiceWorker } from '@root/serviceWorker';
 async function main(): Promise<void> {
 	loadAppConfig();
 
-	fixBrokenExpense();
-
 	runBackup();
 	await getCurrencyRates();
 	loadExpenses();
@@ -59,25 +57,4 @@ function loadExpenses(): void {
 	let rawExpenses = ExpensesStorage.getInstance().getItems();
 
 	Expenses.getInstance().__addRawExpenses(rawExpenses);
-}
-
-/**
- * @description
- * Generate proper ID for expense with undefined id
- */
-function fixBrokenExpense(): void {
-	let expensesStorage = ExpensesStorage.getInstance();
-	let { undefined: brokenExpense, ...restExpenses } =
-		expensesStorage.getItems();
-
-	if (brokenExpense) {
-		let id = IdGenerator.getInstance().getId();
-
-		brokenExpense.id = id;
-
-		expensesStorage.setItems({
-			...restExpenses,
-			[id]: brokenExpense,
-		});
-	}
 }
