@@ -2,6 +2,7 @@ import { useStore } from 'zustand';
 
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import { ECurrency } from '@core/infrastructure/currency/types';
 
 import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
@@ -60,7 +61,29 @@ export function Settings() {
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Валюта:</span>{' '}
-						{appConfigState.currency}
+						<select
+							name="currency"
+							id="currency"
+							value={appConfigState.currency}
+							onChange={(event) => {
+								appConfigStore.set({
+									currency: event.target.value as ECurrency,
+								});
+							}}
+						>
+							<option key={ECurrency.EUR} value={ECurrency.EUR}>
+								{ECurrency.EUR}
+							</option>
+							<option key={ECurrency.USD} value={ECurrency.USD}>
+								{ECurrency.USD}
+							</option>
+							<option key={ECurrency.RUB} value={ECurrency.RUB}>
+								{ECurrency.RUB}
+							</option>
+							<option key={ECurrency.GEL} value={ECurrency.GEL}>
+								{ECurrency.GEL}
+							</option>
+						</select>
 					</div>
 
 					<div className={styles.field}>
