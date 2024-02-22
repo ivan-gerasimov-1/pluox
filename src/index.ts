@@ -2,6 +2,7 @@ import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfi
 import { BackupService } from '@core/infrastructure/backupService/BackupService';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
+import { ECurrency } from '@core/infrastructure/currency/types';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { Expenses } from '@domain/expenses/expenses';
 import { ReactUI, type IUserInterface } from '@root/createUI';
@@ -31,7 +32,10 @@ main();
 async function getCurrencyRates(): Promise<void> {
 	let currencyRatesStorage = CurrencyRatesStorage.getInstance();
 
-	if (!currencyRatesStorage.isEmpty()) {
+	if (
+		!currencyRatesStorage.isEmpty() &&
+		currencyRatesStorage.has(ECurrency.EUR)
+	) {
 		return;
 	}
 
