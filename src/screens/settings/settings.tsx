@@ -1,9 +1,10 @@
+import { useStore } from 'zustand';
+
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
-import { useAppConfigStore } from '@modules/appConfig/appConfig.store';
+import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
-import { EService, useService } from '@modules/serviceContainer/useService';
 
 import { Screen } from '@uiKit/screen/screen';
 import { Header } from '@uiKit/header/header';
@@ -12,10 +13,9 @@ import { Button } from '@uiKit/button/button';
 import styles from './settings.module.css';
 
 export function Settings() {
-	const appConfig = useService(EService.APP_CONFIG);
-
-	const config = useAppConfigStore();
 	let navigation = useNavigation();
+	let appConfigStore = AppConfigStore.getInstance();
+	let appConfigState = useStore(appConfigStore.get());
 
 	return (
 		<Screen>
@@ -42,11 +42,11 @@ export function Settings() {
 						<select
 							name="locale"
 							id="locale"
-							value={config.locale}
+							value={appConfigState.locale}
 							onChange={(event) => {
 								const locale = event.target.value as ELocaleCode;
 
-								config.update({ locale });
+								appConfigStore.set({ locale });
 							}}
 						>
 							<option key={ELocaleCode.RU_RU} value={ELocaleCode.RU_RU}>
@@ -60,26 +60,26 @@ export function Settings() {
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Валюта:</span>{' '}
-						{appConfig.currency}
+						{appConfigState.currency}
 					</div>
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Доступные валюты:</span>{' '}
-						{appConfig.availabelCurrencies.join(', ')}
+						{appConfigState.availabelCurrencies.join(', ')}
 					</div>
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Бюджет:</span>
 						<input
 							type="number"
-							value={config.budget || 0}
+							value={appConfigState.budget || 0}
 							onChange={(event) => {
 								const budget = Number.parseInt(event.target.value);
 
-								config.update({ budget });
+								appConfigStore.set({ budget });
 							}}
 						/>
-						<span> {appConfig.currency}</span>
+						<span> {appConfigState.currency}</span>
 					</div>
 				</div>
 			</div>

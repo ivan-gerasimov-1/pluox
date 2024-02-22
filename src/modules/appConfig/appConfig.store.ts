@@ -1,34 +1,87 @@
-import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import {
+	AppConfig,
+	IAppConfig,
+} from '@core/infrastructure/appConfig/AppConfig';
+import { TAppConfig } from '@core/infrastructure/appConfig/types';
+import {
+	AppConfigService,
+	IAppConfigService,
+} from '@core/infrastructure/appConfigService/AppConfigService';
+import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
-import { create } from 'zustand';
+import { StoreApi, createStore } from 'zustand';
 
 export interface IAppConfigStore {
-	readonly locale: ELocaleCode;
-	readonly budget: number | null;
+	get(): StoreApi<TAppConfig>;
 
-	update(config: { locale?: ELocaleCode; budget?: number | null }): void;
+	set(config: {
+		locale?: ELocaleCode;
+		budget?: number | null;
+		currency?: ECurrency;
+	}): void;
 }
 
-export const useAppConfigStore = create<IAppConfigStore>((set) => {
-	const appConfig = AppConfig.getInstance();
+export class AppConfigStore implements IAppConfigStore {
+	static #instance: AppConfigStore;
 
-	return {
-		locale: appConfig.locale,
-		budget: appConfig.budget,
+	private readonly internalStore;
 
-		update(config: { locale?: ELocaleCode; budget?: number | null }): void {
-			if (config.locale) {
-				appConfig.locale = config.locale;
-			}
+	private constructor(
+		private readonly appConfig: IAppConfig,
+		private readonly appConfigService: IAppConfigService,
+	) {
+		this.internalStore = createStore(() => {
+			return {
+				locale: this.appConfig.locale,
+				budget: this.appConfig.budget,
+				currency: this.appConfig.currency,
+				availabelCurrencies: this.appConfig.availabelCurrencies,
+			};
+		});
+	}
 
-			if (config.budget !== undefined) {
-				appConfig.budget = config.budget;
-			}
+	public static getInstance(): IAppConfigStore {
+		if (!this.#instance) {
+			let appConfig = AppConfig.getInstance();
+			let appConfigService = AppConfigService.getInstance();
 
-			set({
-				locale: config.locale || appConfig.locale,
-				budget: config.budget !== undefined ? config.budget : appConfig.budget,
-			});
-		},
-	};
-});
+			this.#instance = new AppConfigStore(appConfig, appConfigService);
+		}
+
+		return this.#instance;
+	}
+
+	public get(): StoreApi<TAppConfig> {
+		return this.internalStore;
+	}
+
+	public set(config: {
+		locale?: ELocaleCode;
+		budget?: number | null;
+		currency?: ECurrency;
+	}): void {
+		if (config.locale) {
+			this.appConfig.locale = config.locale;
+		}
+
+		if (config.budget !== undefined) {
+			this.appConfig.budget = config.budget;
+		}
+
+		if (config.currency !== undefined) {
+			this.appConfig.currency = config.currency;
+		}
+
+		this.appConfigService.saveConfig({
+			locale: this.appConfig.locale,
+			budget: this.appConfig.budget,
+			currency: this.appConfig.currency,
+		});
+
+		this.internalStore.setState({
+			locale: this.appConfig.locale,
+			budget: this.appConfig.budget,
+			currency: this.appConfig.currency,
+		});
+	}
+}

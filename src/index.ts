@@ -1,3 +1,4 @@
+import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { BackupService } from '@core/infrastructure/backupService/BackupService';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
@@ -11,6 +12,8 @@ import { registerServiceWorker } from '@root/serviceWorker';
  * @description Main function
  */
 async function main(): Promise<void> {
+	loadAppConfig();
+
 	fixBrokenExpense();
 
 	runBackup();
@@ -46,6 +49,10 @@ async function runBackup(): Promise<void> {
 	let expenses = expensesStorage.getItems();
 
 	return BackupService.getInstance().run(expenses);
+}
+
+function loadAppConfig(): void {
+	AppConfigService.getInstance().initialize();
 }
 
 function loadExpenses(): void {
