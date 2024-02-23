@@ -22,6 +22,10 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 		window.localStorage.setItem(this.makeId(id), JSON.stringify(value));
 	}
 
+	public clear(id: string): void {
+		window.localStorage.removeItem(this.makeId(id));
+	}
+
 	private makeId(id: Id): Id {
 		return `${this.#ID_PREFIX}/${id}`;
 	}
