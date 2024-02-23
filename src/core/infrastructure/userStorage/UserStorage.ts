@@ -38,4 +38,8 @@ export class UserStorage
 	public override get(): { id: string; email: string } | null {
 		return super.get(this.STORAGE_ID);
 	}
+
+	public override clear(): void {
+		return super.clear(this.STORAGE_ID);
+	}
 }
