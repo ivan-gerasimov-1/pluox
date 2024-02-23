@@ -72,11 +72,8 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	public async signOut(): Promise<void> {
-		this.authStorage.set('');
-		this.userStorage.update({
-			id: '',
-			email: '',
-		});
+		this.authStorage.clear();
+		this.userStorage.clear();
 	}
 
 	public check(): boolean {
