@@ -25,4 +25,8 @@ export class AuthStorage extends AppStorage<string> implements IAuthStorage {
 	public override get(): string | null {
 		return super.get(this.STORAGE_ID);
 	}
+
+	public override clear(): void {
+		return super.clear(this.STORAGE_ID);
+	}
 }
