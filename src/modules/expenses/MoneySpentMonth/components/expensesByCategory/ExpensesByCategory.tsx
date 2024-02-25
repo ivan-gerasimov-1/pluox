@@ -23,7 +23,11 @@ export function ExpensesByCategory() {
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<span style={{ fontWeight: 600 }}>{getCategoryName(id)}</span>
 
-								<span style={{ fontSize: '12px', opacity: 0.75 }}>25.5%</span>
+								<span
+									style={{ fontSize: '12px', opacity: 0.75, marginTop: '5px' }}
+								>
+									25.5%
+								</span>
 							</div>
 						</div>
 
