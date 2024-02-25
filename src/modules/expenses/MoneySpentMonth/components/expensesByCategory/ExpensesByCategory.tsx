@@ -21,7 +21,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 
 	return (
 		<>
-			{expensesToRender.map(({ id, total }) => {
+			{expensesToRender.map(({ id, total, percentage }) => {
 				return (
 					<div key={id} className={styles.categoryRow}>
 						<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -35,7 +35,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 								<span
 									style={{ fontSize: '12px', opacity: 0.75, marginTop: '5px' }}
 								>
-									25.5%
+									{percentage.toFixed(2)}%
 								</span>
 							</div>
 						</div>
