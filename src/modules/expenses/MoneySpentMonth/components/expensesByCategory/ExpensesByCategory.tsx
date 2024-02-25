@@ -17,6 +17,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 		props.month,
 	);
 	let expensesToRender = showAll ? expenses : expenses.slice(0, 3);
+	let showMoreButton = expenses.length >= 4;
 
 	return (
 		<>
@@ -48,31 +49,33 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 				);
 			})}
 
-			<button
-				type="button"
-				style={{
-					width: '100%',
-					margin: '0',
-					padding: '10px 10px',
+			{showMoreButton && (
+				<button
+					type="button"
+					style={{
+						width: '100%',
+						margin: '0',
+						padding: '10px 10px',
 
-					color: 'var(--primary)',
-					background: 'none',
+						color: 'var(--primary)',
+						background: 'none',
 
-					border: 'none',
+						border: 'none',
 
-					fontSize: '14px',
-					fontFamily: 'inherit',
+						fontSize: '14px',
+						fontFamily: 'inherit',
 
-					cursor: 'pointer',
-				}}
-				onClick={(event) => {
-					event.preventDefault();
+						cursor: 'pointer',
+					}}
+					onClick={(event) => {
+						event.preventDefault();
 
-					setShowAll(!showAll);
-				}}
-			>
-				{showAll ? 'Свернуть ↑' : 'Ещё ↓'}
-			</button>
+						setShowAll(!showAll);
+					}}
+				>
+					{showAll ? 'Свернуть ↑' : 'Ещё ↓'}
+				</button>
+			)}
 		</>
 	);
 }
