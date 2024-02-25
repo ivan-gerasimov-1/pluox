@@ -3,6 +3,7 @@ import {
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
+import type { TMonth } from '@domain/amount/useCases/types';
 import { Categories } from '@domain/categories/Categories';
 import type { ICategories } from '@domain/categories/types';
 import type { IExpense, TExpense } from '@domain/expense/types';
@@ -130,26 +131,37 @@ export class Expenses implements IExpenses {
 		return this;
 	}
 
-	public getMonthlyExpensesByCategory(): { id: Id; total: number }[] {
+	public getMonthlyExpensesByCategory(
+		month: TMonth,
+	): { id: Id; total: number }[] {
 		let currencyConverter = CurrencyConverter.getInstance();
 		let currency = this.appConfig.currency;
-		let expensesByCategory: Record<Id, { id: Id; total: number }> = {};
 
-		const date = new Date(
-			new Date(new Date().getFullYear(), this.appConfig.currentMonth, 1),
-		);
+		let expensesByCategory: Record<
+			Id,
+			{
+				id: Id;
+				total: number;
+				percentage: number;
+			}
+		> = {};
+
+		const startDate = new Date(new Date(new Date().getFullYear(), month, 1));
+		const endDate = new Date(new Date(new Date().getFullYear(), month, 30));
 
 		let expenses = this.list({
-			dateFrom: date.toISOString(),
+			dateFrom: startDate.toISOString(),
+			dateTo: endDate.toISOString(),
 		});
 
 		for (let expense of expenses) {
-			let category = expense.category || 'uncategorized';
+			let category = expense.category || '—';
 
 			if (!expensesByCategory[category]) {
 				expensesByCategory[category] = {
 					id: category,
 					total: 0,
+					percentage: 0,
 				};
 			}
 

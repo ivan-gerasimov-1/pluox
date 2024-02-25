@@ -1,3 +1,4 @@
+import type { TMonth } from '@domain/amount/useCases/types';
 import type { IExpense, TExpense } from '@domain/expense/types';
 import type { Id, TISODateString } from '@domain/types';
 
@@ -17,7 +18,7 @@ export interface IExpenses {
 	/** @description temporary solution */
 	__addRawExpenses(expenses: TExpenses): IExpenses;
 
-	getMonthlyExpensesByCategory(): { id: Id; total: number }[];
+	getMonthlyExpensesByCategory(month: TMonth): { id: Id; total: number }[];
 }
 
 export type TExpenses = Record<Id, TExpense>;

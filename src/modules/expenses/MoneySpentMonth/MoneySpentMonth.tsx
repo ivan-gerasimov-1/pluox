@@ -29,7 +29,7 @@ export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 
 			<hr className={styles.separator} />
 
-			<ExpensesByCategory />
+			<ExpensesByCategory month={props.month} />
 		</>
 	);
 }

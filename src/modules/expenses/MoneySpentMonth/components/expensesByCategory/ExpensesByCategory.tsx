@@ -4,10 +4,18 @@ import { Expenses } from '@domain/expenses';
 import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
 import { useState } from 'react';
 import styles from './ExpensesByCategory.module.css';
+import { TMonth } from '@domain/amount/useCases/types';
 
-export function ExpensesByCategory() {
+export type TExpensesByCategory = {
+	month: TMonth;
+};
+
+export function ExpensesByCategory(props: TExpensesByCategory) {
 	let [showAll, setShowAll] = useState<boolean>(false);
-	let expenses = Expenses.getInstance().getMonthlyExpensesByCategory();
+
+	let expenses = Expenses.getInstance().getMonthlyExpensesByCategory(
+		props.month,
+	);
 	let expensesToRender = showAll ? expenses : expenses.slice(0, 3);
 
 	return (
