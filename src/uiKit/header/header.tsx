@@ -6,6 +6,7 @@ import { AuthService } from '@core/infrastructure/authService/AuthService';
 
 import { Icon } from '@uiKit/icon/icon';
 import { Navigable } from '@uiKit/navigable/navigable';
+import { IconButton } from '@uiKit/iconButton/iconButton';
 
 import styles from './header.module.css';
 
@@ -22,9 +23,11 @@ export function Header(props: THeaderProps) {
 			{Boolean(isMain) ? (
 				<div />
 			) : (
-				<Navigable to={EAppPath.MAIN}>
-					<Icon name={Icon.IconName.Back} size={Icon.Size.LARGE} />
-				</Navigable>
+				<IconButton
+					onClick={() => window.history.back()}
+					iconName={Icon.IconName.Back}
+					iconSize={Icon.Size.LARGE}
+				/>
 			)}
 
 			{props.title && <h1 className={styles.title}>{props.title}</h1>}
