@@ -4,6 +4,7 @@ import { useIntl } from '@modules/intl';
 import { expenseListI18n } from '@screens/expenseList/expenseList.i18n';
 
 import { Header } from '@uiKit/header/header';
+import { Screen } from '@uiKit/screen/screen';
 /* import { ActionSheet } from '@root/uiKit/actionSheet';
 import { EditExpense } from '@modules/expenses/editExpense/editExpense';
 import { type Id } from '@domain/types';
@@ -21,7 +22,7 @@ export function ExpenseListScreen() {
 	).toISOString();
 
 	return (
-		<>
+		<Screen>
 			<Header title={intl.translate('title')} />
 
 			<ExpenseList
@@ -31,6 +32,6 @@ export function ExpenseListScreen() {
 			{/* <ActionSheet isOpen={editItem !== null} onClose={() => setEditItem(null)}>
 				{editItem ? <EditExpense itemId={editItem} /> : <div>—</div>}
 			</ActionSheet> */}
-		</>
+		</Screen>
 	);
 }
