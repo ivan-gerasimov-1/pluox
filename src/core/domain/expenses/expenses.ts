@@ -131,11 +131,15 @@ export class Expenses implements IExpenses {
 		return this;
 	}
 
-	public getMonthlyExpensesByCategory(
-		month: TMonth,
-	): { id: Id; total: number }[] {
+	public getMonthlyExpensesByCategory(month: TMonth): {
+		id: Id;
+		total: number;
+		percentage: number;
+	}[] {
 		let currencyConverter = CurrencyConverter.getInstance();
 		let currency = this.appConfig.currency;
+
+		let total = 0;
 
 		let expensesByCategory: Record<
 			Id,
@@ -170,6 +174,15 @@ export class Expenses implements IExpenses {
 				expense.currency,
 				currency,
 			);
+		}
+
+		for (let category in expensesByCategory) {
+			total += expensesByCategory[category].total;
+		}
+
+		for (let category in expensesByCategory) {
+			expensesByCategory[category].percentage =
+				(expensesByCategory[category].total / total) * 100;
 		}
 
 		let result = Object.values(expensesByCategory);
