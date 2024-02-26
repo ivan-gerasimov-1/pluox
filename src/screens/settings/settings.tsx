@@ -12,6 +12,8 @@ import { Header } from '@uiKit/header/header';
 import { Button } from '@uiKit/button/button';
 
 import styles from './settings.module.css';
+import { Navigable } from '@uiKit/navigable/navigable';
+import { EAppPath } from '@root/appPath';
 
 export function Settings() {
 	let navigation = useNavigation();
@@ -33,6 +35,10 @@ export function Settings() {
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Эл. почта:</span> —
 					</div>
+				</div>
+
+				<div className={styles.section}>
+					<Navigable to={EAppPath.CATEGORIES}>Категории →</Navigable>
 				</div>
 
 				<div className={styles.section}>
