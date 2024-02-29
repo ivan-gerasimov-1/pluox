@@ -1,39 +1,43 @@
 import { categoryList } from '@domain/categories/constants';
-import type {
-	ICategories,
-	TCategory,
-	TCategoryDTO,
-} from '@domain/categories/types';
+import type { ICategories, TCategoryDTO } from '@domain/categories/types';
+import { Category } from '@domain/category/category';
+import type { ICategory } from '@domain/category/types';
 import type { Id } from '@domain/types';
 
 export class Categories implements ICategories {
 	static #instance: ICategories;
 
-	private readonly categories: Map<Id, TCategory>;
+	private readonly categories: Map<Id, ICategory>;
 
 	private constructor() {
-		this.categories = new Map<Id, TCategory>();
+		this.categories = new Map<Id, ICategory>();
 	}
 
 	public static getInstance() {
 		if (!this.#instance) {
 			this.#instance = new Categories();
 
-			for (const category of categoryList) {
+			for (const categoryDto of categoryList) {
+				let category = Category.create(
+					categoryDto.id,
+					categoryDto.name,
+					categoryDto.icon,
+					1,
+				);
+
+				console.log(category, category.toObject());
+
 				this.#instance.add(category);
 			}
+
+			console.log(this.#instance);
 		}
 
 		return this.#instance;
 	}
 
-	public add(category: TCategoryDTO): ICategories {
-		this.categories.set(category.id, {
-			id: category.id,
-			name: category.name,
-			icon: category.icon,
-			weight: 1,
-		});
+	public add(category: ICategory): ICategories {
+		this.categories.set(category.id, category);
 
 		return this;
 	}
@@ -42,8 +46,12 @@ export class Categories implements ICategories {
 		this.categories.delete(id);
 	}
 
-	public list(params?: { useWeights?: boolean }): TCategory[] {
-		let categoryList = [...this.categories.values()];
+	public list(params?: { useWeights?: boolean }): TCategoryDTO[] {
+		let categoryList: TCategoryDTO[] = [];
+
+		for (let category of this.categories.values()) {
+			categoryList.push(category.toObject());
+		}
 
 		if (params?.useWeights) {
 			this.sortByWeight(categoryList);
@@ -52,22 +60,28 @@ export class Categories implements ICategories {
 		return categoryList;
 	}
 
-	public increaseWeight(id: Id) {
+	public get(id: Id): ICategory {
 		let category = this.categories.get(id);
 
-		if (category) {
-			category.weight = category.weight + 1;
+		if (!category) {
+			throw new Error('Not Found');
 		}
+
+		return category;
+	}
+
+	public increaseWeight(id: Id) {
+		let category = this.get(id);
+
+		category.increaseWeight();
 
 		return this;
 	}
 
 	public decreaseWeight(id: Id) {
-		let category = this.categories.get(id);
+		let category = this.get(id);
 
-		if (category) {
-			category.weight = category.weight - 1;
-		}
+		category.decreaseWeight();
 
 		return this;
 	}
@@ -77,7 +91,7 @@ export class Categories implements ICategories {
 	 * Sort categories by weight.
 	 * WARNING: this method mutates the original array
 	 */
-	private sortByWeight(categoryList: TCategory[]): TCategory[] {
+	private sortByWeight(categoryList: TCategoryDTO[]): TCategoryDTO[] {
 		return categoryList.sort((aCategory, bCategory) => {
 			if (aCategory.weight > bCategory.weight) {
 				return -1;
