@@ -25,12 +25,8 @@ export class Categories implements ICategories {
 					1,
 				);
 
-				console.log(category, category.toObject());
-
 				this.#instance.add(category);
 			}
-
-			console.log(this.#instance);
 		}
 
 		return this.#instance;
