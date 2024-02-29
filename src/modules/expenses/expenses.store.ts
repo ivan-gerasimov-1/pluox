@@ -3,24 +3,16 @@ import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { Amount } from '@domain/amount';
 import { TMonth } from '@domain/amount/useCases/types';
 import { Expense } from '@domain/expense';
-import type { TExpense } from '@domain/expense/types';
+import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
-import type { Id, TCategory, TISODateString } from '@domain/types';
+import type { Id, TISODateString } from '@domain/types';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-
-export type TExpenseCreatePayload = {
-	amount: number;
-	currency: ECurrency;
-	comment: string;
-	category: TCategory;
-	date?: TISODateString;
-};
 
 interface IExpensesStore {
 	readonly operations: TExpenses;
 
-	addExpense(payload: TExpenseCreatePayload): Promise<void>;
+	addExpense(payload: TExpenseCreateDTO): Promise<void>;
 	/** @todo Not Implemented */
 	editExpense(payload: unknown): void;
 	deleteExpense(id: Id): void;
@@ -46,7 +38,7 @@ export let useExpensesStore = create<
 			return {
 				operations: {},
 
-				async addExpense(payload: TExpenseCreatePayload): Promise<void> {
+				async addExpense(payload: TExpenseCreateDTO): Promise<void> {
 					const expense = Expense.create(
 						payload.amount,
 						payload.currency,

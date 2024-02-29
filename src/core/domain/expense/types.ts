@@ -20,3 +20,11 @@ export type TExpense = {
 	dateCreated: TISODateString;
 	dateModified: TISODateString;
 };
+
+export type TExpenseCreateDTO = {
+	amount: number;
+	currency: ECurrency;
+	comment: string;
+	category: TCategory;
+	date?: TISODateString;
+};
