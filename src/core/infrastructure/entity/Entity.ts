@@ -1,14 +1,21 @@
 import { type IEntity } from '@core/infrastructure/entity/types';
-import { type Id } from '@domain/types';
+import type { TISODateString, Id } from '@domain/types';
 import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
 
 export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 	readonly #id: Id;
 
+	protected readonly dateCreated: TISODateString;
+	protected dateModified: TISODateString;
+
 	constructor() {
 		let idGenerator = IdGenerator.getInstance();
+		let currentDate = new Date().toISOString();
 
 		this.#id = idGenerator.getId();
+
+		this.dateCreated = currentDate;
+		this.dateModified = currentDate;
 	}
 
 	public get id(): Id {

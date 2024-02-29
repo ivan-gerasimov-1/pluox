@@ -1,12 +1,10 @@
-import { type ECurrency } from '@core/infrastructure/currency/types';
+import type { ECurrency } from '@core/infrastructure/currency/types';
 import { Entity } from '@core/infrastructure/entity/Entity';
 import type { IExpense, TExpense } from '@domain/expense/types';
 import type { TCategory, TISODateString } from '@domain/types';
 
 export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #amount: number;
-	readonly #dateCreated: TISODateString;
-	readonly #dateModified: TISODateString;
 	readonly #currency: ECurrency;
 	readonly #comment: string;
 	readonly #category: TCategory;
@@ -21,15 +19,11 @@ export class Expense extends Entity<TExpense> implements IExpense {
 	) {
 		super();
 
-		let currentDate = new Date().toISOString();
-
 		this.#amount = amount;
 		this.#currency = currency;
 		this.#comment = comment;
 		this.#category = category;
-		this.#date = date || currentDate;
-		this.#dateCreated = currentDate;
-		this.#dateModified = currentDate;
+		this.#date = date || this.dateCreated;
 	}
 
 	public static create(
@@ -52,9 +46,9 @@ export class Expense extends Entity<TExpense> implements IExpense {
 			/**
 			 * @todo remove backwards compatibility
 			 */
-			date: this.#date || this.#dateCreated,
-			dateCreated: this.#dateCreated,
-			dateModified: this.#dateModified,
+			date: this.#date || this.dateCreated,
+			dateCreated: this.dateCreated,
+			dateModified: this.dateModified,
 		};
 	}
 }
