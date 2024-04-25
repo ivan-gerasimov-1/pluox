@@ -1,4 +1,4 @@
-import { classnames } from '@root/utils/classnames';
+import { cls } from '@root/utils/classnames';
 import styles from './loader.module.css';
 
 type TLoaderProps = {
@@ -10,7 +10,7 @@ export function Loader(props: TLoaderProps) {
 	return (
 		<div
 			style={props.style}
-			className={classnames(styles.loader, props.className)}
+			className={cls(styles.loader, props.className)}
 		></div>
 	);
 }

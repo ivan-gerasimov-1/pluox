@@ -1,4 +1,4 @@
-import { classnames } from '@root/utils/classnames';
+import { cls } from '@root/utils/classnames';
 import React from 'react';
 import styles from './card.module.css';
 
@@ -10,7 +10,7 @@ type TCardProps = {
 export function Card(props: React.PropsWithChildren<TCardProps>) {
 	return (
 		<div
-			className={classnames(styles.card, {
+			className={cls(styles.card, {
 				[styles.noPadding]: props.noPadding,
 				[styles.pressableLink]: props.touchable,
 			})}

@@ -1,5 +1,5 @@
 import { categoryList } from '@domain/categories/constants';
-import { classnames } from '@utils/classnames';
+import { cls } from '@utils/classnames';
 import styles from './categoryInput.module.css';
 import { useIntl } from '@modules/intl';
 import { categoryInputI18n } from '@modules/expenses/expenseView/components/categoryInput/categoryInput.i18n';
@@ -25,7 +25,7 @@ export function CategoryInput(props: TCategoryInputProps) {
 
 	return (
 		<select
-			className={classnames(styles.categoryInput, {
+			className={cls(styles.categoryInput, {
 				[styles.isEmpty]: props.value === '',
 			})}
 			value={props.value || ''}

@@ -1,4 +1,4 @@
-import { classnames } from '@utils/classnames';
+import { cls } from '@utils/classnames';
 import styles from './button.module.css';
 
 export type TButtonProps = {
@@ -13,7 +13,7 @@ export function Button(props: React.PropsWithChildren<TButtonProps>) {
 		<button
 			type="button"
 			style={props.style}
-			className={classnames(styles.button, props.className)}
+			className={cls(styles.button, props.className)}
 			onClick={props.onClick}
 		>
 			{props.children}

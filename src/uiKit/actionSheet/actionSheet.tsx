@@ -1,4 +1,4 @@
-import { classnames } from '@utils/classnames';
+import { cls } from '@utils/classnames';
 import type React from 'react';
 import styles from './actionSheet.module.css';
 import { useActionSheetContainer } from '@root/uiKit/actionSheet/hooks/useActionSheetContainer';
@@ -102,7 +102,7 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 					</div>
 
 					<div
-						className={classnames(styles.actionSheetWrapper, {
+						className={cls(styles.actionSheetWrapper, {
 							[styles.noPointerEvents]: !isOpen,
 						})}
 					>
