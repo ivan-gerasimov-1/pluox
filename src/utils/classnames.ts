@@ -1,1 +1,5 @@
-export { default as classnames } from 'clsx';
+export { default as cls } from 'clsx';
+export {
+	/** @deprecated */
+	default as classnames,
+} from 'clsx';
