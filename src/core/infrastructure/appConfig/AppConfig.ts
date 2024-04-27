@@ -58,6 +58,7 @@ export class AppConfig implements IAppConfig {
 			ECurrency.RUB,
 			ECurrency.USD,
 			ECurrency.EUR,
+			ECurrency.THB,
 		];
 		this.#budget = 4800;
 		this.#currentMonth = this.getCurrentMonth();

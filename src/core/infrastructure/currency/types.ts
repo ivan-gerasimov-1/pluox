@@ -3,4 +3,5 @@ export const enum ECurrency {
 	GEL = 'GEL',
 	RUB = 'RUB',
 	USD = 'USD',
+	THB = 'THB',
 }
