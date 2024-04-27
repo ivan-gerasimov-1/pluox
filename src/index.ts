@@ -31,11 +31,11 @@ main();
 
 async function getCurrencyRates(): Promise<void> {
 	let currencyRatesStorage = CurrencyRatesStorage.getInstance();
+	let hasAllCurrencies = Object.values(ECurrency).every((currency) => {
+		return currencyRatesStorage.has(currency);
+	});
 
-	if (
-		!currencyRatesStorage.isEmpty() &&
-		currencyRatesStorage.has(ECurrency.EUR)
-	) {
+	if (!currencyRatesStorage.isEmpty() && hasAllCurrencies) {
 		return;
 	}
 
