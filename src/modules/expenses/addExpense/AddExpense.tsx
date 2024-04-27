@@ -6,11 +6,14 @@ import { useExpensesStore } from '@modules/expenses/expenses.store';
 export function AddExpense() {
 	let addExpense = useExpensesStore((state) => state.addExpense);
 
+	/** @todo Make configurable */
+	let defaultCurrency = ECurrency.THB;
+
 	return (
 		<ExpenseForm
 			onSubmit={addExpense}
 			amount={0}
-			currency={ECurrency.GEL}
+			currency={defaultCurrency}
 			comment=""
 			category=""
 			date={createDateViewValue()}
