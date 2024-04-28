@@ -49,28 +49,12 @@ export class AppConfigStore implements IAppConfigStore {
 	}
 
 	public set(config: Partial<TAppConfig>): void {
-		if (config.locale) {
-			this.appConfig.locale = config.locale;
-		}
-
-		if (config.budget !== undefined) {
-			this.appConfig.budget = config.budget;
-		}
-
-		if (config.currency !== undefined) {
-			this.appConfig.currency = config.currency;
-		}
-
-		this.appConfigService.saveConfig({
-			locale: this.appConfig.locale,
-			budget: this.appConfig.budget,
-			currency: this.appConfig.currency,
+		let nextConfig = this.appConfigService.update({
+			locale: config.locale,
+			budget: config.budget,
+			currency: config.currency,
 		});
 
-		this.store.setState({
-			locale: this.appConfig.locale,
-			budget: this.appConfig.budget,
-			currency: this.appConfig.currency,
-		});
+		this.store.setState(nextConfig);
 	}
 }

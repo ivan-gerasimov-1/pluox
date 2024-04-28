@@ -8,7 +8,7 @@ import { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
 
 export interface IAppConfigService {
 	initialize(): IAppConfigService;
-	saveConfig(config: Partial<TAppConfig>): IAppConfigService;
+	update(config: Partial<TAppConfig>): TAppConfig;
 }
 
 export class AppConfigService implements IAppConfigService {
@@ -31,32 +31,31 @@ export class AppConfigService implements IAppConfigService {
 	}
 
 	public initialize(): this {
-		let config = this.appConfigStorage.getConfig();
+		let config = this.appConfigStorage.load();
 
 		if (config) {
-			for (let [key, value] of Object.entries(config)) {
-				if (value === undefined) {
-					continue;
-				}
-
-				// @ts-expect-error
-				this.appConfig[key] = value;
-			}
+			this.updateAppConfig(config);
 		}
 
 		return this;
 	}
 
-	public saveConfig(config: Partial<TAppConfig>): this {
-		const appConfig = {
+	public update(config: Partial<TAppConfig>): TAppConfig {
+		this.updateAppConfig(config);
+
+		const nextConfig = {
 			locale: this.appConfig.locale,
+			budget: this.appConfig.budget,
 			currency: this.appConfig.currency,
 			availabelCurrencies: this.appConfig.availabelCurrencies,
-			budget: this.appConfig.budget,
 		};
 
-		const updatedConfig: Partial<TAppConfig> = {};
+		this.appConfigStorage.save(nextConfig);
 
+		return nextConfig;
+	}
+
+	private updateAppConfig(config: Partial<TAppConfig>): void {
 		for (let [key, value] of Object.entries(config)) {
 			if (value === undefined) {
 				continue;
@@ -64,18 +63,6 @@ export class AppConfigService implements IAppConfigService {
 
 			// @ts-expect-error
 			this.appConfig[key] = value;
-
-			// @ts-expect-error
-			updatedConfig[key] = value;
 		}
-
-		const newConfig = {
-			...appConfig,
-			...updatedConfig,
-		};
-
-		this.appConfigStorage.setConfig(newConfig);
-
-		return this;
 	}
 }

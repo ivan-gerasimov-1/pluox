@@ -22,11 +22,11 @@ export class AppConfigStorage
 		return this.#instance;
 	}
 
-	public getConfig(): TAppConfig | null {
+	public load(): TAppConfig | null {
 		return this.get(this.STORAGE_ID);
 	}
 
-	public setConfig(config: TAppConfig): void {
+	public save(config: TAppConfig): void {
 		this.set(this.STORAGE_ID, config);
 	}
 }
