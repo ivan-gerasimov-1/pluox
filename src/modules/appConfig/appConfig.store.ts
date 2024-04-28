@@ -7,30 +7,23 @@ import {
 	AppConfigService,
 	IAppConfigService,
 } from '@core/infrastructure/appConfigService/AppConfigService';
-import { ECurrency } from '@core/infrastructure/currency/types';
-import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { StoreApi, createStore } from 'zustand';
 
 export interface IAppConfigStore {
 	get(): StoreApi<TAppConfig>;
-
-	set(config: {
-		locale?: ELocaleCode;
-		budget?: number | null;
-		currency?: ECurrency;
-	}): void;
+	set(config: Partial<TAppConfig>): void;
 }
 
 export class AppConfigStore implements IAppConfigStore {
 	static #instance: AppConfigStore;
 
-	private readonly internalStore;
+	private readonly store: StoreApi<TAppConfig>;
 
 	private constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly appConfigService: IAppConfigService,
 	) {
-		this.internalStore = createStore(() => {
+		this.store = createStore(() => {
 			return {
 				locale: this.appConfig.locale,
 				budget: this.appConfig.budget,
@@ -52,14 +45,10 @@ export class AppConfigStore implements IAppConfigStore {
 	}
 
 	public get(): StoreApi<TAppConfig> {
-		return this.internalStore;
+		return this.store;
 	}
 
-	public set(config: {
-		locale?: ELocaleCode;
-		budget?: number | null;
-		currency?: ECurrency;
-	}): void {
+	public set(config: Partial<TAppConfig>): void {
 		if (config.locale) {
 			this.appConfig.locale = config.locale;
 		}
@@ -78,7 +67,7 @@ export class AppConfigStore implements IAppConfigStore {
 			currency: this.appConfig.currency,
 		});
 
-		this.internalStore.setState({
+		this.store.setState({
 			locale: this.appConfig.locale,
 			budget: this.appConfig.budget,
 			currency: this.appConfig.currency,
