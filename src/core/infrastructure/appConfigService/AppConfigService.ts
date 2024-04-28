@@ -61,7 +61,7 @@ export class AppConfigService implements IAppConfigService {
 				continue;
 			}
 
-			// @ts-expect-error
+			// @ts-expect-error | Leave as is due to nature of Object.entries
 			this.appConfig[key] = value;
 		}
 	}
