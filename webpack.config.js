@@ -153,6 +153,8 @@ module.exports = {
 							importLoaders: 1,
 							modules: {
 								auto: true,
+								namedExport: false,
+								exportLocalsConvention: 'camel-case-only',
 								localIdentName: config.isDevelopment
 									? '[local]_[name]_[contenthash:base64:5]'
 									: '[contenthash:base64:5]',
@@ -207,14 +209,15 @@ module.exports = {
 		static: {
 			directory: config.paths.public,
 		},
-		proxy: {
-			'/api': {
+		proxy: [
+			{
+				context: ['/api'],
 				target: 'http://localhost:3001',
 				pathRewrite: {
 					'^/api': '',
 				},
 			},
-		},
+		],
 	},
 };
 
