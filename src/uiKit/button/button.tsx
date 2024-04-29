@@ -3,7 +3,7 @@ import styles from './button.module.css';
 
 export type TButtonProps = {
 	className?: string;
-	style: React.CSSProperties;
+	style?: React.CSSProperties;
 
 	onClick: () => void;
 };
