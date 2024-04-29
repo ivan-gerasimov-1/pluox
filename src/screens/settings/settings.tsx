@@ -14,6 +14,7 @@ import { Button } from '@uiKit/button/button';
 import styles from './settings.module.css';
 import { Navigable } from '@uiKit/navigable/navigable';
 import { EAppPath } from '@root/appPath';
+import { cls } from '@utils/classnames';
 
 export function Settings() {
 	let navigation = useNavigation();
@@ -34,6 +35,24 @@ export function Settings() {
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Эл. почта:</span> —
+					</div>
+
+					<div className={cls(styles.field, styles.sectionActionsContainer)}>
+						<div style={{ width: '100%' }} />
+
+						<Button
+							onClick={() => {
+								if (!window.confirm('Вы уверены, что хотите выйти?')) {
+									return;
+								}
+
+								AuthService.getInstance().signOut();
+
+								navigation.mainPage();
+							}}
+						>
+							Выйти
+						</Button>
 					</div>
 				</div>
 
@@ -106,23 +125,6 @@ export function Settings() {
 						<span> {appConfigState.currency}</span>
 					</div>
 				</div>
-			</div>
-
-			<div>
-				<Button
-					style={{ width: '100%' }}
-					onClick={() => {
-						if (!window.confirm('Вы уверены, что хотите выйти?')) {
-							return;
-						}
-
-						AuthService.getInstance().signOut();
-
-						navigation.mainPage();
-					}}
-				>
-					Выйти
-				</Button>
 			</div>
 		</Screen>
 	);
