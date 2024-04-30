@@ -22,6 +22,7 @@
 	/* Font size */
 	--fs-90: 11px;
 	--fs-100: 13px;
+	--fs-200: 15px;
 
 	/* border */
 	--border-color: var(--color-grey-300);
