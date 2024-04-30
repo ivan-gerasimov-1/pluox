@@ -9,6 +9,10 @@
 	border-radius: var(--border-radius-small);
 
 	appearance: none;
+
+	color: inherit;
+
+	background-color: transparent;
 	background-image: url('data:image/svg+xml;utf8,<svg fill="%23444444" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z" fill-rule="evenodd"/></svg>'); /* заменяем стандартную стрелку на настраиваемую иконку */
 	background-repeat: no-repeat; /* предотвращаем повторение фонового изображения */
 	background-position: right center; /* позиционируем нашу настраиваемую иконку справа по центру */
