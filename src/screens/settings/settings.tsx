@@ -15,6 +15,7 @@ import styles from './settings.module.css';
 import { Navigable } from '@uiKit/navigable/navigable';
 import { EAppPath } from '@root/appPath';
 import { cls } from '@utils/classnames';
+import { Select } from '@uiKit/select/select';
 
 export function Settings() {
 	let navigation = useNavigation();
@@ -65,45 +66,46 @@ export function Settings() {
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Язык:</span>
-						<select
+
+						<Select
 							name="locale"
 							id="locale"
 							value={appConfigState.locale}
-							onChange={(event) => {
-								const locale = event.target.value as ELocaleCode;
-
+							onChange={(locale) => {
 								appConfigStore.set({ locale });
 							}}
-						>
-							<option key={ELocaleCode.RU_RU} value={ELocaleCode.RU_RU}>
-								Русский
-							</option>
-							<option key={ELocaleCode.EN_US} value={ELocaleCode.EN_US}>
-								English
-							</option>
-						</select>
+							options={[
+								{
+									key: ELocaleCode.RU_RU,
+									value: ELocaleCode.RU_RU,
+									label: 'Русский',
+								},
+								{
+									key: ELocaleCode.EN_US,
+									value: ELocaleCode.EN_US,
+									label: 'English',
+								},
+							]}
+						/>
 					</div>
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>Валюта:</span>{' '}
-						<select
+						<Select
 							name="currency"
 							id="currency"
 							value={appConfigState.currency}
-							onChange={(event) => {
-								appConfigStore.set({
-									currency: event.target.value as ECurrency,
-								});
+							onChange={(value) => {
+								appConfigStore.set({ currency: value });
 							}}
-						>
-							{Object.values(ECurrency).map((currency) => {
-								return (
-									<option key={currency} value={currency}>
-										{currency}
-									</option>
-								);
+							options={Object.values(ECurrency).map((currencyCode) => {
+								return {
+									key: currencyCode,
+									value: currencyCode,
+									label: currencyCode,
+								};
 							})}
-						</select>
+						/>
 					</div>
 
 					<div className={styles.field}>
