@@ -1,0 +1,15 @@
+.select {
+	padding: 5px 20px 5px 10px;
+
+	min-width: 100px;
+
+	font-size: var(--fs-100);
+
+	border: var(--border-light);
+	border-radius: var(--border-radius-small);
+
+	appearance: none;
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%23444444" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z" fill-rule="evenodd"/></svg>'); /* заменяем стандартную стрелку на настраиваемую иконку */
+	background-repeat: no-repeat; /* предотвращаем повторение фонового изображения */
+	background-position: right center; /* позиционируем нашу настраиваемую иконку справа по центру */
+}
