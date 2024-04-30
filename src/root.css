@@ -19,6 +19,10 @@
 
 	--text-color: var(--color-black);
 
+	/* Font size */
+	--fs-90: 11px;
+	--fs-100: 13px;
+
 	/* border */
 	--border-color: var(--color-grey-300);
 	--border-color-light: var(--color-grey-200);
