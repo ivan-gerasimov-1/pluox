@@ -31,12 +31,16 @@ export function Settings() {
 					<h2 className={styles.sectionHeader}>Пользователь</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Имя:</span> —
+						<span className={styles.fieldLabel}>Имя</span>
+						<span>—</span>
 					</div>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Эл. почта:</span> —
+						<span className={styles.fieldLabel}>Почта</span>
+						<span>—</span>
 					</div>
+
+					<hr className={styles.separator} />
 
 					<div className={cls(styles.field, styles.sectionActionsContainer)}>
 						<div style={{ width: '100%' }} />
@@ -58,14 +62,10 @@ export function Settings() {
 				</div>
 
 				<div className={styles.section}>
-					<Navigable to={EAppPath.CATEGORIES}>Категории →</Navigable>
-				</div>
-
-				<div className={styles.section}>
 					<h2 className={styles.sectionHeader}>Приложение</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Язык:</span>
+						<span className={styles.fieldLabel}>Язык</span>
 
 						<Select
 							name="locale"
@@ -88,9 +88,14 @@ export function Settings() {
 							]}
 						/>
 					</div>
+				</div>
+
+				<div className={styles.section}>
+					<h2 className={styles.sectionHeader}>Валюта</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Валюта:</span>{' '}
+						<span className={styles.fieldLabel}>Основная валюта</span>
+
 						<Select
 							name="currency"
 							id="currency"
@@ -109,22 +114,46 @@ export function Settings() {
 					</div>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Доступные валюты:</span>{' '}
-						{appConfigState.availabelCurrencies.join(', ')}
+						<span className={styles.fieldLabel}>Доступные валюты</span>
+						<span className={styles.currencies}>
+							{appConfigState.availabelCurrencies.join(', ')}
+						</span>
 					</div>
+				</div>
+
+				<div className={styles.section}>
+					<h2 className={styles.sectionHeader}>Бюджет</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Бюджет:</span>
-						<input
-							type="number"
-							value={appConfigState.budget || 0}
-							onChange={(event) => {
-								const budget = Number.parseInt(event.target.value);
+						<span className={styles.fieldLabel}>Бюджет</span>
 
-								appConfigStore.set({ budget });
-							}}
-						/>
-						<span> {appConfigState.currency}</span>
+						<div className={styles.budgetContainer}>
+							<span className={styles.budgetCurrency}>
+								{appConfigState.currency}
+							</span>
+
+							<input
+								type="number"
+								className={styles.budgetInput}
+								value={appConfigState.budget || 0}
+								onChange={(event) => {
+									const budget = Number.parseInt(event.target.value);
+
+									appConfigStore.set({ budget });
+								}}
+							/>
+						</div>
+					</div>
+				</div>
+
+				<div className={styles.section}>
+					<h2 className={styles.sectionHeader}>Категории</h2>
+
+					<div className={styles.field}>
+						<Navigable to={EAppPath.CATEGORIES} className={styles.categories}>
+							<span>Категории</span>
+							<span>→</span>
+						</Navigable>
 					</div>
 				</div>
 			</div>

@@ -12,21 +12,77 @@
 }
 
 .sectionHeader {
-	margin: 0 0 20px 0;
+	margin: 0 0 25px 0;
 
 	font-size: var(--fs-200);
 }
 
 .field {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+
 	& + & {
-		margin-top: 10px;
+		margin-top: 20px;
 	}
 }
 
 .fieldLabel {
+	margin-top: 10px;
+
 	font-size: var(--fs-100);
 }
 
 .sectionActionsContainer {
 	display: flex;
+}
+
+.categories {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+
+	width: 100%;
+	margin-top: 10px;
+
+	font-size: var(--fs-100);
+}
+
+.currencies {
+	font-size: var(--fs-100);
+}
+
+.budgetContainer {
+	display: flex;
+	align-items: center;
+}
+
+.budgetCurrency {
+	margin-right: 5px;
+
+	font-size: var(--fs-100);
+}
+
+.budgetInput {
+	padding: 5px 10px;
+
+	border: var(--border-light);
+	border-radius: var(--border-radius-small);
+
+	font-family: inherit;
+	font-size: var(--fs-100);
+
+	color: inherit;
+}
+
+.separator {
+	height: 1px;
+
+	margin: 20px 0;
+
+	border: 0;
+
+	background-color: black;
+
+	opacity: 0.15;
 }
