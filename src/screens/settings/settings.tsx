@@ -1,42 +1,54 @@
 import { useStore } from 'zustand';
 
-import { AuthService } from '@core/infrastructure/authService/AuthService';
-import { ELocaleCode } from '@core/infrastructure/intl/enums';
-import { ECurrency } from '@core/infrastructure/currency/types';
+import { cls } from '@utils/classnames';
 
+import { EAppPath } from '@root/appPath';
+
+import { AuthService } from '@core/infrastructure/authService/AuthService';
+import { ECurrency } from '@core/infrastructure/currency/types';
+import { ELocaleCode } from '@core/infrastructure/intl/enums';
+
+import { useIntl } from '@modules/intl/useIntl';
 import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
 
-import { Screen } from '@uiKit/screen/screen';
-import { Header } from '@uiKit/header/header';
 import { Button } from '@uiKit/button/button';
-
-import styles from './settings.module.css';
+import { Header } from '@uiKit/header/header';
+import { Screen } from '@uiKit/screen/screen';
 import { Navigable } from '@uiKit/navigable/navigable';
-import { EAppPath } from '@root/appPath';
-import { cls } from '@utils/classnames';
 import { Select } from '@uiKit/select/select';
 
+import { settingsI18n } from '@screens/settings/settings.i18n';
+
+import styles from './settings.module.css';
+
 export function Settings() {
+	let intl = useIntl(settingsI18n);
 	let navigation = useNavigation();
 	let appConfigStore = AppConfigStore.getInstance();
 	let appConfigState = useStore(appConfigStore.get());
 
 	return (
 		<Screen>
-			<Header title="Настройки" />
+			<Header title={intl.translate('screenTitle')} />
 
 			<div>
 				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>Пользователь</h2>
+					<h2 className={styles.sectionHeader}>
+						{intl.translate('userSectionTitle')}
+					</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Имя</span>
+						<span className={styles.fieldLabel}>
+							{intl.translate('userName')}
+						</span>
 						<span>—</span>
 					</div>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Почта</span>
+						<span className={styles.fieldLabel}>
+							{intl.translate('userEmail')}
+						</span>
 						<span>—</span>
 					</div>
 
@@ -47,7 +59,7 @@ export function Settings() {
 
 						<Button
 							onClick={() => {
-								if (!window.confirm('Вы уверены, что хотите выйти?')) {
+								if (!window.confirm(intl.translate('exitConfirmation'))) {
 									return;
 								}
 
@@ -56,7 +68,7 @@ export function Settings() {
 								navigation.mainPage();
 							}}
 						>
-							Выйти
+							{intl.translate('exitButton')}
 						</Button>
 					</div>
 				</div>
