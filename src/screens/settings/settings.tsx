@@ -74,10 +74,14 @@ export function Settings() {
 				</div>
 
 				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>Приложение</h2>
+					<h2 className={styles.sectionHeader}>
+						{intl.translate('appSectionTitle')}
+					</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Язык</span>
+						<span className={styles.fieldLabel}>
+							{intl.translate('appLanguage')}
+						</span>
 
 						<Select
 							name="locale"
@@ -103,10 +107,14 @@ export function Settings() {
 				</div>
 
 				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>Валюта</h2>
+					<h2 className={styles.sectionHeader}>
+						{intl.translate('currencySectionTitle')}
+					</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Основная валюта</span>
+						<span className={styles.fieldLabel}>
+							'{intl.translate('currencyMain')}'
+						</span>
 
 						<Select
 							name="currency"
@@ -126,7 +134,9 @@ export function Settings() {
 					</div>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Доступные валюты</span>
+						<span className={styles.fieldLabel}>
+							{intl.translate('currencyAvailable')}
+						</span>
 						<span className={styles.currencies}>
 							{appConfigState.availabelCurrencies.join(', ')}
 						</span>
@@ -134,10 +144,14 @@ export function Settings() {
 				</div>
 
 				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>Бюджет</h2>
+					<h2 className={styles.sectionHeader}>
+						{intl.translate('budgetSectionTitle')}
+					</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>Бюджет</span>
+						<span className={styles.fieldLabel}>
+							{intl.translate('budgetLabel')}
+						</span>
 
 						<div className={styles.budgetContainer}>
 							<span className={styles.budgetCurrency}>
@@ -159,11 +173,13 @@ export function Settings() {
 				</div>
 
 				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>Категории</h2>
+					<h2 className={styles.sectionHeader}>
+						{intl.translate('categoriesSectionTitle')}
+					</h2>
 
 					<div className={styles.field}>
 						<Navigable to={EAppPath.CATEGORIES} className={styles.categories}>
-							<span>Категории</span>
+							<span>{intl.translate('categoriesLabel')}</span>
 							<span>→</span>
 						</Navigable>
 					</div>
