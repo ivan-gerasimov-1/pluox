@@ -24,6 +24,14 @@
 	--fs-100: 13px;
 	--fs-200: 15px;
 
+	/** Font color */
+	--fc-90: var(--color-grey-700);
+	--fc-100: var(--text-color);
+
+	/** Font weight */
+	--fw-100: 400;
+	--fw-200: 700;
+
 	/* border */
 	--border-color: var(--color-grey-300);
 	--border-color-light: var(--color-grey-200);
