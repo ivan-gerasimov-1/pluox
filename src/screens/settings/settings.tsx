@@ -79,7 +79,7 @@ export function Settings() {
 						{intl.translate('appSectionTitle')}
 					</h2>
 
-					<div className={styles.field}>
+					{/* <div className={styles.field}>
 						<span className={styles.fieldLabel}>
 							{intl.translate('appLanguage')}
 						</span>
@@ -104,38 +104,53 @@ export function Settings() {
 								},
 							]}
 						/>
-					</div>
+					</div> */}
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>
-							{intl.translate('appLanguage')}
-						</span>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+							}}
+						>
+							<span
+								style={{
+									color: 'var(--fc-90)',
+								}}
+								className={styles.fieldLabel}
+							>
+								{intl.translate('appLanguage')}
+							</span>
 
-						<span>{appConfigState.locale}</span>
+							<span
+								style={{
+									marginTop: '5px',
+									fontSize: '13px',
+								}}
+							>
+								{appConfigState.locale}
+							</span>
+						</div>
 
 						<label
-							htmlFor="_locale"
+							htmlFor="locale"
 							style={{
 								position: 'relative',
-
 								display: 'flex',
-
-								padding: '5px',
+								padding: '10px',
 							}}
 						>
 							<Icon name={Icon.IconName.Settings} />
 
 							<select
-								name="_locale"
-								id="_locale"
+								name="locale"
+								id="locale"
 								style={{
 									position: 'absolute',
 									left: 0,
 									top: 0,
-
 									width: '100%',
 									height: '100%',
-
 									appearance: 'none',
 									color: 'transparent',
 									background: 'none',
