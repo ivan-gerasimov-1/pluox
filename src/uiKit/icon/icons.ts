@@ -6,6 +6,7 @@ import LogInOutlineIcon from 'ionicons/dist/svg/log-in-outline.svg';
 import LogOutOutlineIcon from 'ionicons/dist/svg/log-out-outline.svg';
 import BackOutlineIcon from 'ionicons/dist/svg/chevron-back-outline.svg';
 import CalendarOutlineIcon from 'ionicons/dist/svg/calendar-outline.svg';
+import Settings from 'ionicons/dist/svg/settings-outline.svg';
 
 export enum EIconName {
 	Close = 'close',
@@ -16,6 +17,7 @@ export enum EIconName {
 	LogOut = 'logOut',
 	Back = 'back',
 	Calendar = 'calendar',
+	Settings = 'settings',
 }
 
 const IconComponent = {
@@ -27,6 +29,7 @@ const IconComponent = {
 	[EIconName.LogOut]: LogOutOutlineIcon,
 	[EIconName.Back]: BackOutlineIcon,
 	[EIconName.Calendar]: CalendarOutlineIcon,
+	[EIconName.Settings]: Settings,
 };
 
 export function getIcon(iconName: EIconName) {
