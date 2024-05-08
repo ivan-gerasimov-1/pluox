@@ -116,17 +116,14 @@ export function Settings() {
 						<label
 							htmlFor="_locale"
 							style={{
-								display: 'flex',
 								position: 'relative',
+
+								display: 'flex',
+
+								padding: '5px',
 							}}
 						>
-							<div
-								style={{
-									pointerEvents: 'none',
-								}}
-							>
-								<Icon name={Icon.IconName.Edit} />
-							</div>
+							<Icon name={Icon.IconName.Settings} />
 
 							<select
 								name="_locale"
