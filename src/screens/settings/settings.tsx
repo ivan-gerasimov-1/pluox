@@ -17,6 +17,7 @@ import { Header } from '@uiKit/header/header';
 import { Screen } from '@uiKit/screen/screen';
 import { Navigable } from '@uiKit/navigable/navigable';
 import { Select } from '@uiKit/select/select';
+import { Icon } from '@uiKit/icon';
 
 import { settingsI18n } from '@screens/settings/settings.i18n';
 
@@ -103,6 +104,57 @@ export function Settings() {
 								},
 							]}
 						/>
+					</div>
+
+					<div className={styles.field}>
+						<span className={styles.fieldLabel}>
+							{intl.translate('appLanguage')}
+						</span>
+
+						<span>{appConfigState.locale}</span>
+
+						<label
+							htmlFor="_locale"
+							style={{
+								display: 'flex',
+								position: 'relative',
+							}}
+						>
+							<div
+								style={{
+									pointerEvents: 'none',
+								}}
+							>
+								<Icon name={Icon.IconName.Edit} />
+							</div>
+
+							<select
+								name="_locale"
+								id="_locale"
+								style={{
+									position: 'absolute',
+									left: 0,
+									top: 0,
+
+									width: '100%',
+									height: '100%',
+
+									appearance: 'none',
+									color: 'transparent',
+									background: 'none',
+									border: 0,
+								}}
+								value={appConfigState.locale}
+								onChange={(event) => {
+									appConfigStore.set({
+										locale: event.target.value as ELocaleCode,
+									});
+								}}
+							>
+								<option value={ELocaleCode.RU_RU}>Русский</option>
+								<option value={ELocaleCode.EN_US}>English</option>
+							</select>
+						</label>
 					</div>
 				</div>
 
