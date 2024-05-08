@@ -55,22 +55,29 @@
 .budgetContainer {
 	display: flex;
 	align-items: center;
-}
-
-.budgetCurrency {
-	margin-right: 5px;
-
-	font-size: var(--fs-100);
-}
-
-.budgetInput {
-	padding: 5px 10px;
 
 	border: var(--border-light);
 	border-radius: var(--border-radius-small);
+}
+
+.budgetCurrency {
+	padding: 5px 5px 5px 10px;
+
+	font-size: var(--fs-90);
+	font-weight: var(--fw-100);
+	color: var(--fc-100);
+
+	cursor: default;
+}
+
+.budgetInput {
+	padding: 10px 15px;
 
 	font-family: inherit;
 	font-size: var(--fs-100);
+
+	border: none;
+	background: none;
 
 	color: inherit;
 }
