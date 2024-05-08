@@ -115,7 +115,7 @@ export function Settings() {
 						>
 							<span
 								style={{
-									color: 'var(--fc-90)',
+									color: '#616161',
 								}}
 								className={styles.fieldLabel}
 							>
