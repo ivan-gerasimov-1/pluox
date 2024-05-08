@@ -113,7 +113,7 @@ export function Settings() {
 
 					<div className={styles.field}>
 						<span className={styles.fieldLabel}>
-							'{intl.translate('currencyMain')}'
+							{intl.translate('currencyMain')}
 						</span>
 
 						<Select
