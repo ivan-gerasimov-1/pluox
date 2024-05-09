@@ -23,6 +23,8 @@ import { Icon } from '@uiKit/icon';
 import { settingsI18n } from '@screens/settings/settings.i18n';
 
 import styles from './settings.module.css';
+import { IconSelect } from '@uiKit/iconSelect/iconSelect';
+import { EIconName } from '@uiKit/icon/icons';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
@@ -91,41 +93,27 @@ export function Settings() {
 							</span>
 						</div>
 
-						<label
-							htmlFor="locale"
-							style={{
-								position: 'relative',
-								display: 'flex',
-								padding: '10px',
+						<IconSelect
+							id="locale"
+							name="locale"
+							icon={EIconName.Settings}
+							value={appConfigState.locale}
+							onChange={(locale) => {
+								appConfigStore.set({
+									locale,
+								});
 							}}
-						>
-							<Icon name={Icon.IconName.Settings} />
-
-							<select
-								name="locale"
-								id="locale"
-								style={{
-									position: 'absolute',
-									left: 0,
-									top: 0,
-									width: '100%',
-									height: '100%',
-									appearance: 'none',
-									color: 'transparent',
-									background: 'none',
-									border: 0,
-								}}
-								value={appConfigState.locale}
-								onChange={(event) => {
-									appConfigStore.set({
-										locale: event.target.value as ELocaleCode,
-									});
-								}}
-							>
-								<option value={ELocaleCode.RU_RU}>Русский</option>
-								<option value={ELocaleCode.EN_US}>English</option>
-							</select>
-						</label>
+							options={[
+								{
+									value: ELocaleCode.RU_RU,
+									label: 'Русский',
+								},
+								{
+									value: ELocaleCode.EN_US,
+									label: 'English',
+								},
+							]}
+						/>
 					</div>
 				</div>
 
@@ -145,46 +133,23 @@ export function Settings() {
 							</span>
 						</div>
 
-						<label
-							htmlFor="_currency"
-							style={{
-								position: 'relative',
-								display: 'flex',
-								padding: '10px',
+						<IconSelect
+							id="currency"
+							name="currency"
+							icon={EIconName.Settings}
+							value={appConfigState.currency}
+							onChange={(currency) => {
+								appConfigStore.set({
+									currency,
+								});
 							}}
-						>
-							<Icon name={Icon.IconName.Settings} />
-
-							<select
-								name="_currency"
-								id="_currency"
-								style={{
-									position: 'absolute',
-									left: 0,
-									top: 0,
-									width: '100%',
-									height: '100%',
-									appearance: 'none',
-									color: 'transparent',
-									background: 'none',
-									border: 0,
-								}}
-								value={appConfigState.currency}
-								onChange={(event) => {
-									appConfigStore.set({
-										currency: event.target.value as ECurrency,
-									});
-								}}
-							>
-								{Object.values(ECurrency).map((currencyCode) => {
-									return (
-										<option key={currencyCode} value={currencyCode}>
-											{currencyCode}
-										</option>
-									);
-								})}
-							</select>
-						</label>
+							options={Object.values(ECurrency).map((currency) => {
+								return {
+									value: currency,
+									label: currency,
+								};
+							})}
+						/>
 					</div>
 
 					<div className={styles.field}>
