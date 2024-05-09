@@ -86,7 +86,7 @@ export function Settings() {
 								{intl.translate('appLanguage')}
 							</span>
 
-							<span className={StyleSheet.fieldValue}>
+							<span className={styles.fieldValue}>
 								{getLanguageNameByLocale(appConfigState.locale)}
 							</span>
 						</div>
