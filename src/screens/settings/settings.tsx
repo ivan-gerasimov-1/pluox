@@ -158,9 +158,15 @@ export function Settings() {
 								{intl.translate('currencyAvailable')}
 							</span>
 
-							<span className={styles.fieldValue}>
-								{appConfigState.availabelCurrencies.join(', ')}
-							</span>
+							<div className={cls(styles.fieldValue, styles.dFlex)}>
+								{appConfigState.availabelCurrencies.map((currency) => {
+									return (
+										<span key={currency} className={styles.currency}>
+											{currency}
+										</span>
+									);
+								})}
+							</div>
 						</div>
 					</div>
 				</div>

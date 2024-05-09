@@ -1,3 +1,7 @@
+.dFlex {
+	display: flex;
+}
+
 .section {
 	padding: 20px 15px 20px 25px;
 
@@ -48,6 +52,21 @@
 
 .sectionActionsContainer {
 	display: flex;
+}
+
+.currency {
+	padding: 2px 5px;
+	margin-left: 5px;
+
+	font-size: var(--fs-90);
+	font-weight: var(--fw-200);
+
+	border: var(--border-defaults);
+	border-radius: var(--border-radius-small);
+
+	&:first-child {
+		margin-left: 0;
+	}
 }
 
 .categories {
