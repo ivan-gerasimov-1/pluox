@@ -79,33 +79,6 @@ export function Settings() {
 						{intl.translate('appSectionTitle')}
 					</h2>
 
-					{/* <div className={styles.field}>
-						<span className={styles.fieldLabel}>
-							{intl.translate('appLanguage')}
-						</span>
-
-						<Select
-							name="locale"
-							id="locale"
-							value={appConfigState.locale}
-							onChange={(locale) => {
-								appConfigStore.set({ locale });
-							}}
-							options={[
-								{
-									key: ELocaleCode.RU_RU,
-									value: ELocaleCode.RU_RU,
-									label: 'Русский',
-								},
-								{
-									key: ELocaleCode.EN_US,
-									value: ELocaleCode.EN_US,
-									label: 'English',
-								},
-							]}
-						/>
-					</div> */}
-
 					<div className={styles.field}>
 						<div
 							style={{
