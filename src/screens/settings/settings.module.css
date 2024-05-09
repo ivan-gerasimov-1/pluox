@@ -27,7 +27,20 @@
 	}
 }
 
+.fieldData {
+	display: flex;
+	flex-direction: column;
+}
+
 .fieldLabel {
+	margin-top: 5px;
+
+	font-size: var(--fs-100);
+
+	color: var(--fc-90);
+}
+
+.fieldValue {
 	margin-top: 5px;
 
 	font-size: var(--fs-100);

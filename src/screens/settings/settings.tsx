@@ -81,27 +81,12 @@ export function Settings() {
 					</h2>
 
 					<div className={styles.field}>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'column',
-							}}
-						>
-							<span
-								style={{
-									color: '#616161',
-								}}
-								className={styles.fieldLabel}
-							>
+						<div className={styles.fieldData}>
+							<span className={styles.fieldLabel}>
 								{intl.translate('appLanguage')}
 							</span>
 
-							<span
-								style={{
-									marginTop: '5px',
-									fontSize: '13px',
-								}}
-							>
+							<span className={StyleSheet.fieldValue}>
 								{getLanguageNameByLocale(appConfigState.locale)}
 							</span>
 						</div>
