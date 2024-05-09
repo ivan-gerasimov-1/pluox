@@ -135,25 +135,56 @@ export function Settings() {
 					</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>
-							{intl.translate('currencyMain')}
-						</span>
+						<div className={styles.fieldData}>
+							<span className={styles.fieldLabel}>
+								{intl.translate('currencyMain')}
+							</span>
 
-						<Select
-							name="currency"
-							id="currency"
-							value={appConfigState.currency}
-							onChange={(value) => {
-								appConfigStore.set({ currency: value });
+							<span className={styles.fieldValue}>
+								{appConfigState.currency}
+							</span>
+						</div>
+
+						<label
+							htmlFor="_currency"
+							style={{
+								position: 'relative',
+								display: 'flex',
+								padding: '10px',
 							}}
-							options={Object.values(ECurrency).map((currencyCode) => {
-								return {
-									key: currencyCode,
-									value: currencyCode,
-									label: currencyCode,
-								};
-							})}
-						/>
+						>
+							<Icon name={Icon.IconName.Settings} />
+
+							<select
+								name="_currency"
+								id="_currency"
+								style={{
+									position: 'absolute',
+									left: 0,
+									top: 0,
+									width: '100%',
+									height: '100%',
+									appearance: 'none',
+									color: 'transparent',
+									background: 'none',
+									border: 0,
+								}}
+								value={appConfigState.currency}
+								onChange={(event) => {
+									appConfigStore.set({
+										currency: event.target.value as ECurrency,
+									});
+								}}
+							>
+								{Object.values(ECurrency).map((currencyCode) => {
+									return (
+										<option key={currencyCode} value={currencyCode}>
+											{currencyCode}
+										</option>
+									);
+								})}
+							</select>
+						</label>
 					</div>
 
 					<div className={styles.field}>
