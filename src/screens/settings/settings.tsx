@@ -153,12 +153,15 @@ export function Settings() {
 					</div>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>
-							{intl.translate('currencyAvailable')}
-						</span>
-						<span className={styles.currencies}>
-							{appConfigState.availabelCurrencies.join(', ')}
-						</span>
+						<div className={styles.fieldData}>
+							<span className={styles.fieldLabel}>
+								{intl.translate('currencyAvailable')}
+							</span>
+
+							<span className={styles.fieldValue}>
+								{appConfigState.availabelCurrencies.join(', ')}
+							</span>
+						</div>
 					</div>
 				</div>
 

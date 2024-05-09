@@ -61,10 +61,6 @@
 	font-size: var(--fs-100);
 }
 
-.currencies {
-	font-size: var(--fs-100);
-}
-
 .budgetContainer {
 	display: flex;
 	align-items: center;
