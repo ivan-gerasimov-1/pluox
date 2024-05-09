@@ -17,20 +17,20 @@ import { Button } from '@uiKit/button/button';
 import { Header } from '@uiKit/header/header';
 import { Screen } from '@uiKit/screen/screen';
 import { Navigable } from '@uiKit/navigable/navigable';
-import { Select } from '@uiKit/select/select';
-import { Icon } from '@uiKit/icon';
 
 import { settingsI18n } from '@screens/settings/settings.i18n';
 
 import styles from './settings.module.css';
 import { IconSelect } from '@uiKit/iconSelect/iconSelect';
 import { EIconName } from '@uiKit/icon/icons';
+import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
 	let navigation = useNavigation();
 	let appConfigStore = AppConfigStore.getInstance();
 	let appConfigState = useStore(appConfigStore.get());
+	let intlService = IntlService.getInstance();
 
 	return (
 		<Screen>
@@ -171,11 +171,17 @@ export function Settings() {
 					</h2>
 
 					<div className={styles.field}>
-						<span className={styles.fieldLabel}>
-							{intl.translate('budgetLabel')}
-						</span>
+						<div className={styles.fieldData}>
+							<span className={styles.fieldLabel}>
+								{appConfigState.currency}
+							</span>
 
-						<div className={styles.budgetContainer}>
+							<span className={styles.fieldValue}>
+								{intlService.formatCurrency(appConfigState.budget || 0)}
+							</span>
+						</div>
+
+						{/* <div className={styles.budgetContainer}>
 							<span className={styles.budgetCurrency}>
 								{appConfigState.currency}
 							</span>
@@ -190,7 +196,7 @@ export function Settings() {
 									appConfigStore.set({ budget });
 								}}
 							/>
-						</div>
+						</div> */}
 					</div>
 				</div>
 

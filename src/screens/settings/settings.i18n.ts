@@ -18,6 +18,7 @@ export const settingsI18n = {
 		currencyAvailable: 'Доступные',
 
 		budgetSectionTitle: 'Бюджет',
+		/** @deprecated */
 		budgetLabel: 'Бюджет',
 
 		categoriesSectionTitle: 'Категории',
@@ -40,6 +41,7 @@ export const settingsI18n = {
 		currencyAvailable: 'Available',
 
 		budgetSectionTitle: 'Budget',
+		/** @deprecated */
 		budgetLabel: 'Budget',
 
 		categoriesSectionTitle: 'Categories',
