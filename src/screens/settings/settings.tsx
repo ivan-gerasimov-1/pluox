@@ -7,6 +7,7 @@ import { EAppPath } from '@root/appPath';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 
 import { useIntl } from '@modules/intl/useIntl';
 import { AppConfigStore } from '@modules/appConfig/appConfig.store';
@@ -101,7 +102,7 @@ export function Settings() {
 									fontSize: '13px',
 								}}
 							>
-								{appConfigState.locale}
+								{getLanguageNameByLocale(appConfigState.locale)}
 							</span>
 						</div>
 
