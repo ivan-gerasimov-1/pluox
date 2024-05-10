@@ -7,8 +7,7 @@ import LogOutOutlineIcon from 'ionicons/dist/svg/log-out-outline.svg';
 import BackOutlineIcon from 'ionicons/dist/svg/chevron-back-outline.svg';
 import CalendarOutlineIcon from 'ionicons/dist/svg/calendar-outline.svg';
 import Settings from 'ionicons/dist/svg/options-outline.svg';
-import CaretDown from 'ionicons/dist/svg/caret-down-outline.svg';
-
+import CaretDown from 'ionicons/dist/svg/chevron-down-outline.svg';
 
 export enum EIconName {
 	Close = 'close',
