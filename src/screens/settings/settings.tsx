@@ -157,10 +157,10 @@ export function Settings() {
 								{intl.translate('currencyAvailable')}
 							</span>
 
-							<div className={cls(styles.fieldValue, styles.currencyContainer)}>
+							<div className={cls(styles.fieldValue, styles.pillsContainer)}>
 								{appConfigState.availabelCurrencies.map((currency) => {
 									return (
-										<span key={currency} className={styles.currency}>
+										<span key={currency} className={styles.pill}>
 											{currency}
 										</span>
 									);
@@ -226,10 +226,10 @@ export function Settings() {
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
-							<div className={cls(styles.fieldValue, styles.currencyContainer)}>
+							<div className={cls(styles.fieldValue, styles.pillsContainer)}>
 								{categoryList.map((category) => {
 									return (
-										<span key={category.id} className={styles.currency}>
+										<span key={category.id} className={styles.pill}>
 											{category.name}
 										</span>
 									);
