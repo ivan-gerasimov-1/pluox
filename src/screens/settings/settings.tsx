@@ -97,7 +97,7 @@ export function Settings() {
 						<IconSelect
 							id="locale"
 							name="locale"
-							icon={EIconName.Settings}
+							icon={EIconName.CaretDown}
 							value={appConfigState.locale}
 							onChange={(locale) => {
 								appConfigStore.set({
@@ -137,7 +137,7 @@ export function Settings() {
 						<IconSelect
 							id="currency"
 							name="currency"
-							icon={EIconName.Settings}
+							icon={EIconName.CaretDown}
 							value={appConfigState.currency}
 							onChange={(currency) => {
 								appConfigStore.set({
@@ -194,6 +194,13 @@ export function Settings() {
 								{intlService.formatCurrency(appConfigState.budget || 0)}
 							</span>
 						</div>
+
+						<IconButton
+							iconName={EIconName.Edit}
+							onClick={() => {
+								window.alert('Not Implemented');
+							}}
+						/>
 
 						{/* <div className={styles.budgetContainer}>
 							<span className={styles.budgetCurrency}>
