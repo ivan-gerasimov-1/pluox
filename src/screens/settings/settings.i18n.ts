@@ -22,6 +22,7 @@ export const settingsI18n = {
 		budgetLabel: 'Бюджет',
 
 		categoriesSectionTitle: 'Категории',
+		/** @deprecated */
 		categoriesLabel: 'Категории',
 	},
 	[ELocaleCode.EN_US]: {
@@ -45,6 +46,7 @@ export const settingsI18n = {
 		budgetLabel: 'Budget',
 
 		categoriesSectionTitle: 'Categories',
+		/** @deprecated */
 		categoriesLabel: 'Categories',
 	},
 };

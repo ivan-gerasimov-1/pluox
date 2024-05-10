@@ -2,8 +2,6 @@ import { useStore } from 'zustand';
 
 import { cls } from '@utils/classnames';
 
-import { EAppPath } from '@root/appPath';
-
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
@@ -16,7 +14,6 @@ import { useNavigation } from '@modules/navigation/useNavigation';
 import { Button } from '@uiKit/button/button';
 import { Header } from '@uiKit/header/header';
 import { Screen } from '@uiKit/screen/screen';
-import { Navigable } from '@uiKit/navigable/navigable';
 
 import { settingsI18n } from '@screens/settings/settings.i18n';
 
@@ -25,6 +22,7 @@ import { IconSelect } from '@uiKit/iconSelect/iconSelect';
 import { EIconName } from '@uiKit/icon/icons';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { IconButton } from '@uiKit/iconButton/iconButton';
+import { categoryList } from '@domain/categories/constants';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
@@ -227,10 +225,24 @@ export function Settings() {
 					</h2>
 
 					<div className={styles.field}>
-						<Navigable to={EAppPath.CATEGORIES} className={styles.categories}>
-							<span>{intl.translate('categoriesLabel')}</span>
-							<span>→</span>
-						</Navigable>
+						<div className={styles.fieldData}>
+							<div className={cls(styles.fieldValue, styles.currencyContainer)}>
+								{categoryList.map((category) => {
+									return (
+										<span key={category.id} className={styles.currency}>
+											{category.name}
+										</span>
+									);
+								})}
+							</div>
+						</div>
+
+						<IconButton
+							iconName={EIconName.Settings}
+							onClick={() => {
+								window.alert('Not Implemented');
+							}}
+						/>
 					</div>
 				</div>
 			</div>
