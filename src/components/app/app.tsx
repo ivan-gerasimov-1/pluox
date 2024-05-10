@@ -28,7 +28,6 @@ export function App() {
 				/>
 
 				<Route path={EAppPath.SETTINGS} element={<Settings />} />
-				<Route path={EAppPath.CATEGORIES} element={<Categories />} />
 
 				<Route
 					path="*"

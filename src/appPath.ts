@@ -5,5 +5,4 @@ export const enum EAppPath {
 	SIGNIN = '/signin',
 	LOGIN = '/login',
 	SETTINGS = '/settings',
-	CATEGORIES = '/categories',
 }
