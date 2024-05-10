@@ -24,6 +24,7 @@ import styles from './settings.module.css';
 import { IconSelect } from '@uiKit/iconSelect/iconSelect';
 import { EIconName } from '@uiKit/icon/icons';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
+import { IconButton } from '@uiKit/iconButton/iconButton';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
@@ -158,7 +159,7 @@ export function Settings() {
 								{intl.translate('currencyAvailable')}
 							</span>
 
-							<div className={cls(styles.fieldValue, styles.dFlex)}>
+							<div className={cls(styles.fieldValue, styles.currencyContainer)}>
 								{appConfigState.availabelCurrencies.map((currency) => {
 									return (
 										<span key={currency} className={styles.currency}>
@@ -168,6 +169,13 @@ export function Settings() {
 								})}
 							</div>
 						</div>
+
+						<IconButton
+							iconName={EIconName.Settings}
+							onClick={() => {
+								window.alert('Not Implemented');
+							}}
+						/>
 					</div>
 				</div>
 
