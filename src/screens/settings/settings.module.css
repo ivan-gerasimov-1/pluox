@@ -108,6 +108,7 @@
 }
 
 .budgetInput {
+	width: 100%;
 	padding: 10px 15px;
 
 	font-family: inherit;

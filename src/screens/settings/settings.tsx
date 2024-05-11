@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useStore } from 'zustand';
 
 import { cls } from '@utils/classnames';
@@ -23,6 +24,7 @@ import { EIconName } from '@uiKit/icon/icons';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { IconButton } from '@uiKit/iconButton/iconButton';
 import { categoryList } from '@domain/categories/constants';
+import { ActionSheet } from '@uiKit/actionSheetV2/actionSheet';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
@@ -31,221 +33,227 @@ export function Settings() {
 	let appConfigState = useStore(appConfigStore.get());
 	let intlService = IntlService.getInstance();
 
+	let [editBudget, setEditBudget] = useState<boolean>(false);
+
 	return (
-		<Screen>
-			<Header title={intl.translate('screenTitle')} />
+		<>
+			<Screen>
+				<Header title={intl.translate('screenTitle')} />
 
-			<div>
-				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('userSectionTitle')}
-					</h2>
+				<div>
+					<div className={styles.section}>
+						<h2 className={styles.sectionHeader}>
+							{intl.translate('userSectionTitle')}
+						</h2>
 
-					<div className={styles.field}>
-						<span className={styles.fieldLabel}>
-							{intl.translate('userName')}
-						</span>
-						<span>—</span>
-					</div>
-
-					<div className={styles.field}>
-						<span className={styles.fieldLabel}>
-							{intl.translate('userEmail')}
-						</span>
-						<span>—</span>
-					</div>
-
-					<hr className={styles.separator} />
-
-					<div className={cls(styles.field, styles.sectionActionsContainer)}>
-						<div style={{ width: '100%' }} />
-
-						<Button
-							onClick={() => {
-								if (!window.confirm(intl.translate('exitConfirmation'))) {
-									return;
-								}
-
-								AuthService.getInstance().signOut();
-
-								navigation.mainPage();
-							}}
-						>
-							{intl.translate('exitButton')}
-						</Button>
-					</div>
-				</div>
-
-				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('appSectionTitle')}
-					</h2>
-
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
+						<div className={styles.field}>
 							<span className={styles.fieldLabel}>
-								{intl.translate('appLanguage')}
+								{intl.translate('userName')}
 							</span>
-
-							<span className={styles.fieldValue}>
-								{getLanguageNameByLocale(appConfigState.locale)}
-							</span>
+							<span>—</span>
 						</div>
 
-						<IconSelect
-							id="locale"
-							name="locale"
-							icon={EIconName.CaretDown}
-							value={appConfigState.locale}
-							onChange={(locale) => {
-								appConfigStore.set({
-									locale,
-								});
-							}}
-							options={[
-								{
-									value: ELocaleCode.RU_RU,
-									label: 'Русский',
-								},
-								{
-									value: ELocaleCode.EN_US,
-									label: 'English',
-								},
-							]}
-						/>
-					</div>
-				</div>
-
-				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('currencySectionTitle')}
-					</h2>
-
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
+						<div className={styles.field}>
 							<span className={styles.fieldLabel}>
-								{intl.translate('currencyMain')}
+								{intl.translate('userEmail')}
 							</span>
-
-							<span className={styles.fieldValue}>
-								{appConfigState.currency}
-							</span>
+							<span>—</span>
 						</div>
 
-						<IconSelect
-							id="currency"
-							name="currency"
-							icon={EIconName.CaretDown}
-							value={appConfigState.currency}
-							onChange={(currency) => {
-								appConfigStore.set({
-									currency,
-								});
-							}}
-							options={Object.values(ECurrency).map((currency) => {
-								return {
-									value: currency,
-									label: currency,
-								};
-							})}
-						/>
+						<hr className={styles.separator} />
+
+						<div className={cls(styles.field, styles.sectionActionsContainer)}>
+							<div style={{ width: '100%' }} />
+
+							<Button
+								onClick={() => {
+									if (!window.confirm(intl.translate('exitConfirmation'))) {
+										return;
+									}
+
+									AuthService.getInstance().signOut();
+
+									navigation.mainPage();
+								}}
+							>
+								{intl.translate('exitButton')}
+							</Button>
+						</div>
 					</div>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>
-								{intl.translate('currencyAvailable')}
-							</span>
+					<div className={styles.section}>
+						<h2 className={styles.sectionHeader}>
+							{intl.translate('appSectionTitle')}
+						</h2>
 
-							<div className={cls(styles.fieldValue, styles.pillsContainer)}>
-								{appConfigState.availabelCurrencies.map((currency) => {
-									return (
-										<span key={currency} className={styles.pill}>
-											{currency}
-										</span>
-									);
-								})}
+						<div className={styles.field}>
+							<div className={styles.fieldData}>
+								<span className={styles.fieldLabel}>
+									{intl.translate('appLanguage')}
+								</span>
+
+								<span className={styles.fieldValue}>
+									{getLanguageNameByLocale(appConfigState.locale)}
+								</span>
 							</div>
-						</div>
 
-						<IconButton
-							iconName={EIconName.Settings}
-							onClick={() => {
-								window.alert('Not Implemented');
-							}}
-						/>
+							<IconSelect
+								id="locale"
+								name="locale"
+								icon={EIconName.CaretDown}
+								value={appConfigState.locale}
+								onChange={(locale) => {
+									appConfigStore.set({
+										locale,
+									});
+								}}
+								options={[
+									{
+										value: ELocaleCode.RU_RU,
+										label: 'Русский',
+									},
+									{
+										value: ELocaleCode.EN_US,
+										label: 'English',
+									},
+								]}
+							/>
+						</div>
 					</div>
-				</div>
 
-				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('budgetSectionTitle')}
-					</h2>
+					<div className={styles.section}>
+						<h2 className={styles.sectionHeader}>
+							{intl.translate('currencySectionTitle')}
+						</h2>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>
-								{appConfigState.currency}
-							</span>
+						<div className={styles.field}>
+							<div className={styles.fieldData}>
+								<span className={styles.fieldLabel}>
+									{intl.translate('currencyMain')}
+								</span>
 
-							<span className={styles.fieldValue}>
-								{intlService.formatCurrency(appConfigState.budget || 0)}
-							</span>
+								<span className={styles.fieldValue}>
+									{appConfigState.currency}
+								</span>
+							</div>
+
+							<IconSelect
+								id="currency"
+								name="currency"
+								icon={EIconName.CaretDown}
+								value={appConfigState.currency}
+								onChange={(currency) => {
+									appConfigStore.set({
+										currency,
+									});
+								}}
+								options={Object.values(ECurrency).map((currency) => {
+									return {
+										value: currency,
+										label: currency,
+									};
+								})}
+							/>
 						</div>
 
-						<IconButton
-							iconName={EIconName.Edit}
-							onClick={() => {
-								window.alert('Not Implemented');
-							}}
-						/>
+						<div className={styles.field}>
+							<div className={styles.fieldData}>
+								<span className={styles.fieldLabel}>
+									{intl.translate('currencyAvailable')}
+								</span>
 
-						{/* <div className={styles.budgetContainer}>
-							<span className={styles.budgetCurrency}>
-								{appConfigState.currency}
-							</span>
+								<div className={cls(styles.fieldValue, styles.pillsContainer)}>
+									{appConfigState.availabelCurrencies.map((currency) => {
+										return (
+											<span key={currency} className={styles.pill}>
+												{currency}
+											</span>
+										);
+									})}
+								</div>
+							</div>
 
-							<input
-								type="number"
-								className={styles.budgetInput}
-								value={appConfigState.budget || 0}
-								onChange={(event) => {
-									const budget = Number.parseInt(event.target.value);
-
-									appConfigStore.set({ budget });
+							<IconButton
+								iconName={EIconName.Settings}
+								onClick={() => {
+									window.alert('Not Implemented');
 								}}
 							/>
-						</div> */}
-					</div>
-				</div>
-
-				<div className={styles.section}>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('categoriesSectionTitle')}
-					</h2>
-
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<div className={cls(styles.fieldValue, styles.pillsContainer)}>
-								{categoryList.map((category) => {
-									return (
-										<span key={category.id} className={styles.pill}>
-											{category.name}
-										</span>
-									);
-								})}
-							</div>
 						</div>
+					</div>
 
-						<IconButton
-							iconName={EIconName.Settings}
-							onClick={() => {
-								window.alert('Not Implemented');
-							}}
-						/>
+					<div className={styles.section}>
+						<h2 className={styles.sectionHeader}>
+							{intl.translate('budgetSectionTitle')}
+						</h2>
+
+						<div className={styles.field}>
+							<div className={styles.fieldData}>
+								<span className={styles.fieldLabel}>
+									{appConfigState.currency}
+								</span>
+
+								<span className={styles.fieldValue}>
+									{intlService.formatCurrency(appConfigState.budget || 0)}
+								</span>
+							</div>
+
+							<IconButton
+								iconName={EIconName.Edit}
+								onClick={() => {
+									setEditBudget(true);
+								}}
+							/>
+						</div>
+					</div>
+
+					<div className={styles.section}>
+						<h2 className={styles.sectionHeader}>
+							{intl.translate('categoriesSectionTitle')}
+						</h2>
+
+						<div className={styles.field}>
+							<div className={styles.fieldData}>
+								<div className={cls(styles.fieldValue, styles.pillsContainer)}>
+									{categoryList.map((category) => {
+										return (
+											<span key={category.id} className={styles.pill}>
+												{category.name}
+											</span>
+										);
+									})}
+								</div>
+							</div>
+
+							<IconButton
+								iconName={EIconName.Settings}
+								onClick={() => {
+									window.alert('Not Implemented');
+								}}
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
-		</Screen>
+			</Screen>
+
+			<ActionSheet onClose={() => setEditBudget(false)} isOpen={editBudget}>
+				<div className={styles.budgetContainer}>
+					<span className={styles.budgetCurrency}>
+						{appConfigState.currency}
+					</span>
+
+					<input
+						type="number"
+						className={styles.budgetInput}
+						value={appConfigState.budget || 0}
+						onChange={(event) => {
+							const budget = Number.parseInt(event.target.value);
+
+							appConfigStore.set({ budget });
+						}}
+					/>
+				</div>
+			</ActionSheet>
+		</>
 	);
 }
