@@ -1,0 +1,29 @@
+.backdrop {
+	position: fixed;
+
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	background-color: rgba(255, 255, 255, 0);
+	/* backdrop-filter: blur(4px); */
+}
+
+.enter {
+	/* backdrop-filter: blur(0px); */
+}
+
+.enterActive {
+	/* backdrop-filter: blur(4px); */
+	/* transition: backdrop-filter 0.25s ease-in-out; */
+}
+
+.exit {
+	/* backdrop-filter: blur(4px); */
+}
+
+.exitActive {
+	/* backdrop-filter: blur(0px); */
+	/* transition: backdrop-filter 0.25s ease-in-out; */
+}
