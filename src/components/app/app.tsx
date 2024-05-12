@@ -1,6 +1,5 @@
 import { appI18n } from '@components/app/app.i18n';
 import { useIntl } from '@modules/intl';
-import { Categories } from '@modules/settings/categories/Categories';
 import { EAppPath } from '@root/appPath';
 import '@root/root.css';
 import { ExpenseListScreen } from '@screens/expenseList';
