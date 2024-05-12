@@ -1,4 +1,6 @@
 .backdrop {
+	--blur-size: 3px;
+
 	position: fixed;
 
 	top: 0;
@@ -7,23 +9,25 @@
 	left: 0;
 
 	background-color: rgba(255, 255, 255, 0);
-	/* backdrop-filter: blur(4px); */
+	backdrop-filter: blur(var(--blur-size));
+
+	will-change: backdrop-filter;
 }
 
 .enter {
-	/* backdrop-filter: blur(0px); */
+	backdrop-filter: blur(0);
 }
 
 .enterActive {
-	/* backdrop-filter: blur(4px); */
-	/* transition: backdrop-filter 0.25s ease-in-out; */
+	backdrop-filter: blur(var(--blur-size));
+	transition: backdrop-filter 0.25s ease-in-out;
 }
 
 .exit {
-	/* backdrop-filter: blur(4px); */
+	backdrop-filter: blur(var(--blur-size));
 }
 
 .exitActive {
-	/* backdrop-filter: blur(0px); */
-	/* transition: backdrop-filter 0.25s ease-in-out; */
+	backdrop-filter: blur(0);
+	transition: backdrop-filter 0.25s ease-in-out;
 }
