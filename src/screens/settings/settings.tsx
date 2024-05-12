@@ -253,6 +253,20 @@ export function Settings() {
 						}}
 					/>
 				</div>
+
+				<Button
+					color="green"
+					style={{
+						width: '100%',
+						marginTop: '15px',
+						padding: '15px auto',
+					}}
+					onClick={() => {
+						setEditBudget(false);
+					}}
+				>
+					Сохранить
+				</Button>
 			</ActionSheet>
 		</>
 	);
