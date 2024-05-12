@@ -40,7 +40,7 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 			<CSSTransition
 				nodeRef={actionSheetContainerRef}
 				in={isMount && isOpen}
-				timeout={2000}
+				timeout={250}
 				classNames={{ ...actionSheetContainerStyles }}
 				appear
 				mountOnEnter
