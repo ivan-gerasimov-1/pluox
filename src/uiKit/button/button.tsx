@@ -4,16 +4,21 @@ import styles from './button.module.css';
 export type TButtonProps = {
 	className?: string;
 	style?: React.CSSProperties;
+	color?: 'red' | 'green';
 
 	onClick: () => void;
 };
 
 export function Button(props: React.PropsWithChildren<TButtonProps>) {
+	let color = props.color || 'red';
+
 	return (
 		<button
 			type="button"
 			style={props.style}
-			className={cls(styles.button, props.className)}
+			className={cls(styles.button, props.className, {
+				[styles[color]]: true,
+			})}
 			onClick={props.onClick}
 		>
 			{props.children}

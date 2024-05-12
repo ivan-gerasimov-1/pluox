@@ -2,7 +2,7 @@
 	display: inline-block;
 
 	margin: 0;
-	padding: 8px 22px;
+	padding: 10px 15px;
 
 	color: var(--color-white);
 	background-color: var(--color-red-400);
@@ -29,4 +29,14 @@
 	&:active {
 		box-shadow: 0px 5px 30px -10px var(--color-red-400);
 	}
+}
+
+.red {
+	color: var(--color-white);
+	background-color: var(--color-red-400);
+}
+
+.green {
+	color: var(--color-white);
+	background-color: var(--color-green-600);
 }
