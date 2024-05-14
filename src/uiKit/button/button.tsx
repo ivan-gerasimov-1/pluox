@@ -4,13 +4,13 @@ import styles from './button.module.css';
 export type TButtonProps = {
 	className?: string;
 	style?: React.CSSProperties;
-	color?: 'red' | 'green';
+	color?: 'red' | 'none';
 
 	onClick: () => void;
 };
 
 export function Button(props: React.PropsWithChildren<TButtonProps>) {
-	let color = props.color || 'red';
+	let color = props.color || 'none';
 
 	return (
 		<button

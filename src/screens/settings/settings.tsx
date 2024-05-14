@@ -255,7 +255,6 @@ export function Settings() {
 				</div>
 
 				<Button
-					color="green"
 					style={{
 						width: '100%',
 						marginTop: '15px',
