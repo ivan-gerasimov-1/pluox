@@ -236,7 +236,11 @@ export function Settings() {
 				</div>
 			</Screen>
 
-			<ActionSheet onClose={() => setEditBudget(false)} isOpen={editBudget}>
+			<ActionSheet
+				onClose={() => setEditBudget(false)}
+				isOpen={editBudget}
+				height="small"
+			>
 				<div className={styles.budgetContainer}>
 					<span className={styles.budgetCurrency}>
 						{appConfigState.currency}
