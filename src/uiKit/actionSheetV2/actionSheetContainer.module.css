@@ -1,5 +1,5 @@
 .actionSheetContainer {
-	--action-sheet-top: 70%;
+	/* --action-sheet-top: 70%; */
 	--action-sheet-bottom: 100%;
 
 	position: fixed;
@@ -22,6 +22,18 @@
 	transform: translateY(var(--action-sheet-bottom));
 
 	will-change: transform box-shadow;
+}
+
+.small {
+	--action-sheet-top: 65%;
+}
+
+.medium {
+	--action-sheet-top: 35%;
+}
+
+.full {
+	--action-sheet-top: 10%;
 }
 
 /* Appear */

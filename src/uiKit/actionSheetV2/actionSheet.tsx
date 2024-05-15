@@ -2,6 +2,8 @@ import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import { cls } from '@utils/classnames';
+
 import { Backdrop } from '@root/uiKit/actionSheetV2/components/backdrop/Backdrop';
 
 import styles from './actionSheet.module.css';
@@ -10,9 +12,11 @@ import actionSheetContainerStyles from './actionSheetContainer.module.css';
 export type TActionSheetProps = {
 	isOpen?: boolean;
 	onClose?(): void;
+	height?: 'small' | 'medium' | 'full';
 };
 
 export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
+	let height = props.height || 'full';
 	let actionSheetContainerRef = useRef<HTMLDivElement>(null);
 
 	let [isOpen, setIsOpen] = useState<boolean>(Boolean(props.isOpen));
@@ -41,7 +45,7 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 				nodeRef={actionSheetContainerRef}
 				in={isMount && isOpen}
 				timeout={250}
-				classNames={{ ...actionSheetContainerStyles }}
+				classNames={actionSheetContainerStyles}
 				appear
 				mountOnEnter
 				unmountOnExit
@@ -53,7 +57,10 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 			>
 				<div
 					ref={actionSheetContainerRef}
-					className={actionSheetContainerStyles.actionSheetContainer}
+					className={cls(
+						actionSheetContainerStyles.actionSheetContainer,
+						actionSheetContainerStyles[height],
+					)}
 					onClick={() => {
 						setIsOpen(true);
 					}}
