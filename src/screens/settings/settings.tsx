@@ -261,8 +261,9 @@ export function Settings() {
 				<Button
 					style={{
 						width: '100%',
-						marginTop: '15px',
-						padding: '15px auto',
+						marginTop: '20px',
+						paddingTop: '15px',
+						paddingBottom: '15px'
 					}}
 					onClick={() => {
 						setEditBudget(false);
