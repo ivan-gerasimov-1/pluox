@@ -25,7 +25,7 @@
 }
 
 .small {
-	--action-sheet-top: 65%;
+	--action-sheet-top: 70%;
 }
 
 .medium {
@@ -33,7 +33,7 @@
 }
 
 .full {
-	--action-sheet-top: 10%;
+	--action-sheet-top: 15%;
 }
 
 /* Appear */
