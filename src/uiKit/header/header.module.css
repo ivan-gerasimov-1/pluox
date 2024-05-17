@@ -5,6 +5,6 @@
 }
 
 .title {
-	font-size: 21px;
+	font-size: var(--fs-400);
 	letter-spacing: -0.375px;
 }
