@@ -8,6 +8,7 @@ import BackOutlineIcon from 'ionicons/dist/svg/chevron-back-outline.svg';
 import CalendarOutlineIcon from 'ionicons/dist/svg/calendar-outline.svg';
 import Settings from 'ionicons/dist/svg/options-outline.svg';
 import CaretDown from 'ionicons/dist/svg/chevron-down-outline.svg';
+import ArrowBack from 'ionicons/dist/svg/arrow-back-outline.svg';
 
 export enum EIconName {
 	Close = 'close',
@@ -20,6 +21,7 @@ export enum EIconName {
 	Calendar = 'calendar',
 	Settings = 'settings',
 	CaretDown = 'caretDown',
+	ArrowBack = 'arrowBack',
 }
 
 const IconComponent = {
@@ -33,6 +35,7 @@ const IconComponent = {
 	[EIconName.Calendar]: CalendarOutlineIcon,
 	[EIconName.Settings]: Settings,
 	[EIconName.CaretDown]: CaretDown,
+	[EIconName.ArrowBack]: ArrowBack,
 };
 
 export function getIcon(iconName: EIconName) {
