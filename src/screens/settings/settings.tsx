@@ -48,17 +48,37 @@ export function Settings() {
 						</h2>
 
 						<div className={styles.field}>
-							<span className={styles.fieldLabel}>
-								{intl.translate('userName')}
-							</span>
-							<span>—</span>
+							<div className={styles.fieldData}>
+								<span className={styles.fieldLabel}>
+									{intl.translate('userName')}
+								</span>
+
+								<span className={styles.fieldValue}>—</span>
+							</div>
+
+							<IconButton
+								iconName={EIconName.Edit}
+								onClick={() => {
+									window.alert('Not Implemented');
+								}}
+							/>
 						</div>
 
 						<div className={styles.field}>
-							<span className={styles.fieldLabel}>
-								{intl.translate('userEmail')}
-							</span>
-							<span>—</span>
+							<div className={styles.fieldData}>
+								<span className={styles.fieldLabel}>
+									{intl.translate('userEmail')}
+								</span>
+
+								<span className={styles.fieldValue}>—</span>
+							</div>
+
+							<IconButton
+								iconName={EIconName.Edit}
+								onClick={() => {
+									window.alert('Not Implemented');
+								}}
+							/>
 						</div>
 
 						<hr className={styles.separator} />
