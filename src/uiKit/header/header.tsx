@@ -26,7 +26,7 @@ export function Header(props: THeaderProps) {
 				<IconButton
 					onClick={() => window.history.back()}
 					iconName={Icon.IconName.ArrowBack}
-					iconSize={Icon.Size.MEDIUM}
+					iconSize={Icon.Size.LARGE}
 				/>
 			)}
 
@@ -34,11 +34,11 @@ export function Header(props: THeaderProps) {
 
 			{isAuthenticated ? (
 				<Navigable to={EAppPath.SETTINGS}>
-					<Icon name={Icon.IconName.User} size={Icon.Size.MEDIUM} />
+					<Icon name={Icon.IconName.User} size={Icon.Size.LARGE} />
 				</Navigable>
 			) : (
 				<Navigable to={EAppPath.LOGIN}>
-					<Icon name={Icon.IconName.LogIn} size={Icon.Size.MEDIUM} />
+					<Icon name={Icon.IconName.LogIn} size={Icon.Size.LARGE} />
 				</Navigable>
 			)}
 		</div>

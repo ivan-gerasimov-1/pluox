@@ -25,6 +25,7 @@ import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { IconButton } from '@uiKit/iconButton/iconButton';
 import { categoryList } from '@domain/categories/constants';
 import { ActionSheet } from '@uiKit/actionSheetV2/actionSheet';
+import { CardContainer } from '@uiKit/cardContainer';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
@@ -40,7 +41,7 @@ export function Settings() {
 			<Screen>
 				<Header title={intl.translate('screenTitle')} />
 
-				<div>
+				<CardContainer>
 					<div className={styles.section}>
 						<h2 className={styles.sectionHeader}>
 							{intl.translate('userSectionTitle')}
@@ -233,7 +234,7 @@ export function Settings() {
 							/>
 						</div>
 					</div>
-				</div>
+				</CardContainer>
 			</Screen>
 
 			<ActionSheet
@@ -263,7 +264,7 @@ export function Settings() {
 						width: '100%',
 						marginTop: '20px',
 						paddingTop: '15px',
-						paddingBottom: '15px'
+						paddingBottom: '15px',
 					}}
 					onClick={() => {
 						setEditBudget(false);

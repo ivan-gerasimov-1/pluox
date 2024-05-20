@@ -7,27 +7,32 @@ import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { Navigable } from '@root/uiKit/navigable/navigable';
 import { Header } from '@uiKit/header/header';
+import { Screen } from '@uiKit/screen/screen';
+
+import styles from './main.module.css';
 
 export function MainScreen() {
 	let appConfig = useService(EService.APP_CONFIG);
 
 	return (
 		<>
-			<CardContainer>
+			<Screen className={styles.screenWithBottomSpace}>
 				<Header />
 
-				<Navigable to={EAppPath.EXPENSE_LIST}>
-					<Card touchable>
-						<MoneySpentMonth month={appConfig.currentMonth} />
-					</Card>
-				</Navigable>
+				<CardContainer>
+					<Navigable to={EAppPath.EXPENSE_LIST}>
+						<Card touchable>
+							<MoneySpentMonth month={appConfig.currentMonth} />
+						</Card>
+					</Navigable>
 
-				<Navigable to={EAppPath.EXPENSE_LIST_MONTHLY}>
-					<Card touchable>
-						<MoneySpentYear />
-					</Card>
-				</Navigable>
-			</CardContainer>
+					<Navigable to={EAppPath.EXPENSE_LIST_MONTHLY}>
+						<Card touchable>
+							<MoneySpentYear />
+						</Card>
+					</Navigable>
+				</CardContainer>
+			</Screen>
 
 			<ActionSheet>
 				<AddExpense />
