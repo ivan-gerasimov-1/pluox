@@ -26,6 +26,7 @@ import { IconButton } from '@uiKit/iconButton/iconButton';
 import { categoryList } from '@domain/categories/constants';
 import { ActionSheet } from '@uiKit/actionSheetV2/actionSheet';
 import { CardContainer } from '@uiKit/cardContainer';
+import { Card } from '@uiKit/card/card';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
@@ -42,7 +43,7 @@ export function Settings() {
 				<Header title={intl.translate('screenTitle')} />
 
 				<CardContainer>
-					<div className={styles.section}>
+					<Card>
 						<h2 className={styles.sectionHeader}>
 							{intl.translate('userSectionTitle')}
 						</h2>
@@ -101,9 +102,9 @@ export function Settings() {
 								{intl.translate('exitButton')}
 							</Button>
 						</div>
-					</div>
+					</Card>
 
-					<div className={styles.section}>
+					<Card>
 						<h2 className={styles.sectionHeader}>
 							{intl.translate('appSectionTitle')}
 						</h2>
@@ -141,9 +142,9 @@ export function Settings() {
 								]}
 							/>
 						</div>
-					</div>
+					</Card>
 
-					<div className={styles.section}>
+					<Card>
 						<h2 className={styles.sectionHeader}>
 							{intl.translate('currencySectionTitle')}
 						</h2>
@@ -202,9 +203,9 @@ export function Settings() {
 								}}
 							/>
 						</div>
-					</div>
+					</Card>
 
-					<div className={styles.section}>
+					<Card>
 						<h2 className={styles.sectionHeader}>
 							{intl.translate('budgetSectionTitle')}
 						</h2>
@@ -227,9 +228,9 @@ export function Settings() {
 								}}
 							/>
 						</div>
-					</div>
+					</Card>
 
-					<div className={styles.section}>
+					<Card>
 						<h2 className={styles.sectionHeader}>
 							{intl.translate('categoriesSectionTitle')}
 						</h2>
@@ -254,7 +255,7 @@ export function Settings() {
 								}}
 							/>
 						</div>
-					</div>
+					</Card>
 				</CardContainer>
 			</Screen>
 
