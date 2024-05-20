@@ -67,6 +67,7 @@ export function Settings() {
 							<div style={{ width: '100%' }} />
 
 							<Button
+								size="s"
 								onClick={() => {
 									if (!window.confirm(intl.translate('exitConfirmation'))) {
 										return;
@@ -261,16 +262,15 @@ export function Settings() {
 
 				<Button
 					style={{
-						width: '100%',
 						marginTop: '20px',
-						paddingTop: '15px',
-						paddingBottom: '15px',
 					}}
 					onClick={() => {
 						setEditBudget(false);
 					}}
+					size="m"
+					isWide
 				>
-					Сохранить
+					{intl.translate('save')}
 				</Button>
 			</ActionSheet>
 		</>
