@@ -24,6 +24,8 @@ export const settingsI18n = {
 		categoriesSectionTitle: 'Категории',
 		/** @deprecated */
 		categoriesLabel: 'Категории',
+
+		save: 'Сохранить',
 	},
 	[ELocaleCode.EN_US]: {
 		screenTitle: 'Settings',
@@ -48,5 +50,7 @@ export const settingsI18n = {
 		categoriesSectionTitle: 'Categories',
 		/** @deprecated */
 		categoriesLabel: 'Categories',
+
+		save: 'Save',
 	},
 };
