@@ -82,33 +82,6 @@ export function Settings() {
 							/>
 						</div>
 
-						<hr className={styles.separator} />
-
-						<div className={cls(styles.field, styles.sectionActionsContainer)}>
-							<div style={{ width: '100%' }} />
-
-							<Button
-								size="s"
-								onClick={() => {
-									if (!window.confirm(intl.translate('exitConfirmation'))) {
-										return;
-									}
-
-									AuthService.getInstance().signOut();
-
-									navigation.mainPage();
-								}}
-							>
-								{intl.translate('exitButton')}
-							</Button>
-						</div>
-					</Card>
-
-					<Card>
-						<h2 className={styles.sectionHeader}>
-							{intl.translate('appSectionTitle')}
-						</h2>
-
 						<div className={styles.field}>
 							<div className={styles.fieldData}>
 								<span className={styles.fieldLabel}>
@@ -141,6 +114,27 @@ export function Settings() {
 									},
 								]}
 							/>
+						</div>
+
+						<hr className={styles.separator} />
+
+						<div className={cls(styles.field, styles.sectionActionsContainer)}>
+							<div style={{ width: '100%' }} />
+
+							<Button
+								size="s"
+								onClick={() => {
+									if (!window.confirm(intl.translate('exitConfirmation'))) {
+										return;
+									}
+
+									AuthService.getInstance().signOut();
+
+									navigation.mainPage();
+								}}
+							>
+								{intl.translate('exitButton')}
+							</Button>
 						</div>
 					</Card>
 
