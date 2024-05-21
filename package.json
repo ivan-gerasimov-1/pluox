@@ -52,6 +52,7 @@
 		"css-minimizer-webpack-plugin": "6.0.0",
 		"html-webpack-plugin": "5.6.0",
 		"mini-css-extract-plugin": "2.9.0",
+		"msw": "2.3.0",
 		"postcss-loader": "8.1.1",
 		"postcss-nested": "6.0.1",
 		"postcss-preset-env": "9.5.9",
@@ -67,5 +68,10 @@
 		"webpack-bundle-analyzer": "4.10.2",
 		"webpack-cli": "5.1.4",
 		"webpack-dev-server": "5.0.4"
+	},
+	"msw": {
+		"workerDirectory": [
+			"public"
+		]
 	}
 }

@@ -7,9 +7,12 @@ import { ECurrency } from '@core/infrastructure/currency/types';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { Expenses } from '@domain/expenses/expenses';
 import { ReactUI, type IUserInterface } from '@root/createUI';
+import { runMockServiceWorker } from '@root/mockServiceWorker/run';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 async function main(): Promise<void> {
+	await runMockServiceWorker();
+
 	runMigrations();
 
 	loadAppConfig();
