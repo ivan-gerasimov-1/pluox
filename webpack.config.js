@@ -205,9 +205,6 @@ module.exports = {
 	devServer: {
 		port: 3000,
 		compress: true,
-		headers: {
-			'Cache-Control': 'max-age=604800',
-		},
 		hot: true,
 		historyApiFallback: true,
 		static: {
