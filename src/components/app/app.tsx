@@ -20,9 +20,9 @@ export function App() {
 				<Route path={EAppPath.LOGIN} element={<LogIn />} />
 
 				<Route path={EAppPath.MAIN} element={<MainScreen />} />
-				<Route path={EAppPath.EXPENSE_LIST} element={<ExpenseListScreen />} />
+				<Route path={EAppPath.EXPENSES} element={<ExpenseListScreen />} />
 				<Route
-					path={EAppPath.EXPENSE_LIST_MONTHLY}
+					path={EAppPath.EXPENSES_LIST_MONTHLY}
 					element={<ExpenseListMonthlyScreen />}
 				/>
 

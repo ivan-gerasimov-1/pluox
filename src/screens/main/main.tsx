@@ -20,13 +20,13 @@ export function MainScreen() {
 				<Header />
 
 				<CardContainer>
-					<Navigable to={EAppPath.EXPENSE_LIST}>
+					<Navigable to={EAppPath.EXPENSES}>
 						<Card touchable>
 							<MoneySpentMonth month={appConfig.currentMonth} />
 						</Card>
 					</Navigable>
 
-					<Navigable to={EAppPath.EXPENSE_LIST_MONTHLY}>
+					<Navigable to={EAppPath.EXPENSES_LIST_MONTHLY}>
 						<Card touchable>
 							<MoneySpentYear />
 						</Card>
