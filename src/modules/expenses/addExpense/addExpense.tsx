@@ -1,6 +1,6 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { createDateViewValue } from '@modules/expenses/addExpense/helpers/createDateViewValue';
-import { ExpenseForm } from '@modules/expenses/expenseView/ExpenseForm';
+import { ExpenseForm } from '@modules/expenses/expenseView/expenseForm';
 import { useExpensesStore } from '@modules/expenses/expenses.store';
 
 export function AddExpense() {

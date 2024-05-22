@@ -1,5 +1,5 @@
 import { type Id } from '@domain/types';
-import { ExpenseForm } from '@modules/expenses/expenseView/ExpenseForm';
+import { ExpenseForm } from '@modules/expenses/expenseView/expenseForm';
 import { useExpensesStore } from '@modules/expenses/expenses.store';
 
 type TEditExpenseProps = {
