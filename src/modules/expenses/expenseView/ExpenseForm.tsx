@@ -3,7 +3,7 @@ import type { TCategory, TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryPills } from '@modules/expenses/expenseView/components/categoryPills/categoryPills';
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/commentInput';
-import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
+import { DateInput } from '@modules/expenses/expenseView/components/dateInput/dateInput';
 import { expenseFormI18n } from '@modules/expenses/expenseView/expenseForm.i18n';
 import { useIntl } from '@modules/intl';
 import { useReducer } from 'react';
