@@ -1,7 +1,7 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
 import type { TCategory, TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
-import { CategoryPills } from '@modules/expenses/expenseView/components/categoryPills/CategoryPills';
+import { CategoryPills } from '@modules/expenses/expenseView/components/categoryPills/categoryPills';
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/CommentInput';
 import { DateInput } from '@modules/expenses/expenseView/components/dateInput/DateInput';
 import { expenseFormI18n } from '@modules/expenses/expenseView/expenseForm.i18n';
