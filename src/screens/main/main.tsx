@@ -1,6 +1,6 @@
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
-import { AddExpense } from '@modules/expenses/addExpense/fddExpense';
+import { AddExpense } from '@modules/expenses/addExpense/addExpense';
 import { EService, useService } from '@modules/serviceContainer/useService';
 import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
