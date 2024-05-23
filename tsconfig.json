@@ -31,5 +31,5 @@
 			"@root/*": ["src/*"]
 		}
 	},
-	"include": ["src/**/*"]
+	"include": ["src/**/*", ".eslintrc.js"]
 }
