@@ -3,16 +3,15 @@
 	border: none;
 	background-color: transparent;
 
-	padding: 0.75rem 1rem;
+	padding: 10px 20px;
 
 	font-family: inherit;
-	font-size: 1rem;
+	font-size: var(--fs-300);
 
 	color: inherit;
 	background-color: var(--color-pure-white);
 
 	border: var(--border-defaults);
-	border-width: 2px;
 	border-color: var(--text-color);
 	border-radius: var(--border-radius-small);
 
@@ -35,15 +34,14 @@
 .currencySelect {
 	appearance: none;
 
-	padding: 0.75rem 1rem;
+	padding: 10px 15px;
 
-	font-size: 1rem;
+	font-size: var(--fs-100);
 	font-family: inherit;
 
 	color: inherit;
 
 	border: var(--border-defaults);
-	border-width: 2px;
 	border-radius: var(--border-radius-small);
 
 	border-top-right-radius: 0;
