@@ -32,8 +32,6 @@
 }
 
 .currencySelect {
-	appearance: none;
-
 	padding: 10px 15px;
 
 	font-size: var(--fs-100);
@@ -43,6 +41,7 @@
 
 	border: var(--border-defaults);
 	border-radius: var(--border-radius-small);
+	background-color: var(--color-pure-white);
 
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
@@ -51,5 +50,6 @@
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 
+	appearance: none;
 	outline: none;
 }
