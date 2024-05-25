@@ -12,4 +12,12 @@ export const handlers = [
 			id: `EXP${Date.now()}`,
 		});
 	}),
+
+	http.post('/api/login', () => {
+		return HttpResponse.json({
+			id: `U${Date.now()}`,
+			email: 'mock@mail.com',
+			token: 'MOCK_TOKEN',
+		});
+	}),
 ];
