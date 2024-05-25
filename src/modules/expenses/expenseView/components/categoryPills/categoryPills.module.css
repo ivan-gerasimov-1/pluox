@@ -16,7 +16,7 @@
 	appearance: none;
 
 	line-height: 1;
-	font-size: var(--fs-90);
+	font-size: var(--fs-100);
 
 	color: var(--color-black);
 	background-color: var(--color-pure-white);
