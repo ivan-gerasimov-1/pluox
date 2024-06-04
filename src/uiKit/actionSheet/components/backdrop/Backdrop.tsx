@@ -23,7 +23,7 @@ export function Backdrop(props: TBackdropProps) {
 			<div
 				ref={backdropRef}
 				className={styles.backdrop}
-				onClick={props.onClick}
+				onMouseDown={props.onClick}
 			/>
 		</CSSTransition>
 	);

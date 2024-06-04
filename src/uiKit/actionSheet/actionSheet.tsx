@@ -92,7 +92,7 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 				<div
 					ref={actionSheetContainerRef}
 					className={actionSheetContainerStyles.actionSheetContainer}
-					onClick={open}
+					onMouseDown={open}
 					onTouchStart={onDragStart}
 					onTouchEnd={onDragEnd}
 					onTouchMove={onDrag}
