@@ -13,7 +13,11 @@ export type TIconButtonProps = {
 
 export function IconButton(props: TIconButtonProps) {
 	return (
-		<button type="button" className={styles.iconButton} onClick={props.onClick}>
+		<button
+			type="button"
+			className={styles.iconButton}
+			onMouseDown={props.onClick}
+		>
 			<Icon name={props.iconName} size={props.iconSize || Icon.Size.MEDIUM} />
 		</button>
 	);
