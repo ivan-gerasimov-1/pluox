@@ -24,7 +24,7 @@ export function Button(props: React.PropsWithChildren<TButtonProps>) {
 				[styles[color]]: true,
 				[styles.wide]: isWide,
 			})}
-			onClick={props.onClick}
+			onMouseDown={props.onClick}
 		>
 			{props.children}
 		</button>
