@@ -1,0 +1,74 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public/**'
+      - 'src/**'
+      - '*.*'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.12.0'
+          cache: 'npm'
+
+      - name: Install dependencies and build the project
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: build
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Load secrets from 1Password
+        uses: 1Password/load-secrets-action@v2.0.0
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          SSH_KEY: 'op://Savee/GitHub Actions/private key'
+          HOST: 'op://Savee/Main Server/Host'
+          USER: 'op://Savee/Main Server/Username'
+
+      - name: Setup SSH
+        run: |
+          set -eu
+          mkdir $HOME/.ssh
+          echo "$SSH_KEY" > $HOME/.ssh/ssh-rsa
+          chmod 600 $HOME/.ssh/ssh-rsa
+          ssh-keyscan -t rsa $HOST > $HOME/.ssh/known_hosts
+          chmod 600 $HOME/.ssh/known_hosts
+          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" > $HOME/.ssh/config
+          chmod 600 $HOME/.ssh/config
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+          path: build
+
+      - name: Deploy config
+        run: |
+          rsync --archive --compress --delete build/* $USER@$HOST:~/srv/savee.gerasimov.dev
