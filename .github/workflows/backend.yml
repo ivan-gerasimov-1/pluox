@@ -85,7 +85,7 @@ jobs:
 
       - name: Clean up build
         run: |
-          cd artifacts/build
+          cd $BUILD_ARTIFACTS
           rm \
             \ package.json
             \ package-lock.json
