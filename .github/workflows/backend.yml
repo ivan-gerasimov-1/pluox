@@ -73,8 +73,8 @@ jobs:
       - name: Clean up build
         run: |
           cd artifacts/build
-          rm artifacts/build/package.json
-          rm artifacts/build/package-lock.json
+          rm package.json
+          rm package-lock.json
       - name: Show content of artifacts
         run: |
           ls artifacts/build
