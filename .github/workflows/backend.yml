@@ -50,15 +50,15 @@ jobs:
       - uses: actions/setup-node@v4
 
       - name: Load secrets from 1Password
-        uses: 1Password/load-secrets-action@v1.3.1
+        uses: 1Password/load-secrets-action@v2.0.0
         with:
           # Export loaded secrets as environment variables
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SSH_KEY: 'op://Savee/Hetzner/private Key'
-          HOST: 'op://Savee/Server/Host'
-          USER: 'op://Savee/Server/User'
+          SSH_KEY: 'op://Savee/GitHub Actions/private key'
+          HOST: 'op://Savee/Savee Server/Host'
+          USER: 'op://Savee/Savee Server/User'
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
