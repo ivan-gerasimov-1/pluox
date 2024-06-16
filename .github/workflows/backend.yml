@@ -28,6 +28,7 @@ jobs:
         run: |
           npm ci
           npm --workspace=@savee/backend run build
+
       - name: Copy files
         run: |
           mkdir -p artifacts/
@@ -66,15 +67,18 @@ jobs:
         with:
           name: build
           path: artifacts/build
+
       - name: Install production dependencies
         run: |
           cd artifacts/build
           npm install --include=prod
+
       - name: Clean up build
         run: |
           cd artifacts/build
           rm package.json
           rm package-lock.json
+
       - name: Setup SSH
         run: |
           set -eu
@@ -86,10 +90,12 @@ jobs:
           echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" \
             \ > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
+
       - name: Deploy
         run: |
           rsync --archive --compress --delete artifacts/build/* $USER@$HOST:/srv/savee/api
-      - name: Start the app
+
+      - name: Run
         run: |
           ssh $USER@$HOST '
             export NVM_DIR=~/.nvm
