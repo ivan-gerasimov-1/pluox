@@ -85,9 +85,10 @@ jobs:
           chmod 600 $HOME/.ssh/ssh-rsa
           ssh-keyscan -t rsa $HOST > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
-          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" > $HOME/.ssh/config
+          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" \
+            \ > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
-      - name: Deploy new code
+      - name: Deploy
         run: |
           rsync --archive --compress --delete artifacts/build/* $USER@$HOST:/srv/savee/api
       - name: Start the app
@@ -95,6 +96,6 @@ jobs:
           ssh $USER@$HOST '
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd /srv/savee/api &&
+            cd /srv/savee/api
             pm2 start ecosystem.config.js
           '
