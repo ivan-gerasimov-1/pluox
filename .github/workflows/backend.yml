@@ -21,7 +21,7 @@ env:
   ARTIFACTS_DIR: artifacts
   ARTIFACT_NAME: build
 
-  DEPLOY_ORIGIN: $ARTIFACTS_DIR/*
+  DEPLOY_ORIGIN: artifacts/*
   DEPLOY_DESTINATION: /srv/savee/api
 
 jobs:
