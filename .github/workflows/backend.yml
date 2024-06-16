@@ -46,8 +46,8 @@ jobs:
 
       - name: Copy files
         run: |
-          cp -r packages/backend/build/* $ARTIFACTS_DIR/
-          cp \
+          cp -r \
+            packages/backend/build/* \
             package-lock.json \
             packages/backend/package.json \
             packages/backend/ecosystem.config.js \
