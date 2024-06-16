@@ -13,6 +13,11 @@ on:
     paths:
       - 'packages/backend/**'
 
+env:
+  NODE_VERSION: 16.20.2
+  BUILD_ARTIFACTS: artifacts/build
+  ARTIFACT_NAME: build
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '16.20.2'
+          node-version: $NODE_VERSION
           cache: 'npm'
 
       - name: Build
@@ -29,19 +34,24 @@ jobs:
           npm ci
           npm --workspace=@savee/backend run build
 
+      - name: Create artifacts directory
+        run: |
+          mkdir -p $BUILD_ARTIFACTS
+
       - name: Copy files
         run: |
-          mkdir -p artifacts/
-          cp -r packages/backend/build/ artifacts/
-          cp packages/backend/package.json artifacts/build/
-          cp packages/backend/ecosystem.config.js artifacts/build/
-          cp package-lock.json artifacts/build/
+          cp -r packages/backend/build/* $BUILD_ARTIFACTS/
+          cp \
+            \ package-lock.json
+            \ packages/backend/package.json
+            \ packages/backend/ecosystem.config.js
+            \ $BUILD_ARTIFACTS/
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build
-          path: artifacts/build
+          name: $ARTIFACT_NAME
+          path: $BUILD_ARTIFACTS
 
   deploy:
     needs: build
@@ -65,19 +75,20 @@ jobs:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: build
-          path: artifacts/build
+          name: $ARTIFACT_NAME
+          path: $BUILD_ARTIFACTS
 
       - name: Install production dependencies
         run: |
-          cd artifacts/build
+          cd $BUILD_ARTIFACTS
           npm install --include=prod
 
       - name: Clean up build
         run: |
           cd artifacts/build
-          rm package.json
-          rm package-lock.json
+          rm \
+            \ package.json
+            \ package-lock.json
 
       - name: Setup SSH
         run: |
@@ -95,7 +106,7 @@ jobs:
 
       - name: Deploy
         run: |
-          rsync --archive --compress --delete artifacts/build/* $USER@$HOST:/srv/savee/api
+          rsync --archive --compress --delete $BUILD_ARTIFACTS/* $USER@$HOST:/srv/savee/api
 
       - name: Run
         run: |
