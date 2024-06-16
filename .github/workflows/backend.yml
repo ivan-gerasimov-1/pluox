@@ -15,8 +15,14 @@ on:
 
 env:
   NODE_VERSION: 16.20.2
-  BUILD_ARTIFACTS: artifacts/build
+
+  NPM_BUILD_CMD: --workspace=@savee/backend run build
+
+  ARTIFACTS_DIR: artifacts
   ARTIFACT_NAME: build
+
+  DEPLOY_ORIGIN: $ARTIFACTS_DIR/*
+  DEPLOY_DESTINATION: /srv/savee/api
 
 jobs:
   build:
@@ -27,31 +33,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Build
         run: |
           npm ci
-          npm --workspace=@savee/backend run build
+          npm $NPM_BUILD_CMD
 
       - name: Create artifacts directory
         run: |
-          mkdir -p $BUILD_ARTIFACTS
+          mkdir -p $ARTIFACTS_DIR
 
       - name: Copy files
         run: |
-          cp -r packages/backend/build/* $BUILD_ARTIFACTS/
+          cp -r packages/backend/build/* $ARTIFACTS_DIR/
           cp \
             package-lock.json \
             packages/backend/package.json \
             packages/backend/ecosystem.config.js \
-            $BUILD_ARTIFACTS/
+            $ARTIFACTS_DIR/
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.BUILD_ARTIFACTS }}
+          path: ${{ env.ARTIFACTS_DIR }}
 
   deploy:
     needs: build
@@ -64,7 +70,6 @@ jobs:
       - name: Load secrets from 1Password
         uses: 1Password/load-secrets-action@v2.0.0
         with:
-          # Export loaded secrets as environment variables
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -76,19 +81,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.BUILD_ARTIFACTS }}
+          path: ${{ env.ARTIFACTS_DIR }}
 
       - name: Install production dependencies
         run: |
-          cd $BUILD_ARTIFACTS
+          cd $ARTIFACTS_DIR
           npm install --include=prod
 
       - name: Clean up build
         run: |
-          cd $BUILD_ARTIFACTS
           rm \
-            package.json \
-            package-lock.json
+            $ARTIFACTS_DIR/package.json \
+            $ARTIFACTS_DIR/package-lock.json
 
       - name: Setup SSH
         run: |
@@ -106,7 +110,7 @@ jobs:
 
       - name: Deploy
         run: |
-          rsync --archive --compress --delete $BUILD_ARTIFACTS/* $USER@$HOST:/srv/savee/api
+          rsync --archive --compress --delete $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         run: |
