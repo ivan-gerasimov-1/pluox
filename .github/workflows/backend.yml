@@ -75,9 +75,6 @@ jobs:
           cd artifacts/build
           rm package.json
           rm package-lock.json
-      - name: Show content of artifacts
-        run: |
-          ls artifacts/build
       - name: Setup SSH
         run: |
           set -eu
