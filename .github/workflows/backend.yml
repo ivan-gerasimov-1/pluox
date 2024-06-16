@@ -69,6 +69,11 @@ jobs:
         run: |
           cd artifacts/build
           npm install --include=prod
+      - name: Clean up build
+        run: |
+          cd artifacts/build
+          rm artifacts/build/package.json
+          rm artifacts/build/package-lock.json
       - name: Show content of artifacts
         run: |
           ls artifacts/build
