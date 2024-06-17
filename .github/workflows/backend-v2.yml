@@ -1,3 +1,5 @@
+# TODO: Implement .env file builder
+# TODO: Enable "Run" step
 name: Backend CI/CD V2 (WIP)
 
 on:
