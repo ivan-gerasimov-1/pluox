@@ -109,7 +109,6 @@ jobs:
           chmod 600 $HOME/.ssh/config
 
       - name: Deploy
-        if: false
         run: |
           rsync --archive --compress --delete $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
