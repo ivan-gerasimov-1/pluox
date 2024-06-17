@@ -108,9 +108,15 @@ jobs:
             > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
 
-          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" \
+          echo -e "
+            Host $HOST
+              \tHostName $HOST
+              \tUser $USER
+              \tIdentityFile $HOME/.ssh/ssh-rsa
+            " \
             > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
+          cat $HOME/.ssh/config
 
       - name: Deploy
         run: |
