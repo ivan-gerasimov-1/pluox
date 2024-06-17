@@ -29,6 +29,8 @@ env:
 
 jobs:
   build:
+    env:
+      RUNNER: ubuntu-22.04
     runs-on: ${{ vars.RUNNER }}
 
     steps:
