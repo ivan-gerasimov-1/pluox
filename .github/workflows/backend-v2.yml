@@ -39,7 +39,6 @@ jobs:
         run: |
           npm ci
           npm $NPM_BUILD_CMD
-          ls $HOME
 
       - name: Create artifacts directory
         run: |
