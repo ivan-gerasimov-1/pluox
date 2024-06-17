@@ -113,6 +113,7 @@ jobs:
           rsync --archive --compress --delete $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
+        # TODO: Enable once the database is ready on the server
         if: false
         run: |
           ssh $USER@$HOST '
