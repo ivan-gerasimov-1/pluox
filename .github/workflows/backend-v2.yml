@@ -123,8 +123,7 @@ jobs:
       - name: Prepare deployment destination directory
         run: |
           ssh $USER@$HOST '
-            mkdir -p \
-              $DEPLOY_DESTINATION
+            mkdir -p $DEPLOY_DESTINATION
           '
 
       - name: Deploy
