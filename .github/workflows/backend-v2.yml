@@ -120,7 +120,11 @@ jobs:
 
       - name: Deploy
         run: |
-          rsync --archive --compress --delete $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+          rsync \
+            --archive \
+            --compress \
+            --delete \
+            $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         # TODO: Enable once the database is ready on the server
