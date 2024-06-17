@@ -3,6 +3,17 @@
 # TODO: Find a way to parametrize "runs-on"
 name: Backend CI/CD V2 (WIP)
 
+env:
+  NODE_VERSION: 20.12.0
+
+  NPM_BUILD_CMD: --workspace=@savee/backend run build
+
+  ARTIFACTS_DIR: artifacts
+  ARTIFACT_NAME: build
+
+  DEPLOY_ORIGIN: artifacts/*
+  DEPLOY_DESTINATION: ~/srv/savee/api
+
 on:
   workflow_dispatch:
   push:
@@ -15,17 +26,6 @@ on:
       - main
     paths:
       - 'packages/backend/**'
-
-env:
-  NODE_VERSION: 20.12.0
-
-  NPM_BUILD_CMD: --workspace=@savee/backend run build
-
-  ARTIFACTS_DIR: artifacts
-  ARTIFACT_NAME: build
-
-  DEPLOY_ORIGIN: artifacts/*
-  DEPLOY_DESTINATION: ~/srv/savee/api
 
 jobs:
   build:
