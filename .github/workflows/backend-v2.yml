@@ -29,7 +29,7 @@ env:
 
 jobs:
   build:
-    runs-on: $RUNNER
+    runs-on: ${{ vars.RUNNER }}
 
     steps:
       - uses: actions/checkout@v4
@@ -64,7 +64,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: $RUNNER
+    runs-on: ${{ vars.RUNNER }}
 
     steps:
       - uses: actions/checkout@v4
