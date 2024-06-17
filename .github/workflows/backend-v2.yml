@@ -1,0 +1,124 @@
+name: Backend CI/CD V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/backend/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'packages/backend/**'
+
+env:
+  NODE_VERSION: 20.12.0
+
+  NPM_BUILD_CMD: --workspace=@savee/backend run build
+
+  ARTIFACTS_DIR: artifacts
+  ARTIFACT_NAME: build
+
+  DEPLOY_ORIGIN: artifacts/*
+  DEPLOY_DESTINATION: ~/srv/savee/api
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Build
+        run: |
+          npm ci
+          npm $NPM_BUILD_CMD
+
+      - name: Create artifacts directory
+        run: |
+          mkdir -p $ARTIFACTS_DIR
+
+      - name: Copy files
+        run: |
+          cp -r \
+            packages/backend/build/* \
+            package-lock.json \
+            packages/backend/package.json \
+            packages/backend/ecosystem.config.js \
+            $ARTIFACTS_DIR/
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+
+      - name: Load secrets from 1Password
+        uses: 1Password/load-secrets-action@v2.0.0
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          SSH_KEY: 'op://Savee/GitHub Actions/private key'
+          HOST: 'op://Savee/Main Server/Host'
+          USER: 'op://Savee/Main Server/Username'
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
+
+      - name: Install production dependencies
+        run: |
+          cd $ARTIFACTS_DIR
+          npm install --include=prod
+
+      - name: Clean up build
+        run: |
+          rm \
+            $ARTIFACTS_DIR/package.json \
+            $ARTIFACTS_DIR/package-lock.json
+
+      - name: Setup SSH
+        run: |
+          set -eu
+          mkdir $HOME/.ssh
+          echo "$SSH_KEY" \
+            > $HOME/.ssh/ssh-rsa
+          chmod 600 $HOME/.ssh/ssh-rsa
+          ssh-keyscan -t rsa $HOST \
+            > $HOME/.ssh/known_hosts
+          chmod 600 $HOME/.ssh/known_hosts
+          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" \
+            > $HOME/.ssh/config
+          chmod 600 $HOME/.ssh/config
+
+      - name: Deploy
+        if: false
+        run: |
+          rsync --archive --compress --delete $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+
+      - name: Run
+        if: false
+        run: |
+          ssh $USER@$HOST '
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd /srv/savee/api
+            pm2 start ecosystem.config.js
+          '
