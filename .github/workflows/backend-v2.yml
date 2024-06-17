@@ -120,6 +120,13 @@ jobs:
             > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
 
+      - name: Prepare deployment destination directory
+        run: |
+          ssh $USER@$HOST '
+            mkdir -p \
+              $DEPLOY_DESTINATION
+          '
+
       - name: Deploy
         run: |
           rsync \
