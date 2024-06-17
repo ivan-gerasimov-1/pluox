@@ -97,13 +97,17 @@ jobs:
       - name: Setup SSH
         run: |
           set -eu
+
           mkdir $HOME/.ssh
+
           echo "$SSH_KEY" \
             > $HOME/.ssh/ssh-rsa
           chmod 600 $HOME/.ssh/ssh-rsa
+
           ssh-keyscan -t rsa $HOST \
             > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
+
           echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" \
             > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
