@@ -64,7 +64,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ${{ env.RUNNER }}
+    runs-on: $RUNNER
 
     steps:
       - uses: actions/checkout@v4
