@@ -31,7 +31,7 @@ jobs:
   build:
     env:
       RUNNER: ubuntu-22.04
-    runs-on: ${{ vars.RUNNER }}
+    runs-on: ${{ env.RUNNER }}
 
     steps:
       - uses: actions/checkout@v4
