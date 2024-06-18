@@ -1,6 +1,18 @@
 name: Frontend CI/CD
 
+env:
+  NODE_VERSION: 16.20.2
+
+  NPM_BUILD_CMD: run build
+
+  ARTIFACTS_DIR: build
+  ARTIFACT_NAME: build
+
+  DEPLOY_ORIGIN: build/*
+  DEPLOY_DESTINATION: ~/srv/savee.gerasimov.dev
+
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -9,34 +21,31 @@ on:
       - 'src/**'
       - '*.*'
 
-  workflow_dispatch:
-
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.12.0'
-          cache: 'npm'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
 
       - name: Install dependencies and build the project
         run: |
           npm ci
-          npm run build
+          npm $NPM_BUILD_CMD
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: frontend-build
-          path: build
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
 
   deploy:
-    runs-on: ubuntu-latest
-    environment: production
+    runs-on: ubuntu-22.04
     needs: build
 
     steps:
@@ -55,20 +64,36 @@ jobs:
       - name: Setup SSH
         run: |
           set -eu
+
           mkdir $HOME/.ssh
-          echo "$SSH_KEY" > $HOME/.ssh/ssh-rsa
+
+          echo "$SSH_KEY" \
+            > $HOME/.ssh/ssh-rsa
           chmod 600 $HOME/.ssh/ssh-rsa
-          ssh-keyscan -t rsa $HOST > $HOME/.ssh/known_hosts
+
+          ssh-keyscan -t rsa $HOST \
+            > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
-          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" > $HOME/.ssh/config
+
+          echo -e "
+            Host $HOST
+              \tHostName $HOST
+              \tUser $USER
+              \tIdentityFile $HOME/.ssh/ssh-rsa
+            " \
+            > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: frontend-build
-          path: build
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
 
-      - name: Deploy config
+      - name: Deploy
         run: |
-          rsync --archive --compress --delete build/* $USER@$HOST:~/srv/savee.gerasimov.dev
+          rsync \
+            --archive \
+            --compress \
+            --delete \
+            $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
