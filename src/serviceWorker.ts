@@ -12,6 +12,6 @@ export function registerServiceWorker() {
 	}
 
 	window.addEventListener(EServiceWorkerEvent.LOAD, () => {
-		navigator.serviceWorker.register('/sw.js');
+		navigator.serviceWorker.register('/service-worker.js');
 	});
 }

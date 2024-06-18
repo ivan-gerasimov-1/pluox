@@ -12,6 +12,7 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ReactRefreshTypeScript = require('react-refresh-typescript');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 class NodeEnvNotProvidedError extends Error {
 	constructor() {
@@ -112,6 +113,13 @@ module.exports = {
 			ignoreOrder: true,
 		}),
 		config.isDevelopment && new ReactRefreshPlugin(),
+		!config.isDevelopment &&
+			new WorkboxPlugin.GenerateSW({
+				// these options encourage the ServiceWorkers to get in there fast
+				// and not allow any straggling "old" SWs to hang around
+				clientsClaim: true,
+				skipWaiting: true,
+			}),
 	].filter(identity),
 	module: {
 		rules: [
