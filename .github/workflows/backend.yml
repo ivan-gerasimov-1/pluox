@@ -1,5 +1,16 @@
 name: Backend CI/CD
 
+env:
+  NODE_VERSION: 16.20.2
+
+  NPM_BUILD_CMD: --workspace=@savee/backend run build
+
+  ARTIFACTS_DIR: artifacts
+  ARTIFACT_NAME: build
+
+  DEPLOY_ORIGIN: artifacts/*
+  DEPLOY_DESTINATION: /srv/savee/api
+
 on:
   workflow_dispatch:
   push:
@@ -13,20 +24,9 @@ on:
     paths:
       - 'packages/backend/**'
 
-env:
-  NODE_VERSION: 16.20.2
-
-  NPM_BUILD_CMD: --workspace=@savee/backend run build
-
-  ARTIFACTS_DIR: artifacts
-  ARTIFACT_NAME: build
-
-  DEPLOY_ORIGIN: artifacts/*
-  DEPLOY_DESTINATION: /srv/savee/api
-
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
@@ -97,26 +97,46 @@ jobs:
       - name: Setup SSH
         run: |
           set -eu
+
           mkdir $HOME/.ssh
+
           echo "$SSH_KEY" \
             > $HOME/.ssh/ssh-rsa
           chmod 600 $HOME/.ssh/ssh-rsa
+
           ssh-keyscan -t rsa $HOST \
             > $HOME/.ssh/known_hosts
           chmod 600 $HOME/.ssh/known_hosts
-          echo -e "Host $HOST\n\tHostName $HOST\n\tUser $USER\n\tIdentityFile $HOME/.ssh/ssh-rsa" \
+
+          echo -e "
+            Host $HOST
+              \tHostName $HOST
+              \tUser $USER
+              \tIdentityFile $HOME/.ssh/ssh-rsa
+            " \
             > $HOME/.ssh/config
           chmod 600 $HOME/.ssh/config
 
+      - name: Prepare deployment destination directory
+        run: |
+          ssh -T $USER@$HOST "
+            mkdir -p \
+              $DEPLOY_DESTINATION
+          "
+
       - name: Deploy
         run: |
-          rsync --archive --compress --delete $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+          rsync \
+            --archive \
+            --compress \
+            --delete \
+            $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         run: |
-          ssh $USER@$HOST '
+          ssh -T $USER@$HOST "
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd /srv/savee/api
             pm2 start ecosystem.config.js
-          '
+          "
