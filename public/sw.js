@@ -1,3 +1,7 @@
+/**
+ * @deprecated In favor of Workbox
+ */
+
 const EServiceWorkerEvent = {
 	ACTIVATE: 'activate',
 	FETCH: 'fetch',
