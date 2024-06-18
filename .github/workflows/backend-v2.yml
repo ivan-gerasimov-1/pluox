@@ -142,6 +142,6 @@ jobs:
           ssh -T $USER@$HOST "
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd /srv/savee/api
+            cd ~/srv/savee/api
             pm2 start ecosystem.config.js
           "
