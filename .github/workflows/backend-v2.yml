@@ -4,7 +4,7 @@
 name: Backend CI/CD V2 (WIP)
 
 env:
-  NODE_VERSION: 20.12.0
+  NODE_VERSION: 20.11.1
 
   NPM_BUILD_CMD: --workspace=@savee/backend run build
 
