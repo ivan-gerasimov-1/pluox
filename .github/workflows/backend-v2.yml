@@ -87,6 +87,7 @@ jobs:
 
       - name: Install production dependencies
         run: |
+          npm install -g node-gyp
           sudo apt-get update
           sudo apt-get install build-essential
           cd $ARTIFACTS_DIR
