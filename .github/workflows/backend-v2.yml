@@ -1,5 +1,8 @@
 # TODO: Implement .env file builder
 # TODO: Find a way to parametrize "runs-on"
+# TODO: bcrypt doesn’t work on a deployment if built on GitHub Actions.
+# Due to that, we have to keep package.json/package-lock.json files,
+# remove bcrypt from node_modules and manually reinstall the package.
 name: Backend CI/CD V2
 
 env:
@@ -91,6 +94,7 @@ jobs:
           npm install --include=prod
 
       - name: Clean up build
+        # We have to keep the files due to bcrypt package issues
         if: false
         run: |
           rm \
@@ -136,6 +140,7 @@ jobs:
             $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
+        # Remove bcrypt related lines once the issue is resolved
         run: |
           ssh -T $USER@$HOST "
             export NVM_DIR=~/.nvm
