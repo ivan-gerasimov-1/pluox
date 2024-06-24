@@ -136,8 +136,6 @@ jobs:
             $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
-        # TODO: Enable once the database is ready on the server
-        if: false
         run: |
           ssh -T $USER@$HOST "
             export NVM_DIR=~/.nvm
