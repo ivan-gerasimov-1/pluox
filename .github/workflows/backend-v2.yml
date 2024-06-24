@@ -1,7 +1,6 @@
 # TODO: Implement .env file builder
-# TODO: Enable "Run" step
 # TODO: Find a way to parametrize "runs-on"
-name: Backend CI/CD V2 (WIP)
+name: Backend CI/CD V2
 
 env:
   NODE_VERSION: 20.11.1
