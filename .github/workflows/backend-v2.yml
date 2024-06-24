@@ -87,9 +87,6 @@ jobs:
 
       - name: Install production dependencies
         run: |
-          npm install -g node-gyp
-          sudo apt-get update
-          sudo apt-get install build-essential
           cd $ARTIFACTS_DIR
           npm install --include=prod
 
@@ -144,5 +141,7 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ~/srv/savee/api
+            rm -rf node_modules/bcrypt
+            npm install bcrypt
             pm2 start ecosystem.config.js
           "
