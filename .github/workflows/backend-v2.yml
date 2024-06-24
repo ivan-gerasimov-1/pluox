@@ -91,6 +91,7 @@ jobs:
           npm install --include=prod
 
       - name: Clean up build
+        if: false
         run: |
           rm \
             $ARTIFACTS_DIR/package.json \
