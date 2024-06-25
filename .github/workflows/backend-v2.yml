@@ -58,6 +58,19 @@ jobs:
             packages/backend/ecosystem.config.js \
             $ARTIFACTS_DIR/
 
+      - name: Install production dependencies
+        run: |
+          cd $ARTIFACTS_DIR
+          npm install --include=prod
+
+      - name: Clean up build
+        # We have to keep the files due to bcrypt package issues
+        if: false
+        run: |
+          rm \
+            $ARTIFACTS_DIR/package.json \
+            $ARTIFACTS_DIR/package-lock.json
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
@@ -87,19 +100,6 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.ARTIFACTS_DIR }}
-
-      - name: Install production dependencies
-        run: |
-          cd $ARTIFACTS_DIR
-          npm install --include=prod
-
-      - name: Clean up build
-        # We have to keep the files due to bcrypt package issues
-        if: false
-        run: |
-          rm \
-            $ARTIFACTS_DIR/package.json \
-            $ARTIFACTS_DIR/package-lock.json
 
       - name: Setup SSH
         run: |
