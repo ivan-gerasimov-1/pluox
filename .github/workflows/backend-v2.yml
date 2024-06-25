@@ -77,6 +77,7 @@ jobs:
 
       - name: Create Docker image
         run: |
+          cd $ARTIFACTS_DIR
           docker build --tag "${IMAGE_TAG}" .
           docker save --output image.tar "${IMAGE_TAG}"
 
