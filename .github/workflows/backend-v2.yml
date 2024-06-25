@@ -78,8 +78,10 @@ jobs:
       - name: Create Docker image
         run: |
           cd $ARTIFACTS_DIR
-          docker build --platform linux/arm64/v8 --tag "${IMAGE_TAG}" .
-          docker save --output image.tar "${IMAGE_TAG}"
+          docker build \
+            --tag "${IMAGE_TAG}" .
+          docker save \
+            --output image.tar "${IMAGE_TAG}"
 
       - name: Upload Docker image
         uses: actions/upload-artifact@v4
@@ -181,4 +183,5 @@ jobs:
             docker rename savee-api savee-api-old
             docker rename savee-api-new savee-api
             docker update --publish-add 3001:3001 savee-api
+            docker container rm savee-api-old
           "
