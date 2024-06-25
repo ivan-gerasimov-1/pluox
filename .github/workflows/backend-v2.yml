@@ -183,5 +183,5 @@ jobs:
             docker stop savee-api
             docker rename savee-api savee-api-old
             docker rename savee-api-new savee-api
-            docker container update --publish-add 3001:3001 savee-api
+            docker update --publish-add 3001:3001 savee-api
           "
