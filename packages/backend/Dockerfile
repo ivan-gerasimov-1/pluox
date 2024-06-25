@@ -2,7 +2,7 @@ FROM node:20.11.1-alpine3.19
 
 WORKDIR /usr/src/app
 
-# RUN npm install -g pm2
+RUN npm install -g pm2
 
 COPY package*.json ./
 
