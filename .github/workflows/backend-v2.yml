@@ -16,6 +16,8 @@ env:
   DEPLOY_ORIGIN: artifacts/*
   DEPLOY_DESTINATION: ~/srv/savee/api
 
+  IMAGE_TAG: ivan-gerasimov-1/savee:latest
+
 on:
   workflow_dispatch:
   push:
@@ -56,9 +58,11 @@ jobs:
             package-lock.json \
             packages/backend/package.json \
             packages/backend/ecosystem.config.js \
+            packages/backend/Dockerfile \
             $ARTIFACTS_DIR/
 
       - name: Install production dependencies
+        if: false
         run: |
           cd $ARTIFACTS_DIR
           npm install --include=prod
@@ -71,11 +75,25 @@ jobs:
             $ARTIFACTS_DIR/package.json \
             $ARTIFACTS_DIR/package-lock.json
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+      - name: Create Docker image
+        if: false
+        run: |
+          docker build --tag "${IMAGE_TAG}" .
+          docker save --output image.tar "${IMAGE_TAG}"
+
+      - name: Upload Docker image
+        uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACTS_DIR }}
+          name: docker-image
+          path: image.tar
+          retention-days: 1
+
+      # - name: Upload build artifact
+      #   uses: actions/upload-artifact@v4
+      #   if: false
+      #   with:
+      #     name: ${{ env.ARTIFACT_NAME }}
+      #     path: ${{ env.ARTIFACTS_DIR }}
 
   deploy:
     needs: build
@@ -95,11 +113,17 @@ jobs:
           HOST: 'op://Savee/Main Server/Host'
           USER: 'op://Savee/Main Server/Username'
 
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
+      # - name: Download build artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: ${{ env.ARTIFACT_NAME }}
+      #     path: ${{ env.ARTIFACTS_DIR }}
+
+      # Load and un-archive the Docker image
+      - name: Download Docker image
+        uses: actions/download-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACTS_DIR }}
+          name: docker-image
 
       - name: Setup SSH
         run: |
@@ -131,22 +155,26 @@ jobs:
               $DEPLOY_DESTINATION
           "
 
+      # - name: Deploy
+      #   run: |
+      #     rsync \
+      #       --archive \
+      #       --compress \
+      #       --delete \
+      #       $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+
       - name: Deploy
         run: |
           rsync \
             --archive \
             --compress \
             --delete \
-            $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+            image.tar $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         # Remove bcrypt related lines once the issue is resolved
         run: |
           ssh -T $USER@$HOST "
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            cd ~/srv/savee/api
-            rm -rf node_modules/bcrypt
-            npm install bcrypt
-            pm2 start ecosystem.config.js
+            load --input ~/srv/savee/api/image.tar
+            docker run -p 3001:3001 -v ~/srv/savee/api/.env:/usr/src/app/.env --name savee-api -d savee-api
           "
