@@ -76,7 +76,6 @@ jobs:
             $ARTIFACTS_DIR/package-lock.json
 
       - name: Create Docker image
-        if: false
         run: |
           docker build --tag "${IMAGE_TAG}" .
           docker save --output image.tar "${IMAGE_TAG}"
