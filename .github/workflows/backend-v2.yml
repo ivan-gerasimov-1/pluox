@@ -78,7 +78,7 @@ jobs:
       - name: Create Docker image
         run: |
           cd $ARTIFACTS_DIR
-          docker build \
+          docker buildx build \
             --platform linux/arm/v7 \
             --tag "${IMAGE_TAG}" .
           docker save \
