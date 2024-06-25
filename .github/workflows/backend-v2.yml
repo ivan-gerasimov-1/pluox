@@ -79,7 +79,10 @@ jobs:
         run: |
           cd $ARTIFACTS_DIR
           docker build --tag "${IMAGE_TAG}" .
-          docker save --output image.tar "${IMAGE_TAG}"
+          docker save --output $ARTIFACTS_DIR/image.tar "${IMAGE_TAG}"
+          ls
+          cd ../
+          ls
 
       - name: Upload Docker image
         uses: actions/upload-artifact@v2
