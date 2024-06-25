@@ -88,7 +88,7 @@ jobs:
           docker buildx build \
             --platform linux/arm64 \
             --tag "${IMAGE_TAG}" \
-            --push .
+            --load .
           docker save \
             --output image.tar "${IMAGE_TAG}"
 
