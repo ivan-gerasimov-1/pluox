@@ -79,7 +79,7 @@ jobs:
         run: |
           cd $ARTIFACTS_DIR
           docker build \
-            --platform linux/arm64 \
+            --platform linux/arm/v8 \
             --tag "${IMAGE_TAG}" .
           docker save \
             --output image.tar "${IMAGE_TAG}"
