@@ -179,5 +179,5 @@ jobs:
         run: |
           ssh -T $USER@$HOST "
             docker load --input ~/srv/savee/api/image.tar
-            docker run -p 3001:3001 -v ~/srv/savee/api/.env:/usr/src/app/.env --name ivan-gerasimov-1/savee -d ivan-gerasimov-1/savee
+            docker run -p 3001:3001 -v ~/srv/savee/api/.env:/usr/src/app/.env --name savee-api -d ivan-gerasimov-1/savee
           "
