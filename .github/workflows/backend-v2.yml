@@ -85,7 +85,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: docker-image
-          path: image.tar
+          path: $ARTIFACTS_DIR/image.tar
           retention-days: 1
 
       # - name: Upload build artifact
