@@ -6,6 +6,7 @@ async function main() {
 
 	try {
 		await app.listen({
+			host: '0.0.0.0',
 			port: appConfig.port,
 		});
 	} catch (error) {
