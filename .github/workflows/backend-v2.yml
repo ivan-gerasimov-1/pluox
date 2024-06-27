@@ -189,5 +189,5 @@ jobs:
             docker load --input ~/srv/savee/api/image.tar
             docker stop savee-api
             docker rm savee-api
-            docker run -d --name savee-api -p 3001:3001 -v ~/srv/savee/api/.env:/usr/src/app/.env  ivan-gerasimov-1/savee:latest
+            docker run -d --name savee-api --network dockernetworks_containers-network -p 3001:3001 -v ~/srv/savee/api/.env:/usr/src/app/.env  ivan-gerasimov-1/savee:latest
           "
