@@ -23,7 +23,7 @@ export function createApp() {
 			origin: allowedOrigins,
 		})
 		.register(mongodb, {
-			url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@localhost:27017/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
+			url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@${appConfig.db.host}:${appConfig.db.port}/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
 			forceClose: true,
 		})
 		.register(jwt, {
