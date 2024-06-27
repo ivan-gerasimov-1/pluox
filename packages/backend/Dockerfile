@@ -13,4 +13,4 @@ COPY . .
 EXPOSE 3001
 
 # CMD ["pm2-runtime", "start", "ecosystem.config.js"]
-CMD ["node -r dotenv/config", "index.js"]
+CMD ["node", "-r", "dotenv/config", "index.js"]
