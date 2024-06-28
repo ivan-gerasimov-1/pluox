@@ -7,20 +7,6 @@ import { isDevelopment } from './helpers/isDevelopment';
 import { authenticationRouter } from './routes/authentication/authentication';
 import { expensesRouter } from './routes/expenses/expenses';
 
-function getAllowedOrigins(params: { isDevelopment: boolean }): string[] {
-	let allowedOrigins = [
-		'https://savee.gerasimov.dev',
-		/** @deprecated */
-		'https://savee.vercel.app',
-	];
-
-	if (params.isDevelopment) {
-		allowedOrigins.push('http://localhost:3000');
-	}
-
-	return allowedOrigins;
-}
-
 export function createApp() {
 	const app = Fastify({
 		logger: true,
@@ -53,4 +39,18 @@ export function createApp() {
 		.register(expensesRouter);
 
 	return app;
+}
+
+function getAllowedOrigins(params: { isDevelopment: boolean }): string[] {
+	let allowedOrigins = [
+		'https://savee.gerasimov.dev',
+		/** @deprecated */
+		'https://savee.vercel.app',
+	];
+
+	if (params.isDevelopment) {
+		allowedOrigins.push('http://localhost:3000');
+	}
+
+	return allowedOrigins;
 }
