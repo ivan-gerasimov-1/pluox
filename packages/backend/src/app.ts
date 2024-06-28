@@ -16,12 +16,21 @@ export function createApp() {
 		isDevelopment: isDevelopment(process.env.NODE_ENV),
 	});
 
+	let mongoUri = getMongoDbConnectionString({
+		username: appConfig.db.user,
+		password: appConfig.db.password,
+		host: appConfig.db.host,
+		port: appConfig.db.port,
+		database: appConfig.db.name,
+		authSource: appConfig.db.auth,
+	});
+
 	app
 		.register(cors, {
 			origin: allowedOrigins,
 		})
 		.register(mongodb, {
-			url: `mongodb://${appConfig.db.user}:${appConfig.db.password}@${appConfig.db.host}:${appConfig.db.port}/${appConfig.db.name}?authSource=${appConfig.db.auth}`,
+			url: mongoUri,
 			forceClose: true,
 		})
 		.register(jwt, {
@@ -53,4 +62,15 @@ function getAllowedOrigins(params: { isDevelopment: boolean }): string[] {
 	}
 
 	return allowedOrigins;
+}
+
+function getMongoDbConnectionString(params: {
+	username: string;
+	password: string;
+	host: string;
+	port: string;
+	database: string;
+	authSource: string;
+}) {
+	return `mongodb://${params.username}:${params.password}@${params.host}:${params.port}/${params.database}?authSource=${params.authSource}`;
 }
