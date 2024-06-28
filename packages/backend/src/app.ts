@@ -7,7 +7,11 @@ import { isDevelopment } from './helpers/isDevelopment';
 import { authenticationRouter } from './routes/authentication/authentication';
 import { expensesRouter } from './routes/expenses/expenses';
 
-let allowedOrigins = ['https://savee.vercel.app'];
+let allowedOrigins = [
+	'https://savee.gerasimov.dev',
+	/** @deprecated */
+	'https://savee.vercel.app',
+];
 
 export function createApp() {
 	const app = Fastify({
