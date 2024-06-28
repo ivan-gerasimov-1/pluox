@@ -48,7 +48,9 @@ export function createApp() {
 		};
 	});
 
-	app.register(authenticationRouter).register(expensesRouter);
+	app //
+		.register(authenticationRouter)
+		.register(expensesRouter);
 
 	return app;
 }
