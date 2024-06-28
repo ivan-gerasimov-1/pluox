@@ -48,9 +48,9 @@ jobs:
         run: |
           ssh -T $USER@$HOST "
             docker run \
-              --detach \
               --name mongodb \
               -v ~/developer/lv48/misc/mongodb:/data/db \
               -p 27017:27017
+              --detach \
               mongo:7.0.11
           "
