@@ -10,5 +10,6 @@ export const appConfig = {
 	jwt: {
 		secret: process.env.JWT_SECRET as string,
 	},
+	host: process.env.APP_HOST as string,
 	port: Number.parseInt(process.env.APP_PORT as string, 10),
 };
