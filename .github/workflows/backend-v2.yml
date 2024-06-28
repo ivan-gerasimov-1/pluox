@@ -149,15 +149,9 @@ jobs:
       - name: Run
         run: |
           ssh -T $USER@$HOST "
+            cd ${DEPLOY_DESTINATION}
             docker load \
-              --input ${DEPLOY_DESTINATION}/${IMAGE_NAME}
-            docker stop ${CONTAINER_NAME}
-            docker rm ${CONTAINER_NAME}
-            docker run \
-              --detach \
-              --name ${CONTAINER_NAME} \
-              --network dockernetworks_containers-network \
-              -p 3001:3001 \
-              -v ${DEPLOY_DESTINATION}/.env:/usr/src/app/.env \
-              "$IMAGE_TAG"
+              --input ${IMAGE_NAME}
+            docker compose up -d
+            docker compose restart
           "
