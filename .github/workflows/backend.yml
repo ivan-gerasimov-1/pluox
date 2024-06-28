@@ -26,7 +26,6 @@ on:
 
 jobs:
   build:
-    if: false
     runs-on: ubuntu-22.04
 
     steps:
@@ -62,7 +61,6 @@ jobs:
 
   deploy:
     needs: build
-    if: false
     runs-on: ubuntu-22.04
 
     steps:
