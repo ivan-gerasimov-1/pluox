@@ -1,0 +1,15 @@
+networks:
+  dockernetworks_containers-network:
+    external: true
+
+services:
+  nginx:
+    image: savee:latest
+    container_name: savee-api
+    ports:
+      - 3001:3000
+    volumes:
+      - ~/srv/savee/api/.env:/usr/src/app/.env:ro
+    restart: always
+    networks:
+      - dockernetworks_containers-network
