@@ -1,8 +1,5 @@
 # TODO: Implement .env file builder
 # TODO: Find a way to parametrize "runs-on"
-# TODO: bcrypt doesn’t work on a deployment if built on GitHub Actions.
-# Due to that, we have to keep package.json/package-lock.json files,
-# remove bcrypt from node_modules and manually reinstall the package.
 name: Backend CI/CD V2
 
 env:
@@ -16,7 +13,10 @@ env:
   DEPLOY_ORIGIN: artifacts/*
   DEPLOY_DESTINATION: ~/srv/savee/api
 
-  IMAGE_TAG: ivan-gerasimov-1/savee:latest
+  # Docker
+  IMAGE_TAG: savee:latest
+  IMAGE_NAME: savee_docker-image.tar
+  CONTAINER_NAME: savee-api
 
 on:
   workflow_dispatch:
@@ -42,9 +42,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
-      - # Add support for more platforms with QEMU (optional)
-        # https://github.com/docker/setup-qemu-action
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -65,46 +63,25 @@ jobs:
             package-lock.json \
             packages/backend/package.json \
             packages/backend/ecosystem.config.js \
-            packages/backend/Dockerfile \
             $ARTIFACTS_DIR/
 
-      - name: Install production dependencies
-        if: false
-        run: |
-          cd $ARTIFACTS_DIR
-          npm install --include=prod
-
-      - name: Clean up build
-        # We have to keep the files due to bcrypt package issues
-        if: false
-        run: |
-          rm \
-            $ARTIFACTS_DIR/package.json \
-            $ARTIFACTS_DIR/package-lock.json
-
-      - name: Create Docker image
+      - name: Build Docker image
         run: |
           cd $ARTIFACTS_DIR
           docker buildx build \
             --platform linux/arm64 \
-            --tag "${IMAGE_TAG}" \
-            --load .
+            --tag "$IMAGE_TAG" \
+            --load \
+            .
           docker save \
-            --output image.tar "${IMAGE_TAG}"
+            --output $ARTIFACTS_DIR/$IMAGE_NAME "$IMAGE_TAG"
 
-      - name: Upload Docker image
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: docker-image
-          path: ${{ env.ARTIFACTS_DIR }}/image.tar
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
           retention-days: 1
-
-      # - name: Upload build artifact
-      #   uses: actions/upload-artifact@v4
-      #   if: false
-      #   with:
-      #     name: ${{ env.ARTIFACT_NAME }}
-      #     path: ${{ env.ARTIFACTS_DIR }}
 
   deploy:
     needs: build
@@ -124,17 +101,11 @@ jobs:
           HOST: 'op://Savee/Main Server/Host'
           USER: 'op://Savee/Main Server/Username'
 
-      # - name: Download build artifact
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: ${{ env.ARTIFACT_NAME }}
-      #     path: ${{ env.ARTIFACTS_DIR }}
-
-      # Load and un-archive the Docker image
-      - name: Download Docker image
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: docker-image
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
 
       - name: Setup SSH
         run: |
@@ -166,28 +137,26 @@ jobs:
               $DEPLOY_DESTINATION
           "
 
-      # - name: Deploy
-      #   run: |
-      #     rsync \
-      #       --archive \
-      #       --compress \
-      #       --delete \
-      #       $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
-
       - name: Deploy
         run: |
           rsync \
             --archive \
             --compress \
             --delete \
-            image.tar $USER@$HOST:$DEPLOY_DESTINATION
+            $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
-        # Remove bcrypt related lines once the issue is resolved
         run: |
           ssh -T $USER@$HOST "
-            docker load --input ~/srv/savee/api/image.tar
-            docker stop savee-api
-            docker rm savee-api
-            docker run -d --name savee-api --network dockernetworks_containers-network -p 3001:3001 -v ~/srv/savee/api/.env:/usr/src/app/.env  ivan-gerasimov-1/savee:latest
+            docker load \
+              --input ${DEPLOY_DESTINATION}/${IMAGE_NAME}
+            docker stop ${CONTAINER_NAME}
+            docker rm ${CONTAINER_NAME}
+            docker run \
+              --detach \
+              --name ${CONTAINER_NAME} \
+              --network dockernetworks_containers-network \
+              -p 3001:3001 \
+              -v ${DEPLOY_DESTINATION}/.env:/usr/src/app/.env \
+              "$IMAGE_TAG"
           "
