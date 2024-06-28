@@ -63,6 +63,7 @@ jobs:
             package-lock.json \
             packages/backend/package.json \
             packages/backend/ecosystem.config.js \
+            packages/backend/Dockerfile \
             $ARTIFACTS_DIR/
 
       - name: Build Docker image
