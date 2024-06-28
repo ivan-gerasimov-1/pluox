@@ -47,9 +47,12 @@ jobs:
       - name: Run
         run: |
           ssh -T $USER@$HOST "
+            docker stop mongodb
+            docker rm mongodb
             docker run \
               --name mongodb \
               -v ~/developer/lv48/misc/mongodb:/data/db \
+              --network dockernetworks_containers-network \
               -p 27017:27017 \
               --detach \
               mongo:7.0.11
