@@ -64,6 +64,7 @@ jobs:
             packages/backend/package.json \
             packages/backend/ecosystem.config.js \
             packages/backend/Dockerfile \
+            packages/backend/docker-compose.yml \
             $ARTIFACTS_DIR/
 
       - name: Build Docker image
