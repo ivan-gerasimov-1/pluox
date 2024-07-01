@@ -1,6 +1,8 @@
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import { type ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import { type ECurrency } from '@core/infrastructure/currency/types';
+import { getDateParts } from '@domain/amount/useCases/helpers';
+import type { TDateParts } from '@domain/amount/useCases/types';
 import { type IExpenses } from '@domain/expenses/types';
 
 export interface ITotalAmountUseCase {
@@ -29,10 +31,17 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 	}
 
 	public run(currency: ECurrency) {
-		return this.calculateAmount(currency);
+		let currentYear = new Date().getFullYear();
+
+		return this.calculateAmount(currency, {
+			year: currentYear,
+		});
 	}
 
-	private calculateAmount(currency: ECurrency): number {
+	private calculateAmount(
+		currency: ECurrency,
+		dateParts: Pick<TDateParts, 'year'>,
+	): number {
 		const expenses = this.#expenses.get();
 
 		let total = 0;
@@ -40,6 +49,15 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 		for (let expense of Object.values(expenses)) {
 			let amount = expense.amount;
 			let expenseCurrency = expense.currency;
+			/**
+			 * @todo remove backward compatibility
+			 */
+			let expenseDate = expense.date || expense.dateCreated;
+			let expenseDateParts = getDateParts(expenseDate);
+
+			if (expenseDateParts.year !== dateParts.year) {
+				continue;
+			}
 
 			total += this.#currencyConverter.convert(
 				amount,
