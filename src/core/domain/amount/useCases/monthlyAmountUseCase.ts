@@ -38,18 +38,19 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 
 	private calculateAmount(currency: ECurrency, currentMonth: TMonth): number {
 		let expenses = this.#expenses.get();
+		let currentYear = new Date().getFullYear();
 
 		let total = 0;
 
 		for (let expense of Object.values(expenses)) {
-			let expenseMonth = this.getMonthFromDate(
-				/**
-				 * @todo remove backward compatibility
-				 */
-				expense.date || expense.dateCreated,
-			);
+			/**
+			 * @todo remove backward compatibility
+			 */
+			let expenseDate = expense.date || expense.dateCreated;
+			let expenseMonth = this.getMonthFromDate(expenseDate);
+			let expenseYear = this.getYearFromDate(expenseDate);
 
-			if (expenseMonth !== currentMonth) {
+			if (expenseMonth !== currentMonth || expenseYear !== currentYear) {
 				continue;
 			}
 
@@ -77,5 +78,11 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		}
 
 		return month;
+	}
+
+	private getYearFromDate(date: string) {
+		const year = new Date(date).getFullYear();
+
+		return year;
 	}
 }
