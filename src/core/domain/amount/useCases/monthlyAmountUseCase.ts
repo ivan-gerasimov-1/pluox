@@ -4,7 +4,7 @@ import { type ECurrency } from '@core/infrastructure/currency/types';
 import { type IExpenses } from '@domain/expenses/types';
 import { InvalidMonthError } from '@domain/amount/useCases/errors';
 import { monthGuard } from '@domain/amount/useCases/typeGuards';
-import { type TMonth } from '@domain/amount/useCases/types';
+import type { TDateParts, TMonth } from '@domain/amount/useCases/types';
 import { type TISODateString } from '@domain/types';
 
 export interface IMonthlyAmountUseCase {
@@ -33,12 +33,16 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 	}
 
 	public run(currentMonth: TMonth, currency: ECurrency) {
-		return this.calculateAmount(currency, currentMonth);
+		let currentYear = new Date().getFullYear();
+
+		return this.calculateAmount(currency, {
+			month: currentMonth,
+			year: currentYear,
+		});
 	}
 
-	private calculateAmount(currency: ECurrency, currentMonth: TMonth): number {
+	private calculateAmount(currency: ECurrency, dateParts: TDateParts): number {
 		let expenses = this.#expenses.get();
-		let currentYear = new Date().getFullYear();
 
 		let total = 0;
 
@@ -47,10 +51,12 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 			 * @todo remove backward compatibility
 			 */
 			let expenseDate = expense.date || expense.dateCreated;
-			let expenseMonth = this.getMonthFromDate(expenseDate);
-			let expenseYear = this.getYearFromDate(expenseDate);
+			let expenseDateParts = this.getDateParts(expenseDate);
 
-			if (expenseMonth !== currentMonth || expenseYear !== currentYear) {
+			if (
+				expenseDateParts.month !== dateParts.month ||
+				expenseDateParts.year !== dateParts.year
+			) {
 				continue;
 			}
 
@@ -70,19 +76,18 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 	/**
 	 * @throws InvalidMonthError
 	 */
-	private getMonthFromDate(date: TISODateString): TMonth {
-		const month = new Date(date).getMonth();
+	private getDateParts(date: TISODateString): TDateParts {
+		const _date = new Date(date);
+		const month = _date.getMonth();
+		const year = _date.getFullYear();
 
 		if (!monthGuard(month)) {
 			throw new InvalidMonthError(month);
 		}
 
-		return month;
-	}
-
-	private getYearFromDate(date: string) {
-		const year = new Date(date).getFullYear();
-
-		return year;
+		return {
+			month,
+			year,
+		};
 	}
 }
