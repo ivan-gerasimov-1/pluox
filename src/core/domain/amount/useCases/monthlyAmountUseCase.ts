@@ -1,11 +1,9 @@
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
-import { type ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
-import { type ECurrency } from '@core/infrastructure/currency/types';
-import { type IExpenses } from '@domain/expenses/types';
-import { InvalidMonthError } from '@domain/amount/useCases/errors';
-import { monthGuard } from '@domain/amount/useCases/typeGuards';
+import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
+import type { ECurrency } from '@core/infrastructure/currency/types';
+import { getDateParts } from '@domain/amount/useCases/helpers';
 import type { TDateParts, TMonth } from '@domain/amount/useCases/types';
-import { type TISODateString } from '@domain/types';
+import type { IExpenses } from '@domain/expenses/types';
 
 export interface IMonthlyAmountUseCase {
 	run(month: TMonth, currency: ECurrency): number;
@@ -51,7 +49,7 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 			 * @todo remove backward compatibility
 			 */
 			let expenseDate = expense.date || expense.dateCreated;
-			let expenseDateParts = this.getDateParts(expenseDate);
+			let expenseDateParts = getDateParts(expenseDate);
 
 			if (
 				expenseDateParts.month !== dateParts.month ||
@@ -71,23 +69,5 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		}
 
 		return total;
-	}
-
-	/**
-	 * @throws InvalidMonthError
-	 */
-	private getDateParts(date: TISODateString): TDateParts {
-		const _date = new Date(date);
-		const month = _date.getMonth();
-		const year = _date.getFullYear();
-
-		if (!monthGuard(month)) {
-			throw new InvalidMonthError(month);
-		}
-
-		return {
-			month,
-			year,
-		};
 	}
 }
