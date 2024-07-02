@@ -5,10 +5,6 @@ import {
 	MonthlyAmountUseCase,
 	type IMonthlyAmountUseCase,
 } from '@domain/amount/useCases/monthlyAmountUseCase';
-import {
-	TotalAmountUseCase,
-	type ITotalAmountUseCase,
-} from '@domain/amount/useCases/totalAmountUseCase';
 import type { TMonth, TYear } from '@domain/amount/useCases/types';
 import type { IExpenses } from '@domain/expenses/types';
 
@@ -16,7 +12,6 @@ export class Amount implements IAmount {
 	readonly #defaultCurrency: ECurrency;
 
 	private constructor(
-		private readonly totalAmountUseCase: ITotalAmountUseCase,
 		private readonly monthlyAmountUseCase: IMonthlyAmountUseCase,
 		params: {
 			defaultCurrency: ECurrency;
@@ -30,10 +25,9 @@ export class Amount implements IAmount {
 		 * @todo Use DI instead of direct instantiation
 		 */
 		let appConfig = AppConfig.getInstance();
-		let totalAmountUseCase = TotalAmountUseCase.create(expenses);
 		let monthlyAmountUseCase = MonthlyAmountUseCase.create(expenses);
 
-		return new Amount(totalAmountUseCase, monthlyAmountUseCase, {
+		return new Amount(monthlyAmountUseCase, {
 			defaultCurrency: appConfig.currency,
 		});
 	}
