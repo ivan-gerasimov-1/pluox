@@ -9,6 +9,9 @@ export interface ITotalAmountUseCase {
 	run(year: TYear, currency: ECurrency): number;
 }
 
+/**
+ * @deprecated in favor of unified MonthlyAmountUseCase
+ */
 export class TotalAmountUseCase implements ITotalAmountUseCase {
 	readonly #expenses: IExpenses;
 	readonly #currencyConverter: ICurrencyConverter;
