@@ -9,10 +9,7 @@ export interface IMonthlyAmountUseCase {
 	run(dateParts: Partial<TDateParts>, currency: ECurrency): number;
 }
 
-/**
- * @todo Reanme to TotalAmountUseCase
- */
-export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
+export class TotalAmountUseCase implements IMonthlyAmountUseCase {
 	readonly #expenses: IExpenses;
 	readonly #currencyConverter: ICurrencyConverter;
 
@@ -30,7 +27,7 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		 */
 		let currencyConverter = CurrencyConverter.getInstance();
 
-		return new MonthlyAmountUseCase(expenses, currencyConverter);
+		return new TotalAmountUseCase(expenses, currencyConverter);
 	}
 
 	public run(dateParts: TDateParts, currency: ECurrency) {
