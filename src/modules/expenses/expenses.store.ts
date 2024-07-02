@@ -102,14 +102,14 @@ export let useExpensesStore = create<
 					let expenses = Expenses.getInstance();
 					let amount = Amount.create(expenses);
 
-					return amount.getTotal();
+					return amount.getTotalByYear();
 				},
 
 				getMonthlyAmount(month: TMonth): number {
 					let expenses = Expenses.getInstance();
 					let amount = Amount.create(expenses);
 
-					return amount.getMonthly(month);
+					return amount.getTotalByMonth(month);
 				},
 			};
 		},

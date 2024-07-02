@@ -9,7 +9,7 @@ import {
 	TotalAmountUseCase,
 	type ITotalAmountUseCase,
 } from '@domain/amount/useCases/totalAmountUseCase';
-import type { TMonth } from '@domain/amount/useCases/types';
+import type { TMonth, TYear } from '@domain/amount/useCases/types';
 import type { IExpenses } from '@domain/expenses/types';
 
 export class Amount implements IAmount {
@@ -38,11 +38,21 @@ export class Amount implements IAmount {
 		});
 	}
 
-	public getTotal(): number {
-		return this.totalAmountUseCase.run(this.#defaultCurrency);
+	public getTotalByYear(): number {
+		let year = new Date().getFullYear();
+
+		return this.totalAmountUseCase.run(year, this.#defaultCurrency);
 	}
 
-	public getMonthly(month: TMonth): number {
-		return this.monthlyAmountUseCase.run(month, this.#defaultCurrency);
+	public getTotalByMonth(month: TMonth): number {
+		let year = new Date().getFullYear();
+
+		return this.monthlyAmountUseCase.run(
+			{
+				month,
+				year,
+			},
+			this.#defaultCurrency,
+		);
 	}
 }

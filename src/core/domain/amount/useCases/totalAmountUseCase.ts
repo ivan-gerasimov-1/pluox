@@ -2,11 +2,11 @@ import { CurrencyConverter } from '@core/infrastructure/currency/currencyConvert
 import { type ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import { type ECurrency } from '@core/infrastructure/currency/types';
 import { getDateParts } from '@domain/amount/useCases/helpers';
-import type { TDateParts } from '@domain/amount/useCases/types';
+import type { TDateParts, TYear } from '@domain/amount/useCases/types';
 import { type IExpenses } from '@domain/expenses/types';
 
 export interface ITotalAmountUseCase {
-	run(currency: ECurrency): number;
+	run(year: TYear, currency: ECurrency): number;
 }
 
 export class TotalAmountUseCase implements ITotalAmountUseCase {
@@ -30,11 +30,9 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 		return new TotalAmountUseCase(expenses, currencyConverter);
 	}
 
-	public run(currency: ECurrency) {
-		let currentYear = new Date().getFullYear();
-
+	public run(year: TYear, currency: ECurrency) {
 		return this.calculateAmount(currency, {
-			year: currentYear,
+			year,
 		});
 	}
 
@@ -42,7 +40,7 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 		currency: ECurrency,
 		dateParts: Pick<TDateParts, 'year'>,
 	): number {
-		const expenses = this.#expenses.get();
+		let expenses = this.#expenses.get();
 
 		let total = 0;
 

@@ -2,11 +2,11 @@ import { CurrencyConverter } from '@core/infrastructure/currency/currencyConvert
 import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 import { getDateParts } from '@domain/amount/useCases/helpers';
-import type { TDateParts, TMonth } from '@domain/amount/useCases/types';
+import type { TDateParts, TMonth, TYear } from '@domain/amount/useCases/types';
 import type { IExpenses } from '@domain/expenses/types';
 
 export interface IMonthlyAmountUseCase {
-	run(month: TMonth, currency: ECurrency): number;
+	run(dateParts: TDateParts, currency: ECurrency): number;
 }
 
 export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
@@ -30,12 +30,10 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		return new MonthlyAmountUseCase(expenses, currencyConverter);
 	}
 
-	public run(currentMonth: TMonth, currency: ECurrency) {
-		let currentYear = new Date().getFullYear();
-
+	public run(dateParts: TDateParts, currency: ECurrency) {
 		return this.calculateAmount(currency, {
-			month: currentMonth,
-			year: currentYear,
+			month: dateParts.month,
+			year: dateParts.year,
 		});
 	}
 
@@ -45,6 +43,8 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		let total = 0;
 
 		for (let expense of Object.values(expenses)) {
+			let amount = expense.amount;
+			let expenseCurrency = expense.currency;
 			/**
 			 * @todo remove backward compatibility
 			 */
@@ -57,9 +57,6 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 			) {
 				continue;
 			}
-
-			let amount = expense.amount;
-			let expenseCurrency = expense.currency;
 
 			total += this.#currencyConverter.convert(
 				amount,
