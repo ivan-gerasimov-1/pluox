@@ -31,10 +31,7 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 	}
 
 	public run(dateParts: TDateParts, currency: ECurrency) {
-		return this.calculateAmount(currency, {
-			month: dateParts.month,
-			year: dateParts.year,
-		});
+		return this.calculateAmount(currency, dateParts);
 	}
 
 	private calculateAmount(currency: ECurrency, dateParts: TDateParts): number {
