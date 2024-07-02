@@ -38,6 +38,12 @@ export class TotalAmountUseCase implements IMonthlyAmountUseCase {
 		currency: ECurrency,
 		dateParts: Partial<TDateParts>,
 	): number {
+		/**
+		 * @todo
+		 * 1. Add query to get()
+		 * 2. Query only related expenses
+		 * 3. Remove filtering from calculation logic
+		 */
 		let expenses = this.#expenses.get();
 
 		let total = 0;
