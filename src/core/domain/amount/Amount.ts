@@ -38,15 +38,25 @@ export class Amount implements IAmount {
 		});
 	}
 
-	public getTotalByYear(): number {
-		let year = new Date().getFullYear();
-
-		return this.totalAmountUseCase.run(year, this.#defaultCurrency);
+	/**
+	 * @todo Add year to the class interface
+	 */
+	public getTotalByYear(year: TYear = new Date().getFullYear()): number {
+		return this.monthlyAmountUseCase.run(
+			{
+				year,
+			},
+			this.#defaultCurrency,
+		);
 	}
 
-	public getTotalByMonth(month: TMonth): number {
-		let year = new Date().getFullYear();
-
+	/**
+	 * @todo Add year to the class interface
+	 */
+	public getTotalByMonth(
+		month: TMonth,
+		year: TYear = new Date().getFullYear(),
+	): number {
 		return this.monthlyAmountUseCase.run(
 			{
 				month,

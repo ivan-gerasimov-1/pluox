@@ -6,9 +6,12 @@ import type { TDateParts, TMonth, TYear } from '@domain/amount/useCases/types';
 import type { IExpenses } from '@domain/expenses/types';
 
 export interface IMonthlyAmountUseCase {
-	run(dateParts: TDateParts, currency: ECurrency): number;
+	run(dateParts: Partial<TDateParts>, currency: ECurrency): number;
 }
 
+/**
+ * @todo Reanme to TotalAmountUseCase
+ */
 export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 	readonly #expenses: IExpenses;
 	readonly #currencyConverter: ICurrencyConverter;
@@ -34,7 +37,10 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 		return this.calculateAmount(currency, dateParts);
 	}
 
-	private calculateAmount(currency: ECurrency, dateParts: TDateParts): number {
+	private calculateAmount(
+		currency: ECurrency,
+		dateParts: Partial<TDateParts>,
+	): number {
 		let expenses = this.#expenses.get();
 
 		let total = 0;
@@ -49,8 +55,10 @@ export class MonthlyAmountUseCase implements IMonthlyAmountUseCase {
 			let expenseDateParts = getDateParts(expenseDate);
 
 			if (
-				expenseDateParts.month !== dateParts.month ||
-				expenseDateParts.year !== dateParts.year
+				(dateParts.month !== undefined &&
+					expenseDateParts.month !== dateParts.month) ||
+				(dateParts.year !== undefined &&
+					expenseDateParts.year !== dateParts.year)
 			) {
 				continue;
 			}
