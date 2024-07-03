@@ -19,6 +19,7 @@ export type TExpense = {
 	date: TISODateString;
 	dateCreated: TISODateString;
 	dateModified: TISODateString;
+	timezone: string;
 };
 
 export type TExpenseCreateDTO = {

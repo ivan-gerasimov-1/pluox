@@ -9,12 +9,14 @@ export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #comment: string;
 	readonly #category: TCategory;
 	readonly #date: string;
+	readonly #timezone: string;
 
 	private constructor(
 		amount: number,
 		currency: ECurrency,
 		comment: string,
 		category: TCategory,
+		timezone: string,
 		date?: TISODateString,
 	) {
 		super();
@@ -24,6 +26,7 @@ export class Expense extends Entity<TExpense> implements IExpense {
 		this.#comment = comment;
 		this.#category = category;
 		this.#date = date || this.dateCreated;
+		this.#timezone = timezone;
 	}
 
 	public static create(
@@ -31,9 +34,10 @@ export class Expense extends Entity<TExpense> implements IExpense {
 		currency: ECurrency,
 		comment: string,
 		category: TCategory = null,
+		timezone: string,
 		date?: TISODateString,
 	): IExpense {
-		return new Expense(amount, currency, comment, category, date);
+		return new Expense(amount, currency, comment, category, timezone, date);
 	}
 
 	public toObject(): TExpense {
@@ -49,6 +53,7 @@ export class Expense extends Entity<TExpense> implements IExpense {
 			date: this.#date || this.dateCreated,
 			dateCreated: this.dateCreated,
 			dateModified: this.dateModified,
+			timezone: this.#timezone,
 		};
 	}
 }
