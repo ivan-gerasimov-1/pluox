@@ -3,7 +3,9 @@
 
 	margin-bottom: 2rem;
 
-	text-transform: capitalize;
+	&::first-letter {
+		text-transform: capitalize;
+	}
 }
 
 .amount {
