@@ -5,4 +5,4 @@ import 'dayjs/locale/ru';
 
 dayjs.extend(utc);
 
-export const date = dayjs;
+export const dateFn = dayjs;
