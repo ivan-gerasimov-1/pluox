@@ -1,11 +1,16 @@
 import type { TMonth } from '@domain/amount/useCases/types';
-import { getMonthNameByIndex } from '@modules/common/hooks/useMonthName/getMonthNameByIndex';
-import { useMonthNameI18n } from '@modules/common/hooks/useMonthName/useMonthName.i18n';
-import { useIntl } from '@modules/intl';
+import { dateFn } from '@modules/date/date';
+import { EService, useService } from '@modules/serviceContainer/useService';
 
 export function useMonthName(month: TMonth): string {
-	let intl = useIntl(useMonthNameI18n);
-	let currentMonth = getMonthNameByIndex(month);
+	let intlService = useService(EService.INTL);
+	let localeCode = intlService.locale;
 
-	return intl.translate(currentMonth);
+	let monthName = dateFn({
+		month,
+	})
+		.locale(localeCode)
+		.format('MMMM');
+
+	return monthName;
 }
