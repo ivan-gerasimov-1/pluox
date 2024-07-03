@@ -6,6 +6,7 @@ import { Expense } from '@domain/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import type { Id, TISODateString } from '@domain/types';
+import { dateFn } from '@modules/date/date';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -44,6 +45,10 @@ export let useExpensesStore = create<
 						payload.currency,
 						payload.comment,
 						payload.category,
+						/**
+						 * @todo Don’t use dateFn directly
+						 */
+						dateFn.tz.guess(),
 						payload.date,
 					);
 
