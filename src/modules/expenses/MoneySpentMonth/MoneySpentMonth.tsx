@@ -8,7 +8,7 @@ import { useExpensesStore } from '@modules/expenses';
 import { ExpensesByCategory } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
 import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 
-import styles from './moneySpentMonth.module.css';
+import { Separator } from '@uiKit/separator/separator';
 
 export type TMoneySpentMonthProps = {
 	month: TMonth;
@@ -27,7 +27,7 @@ export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 		<>
 			<MoneyCard title={currentMonth} amount={total} total={budget} />
 
-			<hr className={styles.separator} />
+			<Separator />
 
 			<ExpensesByCategory month={props.month} />
 		</>

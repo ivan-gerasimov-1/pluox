@@ -27,6 +27,7 @@ import { categoryList } from '@domain/categories/constants';
 import { ActionSheet } from '@uiKit/actionSheetV2/actionSheet';
 import { CardContainer } from '@uiKit/cardContainer';
 import { Card } from '@uiKit/card/card';
+import { Separator } from '@uiKit/separator/separator';
 
 export function Settings() {
 	let intl = useIntl(settingsI18n);
@@ -116,7 +117,8 @@ export function Settings() {
 							/>
 						</div>
 
-						<hr className={styles.separator} />
+						{/* <hr className={styles.separator} /> */}
+						<Separator />
 
 						<div className={cls(styles.field, styles.sectionActionsContainer)}>
 							<div style={{ width: '100%' }} />
