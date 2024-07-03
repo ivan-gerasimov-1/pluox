@@ -1,3 +1,4 @@
+import { dateFn } from '@modules/date/date';
 import { ExpenseList } from '@modules/expenses';
 import { useIntl } from '@modules/intl';
 
@@ -14,19 +15,17 @@ export function ExpenseListScreen() {
 	let intl = useIntl(expenseListI18n);
 	/* let [editItem, setEditItem] = useState<Id | null>(null); */
 
-	let currentDate = new Date();
-	let dateFrom = new Date(
-		currentDate.getFullYear(),
-		currentDate.getMonth(),
-		1,
-	).toISOString();
+	let dateFrom = dateFn().startOf('month').toISOString();
+	let dateTo = dateFn().endOf('month').toISOString();
 
 	return (
 		<Screen>
 			<Header title={intl.translate('title')} />
 
 			<ExpenseList
-				/* onEdit={(id: Id) => setEditItem(id)} */ dateFrom={dateFrom}
+				dateFrom={dateFrom}
+				dateTo={dateTo}
+				/* onEdit={(id: Id) => setEditItem(id)} */
 			/>
 
 			{/* <ActionSheet isOpen={editItem !== null} onClose={() => setEditItem(null)}>
