@@ -1,13 +1,13 @@
 .list {
-	margin: 1rem 0;
-	padding: 0 0 0 1.5rem;
+	margin: 15px 0 0 0;
+	padding: 0 0 0 20px;
 
 	list-style-type: none;
 
 	font-family: monospace;
 
 	& > :nth-child(n) {
-		margin: 0.75rem 0;
+		margin: 20px 0;
 	}
 
 	& > :first-child {
@@ -23,14 +23,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
-	padding-bottom: 0.25rem;
-
-	border-bottom: var(--border-light);
 }
 
 .info {
 	display: flex;
+
 	flex-direction: column;
 	flex-grow: 1;
 }
@@ -45,7 +42,6 @@
 	align-items: center;
 
 	margin: 0;
-	padding: 0.75rem;
 
 	border: 0 none;
 	background: none;
@@ -57,49 +53,55 @@
 .amount {
 	display: flex;
 
-	margin-bottom: 0.5rem;
-
-	padding-right: 1rem;
-
 	justify-content: flex-start;
-	align-items: baseline;
+	align-items: flex-end;
+
+	padding-right: 20px;
 }
 
 .expenseInMainCurrency {
-	font-size: 1.125rem;
-	font-weight: 600;
+	line-height: 1;
+	font-size: var(--fs-300);
+	font-weight: var(--fw-200);
 }
 
 .expense {
 	flex-grow: 1;
 
 	text-align: left;
+
+	font-size: var(--fs-100);
 }
 
 .dotFilledSpace {
-	width: 100%; /* Adjust the width and height as needed */
-	height: 1rem;
-	margin-right: 0.375rem;
+	width: 100%;
+	height: var(--fs-300);
+
+	margin-right: 5px;
+
+	background-size: 10px 30px;
 	background-image: radial-gradient(
 		circle,
 		var(--color-grey-500) 1px,
 		transparent 0
 	);
-	background-size: 10px 30px; /* Adjust the size to control dot density */
 }
 
 .comment {
-	margin-bottom: 0.5rem;
+	margin-top: 10px;
+
+	font-size: var(--fs-90);
 }
 
 .date {
-	margin-top: 2rem;
-	margin-left: 1rem;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 15px;
 
-	font-size: 0.75rem;
-	font-weight: 800;
+	font-size: var(--fs-90);
+	font-weight: var(--fw-200);
 }
 
 .iconContainer {
-	margin-right: 0.875rem;
+	margin-right: 15px;
 }
