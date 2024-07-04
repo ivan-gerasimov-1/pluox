@@ -47,8 +47,11 @@
 	--border-defaults: 1px solid var(--border-color);
 	--border-light: 1px solid var(--border-color-light);
 
-	--border-radius-small: 5px;
-	--border-radius-default: 15px;
+	--border-radius-90: calc(var(--border-radius-100) - 10px);
+	--border-radius-100: 17px;
+
+	--border-radius-small: var(--border-radius-90);
+	--border-radius-default: var(--border-radius-100);
 
 	/* misc */
 	--transition-defaults: 0.15s ease-in-out;
