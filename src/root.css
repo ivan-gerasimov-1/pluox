@@ -23,7 +23,7 @@
 
 	/* Font size */
 	--fs-90: calc(var(--fs-100) - 2px);
-	--fs-100: 13px;
+	--fs-100: 14px;
 	--fs-200: calc(var(--fs-100) + 2px);
 	--fs-300: calc(var(--fs-200) + 2px);
 	--fs-400: calc(var(--fs-300) + 2px);
