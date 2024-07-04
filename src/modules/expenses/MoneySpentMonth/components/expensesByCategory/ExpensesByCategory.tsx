@@ -24,24 +24,54 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 			{expensesToRender.map(({ id, total, percentage }) => {
 				return (
 					<div key={id} className={styles.categoryRow}>
-						<div style={{ display: 'flex', alignItems: 'center' }}>
-							<div style={{ marginRight: '10px' }}>
+						<div
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+							}}
+						>
+							<div
+								style={{
+									marginRight: '15px',
+								}}
+							>
 								<CategoryIcon categoryId={id} />
 							</div>
 
-							<div style={{ display: 'flex', flexDirection: 'column' }}>
-								<span style={{ fontWeight: 600 }}>{getCategoryName(id)}</span>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+								}}
+							>
+								<span
+									style={{
+										fontSize: 'var(--fs-100)',
+										fontWeight: 'var(--fw-100)',
+									}}
+								>
+									{getCategoryName(id)}
+								</span>
 
 								<span
-									style={{ fontSize: '12px', opacity: 0.75, marginTop: '5px' }}
+									style={{
+										fontSize: 'var(--fs-90)',
+										color: 'var(--fc-90)',
+										marginTop: '7.5px',
+									}}
 								>
-									{percentage.toFixed(2)}%
+									{percentage.toFixed(1)}%
 								</span>
 							</div>
 						</div>
 
 						<div>
-							<span style={{ fontWeight: 600 }}>
+							<span
+								style={{
+									fontSize: 'var(--fs-100)',
+									fontWeight: 'var(--fw-200)',
+								}}
+							>
 								{IntlService.getInstance().formatCurrency(total)}
 							</span>
 						</div>
