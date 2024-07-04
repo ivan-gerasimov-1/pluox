@@ -28,14 +28,18 @@
 	--fs-300: calc(var(--fs-200) + 2px);
 	--fs-400: calc(var(--fs-300) + 2px);
 	--fs-500: calc(var(--fs-400) + 2px);
+	--fs-600: calc(var(--fs-500) + 2px);
+	--fs-700: calc(var(--fs-600) + 2px);
 
 	/** Font color */
+	--fc-70: var(--color-grey-500);
+	--fc-80: var(--color-grey-600);
 	--fc-90: var(--color-grey-700);
 	--fc-100: var(--text-color);
 
 	/** Font weight */
 	--fw-100: 400;
-	--fw-200: 700;
+	--fw-200: 600;
 
 	/* border */
 	--border-color: var(--color-grey-300);
