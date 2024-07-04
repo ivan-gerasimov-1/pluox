@@ -1,7 +1,7 @@
 .title {
-	font-size: 1.25rem;
+	font-size: var(--fs-200);
 
-	margin-bottom: 2rem;
+	margin-block-end: 30px;
 
 	&::first-letter {
 		text-transform: capitalize;
@@ -10,7 +10,7 @@
 
 .amount {
 	font-family: monospace;
-	font-size: 2rem;
+	font-size: var(--fs-700);
 
 	text-align: right;
 	text-overflow: ellipsis;
@@ -19,11 +19,12 @@
 }
 
 .leftover {
-	margin-top: 0.5rem;
+	margin-block-start: 10px;
+
 	text-align: right;
 
-	font-size: 0.75rem;
-	font-weight: bold;
+	font-size: var(--fs-90);
+	font-weight: var(--fw-200);
 
-	color: var(--color-grey-500);
+	color: var(--fc-70);
 }
