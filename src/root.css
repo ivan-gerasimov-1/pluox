@@ -27,6 +27,7 @@
 	--fs-200: calc(var(--fs-100) + 2px);
 	--fs-300: calc(var(--fs-200) + 2px);
 	--fs-400: calc(var(--fs-300) + 2px);
+	--fs-500: calc(var(--fs-400) + 2px);
 
 	/** Font color */
 	--fc-90: var(--color-grey-700);
