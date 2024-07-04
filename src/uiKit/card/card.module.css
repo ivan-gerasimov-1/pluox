@@ -1,5 +1,6 @@
 .card {
-	padding: 1rem 1.25rem;
+	padding-block: 25px;
+	padding-inline: 20px;
 
 	border-radius: var(--border-radius-default);
 
