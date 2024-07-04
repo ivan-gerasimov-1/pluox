@@ -91,6 +91,8 @@
 	margin-top: 10px;
 
 	font-size: var(--fs-90);
+
+	color: var(--fc-90);
 }
 
 .date {
