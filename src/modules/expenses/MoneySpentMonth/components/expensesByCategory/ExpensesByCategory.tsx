@@ -1,10 +1,16 @@
+import { useState } from 'react';
+
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
+import { useIntl } from '@modules/intl';
+
+import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
 import { Expenses } from '@domain/expenses';
+import { expensesByCategoryI18n } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/expensesByCategory.i18n';
+
 import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
-import { useState } from 'react';
+
 import styles from './ExpensesByCategory.module.css';
-import { TMonth } from '@domain/amount/useCases/types';
 
 export type TExpensesByCategory = {
 	className?: string;
@@ -12,6 +18,7 @@ export type TExpensesByCategory = {
 };
 
 export function ExpensesByCategory(props: TExpensesByCategory) {
+	let intl = useIntl(expensesByCategoryI18n);
 	let [showAll, setShowAll] = useState<boolean>(false);
 
 	let expenses = Expenses.getInstance().getMonthlyExpensesByCategory(
@@ -60,7 +67,9 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 						setShowAll(!showAll);
 					}}
 				>
-					{showAll ? 'Свернуть ↑' : 'Ещё ↓'}
+					{showAll
+						? intl.translate('hideButton')
+						: intl.translate('showButton')}
 				</button>
 			)}
 		</div>
