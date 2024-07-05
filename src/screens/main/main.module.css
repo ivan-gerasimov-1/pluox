@@ -1,3 +1,4 @@
 .screenWithBottomSpace {
-	margin-bottom: 135px;
+	min-height: calc(100dvh - 115px);
+	margin-block-end: 115px;
 }
