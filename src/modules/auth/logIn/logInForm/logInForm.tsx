@@ -5,6 +5,7 @@ import { delay } from '@utils/delay';
 import styles from './logInForm.module.css';
 import { EAppPath } from '@root/appPath';
 import { Navigable } from '@uiKit/navigable/navigable';
+import { Button } from '@uiKit/button/button';
 
 export function useLoginForm() {
 	let authService = useAuthService();
@@ -42,7 +43,7 @@ export function LogInForm() {
 
 	return (
 		<div className={styles.formContainer}>
-			<h1>Savee</h1>
+			<h1 className={styles.title}>Savee</h1>
 
 			<Form name="signIn" onSubmit={onSubmit}>
 				<FormGroup>
@@ -51,24 +52,55 @@ export function LogInForm() {
 
 				<FormGroup>
 					<PasswordInput name="password" label="Пароль" />
-				</FormGroup>
-
-				<FormGroup>
-					<span>Забыли пароль?</span>
-
-					<br />
-
-					<Navigable to={EAppPath.SIGNIN}>Регистрация</Navigable>
+					<span
+						style={{
+							fontSize: 'var(--fs-100)',
+							marginBlockStart: '7.5px',
+							textAlign: 'right',
+							userSelect: 'none',
+							cursor: 'pointer',
+						}}
+					>
+						Забыли пароль?
+					</span>
 				</FormGroup>
 
 				<FormGroup>
 					{!pending ? (
-						<button type="submit" className={styles.submitButton}>
+						<Button
+							type="submit"
+							className={styles.submitButton}
+							onClick={() => {}}
+						>
 							Войти
-						</button>
+						</Button>
 					) : (
 						<div>Загрузка…</div>
 					)}
+				</FormGroup>
+
+				<br />
+				<br />
+				<br />
+
+				<FormGroup>
+					<div
+						style={{
+							fontSize: 'var(--fs-100)',
+							textAlign: 'center',
+						}}
+					>
+						Нет аккаунта?{' '}
+						<Navigable to={EAppPath.SIGNIN}>
+							<span
+								style={{
+									color: 'rgb(66, 66, 190)',
+								}}
+							>
+								Создать
+							</span>
+						</Navigable>
+					</div>
 				</FormGroup>
 			</Form>
 		</div>
@@ -91,7 +123,7 @@ function Form(
 	}
 
 	return (
-		<form name={props.name} className={styles.signInForm} onSubmit={onSubmit}>
+		<form name={props.name} className={styles.form} onSubmit={onSubmit}>
 			{props.children}
 		</form>
 	);

@@ -1,74 +1,71 @@
-.formContainer {
+.formContainer.formContainer {
 	display: flex;
+
 	flex-flow: column;
 	justify-content: center;
 
-	width: 100%;
-	height: 100vh;
+	width: 400px;
+	max-width: 100%;
 
-	padding: 0 3rem;
+	margin: auto;
+
+	padding-block: 60px;
+	padding-inline: 40px;
+
+	border: 1px solid var(--color-grey-100);
+	border-radius: var(--border-radius-100);
+
+	box-shadow: 0px 10px 30px -10px var(--color-grey-300);
 }
 
-.signInForm {
+.title {
+	font-size: var(--fs-700);
+	font-weight: var(--fw-200);
+}
+
+.form {
 	display: flex;
 
 	flex-flow: column;
-	align-items: center;
-	justify-content: center;
 
-	margin-top: 3rem;
+	margin-top: 40px;
 }
 
 .inputGroup {
 	display: flex;
 	flex-flow: column;
 
-	width: 100%;
-
 	& + & {
-		margin-top: 24px;
+		margin-top: 20px;
 	}
 }
 
-.labelText {
-	display: block;
+.label {
+	display: flex;
 
-	font-size: 16px;
-	font-weight: 600;
+	flex-direction: column;
+}
+
+.labelText {
+	font-size: var(--fs-100);
+	font-weight: var(--fw-200);
 }
 
 .inputField {
-	width: 100%;
+	margin-block-start: 10px;
+	padding-block: 15px;
+	padding-inline: 25px;
 
-	margin-top: 8px;
-	padding: 15px 25px;
-
-	border: 2px solid grey;
-	border-radius: 7px;
+	border: 1px solid var(--color-grey-500);
+	border-radius: var(--border-radius-90);
 	background: none;
-
-	font-size: 16px;
-}
-
-.submitButton {
-	margin-top: 24px;
-	padding: 15px 20px;
-
-	border: none;
-	border-radius: 7px;
-	border: 2px solid black;
-
-	background: none;
-	/* color: white; */
 
 	font-family: inherit;
-	font-size: 14px;
-	font-weight: 600;
+	font-size: var(--fs-100);
 
-	transition: all 0.1s ease-in-out;
+	outline: none;
 
-	/* &:active {
-		box-shadow: 0 2px #d63232;
-		transform: translateY(3px);
-	} */
+	&:focus {
+		border-color: var(--color-grey-700);
+	}
 }
