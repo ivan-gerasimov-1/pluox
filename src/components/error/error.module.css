@@ -4,7 +4,7 @@
 }
 
 .message {
-	margin-top: 10px;
+	margin-block-start: 10px;
 
 	font-size: var(--fs-100);
 	font-weight: var(--fw-100);
@@ -13,5 +13,5 @@
 }
 
 .button {
-	margin-top: 40px;
+	margin-block-start: 40px;
 }
