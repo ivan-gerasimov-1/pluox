@@ -10,6 +10,8 @@ import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 
 import { Separator } from '@uiKit/separator/separator';
 
+import styles from './moneySpentMonth.module.css';
+
 export type TMoneySpentMonthProps = {
 	month: TMonth;
 };
@@ -29,7 +31,10 @@ export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 
 			<Separator />
 
-			<ExpensesByCategory month={props.month} />
+			<ExpensesByCategory
+				className={styles.expensesByCategory}
+				month={props.month}
+			/>
 		</>
 	);
 }
