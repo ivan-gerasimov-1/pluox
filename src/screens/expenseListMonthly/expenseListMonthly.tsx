@@ -19,9 +19,9 @@ export function ExpenseListMonthlyScreen() {
 
 	return (
 		<Screen>
-			<CardContainer>
-				<Header title={intl.translate('title')} />
+			<Header title={intl.translate('title')} />
 
+			<CardContainer>
 				{MONTH_LIST.map((month) => {
 					return (
 						<Fragment key={month}>
