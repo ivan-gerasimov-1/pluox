@@ -1,21 +1,31 @@
-import { appI18n } from '@components/app/app.i18n';
-import { useIntl } from '@modules/intl';
+import {
+	createBrowserRouter as createRouter,
+	createRoutesFromElements,
+	Route,
+	RouterProvider,
+} from 'react-router-dom';
+
 import { EAppPath } from '@root/appPath';
-import '@root/root.css';
+
+import { useIntl } from '@modules/intl';
+
+import { appI18n } from '@components/app/app.i18n';
+
 import { ExpenseListScreen } from '@screens/expenseList';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
 import { ErrorScreen, MainScreen } from '@screens/index';
 import { LogIn } from '@screens/logIn/LogIn';
 import { Settings } from '@screens/settings/settings';
 import { SignIn } from '@screens/signIn';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
+import '@root/root.css';
 
 export function App() {
 	let intl = useIntl(appI18n);
 
-	return (
-		<Router>
-			<Routes>
+	let router = createRouter(
+		createRoutesFromElements(
+			<>
 				<Route path={EAppPath.SIGNIN} element={<SignIn />} />
 				<Route path={EAppPath.LOGIN} element={<LogIn />} />
 
@@ -36,7 +46,9 @@ export function App() {
 						/>
 					}
 				/>
-			</Routes>
-		</Router>
+			</>,
+		),
 	);
+
+	return <RouterProvider router={router} />;
 }
