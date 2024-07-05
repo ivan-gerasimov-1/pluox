@@ -1,5 +1,5 @@
 .title {
-	font-size: var(--fs-200);
+	font-size: var(--fs-300);
 
 	margin-block-end: 30px;
 
@@ -11,6 +11,7 @@
 .amount {
 	font-family: monospace;
 	font-size: var(--fs-700);
+	font-weight: var(--fw-200);
 
 	text-align: right;
 	text-overflow: ellipsis;
