@@ -7,6 +7,7 @@ import styles from './ExpensesByCategory.module.css';
 import { TMonth } from '@domain/amount/useCases/types';
 
 export type TExpensesByCategory = {
+	className?: string;
 	month: TMonth;
 };
 
@@ -20,7 +21,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 	let showMoreButton = expenses.length >= 4;
 
 	return (
-		<>
+		<div className={props.className}>
 			{expensesToRender.map(({ id, total, percentage }) => {
 				return (
 					<div key={id} className={styles.categoryRow}>
@@ -62,6 +63,6 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 					{showAll ? 'Свернуть ↑' : 'Ещё ↓'}
 				</button>
 			)}
-		</>
+		</div>
 	);
 }
