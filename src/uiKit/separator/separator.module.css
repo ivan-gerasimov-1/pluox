@@ -6,7 +6,5 @@
 	border: 0;
 	border-radius: 2px;
 
-	background-color: black;
-
-	opacity: 0.075;
+	background-color: var(--color-grey-100);
 }
