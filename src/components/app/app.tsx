@@ -7,22 +7,17 @@ import {
 
 import { EAppPath } from '@root/appPath';
 
-import { useIntl } from '@modules/intl';
-
-import { appI18n } from '@components/app/app.i18n';
-
 import { ExpenseListScreen } from '@screens/expenseList';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
-import { ErrorScreen, MainScreen } from '@screens/index';
+import { MainScreen } from '@screens/index';
 import { LogIn } from '@screens/logIn/LogIn';
 import { Settings } from '@screens/settings/settings';
 import { SignIn } from '@screens/signIn';
+import { NotFoundErrorScreen } from '@screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
 
 import '@root/root.css';
 
 export function App() {
-	let intl = useIntl(appI18n);
-
 	let router = createRouter(
 		createRoutesFromElements(
 			<>
@@ -38,14 +33,7 @@ export function App() {
 
 				<Route path={EAppPath.SETTINGS} element={<Settings />} />
 
-				<Route
-					path="*"
-					element={
-						<ErrorScreen
-							message={intl.translate('errorMessages').pageNotFound}
-						/>
-					}
-				/>
+				<Route path="*" element={<NotFoundErrorScreen />} />
 			</>,
 		),
 	);
