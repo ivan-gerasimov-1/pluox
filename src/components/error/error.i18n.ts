@@ -5,6 +5,6 @@ export const errorI18n = {
 		mainPageButtonLabel: 'На главную',
 	},
 	[ELocaleCode.EN_US]: {
-		mainPageButtonLabel: 'Main page',
+		mainPageButtonLabel: 'Go Home',
 	},
 };

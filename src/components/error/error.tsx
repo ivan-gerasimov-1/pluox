@@ -1,6 +1,9 @@
 import { errorI18n } from '@components/error/error.i18n';
 import { useIntl } from '@modules/intl';
 import { useNavigation } from '@modules/navigation/useNavigation';
+import { Button } from '@uiKit/button/button';
+
+import styles from './error.module.css';
 
 type TErrorProps = {
 	title: string;
@@ -13,14 +16,13 @@ export function Error(props: TErrorProps) {
 
 	return (
 		<>
-			<h1>{props.title}</h1>
-			<h2>{props.message}</h2>
+			<h1 className={styles.header}>{props.title}</h1>
 
-			<br />
+			<h2 className={styles.message}>{props.message}</h2>
 
-			<button type="button" onClick={navigation.mainPage}>
+			<Button className={styles.button} onClick={navigation.mainPage}>
 				{intl.translate('mainPageButtonLabel')}
-			</button>
+			</Button>
 		</>
 	);
 }

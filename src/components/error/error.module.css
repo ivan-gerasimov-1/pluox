@@ -1,0 +1,17 @@
+.header {
+	font-size: var(--fs-700);
+	font-weight: var(--fw-200);
+}
+
+.message {
+	margin-top: 10px;
+
+	font-size: var(--fs-100);
+	font-weight: var(--fw-100);
+
+	color: var(--fc-90);
+}
+
+.button {
+	margin-top: 40px;
+}
