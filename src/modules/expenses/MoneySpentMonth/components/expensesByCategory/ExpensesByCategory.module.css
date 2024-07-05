@@ -46,7 +46,7 @@
 .showMoreButton {
 	width: 100%;
 
-	margin: 0;
+	margin-block-start: -10px;
 	padding: 10px;
 
 	color: var(--fc-100);
