@@ -42,3 +42,21 @@
 	font-size: var(--fs-100);
 	font-weight: var(--fw-200);
 }
+
+.showMoreButton {
+	width: 100%;
+
+	margin: 0;
+	padding: 10px;
+
+	color: var(--fc-100);
+
+	background: none;
+
+	border: none;
+
+	font-size: var(--fs-100);
+	font-family: inherit;
+
+	cursor: pointer;
+}

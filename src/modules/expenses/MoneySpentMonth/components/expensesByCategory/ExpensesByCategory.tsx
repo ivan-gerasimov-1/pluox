@@ -52,21 +52,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 			{showMoreButton && (
 				<button
 					type="button"
-					style={{
-						width: '100%',
-						margin: '0',
-						padding: '10px 10px',
-
-						color: 'var(--primary)',
-						background: 'none',
-
-						border: 'none',
-
-						fontSize: '14px',
-						fontFamily: 'inherit',
-
-						cursor: 'pointer',
-					}}
+					className={styles.showMoreButton}
 					onClick={(event) => {
 						event.preventDefault();
 
