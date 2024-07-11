@@ -2,11 +2,23 @@ import bcrypt from 'bcrypt';
 import { FastifyInstance } from 'fastify';
 import { generateUserId } from './helpers/generateUserId';
 
+type TSignupPayload = {
+	email: string;
+	password: string;
+};
+
+type TLoginPayload = {
+	email: string;
+	password: string;
+};
+
 export async function authenticationRouter(plugin: FastifyInstance) {
-	plugin.post('/signup', async function handler(request, response) {
-		// @ts-expect-error
-		const { email, password } = request.body;
-		const hashedPassword = await bcrypt.hash(password, 10);
+	plugin.post<{
+		Body: TSignupPayload;
+	}>('/signup', async function handler(request, response) {
+		let payload = request.body;
+
+		const hashedPassword = await bcrypt.hash(payload.password, 10);
 
 		const usersCollection = plugin.mongo.db?.collection('users');
 
@@ -14,26 +26,30 @@ export async function authenticationRouter(plugin: FastifyInstance) {
 
 		await usersCollection?.insertOne({
 			id: userId,
-			email,
+			email: payload.email,
 			password: hashedPassword,
 		});
 
 		response.send({
 			id: userId,
-			email,
+			email: payload.email,
 		});
 	});
 
-	plugin.post('/login', async (request, reply) => {
-		// @ts-expect-error
-		const { email, password } = request.body;
+	plugin.post<{
+		Body: TLoginPayload;
+	}>('/login', async (request, reply) => {
+		let payload = request.body;
 
 		const usersCollection = plugin.mongo.db?.collection('users');
 		const user = await usersCollection?.findOne({
-			email,
+			email: payload.email,
 		});
 
-		const isPasswordValid = await bcrypt.compare(password, user?.password);
+		const isPasswordValid = await bcrypt.compare(
+			payload.password,
+			user?.password,
+		);
 
 		if (!isPasswordValid) {
 			reply.code(401).send({
