@@ -22,7 +22,7 @@ async function main(): Promise<void> {
 	loadExpenses();
 
 	const ui: IUserInterface = new ReactUI(window, {
-		containerId: 'root',
+		containerId: 'saveeRoot',
 	});
 
 	registerServiceWorker();

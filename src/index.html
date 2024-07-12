@@ -32,13 +32,24 @@
 			}
 
 			.loading {
+				position: fixed;
+
 				width: 100%;
-				height: 100vh;
+				height: 100dvh;
 
 				display: flex;
 
 				align-items: center;
 				justify-content: center;
+
+				background-color: #fafafa;
+
+				transition: opacity 0.15s ease-in-out;
+				z-index: 1;
+			}
+
+			.loading.hidded {
+				opacity: 0;
 			}
 
 			.loader {
@@ -73,11 +84,11 @@
 	</head>
 
 	<body>
-		<div id="root">
-			<div class="loading">
-				<div class="loader"></div>
-			</div>
+		<div id="loader" class="loading">
+			<div class="loader"></div>
 		</div>
+
+		<div id="saveeRoot"></div>
 
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 	</body>

@@ -1,6 +1,7 @@
-import { App } from '@components/app/app';
 import { StrictMode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
+
+import { App } from '@components/app/app';
 
 interface IWindow extends Window {}
 interface IRoot extends Root {}
@@ -40,7 +41,13 @@ export class ReactUI implements IUserInterface {
 
 		this.root.render(
 			<StrictMode>
-				<App />
+				<App
+					onRendered={() => {
+						let $loader = this.#window.document.getElementById('loader');
+
+						$loader?.classList.add('hidded');
+					}}
+				/>
 			</StrictMode>,
 		);
 	}
