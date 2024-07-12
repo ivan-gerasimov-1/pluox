@@ -47,7 +47,7 @@ export class ReactUI implements IUserInterface {
 
 						this.#window.setTimeout(() => {
 							$loader?.classList.add('hidded');
-						}, 1500);
+						}, 500);
 					}}
 				/>
 			</StrictMode>,
