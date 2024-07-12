@@ -1,6 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 
+import { delay } from '@utils/delay';
+
 import { App } from '@components/app/app';
 
 interface IWindow extends Window {}
@@ -42,12 +44,16 @@ export class ReactUI implements IUserInterface {
 		this.root.render(
 			<StrictMode>
 				<App
-					onRendered={() => {
+					onRendered={async () => {
 						let $loader = this.#window.document.getElementById('loader');
 
-						this.#window.setTimeout(() => {
-							$loader?.classList.add('hidded');
-						}, 500);
+						await delay(500);
+
+						$loader?.classList.add('hidded');
+
+						await delay(150);
+
+						$loader?.remove();
 					}}
 				/>
 			</StrictMode>,

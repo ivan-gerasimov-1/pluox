@@ -31,7 +31,7 @@
 				background-color: #fafafa;
 			}
 
-			.loading {
+			.loaderContainer {
 				position: fixed;
 
 				width: 100%;
@@ -48,22 +48,24 @@
 				z-index: 1;
 			}
 
-			.loading.hidded {
+			.loaderContainer.hidded {
 				opacity: 0;
+
+				pointer-events: none;
 			}
 
-			.loader {
+			.loaderContent {
 				width: 10vw;
 				aspect-ratio: 1;
 
 				border: 0.5vw solid #333;
 
-				animation: loader 2.5s infinite;
+				animation: loaderAnimation 2.5s infinite;
 
 				will-change: border-radius;
 			}
 
-			@keyframes loader {
+			@keyframes loaderAnimation {
 				0% {
 					border-radius: 50% 50% 15% 15%;
 				}
@@ -84,8 +86,8 @@
 	</head>
 
 	<body>
-		<div id="loader" class="loading">
-			<div class="loader"></div>
+		<div id="loader" class="loaderContainer">
+			<div class="loaderContent"></div>
 		</div>
 
 		<div id="saveeRoot"></div>
