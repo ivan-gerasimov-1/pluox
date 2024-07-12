@@ -18,7 +18,7 @@
 
 	transform: translateY(var(--action-sheet-start));
 
-	will-change: transform box-shadow;
+	will-change: transform, box-shadow;
 }
 
 .actionSheetContainerEmpty {

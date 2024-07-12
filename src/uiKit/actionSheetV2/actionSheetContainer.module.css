@@ -21,7 +21,7 @@
 
 	transform: translateY(var(--action-sheet-bottom));
 
-	will-change: transform box-shadow;
+	will-change: transform, box-shadow;
 }
 
 .small {
