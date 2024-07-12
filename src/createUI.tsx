@@ -45,7 +45,9 @@ export class ReactUI implements IUserInterface {
 					onRendered={() => {
 						let $loader = this.#window.document.getElementById('loader');
 
-						$loader?.classList.add('hidded');
+						this.#window.setTimeout(() => {
+							$loader?.classList.add('hidded');
+						}, 1500);
 					}}
 				/>
 			</StrictMode>,
