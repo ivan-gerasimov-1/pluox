@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import { EAppPath } from '@root/appPath';
+import { useEffectOnce } from '@root/hooks/useEffectOnce';
 
 import { ExpenseListScreen } from '@screens/expenseList';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
@@ -17,7 +18,19 @@ import { NotFoundErrorScreen } from '@screens/error/screens/notFoundErrorScreen/
 
 import '@root/root.css';
 
-export function App() {
+type IAppProps = {
+	onRendered?(): void;
+};
+
+export function App(props: IAppProps) {
+	useEffectOnce(() => {
+		if (!props.onRendered) {
+			return;
+		}
+
+		props.onRendered();
+	});
+
 	let router = createRouter(
 		createRoutesFromElements(
 			<>
