@@ -82,12 +82,80 @@
 					border-radius: 50% 50% 15% 15%;
 				}
 			}
+
+			.skeleton {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: 15px;
+				transition: opacity 0.15s ease-in-out;
+				background-color: #fafafa;
+				z-index: 1;
+			}
+
+			.skeleton.hidden {
+				opacity: 0;
+
+				pointer-events: none;
+			}
+
+			.skeletonHeader {
+				display: flex;
+				justify-content: flex-end;
+				height: 35px;
+			}
+
+			.skeletonBox {
+				width: 35px;
+				height: 35px;
+				background-color: rgb(179, 177, 177);
+				border-radius: 100%;
+			}
+
+			.skeletonCard {
+				width: 100%;
+				height: 156px;
+
+				padding: 25px 20px;
+
+				margin-top: 25px;
+
+				border-radius: 15px;
+
+				background-color: white;
+
+				box-shadow: 0 0.5em 1.5em -0.75em rgba(0, 0, 0, 0.25);
+			}
+
+			.skeletonCard--small {
+				height: 124px;
+			}
+
+			.block {
+				width: 75px;
+				height: 15px;
+
+				background-color: rgb(179, 177, 177);
+			}
 		</style>
 	</head>
 
 	<body>
-		<div id="loader" class="loaderContainer">
+		<!-- <div id="loader" class="loaderContainer">
 			<div class="loaderContent"></div>
+		</div> -->
+		<div id="loader" class="skeleton">
+			<div class="skeletonHeader">
+				<div class="skeletonBox"></div>
+			</div>
+			<div class="skeletonCard">
+				<div class="block"></div>
+			</div>
+			<div class="skeletonCard skeletonCard--small">
+				<div class="block"></div>
+			</div>
 		</div>
 
 		<div id="saveeRoot"></div>

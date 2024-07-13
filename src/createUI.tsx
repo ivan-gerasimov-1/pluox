@@ -47,9 +47,7 @@ export class ReactUI implements IUserInterface {
 					onRendered={async () => {
 						let $loader = this.#window.document.getElementById('loader');
 
-						await delay(500);
-
-						$loader?.classList.add('hidded');
+						$loader?.classList.add('hidden');
 
 						await delay(150);
 
