@@ -7,7 +7,7 @@ export function AddExpense() {
 	let addExpense = useExpensesStore((state) => state.addExpense);
 
 	/** @todo Make configurable */
-	let defaultCurrency = ECurrency.THB;
+	let defaultCurrency = ECurrency.RUB;
 
 	return (
 		<ExpenseForm
