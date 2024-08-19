@@ -15,5 +15,5 @@ export let environment: TEnvironment = {
 	isDevelopment: isDevelopment(process.env.NODE_ENV),
 	apiUrl: isDevelopment(process.env.NODE_ENV)
 		? '/api'
-		: 'http://95.216.175.114/api',
+		: 'https://savee-api.gerasimov.dev',
 };
