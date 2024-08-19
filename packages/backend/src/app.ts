@@ -53,6 +53,7 @@ export function createApp() {
 function getAllowedOrigins(params: { isDevelopment: boolean }): string[] {
 	let allowedOrigins = [
 		'https://savee.gerasimov.dev',
+		'https://savee-api.gerasimov.dev',
 		/** @deprecated */
 		'https://savee.vercel.app',
 	];
