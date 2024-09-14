@@ -1,8 +1,21 @@
 {
 	"folders": [
 		{
-			"path": "../"
-		}
+			"name": "Savee | Root",
+			"path": "../",
+		},
+		{
+			"name": "UI",
+			"path": "../src",
+		},
+		{
+			"name": "API",
+			"path": "../packages/backend",
+		},
+		{
+			"name": "CI/CD",
+			"path": "../.github/workflows",
+		},
 	],
-	"settings": {}
+	"settings": {},
 }
