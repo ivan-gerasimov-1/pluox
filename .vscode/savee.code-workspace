@@ -6,7 +6,7 @@
 		},
 		{
 			"name": "UI",
-			"path": "../src",
+			"path": "../apps/frontend",
 		},
 		{
 			"name": "API",
