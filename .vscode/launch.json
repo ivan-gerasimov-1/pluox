@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Backend",
+			"name": "API",
 			"command": "npm --workspace=@savee/backend start",
 			"request": "launch",
 			"type": "node-terminal"
@@ -13,7 +13,7 @@
 		{
 			"name": "UI",
 			"type": "node-terminal",
-			"command": "npm start",
+			"command": "npm --workspace=@savee/frontend start",
 			"request": "launch"
 		},
 		{
@@ -27,7 +27,7 @@
 	"compounds": [
 		{
 			"name": "App",
-			"configurations": ["UI", "Backend"],
+			"configurations": ["UI", "API"],
 			"stopAll": false,
 			"presentation": {
 				"hidden": false,
