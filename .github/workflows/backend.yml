@@ -17,12 +17,12 @@ on:
     branches:
       - main
     paths:
-      - 'packages/backend/**'
+      - 'apps/backend/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'packages/backend/**'
+      - 'apps/backend/**'
 
 jobs:
   build:
@@ -47,10 +47,10 @@ jobs:
       - name: Copy files
         run: |
           cp -r \
-            packages/backend/build/* \
+            apps/backend/build/* \
             package-lock.json \
-            packages/backend/package.json \
-            packages/backend/ecosystem.config.js \
+            apps/backend/package.json \
+            apps/backend/ecosystem.config.js \
             $ARTIFACTS_DIR/
 
       - name: Upload build artifact

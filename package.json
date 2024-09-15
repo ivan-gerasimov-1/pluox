@@ -22,7 +22,7 @@
 	},
 	"homepage": "https://github.com/EvanJ0hnson/savee#readme",
 	"workspaces": [
-		"packages/backend"
+		"apps/backend"
 	],
 	"dependencies": {
 		"@supabase/supabase-js": "2.45.4",
