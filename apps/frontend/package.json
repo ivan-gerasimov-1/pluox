@@ -10,21 +10,9 @@
 		"preview": "npx serve --single --no-request-logging --config ../serve.json --listen 3000 build/",
 		"start": "cross-env NODE_ENV='development' npx webpack-dev-server"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/EvanJ0hnson/savee.git"
-	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"private": true,
-	"bugs": {
-		"url": "https://github.com/EvanJ0hnson/savee/issues"
-	},
-	"homepage": "https://github.com/EvanJ0hnson/savee#readme",
-	"workspaces": [
-		"apps/backend",
-		"apps/frontend"
-	],
 	"dependencies": {
 		"@supabase/supabase-js": "2.45.4",
 		"clsx": "2.1.1",

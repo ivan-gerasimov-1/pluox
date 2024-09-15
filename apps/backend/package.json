@@ -1,6 +1,6 @@
 {
 	"name": "@savee/backend",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "Savee app backend",
 	"scripts": {
 		"build:clear": "rm -f ./.cache/.tsbuildinfo && rm -rf ./build",
@@ -9,7 +9,6 @@
 		"start": "nodemon --watch ./src --ext ts -r dotenv/config ./src/index.ts",
 		"preview": "node ./build/index.js"
 	},
-	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"private": true,
 	"devDependencies": {
