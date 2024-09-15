@@ -27,8 +27,6 @@ async function main(): Promise<void> {
 
 	registerServiceWorker();
 
-	console.log('asd');
-
 	await ui.render();
 }
 
