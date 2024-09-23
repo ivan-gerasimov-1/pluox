@@ -1,10 +1,16 @@
 {
 	"name": "@savee/backend-lite",
 	"version": "0.0.1",
-	"main": "src/index.js",
+	"main": "src/index.ts",
+	"type": "module",
 	"scripts": {
+		"start": "node --env-file=.env --enable-source-maps --experimental-transform-types --experimental-sqlite --watch-path=./src ./src/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"imports": {
+		"#app/*": "./src/*.ts"
+	},
+	"packageManager": "npm@10.8.3",
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"description": "Savee app backend (lite)"
