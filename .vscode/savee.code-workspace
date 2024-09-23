@@ -13,6 +13,10 @@
 			"path": "../apps/backend",
 		},
 		{
+			"name": "API Lite",
+			"path": "../apps/backend-lite",
+		},
+		{
 			"name": "CI/CD",
 			"path": "../.github/workflows",
 		},
