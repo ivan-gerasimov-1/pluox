@@ -1,0 +1,11 @@
+{
+	"name": "@savee/backend-lite",
+	"version": "0.0.1",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
+	"license": "UNLICENSED",
+	"description": "Savee app backend (lite)"
+}
