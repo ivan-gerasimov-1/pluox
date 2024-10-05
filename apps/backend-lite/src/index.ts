@@ -7,6 +7,8 @@ import { type Database } from 'better-sqlite3';
 
 const enum EResponseCode {
 	OK = 200,
+	BAD_REQUEST = 400,
+	UNAUTHORIZED = 401,
 	NOT_FOUND = 404,
 	INTERNAL_SERVER_ERROR = 500,
 }
@@ -45,6 +47,54 @@ const routes = {
 
 		sendJsonResponse(response, EResponseCode.OK, {
 			data: users,
+		});
+	},
+	'/signin': (
+		request,
+		response,
+		params: {
+			db: Database;
+		},
+	) => {
+		readJsonBody(request, response, (payload) => {
+			const statement = params.db.prepare(
+				'SELECT username, password FROM users WHERE username = ?',
+			);
+
+			let result;
+			try {
+				result = statement.get(payload.username);
+			} catch (error) {
+				console.log(error);
+			}
+
+			console.log(result);
+
+			function handle() {
+				if (!result) {
+					sendJsonResponse(response, EResponseCode.NOT_FOUND, {
+						message: 'Not Found',
+					});
+
+					return;
+				}
+
+				if (result.password !== payload.password) {
+					sendJsonResponse(response, EResponseCode.UNAUTHORIZED, {
+						message: 'Unauthorized',
+					});
+
+					return;
+				}
+
+				sendJsonResponse(response, EResponseCode.OK, {
+					data: {
+						username: result.username,
+					},
+				});
+			}
+
+			handle();
 		});
 	},
 	'/signup': (
@@ -118,16 +168,16 @@ function main() {
 
 	const server = createServer((request, response) => {
 		try {
-		let routeHander = routes[request.url];
+			let routeHander = routes[request.url];
 
-		if (!routeHander) {
-			routes.notFound(request, response);
-			return;
-		}
+			if (!routeHander) {
+				routes.notFound(request, response);
+				return;
+			}
 
-		routeHander(request, response, {
-			db,
-		});
+			routeHander(request, response, {
+				db,
+			});
 		} catch (error) {
 			console.log(error);
 
