@@ -83,8 +83,10 @@ const routes = {
 				// }
 
 				sendJsonResponse(response, EResponseCode.OK, {
-					message: 'Signup successful',
-					// userId: this.lastID,
+					data: {
+						id: result.lastInsertRowid,
+						username: payload.username,
+					},
 				});
 			}
 
