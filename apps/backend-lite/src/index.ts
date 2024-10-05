@@ -28,7 +28,7 @@ const routes = {
 			db: Database;
 		},
 	) => {
-		let users = params.db.prepare('SELECT * FROM contacts').all();
+		let users = params.db.prepare('SELECT * FROM users').all();
 
 		sendJsonResponse(response, EResponseCode.OK, {
 			data: users,
@@ -58,7 +58,7 @@ const routes = {
 			}
 
 			const stmt = params.db.prepare(
-				'INSERT INTO contacts (username) VALUES (:username)',
+				'INSERT INTO users (username, password) VALUES (:username, :password)',
 			);
 
 			console.log(payload);

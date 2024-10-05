@@ -1,8 +1,11 @@
 // @ts-expect-error
 import BetterSQLite3 from 'better-sqlite3';
+// import { DatabaseSync as BetterSQLite3 } from 'node:sqlite';
+
+const DATABASE_FILE = 'db.sqlite';
 
 export function createDatabase() {
-	return new BetterSQLite3('db.sqlite');
+	return new BetterSQLite3(DATABASE_FILE);
 }
 
 export function initializeDatabase() {
@@ -10,10 +13,12 @@ export function initializeDatabase() {
 
 	try {
 		db.exec(`
-			create table if not exists contacts (
-					 id integer primary key,
-					 username text not null
-			)`);
+			CREATE TABLE IF NOT EXISTS users (
+				id INTEGER PRIMARY KEY,
+				username TEXT NOT NULL,
+				password TEXT NOT NULL
+			)
+		`);
 	} catch (error) {
 		console.log(error);
 	}
