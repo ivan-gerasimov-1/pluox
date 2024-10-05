@@ -13,12 +13,13 @@ const enum EResponseCode {
 const routes = {
 	'/': (request, response) => {
 		sendJsonResponse(response, EResponseCode.OK, {
-			message: 'Hello, World!',
+			message: 'Savee API',
 		});
 	},
 	'/health': (request, response) => {
 		sendJsonResponse(response, EResponseCode.OK, {
 			message: 'OK',
+			timestamp: new Date().toISOString(),
 		});
 	},
 	'/users': (
