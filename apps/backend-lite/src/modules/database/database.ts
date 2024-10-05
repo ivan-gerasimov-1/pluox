@@ -1,7 +1,8 @@
-import { DatabaseSync } from 'node:sqlite';
+// @ts-expect-error
+import BetterSQLite3 from 'better-sqlite3';
 
 export function createDatabase() {
-	return new DatabaseSync(':memory:');
+	return new BetterSQLite3('db.sqlite');
 }
 
 export function initializeDatabase() {

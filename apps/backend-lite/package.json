@@ -4,7 +4,7 @@
 	"main": "src/index.ts",
 	"type": "module",
 	"scripts": {
-		"start": "node --env-file=.env --experimental-transform-types --experimental-sqlite --watch-path=./src ./src/index.ts",
+		"start": "node --env-file=.env --experimental-transform-types --watch-path=./src ./src/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"imports": {
@@ -13,5 +13,11 @@
 	"packageManager": "npm@10.8.3",
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
-	"description": "Savee app backend (lite)"
+	"description": "Savee app backend (lite)",
+	"dependencies": {
+		"better-sqlite3": "11.3.0"
+	},
+	"devDependencies": {
+		"@types/better-sqlite3": "7.6.11"
+	}
 }

@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { initializeDatabase } from '#app/modules/database/database';
 import { sendJsonResponse } from '#app/utils/sendJsonResponse';
 import { config } from '#app/config';
-import { type DatabaseSync } from 'node:sqlite';
+import { type Database } from 'better-sqlite3';
 
 const enum EResponseCode {
 	OK = 200,
@@ -25,7 +25,7 @@ const routes = {
 		request,
 		response,
 		params: {
-			db: DatabaseSync;
+			db: Database;
 		},
 	) => {
 		let users = params.db.prepare('SELECT * FROM contacts').all();
@@ -38,7 +38,7 @@ const routes = {
 		request,
 		response,
 		params: {
-			db: DatabaseSync;
+			db: Database;
 		},
 	) => {
 		let body = '';
