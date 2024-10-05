@@ -104,22 +104,7 @@ const routes = {
 			db: Database;
 		},
 	) => {
-		let body = '';
-
-		request.on('data', (chunk) => {
-			body += chunk.toString();
-			console.log(body);
-		});
-
-		request.on('end', () => {
-			let payload;
-
-			try {
-				payload = JSON.parse(body);
-			} catch (error) {
-				console.log(error);
-			}
-
+		readJsonBody(request, response, (payload) => {
 			const stmt = params.db.prepare(
 				'INSERT INTO users (username, password) VALUES (:username, :password)',
 			);
@@ -138,13 +123,6 @@ const routes = {
 			console.log(result);
 
 			function handle() {
-				// if (error) {
-				// 	sendJsonResponse(response, EResponseCode.NOT_FOUND, {
-				// 		message: 'Signup sfailed',
-				// 	});
-				// 	return;
-				// }
-
 				sendJsonResponse(response, EResponseCode.OK, {
 					data: {
 						id: result.lastInsertRowid,
