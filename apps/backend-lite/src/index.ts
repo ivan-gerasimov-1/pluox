@@ -29,7 +29,18 @@ const routes = {
 			db: Database;
 		},
 	) => {
-		let users = params.db.prepare('SELECT * FROM users').all();
+		let usersSqlQuery = `
+			SELECT id, username FROM users
+		`;
+		let usersSqlStatement = params.db.prepare<
+			[],
+			{
+				id: string;
+				username: string;
+			}
+		>(usersSqlQuery);
+
+		let users = usersSqlStatement.all();
 
 		sendJsonResponse(response, EResponseCode.OK, {
 			data: users,
