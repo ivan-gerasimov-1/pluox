@@ -8,6 +8,7 @@ import { type Database } from 'better-sqlite3';
 const enum EResponseCode {
 	OK = 200,
 	NOT_FOUND = 404,
+	INTERNAL_SERVER_ERROR = 500,
 }
 
 const routes = {
@@ -116,6 +117,7 @@ function main() {
 	let db = initializeDatabase();
 
 	const server = createServer((request, response) => {
+		try {
 		let routeHander = routes[request.url];
 
 		if (!routeHander) {
@@ -126,6 +128,13 @@ function main() {
 		routeHander(request, response, {
 			db,
 		});
+		} catch (error) {
+			console.log(error);
+
+			sendJsonResponse(response, EResponseCode.INTERNAL_SERVER_ERROR, {
+				message: 'Internal server error',
+			});
+		}
 	});
 
 	server
