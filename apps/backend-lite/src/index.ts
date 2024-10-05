@@ -165,3 +165,25 @@ function main() {
 }
 
 main();
+
+function readJsonBody(request, response, callback) {
+	let body = '';
+
+	request.on('data', (chunk) => {
+		body += chunk.toString();
+	});
+
+	request.on('end', () => {
+		try {
+			let parsedBody = JSON.parse(body);
+
+			callback(parsedBody);
+		} catch (error) {
+			console.log(error);
+
+			sendJsonResponse(response, EResponseCode.BAD_REQUEST, {
+				message: 'Bad request',
+			});
+		}
+	});
+}
