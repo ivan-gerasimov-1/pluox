@@ -1,7 +1,9 @@
 import { createServer } from 'node:http';
 
+import { initializeDatabase } from '#app/modules/database/database';
 import { sendJsonResponse } from '#app/utils/sendJsonResponse';
 import { config } from '#app/config';
+import { type DatabaseSync } from 'node:sqlite';
 
 const enum EResponseCode {
 	OK = 200,
@@ -19,6 +21,76 @@ const routes = {
 			message: 'OK',
 		});
 	},
+	'/users': (
+		request,
+		response,
+		params: {
+			db: DatabaseSync;
+		},
+	) => {
+		let users = params.db.prepare('SELECT * FROM contacts').all();
+
+		sendJsonResponse(response, EResponseCode.OK, {
+			data: users,
+		});
+	},
+	'/signup': (
+		request,
+		response,
+		params: {
+			db: DatabaseSync;
+		},
+	) => {
+		let body = '';
+
+		request.on('data', (chunk) => {
+			body += chunk.toString();
+			console.log(body);
+		});
+
+		request.on('end', () => {
+			let payload;
+
+			try {
+				payload = JSON.parse(body);
+			} catch (error) {
+				console.log(error);
+			}
+
+			const stmt = params.db.prepare(
+				'INSERT INTO contacts (username) VALUES (:username)',
+			);
+
+			console.log(payload);
+			let result;
+			try {
+				result = stmt.run({
+					username: payload.username,
+					password: payload.password,
+				});
+			} catch (error) {
+				console.log(error);
+			}
+
+			console.log(result);
+
+			function handle() {
+				// if (error) {
+				// 	sendJsonResponse(response, EResponseCode.NOT_FOUND, {
+				// 		message: 'Signup sfailed',
+				// 	});
+				// 	return;
+				// }
+
+				sendJsonResponse(response, EResponseCode.OK, {
+					message: 'Signup successful',
+					// userId: this.lastID,
+				});
+			}
+
+			handle();
+		});
+	},
 	notFound: (request, response) => {
 		sendJsonResponse(response, EResponseCode.NOT_FOUND, {
 			message: 'Not found',
@@ -27,6 +99,8 @@ const routes = {
 };
 
 function main() {
+	let db = initializeDatabase();
+
 	const server = createServer((request, response) => {
 		let routeHander = routes[request.url];
 
@@ -35,30 +109,43 @@ function main() {
 			return;
 		}
 
-		routeHander(request, response);
+		routeHander(request, response, {
+			db,
+		});
 	});
 
 	server
 		.listen(
 			{
+				host: config.host,
 				port: config.port,
 			},
 			() => {
-				console.log(`Server is running on port ${config.port}`);
+				console.log(
+					`Server is running on port ${config.port}, host ${config.host}`,
+				);
 			},
 		)
 		.on('error', (error) => {
 			if (error.code === 'EADDRINUSE') {
 				console.error('[Error] Address in use:', config.port);
+				db.close();
 				server.close();
 			}
 		});
 
-	['SIGINT', 'SIGTERM', 'SIGQUIT'].forEach((signal) =>
-		process.on(signal, (signalName) => {
+	['SIGINT', 'SIGTERM'].forEach((signal) =>
+		process.on(signal, (...signalName) => {
 			console.log('Server is shutting down due to:', signalName);
-			server.close();
-			process.exit();
+
+			server.close(() => {
+				console.log('Server closed');
+
+				db.close();
+				console.log('Database closed');
+
+				process.exit(0);
+			});
 		}),
 	);
 }
