@@ -14,6 +14,20 @@ const enum EResponseCode {
 	CONFLICT = 409,
 	INTERNAL_SERVER_ERROR = 500,
 }
+type TId = string;
+type TPassword = string;
+
+type TUserCreateSchema = {
+	id: TId;
+	username: string;
+	password: TPassword;
+};
+
+type TUserSchema = {
+	id: TId;
+	username: string;
+	password: TPassword;
+};
 
 const routes = {
 	'/': (request, response) => {
@@ -59,14 +73,18 @@ const routes = {
 		},
 	) => {
 		readJsonBody(request, response, (payload) => {
-			const statement = params.db.prepare(
-				'SELECT id, username, password FROM users WHERE username = ?',
+			let db = params.db;
+			let userReadSQLQuery =
+				'SELECT id, username, password FROM users WHERE username = ?';
+
+			let userReadStatement = db.prepare<[TPassword], TUserSchema>(
+				userReadSQLQuery,
 			);
 
-			let user;
+			let user: TUserSchema;
 
 			try {
-				user = statement.get(payload.username);
+				user = userReadStatement.get(payload.username);
 			} catch (error) {
 				console.log(error);
 			}
@@ -109,12 +127,14 @@ const routes = {
 		readJsonBody(request, response, (payload) => {
 			let database = params.db;
 
-			let userGetSqlQuery =
-				'SELECT username, password FROM users WHERE username = ?';
-			const userGetStatement = database.prepare(userGetSqlQuery);
+			let userReadSQLQuery =
+				'SELECT id, username, password FROM users WHERE username = ?';
+			const userReadStatement = database.prepare<[string], TUserSchema>(
+				userReadSQLQuery,
+			);
 
 			try {
-				let user = userGetStatement.get(payload.username);
+				let user = userReadStatement.get(payload.username);
 
 				if (user) {
 					sendJsonResponse(response, EResponseCode.CONFLICT, {
@@ -127,29 +147,33 @@ const routes = {
 				console.log(error);
 			}
 
-			let userAddSqlQuery =
+			let userCreateSqlQuery =
 				'INSERT INTO users (id, username, password) VALUES (:id, :username, :password)';
-			const userAddStatement = database.prepare(userAddSqlQuery);
-
-			let newUser;
+			const userCreateStatement =
+				database.prepare<[TUserCreateSchema]>(userCreateSqlQuery);
 
 			let salt = randomBytes(16).toString('hex');
 			let passwordHash = scrypt(payload.password, salt, 64).toString('hex');
 			let passwordWithSalt = `${salt}:${passwordHash}`;
 
+			let user: TUserSchema;
+			let newUser: TUserCreateSchema = {
+				id: generateId('usr'),
+				username: payload.username,
+				password: passwordWithSalt,
+			};
+
 			try {
-				newUser = userAddStatement.run({
-					id: generateId('usr'),
-					username: payload.username,
-					password: passwordWithSalt,
-				});
+				userCreateStatement.run(newUser);
+
+				user = userReadStatement.get(payload.username);
 			} catch (error) {
 				console.log(error);
 			}
 
 			sendJsonResponse(response, EResponseCode.OK, {
 				data: {
-					username: newUser.username,
+					username: user.username,
 				},
 			});
 		});
