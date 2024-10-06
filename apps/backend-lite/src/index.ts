@@ -1,10 +1,14 @@
 import { createServer } from 'node:http';
-import { scryptSync as scrypt, randomBytes } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
 
 import { initializeDatabase } from '#app/modules/database/database';
 import { sendJsonResponse } from '#app/utils/sendJsonResponse';
 import { config } from '#app/config';
 import { type Database } from 'better-sqlite3';
+import {
+	comparePasswordHash,
+	createPasswordHash,
+} from '#app/modules/crypto/passwordHash';
 
 const enum EResponseCode {
 	OK = 200,
@@ -97,10 +101,12 @@ const routes = {
 				return;
 			}
 
-			let [salt, key] = user.password.split(':');
-			let passwordHash = scrypt(payload.password, salt, 64).toString('hex');
+			let isPasswordMatch = comparePasswordHash(
+				payload.password,
+				user.password,
+			);
 
-			if (key !== passwordHash) {
+			if (!isPasswordMatch) {
 				sendJsonResponse(response, EResponseCode.UNAUTHORIZED, {
 					message: 'Unauthorized',
 				});
@@ -152,15 +158,11 @@ const routes = {
 			const userCreateStatement =
 				database.prepare<[TUserCreateSchema]>(userCreateSqlQuery);
 
-			let salt = randomBytes(16).toString('hex');
-			let passwordHash = scrypt(payload.password, salt, 64).toString('hex');
-			let passwordWithSalt = `${salt}:${passwordHash}`;
-
 			let user: TUserSchema;
 			let newUser: TUserCreateSchema = {
 				id: generateId('usr'),
 				username: payload.username,
-				password: passwordWithSalt,
+				password: createPasswordHash(payload.password),
 			};
 
 			try {
