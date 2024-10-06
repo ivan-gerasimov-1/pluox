@@ -1,5 +1,4 @@
 import { createServer } from 'node:http';
-import { randomBytes } from 'node:crypto';
 
 import { initializeDatabase } from '#app/modules/database/database';
 import { sendJsonResponse } from '#app/utils/sendJsonResponse';
@@ -9,6 +8,7 @@ import {
 	comparePasswordHash,
 	createPasswordHash,
 } from '#app/modules/crypto/passwordHash';
+import { generateId } from '#app/modules/crypto/id';
 
 const enum EResponseCode {
 	OK = 200,
@@ -269,8 +269,4 @@ function readJsonBody(request, response, callback) {
 			});
 		}
 	});
-}
-
-function generateId(prefix: string = 'id', length: number = 7): string {
-	return `${prefix}${randomBytes(length).toString('hex')}`;
 }
