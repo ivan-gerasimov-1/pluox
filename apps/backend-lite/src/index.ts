@@ -60,7 +60,7 @@ const routes = {
 	) => {
 		readJsonBody(request, response, (payload) => {
 			const statement = params.db.prepare(
-				'SELECT username, password FROM users WHERE username = ?',
+				'SELECT id, username, password FROM users WHERE username = ?',
 			);
 
 			let user;
@@ -92,7 +92,9 @@ const routes = {
 
 			sendJsonResponse(response, EResponseCode.OK, {
 				data: {
+					id: user.id,
 					username: user.username,
+					password: user.password,
 				},
 			});
 		});
@@ -126,18 +128,20 @@ const routes = {
 			}
 
 			let userAddSqlQuery =
-				'INSERT INTO users (username, password) VALUES (:username, :password)';
+				'INSERT INTO users (id, username, password) VALUES (:id, :username, :password)';
 			const userAddStatement = database.prepare(userAddSqlQuery);
 
 			let newUser;
 
 			let salt = randomBytes(16).toString('hex');
 			let passwordHash = scrypt(payload.password, salt, 64).toString('hex');
+			let passwordWithSalt = `${salt}:${passwordHash}`;
 
 			try {
 				newUser = userAddStatement.run({
+					id: generateId('usr'),
 					username: payload.username,
-					password: `${salt}:${passwordHash}`,
+					password: passwordWithSalt,
 				});
 			} catch (error) {
 				console.log(error);
@@ -145,7 +149,7 @@ const routes = {
 
 			sendJsonResponse(response, EResponseCode.OK, {
 				data: {
-					username: payload.username,
+					username: newUser.username,
 				},
 			});
 		});
@@ -239,4 +243,8 @@ function readJsonBody(request, response, callback) {
 			});
 		}
 	});
+}
+
+function generateId(prefix: string = 'id', length: number = 7): string {
+	return `${prefix}${randomBytes(length).toString('hex')}`;
 }
