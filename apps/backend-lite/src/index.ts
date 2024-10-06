@@ -61,40 +61,35 @@ const routes = {
 				'SELECT username, password FROM users WHERE username = ?',
 			);
 
-			let result;
+			let user;
+
 			try {
-				result = statement.get(payload.username);
+				user = statement.get(payload.username);
 			} catch (error) {
 				console.log(error);
 			}
 
-			console.log(result);
-
-			function handle() {
-				if (!result) {
-					sendJsonResponse(response, EResponseCode.NOT_FOUND, {
-						message: 'Not Found',
-					});
-
-					return;
-				}
-
-				if (result.password !== payload.password) {
-					sendJsonResponse(response, EResponseCode.UNAUTHORIZED, {
-						message: 'Unauthorized',
-					});
-
-					return;
-				}
-
-				sendJsonResponse(response, EResponseCode.OK, {
-					data: {
-						username: result.username,
-					},
+			if (!user) {
+				sendJsonResponse(response, EResponseCode.NOT_FOUND, {
+					message: 'Not Found',
 				});
+
+				return;
 			}
 
-			handle();
+			if (user.password !== payload.password) {
+				sendJsonResponse(response, EResponseCode.UNAUTHORIZED, {
+					message: 'Unauthorized',
+				});
+
+				return;
+			}
+
+			sendJsonResponse(response, EResponseCode.OK, {
+				data: {
+					username: user.username,
+				},
+			});
 		});
 	},
 	'/signup': (
