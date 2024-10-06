@@ -1,4 +1,5 @@
 import { createServer } from 'node:http';
+import { scryptSync as scrypt, randomBytes } from 'node:crypto';
 
 import { initializeDatabase } from '#app/modules/database/database';
 import { sendJsonResponse } from '#app/utils/sendJsonResponse';
@@ -10,6 +11,7 @@ const enum EResponseCode {
 	BAD_REQUEST = 400,
 	UNAUTHORIZED = 401,
 	NOT_FOUND = 404,
+	CONFLICT = 409,
 	INTERNAL_SERVER_ERROR = 500,
 }
 
@@ -77,7 +79,10 @@ const routes = {
 				return;
 			}
 
-			if (user.password !== payload.password) {
+			let [salt, key] = user.password.split(':');
+			let passwordHash = scrypt(payload.password, salt, 64).toString('hex');
+
+			if (key !== passwordHash) {
 				sendJsonResponse(response, EResponseCode.UNAUTHORIZED, {
 					message: 'Unauthorized',
 				});
@@ -100,33 +105,49 @@ const routes = {
 		},
 	) => {
 		readJsonBody(request, response, (payload) => {
-			const stmt = params.db.prepare(
-				'INSERT INTO users (username, password) VALUES (:username, :password)',
-			);
+			let database = params.db;
 
-			console.log(payload);
-			let result;
+			let userGetSqlQuery =
+				'SELECT username, password FROM users WHERE username = ?';
+			const userGetStatement = database.prepare(userGetSqlQuery);
+
 			try {
-				result = stmt.run({
+				let user = userGetStatement.get(payload.username);
+
+				if (user) {
+					sendJsonResponse(response, EResponseCode.CONFLICT, {
+						message: 'User with this name already exists',
+					});
+
+					return;
+				}
+			} catch (error) {
+				console.log(error);
+			}
+
+			let userAddSqlQuery =
+				'INSERT INTO users (username, password) VALUES (:username, :password)';
+			const userAddStatement = database.prepare(userAddSqlQuery);
+
+			let newUser;
+
+			let salt = randomBytes(16).toString('hex');
+			let passwordHash = scrypt(payload.password, salt, 64).toString('hex');
+
+			try {
+				newUser = userAddStatement.run({
 					username: payload.username,
-					password: payload.password,
+					password: `${salt}:${passwordHash}`,
 				});
 			} catch (error) {
 				console.log(error);
 			}
 
-			console.log(result);
-
-			function handle() {
-				sendJsonResponse(response, EResponseCode.OK, {
-					data: {
-						id: result.lastInsertRowid,
-						username: payload.username,
-					},
-				});
-			}
-
-			handle();
+			sendJsonResponse(response, EResponseCode.OK, {
+				data: {
+					username: payload.username,
+				},
+			});
 		});
 	},
 	notFound: (request, response) => {
