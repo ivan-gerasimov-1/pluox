@@ -1,6 +1,6 @@
-import { connect, createConnection, type Socket } from 'node:net';
+import { connect as createConnection, type Socket } from 'node:net';
 import { connect as createSecureConnection, type TLSSocket } from 'node:tls';
-import * as crypto from 'node:crypto';
+import { generatedUuid } from '#app/modules/crypto/generateUUID';
 
 export class Mail {
 	#socket: TLSSocket | Socket;
@@ -78,14 +78,13 @@ export class Mail {
 		message: string;
 	}) {
 		return new Promise<void>((resolve, reject) => {
-			this.#socket.on('data', (data) => {
-				console.log('DATA:', data.toString());
-			});
+			let datetime = new Date().toUTCString();
+			let messageId = generatedUuid();
 
 			this.#socket.write(
 				[
 					'',
-					`MAIL FROM: <${params.from}>`,
+					`MAIL FROM: "Savee Team" <${params.from}>`,
 					`RCPT TO: <${params.to}>`,
 
 					'DATA',
@@ -93,8 +92,8 @@ export class Mail {
 					`From: ${params.from}`,
 					`To: <${params.to}>`,
 					`Subject: ${params.subject}`,
-					`Date: ${new Date().toUTCString()}`,
-					`Message-ID: <${crypto.randomUUID()}@savee.app>`,
+					`Date: ${datetime}`,
+					`Message-ID: <${messageId}@savee.app>`,
 					'MIME-Version: 1.0',
 					'Content-Type: text/html; charset=UTF-8',
 					'',
