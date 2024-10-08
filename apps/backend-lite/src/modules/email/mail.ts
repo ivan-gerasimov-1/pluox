@@ -42,7 +42,7 @@ export class Mail {
 					port: this.server.port,
 				},
 				() => {
-					socket.write(`EHLO ${this.server.host}\r\n`);
+					socket.write(this.#wrapSocketMessage(`EHLO ${this.server.host}`));
 
 					console.log('CONNECTED');
 					resolve(socket);
@@ -54,11 +54,11 @@ export class Mail {
 	#authenticate(): Promise<void> {
 		return new Promise<void>((resolve, reject) => {
 			this.#socket.write(
-				[
+				this.#wrapSocketMessage(
 					'AUTH LOGIN',
 					Buffer.from(this.authentication.user).toString('base64'),
 					Buffer.from(this.authentication.password).toString('base64'),
-				].join('\r\n'),
+				),
 				(error) => {
 					if (error) {
 						reject(error);
@@ -82,8 +82,7 @@ export class Mail {
 			let messageId = generatedUuid();
 
 			this.#socket.write(
-				[
-					'',
+				this.#wrapSocketMessage(
 					`MAIL FROM: <${params.from}>`,
 					`RCPT TO: <${params.to}>`,
 
@@ -100,8 +99,7 @@ export class Mail {
 					`${params.message}`,
 					'.',
 					'QUIT',
-					'',
-				].join('\r\n'),
+				),
 				(error) => {
 					if (error) {
 						reject(error);
@@ -113,5 +111,9 @@ export class Mail {
 				},
 			);
 		});
+	}
+
+	#wrapSocketMessage(...messages: string[]): string {
+		return [...messages, ''].join('\r\n');
 	}
 }
