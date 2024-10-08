@@ -3,6 +3,8 @@
 		"target": "ES2023",
 		"paths": {
 			"#app/*": ["./src/*"]
-		}
+		},
+
+		"typeRoots": ["./node_modules/@types"]
 	}
 }
