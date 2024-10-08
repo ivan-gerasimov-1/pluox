@@ -1,4 +1,5 @@
 import { createServer } from 'node:http';
+import { env as processEnv } from 'node:process';
 
 import { generateId } from '#app/modules/crypto/id';
 import {
@@ -10,7 +11,7 @@ import { createMail } from '#app/modules/email/createMail';
 import { sendJsonResponse } from '#app/utils/sendJsonResponse';
 import { type Database } from 'better-sqlite3';
 import { type Mail } from '#app/modules/email/mail';
-import { appConfig, type TAppConfig } from '#app/modules/appConfig/index';
+import { createAppConfig, type TAppConfig } from '#app/modules/appConfig/index';
 
 const enum EResponseCode {
 	OK = 200,
@@ -48,10 +49,12 @@ const routes = {
 		response,
 		params: {
 			mail: Mail;
+			appConfig: TAppConfig;
 		},
 	) => {
 		readJsonBody(request, response, (body) => {
 			let mail = params.mail;
+			let appConfig = params.appConfig;
 
 			mail.send({
 				from: appConfig.email.from,
@@ -228,6 +231,7 @@ const routes = {
 };
 
 function main() {
+	let appConfig = createAppConfig(processEnv);
 	let db = initializeDatabase();
 	let mail = createMail({
 		host: appConfig.email.host,
