@@ -23,15 +23,11 @@ const enum EResponseCode {
 type TId = string;
 type TPassword = string;
 
-type TUserCreateSchema = {
-	id: TId;
-	username: string;
-	password: TPassword;
-};
+type TUserCreateSchema = Pick<TUserSchema, 'id' | 'email' | 'password'>;
 
 type TUserSchema = {
 	id: TId;
-	username: string;
+	email: string;
 	password: TPassword;
 };
 
@@ -78,13 +74,13 @@ const routes = {
 		},
 	) => {
 		let usersSqlQuery = `
-			SELECT id, username FROM users
+			SELECT id, email FROM users
 		`;
 		let usersSqlStatement = params.db.prepare<
 			[],
 			{
 				id: string;
-				username: string;
+				email: string;
 			}
 		>(usersSqlQuery);
 
@@ -104,7 +100,7 @@ const routes = {
 		readJsonBody(request, response, (payload) => {
 			let db = params.db;
 			let userReadSQLQuery =
-				'SELECT id, username, password FROM users WHERE username = ?';
+				'SELECT id, email, password FROM users WHERE email = ?';
 
 			let userReadStatement = db.prepare<[TPassword], TUserSchema>(
 				userReadSQLQuery,
@@ -113,7 +109,7 @@ const routes = {
 			let user: TUserSchema;
 
 			try {
-				user = userReadStatement.get(payload.username);
+				user = userReadStatement.get(payload.email);
 			} catch (error) {
 				console.log(error);
 			}
@@ -142,7 +138,7 @@ const routes = {
 			sendJsonResponse(response, EResponseCode.OK, {
 				data: {
 					id: user.id,
-					username: user.username,
+					email: user.email,
 					password: user.password,
 				},
 			});
@@ -161,13 +157,13 @@ const routes = {
 			let mail = params.mail;
 
 			let userReadSQLQuery =
-				'SELECT id, username, password FROM users WHERE username = ?';
+				'SELECT id, email, password FROM users WHERE email = ?';
 			const userReadStatement = database.prepare<[string], TUserSchema>(
 				userReadSQLQuery,
 			);
 
 			try {
-				let user = userReadStatement.get(payload.username);
+				let user = userReadStatement.get(payload.email);
 
 				if (user) {
 					sendJsonResponse(response, EResponseCode.CONFLICT, {
@@ -181,26 +177,25 @@ const routes = {
 			}
 
 			let userCreateSqlQuery =
-				'INSERT INTO users (id, username, password) VALUES (:id, :username, :password)';
+				'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)';
 			const userCreateStatement =
 				database.prepare<[TUserCreateSchema]>(userCreateSqlQuery);
 
 			let user: TUserSchema;
 			let newUser: TUserCreateSchema = {
 				id: generateId('usr'),
-				username: payload.username,
+				email: payload.email,
 				password: createPasswordHash(payload.password),
 			};
 
 			try {
 				userCreateStatement.run(newUser);
 
-				user = userReadStatement.get(payload.username);
+				user = userReadStatement.get(payload.email);
 
 				mail.send({
 					from: config.email.from,
-					/** @todo Remove fallback */
-					to: payload.email || 'ivangerasimow@gmail.com',
+					to: payload.email,
 					subject: 'Добро пожаловать в Savee',
 					message: `
 						<html>
@@ -218,7 +213,7 @@ const routes = {
 
 			sendJsonResponse(response, EResponseCode.OK, {
 				data: {
-					username: user.username,
+					email: user.email,
 				},
 			});
 		});
