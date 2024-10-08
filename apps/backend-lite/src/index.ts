@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 
-import { config } from '#app/config';
+import { appConfig } from '#app/config';
 import { generateId } from '#app/modules/crypto/id';
 import {
 	comparePasswordHash,
@@ -54,7 +54,7 @@ const routes = {
 			let mail = params.mail;
 
 			mail.send({
-				from: config.email.from,
+				from: appConfig.email.from,
 				to: body.to,
 				subject: body.subject,
 				message: body.message,
@@ -194,7 +194,7 @@ const routes = {
 				user = userReadStatement.get(payload.email);
 
 				mail.send({
-					from: config.email.from,
+					from: appConfig.email.from,
 					to: payload.email,
 					subject: 'Добро пожаловать в Savee',
 					message: `
@@ -228,13 +228,13 @@ const routes = {
 function main() {
 	let db = initializeDatabase();
 	let mail = createMail({
-		host: config.email.host,
-		port: config.email.port,
+		host: appConfig.email.host,
+		port: appConfig.email.port,
 		auth: {
-			user: config.email.auth.user,
-			password: config.email.auth.password,
+			user: appConfig.email.auth.user,
+			password: appConfig.email.auth.password,
 		},
-		provider: config.email.provider,
+		provider: appConfig.email.provider,
 	});
 
 	const server = createServer((request, response) => {
@@ -262,18 +262,18 @@ function main() {
 	server
 		.listen(
 			{
-				host: config.host,
-				port: config.port,
+				host: appConfig.host,
+				port: appConfig.port,
 			},
 			() => {
 				console.log(
-					`Server is running on port ${config.port}, host ${config.host}`,
+					`Server is running on port ${appConfig.port}, host ${appConfig.host}`,
 				);
 			},
 		)
 		.on('error', (error) => {
 			if (error.code === 'EADDRINUSE') {
-				console.error('[Error] Address in use:', config.port);
+				console.error('[Error] Address in use:', appConfig.port);
 				db.close();
 				server.close();
 			}
