@@ -13,6 +13,7 @@ import { type Mail } from '#app/modules/email/mail';
 import { createAppConfig, type TAppConfig } from '#app/modules/appConfig/index';
 import { readJsonBody, sendJsonResponse } from '#app/router/index';
 import { EResponseCode } from '#app/enums';
+import type { TRequest, TResponse } from '#app/types';
 
 type TId = string;
 type TPassword = string;
@@ -25,17 +26,28 @@ type TUserSchema = {
 	password: TPassword;
 };
 
-const routes = {
+const routes: Record<
+	string,
+	(
+		request: TRequest,
+		response: TResponse,
+		params?: {
+			mail: Mail;
+			appConfig: TAppConfig;
+			db: Database;
+		},
+	) => {} | Promise<{}>
+> = {
 	'/': (request, response) => {
-		sendJsonResponse(response, EResponseCode.OK, {
+		return {
 			message: 'Savee API',
-		});
+		};
 	},
 	'/health': (request, response) => {
-		sendJsonResponse(response, EResponseCode.OK, {
+		return {
 			message: 'OK',
 			timestamp: new Date().toISOString(),
-		});
+		};
 	},
 	'/mail/test': async (
 		request,
@@ -61,10 +73,10 @@ const routes = {
 			message: body.message,
 		});
 
-		sendJsonResponse(response, EResponseCode.OK, {
+		return {
 			message: 'OK',
 			timestamp: new Date().toISOString(),
-		});
+		};
 	},
 	'/users': (
 		request,
@@ -86,9 +98,9 @@ const routes = {
 
 		let users = usersSqlStatement.all();
 
-		sendJsonResponse(response, EResponseCode.OK, {
+		return {
 			data: users,
-		});
+		};
 	},
 	'/signin': async (
 		request,
@@ -111,37 +123,33 @@ const routes = {
 
 		let user: TUserSchema;
 
-		try {
-			user = userReadStatement.get(payload.email);
-		} catch (error) {
-			console.log(error);
-		}
+		user = userReadStatement.get(payload.email);
 
 		if (!user) {
-			sendJsonResponse(response, EResponseCode.NOT_FOUND, {
-				message: 'Not Found',
-			});
-
-			return;
+			return {
+				error: {
+					code: EResponseCode.NOT_FOUND,
+					message: 'Not Found',
+				},
+			};
 		}
 
 		let isPasswordMatch = comparePasswordHash(payload.password, user.password);
 
 		if (!isPasswordMatch) {
-			sendJsonResponse(response, EResponseCode.UNAUTHORIZED, {
-				message: 'Unauthorized',
-			});
-
-			return;
+			return {
+				error: {
+					code: EResponseCode.UNAUTHORIZED,
+					message: 'Unauthorized',
+				},
+			};
 		}
 
-		sendJsonResponse(response, EResponseCode.OK, {
-			data: {
-				id: user.id,
-				email: user.email,
-				password: user.password,
-			},
-		});
+		return {
+			id: user.id,
+			email: user.email,
+			password: user.password,
+		};
 	},
 	'/signup': async (
 		request,
@@ -166,18 +174,15 @@ const routes = {
 			userReadSQLQuery,
 		);
 
-		try {
-			let user = userReadStatement.get(payload.email);
+		let existingUser = userReadStatement.get(payload.email);
 
-			if (user) {
-				sendJsonResponse(response, EResponseCode.CONFLICT, {
+		if (existingUser) {
+			return {
+				error: {
+					code: EResponseCode.CONFLICT,
 					message: 'User with this name already exists',
-				});
-
-				return;
-			}
-		} catch (error) {
-			console.log(error);
+				},
+			};
 		}
 
 		let userCreateSqlQuery =
@@ -185,46 +190,40 @@ const routes = {
 		const userCreateStatement =
 			database.prepare<[TUserCreateSchema]>(userCreateSqlQuery);
 
-		let user: TUserSchema;
-		let newUser: TUserCreateSchema = {
+		userCreateStatement.run({
 			id: generateId('usr'),
 			email: payload.email,
 			password: createPasswordHash(payload.password),
-		};
-
-		try {
-			userCreateStatement.run(newUser);
-
-			user = userReadStatement.get(payload.email);
-
-			mail.send({
-				from: appConfig.email.from,
-				to: payload.email,
-				subject: 'Добро пожаловать в Savee',
-				message: `
-						<html>
-				 					<body>
-				 							<h1>Добро пожаловать!</h1>
-				 							<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
-				 							<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
-				 					</body>
-				 			</html>
-					`,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-
-		sendJsonResponse(response, EResponseCode.OK, {
-			data: {
-				email: user.email,
-			},
 		});
+
+		let user = userReadStatement.get(payload.email);
+
+		mail.send({
+			from: appConfig.email.from,
+			to: payload.email,
+			subject: 'Добро пожаловать в Savee',
+			message: `
+				<html>
+					<body>
+						<h1>Добро пожаловать!</h1>
+						<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
+						<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
+					</body>
+				</html>
+			`,
+		});
+
+		return {
+			email: user.email,
+		};
 	},
 	notFound: (request, response) => {
-		sendJsonResponse(response, EResponseCode.NOT_FOUND, {
-			message: 'Not found',
-		});
+		return {
+			error: {
+				code: EResponseCode.NOT_FOUND,
+				message: 'Requested endpoint is not found',
+			},
+		};
 	},
 };
 
@@ -250,11 +249,43 @@ function main() {
 				return;
 			}
 
-			await routeHander(request, response, {
+			let result = await routeHander(request, response, {
 				db,
 				mail,
 				appConfig,
 			});
+
+			// @ts-expect-error
+			if (result.error) {
+				console.log(
+					// @ts-expect-error
+					result.error,
+				);
+
+				sendJsonResponse(
+					response,
+					// @ts-expect-error
+					result.error?.code,
+					{
+						// @ts-expect-error
+						message: result.error?.message,
+					},
+				);
+
+				return;
+			}
+
+			let {
+				// @ts-expect-error
+				meta,
+				...responsePayload
+			} = result;
+
+			sendJsonResponse(
+				response,
+				meta?.code || EResponseCode.OK,
+				responsePayload,
+			);
 		} catch (error) {
 			console.log(error);
 
