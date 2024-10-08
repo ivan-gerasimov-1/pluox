@@ -1,6 +1,5 @@
 import { createServer } from 'node:http';
 
-import { appConfig } from '#app/config';
 import { generateId } from '#app/modules/crypto/id';
 import {
 	comparePasswordHash,
@@ -11,6 +10,7 @@ import { createMail } from '#app/modules/email/createMail';
 import { sendJsonResponse } from '#app/utils/sendJsonResponse';
 import { type Database } from 'better-sqlite3';
 import { type Mail } from '#app/modules/email/mail';
+import { appConfig, type TAppConfig } from '#app/modules/appConfig/index';
 
 const enum EResponseCode {
 	OK = 200,
@@ -150,11 +150,13 @@ const routes = {
 		params: {
 			db: Database;
 			mail: Mail;
+			appConfig: TAppConfig;
 		},
 	) => {
 		readJsonBody(request, response, (payload) => {
 			let database = params.db;
 			let mail = params.mail;
+			let appConfig = params.appConfig;
 
 			let userReadSQLQuery =
 				'SELECT id, email, password FROM users WHERE email = ?';
@@ -249,6 +251,7 @@ function main() {
 			routeHander(request, response, {
 				db,
 				mail,
+				appConfig,
 			});
 		} catch (error) {
 			console.log(error);
