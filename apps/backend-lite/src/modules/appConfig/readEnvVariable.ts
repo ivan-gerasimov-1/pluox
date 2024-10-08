@@ -1,9 +1,9 @@
 import {
 	EnvVariableEmptyError,
 	EnvVariableNotDefinedError,
-} from '#app/modules/config/errors';
-import { type EEnvVariable } from '#app/modules/config/types';
-import { isDefined, isEmptyString } from '#app/modules/config/validators';
+} from '#app/modules/appConfig/errors';
+import { type EEnvVariable } from '#app/modules/appConfig/types';
+import { isDefined, isEmptyString } from '#app/modules/appConfig/validators';
 import { env as processEnv } from 'node:process';
 
 export function readEnvVariable<T>(

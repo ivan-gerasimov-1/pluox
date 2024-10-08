@@ -1,7 +1,7 @@
-import { parseNumber } from '#app/modules/config/parsers';
-import { readEnvVariable } from '#app/modules/config/readEnvVariable';
-import { EEnvVariable, type TAppConfig } from '#app/modules/config/types';
-import { identity } from '#app/modules/config/utils';
+import { parseNumber } from '#app/modules/appConfig/parsers';
+import { readEnvVariable } from '#app/modules/appConfig/readEnvVariable';
+import { EEnvVariable, type TAppConfig } from '#app/modules/appConfig/types';
+import { identity } from '#app/modules/appConfig/utils';
 
 export const appConfig: TAppConfig = {
 	host: readEnvVariable(EEnvVariable.HOST, identity),
