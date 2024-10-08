@@ -8,11 +8,10 @@ import {
 } from '#app/modules/crypto/passwordHash';
 import { initializeDatabase } from '#app/modules/database/database';
 import { createMail } from '#app/modules/email/createMail';
-import { sendJsonResponse } from '#app/utils/sendJsonResponse';
 import { type Database } from 'better-sqlite3';
 import { type Mail } from '#app/modules/email/mail';
 import { createAppConfig, type TAppConfig } from '#app/modules/appConfig/index';
-import { readJsonBody } from '#app/router/index';
+import { readJsonBody, sendJsonResponse } from '#app/router/index';
 import { EResponseCode } from '#app/enums';
 
 type TId = string;
