@@ -84,12 +84,12 @@ export class Mail {
 			this.#socket.write(
 				[
 					'',
-					`MAIL FROM: "Savee Team" <${params.from}>`,
+					`MAIL FROM: <${params.from}>`,
 					`RCPT TO: <${params.to}>`,
 
 					'DATA',
 
-					`From: ${params.from}`,
+					`From: "Savee Team" <${params.from}>`,
 					`To: <${params.to}>`,
 					`Subject: ${params.subject}`,
 					`Date: ${datetime}`,
@@ -102,16 +102,16 @@ export class Mail {
 					'QUIT',
 					'',
 				].join('\r\n'),
+				(error) => {
+					if (error) {
+						reject(error);
+					}
+
+					console.log('EMAIL SENT');
+
+					resolve();
+				},
 			);
-			(error) => {
-				if (error) {
-					reject(error);
-				}
-
-				console.log('EMAIL SENT');
-
-				resolve();
-			};
 		});
 	}
 }
