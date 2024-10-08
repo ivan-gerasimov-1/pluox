@@ -1,6 +1,22 @@
-export const appConfig = {
+export type TAppConfig = {
+	host: string;
+	port: number;
+
+	email: {
+		provider: string;
+		host: string;
+		port: number;
+		auth: {
+			user: string;
+			password: string;
+		};
+		from: string;
+	};
+};
+
+export const appConfig: TAppConfig = {
 	host: process.env.APP_HOST || '0.0.0.0',
-	port: process.env.APP_PORT || 3000,
+	port: Number.parseInt(process.env.APP_PORT) || 3000,
 
 	email: {
 		provider: process.env.APP_EMAIL_PROVIDER,
