@@ -1,14 +1,16 @@
 import { createServer } from 'node:http';
 
-import { initializeDatabase } from '#app/modules/database/database';
-import { sendJsonResponse } from '#app/utils/sendJsonResponse';
 import { config } from '#app/config';
-import { type Database } from 'better-sqlite3';
+import { generateId } from '#app/modules/crypto/id';
 import {
 	comparePasswordHash,
 	createPasswordHash,
 } from '#app/modules/crypto/passwordHash';
-import { generateId } from '#app/modules/crypto/id';
+import { initializeDatabase } from '#app/modules/database/database';
+import { createMail } from '#app/modules/email/createMail';
+import { sendJsonResponse } from '#app/utils/sendJsonResponse';
+import { type Database } from 'better-sqlite3';
+import { type Mail } from '#app/modules/email/mail';
 
 const enum EResponseCode {
 	OK = 200,
@@ -43,6 +45,29 @@ const routes = {
 		sendJsonResponse(response, EResponseCode.OK, {
 			message: 'OK',
 			timestamp: new Date().toISOString(),
+		});
+	},
+	'/mail/test': (
+		request,
+		response,
+		params: {
+			mail: Mail;
+		},
+	) => {
+		readJsonBody(request, response, (body) => {
+			let mail = params.mail;
+
+			mail.send({
+				from: config.email.from,
+				to: body.to,
+				subject: body.subject,
+				message: body.message,
+			});
+
+			sendJsonResponse(response, EResponseCode.OK, {
+				message: 'OK',
+				timestamp: new Date().toISOString(),
+			});
 		});
 	},
 	'/users': (
@@ -128,10 +153,12 @@ const routes = {
 		response,
 		params: {
 			db: Database;
+			mail: Mail;
 		},
 	) => {
 		readJsonBody(request, response, (payload) => {
 			let database = params.db;
+			let mail = params.mail;
 
 			let userReadSQLQuery =
 				'SELECT id, username, password FROM users WHERE username = ?';
@@ -169,6 +196,22 @@ const routes = {
 				userCreateStatement.run(newUser);
 
 				user = userReadStatement.get(payload.username);
+
+				mail.send({
+					from: config.email.from,
+					/** @todo Remove fallback */
+					to: payload.email || 'ivangerasimow@gmail.com',
+					subject: 'Добро пожаловать в Savee',
+					message: `
+						<html>
+				 					<body>
+				 							<h1>Добро пожаловать!</h1>
+				 							<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
+				 							<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
+				 					</body>
+				 			</html>
+					`,
+				});
 			} catch (error) {
 				console.log(error);
 			}
@@ -189,6 +232,15 @@ const routes = {
 
 function main() {
 	let db = initializeDatabase();
+	let mail = createMail({
+		host: config.email.host,
+		port: config.email.port,
+		auth: {
+			user: config.email.auth.user,
+			password: config.email.auth.password,
+		},
+		provider: config.email.provider,
+	});
 
 	const server = createServer((request, response) => {
 		try {
@@ -201,6 +253,7 @@ function main() {
 
 			routeHander(request, response, {
 				db,
+				mail,
 			});
 		} catch (error) {
 			console.log(error);
