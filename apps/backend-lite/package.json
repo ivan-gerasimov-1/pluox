@@ -16,11 +16,9 @@
 	"license": "UNLICENSED",
 	"description": "Savee app backend (lite)",
 	"dependencies": {
-		"better-sqlite3": "11.3.0",
-		"nodemailer": "6.9.15"
+		"better-sqlite3": "11.3.0"
 	},
 	"devDependencies": {
-		"@types/better-sqlite3": "7.6.11",
-		"@types/nodemailer": "6.4.16"
+		"@types/better-sqlite3": "7.6.11"
 	}
 }
