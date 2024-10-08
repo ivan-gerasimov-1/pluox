@@ -1,41 +1,29 @@
 import type { TRequest } from '#app/types';
 
 import { EResponseCode } from '#app/enums';
+import { ERequestEvent } from '#app/router/enums';
 
 export function readJsonBody<T>(request: TRequest): Promise<T> {
 	return new Promise((resolve, reject) => {
 		let body = '';
 
-		request.on('data', (chunk) => {
+		request.on(ERequestEvent.DATA, (chunk) => {
 			body += chunk.toString();
 		});
 
-		request.on('end', () => {
+		request.on(ERequestEvent.END, () => {
 			try {
 				let parsedBody = JSON.parse(body);
 
 				resolve(parsedBody);
 			} catch (error) {
-				console.log(error);
-
 				reject({
 					code: EResponseCode.BAD_REQUEST,
-					message: 'Bad request',
+					message: 'Invalid JSON',
 				});
-
-				// sendJsonResponse(response, EResponseCode.BAD_REQUEST, {
-				// 	message: 'Bad request',
-				// });
 			}
 		});
 
-		request.on('error', (error) => {
-			console.log(error);
-
-			reject({
-				code: EResponseCode.INTERNAL_SERVER_ERROR,
-				message: 'Internal server error',
-			});
-		});
+		request.on(ERequestEvent.ERROR, reject);
 	});
 }
