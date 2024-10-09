@@ -1,6 +1,10 @@
 import { createServer } from 'node:http';
 import { env as processEnv } from 'node:process';
 
+import { type Database } from 'better-sqlite3';
+
+import { EResponseCode } from '#app/enums';
+import { createAppConfig, type TAppConfig } from '#app/modules/appConfig/index';
 import { generateId } from '#app/modules/crypto/id';
 import {
 	comparePasswordHash,
@@ -8,12 +12,9 @@ import {
 } from '#app/modules/crypto/passwordHash';
 import { initializeDatabase } from '#app/modules/database/database';
 import { createMail } from '#app/modules/email/createMail';
-import { type Database } from 'better-sqlite3';
 import { type Mail } from '#app/modules/email/mail';
-import { createAppConfig, type TAppConfig } from '#app/modules/appConfig/index';
-import { readJsonBody, sendJsonResponse } from '#app/router/index';
-import { EResponseCode } from '#app/enums';
-import type { TRequest, TResponse } from '#app/types';
+import { Router, readJsonBody, sendJsonResponse } from '#app/router/index';
+import type { TRequest } from '#app/types';
 
 type TId = string;
 type TPassword = string;
@@ -26,183 +27,178 @@ type TUserSchema = {
 	password: TPassword;
 };
 
-const routes: Record<
-	string,
-	(
-		request: TRequest,
-		response: TResponse,
-		params?: {
-			mail: Mail;
-			appConfig: TAppConfig;
-			db: Database;
-		},
-	) => {} | Promise<{}>
-> = {
-	'/': () => {
-		return {
-			message: 'Savee API',
-		};
-	},
-	'/health': () => {
-		return {
-			message: 'OK',
-			timestamp: new Date().toISOString(),
-		};
-	},
-	'/mail/test': async (
-		request,
-		response,
-		params: {
-			mail: Mail;
-			appConfig: TAppConfig;
-		},
-	) => {
-		let body = await readJsonBody<{
-			to: string;
-			subject: string;
-			message: string;
-		}>(request);
+function getIndex() {
+	return {
+		message: 'Savee API',
+	};
+}
 
-		let mail = params.mail;
-		let appConfig = params.appConfig;
+function getHealth() {
+	return {
+		message: 'OK',
+		timestamp: new Date().toISOString(),
+	};
+}
 
-		mail.send({
-			from: appConfig.email.from,
-			to: body.to,
-			subject: body.subject,
-			message: body.message,
-		});
-
-		return {
-			message: 'OK',
-			timestamp: new Date().toISOString(),
-		};
+async function postMailTest(
+	params,
+	dependencies: {
+		mail: Mail;
+		appConfig: TAppConfig;
 	},
-	'/users': (
-		request,
-		response,
-		params: {
-			db: Database;
-		},
-	) => {
-		let usersSqlQuery = `
+	request: TRequest,
+) {
+	let body = await readJsonBody<{
+		to: string;
+		subject: string;
+		message: string;
+	}>(request);
+
+	let mail = dependencies.mail;
+	let appConfig = dependencies.appConfig;
+
+	mail.send({
+		from: appConfig.email.from,
+		to: body.to,
+		subject: body.subject,
+		message: body.message,
+	});
+
+	return {
+		message: 'OK',
+		timestamp: new Date().toISOString(),
+	};
+}
+
+function getUsers(
+	params,
+	dependencies: {
+		db: Database;
+	},
+) {
+	let db = dependencies.db;
+
+	let usersSqlQuery = `
 			SELECT id, email FROM users
 		`;
-		let usersSqlStatement = params.db.prepare<
-			[],
-			{
-				id: string;
-				email: string;
-			}
-		>(usersSqlQuery);
+	let usersSqlStatement = db.prepare<
+		[],
+		{
+			id: string;
+			email: string;
+		}
+	>(usersSqlQuery);
 
-		let users = usersSqlStatement.all();
+	let users = usersSqlStatement.all();
 
-		return {
-			data: users,
-		};
+	return {
+		data: users,
+	};
+}
+
+async function postSignIn(
+	params,
+	dependencies: {
+		db: Database;
 	},
-	'/signin': async (
+	request: TRequest,
+) {
+	let db = dependencies.db;
+
+	let payload = await readJsonBody<{ email: string; password: string }>(
 		request,
-		response,
-		params: {
-			db: Database;
-		},
-	) => {
-		let payload = await readJsonBody<{ email: string; password: string }>(
-			request,
-		);
+	);
 
-		let db = params.db;
-		let userReadSQLQuery =
-			'SELECT id, email, password FROM users WHERE email = ?';
+	let userReadSQLQuery =
+		'SELECT id, email, password FROM users WHERE email = ?';
 
-		let userReadStatement = db.prepare<[TPassword], TUserSchema>(
-			userReadSQLQuery,
-		);
+	let userReadStatement = db.prepare<[TPassword], TUserSchema>(
+		userReadSQLQuery,
+	);
 
-		let user: TUserSchema;
+	let user: TUserSchema;
 
-		user = userReadStatement.get(payload.email);
+	user = userReadStatement.get(payload.email);
 
-		if (!user) {
-			return {
-				error: {
-					code: EResponseCode.NOT_FOUND,
-					message: 'Not Found',
-				},
-			};
-		}
-
-		let isPasswordMatch = comparePasswordHash(payload.password, user.password);
-
-		if (!isPasswordMatch) {
-			return {
-				error: {
-					code: EResponseCode.UNAUTHORIZED,
-					message: 'Unauthorized',
-				},
-			};
-		}
-
+	if (!user) {
 		return {
-			id: user.id,
-			email: user.email,
-			password: user.password,
+			error: {
+				code: EResponseCode.NOT_FOUND,
+				message: 'Not Found',
+			},
 		};
+	}
+
+	let isPasswordMatch = comparePasswordHash(payload.password, user.password);
+
+	if (!isPasswordMatch) {
+		return {
+			error: {
+				code: EResponseCode.UNAUTHORIZED,
+				message: 'Unauthorized',
+			},
+		};
+	}
+
+	return {
+		id: user.id,
+		email: user.email,
+		password: user.password,
+	};
+}
+
+async function postSignUp(
+	params,
+	dependencies: {
+		db: Database;
+		mail: Mail;
+		appConfig: TAppConfig;
 	},
-	'/signup': async (
+	request: TRequest,
+) {
+	let database = dependencies.db;
+	let mail = dependencies.mail;
+	let appConfig = dependencies.appConfig;
+
+	let payload = await readJsonBody<{ email: string; password: string }>(
 		request,
-		response,
-		params: {
-			db: Database;
-			mail: Mail;
-			appConfig: TAppConfig;
-		},
-	) => {
-		let database = params.db;
-		let mail = params.mail;
-		let appConfig = params.appConfig;
+	);
 
-		let payload = await readJsonBody<{ email: string; password: string }>(
-			request,
-		);
+	let userReadSQLQuery =
+		'SELECT id, email, password FROM users WHERE email = ?';
+	const userReadStatement = database.prepare<[string], TUserSchema>(
+		userReadSQLQuery,
+	);
 
-		let userReadSQLQuery =
-			'SELECT id, email, password FROM users WHERE email = ?';
-		const userReadStatement = database.prepare<[string], TUserSchema>(
-			userReadSQLQuery,
-		);
+	let existingUser = userReadStatement.get(payload.email);
 
-		let existingUser = userReadStatement.get(payload.email);
+	if (existingUser) {
+		return {
+			error: {
+				code: EResponseCode.CONFLICT,
+				message: 'User with this name already exists',
+			},
+		};
+	}
 
-		if (existingUser) {
-			return {
-				error: {
-					code: EResponseCode.CONFLICT,
-					message: 'User with this name already exists',
-				},
-			};
-		}
+	let userCreateSqlQuery =
+		'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)';
+	const userCreateStatement =
+		database.prepare<[TUserCreateSchema]>(userCreateSqlQuery);
 
-		let userCreateSqlQuery =
-			'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)';
-		const userCreateStatement =
-			database.prepare<[TUserCreateSchema]>(userCreateSqlQuery);
+	userCreateStatement.run({
+		id: generateId('usr'),
+		email: payload.email,
+		password: createPasswordHash(payload.password),
+	});
 
-		userCreateStatement.run({
-			id: generateId('usr'),
-			email: payload.email,
-			password: createPasswordHash(payload.password),
-		});
+	let user = userReadStatement.get(payload.email);
 
-		let user = userReadStatement.get(payload.email);
-
-		mail.send({
-			from: appConfig.email.from,
-			to: payload.email,
-			subject: 'Добро пожаловать в Savee',
-			message: `
+	mail.send({
+		from: appConfig.email.from,
+		to: payload.email,
+		subject: 'Добро пожаловать в Savee',
+		message: `
 				<html>
 					<body>
 						<h1>Добро пожаловать!</h1>
@@ -211,21 +207,21 @@ const routes: Record<
 					</body>
 				</html>
 			`,
-		});
+	});
 
-		return {
-			email: user.email,
-		};
-	},
-	notFound: () => {
-		return {
-			error: {
-				code: EResponseCode.NOT_FOUND,
-				message: 'Requested endpoint is not found',
-			},
-		};
-	},
-};
+	return {
+		email: user.email,
+	};
+}
+
+function notFoundController() {
+	return {
+		error: {
+			code: EResponseCode.NOT_FOUND,
+			message: 'Requested endpoint is not found',
+		},
+	};
+}
 
 function main() {
 	let appConfig = createAppConfig(processEnv);
@@ -240,37 +236,45 @@ function main() {
 		provider: appConfig.email.provider,
 	});
 
+	let router = new Router();
+
+	router
+		.addRoute('/', getIndex)
+		.addRoute('/health', getHealth)
+		.addRoute('/mail/test', postMailTest)
+		.addRoute('/users', getUsers)
+		.addRoute('/signin', postSignIn)
+		.addRoute('/signup', postSignUp);
+
 	const server = createServer(async (request, response) => {
 		try {
-			let routeHander = routes[request.url];
+			/**
+			 * @todo Remove queryParams from url
+			 */
+			let match = router.match(request.url);
 
-			if (!routeHander) {
-				routes.notFound(request, response);
-				return;
-			}
-
-			let result = await routeHander(request, response, {
+			let dependencies = {
 				db,
 				mail,
 				appConfig,
-			});
+			};
 
-			// @ts-expect-error
+			let routeHander =
+				match?.handler<
+					Record<string, any> & {
+						error?: Record<string, any>;
+						meta?: Record<string, any>;
+					}
+				> || notFoundController;
+
+			let result = await routeHander(match?.params, dependencies, request);
+
 			if (result.error) {
-				console.log(
-					// @ts-expect-error
-					result.error,
-				);
+				console.log(result.error);
 
-				sendJsonResponse(
-					response,
-					// @ts-expect-error
-					result.error?.code,
-					{
-						// @ts-expect-error
-						message: result.error?.message,
-					},
-				);
+				sendJsonResponse(response, result.error?.code, {
+					message: result.error?.message,
+				});
 
 				return;
 			}
