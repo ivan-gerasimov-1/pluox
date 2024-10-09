@@ -6,7 +6,10 @@
 	"scripts": {
 		"start": "node --env-file=.env --experimental-transform-types --watch ./src/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"db:delete": "rm -rf ./db.sqlite"
+		"db:init": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/init.ts",
+		"db:reset": "echo 'Not Implemented' && exit 0 && npm run db:delete && npm run db:init",
+		"db:delete": "rm -rf ./db.sqlite",
+		"db:migrate": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/migrate.ts"
 	},
 	"imports": {
 		"#app/*": "./src/*.ts"
