@@ -38,12 +38,12 @@ const routes: Record<
 		},
 	) => {} | Promise<{}>
 > = {
-	'/': (request, response) => {
+	'/': () => {
 		return {
 			message: 'Savee API',
 		};
 	},
-	'/health': (request, response) => {
+	'/health': () => {
 		return {
 			message: 'OK',
 			timestamp: new Date().toISOString(),
@@ -217,7 +217,7 @@ const routes: Record<
 			email: user.email,
 		};
 	},
-	notFound: (request, response) => {
+	notFound: () => {
 		return {
 			error: {
 				code: EResponseCode.NOT_FOUND,
