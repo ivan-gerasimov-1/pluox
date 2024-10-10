@@ -3,6 +3,9 @@ type TTrieNode = {
 	handler: <T>(...args: any) => Promise<T> | null;
 	isDynamic: boolean;
 	paramName: string | null;
+	options: {
+		secure?: boolean;
+	} | null;
 };
 
 export class Router {
@@ -12,7 +15,7 @@ export class Router {
 		this.#routes = this.#createTrieNode();
 	}
 
-	public addRoute(path: string, handler) {
+	public addRoute(path: string, handler, options?: Record<any, any>) {
 		let segments = path.split('/').filter(Boolean);
 		let currentNode = this.#routes;
 
@@ -33,6 +36,7 @@ export class Router {
 		}
 
 		currentNode.handler = handler;
+		currentNode.options = options;
 
 		return this;
 	}
@@ -42,10 +46,12 @@ export class Router {
 		let currentNode = this.#routes;
 
 		const params = {};
+		let options = null;
 
 		for (const segment of segments) {
 			if (currentNode.children[segment]) {
 				currentNode = currentNode.children[segment];
+				options = currentNode.options;
 			} else if (currentNode.children[':']) {
 				currentNode = currentNode.children[':'];
 				params[currentNode.paramName] = segment;
@@ -57,6 +63,7 @@ export class Router {
 		return currentNode.handler
 			? {
 					handler: currentNode.handler,
+					options,
 					params,
 				}
 			: null;
@@ -68,6 +75,7 @@ export class Router {
 			handler: null,
 			isDynamic: false,
 			paramName: null,
+			options: null,
 		};
 	}
 }
