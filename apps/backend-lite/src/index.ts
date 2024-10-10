@@ -76,12 +76,12 @@ async function postMailTest(
 async function getUsers(
 	params: never,
 	dependencies: {
-		usersService: UsersRepository;
+		usersRepository: UsersRepository;
 	},
 ) {
-	let usersService = dependencies.usersService;
+	let usersRepository = dependencies.usersRepository;
 
-	let users = await usersService.getUsers();
+	let users = await usersRepository.getUsers();
 
 	return {
 		data: users,
@@ -93,13 +93,13 @@ async function getUser(
 		id: string;
 	},
 	dependencies: {
-		usersService: UsersRepository;
+		usersRepository: UsersRepository;
 	},
 ) {
-	let userService = dependencies.usersService;
+	let usersRepository = dependencies.usersRepository;
 	let userId = params.id;
 
-	let user = await userService.getUser(userId);
+	let user = await usersRepository.getUser(userId);
 
 	if (!user) {
 		return {
@@ -119,26 +119,17 @@ async function getUser(
 async function postSignIn(
 	params,
 	dependencies: {
-		db: Database;
+		usersRepository: UsersRepository;
 	},
 	request: TRequest,
 ) {
-	let db = dependencies.db;
+	let usersRepository = dependencies.usersRepository;
 
 	let payload = await readJsonBody<{ email: string; password: string }>(
 		request,
 	);
 
-	let userReadSQLQuery =
-		'SELECT id, email, password FROM users WHERE email = ?';
-
-	let userReadStatement = db.prepare<[TPassword], TUserSchema>(
-		userReadSQLQuery,
-	);
-
-	let user: TUserSchema;
-
-	user = userReadStatement.get(payload.email);
+	let user: TUserSchema = await usersRepository.getUserByEmail(payload.email);
 
 	if (!user) {
 		return {
@@ -163,7 +154,6 @@ async function postSignIn(
 	return {
 		id: user.id,
 		email: user.email,
-		password: user.password,
 	};
 }
 
@@ -180,7 +170,7 @@ async function postSignUp(
 	let mail = dependencies.mail;
 	let appConfig = dependencies.appConfig;
 
-	let payload = await readJsonBody<{ email: string; password: string }>(
+	let payload = await readJsonBody<{ email: string; password: TPassword }>(
 		request,
 	);
 
@@ -257,7 +247,7 @@ function main() {
 		provider: appConfig.email.provider,
 	});
 
-	let usersService = new UsersRepository(db);
+	let usersRepository = new UsersRepository(db);
 
 	let router = new Router();
 
@@ -281,7 +271,7 @@ function main() {
 				db,
 				mail,
 				appConfig,
-				usersService,
+				usersRepository,
 			};
 
 			let routeHander =
