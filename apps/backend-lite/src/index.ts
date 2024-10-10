@@ -171,24 +171,20 @@ async function postSignUp(
 		db: Database;
 		mail: Mail;
 		appConfig: TAppConfig;
+		usersRepository: UsersRepository;
 	},
 	request: TRequest,
 ) {
 	let database = dependencies.db;
 	let mail = dependencies.mail;
 	let appConfig = dependencies.appConfig;
+	let usersRepository = dependencies.usersRepository;
 
 	let payload = await readJsonBody<{ email: string; password: TPassword }>(
 		request,
 	);
 
-	let userReadSQLQuery =
-		'SELECT id, email, password FROM users WHERE email = ?';
-	const userReadStatement = database.prepare<[string], TUserSchema>(
-		userReadSQLQuery,
-	);
-
-	let existingUser = userReadStatement.get(payload.email);
+	let existingUser = await usersRepository.getUserByEmail(payload.email);
 
 	if (existingUser) {
 		return {
@@ -210,7 +206,7 @@ async function postSignUp(
 		password: createPasswordHash(payload.password),
 	});
 
-	let user = userReadStatement.get(payload.email);
+	let newUser = await usersRepository.getUserByEmail(payload.email);
 
 	mail.send({
 		from: appConfig.email.from,
@@ -227,7 +223,7 @@ async function postSignUp(
 	});
 
 	return {
-		email: user.email,
+		email: newUser.email,
 	};
 }
 
