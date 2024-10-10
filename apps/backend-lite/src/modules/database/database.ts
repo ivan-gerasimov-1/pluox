@@ -1,15 +1,20 @@
 // @ts-expect-error
-import BetterSQLite3 from 'better-sqlite3';
-// import { DatabaseSync as BetterSQLite3 } from 'node:sqlite';
+import SQLite from 'better-sqlite3';
+// import { DatabaseSync as SQLite } from 'node:sqlite';
 
-const DATABASE_FILE = 'db.sqlite';
+import type {
+	IDatabase,
+	TInitializeDatabaseParams,
+} from '#app/modules/database/types';
 
-export function createDatabase() {
-	return new BetterSQLite3(DATABASE_FILE);
+export function createDatabase(filename: string): IDatabase {
+	return new SQLite(filename);
 }
 
-export function initializeDatabase() {
-	let db = createDatabase();
+export function initializeDatabase(
+	params: TInitializeDatabaseParams,
+): IDatabase {
+	let db = createDatabase(params.filename);
 
 	try {
 		db.exec(`
