@@ -8,6 +8,8 @@ export function createAppConfig(processEnv: TProcessEnv): TAppConfig {
 	let readEnvVariable = createEnvVariableReader(processEnv);
 
 	return {
+		env: readEnvVariable(EEnvVariable.ENV, identity),
+
 		host: readEnvVariable(EEnvVariable.HOST, identity),
 		port: readEnvVariable(EEnvVariable.PORT, parseNumber),
 

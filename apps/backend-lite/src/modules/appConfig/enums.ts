@@ -1,4 +1,5 @@
 export const enum EEnvVariable {
+	ENV = 'APP_ENV',
 	HOST = 'APP_HOST',
 	PORT = 'APP_PORT',
 
