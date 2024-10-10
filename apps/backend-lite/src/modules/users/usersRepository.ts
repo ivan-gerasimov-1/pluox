@@ -28,7 +28,7 @@ export class UsersRepository {
 			: null;
 	}
 
-	public async getUserByEmail(email: string): Promise<TUserSchema> {
+	public async getUserByEmail(email: string): Promise<TUserSchema | null> {
 		let user = this.#userFindByEmailStatement.get(email);
 
 		return user
