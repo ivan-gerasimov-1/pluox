@@ -104,6 +104,40 @@ function getUsers(
 	};
 }
 
+function getUser(
+	params: {
+		id: string;
+	},
+	dependencies: {
+		db: Database;
+	},
+) {
+	let db = dependencies.db;
+
+	let userId = params.id;
+
+	let userReadSQLQuery = 'SELECT id, email FROM users WHERE id = ?';
+	let userReadStatement = db.prepare<[TId], Pick<TUserSchema, 'id' | 'email'>>(
+		userReadSQLQuery,
+	);
+
+	let user = userReadStatement.get(userId);
+
+	if (!user) {
+		return {
+			error: {
+				code: EResponseCode.NOT_FOUND,
+				message: 'User not found',
+			},
+		};
+	}
+
+	return {
+		id: user.id,
+		email: user.email,
+	};
+}
+
 async function postSignIn(
 	params,
 	dependencies: {
@@ -250,6 +284,7 @@ function main() {
 		.addRoute('/health', getHealth)
 		.addRoute('/mail/test', postMailTest)
 		.addRoute('/users', getUsers)
+		.addRoute('/users/:id', getUser)
 		.addRoute('/signin', postSignIn)
 		.addRoute('/signup', postSignUp);
 
