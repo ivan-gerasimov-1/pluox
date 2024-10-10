@@ -20,7 +20,7 @@ import {
 } from '#app/modules/router/index';
 import type { TPassword, TRequest } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
-import { UsersRepository } from '#app/modules/users/usersService';
+import { UsersRepository } from '#app/modules/users/usersRepository';
 import type { TUserCreateSchema, TUserSchema } from '#app/modules/users/types';
 
 function getIndex() {
