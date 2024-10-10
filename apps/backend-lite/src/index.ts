@@ -13,7 +13,11 @@ import {
 import { initializeDatabase } from '#app/modules/database/database';
 import { createMail } from '#app/modules/email/createMail';
 import { type Mail } from '#app/modules/email/mail';
-import { Router, readJsonBody, sendJsonResponse } from '#app/router/index';
+import {
+	Router,
+	readJsonBody,
+	sendJsonResponse,
+} from '#app/modules/router/index';
 import type { TPassword, TRequest } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 import { UsersService } from '#app/modules/users/usersService';

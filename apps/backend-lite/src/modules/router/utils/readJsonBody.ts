@@ -1,7 +1,7 @@
 import type { TRequest } from '#app/types';
 
 import { EResponseCode } from '#app/enums';
-import { ERequestEvent } from '#app/router/enums';
+import { ERequestEvent } from '#app/modules/router/enums';
 
 export function readJsonBody<T>(request: TRequest): Promise<T> {
 	return new Promise((resolve, reject) => {
