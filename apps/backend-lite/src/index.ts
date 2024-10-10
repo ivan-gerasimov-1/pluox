@@ -20,7 +20,7 @@ import {
 } from '#app/modules/router/index';
 import type { TPassword, TRequest } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
-import { UsersService } from '#app/modules/users/usersService';
+import { UsersRepository } from '#app/modules/users/usersService';
 import type { TUserCreateSchema, TUserSchema } from '#app/modules/users/types';
 
 function getIndex() {
@@ -76,7 +76,7 @@ async function postMailTest(
 async function getUsers(
 	params: never,
 	dependencies: {
-		usersService: UsersService;
+		usersService: UsersRepository;
 	},
 ) {
 	let usersService = dependencies.usersService;
@@ -93,7 +93,7 @@ async function getUser(
 		id: string;
 	},
 	dependencies: {
-		usersService: UsersService;
+		usersService: UsersRepository;
 	},
 ) {
 	let userService = dependencies.usersService;
@@ -257,7 +257,7 @@ function main() {
 		provider: appConfig.email.provider,
 	});
 
-	let usersService = new UsersService(db);
+	let usersService = new UsersRepository(db);
 
 	let router = new Router();
 

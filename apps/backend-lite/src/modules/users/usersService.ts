@@ -7,7 +7,7 @@ const enum EUsersSQLQuery {
 	ALL = 'SELECT id, email FROM users',
 }
 
-export class UsersService {
+export class UsersRepository {
 	#database: Database;
 
 	constructor(database: Database) {
