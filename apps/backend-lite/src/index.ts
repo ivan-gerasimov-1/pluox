@@ -18,10 +18,12 @@ import {
 	readJsonBody,
 	sendJsonResponse,
 } from '#app/modules/router/index';
-import type { TPassword, TRequest } from '#app/types';
+import type { TPassword, TRequest, TResponse } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 import { UsersRepository } from '#app/modules/users/usersRepository';
 import type { TUserCreateSchema, TUserSchema } from '#app/modules/users/types';
+import { Session } from '#app/modules/session/session';
+import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 
 function getIndex() {
 	return {
@@ -120,10 +122,13 @@ async function postSignIn(
 	params,
 	dependencies: {
 		usersRepository: UsersRepository;
+		session: Session;
 	},
 	request: TRequest,
+	response: TResponse,
 ) {
 	let usersRepository = dependencies.usersRepository;
+	let session = dependencies.session;
 
 	let payload = await readJsonBody<{ email: string; password: string }>(
 		request,
@@ -150,6 +155,9 @@ async function postSignIn(
 			},
 		};
 	}
+
+	let sessionId = session.create();
+	response.setHeader('Set-Cookie', `sessionId=${sessionId}; HttpOnly; Path=/`);
 
 	return {
 		id: user.id,
@@ -246,16 +254,23 @@ function main() {
 		},
 		provider: appConfig.email.provider,
 	});
+	let session = new Session();
 
 	let usersRepository = new UsersRepository(db);
 
 	let router = new Router();
 
 	router
-		.addRoute('/', getIndex)
+		.addRoute('/', getIndex, {
+			secure: true,
+		})
 		.addRoute('/health', getHealth)
-		.addRoute('/mail/test', postMailTest)
-		.addRoute('/users', getUsers)
+		.addRoute('/mail/test', postMailTest, {
+			secure: true,
+		})
+		.addRoute('/users', getUsers, {
+			secure: true,
+		})
 		.addRoute('/users/:id', getUser)
 		.addRoute('/signin', postSignIn)
 		.addRoute('/signup', postSignUp);
@@ -267,11 +282,25 @@ function main() {
 			 */
 			let match = router.match(request.url);
 
+			let canAccess = match?.options?.secure
+				? checkAuthentication(request, session, appConfig)
+				: true;
+
+			if (!canAccess) {
+				let error = {
+					code: EResponseCode.UNAUTHORIZED,
+					message: 'Unauthorized',
+				};
+
+				throw error;
+			}
+
 			let dependencies = {
 				db,
 				mail,
 				appConfig,
 				usersRepository,
+				session,
 			};
 
 			let routeHander =
@@ -282,7 +311,12 @@ function main() {
 					}
 				> || notFoundController;
 
-			let result = await routeHander(match?.params, dependencies, request);
+			let result = await routeHander(
+				match?.params,
+				dependencies,
+				request,
+				response,
+			);
 
 			if (result.error) {
 				console.log(result.error);
