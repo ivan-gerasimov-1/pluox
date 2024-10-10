@@ -8,7 +8,7 @@ const enum EUsersSQLQuery {
 }
 
 export class UsersRepository {
-	#database: Database;
+	readonly #database: Database;
 
 	constructor(database: Database) {
 		this.#database = database;
