@@ -2,6 +2,10 @@ export type TAppConfig = {
 	host: string;
 	port: number;
 
+	db: {
+		filename: string;
+	};
+
 	email: {
 		provider: string;
 		host: string;

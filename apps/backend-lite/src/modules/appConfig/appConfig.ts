@@ -11,6 +11,10 @@ export function createAppConfig(processEnv: TProcessEnv): TAppConfig {
 		host: readEnvVariable(EEnvVariable.HOST, identity),
 		port: readEnvVariable(EEnvVariable.PORT, parseNumber),
 
+		db: {
+			filename: readEnvVariable(EEnvVariable.DB_FILENAME, identity),
+		},
+
 		email: {
 			provider: readEnvVariable(EEnvVariable.EMAIL_PROVIDER, identity),
 			host: readEnvVariable(EEnvVariable.EMAIL_HOST, identity),
