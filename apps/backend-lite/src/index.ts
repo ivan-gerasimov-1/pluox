@@ -14,19 +14,10 @@ import { initializeDatabase } from '#app/modules/database/database';
 import { createMail } from '#app/modules/email/createMail';
 import { type Mail } from '#app/modules/email/mail';
 import { Router, readJsonBody, sendJsonResponse } from '#app/router/index';
-import type { TRequest } from '#app/types';
+import type { TPassword, TRequest } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
-
-type TId = string;
-type TPassword = string;
-
-type TUserCreateSchema = Pick<TUserSchema, 'id' | 'email' | 'password'>;
-
-type TUserSchema = {
-	id: TId;
-	email: string;
-	password: TPassword;
-};
+import { UsersService } from '#app/modules/users/usersService';
+import type { TUserCreateSchema, TUserSchema } from '#app/modules/users/types';
 
 function getIndex() {
 	return {
@@ -78,50 +69,33 @@ async function postMailTest(
 	};
 }
 
-function getUsers(
-	params,
+async function getUsers(
+	params: never,
 	dependencies: {
-		db: Database;
+		usersService: UsersService;
 	},
 ) {
-	let db = dependencies.db;
+	let usersService = dependencies.usersService;
 
-	let usersSqlQuery = `
-			SELECT id, email FROM users
-		`;
-	let usersSqlStatement = db.prepare<
-		[],
-		{
-			id: string;
-			email: string;
-		}
-	>(usersSqlQuery);
-
-	let users = usersSqlStatement.all();
+	let users = await usersService.getUsers();
 
 	return {
 		data: users,
 	};
 }
 
-function getUser(
+async function getUser(
 	params: {
 		id: string;
 	},
 	dependencies: {
-		db: Database;
+		usersService: UsersService;
 	},
 ) {
-	let db = dependencies.db;
-
+	let userService = dependencies.usersService;
 	let userId = params.id;
 
-	let userReadSQLQuery = 'SELECT id, email FROM users WHERE id = ?';
-	let userReadStatement = db.prepare<[TId], Pick<TUserSchema, 'id' | 'email'>>(
-		userReadSQLQuery,
-	);
-
-	let user = userReadStatement.get(userId);
+	let user = await userService.getUser(userId);
 
 	if (!user) {
 		return {
@@ -277,6 +251,8 @@ function main() {
 		provider: appConfig.email.provider,
 	});
 
+	let usersService = new UsersService(db);
+
 	let router = new Router();
 
 	router
@@ -299,6 +275,7 @@ function main() {
 				db,
 				mail,
 				appConfig,
+				usersService,
 			};
 
 			let routeHander =
