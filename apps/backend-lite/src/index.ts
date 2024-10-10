@@ -240,7 +240,9 @@ function notFoundController() {
 
 function main() {
 	let appConfig = createAppConfig(processEnv);
-	let db = initializeDatabase();
+	let db = initializeDatabase({
+		filename: appConfig.db.filename,
+	});
 	let mail = createMail({
 		host: appConfig.email.host,
 		port: appConfig.email.port,
