@@ -24,6 +24,11 @@ export function initializeDatabase(
 				password TEXT NOT NULL
 			)
 		`);
+		db.exec(`
+			CREATE TABLE IF NOT EXISTS expenses (
+				id TEXT PRIMARY KEY
+			)
+		`);
 	} catch (error) {
 		console.log(error);
 	}
