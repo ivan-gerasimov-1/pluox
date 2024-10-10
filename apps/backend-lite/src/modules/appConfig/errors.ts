@@ -1,4 +1,4 @@
-import { type EEnvVariable } from '#app/modules/appConfig/types';
+import { type EEnvVariable } from '#app/modules/appConfig/enums';
 
 export class EnvVariableNotDefinedError extends Error {
 	constructor(variableName: EEnvVariable) {
