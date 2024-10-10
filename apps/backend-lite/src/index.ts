@@ -15,6 +15,7 @@ import { createMail } from '#app/modules/email/createMail';
 import { type Mail } from '#app/modules/email/mail';
 import { Router, readJsonBody, sendJsonResponse } from '#app/router/index';
 import type { TRequest } from '#app/types';
+import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 
 type TId = string;
 type TPassword = string;
@@ -61,7 +62,14 @@ async function postMailTest(
 		from: appConfig.email.from,
 		to: body.to,
 		subject: body.subject,
-		message: body.message,
+		message: createEmailTemplate({
+			title: body.subject,
+			heading: 'Добро пожаловать!',
+			body: `
+				<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
+				<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
+			`,
+		}),
 	});
 
 	return {
@@ -198,15 +206,14 @@ async function postSignUp(
 		from: appConfig.email.from,
 		to: payload.email,
 		subject: 'Добро пожаловать в Savee',
-		message: `
-				<html>
-					<body>
-						<h1>Добро пожаловать!</h1>
-						<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
-						<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
-					</body>
-				</html>
+		message: createEmailTemplate({
+			title: 'Добро пожаловать в Savee',
+			heading: 'Добро пожаловать!',
+			body: `
+				<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
+				<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
 			`,
+		}),
 	});
 
 	return {
