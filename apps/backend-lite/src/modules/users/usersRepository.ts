@@ -4,6 +4,7 @@ import type { Database } from 'better-sqlite3';
 
 const enum EUsersSQLQuery {
 	ONE_BY_ID = 'SELECT id, email FROM users WHERE id = ?',
+	ONE_BY_EMAIL = 'SELECT id, email, password FROM users WHERE email = ?',
 	ALL = 'SELECT id, email FROM users',
 }
 
@@ -27,6 +28,18 @@ export class UsersRepository {
 			: null;
 	}
 
+	public async getUserByEmail(email: string): Promise<TUserSchema> {
+		let user = this.#userFindByEmailStatement.get(email);
+
+		return user
+			? {
+					id: user.id,
+					email: user.email,
+					password: user.password,
+				}
+			: null;
+	}
+
 	public async getUsers(): Promise<Pick<TUserSchema, 'id' | 'email'>[]> {
 		let users = this.#usersFindAllStatement.all();
 
@@ -42,6 +55,10 @@ export class UsersRepository {
 		return EUsersSQLQuery.ONE_BY_ID;
 	}
 
+	get #userReadByEmailSQLQuery(): string {
+		return EUsersSQLQuery.ONE_BY_EMAIL;
+	}
+
 	get #usersReadSQLQuery(): string {
 		return EUsersSQLQuery.ALL;
 	}
@@ -49,6 +66,12 @@ export class UsersRepository {
 	get #userFindByIdStatement() {
 		return this.#database.prepare<[TId], Pick<TUserSchema, 'id' | 'email'>>(
 			this.#userReadSQLQuery,
+		);
+	}
+
+	get #userFindByEmailStatement() {
+		return this.#database.prepare<[string], TUserSchema>(
+			this.#userReadByEmailSQLQuery,
 		);
 	}
 
