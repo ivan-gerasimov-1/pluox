@@ -242,9 +242,7 @@ function main() {
 		provider: appConfig.email.provider,
 	});
 	let session = new Session();
-
 	let usersRepository = new UsersRepository(db);
-
 	let router = new Router();
 
 	router
