@@ -25,6 +25,11 @@ import type { TUserCreateSchema, TUserSchema } from '#app/modules/users/types';
 import { Session } from '#app/modules/session/session';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 
+const enum EProcessEvent {
+	SIGINT = 'SIGINT',
+	SIGTERM = 'SIGTERM',
+}
+
 function getIndex() {
 	return {
 		message: 'Savee API',
@@ -370,7 +375,7 @@ function main() {
 			}
 		});
 
-	['SIGINT', 'SIGTERM'].forEach((signal) =>
+	[EProcessEvent.SIGINT, EProcessEvent.SIGTERM].forEach((signal) =>
 		process.on(signal, (...signalName) => {
 			console.log('Server is shutting down due to:', signalName);
 
