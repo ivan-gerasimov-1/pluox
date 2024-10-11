@@ -1,4 +1,4 @@
-import { createServer } from 'node:http';
+import { createServer, type Server } from 'node:http';
 import { env as processEnv } from 'node:process';
 
 import { type Database } from 'better-sqlite3';
@@ -339,20 +339,26 @@ function main() {
 			}
 		});
 
-	[EProcessEvent.SIGINT, EProcessEvent.SIGTERM].forEach((signal) =>
-		process.on(signal, (...signalName) => {
-			console.log('Server is shutting down due to:', signalName);
+	let handleShutdown = createShutdownHandler(server, db);
 
-			server.close(() => {
-				console.log('Server closed');
-
-				db.close();
-				console.log('Database closed');
-
-				process.exit(0);
-			});
-		}),
-	);
+	process.on(EProcessEvent.SIGINT, handleShutdown);
+	process.on(EProcessEvent.SIGTERM, handleShutdown);
 }
 
 main();
+
+function createShutdownHandler(server: Server, database: Database) {
+	return function handleShutdown(signalName: EProcessEvent) {
+		console.log('Server is shutting down due to:', signalName);
+
+		server.close(() => {
+			console.log('Server closed');
+
+			database.close();
+
+			console.log('Database closed');
+
+			process.exit(0);
+		});
+	};
+}
