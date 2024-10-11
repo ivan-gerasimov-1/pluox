@@ -3,7 +3,7 @@ import { env as processEnv } from 'node:process';
 
 import { type Database } from 'better-sqlite3';
 
-import { EResponseCode } from '#app/enums';
+import { EProcessEvent, EResponseCode } from '#app/enums';
 import { createAppConfig, type TAppConfig } from '#app/modules/appConfig/index';
 import { generateId } from '#app/modules/crypto/id';
 import {
@@ -23,11 +23,6 @@ import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 import { UsersRepository } from '#app/modules/users/usersRepository';
 import { Session } from '#app/modules/session/session';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
-
-const enum EProcessEvent {
-	SIGINT = 'SIGINT',
-	SIGTERM = 'SIGTERM',
-}
 
 function getIndex() {
 	return {
