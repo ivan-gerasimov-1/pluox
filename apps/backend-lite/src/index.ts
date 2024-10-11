@@ -24,6 +24,14 @@ import { UsersRepository } from '#app/modules/users/usersRepository';
 import { Session } from '#app/modules/session/session';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 
+export type TEndpointControllerDependencies = {
+	db: Database;
+	mail: Mail;
+	appConfig: TAppConfig;
+	session: Session;
+	usersRepository: UsersRepository;
+};
+
 function getIndex() {
 	return {
 		message: 'Savee API',
@@ -39,10 +47,7 @@ function getHealth() {
 
 async function postMailTest(
 	params,
-	dependencies: {
-		mail: Mail;
-		appConfig: TAppConfig;
-	},
+	{ mail, appConfig }: TEndpointControllerDependencies,
 	request: TRequest,
 ) {
 	let body = await readJsonBody<{
@@ -50,9 +55,6 @@ async function postMailTest(
 		subject: string;
 		message: string;
 	}>(request);
-
-	let mail = dependencies.mail;
-	let appConfig = dependencies.appConfig;
 
 	mail.send({
 		from: appConfig.email.from,
@@ -76,12 +78,8 @@ async function postMailTest(
 
 async function getUsers(
 	params: never,
-	dependencies: {
-		usersRepository: UsersRepository;
-	},
+	{ usersRepository }: TEndpointControllerDependencies,
 ) {
-	let usersRepository = dependencies.usersRepository;
-
 	let users = await usersRepository.getUsers();
 
 	return {
@@ -93,11 +91,8 @@ async function getUser(
 	params: {
 		id: string;
 	},
-	dependencies: {
-		usersRepository: UsersRepository;
-	},
+	{ usersRepository }: TEndpointControllerDependencies,
 ) {
-	let usersRepository = dependencies.usersRepository;
 	let userId = params.id;
 
 	let user = await usersRepository.getUser(userId);
@@ -119,16 +114,10 @@ async function getUser(
 
 async function postSignIn(
 	params,
-	dependencies: {
-		usersRepository: UsersRepository;
-		session: Session;
-	},
+	{ usersRepository, session }: TEndpointControllerDependencies,
 	request: TRequest,
 	response: TResponse,
 ) {
-	let usersRepository = dependencies.usersRepository;
-	let session = dependencies.session;
-
 	let payload = await readJsonBody<{ email: string; password: string }>(
 		request,
 	);
@@ -166,18 +155,9 @@ async function postSignIn(
 
 async function postSignUp(
 	params,
-	dependencies: {
-		db: Database;
-		mail: Mail;
-		appConfig: TAppConfig;
-		usersRepository: UsersRepository;
-	},
+	{ mail, appConfig, usersRepository }: TEndpointControllerDependencies,
 	request: TRequest,
 ) {
-	let mail = dependencies.mail;
-	let appConfig = dependencies.appConfig;
-	let usersRepository = dependencies.usersRepository;
-
 	let payload = await readJsonBody<{ email: string; password: TPassword }>(
 		request,
 	);
