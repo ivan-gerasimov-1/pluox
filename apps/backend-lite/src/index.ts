@@ -21,7 +21,6 @@ import {
 import type { TPassword, TRequest, TResponse } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 import { UsersRepository } from '#app/modules/users/usersRepository';
-import type { TUserCreateSchema, TUserSchema } from '#app/modules/users/types';
 import { Session } from '#app/modules/session/session';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 
@@ -139,7 +138,7 @@ async function postSignIn(
 		request,
 	);
 
-	let user: TUserSchema = await usersRepository.getUserByEmail(payload.email);
+	let user = await usersRepository.getUserByEmail(payload.email);
 
 	if (!user) {
 		return {
@@ -180,7 +179,6 @@ async function postSignUp(
 	},
 	request: TRequest,
 ) {
-	let database = dependencies.db;
 	let mail = dependencies.mail;
 	let appConfig = dependencies.appConfig;
 	let usersRepository = dependencies.usersRepository;
@@ -200,18 +198,11 @@ async function postSignUp(
 		};
 	}
 
-	let userCreateSqlQuery =
-		'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)';
-	const userCreateStatement =
-		database.prepare<[TUserCreateSchema]>(userCreateSqlQuery);
-
-	userCreateStatement.run({
+	await usersRepository.createUser({
 		id: generateId('usr'),
 		email: payload.email,
 		password: createPasswordHash(payload.password),
 	});
-
-	let newUser = await usersRepository.getUserByEmail(payload.email);
 
 	mail.send({
 		from: appConfig.email.from,
@@ -228,7 +219,7 @@ async function postSignUp(
 	});
 
 	return {
-		email: newUser.email,
+		email: payload.email,
 	};
 }
 
