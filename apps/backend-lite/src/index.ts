@@ -251,7 +251,9 @@ function main() {
 
 	const server = createServer(async (request, response) => {
 		try {
+			if (request.headers.cookie) {
 			cookie.load(request.headers.cookie);
+			}
 
 			/**
 			 * @todo Remove queryParams from url
