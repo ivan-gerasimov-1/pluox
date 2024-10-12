@@ -261,7 +261,7 @@ function main() {
 			let match = router.match(request.url ?? '');
 
 			let canAccess = match?.options?.secure
-				? checkAuthentication(request, session, appConfig)
+				? checkAuthentication(session, cookie, appConfig)
 				: true;
 
 			if (!canAccess) {

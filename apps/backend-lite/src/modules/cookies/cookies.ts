@@ -1,5 +1,8 @@
 import type { TRequest } from '#app/types';
 
+/**
+ * @deprecated
+ */
 export function getSessionIdFromCookies(request: TRequest) {
 	const cookies = request.headers.cookie;
 

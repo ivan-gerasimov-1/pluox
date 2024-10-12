@@ -1,18 +1,24 @@
 import type { TAppConfig } from '#app/modules/appConfig/types';
-import { getSessionIdFromCookies } from '#app/modules/cookies/cookies';
+import type { ICookie } from '#app/modules/cookie/index';
 
 import type { Session } from '#app/modules/session/session';
-import type { TRequest } from '#app/types';
 
 export function checkAuthentication(
-	request: TRequest,
 	session: Session,
+	cookie: ICookie,
 	appConfig: TAppConfig,
-) {
-	let sessionId = getSessionIdFromCookies(request);
+): boolean {
+	let sessionId = cookie.getValue('sessionId');
 
+	/**
+	 * @description Find a better way to bypass authentication in local environment
+	 */
 	if (appConfig.env === 'local' && sessionId === 'letMeIn') {
 		return true;
+	}
+
+	if (!sessionId) {
+		return false;
 	}
 
 	return session.has(sessionId);
