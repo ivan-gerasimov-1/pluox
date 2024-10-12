@@ -27,6 +27,10 @@ export class Cookie implements ICookie {
 	public parse(rawCookie: string): Map<TCookieName, TCookieContainer> {
 		let cookie = new Map<TCookieName, TCookieContainer>();
 
+		if (!rawCookie) {
+			return cookie;
+		}
+
 		rawCookie
 			.split(';')
 			.filter(Boolean)
