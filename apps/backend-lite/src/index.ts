@@ -47,7 +47,7 @@ function getHealth() {
 }
 
 async function postMailTest(
-	params,
+	params: never,
 	{ mail, appConfig }: TEndpointControllerDependencies,
 	request: TRequest,
 ) {
@@ -162,7 +162,7 @@ async function postSignIn(
 }
 
 async function postSignUp(
-	params,
+	params: never,
 	{ mail, appConfig, usersRepository }: TEndpointControllerDependencies,
 	request: TRequest,
 ) {
@@ -256,7 +256,7 @@ function main() {
 			/**
 			 * @todo Remove queryParams from url
 			 */
-			let match = router.match(request.url);
+			let match = router.match(request.url ?? '');
 
 			let canAccess = match?.options?.secure
 				? checkAuthentication(request, session, appConfig)
@@ -297,7 +297,7 @@ function main() {
 				response,
 			);
 
-			if (result.error) {
+			if (result?.error) {
 				console.log(result.error);
 
 				sendJsonResponse(response, result.error?.code, {
@@ -330,15 +330,25 @@ function main() {
 		} catch (error) {
 			console.log(error);
 
-			if (!error.code) {
+			if (
+				// @ts-expect-error
+				!error?.code
+			) {
 				sendJsonResponse(response, EResponseCode.INTERNAL_SERVER_ERROR, {
 					message: 'Internal server error',
 				});
 			}
 
-			sendJsonResponse(response, error.code, {
-				message: error.message,
-			});
+			sendJsonResponse(
+				response,
+				// @ts-expect-error
+				error?.code,
+				{
+					message:
+						// @ts-expect-error
+						error?.message,
+				},
+			);
 		}
 	});
 
@@ -355,7 +365,10 @@ function main() {
 			},
 		)
 		.on('error', (error) => {
-			if (error.code === 'EADDRINUSE') {
+			if (
+				// @ts-expect-error
+				error.code === 'EADDRINUSE'
+			) {
 				console.error('[Error] Address in use:', appConfig.port);
 				db.close();
 				server.close();
