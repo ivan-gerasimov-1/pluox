@@ -18,11 +18,12 @@ import {
 	readJsonBody,
 	sendJsonResponse,
 } from '#app/modules/router/index';
-import type { TPassword, TRequest, TResponse } from '#app/types';
+import type { TPassword, TRequest } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 import { UsersRepository } from '#app/modules/users/usersRepository';
 import { Session } from '#app/modules/session/session';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
+import { createCookie, type ICookie } from '#app/modules/cookie/index';
 
 export type TEndpointControllerDependencies = {
 	db: Database;
@@ -89,11 +90,13 @@ async function getUsers(
 
 async function getUser(
 	params: {
-		id: string;
+		pathParams: {
+			id: string;
+		};
 	},
 	{ usersRepository }: TEndpointControllerDependencies,
 ) {
-	let userId = params.id;
+	let userId = params.pathParams.id;
 
 	let user = await usersRepository.getUser(userId);
 
@@ -113,10 +116,13 @@ async function getUser(
 }
 
 async function postSignIn(
-	params,
+	{
+		cookie,
+	}: {
+		cookie: ICookie;
+	},
 	{ usersRepository, session }: TEndpointControllerDependencies,
 	request: TRequest,
-	response: TResponse,
 ) {
 	let payload = await readJsonBody<{ email: string; password: string }>(
 		request,
@@ -144,8 +150,10 @@ async function postSignIn(
 		};
 	}
 
-	let sessionId = session.create();
-	response.setHeader('Set-Cookie', `sessionId=${sessionId}; HttpOnly; Path=/`);
+	cookie.set('sessionId', session.create(), {
+		httpOnly: true,
+		path: '/',
+	});
 
 	return {
 		id: user.id,
@@ -224,6 +232,7 @@ function main() {
 	let session = new Session();
 	let usersRepository = new UsersRepository(db);
 	let router = new Router();
+	let cookie = createCookie();
 
 	router
 		.addRoute('/', getIndex, {
@@ -242,6 +251,8 @@ function main() {
 
 	const server = createServer(async (request, response) => {
 		try {
+			cookie.load(request.headers.cookie);
+
 			/**
 			 * @todo Remove queryParams from url
 			 */
@@ -277,7 +288,10 @@ function main() {
 				> || notFoundController;
 
 			let result = await routeHander(
-				match?.params,
+				{
+					pathParams: match?.params || null,
+					cookie,
+				},
 				dependencies,
 				request,
 				response,
@@ -291,6 +305,15 @@ function main() {
 				});
 
 				return;
+			}
+
+			if (cookie.hasModified) {
+				response.setHeader(
+					'Set-Cookie',
+					cookie.serialize({
+						modifiedOnly: true,
+					}),
+				);
 			}
 
 			let {
