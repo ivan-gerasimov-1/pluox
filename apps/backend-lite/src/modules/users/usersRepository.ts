@@ -73,7 +73,9 @@ export class UsersRepository {
 	}
 
 	get #userCreateStatement() {
-		return this.#database.prepare<[TUserCreateSchema]>(this.#userReadSQLQuery);
+		return this.#database.prepare<[TUserCreateSchema]>(
+			this.#userCreateSQLQuery,
+		);
 	}
 
 	get #userFindByIdStatement() {
