@@ -75,9 +75,10 @@ export class Cookie implements ICookie {
 
 	public getValue(key: string): string | null {
 		if (!this.#cookie.has(key)) {
-			return;
+			return null;
 		}
 
+		// @ts-expect-error | We know that cookie has value
 		return this.#cookie.get(key).value;
 	}
 
@@ -86,6 +87,7 @@ export class Cookie implements ICookie {
 			return null;
 		}
 
+		// @ts-expect-error | We know that cookie has value
 		return this.#cookie.get(key);
 	}
 
