@@ -2,12 +2,9 @@ FROM node:22.9.0-alpine3.20
 
 WORKDIR /srv/app
 
-COPY \
-	package.json \
-	package-lock.json \
-	./
+COPY package.json ./
 
-RUN npm install
+RUN npm install --omit=dev
 
 COPY .env ./
 COPY src ./src
