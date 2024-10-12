@@ -47,16 +47,17 @@ function getHealth() {
 }
 
 async function postMailTest(
-	params: never,
+	{
+		body,
+	}: {
+		body: {
+			to: string;
+			subject: string;
+			message: string;
+		};
+	},
 	{ mail, appConfig }: TEndpointControllerDependencies,
-	request: TRequest,
 ) {
-	let body = await readJsonBody<{
-		to: string;
-		subject: string;
-		message: string;
-	}>(request);
-
 	mail.send({
 		from: appConfig.email.from,
 		to: body.to,
@@ -117,18 +118,15 @@ async function getUser(
 
 async function postSignIn(
 	{
+		body,
 		cookie,
 	}: {
+		body: { email: string; password: string };
 		cookie: ICookie;
 	},
 	{ usersRepository, session }: TEndpointControllerDependencies,
-	request: TRequest,
 ) {
-	let payload = await readJsonBody<{ email: string; password: string }>(
-		request,
-	);
-
-	let user = await usersRepository.getUserByEmail(payload.email);
+	let user = await usersRepository.getUserByEmail(body.email);
 
 	if (!user) {
 		return {
@@ -139,7 +137,7 @@ async function postSignIn(
 		};
 	}
 
-	let isPasswordMatch = comparePasswordHash(payload.password, user.password);
+	let isPasswordMatch = comparePasswordHash(body.password, user.password);
 
 	if (!isPasswordMatch) {
 		return {
@@ -162,15 +160,14 @@ async function postSignIn(
 }
 
 async function postSignUp(
-	params: never,
+	{
+		body,
+	}: {
+		body: { email: string; password: TPassword };
+	},
 	{ mail, appConfig, usersRepository }: TEndpointControllerDependencies,
-	request: TRequest,
 ) {
-	let payload = await readJsonBody<{ email: string; password: TPassword }>(
-		request,
-	);
-
-	let existingUser = await usersRepository.getUserByEmail(payload.email);
+	let existingUser = await usersRepository.getUserByEmail(body.email);
 
 	if (existingUser) {
 		return {
@@ -183,13 +180,13 @@ async function postSignUp(
 
 	await usersRepository.createUser({
 		id: generateId('usr'),
-		email: payload.email,
-		password: createPasswordHash(payload.password),
+		email: body.email,
+		password: createPasswordHash(body.password),
 	});
 
 	mail.send({
 		from: appConfig.email.from,
-		to: payload.email,
+		to: body.email,
 		subject: 'Добро пожаловать в Savee',
 		message: createEmailTemplate({
 			title: 'Добро пожаловать в Savee',
@@ -202,7 +199,7 @@ async function postSignUp(
 	});
 
 	return {
-		email: payload.email,
+		email: body.email,
 	};
 }
 
@@ -251,6 +248,12 @@ function main() {
 
 	const server = createServer(async (request, response) => {
 		try {
+			let body: Record<any, any> | null = null;
+
+			if (isJson(request)) {
+				body = await readJsonBody(request);
+			}
+
 			if (request.headers.cookie) {
 				cookie.load(request.headers.cookie);
 			}
@@ -291,6 +294,7 @@ function main() {
 
 			let result = await routeHander(
 				{
+					body,
 					pathParams: match?.params || null,
 					cookie,
 				},
@@ -309,6 +313,12 @@ function main() {
 				return;
 			}
 
+			let {
+				// @ts-expect-error
+				meta,
+				...responsePayload
+			} = result;
+
 			if (cookie.hasModified) {
 				response.setHeader(
 					'Set-Cookie',
@@ -317,12 +327,6 @@ function main() {
 					}),
 				);
 			}
-
-			let {
-				// @ts-expect-error
-				meta,
-				...responsePayload
-			} = result;
 
 			sendJsonResponse(
 				response,
@@ -399,4 +403,8 @@ function createShutdownHandler(server: Server, database: Database) {
 			process.exit(0);
 		});
 	};
+}
+
+function isJson(request: TRequest): boolean {
+	return request.headers['content-type'] === 'application/json';
 }
