@@ -16,7 +16,12 @@ export type TCookieContainer = {
 
 export interface ICookie {
 	parse(cookie: string): Map<TCookieName, TCookieContainer>;
-	serialize(): string;
+
+	load(cookie: string): ICookie;
+
+	serialize(options?: { modifiedOnly?: boolean }): string;
+
+	hasModified: boolean;
 
 	get(key: string): TCookieContainer | null;
 	getValue(key: string): string | null;

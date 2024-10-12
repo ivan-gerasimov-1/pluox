@@ -1,10 +1,12 @@
 import { Cookie } from './cookie.ts';
 import type { ICookie } from './types.ts';
 
-export function createCookie(cookie: string): ICookie {
+export function createCookie(rawCookie?: string): ICookie {
 	let cookieInstance = new Cookie();
 
-	cookieInstance.parse(cookie);
+	if (rawCookie) {
+		cookieInstance.load(rawCookie);
+	}
 
 	return cookieInstance;
 }
