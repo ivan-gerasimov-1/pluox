@@ -25,6 +25,14 @@ import { Session } from '#app/modules/session/session';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 import { createCookie, type ICookie } from '#app/modules/cookie/index';
 import { ExpensesRepository } from '#app/modules/expenses/index';
+import { type TExpenseCreateDTO } from '#app/modules/expenses/expensesRepository';
+
+export const enum EHttpMethod {
+	GET = 'GET',
+	POST = 'POST',
+	PUT = 'PUT',
+	DELETE = 'DELETE',
+}
 
 export type TEndpointControllerDependencies = {
 	db: Database;
@@ -118,14 +126,54 @@ async function getUser(
 	};
 }
 
-async function getExpenses(
-	params: never,
+async function expensesController(
+	{
+		body,
+	}: {
+		body: TExpenseCreateDTO;
+	},
 	{ expenesesRepository }: TEndpointControllerDependencies,
+	request: TRequest,
 ) {
-	let expenses = await expenesesRepository.getExpenses();
+	if (request.method === EHttpMethod.POST) {
+		await expenesesRepository.createExpense({
+			id: body.id,
+			userId: body.userId,
+			// 	amount: request.body.amount,
+			// 	// @ts-expect-error
+			// 	amountInUSD: request.body.amountInUSD,
+			// 	// @ts-expect-error
+			// 	currency: request.body.currency,
+			// 	// @ts-expect-error
+			// 	comment: request.body.comment,
+			// 	// @ts-expect-error
+			// 	category: request.body.category,
+			// 	date: new Date(
+			// 		// @ts-expect-error
+			// 		request.body.date,
+			// 	),
+			createdAt: body.createdAt,
+			modifiedAt: body.modifiedAt,
+		});
+
+		return {
+			status: 'Success',
+		};
+	}
+
+	if (request.method === EHttpMethod.GET) {
+		let expenses = await expenesesRepository.getExpenses();
+
+		return {
+			data: expenses,
+		};
+	}
 
 	return {
-		data: expenses,
+		error: {
+			code: EResponseCode.NOT_FOUND,
+			message: 'Not Implemented',
+		},
 	};
 }
 
@@ -257,7 +305,7 @@ function main() {
 			secure: true,
 		})
 		.addRoute('/users/:id', getUser)
-		.addRoute('/expenses', getExpenses, {
+		.addRoute('/expenses', expensesController, {
 			secure: true,
 		})
 		.addRoute('/signin', postSignIn)
