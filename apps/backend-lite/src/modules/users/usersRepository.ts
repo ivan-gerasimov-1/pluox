@@ -16,6 +16,28 @@ export class UsersRepository {
 		this.#database = database;
 	}
 
+	get #userCreateStatement() {
+		return this.#database.prepare<[TUserCreateSchema]>(EUsersSQLQuery.CREATE);
+	}
+
+	get #userFindByIdStatement() {
+		return this.#database.prepare<[TId], Pick<TUserSchema, 'id' | 'email'>>(
+			EUsersSQLQuery.ONE_BY_ID,
+		);
+	}
+
+	get #userFindByEmailStatement() {
+		return this.#database.prepare<[string], TUserSchema>(
+			EUsersSQLQuery.ONE_BY_EMAIL,
+		);
+	}
+
+	get #usersFindAllStatement() {
+		return this.#database.prepare<[], Pick<TUserSchema, 'id' | 'email'>>(
+			EUsersSQLQuery.ALL,
+		);
+	}
+
 	public async createUser(user: TUserCreateSchema): Promise<void> {
 		this.#userCreateStatement.run(user);
 	}
@@ -54,45 +76,5 @@ export class UsersRepository {
 				email: user.email,
 			};
 		});
-	}
-
-	get #userCreateSQLQuery(): string {
-		return EUsersSQLQuery.CREATE;
-	}
-
-	get #userReadSQLQuery(): string {
-		return EUsersSQLQuery.ONE_BY_ID;
-	}
-
-	get #userReadByEmailSQLQuery(): string {
-		return EUsersSQLQuery.ONE_BY_EMAIL;
-	}
-
-	get #usersReadSQLQuery(): string {
-		return EUsersSQLQuery.ALL;
-	}
-
-	get #userCreateStatement() {
-		return this.#database.prepare<[TUserCreateSchema]>(
-			this.#userCreateSQLQuery,
-		);
-	}
-
-	get #userFindByIdStatement() {
-		return this.#database.prepare<[TId], Pick<TUserSchema, 'id' | 'email'>>(
-			this.#userReadSQLQuery,
-		);
-	}
-
-	get #userFindByEmailStatement() {
-		return this.#database.prepare<[string], TUserSchema>(
-			this.#userReadByEmailSQLQuery,
-		);
-	}
-
-	get #usersFindAllStatement() {
-		return this.#database.prepare<[], Pick<TUserSchema, 'id' | 'email'>>(
-			this.#usersReadSQLQuery,
-		);
 	}
 }
