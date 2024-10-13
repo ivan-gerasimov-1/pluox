@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"___start___": "",
-		"start": "npm run start",
+		"start": "npm run start:dev",
 		"start:dev": "node --env-file=.env --experimental-transform-types --watch ./src/index.ts",
 		"start:prod": "node --env-file=.env --experimental-transform-types ./src/index.ts",
 		"___test___": "",
