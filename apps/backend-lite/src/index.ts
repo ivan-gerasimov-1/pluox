@@ -24,6 +24,7 @@ import { UsersRepository } from '#app/modules/users/usersRepository';
 import { Session } from '#app/modules/session/session';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 import { createCookie, type ICookie } from '#app/modules/cookie/index';
+import { ExpensesRepository } from '#app/modules/expenses/index';
 
 export type TEndpointControllerDependencies = {
 	db: Database;
@@ -31,6 +32,7 @@ export type TEndpointControllerDependencies = {
 	appConfig: TAppConfig;
 	session: Session;
 	usersRepository: UsersRepository;
+	expenesesRepository: ExpensesRepository;
 };
 
 function getIndex() {
@@ -113,6 +115,17 @@ async function getUser(
 	return {
 		id: user.id,
 		email: user.email,
+	};
+}
+
+async function getExpenses(
+	params: never,
+	{ expenesesRepository }: TEndpointControllerDependencies,
+) {
+	let expenses = await expenesesRepository.getExpenses();
+
+	return {
+		data: expenses,
 	};
 }
 
@@ -228,6 +241,7 @@ function main() {
 	});
 	let session = new Session();
 	let usersRepository = new UsersRepository(db);
+	let expenesesRepository = new ExpensesRepository(db);
 	let router = new Router();
 	let cookie = createCookie();
 
@@ -243,6 +257,9 @@ function main() {
 			secure: true,
 		})
 		.addRoute('/users/:id', getUser)
+		.addRoute('/expenses', getExpenses, {
+			secure: true,
+		})
 		.addRoute('/signin', postSignIn)
 		.addRoute('/signup', postSignUp);
 
@@ -281,6 +298,7 @@ function main() {
 				mail,
 				appConfig,
 				usersRepository,
+				expenesesRepository,
 				session,
 			};
 
