@@ -19,14 +19,18 @@ export function initializeDatabase(
 	try {
 		db.exec(`
 			CREATE TABLE IF NOT EXISTS users (
-				id TEXT PRIMARY KEY,
+				id VARCHAR(36) PRIMARY KEY,
 				email TEXT NOT NULL,
 				password TEXT NOT NULL
 			)
 		`);
 		db.exec(`
 			CREATE TABLE IF NOT EXISTS expenses (
-				id TEXT PRIMARY KEY
+				id VARCHAR(36) PRIMARY KEY,
+				userId VARCHAR(36) NOT NULL,
+				createdAt DATETIME NOT NULL,
+				modifiedAt DATETIME NOT NULL,
+				FOREIGN KEY (userId) REFERENCES users(id)
 			)
 		`);
 	} catch (error) {
