@@ -354,25 +354,16 @@ function main() {
 		} catch (error) {
 			console.log(error);
 
-			if (
+			let errorCode =
 				// @ts-expect-error
-				!error?.code
-			) {
-				sendJsonResponse(response, EResponseCode.INTERNAL_SERVER_ERROR, {
-					message: 'Internal server error',
-				});
-			}
+				error?.code ?? EResponseCode.INTERNAL_SERVER_ERROR;
+			let errorMessage =
+				// @ts-expect-error
+				error?.code ? error?.message : 'Internal server error';
 
-			sendJsonResponse(
-				response,
-				// @ts-expect-error
-				error?.code,
-				{
-					message:
-						// @ts-expect-error
-						error?.message,
-				},
-			);
+			sendJsonResponse(response, errorCode, {
+				message: errorMessage,
+			});
 		}
 	});
 
