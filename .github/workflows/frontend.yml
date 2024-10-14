@@ -13,13 +13,13 @@ env:
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'public/**'
-      - 'src/**'
-      - '*.*'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'public/**'
+  #     - 'src/**'
+  #     - '*.*'
 
 jobs:
   build:

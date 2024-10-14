@@ -20,16 +20,16 @@ env:
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'apps/backend/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'apps/backend/**'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'apps/backend/**'
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'apps/backend/**'
 
 jobs:
   build:
