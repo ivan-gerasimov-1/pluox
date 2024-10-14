@@ -93,7 +93,7 @@ jobs:
           npm run docker:build
           docker buildx build \
             --platform linux/arm64 \
-            --tag "ghcr.io/${{ github.repository }}/savee-api:latest" \
+            --tag ghcr.io/${{ github.repository }}/savee-api:latest \
             --load \
             .
           docker push ghcr.io/${{ github.repository }}/savee-api:latest
