@@ -1,0 +1,9 @@
+services:
+  api:
+    image: savee-api-lite:latest
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./db.sqlite:/srv/app/db.sqlite
+    environment:
+      - NODE_ENV=production

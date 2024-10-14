@@ -1,0 +1,46 @@
+{
+	"name": "@savee/backend-lite",
+	"version": "0.0.1",
+	"main": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"___start___": "",
+		"start": "npm run start:dev",
+		"start:dev": "node --env-file=.env --experimental-transform-types --watch ./src/index.ts",
+		"start:prod": "node --env-file=.env --experimental-transform-types ./src/index.ts",
+		"___test___": "",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"___build___": "",
+		"prebuild": "npm run _build:removeDist && npm run _build:createDist",
+		"build": "npm run _build:copyApp && npm run _build:copyAssets",
+		"_build:removeDist": "rm -rf dist",
+		"_build:createDist": "mkdir dist",
+		"_build:copyApp": "cp -r src dist",
+		"_build:copyAssets": "cp package.json .env dist",
+		"___docker___": "",
+		"docker:build": "npm run _docker:copyFiles && cd dist && npm run _docker:buildImage",
+		"docker:compose:up": "cd .docker && docker-compose up -d",
+		"docker:compose:down": "cd .docker && docker-compose down",
+		"_docker:copyFiles": "cp -r .docker/Dockerfile dist",
+		"_docker:buildImage": "docker build -t savee-api-lite:latest .",
+		"___db___": "",
+		"db:init": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/init.ts",
+		"db:reset": "echo 'Not Implemented' && exit 0 && npm run db:delete && npm run db:init",
+		"db:delete": "rm -rf ./db.sqlite",
+		"db:migrate": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/migrate.ts"
+	},
+	"imports": {
+		"#app/*": "./src/*.ts"
+	},
+	"packageManager": "npm@10.8.3",
+	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
+	"license": "UNLICENSED",
+	"description": "Savee app backend (lite)",
+	"dependencies": {
+		"better-sqlite3": "11.3.0"
+	},
+	"devDependencies": {
+		"@types/better-sqlite3": "7.6.11",
+		"@types/node": "22.7.5"
+	}
+}
