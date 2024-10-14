@@ -3,13 +3,13 @@ name: Frontend CI/CD
 env:
   NODE_VERSION: 16.20.2
 
-  NPM_BUILD_CMD: run build
+  # NPM_BUILD_CMD: run build
 
   ARTIFACTS_DIR: build
   ARTIFACT_NAME: build
 
-  DEPLOY_ORIGIN: build/*
-  DEPLOY_DESTINATION: ~/srv/savee.gerasimov.dev
+  # DEPLOY_ORIGIN: build/*
+  # DEPLOY_DESTINATION: ~/srv/savee.gerasimov.dev
 
 on:
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies and build the project
         run: |
           npm ci
-          npm $NPM_BUILD_CMD
+          npm run build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -57,11 +57,14 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SSH_KEY: 'op://Savee/GitHub Actions/private key'
-          HOST: 'op://Savee/Main Server/Host'
-          USER: 'op://Savee/Main Server/Username'
+          # SSH_KEY: 'op://Savee/GitHub Actions/private key'
+          # HOST: 'op://Savee/Main Server/Host'
+          # USER: 'op://Savee/Main Server/Username'
+          CLOUDFLARE_ACCOUNT_ID: 'op://Savee/Cloudflare Wrangler/Account ID'
+          CLOUDFLARE_API_TOKEN: 'op://Savee/Cloudflare Wrangler/API Token'
 
       - name: Setup SSH
+        if: false
         run: |
           set -eu
 
@@ -91,9 +94,18 @@ jobs:
           path: ${{ env.ARTIFACTS_DIR }}
 
       - name: Deploy
+        if: false
         run: |
           rsync \
             --archive \
             --compress \
             --delete \
             $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: 'apps/frontend'
+          command: pages deploy
