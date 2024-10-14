@@ -14,7 +14,7 @@ env:
   DEPLOY_DESTINATION: ~/srv/savee/api
 
   # Docker
-  IMAGE_TAG: savee-api:latest
+  IMAGE_TAG: ghcr.io/${{ github.repository }}savee-api:latest
   IMAGE_NAME: savee_docker-image.tar
   CONTAINER_NAME: savee-api
 
@@ -65,12 +65,12 @@ jobs:
           npm ci
           npm $NPM_BUILD_CMD
 
-      # - name: Log in to GitHub Container Registry
-      #   uses: docker/login-action@v2
-      #   with:
-      #     registry: ghcr.io
-      #     username: ${{ github.actor }} # GitHub username
-      #     password: ${{ secrets.GITHUB_TOKEN }} # Токен предоставляется GitHub Actions по умолчанию
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Create artifacts directory
       #   run: |
@@ -87,16 +87,16 @@ jobs:
       #       apps/backend/docker-compose.yml \
       #       $ARTIFACTS_DIR/
 
-      # - name: Build Docker image
-      #   run: |
-      #     cd $ARTIFACTS_DIR
-      #     docker buildx build \
-      #       --platform linux/arm64 \
-      #       --tag "$IMAGE_TAG" \
-      #       --load \
-      #       .
-      #     docker save \
-      #       --output $IMAGE_NAME "$IMAGE_TAG"
+      - name: Build Docker image
+        run: |
+          cd apps/backend-lite
+          npm run docker:build
+          docker buildx build \
+            --platform linux/arm64 \
+            --tag "ghcr.io/${{ github.repository }}/savee-api:latest" \
+            --load \
+            .
+          docker push ghcr.io/${{ github.repository }}/savee-api:latest
 
       # - name: Upload build artifact
       #   uses: actions/upload-artifact@v4
