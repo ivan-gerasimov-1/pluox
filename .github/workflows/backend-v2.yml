@@ -90,7 +90,8 @@ jobs:
       - name: Build Docker image
         run: |
           cd apps/backend-lite
-          npm run docker:build
+          npm run _docker:copyFiles
+          cd dist
           docker buildx build \
             --platform linux/arm64 \
             --tag ghcr.io/${{ github.repository }}/savee-api:latest \
