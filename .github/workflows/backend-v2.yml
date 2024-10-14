@@ -20,16 +20,16 @@ env:
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'packages/backend/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'packages/backend/**'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'apps/backend/**'
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'apps/backend/**'
 
 jobs:
   build:
@@ -59,12 +59,12 @@ jobs:
       - name: Copy files
         run: |
           cp -r \
-            packages/backend/build/* \
+            apps/backend/build/* \
             package-lock.json \
-            packages/backend/package.json \
-            packages/backend/ecosystem.config.js \
-            packages/backend/Dockerfile \
-            packages/backend/docker-compose.yml \
+            apps/backend/package.json \
+            apps/backend/ecosystem.config.js \
+            apps/backend/Dockerfile \
+            apps/backend/docker-compose.yml \
             $ARTIFACTS_DIR/
 
       - name: Build Docker image

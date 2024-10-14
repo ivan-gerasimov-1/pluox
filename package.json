@@ -1,79 +1,10 @@
 {
 	"name": "savee",
 	"version": "0.1.0",
-	"scripts": {
-		"analyze": "npm run analyze@prod",
-		"analyze@prod": "cross-env NODE_ENV='production' BUNDLE_ANALYZER='on' npx webpack --mode production",
-		"build": "npm run build@production",
-		"build@development": "cross-env NODE_ENV='development' npx webpack",
-		"build@production": "cross-env NODE_ENV='production' npx webpack",
-		"preview": "npx serve --single --no-request-logging --config ../serve.json --listen 3000 build/",
-		"start": "cross-env NODE_ENV='development' npx webpack-dev-server"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/EvanJ0hnson/savee.git"
-	},
-	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.pw)",
+	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"private": true,
-	"bugs": {
-		"url": "https://github.com/EvanJ0hnson/savee/issues"
-	},
-	"homepage": "https://github.com/EvanJ0hnson/savee#readme",
 	"workspaces": [
-		"packages/backend"
-	],
-	"dependencies": {
-		"@supabase/supabase-js": "2.38.2",
-		"clsx": "2.1.1",
-		"dayjs": "1.11.11",
-		"ionicons": "7.3.1",
-		"nanoid": "5.0.7",
-		"react": "18.3.1",
-		"react-dom": "18.3.1",
-		"react-router": "6.23.0",
-		"react-router-dom": "6.23.0",
-		"react-swipeable-list": "1.9.3",
-		"react-transition-group": "4.4.5",
-		"zustand": "4.5.2"
-	},
-	"devDependencies": {
-		"@pmmmwh/react-refresh-webpack-plugin": "0.5.13",
-		"@svgr/webpack": "8.1.0",
-		"@types/react": "18.3.1",
-		"@types/react-dom": "18.3.0",
-		"@types/react-router": "5.1.20",
-		"@types/react-router-dom": "5.3.3",
-		"@types/react-transition-group": "4.4.10",
-		"clean-webpack-plugin": "4.0.0",
-		"copy-webpack-plugin": "12.0.2",
-		"cross-env": "7.0.3",
-		"css-loader": "7.1.1",
-		"css-minimizer-webpack-plugin": "6.0.0",
-		"html-webpack-plugin": "5.6.0",
-		"mini-css-extract-plugin": "2.9.0",
-		"msw": "2.3.0",
-		"postcss-loader": "8.1.1",
-		"postcss-nested": "6.0.1",
-		"postcss-preset-env": "9.5.9",
-		"prettier": "3.2.5",
-		"react-refresh": "0.14.2",
-		"react-refresh-typescript": "2.0.9",
-		"serve": "14.2.3",
-		"source-map-loader": "5.0.0",
-		"ts-loader": "9.5.1",
-		"tsconfig-paths-webpack-plugin": "4.1.0",
-		"typescript": "5.4.5",
-		"webpack": "5.91.0",
-		"webpack-bundle-analyzer": "4.10.2",
-		"webpack-cli": "5.1.4",
-		"webpack-dev-server": "5.0.4",
-		"workbox-webpack-plugin": "7.1.0"
-	},
-	"msw": {
-		"workerDirectory": [
-			"public"
-		]
-	}
+		"apps/*"
+	]
 }

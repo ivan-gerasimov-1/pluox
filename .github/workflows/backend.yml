@@ -13,16 +13,16 @@ env:
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'packages/backend/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'packages/backend/**'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'apps/backend/**'
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'apps/backend/**'
 
 jobs:
   build:
@@ -47,10 +47,10 @@ jobs:
       - name: Copy files
         run: |
           cp -r \
-            packages/backend/build/* \
+            apps/backend/build/* \
             package-lock.json \
-            packages/backend/package.json \
-            packages/backend/ecosystem.config.js \
+            apps/backend/package.json \
+            apps/backend/ecosystem.config.js \
             $ARTIFACTS_DIR/
 
       - name: Upload build artifact
