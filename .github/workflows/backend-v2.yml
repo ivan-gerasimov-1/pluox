@@ -3,9 +3,9 @@
 name: Backend CI/CD V2
 
 env:
-  NODE_VERSION: 20.11.1
+  NODE_VERSION: 22.9.0
 
-  NPM_BUILD_CMD: --workspace=@savee/backend run build
+  NPM_BUILD_CMD: --workspace=@savee/backend-lite run build
 
   ARTIFACTS_DIR: artifacts
   ARTIFACT_NAME: build
@@ -14,7 +14,7 @@ env:
   DEPLOY_DESTINATION: ~/srv/savee/api
 
   # Docker
-  IMAGE_TAG: savee:latest
+  IMAGE_TAG: savee-api:latest
   IMAGE_NAME: savee_docker-image.tar
   CONTAINER_NAME: savee-api
 
@@ -52,107 +52,115 @@ jobs:
           npm ci
           npm $NPM_BUILD_CMD
 
-      - name: Create artifacts directory
-        run: |
-          mkdir -p $ARTIFACTS_DIR
-
-      - name: Copy files
-        run: |
-          cp -r \
-            apps/backend/build/* \
-            package-lock.json \
-            apps/backend/package.json \
-            apps/backend/ecosystem.config.js \
-            apps/backend/Dockerfile \
-            apps/backend/docker-compose.yml \
-            $ARTIFACTS_DIR/
-
-      - name: Build Docker image
-        run: |
-          cd $ARTIFACTS_DIR
-          docker buildx build \
-            --platform linux/arm64 \
-            --tag "$IMAGE_TAG" \
-            --load \
-            .
-          docker save \
-            --output $IMAGE_NAME "$IMAGE_TAG"
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACTS_DIR }}
-          retention-days: 1
+          registry: ghcr.io
+          username: ${{ github.actor }} # GitHub username
+          password: ${{ secrets.GITHUB_TOKEN }} # Токен предоставляется GitHub Actions по умолчанию
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-22.04
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # - name: Create artifacts directory
+      #   run: |
+      #     mkdir -p $ARTIFACTS_DIR
 
-      - name: Load secrets from 1Password
-        uses: 1Password/load-secrets-action@v2.0.0
-        with:
-          export-env: true
-        env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SSH_KEY: 'op://Savee/GitHub Actions/private key'
-          HOST: 'op://Savee/Main Server/Host'
-          USER: 'op://Savee/Main Server/Username'
+      # - name: Copy files
+      #   run: |
+      #     cp -r \
+      #       apps/backend/build/* \
+      #       package-lock.json \
+      #       apps/backend/package.json \
+      #       apps/backend/ecosystem.config.js \
+      #       apps/backend/Dockerfile \
+      #       apps/backend/docker-compose.yml \
+      #       $ARTIFACTS_DIR/
 
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACTS_DIR }}
+      # - name: Build Docker image
+      #   run: |
+      #     cd $ARTIFACTS_DIR
+      #     docker buildx build \
+      #       --platform linux/arm64 \
+      #       --tag "$IMAGE_TAG" \
+      #       --load \
+      #       .
+      #     docker save \
+      #       --output $IMAGE_NAME "$IMAGE_TAG"
 
-      - name: Setup SSH
-        run: |
-          set -eu
+      # - name: Upload build artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ${{ env.ARTIFACT_NAME }}
+      #     path: ${{ env.ARTIFACTS_DIR }}
+      #     retention-days: 1
 
-          mkdir $HOME/.ssh
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-22.04
 
-          echo "$SSH_KEY" \
-            > $HOME/.ssh/ssh-rsa
-          chmod 600 $HOME/.ssh/ssh-rsa
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
 
-          ssh-keyscan -t rsa $HOST \
-            > $HOME/.ssh/known_hosts
-          chmod 600 $HOME/.ssh/known_hosts
+  #     - name: Load secrets from 1Password
+  #       uses: 1Password/load-secrets-action@v2.0.0
+  #       with:
+  #         export-env: true
+  #       env:
+  #         OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+  #         SSH_KEY: 'op://Savee/GitHub Actions/private key'
+  #         HOST: 'op://Savee/Main Server/Host'
+  #         USER: 'op://Savee/Main Server/Username'
 
-          echo -e "
-            Host $HOST
-              \tHostName $HOST
-              \tUser $USER
-              \tIdentityFile $HOME/.ssh/ssh-rsa
-            " \
-            > $HOME/.ssh/config
-          chmod 600 $HOME/.ssh/config
+  #     - name: Download build artifact
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: ${{ env.ARTIFACT_NAME }}
+  #         path: ${{ env.ARTIFACTS_DIR }}
 
-      - name: Prepare deployment destination directory
-        run: |
-          ssh -T $USER@$HOST "
-            mkdir -p \
-              $DEPLOY_DESTINATION
-          "
+  #     - name: Setup SSH
+  #       run: |
+  #         set -eu
 
-      - name: Deploy
-        run: |
-          rsync \
-            --archive \
-            --compress \
-            --delete \
-            $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+  #         mkdir $HOME/.ssh
 
-      - name: Run
-        run: |
-          ssh -T $USER@$HOST "
-            cd ${DEPLOY_DESTINATION}
-            docker load \
-              --input ${IMAGE_NAME}
-            docker compose up -d
-            docker compose restart
-          "
+  #         echo "$SSH_KEY" \
+  #           > $HOME/.ssh/ssh-rsa
+  #         chmod 600 $HOME/.ssh/ssh-rsa
+
+  #         ssh-keyscan -t rsa $HOST \
+  #           > $HOME/.ssh/known_hosts
+  #         chmod 600 $HOME/.ssh/known_hosts
+
+  #         echo -e "
+  #           Host $HOST
+  #             \tHostName $HOST
+  #             \tUser $USER
+  #             \tIdentityFile $HOME/.ssh/ssh-rsa
+  #           " \
+  #           > $HOME/.ssh/config
+  #         chmod 600 $HOME/.ssh/config
+
+  #     - name: Prepare deployment destination directory
+  #       run: |
+  #         ssh -T $USER@$HOST "
+  #           mkdir -p \
+  #             $DEPLOY_DESTINATION
+  #         "
+
+  #     - name: Deploy
+  #       run: |
+  #         rsync \
+  #           --archive \
+  #           --compress \
+  #           --delete \
+  #           $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+
+  #     - name: Run
+  #       run: |
+  #         ssh -T $USER@$HOST "
+  #           cd ${DEPLOY_DESTINATION}
+  #           docker load \
+  #             --input ${IMAGE_NAME}
+  #           docker compose up -d
+  #           docker compose restart
+  #         "
