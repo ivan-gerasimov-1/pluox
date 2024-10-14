@@ -3,9 +3,9 @@ name: Frontend CI/CD
 env:
   NODE_VERSION: 22.9.0
 
-  # NPM_BUILD_CMD: run build
+  NPM_BUILD_CMD: --workspace=@savee/frontend run build
 
-  ARTIFACTS_DIR: build
+  ARTIFACTS_DIR: apps/frontend/build
   ARTIFACT_NAME: build
 
   # DEPLOY_ORIGIN: build/*
@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies and build the project
         run: |
           npm ci
-          npm run build
+          npm $NPM_BUILD_CMD
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
