@@ -14,7 +14,7 @@ env:
   DEPLOY_DESTINATION: ~/srv/savee/api
 
   # Docker
-  IMAGE_TAG: ghcr.io/${{ github.repository }}savee-api:latest
+  IMAGE_TAG: ghcr.io/${{ github.repository }}/savee-api:latest
   IMAGE_NAME: savee_docker-image.tar
   CONTAINER_NAME: savee-api
 
@@ -166,7 +166,7 @@ jobs:
             --archive \
             --compress \
             --delete \
-            apps/backend-lite/docker-compose.yml $USER@$HOST:$DEPLOY_DESTINATION
+            apps/backend-lite/.docker/docker-compose.yml $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         env:
