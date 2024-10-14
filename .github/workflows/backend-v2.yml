@@ -106,74 +106,75 @@ jobs:
       #     path: ${{ env.ARTIFACTS_DIR }}
       #     retention-days: 1
 
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-22.04
+  deploy:
+    needs: build
+    runs-on: ubuntu-22.04
 
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
 
-  #     - name: Load secrets from 1Password
-  #       uses: 1Password/load-secrets-action@v2.0.0
-  #       with:
-  #         export-env: true
-  #       env:
-  #         OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-  #         SSH_KEY: 'op://Savee/GitHub Actions/private key'
-  #         HOST: 'op://Savee/Main Server/Host'
-  #         USER: 'op://Savee/Main Server/Username'
+      - name: Load secrets from 1Password
+        uses: 1Password/load-secrets-action@v2.0.0
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          SSH_KEY: 'op://Savee/GitHub Actions/private key'
+          HOST: 'op://Savee/Main Server/Host'
+          USER: 'op://Savee/Main Server/Username'
 
-  #     - name: Download build artifact
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: ${{ env.ARTIFACT_NAME }}
-  #         path: ${{ env.ARTIFACTS_DIR }}
+      # - name: Download build artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: ${{ env.ARTIFACT_NAME }}
+      #     path: ${{ env.ARTIFACTS_DIR }}
 
-  #     - name: Setup SSH
-  #       run: |
-  #         set -eu
+      - name: Setup SSH
+        run: |
+          set -eu
 
-  #         mkdir $HOME/.ssh
+          mkdir $HOME/.ssh
 
-  #         echo "$SSH_KEY" \
-  #           > $HOME/.ssh/ssh-rsa
-  #         chmod 600 $HOME/.ssh/ssh-rsa
+          echo "$SSH_KEY" \
+            > $HOME/.ssh/ssh-rsa
+          chmod 600 $HOME/.ssh/ssh-rsa
 
-  #         ssh-keyscan -t rsa $HOST \
-  #           > $HOME/.ssh/known_hosts
-  #         chmod 600 $HOME/.ssh/known_hosts
+          ssh-keyscan -t rsa $HOST \
+            > $HOME/.ssh/known_hosts
+          chmod 600 $HOME/.ssh/known_hosts
 
-  #         echo -e "
-  #           Host $HOST
-  #             \tHostName $HOST
-  #             \tUser $USER
-  #             \tIdentityFile $HOME/.ssh/ssh-rsa
-  #           " \
-  #           > $HOME/.ssh/config
-  #         chmod 600 $HOME/.ssh/config
+          echo -e "
+            Host $HOST
+              \tHostName $HOST
+              \tUser $USER
+              \tIdentityFile $HOME/.ssh/ssh-rsa
+            " \
+            > $HOME/.ssh/config
+          chmod 600 $HOME/.ssh/config
 
-  #     - name: Prepare deployment destination directory
-  #       run: |
-  #         ssh -T $USER@$HOST "
-  #           mkdir -p \
-  #             $DEPLOY_DESTINATION
-  #         "
+      - name: Prepare deployment destination directory
+        run: |
+          ssh -T $USER@$HOST "
+            mkdir -p \
+              $DEPLOY_DESTINATION
+          "
 
-  #     - name: Deploy
-  #       run: |
-  #         rsync \
-  #           --archive \
-  #           --compress \
-  #           --delete \
-  #           $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
+      - name: Deploy
+        run: |
+          rsync \
+            --archive \
+            --compress \
+            --delete \
+            apps/backend-lite/docker-compose.yml $USER@$HOST:$DEPLOY_DESTINATION
 
-  #     - name: Run
-  #       run: |
-  #         ssh -T $USER@$HOST "
-  #           cd ${DEPLOY_DESTINATION}
-  #           docker load \
-  #             --input ${IMAGE_NAME}
-  #           docker compose up -d
-  #           docker compose restart
-  #         "
+      - name: Run
+        env:
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ssh -T $USER@$HOST "
+            echo ${DOCKER_PASSWORD} | docker login ghcr.io -u "${DOCKER_USERNAME}" --password-stdin
+            cd ${DEPLOY_DESTINATION}
+            docker compose up -d
+          "
