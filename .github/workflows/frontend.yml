@@ -1,7 +1,7 @@
 name: Frontend CI/CD
 
 env:
-  NODE_VERSION: 16.20.2
+  NODE_VERSION: 22.9.0
 
   # NPM_BUILD_CMD: run build
 
