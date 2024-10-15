@@ -60,6 +60,9 @@ jobs:
           printf "%s" $ENV_FILE > apps/backend-lite/.env
           npm ci
           npm $NPM_BUILD_CMD
+          echo ——————
+          ls apps/backend-lite/dist
+          echo ——————
           printf "%s" $ENV_FILE > apps/backend-lite/dist/.env
 
       - name: Log in to GitHub Container Registry
