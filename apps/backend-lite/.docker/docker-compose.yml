@@ -1,6 +1,6 @@
 services:
   api:
-    image: savee-api:latest
+    image: ghcr.io/ivan-gerasimov-1/savee/savee-api:stable
     ports:
       - '3000:3000'
     # volumes:

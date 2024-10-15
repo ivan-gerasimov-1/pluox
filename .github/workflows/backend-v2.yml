@@ -14,7 +14,7 @@ env:
   DEPLOY_DESTINATION: ~/srv/savee/api
 
   # Docker
-  IMAGE_TAG: ghcr.io/${{ github.repository }}/savee-api:latest
+  IMAGE_TAG: ghcr.io/${{ github.repository }}/savee-api:stable
   IMAGE_NAME: savee_docker-image.tar
   CONTAINER_NAME: savee-api
 
@@ -94,10 +94,10 @@ jobs:
           cd dist
           docker buildx build \
             --platform linux/arm64 \
-            --tag ghcr.io/${{ github.repository }}/savee-api:latest \
+            --tag ghcr.io/${{ github.repository }}/savee-api:stable \
             --load \
             .
-          docker push ghcr.io/${{ github.repository }}/savee-api:latest
+          docker push ghcr.io/${{ github.repository }}/savee-api:stable
 
       # - name: Upload build artifact
       #   uses: actions/upload-artifact@v4
@@ -176,7 +176,7 @@ jobs:
         run: |
           ssh -T $USER@$HOST "
             echo ${DOCKER_PASSWORD} | docker login ghcr.io -u "${DOCKER_USERNAME}" --password-stdin
-            docker pull ghcr.io/${SOMETHING}/savee-api:latest
+            docker pull ghcr.io/${SOMETHING}/savee-api:stable
             cd ${DEPLOY_DESTINATION}
             docker compose up -d
           "
