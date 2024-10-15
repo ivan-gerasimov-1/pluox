@@ -104,7 +104,7 @@ jobs:
           retention-days: 1
 
   deploy:
-    needs: build
+    # needs: build
     runs-on: ubuntu-22.04
 
     steps:
