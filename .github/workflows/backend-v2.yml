@@ -57,11 +57,10 @@ jobs:
 
       - name: Build
         run: |
-          mkdir apps/backend-lite/dist
-          printf "%s" $ENV_FILE > apps/backend-lite/dist/.env
           printf "%s" $ENV_FILE > apps/backend-lite/.env
           npm ci
           npm $NPM_BUILD_CMD
+          printf "%s" $ENV_FILE > apps/backend-lite/dist/.env
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
