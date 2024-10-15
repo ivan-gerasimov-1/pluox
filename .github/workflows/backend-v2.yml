@@ -34,6 +34,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    if: false
 
     steps:
       - uses: actions/checkout@v4
@@ -125,16 +126,11 @@ jobs:
           USER: 'op://Savee/Main Server/Username'
           ENV_FILE: 'op://Savee/savee-api_backend-lite_env/.env'
 
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACTS_DIR }}
-
-      - name: List
-        run: |
-          ls -a apps/backend-lite
-          ls -a apps/backend-lite/dist
+      # - name: Download build artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: ${{ env.ARTIFACT_NAME }}
+      #     path: ${{ env.ARTIFACTS_DIR }}
 
       - name: Setup SSH
         run: |
@@ -175,15 +171,15 @@ jobs:
             --delete \
             apps/backend-lite/.docker/docker-compose.yml apps/backend-lite/.env $USER@$HOST:$DEPLOY_DESTINATION
 
-      - name: Run
-        env:
-          DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          SOMETHING: ${{ github.repository}}
-        run: |
-          ssh -T $USER@$HOST "
-            echo ${DOCKER_PASSWORD} | docker login ghcr.io -u "${DOCKER_USERNAME}" --password-stdin
-            docker pull ghcr.io/${SOMETHING}/savee-api:stable
-            cd ${DEPLOY_DESTINATION}
-            docker compose up -d
-          "
+      # - name: Run
+      #   env:
+      #     DOCKER_USERNAME: ${{ github.actor }}
+      #     DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      #     SOMETHING: ${{ github.repository}}
+      #   run: |
+      #     ssh -T $USER@$HOST "
+      #       echo ${DOCKER_PASSWORD} | docker login ghcr.io -u "${DOCKER_USERNAME}" --password-stdin
+      #       docker pull ghcr.io/${SOMETHING}/savee-api:stable
+      #       cd ${DEPLOY_DESTINATION}
+      #       docker compose up -d
+      #     "
