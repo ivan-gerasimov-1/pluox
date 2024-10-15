@@ -43,7 +43,7 @@ export class BaseApi implements IBaseApi {
 		path: string,
 		payload?: TPayload,
 	): Promise<TResponse> {
-		const response = await fetch(`${this.appConfig.apiUrl}${path}`, {
+		const responseRaw = await fetch(`${this.appConfig.apiUrl}${path}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -52,10 +52,12 @@ export class BaseApi implements IBaseApi {
 			body: JSON.stringify(payload),
 		});
 
-		if (!response.ok) {
-			return Promise.reject(response.json());
+		let response = await responseRaw.json();
+
+		if (!responseRaw.ok) {
+			return Promise.reject(response);
 		}
 
-		return response.json();
+		return response;
 	}
 }
