@@ -72,6 +72,7 @@ jobs:
           npm run _docker:copyFiles
           cd dist
           docker buildx build \
+            --platform linux/arm64 \
             --tag ${IMAGE_TAG} \
             --load \
             .
