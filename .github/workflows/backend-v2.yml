@@ -57,6 +57,7 @@ jobs:
 
       - name: Build
         run: |
+          mkdir apps/backend-lite/dist
           printf "%s" $ENV_FILE > apps/backend-lite/dist/.env
           printf "%s" $ENV_FILE > apps/backend-lite/.env
           npm ci
