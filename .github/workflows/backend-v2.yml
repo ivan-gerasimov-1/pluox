@@ -127,6 +127,11 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.ARTIFACTS_DIR }}
 
+      - name: List
+        run: |
+          ls apps/backend-lite
+          ls apps/backend-lite/dist
+
       - name: Setup SSH
         run: |
           set -eu
