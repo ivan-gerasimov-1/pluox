@@ -1,3 +1,7 @@
+networks:
+  dockernetworks_containers-network:
+    external: true
+
 services:
   savee-api:
     image: ghcr.io/ivan-gerasimov-1/savee/savee-api:stable
@@ -7,3 +11,5 @@ services:
     #   - ./db.sqlite:/srv/app/db.sqlite
     environment:
       - NODE_ENV=production
+    networks:
+      - dockernetworks_containers-network
