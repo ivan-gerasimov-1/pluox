@@ -7,7 +7,7 @@ env:
 
   NPM_BUILD_CMD: --workspace=@savee/backend-lite run build
 
-  ARTIFACTS_DIR: artifacts
+  ARTIFACTS_DIR: apps/backend-lite/dist
   ARTIFACT_NAME: build
 
   DEPLOY_ORIGIN: artifacts/*
