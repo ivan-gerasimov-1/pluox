@@ -8,9 +8,6 @@ env:
   ARTIFACTS_DIR: apps/frontend/build
   ARTIFACT_NAME: build
 
-  # DEPLOY_ORIGIN: build/*
-  # DEPLOY_DESTINATION: ~/srv/savee.gerasimov.dev
-
 on:
   workflow_dispatch:
   push:
@@ -18,6 +15,7 @@ on:
       - main
     paths:
       - 'apps/frontend/**'
+      - '.github/workflows/frontend.yml'
 
 jobs:
   build:
@@ -55,50 +53,14 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          # SSH_KEY: 'op://Savee/GitHub Actions/private key'
-          # HOST: 'op://Savee/Main Server/Host'
-          # USER: 'op://Savee/Main Server/Username'
           CLOUDFLARE_ACCOUNT_ID: 'op://Savee/Cloudflare Wrangler/Account ID'
           CLOUDFLARE_API_TOKEN: 'op://Savee/Cloudflare Wrangler/API Token'
-
-      - name: Setup SSH
-        if: false
-        run: |
-          set -eu
-
-          mkdir $HOME/.ssh
-
-          echo "$SSH_KEY" \
-            > $HOME/.ssh/ssh-rsa
-          chmod 600 $HOME/.ssh/ssh-rsa
-
-          ssh-keyscan -t rsa $HOST \
-            > $HOME/.ssh/known_hosts
-          chmod 600 $HOME/.ssh/known_hosts
-
-          echo -e "
-            Host $HOST
-              \tHostName $HOST
-              \tUser $USER
-              \tIdentityFile $HOME/.ssh/ssh-rsa
-            " \
-            > $HOME/.ssh/config
-          chmod 600 $HOME/.ssh/config
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.ARTIFACTS_DIR }}
-
-      - name: Deploy
-        if: false
-        run: |
-          rsync \
-            --archive \
-            --compress \
-            --delete \
-            $DEPLOY_ORIGIN $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
