@@ -131,9 +131,6 @@ jobs:
             apps/backend-lite/.docker/docker-compose.yml $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Deploy
-        env:
-          DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ssh -T $USER@$HOST "
             echo ${DOCKER_REGISTRY_PASSWORD} | docker login ghcr.io -u "${DOCKER_REGISTRY_USERNAME}" --password-stdin
