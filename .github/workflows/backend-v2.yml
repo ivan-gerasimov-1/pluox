@@ -10,7 +10,7 @@ env:
   DEPLOY_DESTINATION: ~/srv/savee/api
 
   # Docker
-  IMAGE_TAG: "ghcr.io/${{ github.repository }}/savee-api:stable"
+  IMAGE_TAG: ghcr.io/${{ github.repository }}/savee-api:stable
   DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
   DOCKER_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
