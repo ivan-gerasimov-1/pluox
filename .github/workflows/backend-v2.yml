@@ -24,12 +24,12 @@ on:
   #   branches:
   #     - main
   #   paths:
-  #     - 'apps/backend/**'
+  #     - 'apps/backend-lite/**'
   # pull_request:
   #   branches:
   #     - main
   #   paths:
-  #     - 'apps/backend/**'
+  #     - 'apps/backend-lite/**'
 
 jobs:
   build:
