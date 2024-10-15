@@ -99,12 +99,12 @@ jobs:
             .
           docker push ghcr.io/${{ github.repository }}/savee-api:stable
 
-      # - name: Upload build artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: ${{ env.ARTIFACT_NAME }}
-      #     path: ${{ env.ARTIFACTS_DIR }}
-      #     retention-days: 1
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
+          retention-days: 1
 
   deploy:
     needs: build
@@ -124,11 +124,11 @@ jobs:
           HOST: 'op://Savee/Main Server/Host'
           USER: 'op://Savee/Main Server/Username'
 
-      # - name: Download build artifact
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: ${{ env.ARTIFACT_NAME }}
-      #     path: ${{ env.ARTIFACTS_DIR }}
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACTS_DIR }}
 
       - name: Setup SSH
         run: |
@@ -166,7 +166,7 @@ jobs:
             --archive \
             --compress \
             --delete \
-            apps/backend-lite/.docker/docker-compose.yml $USER@$HOST:$DEPLOY_DESTINATION
+            apps/backend-lite/.docker/docker-compose.yml apps/backend-lite/.env $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         env:
