@@ -61,7 +61,7 @@ jobs:
           npm ci
           npm $NPM_BUILD_CMD
           echo ——————
-          ls apps/backend-lite/dist
+          ls -a apps/backend-lite/dist
           echo ——————
           printf "%s" $ENV_FILE > apps/backend-lite/dist/.env
 
@@ -132,8 +132,8 @@ jobs:
 
       - name: List
         run: |
-          ls apps/backend-lite
-          ls apps/backend-lite/dist
+          ls -a apps/backend-lite
+          ls -a apps/backend-lite/dist
 
       - name: Setup SSH
         run: |
