@@ -166,7 +166,7 @@ jobs:
             --archive \
             --compress \
             --delete \
-            apps/backend-lite/.docker/docker-compose.yml apps/backend-lite/.env $USER@$HOST:$DEPLOY_DESTINATION
+            apps/backend-lite/.docker/docker-compose.yml apps/backend-lite/dist/.env $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         env:
