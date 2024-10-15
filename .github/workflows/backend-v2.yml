@@ -6,7 +6,7 @@ env:
 
   NPM_BUILD_CMD: --workspace=@savee/backend-lite run build
 
-	# @deprecated
+	# deprecated
   DEPLOY_DESTINATION: ~/srv/savee/api
 
   # Docker
