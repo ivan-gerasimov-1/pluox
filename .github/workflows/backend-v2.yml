@@ -55,12 +55,9 @@ jobs:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           ENV_FILE: 'op://Savee/savee-api_backend-lite_env/.env'
 
-      - name: Log
-        run: echo $ENV_FILE
-
       - name: Build
         run: |
-          echo $PATH
+          printf "%s" $ENV_FILE > apps/backend-lite/dist/.env
           printf "%s" $ENV_FILE > apps/backend-lite/.env
           npm ci
           npm $NPM_BUILD_CMD
