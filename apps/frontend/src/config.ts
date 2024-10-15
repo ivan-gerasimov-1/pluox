@@ -21,7 +21,7 @@ function getApiUrl(env?: string | EEnvironment): string {
 		return '/api';
 	}
 
-	return window.location.hostname.includes('pages.dev')
-		? 'https://savee-api-v2.gerasimov.dev'
-		: 'https://savee-api.gerasimov.dev';
+	return window.location.hostname.includes('vercel.app')
+		? 'https://savee-api.gerasimov.dev'
+		: 'https://savee-api-v2.gerasimov.dev';
 }
