@@ -70,6 +70,7 @@ jobs:
           cd dist
           docker buildx build \
             --tag ${IMAGE_TAG} \
+            --load \
             .
 
       - name: Publish Docker image
