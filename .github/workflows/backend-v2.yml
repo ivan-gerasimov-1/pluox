@@ -123,6 +123,7 @@ jobs:
           SSH_KEY: 'op://Savee/GitHub Actions/private key'
           HOST: 'op://Savee/Main Server/Host'
           USER: 'op://Savee/Main Server/Username'
+          ENV_FILE: 'op://Savee/savee-api_backend-lite_env/.env'
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
@@ -167,11 +168,12 @@ jobs:
 
       - name: Deploy
         run: |
+          printf "%s" $ENV_FILE > apps/backend-lite/.env
           rsync \
             --archive \
             --compress \
             --delete \
-            apps/backend-lite/.docker/docker-compose.yml apps/backend-lite/dist/.env $USER@$HOST:$DEPLOY_DESTINATION
+            apps/backend-lite/.docker/docker-compose.yml apps/backend-lite/.env $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Run
         env:
