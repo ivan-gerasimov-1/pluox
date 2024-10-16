@@ -1,5 +1,6 @@
 import { createServer, type Server } from 'node:http';
 import { env as processEnv } from 'node:process';
+import * as assert from 'node:assert';
 
 import { type Database } from 'better-sqlite3';
 
@@ -338,6 +339,10 @@ function main() {
 				? checkAuthentication(session, cookie, appConfig)
 				: true;
 
+			let auth: {
+				userId: string;
+			};
+
 			if (!canAccess) {
 				let error = {
 					code: EResponseCode.UNAUTHORIZED,
@@ -345,6 +350,18 @@ function main() {
 				};
 
 				throw error;
+			} else {
+				let sessionId = cookie.getValue('sessionId');
+
+				assert(sessionId);
+
+				let sessionData = session.get(sessionId);
+
+				assert(sessionData);
+
+				auth = {
+					userId: sessionData.userId,
+				};
 			}
 
 			let dependencies = {
@@ -369,6 +386,7 @@ function main() {
 					body,
 					pathParams: match?.params || null,
 					cookie,
+					auth,
 				},
 				dependencies,
 				request,
