@@ -5,28 +5,32 @@ import * as assert from 'node:assert';
 import { type Database } from 'better-sqlite3';
 
 import { EProcessEvent, EResponseCode } from '#app/enums';
+import type { TPassword, TRequest } from '#app/types';
 import { createAppConfig, type TAppConfig } from '#app/modules/appConfig/index';
-import { generateId } from '#app/modules/crypto/id';
 import {
 	comparePasswordHash,
 	createPasswordHash,
-} from '#app/modules/crypto/passwordHash';
+	generateId,
+} from '#app/modules/crypto/index';
 import { initializeDatabase } from '#app/modules/database/database';
-import { createMail } from '#app/modules/email/createMail';
-import { type Mail } from '#app/modules/email/mail';
+import {
+	createMail,
+	createEmailTemplate,
+	type Mail,
+} from '#app/modules/email/index';
 import {
 	Router,
 	readJsonBody,
 	sendJsonResponse,
 } from '#app/modules/router/index';
-import type { TPassword, TRequest } from '#app/types';
-import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 import { UsersRepository } from '#app/modules/users/usersRepository';
 import { Session, type ISession } from '#app/modules/session/index';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 import { createCookie, type ICookie } from '#app/modules/cookie/index';
-import { ExpensesRepository } from '#app/modules/expenses/index';
-import { type TExpenseCreateDTO } from '#app/modules/expenses/expensesRepository';
+import {
+	ExpensesRepository,
+	type TExpenseCreateDTO,
+} from '#app/modules/expenses/index';
 
 export const enum EHttpMethod {
 	GET = 'GET',
