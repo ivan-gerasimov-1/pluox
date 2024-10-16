@@ -130,16 +130,25 @@ async function getUser(
 async function expensesController(
 	{
 		body,
+		auth,
 	}: {
-		body: TExpenseCreateDTO;
+		body: TExpenseCreateDTO & {
+			dateCreated: string;
+			dateModified: string;
+		};
+		auth: {
+			userId: string;
+		};
 	},
 	{ expenesesRepository }: TEndpointControllerDependencies,
 	request: TRequest,
 ) {
+	let userId = auth.userId;
+
 	if (request.method === EHttpMethod.POST) {
 		await expenesesRepository.createExpense({
 			id: body.id,
-			userId: body.userId,
+			userId,
 			// 	amount: request.body.amount,
 			// 	// @ts-expect-error
 			// 	amountInUSD: request.body.amountInUSD,
@@ -153,12 +162,28 @@ async function expensesController(
 			// 		// @ts-expect-error
 			// 		request.body.date,
 			// 	),
-			createdAt: body.createdAt,
-			modifiedAt: body.modifiedAt,
+			createdAt: body.dateCreated,
+			modifiedAt: body.dateModified,
 		});
 
 		return {
-			status: 'Success',
+			id: body.id,
+			userId,
+			// 	amount: request.body.amount,
+			// 	// @ts-expect-error
+			// 	amountInUSD: request.body.amountInUSD,
+			// 	// @ts-expect-error
+			// 	currency: request.body.currency,
+			// 	// @ts-expect-error
+			// 	comment: request.body.comment,
+			// 	// @ts-expect-error
+			// 	category: request.body.category,
+			// 	date: new Date(
+			// 		// @ts-expect-error
+			// 		request.body.date,
+			// 	),
+			createdAt: body.dateCreated,
+			modifiedAt: body.dateModified,
 		};
 	}
 
@@ -316,6 +341,8 @@ function main() {
 			secure: true,
 		})
 		.addRoute('/signin', postSignIn)
+		/** @alias ./signin */
+		.addRoute('/login', postSignIn)
 		.addRoute('/signup', postSignUp);
 
 	const server = createServer(async (request, response) => {
