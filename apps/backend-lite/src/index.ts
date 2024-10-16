@@ -147,9 +147,9 @@ async function expensesController(
 	{ expenesesRepository }: TEndpointControllerDependencies,
 	request: TRequest,
 ) {
-	let userId = auth.userId;
-
 	if (request.method === EHttpMethod.POST) {
+		let userId = auth.userId;
+
 		await expenesesRepository.createExpense({
 			id: body.id,
 			userId,
