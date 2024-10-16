@@ -21,7 +21,7 @@ import {
 import type { TPassword, TRequest } from '#app/types';
 import { createEmailTemplate } from '#app/modules/email/createEmailTemplate';
 import { UsersRepository } from '#app/modules/users/usersRepository';
-import { Session } from '#app/modules/session/session';
+import { Session, type ISession } from '#app/modules/session/index';
 import { checkAuthentication } from '#app/modules/authentication/checkAuthentication';
 import { createCookie, type ICookie } from '#app/modules/cookie/index';
 import { ExpensesRepository } from '#app/modules/expenses/index';
@@ -38,7 +38,7 @@ export type TEndpointControllerDependencies = {
 	db: Database;
 	mail: Mail;
 	appConfig: TAppConfig;
-	session: Session;
+	session: ISession;
 	usersRepository: UsersRepository;
 	expenesesRepository: ExpensesRepository;
 };
@@ -209,10 +209,16 @@ async function postSignIn(
 		};
 	}
 
-	cookie.set('sessionId', session.create(), {
-		httpOnly: true,
-		path: '/',
-	});
+	cookie.set(
+		'sessionId',
+		session.create({
+			userId: user.id,
+		}),
+		{
+			httpOnly: true,
+			path: '/',
+		},
+	);
 
 	return {
 		id: user.id,
