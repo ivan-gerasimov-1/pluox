@@ -5,19 +5,19 @@
 			"path": "../",
 		},
 		{
-			"name": "UI",
+			"name": "Web App",
 			"path": "../apps/frontend",
 		},
 		{
 			"name": "API",
-			"path": "../apps/backend",
-		},
-		{
-			"name": "API Lite",
 			"path": "../apps/backend-lite",
 		},
 		{
-			"name": "CI/CD",
+			"name": "API (@deprecated)",
+			"path": "../apps/backend",
+		},
+		{
+			"name": "GitHub Actions",
 			"path": "../.github/workflows",
 		},
 	],
