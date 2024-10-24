@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"name": "Savee | Root",
+			"name": "root",
 			"path": "../",
 		},
 		{
@@ -11,10 +11,6 @@
 		{
 			"name": "API",
 			"path": "../apps/backend-lite",
-		},
-		{
-			"name": "API (@deprecated)",
-			"path": "../apps/backend",
 		},
 		{
 			"name": "GitHub Actions",
