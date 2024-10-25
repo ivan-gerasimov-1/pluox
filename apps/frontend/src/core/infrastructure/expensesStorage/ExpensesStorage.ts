@@ -13,22 +13,18 @@ export class ExpensesStorage
 {
 	static #instance: IExpensesStorage;
 
-	private readonly STORAGE_ID: string = 'store/$expenses';
-
-	private constructor() {
-		super();
-	}
+	static readonly #STORAGE_ID: string = 'store/$expenses';
 
 	public static getInstance(): IExpensesStorage {
 		if (!this.#instance) {
-			this.#instance = new ExpensesStorage();
+			this.#instance = new ExpensesStorage(this.#STORAGE_ID);
 		}
 
 		return this.#instance;
 	}
 
 	public getItems(): Record<Id, TExpense> {
-		const value = this.get(this.STORAGE_ID);
+		const value = this.get();
 
 		if (!value || !value.state) {
 			return {};
@@ -38,9 +34,9 @@ export class ExpensesStorage
 	}
 
 	public setItems(values: Record<Id, TExpense>): IExpensesStorage {
-		const value = this.get(this.STORAGE_ID);
+		const value = this.get();
 
-		this.set(this.STORAGE_ID, {
+		this.set({
 			...value,
 			state: {
 				...value?.state,

@@ -6,29 +6,15 @@ export class ClientIdStorage
 	extends AppStorage<Id>
 	implements IClientIdStorage
 {
-	static #instance: ClientIdStorage;
+	static #instance: IClientIdStorage;
 
-	private readonly STORAGE_ID: Id = 'clientId';
-
-	private constructor() {
-		super();
-	}
+	static readonly #STORAGE_ID: Id = 'clientId';
 
 	public static getInstance(): IClientIdStorage {
 		if (!this.#instance) {
-			this.#instance = new ClientIdStorage();
+			this.#instance = new ClientIdStorage(this.#STORAGE_ID);
 		}
 
 		return this.#instance;
-	}
-
-	public setId(clientId: Id): this {
-		super.set(this.STORAGE_ID, clientId);
-
-		return this;
-	}
-
-	public getId(): Id | null {
-		return super.get(this.STORAGE_ID);
 	}
 }

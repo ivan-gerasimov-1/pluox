@@ -1,5 +1,5 @@
 export interface IAppStorage<T extends {} = {}> {
-	get(id: string): T | null;
-	set(id: string, data: T): void;
-	clear(id: string): void;
+	get(): T | null;
+	set(payload: T): void;
+	clear(): void;
 }

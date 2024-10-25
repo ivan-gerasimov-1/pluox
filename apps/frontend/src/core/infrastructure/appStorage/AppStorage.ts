@@ -4,8 +4,18 @@ import { type Id } from '@domain/types';
 export class AppStorage<T extends {}> implements IAppStorage<T> {
 	readonly #ID_PREFIX = '@savee';
 
-	public get(id: string): T | null {
-		const rawData = window.localStorage.getItem(this.makeId(id));
+	readonly #storageId: string;
+
+	constructor(storageId: string) {
+		this.#storageId = storageId;
+	}
+
+	public get id(): string {
+		return this.makeId(this.#storageId);
+	}
+
+	public get(): T | null {
+		const rawData = window.localStorage.getItem(this.id);
 
 		if (rawData === null) {
 			return null;
@@ -18,12 +28,12 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 		}
 	}
 
-	public set(id: string, value: T): void {
-		window.localStorage.setItem(this.makeId(id), JSON.stringify(value));
+	public set(payload: T): void {
+		window.localStorage.setItem(this.id, JSON.stringify(payload));
 	}
 
-	public clear(id: string): void {
-		window.localStorage.removeItem(this.makeId(id));
+	public clear(): void {
+		window.localStorage.removeItem(this.id);
 	}
 
 	private makeId(id: Id): Id {

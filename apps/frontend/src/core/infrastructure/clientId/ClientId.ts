@@ -14,7 +14,7 @@ export class ClientId implements IClientId {
 		private readonly idGenerator: IIdGenerator,
 		private readonly storage: IClientIdStorage,
 	) {
-		this.#clientId = storage.getId() || this.createId();
+		this.#clientId = storage.get() || this.createId();
 	}
 
 	public static getInstance(): IClientId {
@@ -35,7 +35,7 @@ export class ClientId implements IClientId {
 	private createId(): Id {
 		let id = this.idGenerator.getId();
 
-		this.storage.setId(id);
+		this.storage.set(id);
 
 		return id;
 	}

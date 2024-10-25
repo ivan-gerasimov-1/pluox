@@ -8,25 +8,13 @@ export class AppConfigStorage
 {
 	static #instance: AppConfigStorage;
 
-	private readonly STORAGE_ID: string = 'appConfig';
-
-	private constructor() {
-		super();
-	}
+	static readonly #STORAGE_ID: string = 'appConfig';
 
 	public static getInstance(): IAppConfigStorage {
 		if (!this.#instance) {
-			this.#instance = new AppConfigStorage();
+			this.#instance = new AppConfigStorage(this.#STORAGE_ID);
 		}
 
 		return this.#instance;
-	}
-
-	public load(): TAppConfig | null {
-		return this.get(this.STORAGE_ID);
-	}
-
-	public save(config: TAppConfig): void {
-		this.set(this.STORAGE_ID, config);
 	}
 }

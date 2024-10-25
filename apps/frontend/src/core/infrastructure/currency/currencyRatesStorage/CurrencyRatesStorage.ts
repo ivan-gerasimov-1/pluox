@@ -10,22 +10,14 @@ export class CurrencyRatesStorage
 {
 	static #instance?: ICurrencyRatesStorage;
 
-	readonly #STORAGE_ID = 'currencyRates';
-
-	private constructor() {
-		super();
-	}
+	static readonly #STORAGE_ID = 'currencyRates';
 
 	public static getInstance(): ICurrencyRatesStorage {
 		if (!this.#instance) {
-			this.#instance = new CurrencyRatesStorage();
+			this.#instance = new CurrencyRatesStorage(this.#STORAGE_ID);
 		}
 
 		return this.#instance;
-	}
-
-	public override get(): TCurrencyRates | null {
-		return super.get(this.#STORAGE_ID);
 	}
 
 	/**
@@ -42,7 +34,7 @@ export class CurrencyRatesStorage
 	}
 
 	public setRates(rates: TCurrencyRates): void {
-		this.set(this.#STORAGE_ID, rates);
+		this.set(rates);
 	}
 
 	public isEmpty(): boolean {

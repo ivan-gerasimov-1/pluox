@@ -58,7 +58,7 @@ function runMigrations() {
 	/** №1. Add THB to stored appConfig */
 	function addThaiBahtCurrencyToStoredAppConfig() {
 		let appConfigStorage = AppConfigStorage.getInstance();
-		let appConfig = appConfigStorage.load();
+		let appConfig = appConfigStorage.get();
 
 		if (!appConfig) {
 			return;
@@ -69,7 +69,7 @@ function runMigrations() {
 		}
 
 		appConfig.availabelCurrencies.push(ECurrency.THB);
-		appConfigStorage.save(appConfig);
+		appConfigStorage.set(appConfig);
 	}
 
 	addThaiBahtCurrencyToStoredAppConfig();

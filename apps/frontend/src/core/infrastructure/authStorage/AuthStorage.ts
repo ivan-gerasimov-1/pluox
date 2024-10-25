@@ -2,31 +2,15 @@ import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
 import { IAuthStorage } from '@core/infrastructure/authStorage/types';
 
 export class AuthStorage extends AppStorage<string> implements IAuthStorage {
-	static #instance: AuthStorage;
+	static #instance: IAuthStorage;
 
-	private readonly STORAGE_ID: string = 'token';
+	static readonly #STORAGE_ID: string = 'token';
 
-	private constructor() {
-		super();
-	}
-
-	public static getInstance(): AuthStorage {
+	public static getInstance(): IAuthStorage {
 		if (!this.#instance) {
-			this.#instance = new AuthStorage();
+			this.#instance = new AuthStorage(this.#STORAGE_ID);
 		}
 
 		return this.#instance;
-	}
-
-	public override set(payload: string): void {
-		super.set(this.STORAGE_ID, payload);
-	}
-
-	public override get(): string | null {
-		return super.get(this.STORAGE_ID);
-	}
-
-	public override clear(): void {
-		return super.clear(this.STORAGE_ID);
 	}
 }

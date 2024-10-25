@@ -10,15 +10,11 @@ export class UserStorage
 {
 	static #instance: UserStorage;
 
-	private readonly STORAGE_ID: string = 'user';
-
-	private constructor() {
-		super();
-	}
+	static readonly STORAGE_ID: string = 'user';
 
 	public static getInstance(): UserStorage {
 		if (!this.#instance) {
-			this.#instance = new UserStorage();
+			this.#instance = new UserStorage(this.STORAGE_ID);
 		}
 
 		return this.#instance;
@@ -27,19 +23,11 @@ export class UserStorage
 	public update(payload: { id?: string; email?: string }): void {
 		const currentUser = this.get();
 
-		super.set(this.STORAGE_ID, {
+		super.set({
 			id: '',
 			email: '',
 			...currentUser,
 			...payload,
 		});
-	}
-
-	public override get(): { id: string; email: string } | null {
-		return super.get(this.STORAGE_ID);
-	}
-
-	public override clear(): void {
-		return super.clear(this.STORAGE_ID);
 	}
 }
