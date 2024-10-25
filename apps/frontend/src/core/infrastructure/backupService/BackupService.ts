@@ -6,6 +6,9 @@ import type { IDatabaseClient } from '@core/infrastructure/databaseClient/types'
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 
+/**
+ * @deprecated
+ */
 export class BackupService implements IBackupService {
 	static #instance: IBackupService;
 
