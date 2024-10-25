@@ -17,11 +17,6 @@ export interface IAppConfig {
 		apiUrl: string;
 		apiKey: string;
 	};
-
-	readonly supabase: {
-		apiUrl: string;
-		apiKey: string;
-	};
 }
 
 export class AppConfig implements IAppConfig {
@@ -35,11 +30,6 @@ export class AppConfig implements IAppConfig {
 	#currentMonth: TMonth;
 
 	#openExchangeRates: {
-		apiUrl: string;
-		apiKey: string;
-	};
-
-	#supabase: {
 		apiUrl: string;
 		apiKey: string;
 	};
@@ -66,12 +56,6 @@ export class AppConfig implements IAppConfig {
 		this.#openExchangeRates = {
 			apiUrl: 'https://openexchangerates.org/api',
 			apiKey: 'fd33278c63404c26b51d7d37ae50731d',
-		};
-
-		this.#supabase = {
-			apiUrl: 'https://cevggnepxhwjwjwkisoq.supabase.co',
-			apiKey:
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldmdnbmVweGh3andqd2tpc29xIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc5Njk0MjAsImV4cCI6MjAxMzU0NTQyMH0._CWTZYsq6KT4Hf5msUc4gjimFEW21dUFriVqq0TkC9M',
 		};
 
 		this.#apiUrl = apiUrl;
@@ -118,13 +102,6 @@ export class AppConfig implements IAppConfig {
 		apiKey: string;
 	} {
 		return this.#openExchangeRates;
-	}
-
-	public get supabase(): {
-		apiUrl: string;
-		apiKey: string;
-	} {
-		return this.#supabase;
 	}
 
 	public get apiUrl(): string {
