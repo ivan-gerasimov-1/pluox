@@ -1,13 +1,10 @@
 import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
-import { IUserStorage } from '@core/infrastructure/userStorage/types';
+import type {
+	IUserStorage,
+	TUser,
+} from '@core/infrastructure/userStorage/types';
 
-export class UserStorage
-	extends AppStorage<{
-		id: string;
-		email: string;
-	}>
-	implements IUserStorage
-{
+export class UserStorage extends AppStorage<TUser> implements IUserStorage {
 	static #instance: UserStorage;
 
 	static readonly STORAGE_ID: string = 'user';
@@ -20,7 +17,7 @@ export class UserStorage
 		return this.#instance;
 	}
 
-	public update(payload: { id?: string; email?: string }): void {
+	public update(payload: Partial<TUser>): void {
 		const currentUser = this.get();
 
 		super.set({
