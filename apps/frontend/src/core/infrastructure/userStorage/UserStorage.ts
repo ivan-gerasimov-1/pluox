@@ -12,7 +12,7 @@ export class UserStorage
 
 	static readonly STORAGE_ID: string = 'user';
 
-	public static getInstance(): UserStorage {
+	public static getInstance(): IUserStorage {
 		if (!this.#instance) {
 			this.#instance = new UserStorage(this.STORAGE_ID);
 		}
