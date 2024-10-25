@@ -30,6 +30,12 @@ export function initializeDatabase(
 				userId VARCHAR(36) NOT NULL,
 				createdAt DATETIME NOT NULL,
 				modifiedAt DATETIME NOT NULL,
+				amount REAL NOT NULL,
+				currency TEXT NOT NULL,
+				comment TEXT NOT NULL,
+				category TEXT NOT NULL,
+				date DATETIME NOT NULL,
+
 				FOREIGN KEY (userId) REFERENCES users(id)
 			)
 		`);

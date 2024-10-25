@@ -136,10 +136,7 @@ async function expensesController(
 		body,
 		auth,
 	}: {
-		body: TExpenseCreateDTO & {
-			dateCreated: string;
-			dateModified: string;
-		};
+		body: TExpenseCreateDTO;
 		auth: {
 			userId: string;
 		};
@@ -152,42 +149,21 @@ async function expensesController(
 
 		await expenesesRepository.createExpense({
 			id: body.id,
+
 			userId,
-			// 	amount: request.body.amount,
-			// 	// @ts-expect-error
-			// 	amountInUSD: request.body.amountInUSD,
-			// 	// @ts-expect-error
-			// 	currency: request.body.currency,
-			// 	// @ts-expect-error
-			// 	comment: request.body.comment,
-			// 	// @ts-expect-error
-			// 	category: request.body.category,
-			// 	date: new Date(
-			// 		// @ts-expect-error
-			// 		request.body.date,
-			// 	),
-			createdAt: body.dateCreated,
-			modifiedAt: body.dateModified,
+
+			createdAt: body.createdAt,
+			modifiedAt: body.modifiedAt,
+
+			amount: body.amount,
+			currency: body.currency,
+			comment: body.comment,
+			category: body.category,
+			date: body.date,
 		});
 
 		return {
-			id: body.id,
-			userId,
-			// 	amount: request.body.amount,
-			// 	// @ts-expect-error
-			// 	amountInUSD: request.body.amountInUSD,
-			// 	// @ts-expect-error
-			// 	currency: request.body.currency,
-			// 	// @ts-expect-error
-			// 	comment: request.body.comment,
-			// 	// @ts-expect-error
-			// 	category: request.body.category,
-			// 	date: new Date(
-			// 		// @ts-expect-error
-			// 		request.body.date,
-			// 	),
-			createdAt: body.dateCreated,
-			modifiedAt: body.dateModified,
+			status: 'Success',
 		};
 	}
 
