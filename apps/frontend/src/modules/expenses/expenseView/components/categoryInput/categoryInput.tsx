@@ -1,7 +1,7 @@
 import { categoryList } from '@domain/categories/constants';
 import { cls } from '@utils/classnames';
 import styles from './categoryInput.module.css';
-import { useIntl } from '@modules/intl';
+import { useIntl } from '@modules/intl/useIntl';
 import { categoryInputI18n } from '@modules/expenses/expenseView/components/categoryInput/categoryInput.i18n';
 import type { TCategory } from '@domain/types';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
-import { useIntl } from '@modules/intl';
+import { useIntl } from '@modules/intl/useIntl';
 
 import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';

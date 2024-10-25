@@ -1,5 +1,5 @@
 import { Error } from '@components/error';
-import { useIntl } from '@modules/intl';
+import { useIntl } from '@modules/intl/useIntl';
 import { errorScreenI18n } from '@root/screens/error/error.i18n';
 import styles from './error.module.css';
 

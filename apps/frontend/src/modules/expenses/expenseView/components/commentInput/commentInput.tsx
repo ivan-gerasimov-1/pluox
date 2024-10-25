@@ -1,5 +1,5 @@
 import { componentInputI18n } from '@modules/expenses/expenseView/components/commentInput/commentInput.i18n';
-import { useIntl } from '@modules/intl';
+import { useIntl } from '@modules/intl/useIntl';
 import styles from './commentInput.module.css';
 import type { TComment } from '@domain/types';
 

@@ -5,7 +5,7 @@ import { CategoryPills } from '@modules/expenses/expenseView/components/category
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/commentInput';
 import { DateInput } from '@modules/expenses/expenseView/components/dateInput/dateInput';
 import { expenseFormI18n } from '@modules/expenses/expenseView/expenseForm.i18n';
-import { useIntl } from '@modules/intl';
+import { useIntl } from '@modules/intl/useIntl';
 import { useReducer } from 'react';
 import styles from './expenseForm.module.css';
 

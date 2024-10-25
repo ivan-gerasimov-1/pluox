@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import type { TMonth } from '@domain/amount/useCases/types';
 
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
-import { useIntl } from '@modules/intl';
+import { useIntl } from '@modules/intl/useIntl';
 
 import { expenseListMonthlyI18n } from '@screens/expenseListMonthly/expenseListMonthly.i18n';
 
