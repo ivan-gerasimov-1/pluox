@@ -1,11 +1,11 @@
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
-import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { Expenses } from '@domain/expenses/expenses';
 import { ReactUI, type IUserInterface } from '@root/createUI';
+import { runMigrations } from '@root/migrations';
 import { runMockServiceWorker } from '@root/mockServiceWorker/run';
 import { registerServiceWorker } from '@root/serviceWorker';
 
@@ -52,25 +52,4 @@ function loadExpenses(): void {
 	let rawExpenses = ExpensesStorage.getInstance().getItems();
 
 	Expenses.getInstance().__addRawExpenses(rawExpenses);
-}
-
-function runMigrations() {
-	/** №1. Add THB to stored appConfig */
-	function addThaiBahtCurrencyToStoredAppConfig() {
-		let appConfigStorage = AppConfigStorage.getInstance();
-		let appConfig = appConfigStorage.get();
-
-		if (!appConfig) {
-			return;
-		}
-
-		if (appConfig.availabelCurrencies.includes(ECurrency.THB)) {
-			return;
-		}
-
-		appConfig.availabelCurrencies.push(ECurrency.THB);
-		appConfigStorage.set(appConfig);
-	}
-
-	addThaiBahtCurrencyToStoredAppConfig();
 }
