@@ -13,10 +13,7 @@ export function groupExpenseListByDay(expenseList: TExpense[]): Array<{
 	> = {};
 
 	for (let expense of expenseList) {
-		/**
-		 * @todo remove backward compatibility
-		 */
-		let datetime = expense.date || expense.dateCreated;
+		let datetime = expense.date;
 		let [date] = datetime.split('T');
 		let [year, month, day] = date.split('-');
 

@@ -5,8 +5,8 @@ import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
 export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 	readonly #id: Id;
 
-	protected readonly dateCreated: TISODateString;
-	protected dateModified: TISODateString;
+	protected readonly createdAt: TISODateString;
+	protected modifiedAt: TISODateString;
 
 	constructor() {
 		let idGenerator = IdGenerator.getInstance();
@@ -14,8 +14,8 @@ export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 
 		this.#id = idGenerator.getId();
 
-		this.dateCreated = currentDate;
-		this.dateModified = currentDate;
+		this.createdAt = currentDate;
+		this.modifiedAt = currentDate;
 	}
 
 	public get id(): Id {

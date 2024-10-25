@@ -50,8 +50,8 @@ export class Expenses implements IExpenses {
 		expenseA: TExpense,
 		expenseB: TExpense,
 	): -1 | 0 | 1 {
-		const dateA = expenseA.date || expenseA.dateCreated;
-		const dateB = expenseB.date || expenseB.dateCreated;
+		const dateA = expenseA.date;
+		const dateB = expenseB.date;
 
 		if (dateA < dateB) {
 			return 1;
@@ -99,8 +99,7 @@ export class Expenses implements IExpenses {
 		return expenses
 			.filter((expense) => {
 				let meetConditions = true;
-				/** @todo remove backwards compatibility */
-				let expenseTimestamp = expense.date || expense.dateCreated;
+				let expenseTimestamp = expense.date;
 
 				if (query.dateFrom) {
 					meetConditions = expenseTimestamp >= query.dateFrom;

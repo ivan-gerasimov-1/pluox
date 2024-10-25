@@ -1,5 +1,5 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
-import type { TCategory, TISODateString } from '@domain/types';
+import type { TCategory, TComment, TISODateString } from '@domain/types';
 import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryPills } from '@modules/expenses/expenseView/components/categoryPills/categoryPills';
 import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/commentInput';
@@ -13,16 +13,16 @@ export type TExpenseFormProps = {
 	onSubmit(payload: {
 		amount: number;
 		currency: ECurrency;
-		comment: string;
-		category: string | null;
-		date: string;
+		comment: TComment;
+		category: TCategory;
+		date: TISODateString;
 	}): void;
 
 	amount: number;
 	currency: ECurrency;
-	comment: string;
+	comment: TComment;
 	category: TCategory;
-	date: string;
+	date: TISODateString;
 };
 
 export function ExpenseForm(props: TExpenseFormProps) {
@@ -187,9 +187,9 @@ type TExpenseFormReducerAction = Partial<TExpenseFormReducerState> & {
 type TExpenseFormReducerState = {
 	amount: number;
 	currency: ECurrency;
-	comment: string;
+	comment: TComment;
 	category: TCategory;
-	date: string;
+	date: TISODateString;
 };
 
 /**

@@ -1,6 +1,6 @@
 import { type ECurrency } from '@core/infrastructure/currency/types';
 import { type IEntity } from '@core/infrastructure/entity/types';
-import type { Id, TCategory, TISODateString } from '@domain/types';
+import type { Id, TCategory, TComment, TISODateString } from '@domain/types';
 
 export interface IExpense extends IEntity<TExpense> {
 	toObject(): TExpense;
@@ -14,18 +14,18 @@ export type TExpense = {
 	 */
 	amount: number;
 	currency: ECurrency;
-	comment: string;
+	comment: TComment;
 	category: TCategory;
 	date: TISODateString;
-	dateCreated: TISODateString;
-	dateModified: TISODateString;
+	createdAt: TISODateString;
+	modifiedAt: TISODateString;
 	timezone: string;
 };
 
 export type TExpenseCreateDTO = {
 	amount: number;
 	currency: ECurrency;
-	comment: string;
+	comment: TComment;
 	category: TCategory;
 	date?: TISODateString;
 };

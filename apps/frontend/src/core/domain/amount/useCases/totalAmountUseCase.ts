@@ -2,7 +2,7 @@ import { CurrencyConverter } from '@core/infrastructure/currency/currencyConvert
 import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 import { getDateParts } from '@domain/amount/useCases/helpers';
-import type { TDateParts, TMonth, TYear } from '@domain/amount/useCases/types';
+import type { TDateParts } from '@domain/amount/useCases/types';
 import type { IExpenses } from '@domain/expenses/types';
 
 export interface IMonthlyAmountUseCase {
@@ -51,11 +51,7 @@ export class TotalAmountUseCase implements IMonthlyAmountUseCase {
 		for (let expense of Object.values(expenses)) {
 			let amount = expense.amount;
 			let expenseCurrency = expense.currency;
-			/**
-			 * @todo remove backward compatibility
-			 */
-			let expenseDate = expense.date || expense.dateCreated;
-			let expenseDateParts = getDateParts(expenseDate);
+			let expenseDateParts = getDateParts(expense.date);
 
 			if (
 				(dateParts.month !== undefined &&

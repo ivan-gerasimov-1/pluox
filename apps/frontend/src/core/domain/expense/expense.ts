@@ -1,20 +1,20 @@
 import type { ECurrency } from '@core/infrastructure/currency/types';
 import { Entity } from '@core/infrastructure/entity/Entity';
 import type { IExpense, TExpense } from '@domain/expense/types';
-import type { TCategory, TISODateString } from '@domain/types';
+import type { TCategory, TComment, TISODateString } from '@domain/types';
 
 export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #amount: number;
 	readonly #currency: ECurrency;
-	readonly #comment: string;
+	readonly #comment: TComment;
 	readonly #category: TCategory;
-	readonly #date: string;
+	readonly #date: TISODateString;
 	readonly #timezone: string;
 
 	private constructor(
 		amount: number,
 		currency: ECurrency,
-		comment: string,
+		comment: TComment,
 		category: TCategory,
 		timezone: string,
 		date?: TISODateString,
@@ -25,14 +25,14 @@ export class Expense extends Entity<TExpense> implements IExpense {
 		this.#currency = currency;
 		this.#comment = comment;
 		this.#category = category;
-		this.#date = date || this.dateCreated;
+		this.#date = date || this.createdAt;
 		this.#timezone = timezone;
 	}
 
 	public static create(
 		amount: number,
 		currency: ECurrency,
-		comment: string,
+		comment: TComment,
 		category: TCategory = null,
 		timezone: string,
 		date?: TISODateString,
@@ -47,12 +47,9 @@ export class Expense extends Entity<TExpense> implements IExpense {
 			currency: this.#currency,
 			comment: this.#comment,
 			category: this.#category,
-			/**
-			 * @todo remove backwards compatibility
-			 */
-			date: this.#date || this.dateCreated,
-			dateCreated: this.dateCreated,
-			dateModified: this.dateModified,
+			date: this.#date,
+			createdAt: this.createdAt,
+			modifiedAt: this.modifiedAt,
 			timezone: this.#timezone,
 		};
 	}
