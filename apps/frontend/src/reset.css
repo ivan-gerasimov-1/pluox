@@ -2,6 +2,9 @@
 *::after,
 *::before {
 	box-sizing: border-box;
+
+	cursor: default;
+	user-select: none;
 }
 
 h1,
