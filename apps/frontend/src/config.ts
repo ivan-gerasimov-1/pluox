@@ -5,6 +5,7 @@ type TEnvironment = {
 
 enum EEnvironment {
 	DEVELOPMENT = 'development',
+	PRODUCTION = 'production',
 }
 
 function isDevelopment(environment?: string | EEnvironment) {
