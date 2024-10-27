@@ -72,13 +72,17 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	public async signOut(): Promise<void> {
-		this.authStorage.delete();
-		this.userStorage.delete();
+		this.cleareStorages();
 	}
 
 	public check(): boolean {
 		const hasToken = !this.authStorage.isEmpty();
 
 		return hasToken;
+	}
+
+	private cleareStorages(): void {
+		this.authStorage.delete();
+		this.userStorage.delete();
 	}
 }
