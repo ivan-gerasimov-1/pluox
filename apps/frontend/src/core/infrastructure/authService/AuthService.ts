@@ -37,7 +37,7 @@ export class AuthService implements IAuthSerivce {
 		const result = await this.authApi.signIn(email, password);
 
 		this.userStorage.update({
-			email,
+			email: result.email,
 		});
 
 		return {
