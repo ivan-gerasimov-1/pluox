@@ -16,7 +16,7 @@ export type THeaderProps = {
 
 export function Header(props: THeaderProps) {
 	let isMain = useMatch(EAppPath.MAIN);
-	let isAuthenticated = AuthService.getInstance().check();
+	let isAuthenticated = AuthService.getInstance().isAuthenticated();
 
 	return (
 		<div className={styles.container}>

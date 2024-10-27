@@ -15,5 +15,5 @@ export interface IAuthSerivce {
 	}>;
 	signOut(): Promise<void>;
 
-	check(): boolean;
+	isAuthenticated(): boolean;
 }

@@ -77,7 +77,7 @@ export class AuthService implements IAuthSerivce {
 		this.cleareStorages();
 	}
 
-	public check(): boolean {
+	public isAuthenticated(): boolean {
 		const hasToken = !this.authStorage.isEmpty();
 
 		return hasToken;
