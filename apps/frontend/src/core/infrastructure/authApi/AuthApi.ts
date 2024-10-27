@@ -63,9 +63,9 @@ export class AuthApi implements IAuthApi {
 		});
 
 		return {
-			id: response.id || '',
-			email: response.email || '',
-			token: response.token || '',
+			id: response.id,
+			email: response.email,
+			token: response.token,
 		};
 	}
 }
