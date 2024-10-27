@@ -16,7 +16,7 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 		let isEmpty = this.isEmpty();
 
 		if (!isEmpty) {
-			throw new Error('Already exists');
+			throw new Error('Storage already exists');
 		}
 
 		window.localStorage.setItem(this.#id, JSON.stringify(payload));
