@@ -58,16 +58,18 @@ export class AuthService implements IAuthSerivce {
 			throw new UserNotFoundError();
 		}
 
-		this.userStorage.update({
-			id: result.id || '',
-			email: result.email || '',
+		this.cleareStorages();
+
+		this.userStorage.create({
+			id: result.id,
+			email: result.email,
 		});
 
-		this.authStorage.update(result.token);
+		this.authStorage.create(result.token);
 
 		return {
-			id: result.id || '',
-			email: result.email || '',
+			id: result.id,
+			email: result.email,
 		};
 	}
 
