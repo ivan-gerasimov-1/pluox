@@ -24,7 +24,7 @@ export class ExpensesStorage
 	}
 
 	public getItems(): Record<Id, TExpense> {
-		const value = this.get();
+		const value = this.read();
 
 		if (!value || !value.state) {
 			return {};
@@ -34,9 +34,9 @@ export class ExpensesStorage
 	}
 
 	public setItems(values: Record<Id, TExpense>): IExpensesStorage {
-		const value = this.get();
+		const value = this.read();
 
-		this.set({
+		this.update({
 			...value,
 			state: {
 				...value?.state,

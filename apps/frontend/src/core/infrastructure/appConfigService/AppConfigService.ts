@@ -31,7 +31,7 @@ export class AppConfigService implements IAppConfigService {
 	}
 
 	public initialize(): this {
-		let config = this.appConfigStorage.get();
+		let config = this.appConfigStorage.read();
 
 		if (config) {
 			this.updateAppConfig(config);
@@ -50,7 +50,7 @@ export class AppConfigService implements IAppConfigService {
 			availabelCurrencies: this.appConfig.availabelCurrencies,
 		};
 
-		this.appConfigStorage.set(nextConfig);
+		this.appConfigStorage.update(nextConfig);
 
 		return nextConfig;
 	}

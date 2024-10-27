@@ -33,7 +33,7 @@ export class BackupService implements IBackupService {
 	}
 
 	public async run<T>(payload: T): Promise<void> {
-		let clientId = this.userStorage.get()?.id || this.clientId.get();
+		let clientId = this.userStorage.read()?.id || this.clientId.get();
 
 		await this.databaseClient.add(this.TABLE_NAME, {
 			clientId,

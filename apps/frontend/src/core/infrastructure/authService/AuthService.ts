@@ -63,7 +63,7 @@ export class AuthService implements IAuthSerivce {
 			email: result.email || '',
 		});
 
-		this.authStorage.set(result.token);
+		this.authStorage.update(result.token);
 
 		return {
 			id: result.id || '',
@@ -72,13 +72,13 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	public async signOut(): Promise<void> {
-		this.authStorage.clear();
-		this.userStorage.clear();
+		this.authStorage.delete();
+		this.userStorage.delete();
 	}
 
 	public check(): boolean {
-		const hasToken = this.authStorage.get();
+		const hasToken = !this.authStorage.isEmpty();
 
-		return !!hasToken;
+		return hasToken;
 	}
 }

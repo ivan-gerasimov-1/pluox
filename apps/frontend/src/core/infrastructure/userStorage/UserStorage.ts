@@ -18,9 +18,9 @@ export class UserStorage extends AppStorage<TUser> implements IUserStorage {
 	}
 
 	public update(payload: Partial<TUser>): void {
-		const currentUser = this.get();
+		const currentUser = this.read();
 
-		super.set({
+		super.update({
 			id: '',
 			email: '',
 			...currentUser,

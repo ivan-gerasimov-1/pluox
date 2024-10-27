@@ -26,7 +26,7 @@ export class BaseApi implements IBaseApi {
 	}
 
 	private get authToken(): string {
-		const token = this.authStorage.get();
+		const token = this.authStorage.read();
 
 		if (!token) {
 			return '';

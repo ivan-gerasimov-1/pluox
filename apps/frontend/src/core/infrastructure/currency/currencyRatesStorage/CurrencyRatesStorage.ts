@@ -24,7 +24,7 @@ export class CurrencyRatesStorage
 	 * @throws {CurrencyRatesNotAvailableError}
 	 */
 	public getRates(): TCurrencyRates {
-		let currencyRates = this.get();
+		let currencyRates = this.read();
 
 		if (!currencyRates) {
 			throw new CurrencyRatesNotAvailableError();
@@ -34,11 +34,7 @@ export class CurrencyRatesStorage
 	}
 
 	public setRates(rates: TCurrencyRates): void {
-		this.set(rates);
-	}
-
-	public isEmpty(): boolean {
-		return this.get() === null;
+		this.update(rates);
 	}
 
 	public has(currency: ECurrency): boolean {
