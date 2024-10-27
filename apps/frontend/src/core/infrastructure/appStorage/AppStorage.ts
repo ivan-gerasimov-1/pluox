@@ -1,6 +1,8 @@
 import { type IAppStorage } from '@core/infrastructure/appStorage/types';
 import { type Id } from '@domain/types';
 
+import { deepMerge } from '@core/infrastructure/appStorage/deepMerge';
+
 export class AppStorage<T extends {}> implements IAppStorage<T> {
 	readonly #ID_PREFIX = '@savee';
 
@@ -30,19 +32,16 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 		return this.parse(rawData);
 	}
 
-	/**
-	 * @todo
-	 * 1. Add DeepMerge in order to avoid overriding this method in other instances
-	 * 2. Make payload Partial<T>
-	 */
-	public update(payload: T): void {
+	public update(payload: Partial<T>): void {
 		let isEmpty = this.isEmpty();
 
 		if (isEmpty) {
 			throw new Error('Not Found');
 		}
 
-		window.localStorage.setItem(this.#id, JSON.stringify(payload));
+		let data = deepMerge(this.read(), payload);
+
+		window.localStorage.setItem(this.#id, JSON.stringify(data));
 	}
 
 	public delete(): void {
