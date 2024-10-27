@@ -36,7 +36,7 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 		let isEmpty = this.isEmpty();
 
 		if (isEmpty) {
-			throw new Error('Not Found');
+			throw new Error('Storage is empty, initialize it first');
 		}
 
 		let data = deepMerge(this.read(), payload);
