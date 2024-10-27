@@ -26,7 +26,7 @@ export class ExpensesStorage
 	public getItems(): Record<Id, TExpense> {
 		const value = this.read();
 
-		if (!value || !value.state) {
+		if (!value?.state) {
 			return {};
 		}
 
