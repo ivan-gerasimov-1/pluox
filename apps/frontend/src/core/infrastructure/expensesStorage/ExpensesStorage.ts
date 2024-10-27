@@ -34,12 +34,8 @@ export class ExpensesStorage
 	}
 
 	public setItems(values: Record<Id, TExpense>): IExpensesStorage {
-		const value = this.read();
-
 		this.update({
-			...value,
 			state: {
-				...value?.state,
 				operations: values,
 			},
 		});
