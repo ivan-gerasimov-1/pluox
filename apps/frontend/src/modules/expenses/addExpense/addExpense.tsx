@@ -4,7 +4,10 @@ import { ECurrency } from '@core/infrastructure/currency/types';
 import type { TExpenseCreateDTO } from '@domain/expense/types';
 import { createDateViewValue } from '@modules/expenses/addExpense/helpers/createDateViewValue';
 import { ExpenseForm } from '@modules/expenses/expenseView/expenseForm';
-import { QUERY_EXPENSES_TOTAL_AMOUNT } from '@modules/expenses/expenses.query';
+import {
+	QUERY_EXPENSES_MONTHLY_AMOUNT,
+	QUERY_EXPENSES_TOTAL_AMOUNT,
+} from '@modules/expenses/expenses.query';
 import { useExpensesStore } from '@modules/expenses/expenses.store';
 
 export function AddExpense() {
@@ -16,6 +19,13 @@ export function AddExpense() {
 
 		await queryClient.invalidateQueries({
 			queryKey: [QUERY_EXPENSES_TOTAL_AMOUNT],
+		});
+
+		/**
+		 * @todo Invalidate queries for selected month
+		 */
+		await queryClient.invalidateQueries({
+			queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT],
 		});
 	}
 
