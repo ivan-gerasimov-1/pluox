@@ -15,6 +15,7 @@ export function MoneySpentYear() {
 	let total = useQuery({
 		queryKey: [QUERY_EXPENSES_TOTAL_AMOUNT],
 		queryFn: getTotalAmount,
+		refetchOnMount: false,
 	});
 
 	return <MoneyCard title={intl.translate('title')} amount={total.data} />;
