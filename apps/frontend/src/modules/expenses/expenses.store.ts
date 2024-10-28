@@ -1,4 +1,3 @@
-import type { ECurrency } from '@core/infrastructure/currency/types';
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { Amount } from '@domain/amount';
 import { TMonth } from '@domain/amount/useCases/types';
@@ -7,6 +6,7 @@ import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import type { Id, TISODateString } from '@domain/types';
 import { dateFn } from '@modules/date/date';
+import { getTotalAmount } from '@modules/expenses/expenses.query';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -28,6 +28,9 @@ interface IExpensesStore {
 	}): TExpense[];
 }
 
+/**
+ * @deprecated Use expenses.query.ts instead
+ */
 export let useExpensesStore = create<
 	IExpensesStore,
 	[
@@ -103,12 +106,7 @@ export let useExpensesStore = create<
 						);
 				},
 
-				getTotalAmount(): number {
-					let expenses = Expenses.getInstance();
-					let amount = Amount.create(expenses);
-
-					return amount.getTotalByYear();
-				},
+				getTotalAmount,
 
 				getMonthlyAmount(month: TMonth): number {
 					let expenses = Expenses.getInstance();
