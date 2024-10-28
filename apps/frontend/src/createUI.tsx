@@ -42,21 +42,19 @@ export class ReactUI implements IUserInterface {
 		}
 
 		this.root.render(
-			<StrictMode>
-				<App
-					onRendered={async () => {
-						let $loader = this.#window.document.getElementById('loader');
+			<App
+				onRendered={async () => {
+					let $loader = this.#window.document.getElementById('loader');
 
-						await delay(350);
+					await delay(350);
 
-						$loader?.classList.add('hidden');
+					$loader?.classList.add('hidden');
 
-						await delay(150);
+					await delay(150);
 
-						$loader?.remove();
-					}}
-				/>
-			</StrictMode>,
+					$loader?.remove();
+				}}
+			/>,
 		);
 	}
 

@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import {
 	createBrowserRouter as createRouter,
 	createRoutesFromElements,
@@ -51,5 +52,9 @@ export function App(props: IAppProps) {
 		),
 	);
 
-	return <RouterProvider router={router} />;
+	return (
+		<StrictMode>
+			<RouterProvider router={router} />
+		</StrictMode>
+	);
 }
