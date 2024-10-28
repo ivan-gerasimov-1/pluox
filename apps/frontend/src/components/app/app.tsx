@@ -5,6 +5,7 @@ import {
 	Route,
 	RouterProvider,
 } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { EAppPath } from '@root/appPath';
 import { useEffectOnce } from '@root/hooks/useEffectOnce';
@@ -24,6 +25,8 @@ type IAppProps = {
 };
 
 export function App(props: IAppProps) {
+	const queryClient = new QueryClient();
+
 	useEffectOnce(() => {
 		if (!props.onRendered) {
 			return;
@@ -54,7 +57,9 @@ export function App(props: IAppProps) {
 
 	return (
 		<StrictMode>
-			<RouterProvider router={router} />
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
 		</StrictMode>
 	);
 }
