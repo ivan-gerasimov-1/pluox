@@ -1,11 +1,15 @@
+import { useQuery } from '@tanstack/react-query';
 import { useStore } from 'zustand';
 
 import { TMonth } from '@domain/amount/useCases/types';
 
 import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useMonthName } from '@modules/common/hooks/useMonthName/useMonthName';
-import { useExpensesStore } from '@modules/expenses';
 import { ExpensesByCategory } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
+import {
+	getMonthlyAmount,
+	QUERY_EXPENSES_MONTHLY_AMOUNT,
+} from '@modules/expenses/expenses.query';
 import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 
 import { Separator } from '@uiKit/separator/separator';
@@ -17,7 +21,12 @@ export type TMoneySpentMonthProps = {
 };
 
 export function MoneySpentMonth(props: TMoneySpentMonthProps) {
-	let total = useExpensesStore((state) => state.getMonthlyAmount(props.month));
+	let total = useQuery({
+		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, props.month],
+		queryFn: () => getMonthlyAmount(props.month),
+		refetchOnMount: false,
+	});
+
 	let budget = useStore(
 		AppConfigStore.getInstance().get(),
 		(state) => state.budget,
@@ -27,7 +36,7 @@ export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 
 	return (
 		<>
-			<MoneyCard title={currentMonth} amount={total} total={budget} />
+			<MoneyCard title={currentMonth} amount={total.data} total={budget} />
 
 			<Separator />
 
