@@ -1,12 +1,14 @@
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
-import { Amount } from '@domain/amount';
 import { TMonth } from '@domain/amount/useCases/types';
 import { Expense } from '@domain/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import { Expenses, type TExpenses } from '@domain/expenses';
 import type { Id, TISODateString } from '@domain/types';
 import { dateFn } from '@modules/date/date';
-import { getTotalAmount } from '@modules/expenses/expenses.query';
+import {
+	getMonthlyAmount,
+	getTotalAmount,
+} from '@modules/expenses/expenses.query';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -107,13 +109,7 @@ export let useExpensesStore = create<
 				},
 
 				getTotalAmount,
-
-				getMonthlyAmount(month: TMonth): number {
-					let expenses = Expenses.getInstance();
-					let amount = Amount.create(expenses);
-
-					return amount.getTotalByMonth(month);
-				},
+				getMonthlyAmount,
 			};
 		},
 		{
