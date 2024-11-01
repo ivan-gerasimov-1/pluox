@@ -6,6 +6,7 @@ import { Expenses, type TExpenses } from '@domain/expenses';
 import type { Id, TISODateString } from '@domain/types';
 import { dateFn } from '@modules/date/date';
 import {
+	getList,
 	getMonthlyAmount,
 	getTotalAmount,
 } from '@modules/expenses/expenses.query';
@@ -95,19 +96,7 @@ export let useExpensesStore = create<
 						.get(id);
 				},
 
-				getList(query?: {
-					dateFrom?: TISODateString;
-					dateTo?: TISODateString;
-				}): TExpense[] {
-					return Expenses.getInstance() //
-						.list(
-							query && {
-								dateFrom: query?.dateFrom,
-								dateTo: query?.dateTo,
-							},
-						);
-				},
-
+				getList,
 				getTotalAmount,
 				getMonthlyAmount,
 			};
