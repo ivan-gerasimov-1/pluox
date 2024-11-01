@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+
 import type { Id, TISODateString } from '@domain/types';
 import { useExpensesStore } from '@modules/expenses';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
@@ -13,6 +15,7 @@ import {
 import 'react-swipeable-list/dist/styles.css';
 import styles from './expenseList.module.css';
 import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
+import { getList, QUERY_EXPENSES_LIST } from '@modules/expenses/expenses.query';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -25,12 +28,18 @@ export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EService.INTL);
 	let currencyConverter = useService(EService.CURRENCY_CONVERTER);
 
-	let expenseList = useExpensesStore((state) =>
-		state.getList({
-			dateFrom: props.dateFrom,
-			dateTo: props.dateTo,
-		}),
-	);
+	let { data: expenseList = [] } = useQuery({
+		queryKey: [QUERY_EXPENSES_LIST, props.dateFrom, props.dateTo],
+		queryFn: ({ queryKey }) => {
+			let [, dateFrom, dateTo] = queryKey as [string, string, string];
+
+			return getList({
+				dateFrom,
+				dateTo,
+			});
+		},
+		refetchOnMount: false,
+	});
 	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
 
 	let expenseGroups = groupExpenseListByDay(expenseList);
