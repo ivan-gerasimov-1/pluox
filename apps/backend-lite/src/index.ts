@@ -357,18 +357,24 @@ function main() {
 				};
 
 				throw error;
-			} else {
-				let sessionId = cookie.getValue('sessionId');
+			} else if (canAccess && match?.options?.secure) {
+				try {
+					let sessionId = cookie.getValue('sessionId');
 
-				assert(sessionId);
+					assert.ok(sessionId);
 
-				let sessionData = session.get(sessionId);
+					let sessionData = session.get(sessionId);
 
-				assert(sessionData);
+					assert.ok(sessionData);
 
-				auth = {
-					userId: sessionData.userId,
-				};
+					auth = {
+						userId: sessionData.userId,
+					};
+				} catch {
+					auth = {
+						userId: '',
+					};
+				}
 			}
 
 			let dependencies = {
