@@ -19,12 +19,6 @@ export function AddExpense() {
 			await Promise.all([
 				queryClient.invalidateQueries({
 					queryKey: [QUERY_EXPENSES_TOTAL_AMOUNT],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_LIST],
 					/**
 					 * @description
 					 * For now we could use this approach, alternative is to
@@ -34,6 +28,14 @@ export function AddExpense() {
 					 *     return state.isInvalidated;
 					 *   }
 					 */
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT],
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [QUERY_EXPENSES_LIST],
 					refetchType: 'all',
 				}),
 			]);
