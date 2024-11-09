@@ -1,8 +1,11 @@
 .wrapper {
+	--pill-gap: 6px;
+
 	display: flex;
 	flex-wrap: wrap;
 
-	margin-left: -5px;
+	margin-top: calc(var(--pill-gap) * -1);
+	margin-left: calc(var(--pill-gap) * -1);
 
 	& > * {
 		flex-grow: 1;
@@ -10,13 +13,17 @@
 }
 
 .pill {
-	padding: 15px 20px;
-	margin: 5px 0 0 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 8px 12px;
+	margin: var(--pill-gap) 0 0 var(--pill-gap);
 
 	appearance: none;
 
 	line-height: 1;
-	font-size: var(--fs-100);
+	font-size: var(--fs-90);
 
 	color: var(--color-black);
 	background-color: var(--color-pure-white);

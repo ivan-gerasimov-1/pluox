@@ -123,8 +123,6 @@ export function ExpenseForm(props: TExpenseFormProps) {
 				/>
 			</div> */}
 
-			<br />
-
 			<div className={styles.formGroup}>
 				<CategoryPills
 					onSelect={(id?: string) => {
@@ -135,8 +133,6 @@ export function ExpenseForm(props: TExpenseFormProps) {
 					}}
 				/>
 			</div>
-
-			<br />
 
 			<div className={styles.formGroup}>
 				<DateInput
@@ -150,9 +146,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 				/>
 			</div>
 
-			<br />
-
-			<div>
+			<div className={styles.formGroup}>
 				<CommentInput
 					value={formState.comment}
 					onChange={(comment: string) => {

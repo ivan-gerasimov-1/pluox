@@ -3,7 +3,9 @@
 	border: none;
 	background-color: transparent;
 
-	padding: 10px 20px;
+	padding: 8px 48px;
+
+	margin-left: 12px;
 
 	font-family: inherit;
 	font-size: var(--fs-300);
@@ -14,13 +16,16 @@
 	border: var(--border-defaults);
 	border-color: var(--text-color);
 	border-radius: var(--border-radius-small);
-
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
 }
 
 .formGroup {
 	display: flex;
+
+	margin-top: 24px;
+
+	&:first-child {
+		margin-top: 0;
+	}
 }
 
 .formGroupItem--2-3 {
@@ -32,7 +37,7 @@
 }
 
 .currencySelect {
-	padding: 10px 15px;
+	padding: 8px 12px;
 
 	font-size: var(--fs-100);
 	font-family: inherit;

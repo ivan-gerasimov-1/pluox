@@ -49,7 +49,7 @@
 	--border-light: 1px solid var(--border-color-light);
 
 	--border-radius-90: calc(var(--border-radius-100) - 10px);
-	--border-radius-100: 17px;
+	--border-radius-100: 24px;
 
 	--border-radius-small: var(--border-radius-90);
 	--border-radius-default: var(--border-radius-100);
