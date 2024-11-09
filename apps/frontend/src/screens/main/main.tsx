@@ -17,7 +17,7 @@ export function MainScreen() {
 	return (
 		<>
 			<Screen className={styles.screenWithBottomSpace}>
-				<Header />
+				<Header title="Savee" />
 
 				<CardContainer>
 					<AppLink to={EAppPath.EXPENSES}>
