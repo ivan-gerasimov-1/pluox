@@ -10,6 +10,7 @@ export const settingsI18n = {
 		exitButton: 'Выйти',
 		exitConfirmation: 'Вы уверены, что хотите выйти?',
 
+		appSectionTitle: 'Приложение',
 		appLanguage: 'Язык',
 
 		currencySectionTitle: 'Валюта',
@@ -35,6 +36,7 @@ export const settingsI18n = {
 		exitButton: 'Exit',
 		exitConfirmation: 'Are you sure?',
 
+		appSectionTitle: 'Application',
 		appLanguage: 'Language',
 
 		currencySectionTitle: 'Currency',
