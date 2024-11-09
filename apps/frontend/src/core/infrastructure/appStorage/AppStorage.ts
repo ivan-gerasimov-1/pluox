@@ -32,12 +32,15 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 		return this.parse(rawData);
 	}
 
+	/**
+	 * @todo Restore isEmpty check
+	 */
 	public update(payload: Partial<T>): void {
-		let isEmpty = this.isEmpty();
+		/* let isEmpty = this.isEmpty();
 
 		if (isEmpty) {
 			throw new Error('Storage is empty, initialize it first');
-		}
+		} */
 
 		let data = deepMerge(this.read(), payload);
 
