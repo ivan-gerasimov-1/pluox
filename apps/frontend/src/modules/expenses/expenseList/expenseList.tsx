@@ -25,8 +25,6 @@ import {
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
-
-	onEdit?(itemId: Id): void;
 };
 
 export function ExpenseList(props: TExpenseListProps) {
@@ -140,22 +138,6 @@ export function ExpenseList(props: TExpenseListProps) {
 									{item.comment && (
 										<div className={styles.comment}>{item.comment}</div>
 									)}
-								</div>
-
-								<div className={styles.buttonGroup}>
-									{/* <button
-												type="button"
-												className={styles.actionButton}
-												onClick={() => {
-													if (!props.onEdit) {
-														return;
-													}
-
-													props.onEdit(item.id);
-												}}
-											>
-												<Icon name={Icon.IconName.Edit} />
-											</button> */}
 								</div>
 							</SwipeableListItem>
 						);
