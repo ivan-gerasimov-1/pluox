@@ -10,3 +10,10 @@
 	font-size: var(--fs-400);
 	letter-spacing: -0.375px;
 }
+
+.buttonPlaceholder {
+	width: 32px;
+	height: 32px;
+
+	padding: 10px;
+}

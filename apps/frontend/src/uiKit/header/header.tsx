@@ -19,7 +19,7 @@ export function Header(props: THeaderProps) {
 	return (
 		<div className={styles.container}>
 			{Boolean(isMain) ? (
-				<div />
+				<div className={styles.buttonPlaceholder} />
 			) : (
 				<IconButton
 					onClick={() => navigate(-1)}
