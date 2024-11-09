@@ -22,9 +22,7 @@ export function Header(props: THeaderProps) {
 				<div />
 			) : (
 				<IconButton
-					onClick={() => {
-						navigate(-1);
-					}}
+					onClick={() => navigate(-1)}
 					iconName={Icon.IconName.ArrowBack}
 					iconSize={Icon.Size.LARGE}
 				/>
