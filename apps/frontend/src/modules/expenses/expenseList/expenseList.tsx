@@ -34,15 +34,18 @@ export function ExpenseList(props: TExpenseListProps) {
 	let currencyConverter = useService(EService.CURRENCY_CONVERTER);
 	let queryClient = useQueryClient();
 
-	let { data: expenseList = [] } = useQuery({
+	let { data: expenseGroups = [] } = useQuery({
 		queryKey: [QUERY_EXPENSES_LIST, props.dateFrom, props.dateTo],
 		queryFn: ({ queryKey }) => {
 			let [, dateFrom, dateTo] = queryKey as [string, string, string];
 
-			return getList({
+			let expenseList = getList({
 				dateFrom,
 				dateTo,
 			});
+			let expenseGroups = groupExpenseListByDay(expenseList);
+
+			return expenseGroups;
 		},
 		refetchOnMount: false,
 	});
@@ -75,8 +78,6 @@ export function ExpenseList(props: TExpenseListProps) {
 			]);
 		},
 	});
-
-	let expenseGroups = groupExpenseListByDay(expenseList);
 
 	return expenseGroups.map((group) => {
 		let expenseList = group.items;
