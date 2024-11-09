@@ -1,5 +1,5 @@
 import { dateFn } from '@modules/date/date';
-import { ExpenseList } from '@modules/expenses';
+import { ExpenseList } from '@modules/expenses/expenseList';
 import { useIntl } from '@modules/intl/useIntl';
 
 import { expenseListI18n } from '@screens/expenseList/expenseList.i18n';
