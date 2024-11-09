@@ -1,4 +1,4 @@
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 
 import { EAppPath } from '@root/appPath';
 
@@ -14,6 +14,7 @@ export type THeaderProps = {
 
 export function Header(props: THeaderProps) {
 	let isMain = useMatch(EAppPath.MAIN);
+	let navigate = useNavigate();
 
 	return (
 		<div className={styles.container}>
@@ -21,7 +22,9 @@ export function Header(props: THeaderProps) {
 				<div />
 			) : (
 				<IconButton
-					onClick={() => window.history.back()}
+					onClick={() => {
+						navigate(-1);
+					}}
 					iconName={Icon.IconName.ArrowBack}
 					iconSize={Icon.Size.LARGE}
 				/>
