@@ -2,8 +2,6 @@ import { useMatch } from 'react-router-dom';
 
 import { EAppPath } from '@root/appPath';
 
-import { AuthService } from '@core/infrastructure/authService/AuthService';
-
 import { Icon } from '@uiKit/icon/icon';
 import { Navigable } from '@uiKit/navigable/navigable';
 import { IconButton } from '@uiKit/iconButton/iconButton';
@@ -16,7 +14,6 @@ export type THeaderProps = {
 
 export function Header(props: THeaderProps) {
 	let isMain = useMatch(EAppPath.MAIN);
-	let isAuthenticated = AuthService.getInstance().isAuthenticated();
 
 	return (
 		<div className={styles.container}>
@@ -32,15 +29,9 @@ export function Header(props: THeaderProps) {
 
 			{props.title && <h1 className={styles.title}>{props.title}</h1>}
 
-			{isAuthenticated ? (
-				<Navigable to={EAppPath.SETTINGS}>
-					<Icon name={Icon.IconName.User} size={Icon.Size.LARGE} />
-				</Navigable>
-			) : (
-				<Navigable to={EAppPath.LOGIN}>
-					<Icon name={Icon.IconName.LogIn} size={Icon.Size.LARGE} />
-				</Navigable>
-			)}
+			<Navigable to={EAppPath.SETTINGS}>
+				<Icon name={Icon.IconName.User} size={Icon.Size.LARGE} />
+			</Navigable>
 		</div>
 	);
 }
