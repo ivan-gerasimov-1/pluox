@@ -1,13 +1,52 @@
+import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { Amount } from '@domain/amount/Amount';
 import type { TMonth } from '@domain/amount/useCases/types';
-import type { TExpense } from '@domain/expense/types';
+import { Expense } from '@domain/expense/expense';
+import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import { Expenses } from '@domain/expenses/expenses';
 import type { Id, TISODateString } from '@domain/types';
+import { dateFn } from '@modules/date/date';
 
 export const QUERY_EXPENSES_LIST = Symbol('expenseList');
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');
 export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
+
+/**
+ * @todo
+ * 1. Encapsulate logic in a separate class
+ * 2. Move async logic to syncer
+ */
+export async function addOne(payload: TExpenseCreateDTO): Promise<void> {
+	const expense = Expense.create(
+		payload.amount,
+		payload.currency,
+		payload.comment,
+		payload.category,
+		/**
+		 * @todo Don’t use dateFn directly
+		 */
+		dateFn.tz.guess(),
+		payload.date,
+	);
+
+	try {
+		const expensesApi = ExpensesApi.getInstance();
+		const response = await expensesApi.create(expense.toObject());
+
+		// @ts-expect-error
+		expense.__dangerouslyUpdateId(response.id);
+	} catch {
+		// DO NOTHING FOR NOW
+	}
+
+	ExpensesStorage.getInstance() //
+		.setItems(
+			Expenses.getInstance() //
+				.add(expense)
+				.get(),
+		);
+}
 
 /**
  * @todo Encapsulate logic in a separate class
