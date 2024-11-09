@@ -46,6 +46,7 @@ export let useExpensesStore = create<
 			return {
 				operations: {},
 
+				/** @deprecated */
 				async addExpense(payload: TExpenseCreateDTO): Promise<void> {
 					const expense = Expense.create(
 						payload.amount,
@@ -81,6 +82,7 @@ export let useExpensesStore = create<
 					//
 				},
 
+				/** @deprecated */
 				deleteExpense(id: Id): void {
 					set((state) => {
 						return {
@@ -92,9 +94,13 @@ export let useExpensesStore = create<
 					});
 				},
 
+				/** @deprecated */
 				getOne,
+				/** @deprecated */
 				getList,
+				/** @deprecated */
 				getTotalAmount,
+				/** @deprecated */
 				getMonthlyAmount,
 			};
 		},
