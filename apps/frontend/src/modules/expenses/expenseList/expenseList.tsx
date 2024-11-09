@@ -18,6 +18,8 @@ import {
 	deleteOne,
 	getList,
 	QUERY_EXPENSES_LIST,
+	QUERY_EXPENSES_MONTHLY_AMOUNT,
+	QUERY_EXPENSES_TOTAL_AMOUNT,
 } from '@modules/expenses/expenses.query';
 
 export type TExpenseListProps = {
@@ -49,10 +51,28 @@ export function ExpenseList(props: TExpenseListProps) {
 		mutationFn: async (id: Id) => {
 			deleteOne(id);
 		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: [QUERY_EXPENSES_LIST],
-			});
+		onSuccess: async () => {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: [QUERY_EXPENSES_TOTAL_AMOUNT],
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT],
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [QUERY_EXPENSES_LIST],
+					/**
+					 * @description
+					 * For now we could use this approach, alternative is to
+					 * refetch a query onMount if it is invalidated
+					 * @example
+					 *   refetchOnMount({ state }) {
+					 *     return state.isInvalidated;
+					 *   }
+					 */
+					refetchType: 'all',
+				}),
+			]);
 		},
 	});
 
