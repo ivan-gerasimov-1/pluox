@@ -33,12 +33,25 @@ export class ExpensesStorage
 		return value.state.operations;
 	}
 
+	/**
+	 * @todo
+	 * 1. Simplify structure
+	 * 2. Return to update
+	 */
 	public setItems(values: Record<Id, TExpense>): IExpensesStorage {
-		this.update({
+		this.delete();
+		this.create({
 			state: {
 				operations: values,
 			},
+			// version: 0,
 		});
+
+		// this.update({
+		// 	state: {
+		// 		operations: values,
+		// 	},
+		// });
 
 		return this;
 	}

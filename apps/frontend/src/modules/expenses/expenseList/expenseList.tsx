@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { Id, TISODateString } from '@domain/types';
-import { useExpensesStore } from '@modules/expenses';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
 import { EService, useService } from '@modules/serviceContainer/useService';
 import { Icon } from '@root/uiKit/icon';
@@ -15,7 +14,11 @@ import {
 import 'react-swipeable-list/dist/styles.css';
 import styles from './expenseList.module.css';
 import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
-import { getList, QUERY_EXPENSES_LIST } from '@modules/expenses/expenses.query';
+import {
+	deleteOne,
+	getList,
+	QUERY_EXPENSES_LIST,
+} from '@modules/expenses/expenses.query';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -27,6 +30,7 @@ export type TExpenseListProps = {
 export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EService.INTL);
 	let currencyConverter = useService(EService.CURRENCY_CONVERTER);
+	let queryClient = useQueryClient();
 
 	let { data: expenseList = [] } = useQuery({
 		queryKey: [QUERY_EXPENSES_LIST, props.dateFrom, props.dateTo],
@@ -40,7 +44,17 @@ export function ExpenseList(props: TExpenseListProps) {
 		},
 		refetchOnMount: false,
 	});
-	let deleteExpense = useExpensesStore((state) => state.deleteExpense);
+
+	let deleteExpense = useMutation({
+		mutationFn: async (id: Id) => {
+			deleteOne(id);
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_EXPENSES_LIST],
+			});
+		},
+	});
 
 	let expenseGroups = groupExpenseListByDay(expenseList);
 
@@ -64,7 +78,7 @@ export function ExpenseList(props: TExpenseListProps) {
 										<SwipeAction
 											Tag="div"
 											onClick={() => {
-												deleteExpense(item.id);
+												deleteExpense.mutate(item.id);
 											}}
 											destructive
 										>
