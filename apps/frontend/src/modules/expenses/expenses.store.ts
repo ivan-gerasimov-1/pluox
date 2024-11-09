@@ -8,6 +8,7 @@ import { dateFn } from '@modules/date/date';
 import {
 	getList,
 	getMonthlyAmount,
+	getOne,
 	getTotalAmount,
 } from '@modules/expenses/expenses.query';
 import { create } from 'zustand';
@@ -91,11 +92,7 @@ export let useExpensesStore = create<
 					});
 				},
 
-				getOne(id: Id): TExpense {
-					return Expenses.getInstance() //
-						.get(id);
-				},
-
+				getOne,
 				getList,
 				getTotalAmount,
 				getMonthlyAmount,
