@@ -2,11 +2,16 @@ import { Amount } from '@domain/amount/Amount';
 import type { TMonth } from '@domain/amount/useCases/types';
 import type { TExpense } from '@domain/expense/types';
 import { Expenses } from '@domain/expenses/expenses';
-import type { TISODateString } from '@domain/types';
+import type { Id, TISODateString } from '@domain/types';
 
 export const QUERY_EXPENSES_LIST = Symbol('expenseList');
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');
 export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
+
+export function getOne(id: Id): TExpense {
+	return Expenses.getInstance() //
+		.get(id);
+}
 
 export function getList(query?: {
 	dateFrom?: TISODateString;
