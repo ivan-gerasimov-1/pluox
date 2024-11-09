@@ -33,7 +33,7 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 	}
 
 	/**
-	 * @todo Restore isEmpty check
+	 * @todo Restore isEmpty check and remove default value for this.read()
 	 */
 	public update(payload: Partial<T>): void {
 		/* let isEmpty = this.isEmpty();
@@ -42,7 +42,7 @@ export class AppStorage<T extends {}> implements IAppStorage<T> {
 			throw new Error('Storage is empty, initialize it first');
 		} */
 
-		let data = deepMerge(this.read(), payload);
+		let data = deepMerge(this.read() ?? {}, payload);
 
 		window.localStorage.setItem(this.#id, JSON.stringify(data));
 	}
