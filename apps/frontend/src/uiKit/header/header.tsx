@@ -3,7 +3,7 @@ import { useMatch, useNavigate } from 'react-router-dom';
 import { EAppPath } from '@root/appPath';
 
 import { Icon } from '@uiKit/icon/icon';
-import { Navigable } from '@uiKit/navigable/navigable';
+import { AppLink } from '@uiKit/appLink/appLink';
 import { IconButton } from '@uiKit/iconButton/iconButton';
 
 import styles from './header.module.css';
@@ -32,9 +32,9 @@ export function Header(props: THeaderProps) {
 
 			{props.title && <h1 className={styles.title}>{props.title}</h1>}
 
-			<Navigable to={EAppPath.SETTINGS}>
+			<AppLink to={EAppPath.SETTINGS}>
 				<Icon name={Icon.IconName.User} size={Icon.Size.LARGE} />
-			</Navigable>
+			</AppLink>
 		</div>
 	);
 }

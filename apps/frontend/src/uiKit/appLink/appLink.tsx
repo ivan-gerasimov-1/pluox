@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './navigable.module.css';
+import styles from './appLink.module.css';
 import { cls } from '@utils/classnames';
 
 type TNavigableProps = {
@@ -7,7 +7,7 @@ type TNavigableProps = {
 	className?: string;
 };
 
-export function Navigable(props: React.PropsWithChildren<TNavigableProps>) {
+export function AppLink(props: React.PropsWithChildren<TNavigableProps>) {
 	return (
 		<Link className={cls(styles.navigable, props.className)} to={props.to}>
 			{props.children}

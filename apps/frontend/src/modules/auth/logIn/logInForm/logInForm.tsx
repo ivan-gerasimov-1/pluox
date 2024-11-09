@@ -4,7 +4,7 @@ import { usePending } from '@screens/hooks/usePending';
 import { delay } from '@utils/delay';
 import styles from './logInForm.module.css';
 import { EAppPath } from '@root/appPath';
-import { Navigable } from '@uiKit/navigable/navigable';
+import { AppLink } from '@uiKit/appLink/appLink';
 import { Button } from '@uiKit/button/button';
 
 export function useLoginForm() {
@@ -91,7 +91,7 @@ export function LogInForm() {
 						}}
 					>
 						Нет аккаунта?{' '}
-						<Navigable to={EAppPath.SIGNIN}>
+						<AppLink to={EAppPath.SIGNIN}>
 							<span
 								style={{
 									color: 'rgb(66, 66, 190)',
@@ -99,7 +99,7 @@ export function LogInForm() {
 							>
 								Создать
 							</span>
-						</Navigable>
+						</AppLink>
 					</div>
 				</FormGroup>
 			</Form>

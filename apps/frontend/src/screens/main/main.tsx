@@ -5,7 +5,7 @@ import { EService, useService } from '@modules/serviceContainer/useService';
 import { EAppPath } from '@root/appPath';
 import { Card, CardContainer } from '@root/uiKit';
 import { ActionSheet } from '@root/uiKit/actionSheet';
-import { Navigable } from '@root/uiKit/navigable/navigable';
+import { AppLink } from '@uiKit/appLink/appLink';
 import { Header } from '@uiKit/header/header';
 import { Screen } from '@uiKit/screen/screen';
 
@@ -20,17 +20,17 @@ export function MainScreen() {
 				<Header />
 
 				<CardContainer>
-					<Navigable to={EAppPath.EXPENSES}>
+					<AppLink to={EAppPath.EXPENSES}>
 						<Card touchable>
 							<MoneySpentMonth month={appConfig.currentMonth} />
 						</Card>
-					</Navigable>
+					</AppLink>
 
-					<Navigable to={EAppPath.EXPENSES_LIST_MONTHLY}>
+					<AppLink to={EAppPath.EXPENSES_LIST_MONTHLY}>
 						<Card touchable>
 							<MoneySpentYear />
 						</Card>
-					</Navigable>
+					</AppLink>
 				</CardContainer>
 			</Screen>
 
