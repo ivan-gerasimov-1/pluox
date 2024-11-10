@@ -7,17 +7,34 @@ import { expenseListI18n } from '@screens/expenseList/expenseList.i18n';
 import { Header } from '@uiKit/header/header';
 import { Screen } from '@uiKit/screen/screen';
 
+import { useSearchParams } from 'react-router-dom';
+
 export function ExpenseListScreen() {
 	let intl = useIntl(expenseListI18n);
-
-	let dateFrom = dateFn().startOf('month').toISOString();
-	let dateTo = dateFn().endOf('month').toISOString();
+	let screenParams = useScreenParams();
 
 	return (
 		<Screen>
 			<Header title={intl.translate('title')} />
 
-			<ExpenseList dateFrom={dateFrom} dateTo={dateTo} />
+			<ExpenseList
+				dateFrom={screenParams.dateFrom}
+				dateTo={screenParams.dateTo}
+			/>
 		</Screen>
 	);
+}
+
+function useScreenParams() {
+	let [searchParams] = useSearchParams();
+
+	let dateFrom =
+		searchParams.get('dateFrom') || dateFn().startOf('month').toISOString();
+	let dateTo =
+		searchParams.get('dateTo') || dateFn().endOf('month').toISOString();
+
+	return {
+		dateFrom,
+		dateTo,
+	};
 }
