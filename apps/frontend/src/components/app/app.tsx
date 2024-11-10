@@ -5,7 +5,7 @@ import {
 	Route,
 	RouterProvider,
 } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { EAppPath } from '@root/appPath';
 import { useEffectOnce } from '@root/hooks/useEffectOnce';
@@ -21,12 +21,12 @@ import { NotFoundErrorScreen } from '@screens/error/screens/notFoundErrorScreen/
 import '@root/root.css';
 
 type IAppProps = {
+	queryClient: QueryClient;
+
 	onRendered?(): void;
 };
 
 export function App(props: IAppProps) {
-	const queryClient = new QueryClient();
-
 	useEffectOnce(() => {
 		if (!props.onRendered) {
 			return;
@@ -57,7 +57,7 @@ export function App(props: IAppProps) {
 
 	return (
 		<StrictMode>
-			<QueryClientProvider client={queryClient}>
+			<QueryClientProvider client={props.queryClient}>
 				<RouterProvider router={router} />
 			</QueryClientProvider>
 		</StrictMode>
