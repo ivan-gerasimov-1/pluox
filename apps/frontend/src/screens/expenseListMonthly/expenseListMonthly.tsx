@@ -24,11 +24,9 @@ export function ExpenseListMonthlyScreen() {
 			<CardContainer>
 				{MONTH_LIST.map((month) => {
 					return (
-						<Fragment key={month}>
-							<Card>
-								<MoneySpentMonth month={month} />
-							</Card>
-						</Fragment>
+						<Card key={month}>
+							<MoneySpentMonth month={month} />
+						</Card>
 					);
 				})}
 			</CardContainer>
