@@ -1,13 +1,16 @@
+import { EAppPath } from '@root/appPath';
+
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
 import { AddExpense } from '@modules/expenses/addExpense/addExpense';
 import { EService, useService } from '@modules/serviceContainer/useService';
-import { EAppPath } from '@root/appPath';
-import { Card, CardContainer } from '@root/uiKit';
+
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { AppLink } from '@uiKit/appLink/appLink';
 import { Header } from '@uiKit/header/header';
 import { Screen } from '@uiKit/screen/screen';
+import { CardContainer } from '@uiKit/cardContainer/cardContainer';
+import { Card } from '@uiKit/card/card';
 
 import styles from './main.module.css';
 
