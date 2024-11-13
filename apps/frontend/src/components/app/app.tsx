@@ -10,9 +10,9 @@ import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { EAppPath } from '@root/appPath';
 import { useEffectOnce } from '@root/hooks/useEffectOnce';
 
+import { MainScreen } from '@screens/main/main';
 import { ExpenseListScreen } from '@screens/expenseList';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
-import { MainScreen } from '@screens/index';
 import { LogIn } from '@screens/logIn/LogIn';
 import { Settings } from '@screens/settings/settings';
 import { SignIn } from '@screens/signIn';
