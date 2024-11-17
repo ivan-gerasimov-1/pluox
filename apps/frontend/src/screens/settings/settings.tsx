@@ -29,7 +29,7 @@ import { CardContainer } from '@uiKit/cardContainer';
 import { Card } from '@uiKit/card/card';
 import { Separator } from '@uiKit/separator/separator';
 
-export function Settings() {
+export function SettingsScreen() {
 	let intl = useIntl(settingsI18n);
 	let navigation = useNavigation();
 	let appConfigStore = AppConfigStore.getInstance();

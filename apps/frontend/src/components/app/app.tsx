@@ -14,7 +14,7 @@ import { MainScreen } from '@screens/main/main';
 import { ExpenseListScreen } from '@screens/expenseList';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
 import { SignInScreen } from '@screens/signIn/SignIn';
-import { Settings } from '@screens/settings/settings';
+import { SettingsScreen } from '@screens/settings/settings';
 import { SignUpScreen } from '@screens/signUp/SignUp';
 import { NotFoundErrorScreen } from '@screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
 
@@ -48,7 +48,7 @@ export function App(props: IAppProps) {
 					element={<ExpenseListMonthlyScreen />}
 				/>
 
-				<Route path={EAppPath.SETTINGS} element={<Settings />} />
+				<Route path={EAppPath.SETTINGS} element={<SettingsScreen />} />
 
 				<Route path="*" element={<NotFoundErrorScreen />} />
 			</>,
