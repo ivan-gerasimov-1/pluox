@@ -13,9 +13,9 @@ import { useEffectOnce } from '@root/hooks/useEffectOnce';
 import { MainScreen } from '@screens/main/main';
 import { ExpenseListScreen } from '@screens/expenseList';
 import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
-import { LogIn } from '@screens/logIn/LogIn';
+import { SignIn } from '@screens/signIn/SignIn';
 import { Settings } from '@screens/settings/settings';
-import { SignIn } from '@screens/signIn';
+import { SignUp } from '@screens/signUp/SignUp';
 import { NotFoundErrorScreen } from '@screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
 
 import '@root/root.css';
@@ -38,8 +38,8 @@ export function App(props: IAppProps) {
 	let router = createRouter(
 		createRoutesFromElements(
 			<>
-				<Route path={EAppPath.SIGNUP} element={<SignIn />} />
-				<Route path={EAppPath.SIGNIN} element={<LogIn />} />
+				<Route path={EAppPath.SIGNUP} element={<SignUp />} />
+				<Route path={EAppPath.SIGNIN} element={<SignIn />} />
 
 				<Route path={EAppPath.MAIN} element={<MainScreen />} />
 				<Route path={EAppPath.EXPENSES} element={<ExpenseListScreen />} />
