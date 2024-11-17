@@ -38,8 +38,8 @@ export function App(props: IAppProps) {
 	let router = createRouter(
 		createRoutesFromElements(
 			<>
-				<Route path={EAppPath.SIGNIN} element={<SignIn />} />
-				<Route path={EAppPath.LOGIN} element={<LogIn />} />
+				<Route path={EAppPath.SIGNUP} element={<SignIn />} />
+				<Route path={EAppPath.SIGNIN} element={<LogIn />} />
 
 				<Route path={EAppPath.MAIN} element={<MainScreen />} />
 				<Route path={EAppPath.EXPENSES} element={<ExpenseListScreen />} />

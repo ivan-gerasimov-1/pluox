@@ -16,7 +16,7 @@ export function useNavigation(): INavigation {
 	}
 
 	function goToLoginPage() {
-		navigate(EAppPath.LOGIN, {
+		navigate(EAppPath.SIGNIN, {
 			replace: true,
 		});
 	}

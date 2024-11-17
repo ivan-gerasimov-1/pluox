@@ -91,7 +91,7 @@ export function LogInForm() {
 						}}
 					>
 						Нет аккаунта?{' '}
-						<AppLink to={EAppPath.SIGNIN}>
+						<AppLink to={EAppPath.SIGNUP}>
 							<span
 								style={{
 									color: 'rgb(66, 66, 190)',
