@@ -1,8 +1,9 @@
 import { useNavigation } from '@modules/navigation/useNavigation';
-import styles from './signIn.module.css';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { usePending } from '@screens/hooks/usePending';
 import { delay } from '@utils/delay';
+
+import styles from './signUp.module.css';
 
 export function SignUp() {
 	let authService = AuthService.getInstance();
