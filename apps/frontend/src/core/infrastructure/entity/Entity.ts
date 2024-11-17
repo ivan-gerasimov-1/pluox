@@ -3,7 +3,7 @@ import type { TISODateString, Id } from '@domain/types';
 import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
 
 export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
-	readonly #id: Id;
+	#id: Id;
 
 	protected readonly createdAt: TISODateString;
 	protected modifiedAt: TISODateString;
@@ -22,15 +22,9 @@ export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 		return this.#id;
 	}
 
-	public abstract toObject(): TEntityDTO;
-
-	/**
-	 * @todo Remove public setter when server sync is ready
-	 */
-	private __dangerouslyUpdateId(value: Id): this {
-		// @ts-expect-error
+	protected set id(value: Id) {
 		this.#id = value;
-
-		return this;
 	}
+
+	public abstract toObject(): TEntityDTO;
 }

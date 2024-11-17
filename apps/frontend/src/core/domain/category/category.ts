@@ -11,10 +11,7 @@ export class Category extends Entity<TCategoryDTO> implements ICategory {
 	private constructor(id: Id, name: string, icon: string, weight: number) {
 		super();
 
-		// this.#id = id;
-		/** @todo */
-		// @ts-expect-error
-		super.__dangerouslyUpdateId(id);
+		this.id = id;
 
 		this.#name = name;
 		this.#icon = icon;
