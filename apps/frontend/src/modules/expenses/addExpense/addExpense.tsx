@@ -9,12 +9,13 @@ import {
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 	QUERY_EXPENSES_TOTAL_AMOUNT,
 } from '@modules/expenses/expenses.query';
+import type { TExpenseCreateDTO } from '@domain/expense/types';
 
 export function AddExpense() {
 	let queryClient = useQueryClient();
 
 	let addExpense = useMutation({
-		mutationFn: addOne,
+		mutationFn: async (payload: TExpenseCreateDTO) => addOne(payload),
 		onSuccess: async () => {
 			await Promise.all([
 				queryClient.invalidateQueries({

@@ -1,4 +1,3 @@
-import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { Amount } from '@domain/amount/Amount';
 import type { TMonth } from '@domain/amount/useCases/types';
@@ -15,9 +14,8 @@ export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
 /**
  * @todo
  * 1. Encapsulate logic in a separate class
- * 2. Move async logic to syncer
  */
-export async function addOne(payload: TExpenseCreateDTO): Promise<void> {
+export function addOne(payload: TExpenseCreateDTO): void {
 	const expense = Expense.create(
 		payload.amount,
 		payload.currency,
@@ -29,16 +27,6 @@ export async function addOne(payload: TExpenseCreateDTO): Promise<void> {
 		dateFn.tz.guess(),
 		payload.date,
 	);
-
-	try {
-		const expensesApi = ExpensesApi.getInstance();
-		const response = await expensesApi.create(expense.toObject());
-
-		// @ts-expect-error
-		expense.__dangerouslyUpdateId(response.id);
-	} catch {
-		// DO NOTHING FOR NOW
-	}
 
 	ExpensesStorage.getInstance() //
 		.setItems(
