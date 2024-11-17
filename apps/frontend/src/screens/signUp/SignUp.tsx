@@ -5,7 +5,7 @@ import { delay } from '@utils/delay';
 
 import styles from './signUp.module.css';
 
-export function SignUp() {
+export function SignUpScreen() {
 	let authService = AuthService.getInstance();
 	const navigation = useNavigation();
 	const { pending, setPending } = usePending();
