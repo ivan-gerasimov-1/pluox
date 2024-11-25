@@ -1,27 +1,15 @@
 import { StrictMode } from 'react';
-import {
-	createBrowserRouter as createRouter,
-	createRoutesFromElements,
-	Route,
-	RouterProvider,
-} from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { EAppPath } from '@root/appPath';
+import { IRouter } from '@root/router';
 import { useEffectOnce } from '@root/hooks/useEffectOnce';
-
-import { MainScreen } from '@screens/main/main';
-import { ExpenseListScreen } from '@screens/expenseList';
-import { ExpenseListMonthlyScreen } from '@screens/expenseListMonthly';
-import { SignInScreen } from '@screens/signIn/SignIn';
-import { SettingsScreen } from '@screens/settings/settings';
-import { SignUpScreen } from '@screens/signUp/SignUp';
-import { NotFoundErrorScreen } from '@screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
 
 import '@root/root.css';
 
 type IAppProps = {
 	queryClient: QueryClient;
+	router: IRouter;
 
 	onRendered?(): void;
 };
@@ -35,30 +23,10 @@ export function App(props: IAppProps) {
 		props.onRendered();
 	});
 
-	let router = createRouter(
-		createRoutesFromElements(
-			<>
-				<Route path={EAppPath.SIGNUP} element={<SignUpScreen />} />
-				<Route path={EAppPath.SIGNIN} element={<SignInScreen />} />
-
-				<Route path={EAppPath.MAIN} element={<MainScreen />} />
-				<Route path={EAppPath.EXPENSES} element={<ExpenseListScreen />} />
-				<Route
-					path={EAppPath.EXPENSES_LIST_MONTHLY}
-					element={<ExpenseListMonthlyScreen />}
-				/>
-
-				<Route path={EAppPath.SETTINGS} element={<SettingsScreen />} />
-
-				<Route path="*" element={<NotFoundErrorScreen />} />
-			</>,
-		),
-	);
-
 	return (
 		<StrictMode>
 			<QueryClientProvider client={props.queryClient}>
-				<RouterProvider router={router} />
+				<RouterProvider router={props.router} />
 			</QueryClientProvider>
 		</StrictMode>
 	);

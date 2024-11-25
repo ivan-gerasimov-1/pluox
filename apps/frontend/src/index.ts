@@ -12,6 +12,7 @@ import { ECurrency } from '@core/infrastructure/currency/types';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 
 import { Expenses } from '@domain/expenses/expenses';
+import { createAppRouter } from '@root/router';
 
 async function main(): Promise<void> {
 	await runMockServiceWorker();
@@ -21,9 +22,14 @@ async function main(): Promise<void> {
 	await getCurrencyRates();
 	loadExpenses();
 
-	const ui: IUserInterface = new ReactUI(window, new QueryClient(), {
-		containerId: 'saveeRoot',
-	});
+	const ui: IUserInterface = new ReactUI(
+		window,
+		new QueryClient(),
+		createAppRouter(),
+		{
+			containerId: 'saveeRoot',
+		},
+	);
 
 	registerServiceWorker();
 

@@ -1,9 +1,11 @@
 import { createRoot, type Root } from 'react-dom/client';
+import type { QueryClient } from '@tanstack/react-query';
+
+import type { IRouter } from '@root/router';
 
 import { delay } from '@utils/delay';
 
 import { App } from '@components/app/app';
-import type { QueryClient } from '@tanstack/react-query';
 
 interface IWindow extends Window {}
 interface IRoot extends Root {}
@@ -26,6 +28,7 @@ export class ReactUI implements IUserInterface {
 	constructor(
 		window: IWindow,
 		private readonly queryClient: QueryClient,
+		private readonly router: IRouter,
 		params: IReactUIConstructorParams,
 	) {
 		this.#window = window;
@@ -48,6 +51,7 @@ export class ReactUI implements IUserInterface {
 		this.root.render(
 			<App
 				queryClient={this.queryClient}
+				router={this.router}
 				onRendered={async () => {
 					let $loader = this.#window.document.getElementById('loader');
 
