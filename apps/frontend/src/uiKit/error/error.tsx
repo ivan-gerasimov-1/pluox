@@ -1,4 +1,4 @@
-import { errorI18n } from '@components/error/error.i18n';
+import { errorI18n } from '@uiKit/error/error.i18n';
 import { useIntl } from '@modules/intl/useIntl';
 import { useNavigation } from '@modules/navigation/useNavigation';
 import { Button } from '@uiKit/button/button';
