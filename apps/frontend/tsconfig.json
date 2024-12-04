@@ -8,6 +8,9 @@
 		"baseUrl": "./",
 		"outDir": "build/",
 
+		"noEmit": true,
+		"tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
+
 		"sourceMap": true,
 
 		"strict": true,
