@@ -36,6 +36,7 @@
 		"@types/react-transition-group": "4.4.11",
 		"@vitejs/plugin-react": "4.3.4",
 		"cross-env": "7.0.3",
+		"lightningcss": "1.28.2",
 		"msw": "2.4.6",
 		"postcss-nested": "6.2.0",
 		"postcss-preset-env": "10.0.3",
