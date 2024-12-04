@@ -7,6 +7,7 @@ import svgr from 'vite-plugin-svgr';
 import postcssNested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
@@ -23,6 +24,9 @@ export default defineConfig(({ mode }) => {
 				titleProp: true,
 			},
 			include: ['**/*.svg'],
+		}),
+		createHtmlPlugin({
+			minify: !isDevelopment,
 		}),
 	];
 
