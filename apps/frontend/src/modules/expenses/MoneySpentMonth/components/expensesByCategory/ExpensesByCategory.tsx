@@ -5,7 +5,7 @@ import { useIntl } from '@modules/intl/useIntl';
 
 import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
-import { Expenses } from '@domain/expenses';
+import { Expenses } from '@domain/expenses/expenses';
 import { expensesByCategoryI18n } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/expensesByCategory.i18n';
 
 import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
