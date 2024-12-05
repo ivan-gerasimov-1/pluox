@@ -1,4 +1,5 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { IClientId } from '@core/infrastructure/clientId/types';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
 import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
@@ -26,6 +27,7 @@ export enum EServiceToken {
 	NUMBER_PARSER = 'NumberParser',
 	ID_GENERATOR = 'IdGenerator',
 	CLIENT_ID_STORAGE = 'ClientIdStorage',
+	CLIENT_ID = 'ClientId',
 }
 
 export interface IServiceMap {
@@ -36,4 +38,5 @@ export interface IServiceMap {
 	[EServiceToken.NUMBER_PARSER]: NumberParser;
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
 	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
+	[EServiceToken.CLIENT_ID]: IClientId;
 }

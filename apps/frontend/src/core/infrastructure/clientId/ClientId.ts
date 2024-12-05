@@ -1,35 +1,17 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import type { IClientId } from '@core/infrastructure/clientId/types';
-import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 
 import type { Id } from '@domain/types';
 
-import { EServiceToken } from '@modules/serviceContainer/types';
-
 export class ClientId implements IClientId {
-	static #instance: IClientId;
-
 	readonly #clientId: string;
 
-	private constructor(
+	constructor(
 		private readonly idGenerator: IIdGenerator,
 		private readonly storage: IClientIdStorage,
 	) {
 		this.#clientId = storage.read() || this.createId();
-	}
-
-	public static getInstance(): IClientId {
-		if (!this.#instance) {
-			let idGenerator = getGlobalContainer().get(EServiceToken.ID_GENERATOR);
-			let storage = getGlobalContainer().get(EServiceToken.CLIENT_ID_STORAGE);
-
-			this.#instance = new ClientId(idGenerator, storage);
-		}
-
-		return this.#instance;
 	}
 
 	public get(): Id {
