@@ -1,9 +1,13 @@
+import { getGlobalContainer } from '@root/diContainer';
+
 import type { IClientId } from '@core/infrastructure/clientId/types';
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
-import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
+
 import type { Id } from '@domain/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export class ClientId implements IClientId {
 	static #instance: IClientId;
@@ -19,7 +23,7 @@ export class ClientId implements IClientId {
 
 	public static getInstance(): IClientId {
 		if (!this.#instance) {
-			const idGenerator = IdGenerator.getInstance();
+			let idGenerator = getGlobalContainer().get(EServiceToken.ID_GENERATOR);
 			const storage = ClientIdStorage.getInstance();
 
 			this.#instance = new ClientId(idGenerator, storage);

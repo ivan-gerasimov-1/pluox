@@ -10,6 +10,7 @@ import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { Container } from '@modules/serviceContainer/container';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
+import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
 
 let globalContainer: Container;
 
@@ -51,6 +52,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			token: EServiceToken.NUMBER_PARSER,
 			useClass: NumberParser,
 			deps: [EServiceToken.APP_CONFIG],
+		},
+
+		{
+			token: EServiceToken.ID_GENERATOR,
+			useFactory: idGeneratorFactory,
 		},
 	);
 

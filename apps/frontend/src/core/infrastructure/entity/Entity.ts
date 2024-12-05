@@ -1,6 +1,10 @@
+import { getGlobalContainer } from '@root/diContainer';
+
 import { type IEntity } from '@core/infrastructure/entity/types';
+
 import type { TISODateString, Id } from '@domain/types';
-import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 	#id: Id;
@@ -9,7 +13,7 @@ export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 	protected modifiedAt: TISODateString;
 
 	constructor() {
-		let idGenerator = IdGenerator.getInstance();
+		let idGenerator = getGlobalContainer().get(EServiceToken.ID_GENERATOR);
 		let currentDate = new Date().toISOString();
 
 		this.#id = idGenerator.getId();
