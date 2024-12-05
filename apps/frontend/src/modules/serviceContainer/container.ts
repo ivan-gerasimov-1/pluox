@@ -10,7 +10,6 @@ export class Container {
 
 	register(...providers: ServiceProvider[]): void {
 		providers.forEach((provider) => {
-			console.log('register', provider.token);
 			this.providers.set(provider.token, provider);
 		});
 	}
@@ -75,43 +74,6 @@ export class Container {
 // 				throw new Error('useService must be used within ContainerProvider');
 // 		}
 // 		return container.get(token);
-// }
-
-// // Пример регистрации сервисов:
-// // core/di/providers.ts
-// export const appProviders: ServiceProvider[] = [
-// 		{
-// 				token: SERVICE_TOKENS.APP_CONFIG,
-// 				useClass: AppConfig
-// 		},
-// 		{
-// 				token: SERVICE_TOKENS.AUTH_SERVICE,
-// 				useClass: AuthService,
-// 				deps: [SERVICE_TOKENS.STORAGE, SERVICE_TOKENS.APP_CONFIG]
-// 		},
-// 		{
-// 				token: SERVICE_TOKENS.EXPENSES_SERVICE,
-// 				useFactory: (storage: ExpensesStorage, converter: CurrencyConverter) => {
-// 						return new ExpensesService(storage, converter);
-// 				},
-// 				deps: [SERVICE_TOKENS.STORAGE, SERVICE_TOKENS.CURRENCY_CONVERTER]
-// 		},
-// 		{
-// 				token: SERVICE_TOKENS.INTL_SERVICE,
-// 				useFactory: (config: AppConfig) => {
-// 						return new IntlService(config.locale);
-// 				},
-// 				deps: [SERVICE_TOKENS.APP_CONFIG]
-// 		}
-// ];
-
-// // Пример использования в компонентах:
-// // components/ExpenseList.tsx
-// export function ExpenseList() {
-// 		const expensesService = useService(SERVICE_TOKENS.EXPENSES_SERVICE);
-// 		const intlService = useService(SERVICE_TOKENS.INTL_SERVICE);
-
-// 		// ... логика компонента
 // }
 
 // // App.tsx
