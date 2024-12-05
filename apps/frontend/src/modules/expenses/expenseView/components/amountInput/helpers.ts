@@ -1,4 +1,4 @@
-import { ALLOWED_SYMBOLS } from '@modules/expenses/expenseView/components/amountInput/constants';
+import { getAllowedSymbols } from '@modules/expenses/expenseView/components/amountInput/constants';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
 export function validateNumber(value: string): boolean {
@@ -21,7 +21,7 @@ export function validateKey(event: React.KeyboardEvent<HTMLInputElement>) {
 	}
 
 	if (
-		!ALLOWED_SYMBOLS.includes(
+		!getAllowedSymbols().includes(
 			// @ts-expect-error
 			event.key,
 		)

@@ -1,7 +1,7 @@
 import { EKey } from '@modules/expenses/expenseView/components/amountInput/enums';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
-export const ALLOWED_SYMBOLS = [
+export const getAllowedSymbols = () => [
 	IntlService.getInstance().decimalSeparator,
 	EKey.Digit0,
 	EKey.Digit1,
