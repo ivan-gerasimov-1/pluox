@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { Id, TISODateString } from '@domain/types';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
-import { EService, useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/useService';
 import { Icon } from '@root/uiKit/icon';
 import {
 	SwipeAction,
@@ -21,6 +21,7 @@ import {
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 	QUERY_EXPENSES_TOTAL_AMOUNT,
 } from '@modules/expenses/expenses.query';
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -28,8 +29,8 @@ export type TExpenseListProps = {
 };
 
 export function ExpenseList(props: TExpenseListProps) {
-	let intlService = useService(EService.INTL);
-	let currencyConverter = useService(EService.CURRENCY_CONVERTER);
+	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let currencyConverter = useService(EServiceToken.CURRENCY_CONVERTER);
 	let queryClient = useQueryClient();
 
 	let { data: expenseGroups = [] } = useQuery({

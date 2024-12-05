@@ -11,6 +11,8 @@ import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 import { useIntl } from '@modules/intl/useIntl';
 import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
+import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@modules/serviceContainer/useService';
 
 import { Button } from '@uiKit/button/button';
 import { Header } from '@uiKit/header/header';
@@ -21,7 +23,6 @@ import { settingsI18n } from '@screens/settings/settings.i18n';
 import styles from './settings.module.css';
 import { IconSelect } from '@uiKit/iconSelect/iconSelect';
 import { EIconName } from '@uiKit/icon/icons';
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { IconButton } from '@uiKit/iconButton/iconButton';
 import { categoryList } from '@domain/categories/constants';
 import { ActionSheet } from '@uiKit/actionSheetV2/actionSheet';
@@ -34,7 +35,7 @@ export function SettingsScreen() {
 	let navigation = useNavigation();
 	let appConfigStore = AppConfigStore.getInstance();
 	let appConfigState = useStore(appConfigStore.get());
-	let intlService = IntlService.getInstance();
+	let intlService = useService(EServiceToken.INTL_SERVICE);
 
 	let [editBudget, setEditBudget] = useState<boolean>(false);
 

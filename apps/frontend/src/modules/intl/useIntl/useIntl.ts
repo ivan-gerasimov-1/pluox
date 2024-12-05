@@ -1,13 +1,17 @@
+import { useMemo } from 'react';
+
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
+
 import { createScopedTranslateFunction } from '@modules/intl/useIntl/translateFunction';
 import { TBaseScope, TUseIntl } from '@modules/intl/useIntl/types';
-import { useMemo } from 'react';
+import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@modules/serviceContainer/useService';
 
 export function useIntl<TScope extends TBaseScope>(
 	scope: Record<ELocaleCode, TScope>,
 ): TUseIntl<TScope> {
-	let localeCode = IntlService.getInstance().locale;
+	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let localeCode = intlService.locale;
 
 	const intl: TUseIntl<TScope> = useMemo((): TUseIntl<TScope> => {
 		return {

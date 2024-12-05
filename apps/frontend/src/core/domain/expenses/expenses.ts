@@ -1,8 +1,9 @@
+import { getGlobalContainer } from '@root/diContainer';
+
 import {
 	AppConfig,
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
-import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import type { TMonth } from '@domain/amount/useCases/types';
 import { Categories } from '@domain/categories/Categories';
 import type { ICategories } from '@domain/categories/types';
@@ -10,6 +11,8 @@ import type { IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export class Expenses implements IExpenses {
 	static #instance?: IExpenses;
@@ -135,7 +138,9 @@ export class Expenses implements IExpenses {
 		total: number;
 		percentage: number;
 	}[] {
-		let currencyConverter = CurrencyConverter.getInstance();
+		let currencyConverter = getGlobalContainer().get(
+			EServiceToken.CURRENCY_CONVERTER,
+		);
 		let currency = this.appConfig.currency;
 
 		let total = 0;

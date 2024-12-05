@@ -1,9 +1,13 @@
+import React, { useEffect, useState } from 'react';
+
+import { getGlobalContainer } from '@root/diContainer';
+
 import {
 	validateKey,
 	validateNumber,
 } from '@modules/expenses/expenseView/components/amountInput/helpers';
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
-import React, { useEffect, useState } from 'react';
+import { EServiceToken } from '@modules/serviceContainer/types';
+
 import styles from './amountInput.module.css';
 
 type TAmountInputProps = {
@@ -58,9 +62,13 @@ function toViewValue(value: number): string {
 		return '';
 	}
 
-	return value.toLocaleString(IntlService.getInstance().locale);
+	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+
+	return value.toLocaleString(intlService.locale);
 }
 
 function toModelValue(value: string): number {
-	return IntlService.getInstance().parseNumber(value);
+	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+
+	return intlService.parseNumber(value);
 }

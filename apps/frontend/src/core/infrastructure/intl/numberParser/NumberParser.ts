@@ -1,14 +1,17 @@
-import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 
+/**
+ * @todo Define interface
+ */
 export class NumberParser {
-	static #instance?: NumberParser;
-
 	readonly #group: RegExp = new RegExp('');
 	readonly #decimal: RegExp = new RegExp('');
 	readonly #numeral: RegExp = new RegExp('');
 	readonly #index: any;
 
-	private constructor(locale: ELocaleCode) {
+	constructor(appConfig: IAppConfig) {
+		let locale = appConfig.locale;
+
 		const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);
 		const numerals = [
 			...new Intl.NumberFormat(locale, { useGrouping: false }).format(
@@ -26,14 +29,6 @@ export class NumberParser {
 		);
 		this.#numeral = new RegExp(`[${numerals.join('')}]`, 'g');
 		this.#index = (d: string) => index.get(d);
-	}
-
-	public static getInstance(locale: ELocaleCode): NumberParser {
-		if (!this.#instance) {
-			this.#instance = new NumberParser(locale);
-		}
-
-		return this.#instance;
 	}
 
 	public parse(value: string): number {

@@ -1,6 +1,10 @@
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
-import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
 import { useState } from 'react';
+
+import { getGlobalContainer } from '@root/diContainer';
+
+import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
+import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@modules/serviceContainer/useService';
 
 export type TAmountInputProps = {
 	amount: string;
@@ -10,6 +14,8 @@ export type TAmountInputProps = {
 
 export function _AmountInput(props: TAmountInputProps) {
 	let [amount, setAmount] = useState<string>(props.amount);
+
+	let intlService = useService(EServiceToken.INTL_SERVICE);
 
 	function handleChange(value: string | number) {
 		if (value === ',') {
@@ -23,7 +29,7 @@ export function _AmountInput(props: TAmountInputProps) {
 		setAmount((prevTestAmount) => {
 			const nextAmount = toModelValue(
 				`${prevTestAmount}${value}`,
-			).toLocaleString(IntlService.getInstance().locale);
+			).toLocaleString(intlService.locale);
 
 			props.onChange(nextAmount);
 
@@ -35,5 +41,7 @@ export function _AmountInput(props: TAmountInputProps) {
 }
 
 function toModelValue(value: string): number {
-	return IntlService.getInstance().parseNumber(value);
+	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+
+	return intlService.parseNumber(value);
 }

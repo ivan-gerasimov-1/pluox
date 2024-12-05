@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 import { useIntl } from '@modules/intl/useIntl';
+import { useService } from '@modules/serviceContainer/useService';
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
@@ -20,6 +21,8 @@ export type TExpensesByCategory = {
 export function ExpensesByCategory(props: TExpensesByCategory) {
 	let intl = useIntl(expensesByCategoryI18n);
 	let [showAll, setShowAll] = useState<boolean>(false);
+
+	let intlService = useService(EServiceToken.INTL_SERVICE);
 
 	let expenses = Expenses.getInstance().getMonthlyExpensesByCategory(
 		props.month,
@@ -50,7 +53,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 
 						<div>
 							<span className={styles.categoryTotalAmount}>
-								{IntlService.getInstance().formatCurrency(total)}
+								{intlService.formatCurrency(total)}
 							</span>
 						</div>
 					</div>

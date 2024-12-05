@@ -1,4 +1,6 @@
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
+import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@modules/serviceContainer/useService';
+
 import styles from './moneyCard.module.css';
 
 type TMoneyCardProps = {
@@ -8,7 +10,7 @@ type TMoneyCardProps = {
 };
 
 export function MoneyCard(props: TMoneyCardProps) {
-	let intlService = IntlService.getInstance();
+	let intlService = useService(EServiceToken.INTL_SERVICE);
 
 	let leftover: number | null = null;
 

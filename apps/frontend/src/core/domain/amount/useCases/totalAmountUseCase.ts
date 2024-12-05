@@ -1,9 +1,13 @@
-import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
+import { getGlobalContainer } from '@root/diContainer';
+
 import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import type { ECurrency } from '@core/infrastructure/currency/types';
+
 import { getDateParts } from '@domain/amount/useCases/helpers';
 import type { TDateParts } from '@domain/amount/useCases/types';
 import type { IExpenses } from '@domain/expenses/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export interface IMonthlyAmountUseCase {
 	run(dateParts: Partial<TDateParts>, currency: ECurrency): number;
@@ -25,7 +29,9 @@ export class TotalAmountUseCase implements IMonthlyAmountUseCase {
 		/**
 		 * @todo Use DI instead of direct instantiation
 		 */
-		let currencyConverter = CurrencyConverter.getInstance();
+		let currencyConverter = getGlobalContainer().get(
+			EServiceToken.CURRENCY_CONVERTER,
+		);
 
 		return new TotalAmountUseCase(expenses, currencyConverter);
 	}

@@ -3,7 +3,8 @@ import { EAppPath } from '@root/appPath';
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
 import { AddExpense } from '@modules/expenses/addExpense/addExpense';
-import { EService, useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/useService';
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { ActionSheet } from '@root/uiKit/actionSheet';
 import { AppLink } from '@uiKit/appLink/appLink';
@@ -15,7 +16,7 @@ import { Card } from '@uiKit/card/card';
 import styles from './main.module.css';
 
 export function MainScreen() {
-	let appConfig = useService(EService.APP_CONFIG);
+	let appConfig = useService(EServiceToken.APP_CONFIG);
 
 	return (
 		<>

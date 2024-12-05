@@ -1,9 +1,13 @@
+import { getGlobalContainer } from '@root/diContainer';
+
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
+
 import { InvalidMonthError } from '@domain/amount/useCases/errors';
 import { monthGuard } from '@domain/amount/useCases/typeGuards';
 import type { TMonth } from '@domain/amount/useCases/types';
-import { environment } from '@root/config';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export interface IAppConfig {
 	locale: ELocaleCode;
@@ -20,8 +24,6 @@ export interface IAppConfig {
 }
 
 export class AppConfig implements IAppConfig {
-	static #instance?: IAppConfig;
-
 	#locale: ELocaleCode;
 	#currency: ECurrency;
 	#availableCurrencies: ECurrency[];
@@ -36,11 +38,7 @@ export class AppConfig implements IAppConfig {
 
 	#apiUrl: string;
 
-	private constructor(
-		locale: ELocaleCode,
-		currency: ECurrency,
-		apiUrl: string,
-	) {
+	constructor(locale: ELocaleCode, currency: ECurrency, apiUrl: string) {
 		this.#locale = locale;
 		this.#currency = currency;
 		this.#availableCurrencies = [
@@ -108,14 +106,11 @@ export class AppConfig implements IAppConfig {
 		return this.#apiUrl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static getInstance(): IAppConfig {
-		if (!this.#instance) {
-			const apiUrl = environment.apiUrl;
-
-			this.#instance = new AppConfig(ELocaleCode.RU_RU, ECurrency.USD, apiUrl);
-		}
-
-		return this.#instance;
+		return getGlobalContainer().get(EServiceToken.APP_CONFIG);
 	}
 
 	private getCurrentMonth(): TMonth {

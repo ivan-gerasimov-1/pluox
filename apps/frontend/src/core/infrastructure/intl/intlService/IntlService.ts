@@ -1,7 +1,4 @@
-import {
-	AppConfig,
-	type IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
+import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { type ECurrency } from '@core/infrastructure/currency/types';
 import { DECIMAL_SEPARATORS } from '@core/infrastructure/intl/constants';
 import { formatCurrency } from '@core/infrastructure/intl/currency';
@@ -13,19 +10,10 @@ import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParse
 import { type TDecimalSeparator } from '@core/infrastructure/intl/types';
 
 export class IntlService implements IIntlService {
-	static #instance?: IIntlService;
-
-	private constructor(private readonly appConfig: IAppConfig) {}
-
-	public static getInstance(): IIntlService {
-		if (!this.#instance) {
-			let appConfig = AppConfig.getInstance();
-
-			this.#instance = new IntlService(appConfig);
-		}
-
-		return this.#instance;
-	}
+	constructor(
+		private readonly appConfig: IAppConfig,
+		private readonly numberParser: NumberParser,
+	) {}
 
 	public get locale(): ELocaleCode {
 		return this.appConfig.locale;
@@ -48,9 +36,7 @@ export class IntlService implements IIntlService {
 	}
 
 	public parseNumber(value: string): number {
-		let numberParser = NumberParser.getInstance(this.locale);
-
-		return numberParser.parse(value);
+		return this.numberParser.parse(value);
 	}
 
 	/**

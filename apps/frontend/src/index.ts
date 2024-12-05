@@ -1,10 +1,11 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import { runMigrations } from '@root/migrations';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
-import { registerServiceWorker } from '@root/serviceWorker';
-import { runMockServiceWorker } from '@root/mockServiceWorker/run';
 import { ReactUI, type IUserInterface } from '@root/createUI';
+import { runMigrations } from '@root/migrations';
+import { runMockServiceWorker } from '@root/mockServiceWorker/run';
+import { createAppRouter } from '@root/router';
+import { registerServiceWorker } from '@root/serviceWorker';
 
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
@@ -12,12 +13,18 @@ import { ECurrency } from '@core/infrastructure/currency/types';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 
 import { Expenses } from '@domain/expenses/expenses';
-import { createAppRouter } from '@root/router';
+
+import { createDIContainer } from '@root/diContainer';
 
 async function main(): Promise<void> {
 	await runMockServiceWorker();
 
+	createDIContainer({
+		isGlobal: true,
+	});
+
 	runMigrations();
+
 	loadAppConfig();
 	await getCurrencyRates();
 	loadExpenses();

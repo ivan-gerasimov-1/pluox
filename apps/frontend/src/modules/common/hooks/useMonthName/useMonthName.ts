@@ -1,9 +1,11 @@
 import type { TMonth } from '@domain/amount/useCases/types';
+
 import { dateFn } from '@modules/date/date';
-import { EService, useService } from '@modules/serviceContainer/useService';
+import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@modules/serviceContainer/useService';
 
 export function useMonthName(month: TMonth): string {
-	let intlService = useService(EService.INTL);
+	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let localeCode = intlService.locale;
 
 	let monthName = dateFn({
