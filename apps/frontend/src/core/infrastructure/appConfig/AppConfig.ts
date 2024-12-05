@@ -1,13 +1,9 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 import { InvalidMonthError } from '@domain/amount/useCases/errors';
 import { monthGuard } from '@domain/amount/useCases/typeGuards';
 import type { TMonth } from '@domain/amount/useCases/types';
-
-import { EServiceToken } from '@modules/serviceContainer/types';
 
 export interface IAppConfig {
 	locale: ELocaleCode;
@@ -104,13 +100,6 @@ export class AppConfig implements IAppConfig {
 
 	public get apiUrl(): string {
 		return this.#apiUrl;
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static getInstance(): IAppConfig {
-		return getGlobalContainer().get(EServiceToken.APP_CONFIG);
 	}
 
 	private getCurrentMonth(): TMonth {
