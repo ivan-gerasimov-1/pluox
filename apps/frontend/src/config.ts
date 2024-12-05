@@ -1,4 +1,4 @@
-type TEnvironment = {
+export type TEnvironment = {
 	isDevelopment: boolean;
 	apiUrl: string;
 };
