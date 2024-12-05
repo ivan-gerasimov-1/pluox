@@ -11,6 +11,7 @@ import { Container } from '@modules/serviceContainer/container';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
+import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 
 let globalContainer: Container;
 
@@ -57,6 +58,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		{
 			token: EServiceToken.ID_GENERATOR,
 			useFactory: idGeneratorFactory,
+		},
+		{
+			token: EServiceToken.CLIENT_ID_STORAGE,
+			useFactory: () => new ClientIdStorage(ClientIdStorage.STORAGE_ID),
 		},
 	);
 

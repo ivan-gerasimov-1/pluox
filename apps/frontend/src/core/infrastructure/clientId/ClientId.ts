@@ -24,7 +24,7 @@ export class ClientId implements IClientId {
 	public static getInstance(): IClientId {
 		if (!this.#instance) {
 			let idGenerator = getGlobalContainer().get(EServiceToken.ID_GENERATOR);
-			const storage = ClientIdStorage.getInstance();
+			let storage = getGlobalContainer().get(EServiceToken.CLIENT_ID_STORAGE);
 
 			this.#instance = new ClientId(idGenerator, storage);
 		}
