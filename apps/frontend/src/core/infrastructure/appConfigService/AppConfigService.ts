@@ -1,10 +1,11 @@
-import {
-	AppConfig,
-	IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
-import { TAppConfig } from '@core/infrastructure/appConfig/types';
+import { getGlobalContainer } from '@root/diContainer';
+
+import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { TAppConfig } from '@core/infrastructure/appConfig/types';
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
-import { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
+import type { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export interface IAppConfigService {
 	initialize(): IAppConfigService;
@@ -21,7 +22,7 @@ export class AppConfigService implements IAppConfigService {
 
 	public static getInstance(): IAppConfigService {
 		if (!this.#instance) {
-			let appConfig = AppConfig.getInstance();
+			let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
 			let appConfigStorage = AppConfigStorage.getInstance();
 
 			this.#instance = new AppConfigService(appConfig, appConfigStorage);

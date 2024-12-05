@@ -1,10 +1,10 @@
-import {
-	AppConfig,
-	type IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
+import { getGlobalContainer } from '@root/diContainer';
+
+import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export class BaseApi implements IBaseApi {
 	static #instance: IBaseApi;
@@ -17,7 +17,7 @@ export class BaseApi implements IBaseApi {
 	public static getInstance(): IBaseApi {
 		if (!this.#instance) {
 			const authStorage = AuthStorage.getInstance();
-			const appConfig = AppConfig.getInstance();
+			let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
 
 			this.#instance = new BaseApi(appConfig, authStorage);
 		}

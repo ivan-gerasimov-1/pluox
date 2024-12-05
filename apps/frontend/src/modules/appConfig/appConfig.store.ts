@@ -1,12 +1,12 @@
-import {
-	AppConfig,
-	IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
-import { TAppConfig } from '@core/infrastructure/appConfig/types';
+import { getGlobalContainer } from '@root/diContainer';
+
+import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { TAppConfig } from '@core/infrastructure/appConfig/types';
 import {
 	AppConfigService,
-	IAppConfigService,
+	type IAppConfigService,
 } from '@core/infrastructure/appConfigService/AppConfigService';
+import { EServiceToken } from '@modules/serviceContainer/types';
 import { StoreApi, createStore } from 'zustand';
 
 export interface IAppConfigStore {
@@ -35,7 +35,7 @@ export class AppConfigStore implements IAppConfigStore {
 
 	public static getInstance(): IAppConfigStore {
 		if (!this.#instance) {
-			let appConfig = AppConfig.getInstance();
+			let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
 			let appConfigService = AppConfigService.getInstance();
 
 			this.#instance = new AppConfigStore(appConfig, appConfigService);

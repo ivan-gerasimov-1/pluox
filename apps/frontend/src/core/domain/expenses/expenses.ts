@@ -1,9 +1,7 @@
 import { getGlobalContainer } from '@root/diContainer';
 
-import {
-	AppConfig,
-	type IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
+import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+
 import type { TMonth } from '@domain/amount/useCases/types';
 import { Categories } from '@domain/categories/Categories';
 import type { ICategories } from '@domain/categories/types';
@@ -28,7 +26,7 @@ export class Expenses implements IExpenses {
 
 	public static getInstance(): IExpenses {
 		if (!this.#instance) {
-			let appConfig = AppConfig.getInstance();
+			let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
 			let categories = Categories.getInstance();
 
 			this.#instance = new Expenses(appConfig, categories);
