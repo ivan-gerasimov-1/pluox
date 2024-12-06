@@ -1,35 +1,12 @@
-import { categoryList } from '@domain/categories/constants';
 import type { ICategories, TCategoryDTO } from '@domain/categories/types';
-import { Category } from '@domain/category/category';
 import type { ICategory } from '@domain/category/types';
 import type { Id } from '@domain/types';
 
 export class Categories implements ICategories {
-	static #instance: ICategories;
-
 	private readonly categories: Map<Id, ICategory>;
 
-	private constructor() {
+	constructor() {
 		this.categories = new Map<Id, ICategory>();
-	}
-
-	public static getInstance() {
-		if (!this.#instance) {
-			this.#instance = new Categories();
-
-			for (const categoryDto of categoryList) {
-				let category = Category.create(
-					categoryDto.id,
-					categoryDto.name,
-					categoryDto.icon,
-					1,
-				);
-
-				this.#instance.add(category);
-			}
-		}
-
-		return this.#instance;
 	}
 
 	public add(category: ICategory): ICategories {

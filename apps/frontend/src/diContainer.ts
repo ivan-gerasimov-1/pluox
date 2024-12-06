@@ -13,6 +13,7 @@ import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParse
 import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 import { ClientId } from '@core/infrastructure/clientId/ClientId';
+import { categoriesFactory } from '@domain/categories/factory';
 
 let globalContainer: Container;
 
@@ -68,6 +69,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			token: EServiceToken.CLIENT_ID,
 			useClass: ClientId,
 			deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_STORAGE],
+		},
+		{
+			token: EServiceToken.CATEGORIES,
+			useFactory: categoriesFactory,
 		},
 	);
 

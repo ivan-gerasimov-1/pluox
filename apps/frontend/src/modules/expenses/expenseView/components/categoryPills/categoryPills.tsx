@@ -1,5 +1,10 @@
-import { Categories } from '@domain/categories/Categories';
 import { useMemo } from 'react';
+
+import { Categories } from '@domain/categories/Categories';
+
+import { useService } from '@modules/serviceContainer/useService';
+import { EServiceToken } from '@modules/serviceContainer/types';
+
 import styles from './categoryPills.module.css';
 
 type TCategoryPillsProps = {
@@ -7,9 +12,10 @@ type TCategoryPillsProps = {
 };
 
 export function CategoryPills(props: TCategoryPillsProps) {
+	let categories = useService(EServiceToken.CATEGORIES);
 	let categoryList = useMemo(
 		() =>
-			Categories.getInstance().list({
+			categories.list({
 				useWeights: true,
 			}),
 		[],

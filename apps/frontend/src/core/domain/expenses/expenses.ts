@@ -26,8 +26,10 @@ export class Expenses implements IExpenses {
 
 	public static getInstance(): IExpenses {
 		if (!this.#instance) {
-			let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
-			let categories = Categories.getInstance();
+			let globalContainer = getGlobalContainer();
+
+			let appConfig = globalContainer.get(EServiceToken.APP_CONFIG);
+			let categories = globalContainer.get(EServiceToken.CATEGORIES);
 
 			this.#instance = new Expenses(appConfig, categories);
 		}

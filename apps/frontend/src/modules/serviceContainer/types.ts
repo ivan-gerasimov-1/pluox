@@ -5,6 +5,7 @@ import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyC
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
+import type { ICategories } from '@domain/categories/types';
 import type { TEnvironment } from '@root/config';
 
 export type ServiceType<T> = new (...args: any[]) => T;
@@ -28,6 +29,7 @@ export enum EServiceToken {
 	ID_GENERATOR = 'IdGenerator',
 	CLIENT_ID_STORAGE = 'ClientIdStorage',
 	CLIENT_ID = 'ClientId',
+	CATEGORIES = 'Categories',
 }
 
 export interface IServiceMap {
@@ -39,4 +41,5 @@ export interface IServiceMap {
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
 	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
 	[EServiceToken.CLIENT_ID]: IClientId;
+	[EServiceToken.CATEGORIES]: ICategories;
 }
