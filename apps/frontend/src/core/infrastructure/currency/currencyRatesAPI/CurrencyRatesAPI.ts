@@ -1,19 +1,13 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
 import type { ICurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/types';
 import { ECurrency } from '@core/infrastructure/currency/types';
 
-import { EServiceToken } from '@modules/serviceContainer/types';
-
 export class CurrencyRatesAPI implements ICurrencyRatesAPI {
-	static #instance: ICurrencyRatesAPI;
-
 	readonly #apiEndpoint: string;
 	readonly #apiKey: string;
 	readonly #availableCurrencies: ECurrency[];
 
-	private constructor(
+	constructor(
 		apiEndpoint: string,
 		apiKey: string,
 		availableCurrencies: ECurrency[],
@@ -21,20 +15,6 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 		this.#apiEndpoint = apiEndpoint;
 		this.#apiKey = apiKey;
 		this.#availableCurrencies = availableCurrencies;
-	}
-
-	public static getInstance(): ICurrencyRatesAPI {
-		if (!this.#instance) {
-			let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
-
-			this.#instance = new CurrencyRatesAPI(
-				appConfig.openExchangeRates.apiUrl,
-				appConfig.openExchangeRates.apiKey,
-				appConfig.availabelCurrencies,
-			);
-		}
-
-		return this.#instance;
 	}
 
 	public async get(): Promise<TCurrencyRates> {

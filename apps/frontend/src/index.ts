@@ -44,6 +44,9 @@ async function main(): Promise<void> {
 main();
 
 async function getCurrencyRates(): Promise<void> {
+	let globalContainer = getGlobalContainer();
+	let currencyRatesAPI = globalContainer.get(EServiceToken.CURRENCY_RATES_API);
+
 	let currencyRatesStorage = CurrencyRatesStorage.getInstance();
 	let hasAllCurrencies = Object.values(ECurrency).every((currency) => {
 		return currencyRatesStorage.has(currency);
@@ -53,7 +56,7 @@ async function getCurrencyRates(): Promise<void> {
 		return;
 	}
 
-	let result = await CurrencyRatesAPI.getInstance() //
+	let result = await currencyRatesAPI //
 		.get();
 
 	currencyRatesStorage.setRates(result);

@@ -1,6 +1,9 @@
 import { environment, type TEnvironment } from '@root/config';
 
-import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import {
+	AppConfig,
+	IAppConfig,
+} from '@core/infrastructure/appConfig/AppConfig';
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import { CurrencyRates } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
 import { ECurrency } from '@core/infrastructure/currency/types';
@@ -18,6 +21,7 @@ import { Expenses } from '@domain/expenses/expenses';
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@modules/appConfig/appConfig.store';
+import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 
 let globalContainer: Container;
 
@@ -96,6 +100,17 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			token: EServiceToken.APP_CONFIG_STORE,
 			useClass: AppConfigStore,
 			deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_SERVICE],
+		},
+		{
+			token: EServiceToken.CURRENCY_RATES_API,
+			useFactory: (appConfig: IAppConfig) => {
+				return new CurrencyRatesAPI(
+					appConfig.openExchangeRates.apiUrl,
+					appConfig.openExchangeRates.apiKey,
+					appConfig.availabelCurrencies,
+				);
+			},
+			deps: [EServiceToken.APP_CONFIG],
 		},
 	);
 
