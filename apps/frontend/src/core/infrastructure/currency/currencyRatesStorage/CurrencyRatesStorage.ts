@@ -1,6 +1,6 @@
-import { type TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
+import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
 import { CurrencyRatesNotAvailableError } from '@core/infrastructure/currency/currencyRatesStorage/errors';
-import { type ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
+import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
 import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 
@@ -8,17 +8,7 @@ export class CurrencyRatesStorage
 	extends AppStorage<TCurrencyRates>
 	implements ICurrencyRatesStorage
 {
-	static #instance?: ICurrencyRatesStorage;
-
-	static readonly #STORAGE_ID = 'currencyRates';
-
-	public static getInstance(): ICurrencyRatesStorage {
-		if (!this.#instance) {
-			this.#instance = new CurrencyRatesStorage(this.#STORAGE_ID);
-		}
-
-		return this.#instance;
-	}
+	public static readonly STORAGE_ID = 'currencyRates';
 
 	/**
 	 * @throws {CurrencyRatesNotAvailableError}

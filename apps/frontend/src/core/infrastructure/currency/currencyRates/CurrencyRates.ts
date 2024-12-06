@@ -1,6 +1,9 @@
-import { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
-import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
-import { type ECurrency } from '@core/infrastructure/currency/types';
+import { getGlobalContainer } from '@root/diContainer';
+
+import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
+import type { ECurrency } from '@core/infrastructure/currency/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export interface ICurrencyRates {
 	get(currency: ECurrency): number;
@@ -17,7 +20,8 @@ export class CurrencyRates implements ICurrencyRates {
 
 	public static getInstance(): ICurrencyRates {
 		if (!this.#instance) {
-			let currencyRates = CurrencyRatesStorage.getInstance() //
+			let currencyRates = getGlobalContainer()
+				.get(EServiceToken.CURRENCY_RATES_STORAGE)
 				.getRates();
 
 			this.#instance = new CurrencyRates(currencyRates);

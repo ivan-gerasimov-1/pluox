@@ -6,7 +6,6 @@ import { runMockServiceWorker } from '@root/mockServiceWorker/run';
 import { createAppRouter } from '@root/router';
 import { registerServiceWorker } from '@root/serviceWorker';
 
-import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ECurrency } from '@core/infrastructure/currency/types';
 
 import { createDIContainer, getGlobalContainer } from '@root/diContainer';
@@ -44,8 +43,10 @@ main();
 async function getCurrencyRates(): Promise<void> {
 	let globalContainer = getGlobalContainer();
 	let currencyRatesAPI = globalContainer.get(EServiceToken.CURRENCY_RATES_API);
+	let currencyRatesStorage = globalContainer.get(
+		EServiceToken.CURRENCY_RATES_STORAGE,
+	);
 
-	let currencyRatesStorage = CurrencyRatesStorage.getInstance();
 	let hasAllCurrencies = Object.values(ECurrency).every((currency) => {
 		return currencyRatesStorage.has(currency);
 	});
