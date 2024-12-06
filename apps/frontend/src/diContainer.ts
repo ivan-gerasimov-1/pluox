@@ -27,6 +27,7 @@ import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
+import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 
 let globalContainer: Container;
 
@@ -147,6 +148,12 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				EServiceToken.AUTH_STORAGE,
 				EServiceToken.USER_STORAGE,
 			],
+		},
+		{
+			token: EServiceToken.EXPENSES_STORAGE,
+			useFactory: () => {
+				return new ExpensesStorage(ExpensesStorage.STORAGE_ID);
+			},
 		},
 	);
 

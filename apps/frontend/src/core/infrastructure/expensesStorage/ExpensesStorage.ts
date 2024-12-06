@@ -11,17 +11,7 @@ export class ExpensesStorage
 	}>
 	implements IExpensesStorage
 {
-	static #instance: IExpensesStorage;
-
-	static readonly #STORAGE_ID: string = 'store/$expenses';
-
-	public static getInstance(): IExpensesStorage {
-		if (!this.#instance) {
-			this.#instance = new ExpensesStorage(this.#STORAGE_ID);
-		}
-
-		return this.#instance;
-	}
+	public static readonly STORAGE_ID: string = 'store/$expenses';
 
 	public getItems(): Record<Id, TExpense> {
 		const value = this.read();

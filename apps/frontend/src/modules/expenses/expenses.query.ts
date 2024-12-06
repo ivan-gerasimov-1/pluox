@@ -1,12 +1,12 @@
 import { getGlobalContainer } from '@root/diContainer';
 
-import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
+import type { IExpensesStorage } from '@core/infrastructure/expensesStorage/types';
 
 import { Amount } from '@domain/amount/Amount';
 import type { TMonth } from '@domain/amount/useCases/types';
 import { Expense } from '@domain/expense/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
-import { IExpenses } from '@domain/expenses/types';
+import type { IExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';
 
 import { dateFn } from '@modules/date/date';
@@ -27,11 +27,22 @@ function getExpensesService(): IExpenses {
 }
 
 /**
+ * @todo Replace with proper DI
+ */
+function getExpensesStorage(): IExpensesStorage {
+	let globalContainer = getGlobalContainer();
+	let expensesStorage = globalContainer.get(EServiceToken.EXPENSES_STORAGE);
+
+	return expensesStorage;
+}
+
+/**
  * @todo
  * 1. Encapsulate logic in a separate class
  */
 export function addOne(payload: TExpenseCreateDTO): void {
 	let expenses = getExpensesService();
+	let expensesStorage = getExpensesStorage();
 
 	let expense = Expense.create(
 		payload.amount,
@@ -45,7 +56,7 @@ export function addOne(payload: TExpenseCreateDTO): void {
 		payload.date,
 	);
 
-	ExpensesStorage.getInstance() //
+	expensesStorage //
 		.setItems(
 			expenses //
 				.add(expense)
@@ -58,9 +69,11 @@ export function addOne(payload: TExpenseCreateDTO): void {
  */
 export function deleteOne(id: Id): void {
 	let expensesSerice = getExpensesService();
+	let expensesStorage = getExpensesStorage();
+
 	let expenses = expensesSerice.delete(id).get();
 
-	ExpensesStorage.getInstance() //
+	expensesStorage //
 		.setItems(expenses);
 }
 

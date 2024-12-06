@@ -8,7 +8,6 @@ import { registerServiceWorker } from '@root/serviceWorker';
 
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ECurrency } from '@core/infrastructure/currency/types';
-import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 
 import { createDIContainer, getGlobalContainer } from '@root/diContainer';
 import { EServiceToken } from '@modules/serviceContainer/types';
@@ -72,7 +71,9 @@ function loadExpenses(): void {
 	let globalContainer = getGlobalContainer();
 
 	let expenses = globalContainer.get(EServiceToken.EXPENSES);
-	let rawExpenses = ExpensesStorage.getInstance().getItems();
+	let expensesStorage = globalContainer.get(EServiceToken.EXPENSES_STORAGE);
+
+	let rawExpenses = expensesStorage.getItems();
 
 	expenses.__addRawExpenses(rawExpenses);
 }
