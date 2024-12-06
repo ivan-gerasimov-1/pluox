@@ -26,12 +26,18 @@ export type ServiceType<T> = new (...args: any[]) => T;
 export type ServiceToken = keyof IServiceMap;
 export type FactoryFn<T> = (...args: any[]) => T;
 
+export const enum ServiceScope {
+	SINGLETON = 'singleton',
+	TRANSIENT = 'transient',
+}
+
 export interface ServiceProvider<T = unknown> {
 	token: ServiceToken;
 	useClass?: ServiceType<T>;
 	useFactory?: FactoryFn<T>;
 	useValue?: T;
 	deps?: ServiceToken[];
+	scope?: ServiceScope;
 }
 
 export enum EServiceToken {

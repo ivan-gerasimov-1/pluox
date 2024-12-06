@@ -39,124 +39,125 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		globalContainer = container;
 	}
 
-	container.register(
-		{
-			token: EServiceToken.ENVIRONMENT,
-			useValue: environment,
-		},
-		{
-			token: EServiceToken.APP_CONFIG,
-			useFactory: (environment: TEnvironment) => {
-				let apiUrl = environment.apiUrl;
-
-				return new AppConfig(ELocaleCode.RU_RU, ECurrency.USD, apiUrl);
+	container
+		.register(
+			{
+				token: EServiceToken.ENVIRONMENT,
+				useValue: environment,
 			},
-			deps: [EServiceToken.ENVIRONMENT],
-		},
-		{
-			token: EServiceToken.INTL_SERVICE,
-			useClass: IntlService,
-			deps: [EServiceToken.APP_CONFIG, EServiceToken.NUMBER_PARSER],
-		},
-		{
-			token: EServiceToken.CURRENCY_CONVERTER,
-			useClass: CurrencyConverter,
-			deps: [EServiceToken.CURRENCY_RATES],
-		},
-		{
-			token: EServiceToken.NUMBER_PARSER,
-			useClass: NumberParser,
-			deps: [EServiceToken.APP_CONFIG],
-		},
+			{
+				token: EServiceToken.APP_CONFIG,
+				useFactory: (environment: TEnvironment) => {
+					let apiUrl = environment.apiUrl;
 
-		{
-			token: EServiceToken.ID_GENERATOR,
-			useFactory: idGeneratorFactory,
-		},
-		{
-			token: EServiceToken.CLIENT_ID_STORAGE,
-			useClass: ClientIdStorage,
-		},
-		{
-			token: EServiceToken.CLIENT_ID,
-			useClass: ClientId,
-			deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_STORAGE],
-		},
-		{
-			token: EServiceToken.CATEGORIES,
-			useFactory: categoriesFactory,
-		},
-		{
-			token: EServiceToken.EXPENSES,
-			useClass: Expenses,
-			deps: [EServiceToken.APP_CONFIG, EServiceToken.CATEGORIES],
-		},
-		{
-			token: EServiceToken.APP_CONFIG_STORAGE,
-			useClass: AppConfigStorage,
-		},
-		{
-			token: EServiceToken.APP_CONFIG_SERVICE,
-			useClass: AppConfigService,
-			deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_STORAGE],
-		},
-		{
-			token: EServiceToken.APP_CONFIG_STORE,
-			useClass: AppConfigStore,
-			deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_SERVICE],
-		},
-		{
-			token: EServiceToken.CURRENCY_RATES_API,
-			useFactory: (appConfig: IAppConfig) => {
-				return new CurrencyRatesAPI(
-					appConfig.openExchangeRates.apiUrl,
-					appConfig.openExchangeRates.apiKey,
-					appConfig.availabelCurrencies,
-				);
+					return new AppConfig(ELocaleCode.RU_RU, ECurrency.USD, apiUrl);
+				},
+				deps: [EServiceToken.ENVIRONMENT],
 			},
-			deps: [EServiceToken.APP_CONFIG],
-		},
-		{
-			token: EServiceToken.AUTH_STORAGE,
-			useClass: AuthStorage,
-		},
-		{
-			token: EServiceToken.BASE_API,
-			useClass: BaseApi,
-			deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_STORAGE],
-		},
-		{
-			token: EServiceToken.AUTH_API,
-			useClass: AuthApi,
-			deps: [EServiceToken.BASE_API],
-		},
-		{
-			token: EServiceToken.USER_STORAGE,
-			useClass: UserStorage,
-		},
-		{
-			token: EServiceToken.AUTH_SERVICE,
-			useClass: AuthService,
-			deps: [
-				EServiceToken.AUTH_API,
-				EServiceToken.AUTH_STORAGE,
-				EServiceToken.USER_STORAGE,
-			],
-		},
-		{
-			token: EServiceToken.EXPENSES_STORAGE,
-			useClass: ExpensesStorage,
-		},
-		{
-			token: EServiceToken.CURRENCY_RATES_STORAGE,
-			useClass: CurrencyRatesStorage,
-		},
-		{
-			token: EServiceToken.CURRENCY_RATES,
-			useClass: CurrencyRates,
-			deps: [EServiceToken.CURRENCY_RATES_STORAGE],
-		},
-	);
+			{
+				token: EServiceToken.NUMBER_PARSER,
+				useClass: NumberParser,
+				deps: [EServiceToken.APP_CONFIG],
+			},
+			{
+				token: EServiceToken.INTL_SERVICE,
+				useClass: IntlService,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.NUMBER_PARSER],
+			},
+			{
+				token: EServiceToken.CURRENCY_RATES_STORAGE,
+				useClass: CurrencyRatesStorage,
+			},
+			{
+				token: EServiceToken.CURRENCY_RATES,
+				useClass: CurrencyRates,
+				deps: [EServiceToken.CURRENCY_RATES_STORAGE],
+			},
+			{
+				token: EServiceToken.CURRENCY_CONVERTER,
+				useClass: CurrencyConverter,
+				deps: [EServiceToken.CURRENCY_RATES],
+			},
+			{
+				token: EServiceToken.ID_GENERATOR,
+				useFactory: idGeneratorFactory,
+			},
+			{
+				token: EServiceToken.CLIENT_ID_STORAGE,
+				useClass: ClientIdStorage,
+			},
+			{
+				token: EServiceToken.CLIENT_ID,
+				useClass: ClientId,
+				deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_STORAGE],
+			},
+			{
+				token: EServiceToken.CATEGORIES,
+				useFactory: categoriesFactory,
+			},
+			{
+				token: EServiceToken.EXPENSES,
+				useClass: Expenses,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.CATEGORIES],
+			},
+			{
+				token: EServiceToken.APP_CONFIG_STORAGE,
+				useClass: AppConfigStorage,
+			},
+			{
+				token: EServiceToken.APP_CONFIG_SERVICE,
+				useClass: AppConfigService,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_STORAGE],
+			},
+			{
+				token: EServiceToken.APP_CONFIG_STORE,
+				useClass: AppConfigStore,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_SERVICE],
+			},
+			{
+				token: EServiceToken.CURRENCY_RATES_API,
+				useFactory: (appConfig: IAppConfig) => {
+					return new CurrencyRatesAPI(
+						appConfig.openExchangeRates.apiUrl,
+						appConfig.openExchangeRates.apiKey,
+						appConfig.availabelCurrencies,
+					);
+				},
+				deps: [EServiceToken.APP_CONFIG],
+			},
+			{
+				token: EServiceToken.AUTH_STORAGE,
+				useClass: AuthStorage,
+			},
+			{
+				token: EServiceToken.BASE_API,
+				useClass: BaseApi,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_STORAGE],
+			},
+			{
+				token: EServiceToken.AUTH_API,
+				useClass: AuthApi,
+				deps: [EServiceToken.BASE_API],
+			},
+			{
+				token: EServiceToken.USER_STORAGE,
+				useClass: UserStorage,
+			},
+			{
+				token: EServiceToken.AUTH_SERVICE,
+				useClass: AuthService,
+				deps: [
+					EServiceToken.AUTH_API,
+					EServiceToken.AUTH_STORAGE,
+					EServiceToken.USER_STORAGE,
+				],
+			},
+			{
+				token: EServiceToken.EXPENSES_STORAGE,
+				useClass: ExpensesStorage,
+			},
+		)
+		.validate();
 
 	return container;
 }
