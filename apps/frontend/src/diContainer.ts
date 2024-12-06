@@ -24,6 +24,7 @@ import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
+import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 
 let globalContainer: Container;
 
@@ -124,6 +125,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			token: EServiceToken.BASE_API,
 			useClass: BaseApi,
 			deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_STORAGE],
+		},
+		{
+			token: EServiceToken.AUTH_API,
+			useClass: AuthApi,
+			deps: [EServiceToken.BASE_API],
 		},
 	);
 

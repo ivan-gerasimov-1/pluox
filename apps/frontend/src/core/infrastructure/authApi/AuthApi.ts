@@ -1,24 +1,8 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 
-import { EServiceToken } from '@modules/serviceContainer/types';
-
 export class AuthApi implements IAuthApi {
-	static #instance: AuthApi;
-
-	private constructor(private readonly api: IBaseApi) {}
-
-	public static getInstance(): AuthApi {
-		if (!this.#instance) {
-			const baseApi = getGlobalContainer().get(EServiceToken.BASE_API);
-
-			this.#instance = new AuthApi(baseApi);
-		}
-
-		return this.#instance;
-	}
+	constructor(private readonly api: IBaseApi) {}
 
 	public async signIn(
 		email: string,
