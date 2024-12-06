@@ -1,5 +1,6 @@
 import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
 import type { IExpensesStorage } from '@core/infrastructure/expensesStorage/types';
+
 import type { TExpense } from '@domain/expense/types';
 import type { Id } from '@domain/types';
 
@@ -11,7 +12,11 @@ export class ExpensesStorage
 	}>
 	implements IExpensesStorage
 {
-	public static readonly STORAGE_ID: string = 'store/$expenses';
+	static readonly #STORAGE_ID: string = 'store/$expenses';
+
+	constructor() {
+		super(ExpensesStorage.#STORAGE_ID);
+	}
 
 	public getItems(): Record<Id, TExpense> {
 		const value = this.read();

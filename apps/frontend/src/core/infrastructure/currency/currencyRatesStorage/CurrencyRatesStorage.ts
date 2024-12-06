@@ -8,7 +8,11 @@ export class CurrencyRatesStorage
 	extends AppStorage<TCurrencyRates>
 	implements ICurrencyRatesStorage
 {
-	public static readonly STORAGE_ID = 'currencyRates';
+	static readonly #STORAGE_ID = 'currencyRates';
+
+	constructor() {
+		super(CurrencyRatesStorage.#STORAGE_ID);
+	}
 
 	/**
 	 * @throws {CurrencyRatesNotAvailableError}

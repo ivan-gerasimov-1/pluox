@@ -75,7 +75,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		},
 		{
 			token: EServiceToken.CLIENT_ID_STORAGE,
-			useFactory: () => new ClientIdStorage(ClientIdStorage.STORAGE_ID),
+			useClass: ClientIdStorage,
 		},
 		{
 			token: EServiceToken.CLIENT_ID,
@@ -93,7 +93,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		},
 		{
 			token: EServiceToken.APP_CONFIG_STORAGE,
-			useFactory: () => new AppConfigStorage(AppConfigStorage.STORAGE_ID),
+			useClass: AppConfigStorage,
 		},
 		{
 			token: EServiceToken.APP_CONFIG_SERVICE,
@@ -118,9 +118,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		},
 		{
 			token: EServiceToken.AUTH_STORAGE,
-			useFactory: () => {
-				return new AuthStorage(AuthStorage.STORAGE_ID);
-			},
+			useClass: AuthStorage,
 		},
 		{
 			token: EServiceToken.BASE_API,
@@ -134,9 +132,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		},
 		{
 			token: EServiceToken.USER_STORAGE,
-			useFactory: () => {
-				return new UserStorage(UserStorage.STORAGE_ID);
-			},
+			useClass: UserStorage,
 		},
 		{
 			token: EServiceToken.AUTH_SERVICE,
@@ -149,15 +145,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		},
 		{
 			token: EServiceToken.EXPENSES_STORAGE,
-			useFactory: () => {
-				return new ExpensesStorage(ExpensesStorage.STORAGE_ID);
-			},
+			useClass: ExpensesStorage,
 		},
 		{
 			token: EServiceToken.CURRENCY_RATES_STORAGE,
-			useFactory: () => {
-				return new CurrencyRatesStorage(CurrencyRatesStorage.STORAGE_ID);
-			},
+			useClass: CurrencyRatesStorage,
 		},
 		{
 			token: EServiceToken.CURRENCY_RATES,

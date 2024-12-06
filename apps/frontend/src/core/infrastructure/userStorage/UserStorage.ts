@@ -5,5 +5,9 @@ import type {
 } from '@core/infrastructure/userStorage/types';
 
 export class UserStorage extends AppStorage<TUser> implements IUserStorage {
-	public static readonly STORAGE_ID: string = 'user';
+	static readonly #STORAGE_ID: string = 'user';
+
+	constructor() {
+		super(UserStorage.#STORAGE_ID);
+	}
 }
