@@ -1,11 +1,14 @@
+import { getGlobalContainer } from '@root/diContainer';
+
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
 import { UserNotFoundError } from '@core/infrastructure/authService/errors';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
-import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export class AuthService implements IAuthSerivce {
 	static #instance: IAuthSerivce;
@@ -18,7 +21,9 @@ export class AuthService implements IAuthSerivce {
 
 	public static getInstance(): IAuthSerivce {
 		if (!this.#instance) {
-			const authStorage = AuthStorage.getInstance();
+			let globalContainer = getGlobalContainer();
+
+			let authStorage = globalContainer.get(EServiceToken.AUTH_STORAGE);
 			const userStorage = UserStorage.getInstance();
 			const authApi = AuthApi.getInstance();
 

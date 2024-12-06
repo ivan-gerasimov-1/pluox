@@ -22,6 +22,7 @@ import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfi
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
+import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 
 let globalContainer: Container;
 
@@ -111,6 +112,12 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				);
 			},
 			deps: [EServiceToken.APP_CONFIG],
+		},
+		{
+			token: EServiceToken.AUTH_STORAGE,
+			useFactory: () => {
+				return new AuthStorage(AuthStorage.STORAGE_ID);
+			},
 		},
 	);
 
