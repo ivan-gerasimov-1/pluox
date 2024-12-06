@@ -1,5 +1,6 @@
-import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { ECurrency } from '@core/infrastructure/currency/types';
+import { EServiceToken } from '@modules/serviceContainer/types';
+import { getGlobalContainer } from '@root/diContainer';
 
 export function runMigrations() {
 	addThaiBahtCurrencyToStoredAppConfig();
@@ -9,7 +10,9 @@ export function runMigrations() {
  * №1. Add THB to stored appConfig
  */
 export function addThaiBahtCurrencyToStoredAppConfig() {
-	let appConfigStorage = AppConfigStorage.getInstance();
+	let globalContainer = getGlobalContainer();
+
+	let appConfigStorage = globalContainer.get(EServiceToken.APP_CONFIG_STORAGE);
 	let appConfig = appConfigStorage.read();
 
 	if (!appConfig) {

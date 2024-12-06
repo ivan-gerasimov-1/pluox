@@ -6,15 +6,5 @@ export class AppConfigStorage
 	extends AppStorage<TAppConfig>
 	implements IAppConfigStorage
 {
-	static #instance: AppConfigStorage;
-
-	static readonly #STORAGE_ID: string = 'appConfig';
-
-	public static getInstance(): IAppConfigStorage {
-		if (!this.#instance) {
-			this.#instance = new AppConfigStorage(this.#STORAGE_ID);
-		}
-
-		return this.#instance;
-	}
+	public static readonly STORAGE_ID: string = 'appConfig';
 }

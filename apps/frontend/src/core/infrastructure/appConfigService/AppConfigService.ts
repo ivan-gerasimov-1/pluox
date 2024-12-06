@@ -2,7 +2,6 @@ import { getGlobalContainer } from '@root/diContainer';
 
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { TAppConfig } from '@core/infrastructure/appConfig/types';
-import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import type { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
 
 import { EServiceToken } from '@modules/serviceContainer/types';
@@ -22,8 +21,12 @@ export class AppConfigService implements IAppConfigService {
 
 	public static getInstance(): IAppConfigService {
 		if (!this.#instance) {
-			let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
-			let appConfigStorage = AppConfigStorage.getInstance();
+			let globalContainer = getGlobalContainer();
+
+			let appConfig = globalContainer.get(EServiceToken.APP_CONFIG);
+			let appConfigStorage = globalContainer.get(
+				EServiceToken.APP_CONFIG_STORAGE,
+			);
 
 			this.#instance = new AppConfigService(appConfig, appConfigStorage);
 		}

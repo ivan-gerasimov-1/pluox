@@ -15,6 +15,7 @@ import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdSt
 import { ClientId } from '@core/infrastructure/clientId/ClientId';
 import { categoriesFactory } from '@domain/categories/factory';
 import { Expenses } from '@domain/expenses/expenses';
+import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 
 let globalContainer: Container;
 
@@ -79,6 +80,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			token: EServiceToken.EXPENSES,
 			useClass: Expenses,
 			deps: [EServiceToken.APP_CONFIG, EServiceToken.CATEGORIES],
+		},
+		{
+			token: EServiceToken.APP_CONFIG_STORAGE,
+			useFactory: () => new AppConfigStorage(AppConfigStorage.STORAGE_ID),
 		},
 	);
 
