@@ -43,6 +43,9 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 	}
 
 	container
+		/**
+		 * @description Environment and configuration
+		 */
 		.register(
 			{
 				token: EServiceToken.ENVIRONMENT,
@@ -58,6 +61,25 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.ENVIRONMENT],
 			},
 			{
+				token: EServiceToken.APP_CONFIG_STORAGE,
+				useClass: AppConfigStorage,
+			},
+			{
+				token: EServiceToken.APP_CONFIG_SERVICE,
+				useClass: AppConfigService,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_STORAGE],
+			},
+			{
+				token: EServiceToken.APP_CONFIG_STORE,
+				useClass: AppConfigStore,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_SERVICE],
+			},
+		)
+		/**
+		 * @description Base services
+		 */
+		.register(
+			{
 				token: EServiceToken.NUMBER_PARSER,
 				useClass: NumberParser,
 				deps: [EServiceToken.APP_CONFIG],
@@ -67,6 +89,56 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: IntlService,
 				deps: [EServiceToken.APP_CONFIG, EServiceToken.NUMBER_PARSER],
 			},
+			{
+				token: EServiceToken.ID_GENERATOR,
+				useFactory: idGeneratorFactory,
+			},
+			{
+				token: EServiceToken.BASE_API,
+				useClass: BaseApi,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_STORAGE],
+			},
+		)
+		/**
+		 * @description Authentication and user management
+		 */
+		.register(
+			{
+				token: EServiceToken.AUTH_STORAGE,
+				useClass: AuthStorage,
+			},
+			{
+				token: EServiceToken.AUTH_API,
+				useClass: AuthApi,
+				deps: [EServiceToken.BASE_API],
+			},
+			{
+				token: EServiceToken.AUTH_SERVICE,
+				useClass: AuthService,
+				deps: [
+					EServiceToken.AUTH_API,
+					EServiceToken.AUTH_STORAGE,
+					EServiceToken.USER_STORAGE,
+				],
+			},
+			{
+				token: EServiceToken.USER_STORAGE,
+				useClass: UserStorage,
+			},
+			{
+				token: EServiceToken.CLIENT_ID_STORAGE,
+				useClass: ClientIdStorage,
+			},
+			{
+				token: EServiceToken.CLIENT_ID,
+				useClass: ClientId,
+				deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_STORAGE],
+			},
+		)
+		/**
+		 * @description Currency converter and exchange rates
+		 */
+		.register(
 			{
 				token: EServiceToken.CURRENCY_RATES_STORAGE,
 				useClass: CurrencyRatesStorage,
@@ -82,42 +154,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.CURRENCY_RATES],
 			},
 			{
-				token: EServiceToken.ID_GENERATOR,
-				useFactory: idGeneratorFactory,
-			},
-			{
-				token: EServiceToken.CLIENT_ID_STORAGE,
-				useClass: ClientIdStorage,
-			},
-			{
-				token: EServiceToken.CLIENT_ID,
-				useClass: ClientId,
-				deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_STORAGE],
-			},
-			{
-				token: EServiceToken.CATEGORIES,
-				useFactory: categoriesFactory,
-			},
-			{
-				token: EServiceToken.EXPENSES,
-				useClass: Expenses,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.CATEGORIES],
-			},
-			{
-				token: EServiceToken.APP_CONFIG_STORAGE,
-				useClass: AppConfigStorage,
-			},
-			{
-				token: EServiceToken.APP_CONFIG_SERVICE,
-				useClass: AppConfigService,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_STORAGE],
-			},
-			{
-				token: EServiceToken.APP_CONFIG_STORE,
-				useClass: AppConfigStore,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_SERVICE],
-			},
-			{
 				token: EServiceToken.CURRENCY_RATES_API,
 				useFactory: (appConfig: IAppConfig) => {
 					return new CurrencyRatesAPI(
@@ -128,32 +164,15 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				},
 				deps: [EServiceToken.APP_CONFIG],
 			},
+		)
+		/**
+		 * @description Expenses
+		 */
+		.register(
 			{
-				token: EServiceToken.AUTH_STORAGE,
-				useClass: AuthStorage,
-			},
-			{
-				token: EServiceToken.BASE_API,
-				useClass: BaseApi,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_STORAGE],
-			},
-			{
-				token: EServiceToken.AUTH_API,
-				useClass: AuthApi,
-				deps: [EServiceToken.BASE_API],
-			},
-			{
-				token: EServiceToken.USER_STORAGE,
-				useClass: UserStorage,
-			},
-			{
-				token: EServiceToken.AUTH_SERVICE,
-				useClass: AuthService,
-				deps: [
-					EServiceToken.AUTH_API,
-					EServiceToken.AUTH_STORAGE,
-					EServiceToken.USER_STORAGE,
-				],
+				token: EServiceToken.EXPENSES,
+				useClass: Expenses,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.CATEGORIES],
 			},
 			{
 				token: EServiceToken.EXPENSES_STORAGE,
@@ -164,15 +183,27 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: ExpensesApi,
 				deps: [EServiceToken.BASE_API],
 			},
-			{
-				token: EServiceToken.TOTAL_AMOUNT_USE_CASE,
-				useClass: TotalAmountUseCase,
-				deps: [EServiceToken.EXPENSES, EServiceToken.CURRENCY_CONVERTER],
-			},
+		)
+		/**
+		 * @description Categories
+		 */
+		.register({
+			token: EServiceToken.CATEGORIES,
+			useFactory: categoriesFactory,
+		})
+		/**
+		 * @description Amount and use cases
+		 */
+		.register(
 			{
 				token: EServiceToken.AMOUNT,
 				useClass: Amount,
 				deps: [EServiceToken.APP_CONFIG, EServiceToken.TOTAL_AMOUNT_USE_CASE],
+			},
+			{
+				token: EServiceToken.TOTAL_AMOUNT_USE_CASE,
+				useClass: TotalAmountUseCase,
+				deps: [EServiceToken.EXPENSES, EServiceToken.CURRENCY_CONVERTER],
 			},
 		)
 		.validate();
