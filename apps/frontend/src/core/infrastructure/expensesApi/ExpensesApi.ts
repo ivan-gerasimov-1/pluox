@@ -4,7 +4,7 @@ import type { IExpensesApi } from '@core/infrastructure/expensesApi/types';
 import type { Id } from '@domain/types';
 
 export class ExpensesApi implements IExpensesApi {
-	private constructor(private readonly api: IBaseApi) {}
+	constructor(private readonly api: IBaseApi) {}
 
 	public async create(payload: Record<string, unknown>): Promise<{
 		id: Id;

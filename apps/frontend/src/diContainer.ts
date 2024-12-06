@@ -29,6 +29,7 @@ import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
+import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 
 let globalContainer: Container;
 
@@ -155,6 +156,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSES_STORAGE,
 				useClass: ExpensesStorage,
+			},
+			{
+				token: EServiceToken.EXPENSES_API,
+				useClass: ExpensesApi,
+				deps: [EServiceToken.BASE_API],
 			},
 		)
 		.validate();
