@@ -1,6 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { runMigrations } from '@root/migrations';
 import { runMockServiceWorker } from '@root/mockServiceWorker/run';
@@ -61,7 +60,10 @@ async function getCurrencyRates(): Promise<void> {
 }
 
 function loadAppConfig(): void {
-	AppConfigService.getInstance().initialize();
+	let globalContainer = getGlobalContainer();
+	let appConfigService = globalContainer.get(EServiceToken.APP_CONFIG_SERVICE);
+
+	appConfigService.initialize();
 }
 
 function loadExpenses(): void {

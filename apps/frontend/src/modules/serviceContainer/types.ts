@@ -1,4 +1,5 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { IAppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import type { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
 import type { IClientId } from '@core/infrastructure/clientId/types';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
@@ -34,6 +35,7 @@ export enum EServiceToken {
 	CATEGORIES = 'Categories',
 	EXPENSES = 'Expenses',
 	APP_CONFIG_STORAGE = 'AppConfigStorage',
+	APP_CONFIG_SERVICE = 'AppConfigService',
 }
 
 export interface IServiceMap {
@@ -48,4 +50,5 @@ export interface IServiceMap {
 	[EServiceToken.CATEGORIES]: ICategories;
 	[EServiceToken.EXPENSES]: IExpenses;
 	[EServiceToken.APP_CONFIG_STORAGE]: IAppConfigStorage;
+	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
 }
