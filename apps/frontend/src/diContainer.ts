@@ -2,7 +2,7 @@ import { environment, type TEnvironment } from '@root/config';
 
 import {
 	AppConfig,
-	IAppConfig,
+	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
 import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
 import { CurrencyRates } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
@@ -60,11 +60,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		},
 		{
 			token: EServiceToken.CURRENCY_CONVERTER,
-			useFactory: () => {
-				let currencyRates = CurrencyRates.getInstance();
-
-				return new CurrencyConverter(currencyRates);
-			},
+			useClass: CurrencyConverter,
+			deps: [EServiceToken.CURRENCY_RATES],
 		},
 		{
 			token: EServiceToken.NUMBER_PARSER,
@@ -161,6 +158,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			useFactory: () => {
 				return new CurrencyRatesStorage(CurrencyRatesStorage.STORAGE_ID);
 			},
+		},
+		{
+			token: EServiceToken.CURRENCY_RATES,
+			useClass: CurrencyRates,
+			deps: [EServiceToken.CURRENCY_RATES_STORAGE],
 		},
 	);
 

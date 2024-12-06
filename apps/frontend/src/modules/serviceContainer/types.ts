@@ -8,6 +8,7 @@ import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 import type { IClientId } from '@core/infrastructure/clientId/types';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
 import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
+import type { ICurrencyRates } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
 import type { ICurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/types';
 import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
 import type { IExpensesApi } from '@core/infrastructure/expensesApi/types';
@@ -56,6 +57,7 @@ export enum EServiceToken {
 	AUTH_SERVICE = 'AuthService',
 	EXPENSES_STORAGE = 'ExpensesStorage',
 	CURRENCY_RATES_STORAGE = 'CurrencyRatesStorage',
+	CURRENCY_RATES = 'CurrencyRates',
 }
 
 export interface IServiceMap {
@@ -81,4 +83,5 @@ export interface IServiceMap {
 	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
 	[EServiceToken.EXPENSES_STORAGE]: IExpensesStorage;
 	[EServiceToken.CURRENCY_RATES_STORAGE]: ICurrencyRatesStorage;
+	[EServiceToken.CURRENCY_RATES]: ICurrencyRates;
 }
