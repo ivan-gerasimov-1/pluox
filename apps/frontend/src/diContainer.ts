@@ -25,6 +25,7 @@ import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
+import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 
 let globalContainer: Container;
 
@@ -130,6 +131,12 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			token: EServiceToken.AUTH_API,
 			useClass: AuthApi,
 			deps: [EServiceToken.BASE_API],
+		},
+		{
+			token: EServiceToken.USER_STORAGE,
+			useFactory: () => {
+				return new UserStorage(UserStorage.STORAGE_ID);
+			},
 		},
 	);
 

@@ -4,7 +4,6 @@ import type { IAuthApi } from '@core/infrastructure/authApi/types';
 import { UserNotFoundError } from '@core/infrastructure/authService/errors';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
 import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
-import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 
 import { EServiceToken } from '@modules/serviceContainer/types';
@@ -24,7 +23,7 @@ export class AuthService implements IAuthSerivce {
 
 			let authStorage = globalContainer.get(EServiceToken.AUTH_STORAGE);
 			let authApi = globalContainer.get(EServiceToken.AUTH_API);
-			const userStorage = UserStorage.getInstance();
+			let userStorage = globalContainer.get(EServiceToken.USER_STORAGE);
 
 			this.#instance = new AuthService(authApi, authStorage, userStorage);
 		}

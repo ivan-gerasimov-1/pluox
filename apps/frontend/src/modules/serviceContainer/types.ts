@@ -12,6 +12,7 @@ import type { IExpensesApi } from '@core/infrastructure/expensesApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
+import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 import type { ICategories } from '@domain/categories/types';
 import type { IExpenses } from '@domain/expenses/types';
 import type { IAppConfigStore } from '@modules/appConfig/appConfig.store';
@@ -48,6 +49,7 @@ export enum EServiceToken {
 	BASE_API = 'BaseApi',
 	AUTH_API = 'AuthApi',
 	EXPENSES_API = 'ExpensesApi',
+	USER_STORAGE = 'UserStorage',
 }
 
 export interface IServiceMap {
@@ -69,4 +71,5 @@ export interface IServiceMap {
 	[EServiceToken.BASE_API]: IBaseApi;
 	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.EXPENSES_API]: IExpensesApi;
+	[EServiceToken.USER_STORAGE]: IUserStorage;
 }
