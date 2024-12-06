@@ -3,7 +3,6 @@ import { useStore } from 'zustand';
 
 import { cls } from '@utils/classnames';
 
-import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
@@ -31,6 +30,7 @@ import { Separator } from '@uiKit/separator/separator';
 
 export function SettingsScreen() {
 	let intl = useIntl(settingsI18n);
+	let authService = useService(EServiceToken.AUTH_SERVICE);
 	let navigation = useNavigation();
 	let appConfigStore = useService(EServiceToken.APP_CONFIG_STORE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
@@ -95,7 +95,7 @@ export function SettingsScreen() {
 										return;
 									}
 
-									AuthService.getInstance().signOut();
+									authService.signOut();
 
 									navigation.mainPage();
 								}}

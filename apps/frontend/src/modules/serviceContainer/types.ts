@@ -2,6 +2,7 @@ import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { IAppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import type { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
+import type { IAuthSerivce } from '@core/infrastructure/authService/types';
 import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 import type { IClientId } from '@core/infrastructure/clientId/types';
@@ -50,6 +51,7 @@ export enum EServiceToken {
 	AUTH_API = 'AuthApi',
 	EXPENSES_API = 'ExpensesApi',
 	USER_STORAGE = 'UserStorage',
+	AUTH_SERVICE = 'AuthService',
 }
 
 export interface IServiceMap {
@@ -72,4 +74,5 @@ export interface IServiceMap {
 	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.EXPENSES_API]: IExpensesApi;
 	[EServiceToken.USER_STORAGE]: IUserStorage;
+	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
 }

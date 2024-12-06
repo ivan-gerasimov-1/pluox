@@ -1,12 +1,15 @@
+import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@modules/serviceContainer/useService';
 import { useNavigation } from '@modules/navigation/useNavigation';
-import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { usePending } from '@screens/hooks/usePending';
+
 import { delay } from '@utils/delay';
 
 import styles from './signUp.module.css';
 
 export function SignUpScreen() {
-	let authService = AuthService.getInstance();
+	let authService = useService(EServiceToken.AUTH_SERVICE);
+
 	const navigation = useNavigation();
 	const { pending, setPending } = usePending();
 

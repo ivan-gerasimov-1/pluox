@@ -1,14 +1,20 @@
-import { useAuthService } from '@modules/auth/hooks/useAuthService';
-import { useNavigation } from '@modules/navigation/useNavigation';
-import { usePending } from '@screens/hooks/usePending';
-import { delay } from '@utils/delay';
-import styles from './logInForm.module.css';
 import { EAppPath } from '@root/appPath';
+
+import { useNavigation } from '@modules/navigation/useNavigation';
+import { useService } from '@modules/serviceContainer/useService';
+import { EServiceToken } from '@modules/serviceContainer/types';
+
+import { usePending } from '@screens/hooks/usePending';
+
+import { delay } from '@utils/delay';
+
 import { AppLink } from '@uiKit/appLink/appLink';
 import { Button } from '@uiKit/button/button';
 
+import styles from './logInForm.module.css';
+
 export function useLoginForm() {
-	let authService = useAuthService();
+	let authService = useService(EServiceToken.AUTH_SERVICE);
 	let navigation = useNavigation();
 
 	let { pending, setPending } = usePending();
