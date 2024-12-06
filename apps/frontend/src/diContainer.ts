@@ -31,6 +31,7 @@ import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesSt
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { TotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
+import { Amount } from '@domain/amount/Amount';
 
 let globalContainer: Container;
 
@@ -167,6 +168,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.TOTAL_AMOUNT_USE_CASE,
 				useClass: TotalAmountUseCase,
 				deps: [EServiceToken.EXPENSES, EServiceToken.CURRENCY_CONVERTER],
+			},
+			{
+				token: EServiceToken.AMOUNT,
+				useClass: Amount,
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.TOTAL_AMOUNT_USE_CASE],
 			},
 		)
 		.validate();

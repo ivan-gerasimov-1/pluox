@@ -4,10 +4,7 @@ import { IServiceMap } from '@modules/serviceContainer/types';
 
 export type { IServiceMap };
 
-/**
- * @todo Use ReactContext instead of globalContainer
- */
-export function useService<T extends keyof IServiceMap = keyof IServiceMap>(
+export function resolveService<T extends keyof IServiceMap = keyof IServiceMap>(
 	serviceId: T,
 ): IServiceMap[T] {
 	const service = getGlobalContainer().get(
@@ -15,4 +12,13 @@ export function useService<T extends keyof IServiceMap = keyof IServiceMap>(
 	) as unknown as IServiceMap[T];
 
 	return service;
+}
+
+/**
+ * @todo Use ReactContext instead of globalContainer
+ */
+export function useService<T extends keyof IServiceMap = keyof IServiceMap>(
+	serviceId: T,
+): IServiceMap[T] {
+	return resolveService(serviceId);
 }

@@ -1,48 +1,23 @@
-import { getGlobalContainer } from '@root/diContainer';
-
-import type { IExpensesStorage } from '@core/infrastructure/expensesStorage/types';
-
-import { Amount } from '@domain/amount/Amount';
 import type { TMonth } from '@domain/amount/useCases/types';
 import { Expense } from '@domain/expense/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
-import type { IExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';
 
 import { dateFn } from '@modules/date/date';
 import { EServiceToken } from '@modules/serviceContainer/types';
+import { resolveService } from '@modules/serviceContainer/useService';
 
 export const QUERY_EXPENSES_LIST = Symbol('expenseList');
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');
 export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
 
 /**
- * @todo Replace with proper DI
- */
-function getExpensesService(): IExpenses {
-	let globalContainer = getGlobalContainer();
-	let expenses = globalContainer.get(EServiceToken.EXPENSES);
-
-	return expenses;
-}
-
-/**
- * @todo Replace with proper DI
- */
-function getExpensesStorage(): IExpensesStorage {
-	let globalContainer = getGlobalContainer();
-	let expensesStorage = globalContainer.get(EServiceToken.EXPENSES_STORAGE);
-
-	return expensesStorage;
-}
-
-/**
  * @todo
  * 1. Encapsulate logic in a separate class
  */
 export function addOne(payload: TExpenseCreateDTO): void {
-	let expenses = getExpensesService();
-	let expensesStorage = getExpensesStorage();
+	let expenses = resolveService(EServiceToken.EXPENSES);
+	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
 
 	let expense = Expense.create(
 		payload.amount,
@@ -68,17 +43,17 @@ export function addOne(payload: TExpenseCreateDTO): void {
  * @todo Encapsulate logic in a separate class
  */
 export function deleteOne(id: Id): void {
-	let expensesSerice = getExpensesService();
-	let expensesStorage = getExpensesStorage();
+	let expensesService = resolveService(EServiceToken.EXPENSES);
+	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
 
-	let expenses = expensesSerice.delete(id).get();
+	let expenses = expensesService.delete(id).get();
 
 	expensesStorage //
 		.setItems(expenses);
 }
 
 export function getOne(id: Id): TExpense {
-	let expenses = getExpensesService();
+	let expenses = resolveService(EServiceToken.EXPENSES);
 
 	return expenses //
 		.get(id);
@@ -88,7 +63,7 @@ export function getList(query?: {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
 }): TExpense[] {
-	let expenses = getExpensesService();
+	let expenses = resolveService(EServiceToken.EXPENSES);
 
 	return expenses //
 		.list(
@@ -100,13 +75,13 @@ export function getList(query?: {
 }
 
 export function getTotalAmount(): number {
-	let amount = Amount.create();
+	let amount = resolveService(EServiceToken.AMOUNT);
 
 	return amount.getTotalByYear();
 }
 
 export function getMonthlyAmount(month: TMonth): number {
-	let amount = Amount.create();
+	let amount = resolveService(EServiceToken.AMOUNT);
 
 	return amount.getTotalByMonth(month);
 }
