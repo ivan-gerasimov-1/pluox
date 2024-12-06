@@ -1,7 +1,11 @@
-import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
-import { type IBaseApi } from '@core/infrastructure/baseApi/types';
-import { IExpensesApi } from '@core/infrastructure/expensesApi/types';
-import { type Id } from '@domain/types';
+import { getGlobalContainer } from '@root/diContainer';
+
+import type { IBaseApi } from '@core/infrastructure/baseApi/types';
+import type { IExpensesApi } from '@core/infrastructure/expensesApi/types';
+
+import type { Id } from '@domain/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export class ExpensesApi implements IExpensesApi {
 	static #instance: IExpensesApi;
@@ -10,7 +14,7 @@ export class ExpensesApi implements IExpensesApi {
 
 	public static getInstance(): IExpensesApi {
 		if (!this.#instance) {
-			const api = BaseApi.getInstance();
+			const api = getGlobalContainer().get(EServiceToken.BASE_API);
 
 			this.#instance = new ExpensesApi(api);
 		}

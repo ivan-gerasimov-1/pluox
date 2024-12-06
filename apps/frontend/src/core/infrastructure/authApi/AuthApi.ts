@@ -1,6 +1,9 @@
+import { getGlobalContainer } from '@root/diContainer';
+
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
-import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
+
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export class AuthApi implements IAuthApi {
 	static #instance: AuthApi;
@@ -9,7 +12,7 @@ export class AuthApi implements IAuthApi {
 
 	public static getInstance(): AuthApi {
 		if (!this.#instance) {
-			const baseApi = BaseApi.getInstance();
+			const baseApi = getGlobalContainer().get(EServiceToken.BASE_API);
 
 			this.#instance = new AuthApi(baseApi);
 		}
