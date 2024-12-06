@@ -100,15 +100,13 @@ export function getList(query?: {
 }
 
 export function getTotalAmount(): number {
-	let expenses = getExpensesService();
-	let amount = Amount.create(expenses);
+	let amount = Amount.create();
 
 	return amount.getTotalByYear();
 }
 
 export function getMonthlyAmount(month: TMonth): number {
-	let expenses = getExpensesService();
-	let amount = Amount.create(expenses);
+	let amount = Amount.create();
 
 	return amount.getTotalByMonth(month);
 }

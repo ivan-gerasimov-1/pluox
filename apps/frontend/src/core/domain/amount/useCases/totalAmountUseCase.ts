@@ -1,5 +1,3 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 
@@ -7,34 +5,15 @@ import { getDateParts } from '@domain/amount/useCases/helpers';
 import type { TDateParts } from '@domain/amount/useCases/types';
 import type { IExpenses } from '@domain/expenses/types';
 
-import { EServiceToken } from '@modules/serviceContainer/types';
-
-export interface IMonthlyAmountUseCase {
+export interface ITotalAmountUseCase {
 	run(dateParts: Partial<TDateParts>, currency: ECurrency): number;
 }
 
-export class TotalAmountUseCase implements IMonthlyAmountUseCase {
-	readonly #expenses: IExpenses;
-	readonly #currencyConverter: ICurrencyConverter;
-
-	private constructor(
-		expenses: IExpenses,
-		currencyConverter: ICurrencyConverter,
-	) {
-		this.#expenses = expenses;
-		this.#currencyConverter = currencyConverter;
-	}
-
-	public static create(expenses: IExpenses) {
-		/**
-		 * @todo Use DI instead of direct instantiation
-		 */
-		let currencyConverter = getGlobalContainer().get(
-			EServiceToken.CURRENCY_CONVERTER,
-		);
-
-		return new TotalAmountUseCase(expenses, currencyConverter);
-	}
+export class TotalAmountUseCase implements ITotalAmountUseCase {
+	constructor(
+		private readonly expenses: IExpenses,
+		private readonly currencyConverter: ICurrencyConverter,
+	) {}
 
 	public run(dateParts: TDateParts, currency: ECurrency) {
 		return this.calculateAmount(currency, dateParts);
@@ -50,7 +29,7 @@ export class TotalAmountUseCase implements IMonthlyAmountUseCase {
 		 * 2. Query only related expenses
 		 * 3. Remove filtering from calculation logic
 		 */
-		let expenses = this.#expenses.get();
+		let expenses = this.expenses.get();
 
 		let total = 0;
 
@@ -68,7 +47,7 @@ export class TotalAmountUseCase implements IMonthlyAmountUseCase {
 				continue;
 			}
 
-			total += this.#currencyConverter.convert(
+			total += this.currencyConverter.convert(
 				amount,
 				expenseCurrency,
 				currency,

@@ -30,6 +30,7 @@ import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
+import { TotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 
 let globalContainer: Container;
 
@@ -161,6 +162,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.EXPENSES_API,
 				useClass: ExpensesApi,
 				deps: [EServiceToken.BASE_API],
+			},
+			{
+				token: EServiceToken.TOTAL_AMOUNT_USE_CASE,
+				useClass: TotalAmountUseCase,
+				deps: [EServiceToken.EXPENSES, EServiceToken.CURRENCY_CONVERTER],
 			},
 		)
 		.validate();

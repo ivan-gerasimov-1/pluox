@@ -3,12 +3,8 @@ import { getGlobalContainer } from '@root/diContainer';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 
 import type { IAmount } from '@domain/amount/types';
-import {
-	TotalAmountUseCase,
-	type IMonthlyAmountUseCase,
-} from '@domain/amount/useCases/totalAmountUseCase';
+import type { ITotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import type { TMonth, TYear } from '@domain/amount/useCases/types';
-import type { IExpenses } from '@domain/expenses/types';
 
 import { EServiceToken } from '@modules/serviceContainer/types';
 
@@ -16,7 +12,7 @@ export class Amount implements IAmount {
 	readonly #defaultCurrency: ECurrency;
 
 	private constructor(
-		private readonly monthlyAmountUseCase: IMonthlyAmountUseCase,
+		private readonly monthlyAmountUseCase: ITotalAmountUseCase,
 		params: {
 			defaultCurrency: ECurrency;
 		},
@@ -24,14 +20,16 @@ export class Amount implements IAmount {
 		this.#defaultCurrency = params.defaultCurrency;
 	}
 
-	public static create(expenses: IExpenses) {
+	public static create() {
 		/**
 		 * @todo Use DI instead of direct instantiation
 		 */
 		let appConfig = getGlobalContainer().get(EServiceToken.APP_CONFIG);
-		let monthlyAmountUseCase = TotalAmountUseCase.create(expenses);
+		let totalAmountUseCase = getGlobalContainer().get(
+			EServiceToken.TOTAL_AMOUNT_USE_CASE,
+		);
 
-		return new Amount(monthlyAmountUseCase, {
+		return new Amount(totalAmountUseCase, {
 			defaultCurrency: appConfig.currency,
 		});
 	}

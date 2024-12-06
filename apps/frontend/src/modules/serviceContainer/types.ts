@@ -17,6 +17,7 @@ import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
+import type { ITotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import type { ICategories } from '@domain/categories/types';
 import type { IExpenses } from '@domain/expenses/types';
 import type { IAppConfigStore } from '@modules/appConfig/appConfig.store';
@@ -64,6 +65,7 @@ export enum EServiceToken {
 	EXPENSES_STORAGE = 'ExpensesStorage',
 	CURRENCY_RATES_STORAGE = 'CurrencyRatesStorage',
 	CURRENCY_RATES = 'CurrencyRates',
+	TOTAL_AMOUNT_USE_CASE = 'TotalAmountUseCase',
 }
 
 export interface IServiceMap {
@@ -90,4 +92,5 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSES_STORAGE]: IExpensesStorage;
 	[EServiceToken.CURRENCY_RATES_STORAGE]: ICurrencyRatesStorage;
 	[EServiceToken.CURRENCY_RATES]: ICurrencyRates;
+	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;
 }
