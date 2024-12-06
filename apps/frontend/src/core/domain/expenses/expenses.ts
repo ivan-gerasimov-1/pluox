@@ -3,7 +3,6 @@ import { getGlobalContainer } from '@root/diContainer';
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 
 import type { TMonth } from '@domain/amount/useCases/types';
-import { Categories } from '@domain/categories/Categories';
 import type { ICategories } from '@domain/categories/types';
 import type { IExpense, TExpense } from '@domain/expense/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
@@ -13,28 +12,13 @@ import type { Id, TISODateString } from '@domain/types';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 export class Expenses implements IExpenses {
-	static #instance?: IExpenses;
-
 	readonly #expenses: Map<Id, TExpense>;
 
-	private constructor(
+	constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly categories: ICategories,
 	) {
 		this.#expenses = new Map();
-	}
-
-	public static getInstance(): IExpenses {
-		if (!this.#instance) {
-			let globalContainer = getGlobalContainer();
-
-			let appConfig = globalContainer.get(EServiceToken.APP_CONFIG);
-			let categories = globalContainer.get(EServiceToken.CATEGORIES);
-
-			this.#instance = new Expenses(appConfig, categories);
-		}
-
-		return this.#instance;
 	}
 
 	public __addRawExpenses(expenses: TExpenses): IExpenses {

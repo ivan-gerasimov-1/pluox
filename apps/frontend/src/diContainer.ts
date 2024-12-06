@@ -14,6 +14,7 @@ import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 import { ClientId } from '@core/infrastructure/clientId/ClientId';
 import { categoriesFactory } from '@domain/categories/factory';
+import { Expenses } from '@domain/expenses/expenses';
 
 let globalContainer: Container;
 
@@ -73,6 +74,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		{
 			token: EServiceToken.CATEGORIES,
 			useFactory: categoriesFactory,
+		},
+		{
+			token: EServiceToken.EXPENSES,
+			useClass: Expenses,
+			deps: [EServiceToken.APP_CONFIG, EServiceToken.CATEGORIES],
 		},
 	);
 

@@ -6,7 +6,6 @@ import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
-import { Expenses } from '@domain/expenses/expenses';
 import { expensesByCategoryI18n } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/expensesByCategory.i18n';
 
 import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
@@ -23,10 +22,9 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 	let [showAll, setShowAll] = useState<boolean>(false);
 
 	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let expensesService = useService(EServiceToken.EXPENSES);
 
-	let expenses = Expenses.getInstance().getMonthlyExpensesByCategory(
-		props.month,
-	);
+	let expenses = expensesService.getMonthlyExpensesByCategory(props.month);
 	let expensesToRender = showAll ? expenses : expenses.slice(0, 3);
 	let showMoreButton = expenses.length >= 4;
 

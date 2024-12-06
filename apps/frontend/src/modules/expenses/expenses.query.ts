@@ -1,22 +1,39 @@
+import { getGlobalContainer } from '@root/diContainer';
+
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
+
 import { Amount } from '@domain/amount/Amount';
 import type { TMonth } from '@domain/amount/useCases/types';
 import { Expense } from '@domain/expense/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
-import { Expenses } from '@domain/expenses/expenses';
+import { IExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';
+
 import { dateFn } from '@modules/date/date';
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 export const QUERY_EXPENSES_LIST = Symbol('expenseList');
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');
 export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
 
 /**
+ * @todo Replace with proper DI
+ */
+function getExpensesService(): IExpenses {
+	let globalContainer = getGlobalContainer();
+	let expenses = globalContainer.get(EServiceToken.EXPENSES);
+
+	return expenses;
+}
+
+/**
  * @todo
  * 1. Encapsulate logic in a separate class
  */
 export function addOne(payload: TExpenseCreateDTO): void {
-	const expense = Expense.create(
+	let expenses = getExpensesService();
+
+	let expense = Expense.create(
 		payload.amount,
 		payload.currency,
 		payload.comment,
@@ -30,7 +47,7 @@ export function addOne(payload: TExpenseCreateDTO): void {
 
 	ExpensesStorage.getInstance() //
 		.setItems(
-			Expenses.getInstance() //
+			expenses //
 				.add(expense)
 				.get(),
 		);
@@ -40,14 +57,17 @@ export function addOne(payload: TExpenseCreateDTO): void {
  * @todo Encapsulate logic in a separate class
  */
 export function deleteOne(id: Id): void {
-	let expenses = Expenses.getInstance().delete(id).get();
+	let expensesSerice = getExpensesService();
+	let expenses = expensesSerice.delete(id).get();
 
 	ExpensesStorage.getInstance() //
 		.setItems(expenses);
 }
 
 export function getOne(id: Id): TExpense {
-	return Expenses.getInstance() //
+	let expenses = getExpensesService();
+
+	return expenses //
 		.get(id);
 }
 
@@ -55,7 +75,9 @@ export function getList(query?: {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
 }): TExpense[] {
-	return Expenses.getInstance() //
+	let expenses = getExpensesService();
+
+	return expenses //
 		.list(
 			query && {
 				dateFrom: query?.dateFrom,
@@ -65,14 +87,14 @@ export function getList(query?: {
 }
 
 export function getTotalAmount(): number {
-	let expenses = Expenses.getInstance();
+	let expenses = getExpensesService();
 	let amount = Amount.create(expenses);
 
 	return amount.getTotalByYear();
 }
 
 export function getMonthlyAmount(month: TMonth): number {
-	let expenses = Expenses.getInstance();
+	let expenses = getExpensesService();
 	let amount = Amount.create(expenses);
 
 	return amount.getTotalByMonth(month);

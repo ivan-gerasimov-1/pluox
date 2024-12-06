@@ -6,6 +6,7 @@ import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import type { ICategories } from '@domain/categories/types';
+import type { IExpenses } from '@domain/expenses/types';
 import type { TEnvironment } from '@root/config';
 
 export type ServiceType<T> = new (...args: any[]) => T;
@@ -30,6 +31,7 @@ export enum EServiceToken {
 	CLIENT_ID_STORAGE = 'ClientIdStorage',
 	CLIENT_ID = 'ClientId',
 	CATEGORIES = 'Categories',
+	EXPENSES = 'Expenses',
 }
 
 export interface IServiceMap {
@@ -42,4 +44,5 @@ export interface IServiceMap {
 	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
 	[EServiceToken.CLIENT_ID]: IClientId;
 	[EServiceToken.CATEGORIES]: ICategories;
+	[EServiceToken.EXPENSES]: IExpenses;
 }

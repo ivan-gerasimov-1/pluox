@@ -12,9 +12,8 @@ import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRate
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 
-import { Expenses } from '@domain/expenses/expenses';
-
-import { createDIContainer } from '@root/diContainer';
+import { createDIContainer, getGlobalContainer } from '@root/diContainer';
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 async function main(): Promise<void> {
 	await runMockServiceWorker();
@@ -66,7 +65,10 @@ function loadAppConfig(): void {
 }
 
 function loadExpenses(): void {
+	let globalContainer = getGlobalContainer();
+
+	let expenses = globalContainer.get(EServiceToken.EXPENSES);
 	let rawExpenses = ExpensesStorage.getInstance().getItems();
 
-	Expenses.getInstance().__addRawExpenses(rawExpenses);
+	expenses.__addRawExpenses(rawExpenses);
 }
