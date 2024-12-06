@@ -9,7 +9,6 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 
 import { useIntl } from '@modules/intl/useIntl';
-import { AppConfigStore } from '@modules/appConfig/appConfig.store';
 import { useNavigation } from '@modules/navigation/useNavigation';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/useService';
@@ -33,9 +32,9 @@ import { Separator } from '@uiKit/separator/separator';
 export function SettingsScreen() {
 	let intl = useIntl(settingsI18n);
 	let navigation = useNavigation();
-	let appConfigStore = AppConfigStore.getInstance();
-	let appConfigState = useStore(appConfigStore.get());
+	let appConfigStore = useService(EServiceToken.APP_CONFIG_STORE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let appConfigState = useStore(appConfigStore.get());
 
 	let [editBudget, setEditBudget] = useState<boolean>(false);
 

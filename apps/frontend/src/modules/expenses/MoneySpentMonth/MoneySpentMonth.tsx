@@ -3,7 +3,7 @@ import { useStore } from 'zustand';
 
 import { TMonth } from '@domain/amount/useCases/types';
 
-import { AppConfigStore } from '@modules/appConfig/appConfig.store';
+import { useService } from '@modules/serviceContainer/useService';
 import { useMonthName } from '@modules/common/hooks/useMonthName/useMonthName';
 import { ExpensesByCategory } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
 import {
@@ -11,6 +11,7 @@ import {
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 } from '@modules/expenses/expenses.query';
 import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
+import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { Separator } from '@uiKit/separator/separator';
 
@@ -21,16 +22,15 @@ export type TMoneySpentMonthProps = {
 };
 
 export function MoneySpentMonth(props: TMoneySpentMonthProps) {
+	let appConfigStore = useService(EServiceToken.APP_CONFIG_STORE);
+
 	let total = useQuery({
 		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, props.month],
 		queryFn: () => getMonthlyAmount(props.month),
 		refetchOnMount: false,
 	});
 
-	let budget = useStore(
-		AppConfigStore.getInstance().get(),
-		(state) => state.budget,
-	);
+	let budget = useStore(appConfigStore.get(), (state) => state.budget);
 
 	let currentMonth = useMonthName(props.month);
 

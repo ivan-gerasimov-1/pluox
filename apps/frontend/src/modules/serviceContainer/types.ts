@@ -9,6 +9,7 @@ import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import type { ICategories } from '@domain/categories/types';
 import type { IExpenses } from '@domain/expenses/types';
+import type { IAppConfigStore } from '@modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 
 export type ServiceType<T> = new (...args: any[]) => T;
@@ -36,6 +37,7 @@ export enum EServiceToken {
 	EXPENSES = 'Expenses',
 	APP_CONFIG_STORAGE = 'AppConfigStorage',
 	APP_CONFIG_SERVICE = 'AppConfigService',
+	APP_CONFIG_STORE = 'AppConfigStore',
 }
 
 export interface IServiceMap {
@@ -51,4 +53,5 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSES]: IExpenses;
 	[EServiceToken.APP_CONFIG_STORAGE]: IAppConfigStorage;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
+	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;
 }

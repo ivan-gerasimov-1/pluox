@@ -1,12 +1,8 @@
 import { StoreApi, createStore } from 'zustand';
 
-import { getGlobalContainer } from '@root/diContainer';
-
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { TAppConfig } from '@core/infrastructure/appConfig/types';
 import type { IAppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
-
-import { EServiceToken } from '@modules/serviceContainer/types';
 
 export interface IAppConfigStore {
 	get(): StoreApi<TAppConfig>;
@@ -14,11 +10,9 @@ export interface IAppConfigStore {
 }
 
 export class AppConfigStore implements IAppConfigStore {
-	static #instance: AppConfigStore;
-
 	private readonly store: StoreApi<TAppConfig>;
 
-	private constructor(
+	constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly appConfigService: IAppConfigService,
 	) {
@@ -30,21 +24,6 @@ export class AppConfigStore implements IAppConfigStore {
 				availabelCurrencies: this.appConfig.availabelCurrencies,
 			};
 		});
-	}
-
-	public static getInstance(): IAppConfigStore {
-		if (!this.#instance) {
-			let globalContainer = getGlobalContainer();
-
-			let appConfig = globalContainer.get(EServiceToken.APP_CONFIG);
-			let appConfigService = globalContainer.get(
-				EServiceToken.APP_CONFIG_SERVICE,
-			);
-
-			this.#instance = new AppConfigStore(appConfig, appConfigService);
-		}
-
-		return this.#instance;
 	}
 
 	public get(): StoreApi<TAppConfig> {
