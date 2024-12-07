@@ -1,14 +1,13 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import { getAllowedSymbols } from '@modules/expenses/expenseView/components/amountInput/constants';
 import { EServiceToken } from '@modules/serviceContainer/types';
+import { resolveService } from '@modules/serviceContainer/resolveService';
 
 export function validateNumber(value: string): boolean {
 	if (RegExp('[A-z]+').test(value)) {
 		return false;
 	}
 
-	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+	let intlService = resolveService(EServiceToken.INTL_SERVICE);
 	let decimalSeaparator = intlService.decimalSeparator;
 
 	if (value.split(decimalSeaparator).length > 2) {

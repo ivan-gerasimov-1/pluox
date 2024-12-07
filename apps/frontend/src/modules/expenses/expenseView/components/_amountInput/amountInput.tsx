@@ -1,10 +1,9 @@
 import { useState } from 'react';
 
-import { getGlobalContainer } from '@root/diContainer';
-
 import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/react/useService';
+import { resolveService } from '@modules/serviceContainer/resolveService';
 
 export type TAmountInputProps = {
 	amount: string;
@@ -41,7 +40,7 @@ export function _AmountInput(props: TAmountInputProps) {
 }
 
 function toModelValue(value: string): number {
-	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+	let intlService = resolveService(EServiceToken.INTL_SERVICE);
 
 	return intlService.parseNumber(value);
 }

@@ -8,8 +8,9 @@ import { registerServiceWorker } from '@root/serviceWorker';
 
 import { ECurrency } from '@core/infrastructure/currency/types';
 
-import { createDIContainer, getGlobalContainer } from '@root/diContainer';
+import { createDIContainer } from '@root/diContainer';
 import { EServiceToken } from '@modules/serviceContainer/types';
+import { resolveService } from '@modules/serviceContainer/resolveService';
 
 async function main(): Promise<void> {
 	await runMockServiceWorker();
@@ -42,9 +43,8 @@ async function main(): Promise<void> {
 main();
 
 async function getCurrencyRates(): Promise<void> {
-	let globalContainer = getGlobalContainer();
-	let currencyRatesAPI = globalContainer.get(EServiceToken.CURRENCY_RATES_API);
-	let currencyRatesStorage = globalContainer.get(
+	let currencyRatesAPI = resolveService(EServiceToken.CURRENCY_RATES_API);
+	let currencyRatesStorage = resolveService(
 		EServiceToken.CURRENCY_RATES_STORAGE,
 	);
 
@@ -63,17 +63,14 @@ async function getCurrencyRates(): Promise<void> {
 }
 
 function loadAppConfig(): void {
-	let globalContainer = getGlobalContainer();
-	let appConfigService = globalContainer.get(EServiceToken.APP_CONFIG_SERVICE);
+	let appConfigService = resolveService(EServiceToken.APP_CONFIG_SERVICE);
 
 	appConfigService.initialize();
 }
 
 function loadExpenses(): void {
-	let globalContainer = getGlobalContainer();
-
-	let expenses = globalContainer.get(EServiceToken.EXPENSES);
-	let expensesStorage = globalContainer.get(EServiceToken.EXPENSES_STORAGE);
+	let expenses = resolveService(EServiceToken.EXPENSES);
+	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
 
 	let rawExpenses = expensesStorage.getItems();
 

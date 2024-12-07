@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { getGlobalContainer } from '@root/diContainer';
-
 import {
 	validateKey,
 	validateNumber,
 } from '@modules/expenses/expenseView/components/amountInput/helpers';
 import { EServiceToken } from '@modules/serviceContainer/types';
+import { resolveService } from '@modules/serviceContainer/resolveService';
 
 import styles from './amountInput.module.css';
 
@@ -62,13 +61,13 @@ function toViewValue(value: number): string {
 		return '';
 	}
 
-	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+	let intlService = resolveService(EServiceToken.INTL_SERVICE);
 
 	return value.toLocaleString(intlService.locale);
 }
 
 function toModelValue(value: string): number {
-	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+	let intlService = resolveService(EServiceToken.INTL_SERVICE);
 
 	return intlService.parseNumber(value);
 }

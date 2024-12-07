@@ -1,5 +1,3 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 
 import type { TMonth } from '@domain/amount/useCases/types';
@@ -10,6 +8,7 @@ import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';
 
 import { EServiceToken } from '@modules/serviceContainer/types';
+import { resolveService } from '@modules/serviceContainer/resolveService';
 
 export class Expenses implements IExpenses {
 	readonly #expenses: Map<Id, TExpense>;
@@ -122,9 +121,7 @@ export class Expenses implements IExpenses {
 		total: number;
 		percentage: number;
 	}[] {
-		let currencyConverter = getGlobalContainer().get(
-			EServiceToken.CURRENCY_CONVERTER,
-		);
+		let currencyConverter = resolveService(EServiceToken.CURRENCY_CONVERTER);
 		let currency = this.appConfig.currency;
 
 		let total = 0;

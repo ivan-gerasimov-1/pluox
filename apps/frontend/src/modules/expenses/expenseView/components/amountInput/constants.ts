@@ -1,10 +1,9 @@
-import { getGlobalContainer } from '@root/diContainer';
-
 import { EKey } from '@modules/expenses/expenseView/components/amountInput/enums';
 import { EServiceToken } from '@modules/serviceContainer/types';
+import { resolveService } from '@modules/serviceContainer/resolveService';
 
 export const getAllowedSymbols = () => {
-	let intlService = getGlobalContainer().get(EServiceToken.INTL_SERVICE);
+	let intlService = resolveService(EServiceToken.INTL_SERVICE);
 
 	return [
 		intlService.decimalSeparator,
