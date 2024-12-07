@@ -31,7 +31,12 @@ export function App(props: IAppProps) {
 		<StrictMode>
 			<ContainerProvider container={props.diContainer}>
 				<QueryClientProvider client={props.queryClient}>
-					<RouterProvider router={props.router} />
+					<RouterProvider
+						router={props.router}
+						future={{
+							v7_startTransition: true,
+						}}
+					/>
 				</QueryClientProvider>
 			</ContainerProvider>
 		</StrictMode>

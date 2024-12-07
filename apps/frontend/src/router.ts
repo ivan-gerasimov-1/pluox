@@ -53,11 +53,22 @@ const NOT_FOUND_ROUTE = {
 };
 
 export function createAppRouter(): IRouter {
-	return createRouter([
-		...AUTHENTICATION_ROUTES,
-		...EXPENSE_ROUTES,
-		...MAIN_ROUTES,
+	return createRouter(
+		[
+			...AUTHENTICATION_ROUTES,
+			...EXPENSE_ROUTES,
+			...MAIN_ROUTES,
 
-		NOT_FOUND_ROUTE,
-	]);
+			NOT_FOUND_ROUTE,
+		],
+		{
+			future: {
+				v7_fetcherPersist: true,
+				v7_relativeSplatPath: true,
+				v7_normalizeFormMethod: true,
+				v7_partialHydration: true,
+				v7_skipActionErrorRevalidation: true,
+			},
+		},
+	);
 }
