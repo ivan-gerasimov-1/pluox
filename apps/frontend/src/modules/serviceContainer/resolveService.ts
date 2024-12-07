@@ -13,12 +13,3 @@ export function resolveService<T extends keyof IServiceMap = keyof IServiceMap>(
 
 	return service;
 }
-
-/**
- * @todo Use ReactContext instead of globalContainer
- */
-export function useService<T extends keyof IServiceMap = keyof IServiceMap>(
-	serviceId: T,
-): IServiceMap[T] {
-	return resolveService(serviceId);
-}

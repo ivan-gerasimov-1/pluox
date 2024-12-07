@@ -10,7 +10,7 @@ import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 import { useIntl } from '@modules/intl/useIntl';
 import { useNavigation } from '@modules/navigation/useNavigation';
 import { EServiceToken } from '@modules/serviceContainer/types';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 
 import { Button } from '@uiKit/button/button';
 import { Header } from '@uiKit/header/header';

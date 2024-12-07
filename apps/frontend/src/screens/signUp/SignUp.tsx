@@ -1,5 +1,5 @@
 import { EServiceToken } from '@modules/serviceContainer/types';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 import { useNavigation } from '@modules/navigation/useNavigation';
 import { usePending } from '@screens/hooks/usePending';
 

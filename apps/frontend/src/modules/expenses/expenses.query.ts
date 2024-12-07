@@ -5,7 +5,7 @@ import type { Id, TISODateString } from '@domain/types';
 
 import { dateFn } from '@modules/date/date';
 import { EServiceToken } from '@modules/serviceContainer/types';
-import { resolveService } from '@modules/serviceContainer/useService';
+import { resolveService } from '@modules/serviceContainer/resolveService';
 
 export const QUERY_EXPENSES_LIST = Symbol('expenseList');
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');

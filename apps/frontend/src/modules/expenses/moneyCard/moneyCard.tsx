@@ -1,5 +1,5 @@
 import { EServiceToken } from '@modules/serviceContainer/types';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 
 import styles from './moneyCard.module.css';
 

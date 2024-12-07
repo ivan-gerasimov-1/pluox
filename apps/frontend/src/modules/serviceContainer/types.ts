@@ -24,6 +24,14 @@ import type { IExpenses } from '@domain/expenses/types';
 import type { IAppConfigStore } from '@modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 
+export interface IContainer {
+	register(...providers: ServiceProvider[]): IContainer;
+	validate(): void;
+	get<T extends ServiceToken = ServiceToken>(token: T): IServiceMap[T];
+	clear(token: ServiceToken): void;
+	clearAll(): void;
+}
+
 export type ServiceType<T> = new (...args: any[]) => T;
 export type ServiceToken = keyof IServiceMap;
 export type FactoryFn<T> = (...args: any[]) => T;

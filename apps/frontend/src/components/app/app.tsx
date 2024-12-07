@@ -5,11 +5,15 @@ import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { IRouter } from '@root/router';
 import { useEffectOnce } from '@root/hooks/useEffectOnce';
 
+import type { IContainer } from '@modules/serviceContainer/types';
+import { ContainerProvider } from '@modules/serviceContainer/react/provider';
+
 import '@root/root.css';
 
 type IAppProps = {
 	queryClient: QueryClient;
 	router: IRouter;
+	diContainer: IContainer;
 
 	onRendered?(): void;
 };
@@ -25,9 +29,11 @@ export function App(props: IAppProps) {
 
 	return (
 		<StrictMode>
-			<QueryClientProvider client={props.queryClient}>
-				<RouterProvider router={props.router} />
-			</QueryClientProvider>
+			<ContainerProvider container={props.diContainer}>
+				<QueryClientProvider client={props.queryClient}>
+					<RouterProvider router={props.router} />
+				</QueryClientProvider>
+			</ContainerProvider>
 		</StrictMode>
 	);
 }

@@ -14,7 +14,7 @@ import { EServiceToken } from '@modules/serviceContainer/types';
 async function main(): Promise<void> {
 	await runMockServiceWorker();
 
-	createDIContainer({
+	let diContainer = createDIContainer({
 		isGlobal: true,
 	});
 
@@ -28,6 +28,7 @@ async function main(): Promise<void> {
 		window,
 		new QueryClient(),
 		createAppRouter(),
+		diContainer,
 		{
 			containerId: 'saveeRoot',
 		},

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useIntl } from '@modules/intl/useIntl';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { TMonth } from '@domain/amount/useCases/types';

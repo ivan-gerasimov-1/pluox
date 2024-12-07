@@ -3,6 +3,8 @@ import type { QueryClient } from '@tanstack/react-query';
 
 import type { IRouter } from '@root/router';
 
+import type { IContainer } from '@modules/serviceContainer/types';
+
 import { delay } from '@utils/delay';
 
 import { App } from '@components/app/app';
@@ -29,6 +31,7 @@ export class ReactUI implements IUserInterface {
 		window: IWindow,
 		private readonly queryClient: QueryClient,
 		private readonly router: IRouter,
+		private readonly container: IContainer,
 		params: IReactUIConstructorParams,
 	) {
 		this.#window = window;
@@ -52,6 +55,7 @@ export class ReactUI implements IUserInterface {
 			<App
 				queryClient={this.queryClient}
 				router={this.router}
+				diContainer={this.container}
 				onRendered={async () => {
 					let $loader = this.#window.document.getElementById('loader');
 

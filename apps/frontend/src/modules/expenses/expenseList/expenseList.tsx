@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { Id, TISODateString } from '@domain/types';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 import { Icon } from '@root/uiKit/icon';
 import {
 	SwipeAction,

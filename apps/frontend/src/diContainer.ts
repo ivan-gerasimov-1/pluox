@@ -11,7 +11,10 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
 import { Container } from '@modules/serviceContainer/container';
-import { EServiceToken } from '@modules/serviceContainer/types';
+import {
+	EServiceToken,
+	type IContainer,
+} from '@modules/serviceContainer/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
@@ -33,7 +36,7 @@ import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { TotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import { Amount } from '@domain/amount/Amount';
 
-let globalContainer: Container;
+let globalContainer: IContainer;
 
 export function createDIContainer(options?: { isGlobal?: boolean }) {
 	let container = new Container();
@@ -211,7 +214,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 	return container;
 }
 
-export function getGlobalContainer(): Container {
+export function getGlobalContainer(): IContainer {
 	if (!globalContainer) {
 		throw new Error('GlobalContainer Not Initialized');
 	}

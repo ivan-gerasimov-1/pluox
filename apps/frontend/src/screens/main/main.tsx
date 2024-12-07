@@ -3,7 +3,7 @@ import { EAppPath } from '@root/appPath';
 import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
 import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
 import { AddExpense } from '@modules/expenses/addExpense/addExpense';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { ActionSheet } from '@root/uiKit/actionSheet';

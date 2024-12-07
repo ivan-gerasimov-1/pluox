@@ -2,17 +2,18 @@ import {
 	type IServiceMap,
 	type ServiceProvider,
 	type ServiceToken,
+	type IContainer,
 	ServiceScope,
 } from '@modules/serviceContainer/types';
 
-export class Container {
+export class Container implements IContainer {
 	private readonly providers = new Map<ServiceToken, ServiceProvider>();
 	private readonly instances = new Map<ServiceToken, unknown>();
 	private readonly resolutionStack: ServiceToken[] = [];
 
 	private isValidated = false;
 
-	register(...providers: ServiceProvider[]): Container {
+	public register(...providers: ServiceProvider[]): IContainer {
 		if (this.isValidated) {
 			throw new Error(
 				'Container is already validated. Cannot register new providers.',
@@ -26,7 +27,7 @@ export class Container {
 		return this;
 	}
 
-	validate(): void {
+	public validate(): void {
 		if (this.isValidated) {
 			return;
 		}
@@ -72,7 +73,7 @@ export class Container {
 		}
 	}
 
-	get<T extends ServiceToken = ServiceToken>(token: T): IServiceMap[T] {
+	public get<T extends ServiceToken = ServiceToken>(token: T): IServiceMap[T] {
 		if (!this.isValidated) {
 			throw new Error(
 				'Container is not validated. Call validate() after registering all providers.',
@@ -133,51 +134,11 @@ export class Container {
 		);
 	}
 
-	clear(token: ServiceToken): void {
+	public clear(token: ServiceToken): void {
 		this.instances.delete(token);
 	}
 
-	clearAll(): void {
+	public clearAll(): void {
 		this.instances.clear();
 	}
 }
-
-// // core/di/react.tsx
-// import { createContext, useContext, ReactNode } from 'react';
-
-// const ContainerContext = createContext<Container | null>(null);
-
-// export function ContainerProvider({
-// 		container,
-// 		children
-// }: {
-// 		container: Container;
-// 		children: ReactNode;
-// }) {
-// 		return (
-// 				<ContainerContext.Provider value={container}>
-// 						{children}
-// 				</ContainerContext.Provider>
-// 		);
-// }
-
-// export function useService<T>(token: ServiceToken<T>): T {
-// 		const container = useContext(ContainerContext);
-// 		if (!container) {
-// 				throw new Error('useService must be used within ContainerProvider');
-// 		}
-// 		return container.get(token);
-// }
-
-// // App.tsx
-// export function App() {
-// 		const container = new Container();
-// 		container.register(appProviders);
-// 		container.validate();
-
-// 		return (
-// 				<ContainerProvider container={container}>
-// 						<Router />
-// 				</ContainerProvider>
-// 		);
-// }

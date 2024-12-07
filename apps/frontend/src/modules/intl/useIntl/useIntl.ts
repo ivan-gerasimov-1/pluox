@@ -5,7 +5,7 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { createScopedTranslateFunction } from '@modules/intl/useIntl/translateFunction';
 import { TBaseScope, TUseIntl } from '@modules/intl/useIntl/types';
 import { EServiceToken } from '@modules/serviceContainer/types';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 
 export function useIntl<TScope extends TBaseScope>(
 	scope: Record<ELocaleCode, TScope>,

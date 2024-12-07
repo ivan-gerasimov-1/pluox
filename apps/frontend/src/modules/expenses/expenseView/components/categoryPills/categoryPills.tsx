@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
 
-import { Categories } from '@domain/categories/Categories';
-
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 import styles from './categoryPills.module.css';

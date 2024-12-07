@@ -1,7 +1,7 @@
 import { EAppPath } from '@root/appPath';
 
 import { useNavigation } from '@modules/navigation/useNavigation';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { usePending } from '@screens/hooks/usePending';

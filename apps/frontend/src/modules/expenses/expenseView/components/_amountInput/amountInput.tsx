@@ -4,7 +4,7 @@ import { getGlobalContainer } from '@root/diContainer';
 
 import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
 import { EServiceToken } from '@modules/serviceContainer/types';
-import { useService } from '@modules/serviceContainer/useService';
+import { useService } from '@modules/serviceContainer/react/useService';
 
 export type TAmountInputProps = {
 	amount: string;
