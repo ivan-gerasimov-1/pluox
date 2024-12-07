@@ -175,7 +175,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSES,
 				useClass: Expenses,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.CATEGORIES],
+				deps: [
+					EServiceToken.APP_CONFIG,
+					EServiceToken.CATEGORIES,
+					EServiceToken.CURRENCY_CONVERTER,
+				],
 			},
 			{
 				token: EServiceToken.EXPENSES_STORAGE,

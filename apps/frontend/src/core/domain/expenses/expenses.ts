@@ -1,4 +1,5 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
 
 import type { TMonth } from '@domain/amount/useCases/types';
 import type { ICategories } from '@domain/categories/types';
@@ -7,15 +8,13 @@ import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';
 
-import { EServiceToken } from '@modules/serviceContainer/types';
-import { resolveService } from '@modules/serviceContainer/resolveService';
-
 export class Expenses implements IExpenses {
 	readonly #expenses: Map<Id, TExpense>;
 
 	constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly categories: ICategories,
+		private readonly currencyConverter: ICurrencyConverter,
 	) {
 		this.#expenses = new Map();
 	}
@@ -121,7 +120,6 @@ export class Expenses implements IExpenses {
 		total: number;
 		percentage: number;
 	}[] {
-		let currencyConverter = resolveService(EServiceToken.CURRENCY_CONVERTER);
 		let currency = this.appConfig.currency;
 
 		let total = 0;
@@ -154,7 +152,7 @@ export class Expenses implements IExpenses {
 				};
 			}
 
-			expensesByCategory[category].total += currencyConverter.convert(
+			expensesByCategory[category].total += this.currencyConverter.convert(
 				expense.amount,
 				expense.currency,
 				currency,
