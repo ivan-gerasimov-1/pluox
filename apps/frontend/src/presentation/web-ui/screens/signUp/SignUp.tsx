@@ -1,7 +1,7 @@
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { useNavigation } from '@root/presentation/web-ui/hooks/navigation/useNavigation';
-import { usePending } from '@root/presentation/web-ui/screens/hooks/usePending';
+import { usePending } from '@root/presentation/web-ui/hooks/usePending';
 
 import { delay } from '@root/presentation/web-ui/utils/delay';
 
