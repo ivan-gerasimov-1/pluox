@@ -1,5 +1,6 @@
-import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { useNavigate } from 'react-router';
+
+import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 interface INavigation {
 	mainPage(): void;
