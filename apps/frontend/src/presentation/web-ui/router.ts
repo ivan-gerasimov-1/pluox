@@ -3,9 +3,9 @@ import { createBrowserRouter as createRouter } from 'react-router-dom';
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import { NotFoundErrorScreen } from '@root/presentation/web-ui/screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
-import { ExpenseListScreen } from '@root/presentation/web-ui/screens/expenseList';
-import { ExpenseListMonthlyScreen } from '@root/presentation/web-ui/screens/expenseListMonthly';
-import { MainScreen } from '@root/presentation/web-ui/screens/main';
+import { ExpenseListScreen } from '@root/presentation/web-ui/screens/expenseList/expenseList';
+import { ExpenseListMonthlyScreen } from '@root/presentation/web-ui/screens/expenseListMonthly/expenseListMonthly';
+import { MainScreen } from '@root/presentation/web-ui/screens/main/main';
 import { SettingsScreen } from '@root/presentation/web-ui/screens/settings/settings';
 import { SignInScreen } from '@root/presentation/web-ui/screens/signIn/SignIn';
 import { SignUpScreen } from '@root/presentation/web-ui/screens/signUp/SignUp';

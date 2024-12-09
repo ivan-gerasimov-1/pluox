@@ -1,1 +1,0 @@
-export { ExpenseListMonthlyScreen } from './expenseListMonthly';
