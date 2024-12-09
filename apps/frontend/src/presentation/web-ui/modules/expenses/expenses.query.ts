@@ -3,7 +3,6 @@ import { Expense } from '@domain/expense/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import type { Id, TISODateString } from '@domain/types';
 
-import { dateFn } from '@root/modules/temporal/temporal';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { resolveService } from '@modules/serviceContainer/resolveService';
 
@@ -18,16 +17,14 @@ export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
 export function addOne(payload: TExpenseCreateDTO): void {
 	let expenses = resolveService(EServiceToken.EXPENSES);
 	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
+	let temporal = resolveService(EServiceToken.TEMPORAL);
 
 	let expense = Expense.create(
 		payload.amount,
 		payload.currency,
 		payload.comment,
 		payload.category,
-		/**
-		 * @todo Don’t use dateFn directly
-		 */
-		dateFn.tz.guess(),
+		temporal.getTimezone(),
 		payload.date,
 	);
 

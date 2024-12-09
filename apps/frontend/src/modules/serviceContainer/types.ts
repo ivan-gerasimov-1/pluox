@@ -23,6 +23,7 @@ import type { ICategories } from '@domain/categories/types';
 import type { IExpenses } from '@domain/expenses/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
+import type { ITemporal } from '@root/modules/temporal/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -76,6 +77,7 @@ export enum EServiceToken {
 	CURRENCY_RATES = 'CurrencyRates',
 	TOTAL_AMOUNT_USE_CASE = 'TotalAmountUseCase',
 	AMOUNT = 'Amount',
+	TEMPORAL = 'Temporal',
 }
 
 export interface IServiceMap {
@@ -104,4 +106,5 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_RATES]: ICurrencyRates;
 	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;
 	[EServiceToken.AMOUNT]: IAmount;
+	[EServiceToken.TEMPORAL]: ITemporal;
 }

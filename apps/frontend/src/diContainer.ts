@@ -35,6 +35,7 @@ import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRate
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { TotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import { Amount } from '@domain/amount/Amount';
+import { Temporal } from '@root/modules/temporal/temporal';
 
 let globalContainer: IContainer;
 
@@ -100,6 +101,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.BASE_API,
 				useClass: BaseApi,
 				deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_STORAGE],
+			},
+			{
+				token: EServiceToken.TEMPORAL,
+				useClass: Temporal,
+				deps: [EServiceToken.INTL_SERVICE],
 			},
 		)
 		/**

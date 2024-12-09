@@ -4,7 +4,6 @@ import { useStore } from 'zustand';
 import { TMonth } from '@domain/amount/useCases/types';
 
 import { useService } from '@modules/serviceContainer/react/useService';
-import { useMonthName } from '@root/presentation/web-ui/hooks/useMonthName';
 import { ExpensesByCategory } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
 import {
 	getMonthlyAmount,
@@ -23,6 +22,7 @@ export type TMoneySpentMonthProps = {
 
 export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 	let appConfigStore = useService(EServiceToken.APP_CONFIG_STORE);
+	let temporal = useService(EServiceToken.TEMPORAL);
 
 	let total = useQuery({
 		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, props.month],
@@ -32,7 +32,7 @@ export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 
 	let budget = useStore(appConfigStore.get(), (state) => state.budget);
 
-	let currentMonth = useMonthName(props.month);
+	let currentMonth = temporal.getMonth(props.month);
 
 	return (
 		<>

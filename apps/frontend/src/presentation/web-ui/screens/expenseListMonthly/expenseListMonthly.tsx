@@ -2,7 +2,8 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import type { TMonth } from '@domain/amount/useCases/types';
 
-import { dateFn } from '@root/modules/temporal/temporal';
+import { useService } from '@root/modules/serviceContainer/react/useService';
+import { EServiceToken } from '@root/modules/serviceContainer/types';
 
 import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
@@ -17,6 +18,7 @@ const MONTH_LIST: TMonth[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 export function ExpenseListMonthlyScreen() {
 	let intl = useIntl(expenseListMonthlyI18n);
+	let temporal = useService(EServiceToken.TEMPORAL);
 
 	return (
 		<Screen>
@@ -24,16 +26,8 @@ export function ExpenseListMonthlyScreen() {
 
 			<CardContainer>
 				{MONTH_LIST.map((month) => {
-					let dateFrom = dateFn({
-						month,
-					})
-						.startOf('month')
-						.toISOString();
-					let dateTo = dateFn({
-						month,
-					})
-						.endOf('month')
-						.toISOString();
+					let dateFrom = temporal.getStartOfMonth(month);
+					let dateTo = temporal.getEndOfMonth(month);
 
 					return (
 						<AppLink

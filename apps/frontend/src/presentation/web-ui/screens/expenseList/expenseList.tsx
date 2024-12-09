@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { dateFn } from '@root/modules/temporal/temporal';
+import { useService } from '@root/modules/serviceContainer/react/useService';
+import { EServiceToken } from '@root/modules/serviceContainer/types';
 
 import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/expenseList/expenseList';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
@@ -27,12 +28,11 @@ export function ExpenseListScreen() {
 }
 
 function useScreenParams() {
+	let temporal = useService(EServiceToken.TEMPORAL);
 	let [searchParams] = useSearchParams();
 
-	let dateFrom =
-		searchParams.get('dateFrom') || dateFn().startOf('month').toISOString();
-	let dateTo =
-		searchParams.get('dateTo') || dateFn().endOf('month').toISOString();
+	let dateFrom = searchParams.get('dateFrom') || temporal.getStartOfMonth();
+	let dateTo = searchParams.get('dateTo') || temporal.getEndOfMonth();
 
 	return {
 		dateFrom,
