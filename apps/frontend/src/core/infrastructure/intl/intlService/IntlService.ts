@@ -1,13 +1,13 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
-import { type ECurrency } from '@core/infrastructure/currency/types';
+import type { ECurrency } from '@core/infrastructure/currency/types';
 import { DECIMAL_SEPARATORS } from '@core/infrastructure/intl/constants';
 import { formatCurrency } from '@core/infrastructure/intl/currency';
 import { formatDate } from '@core/infrastructure/intl/date';
-import { type ELocaleCode } from '@core/infrastructure/intl/enums';
+import type { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { UnsupportedDecimalSeparatorError } from '@core/infrastructure/intl/intlService/errors';
 import { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
-import { type TDecimalSeparator } from '@core/infrastructure/intl/types';
+import type { TDecimalSeparator } from '@core/infrastructure/intl/types';
 
 export class IntlService implements IIntlService {
 	constructor(

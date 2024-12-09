@@ -1,4 +1,4 @@
-import { Id } from '@domain/types';
+import type { Id } from '@domain/types';
 
 export class ExpenseNotFoundError extends Error {
 	constructor(id: Id) {

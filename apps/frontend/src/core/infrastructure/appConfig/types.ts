@@ -1,5 +1,5 @@
-import { ECurrency } from '@core/infrastructure/currency/types';
-import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import type { ECurrency } from '@core/infrastructure/currency/types';
+import type { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 export type TAppConfig = {
 	locale: ELocaleCode;

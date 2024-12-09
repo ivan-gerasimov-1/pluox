@@ -1,5 +1,5 @@
-import { type IAppStorage } from '@core/infrastructure/appStorage/types';
-import { type Id } from '@domain/types';
+import type { IAppStorage } from '@core/infrastructure/appStorage/types';
+import type { Id } from '@domain/types';
 
 import { deepMerge } from '@core/infrastructure/appStorage/deepMerge';
 

@@ -1,5 +1,5 @@
 import type { ECurrency } from '@core/infrastructure/currency/types';
-import { type ELocaleCode } from '@core/infrastructure/intl/enums';
+import type { ELocaleCode } from '@core/infrastructure/intl/enums';
 import type { TDecimalSeparator } from '@core/infrastructure/intl/types';
 
 export interface IIntlService {
