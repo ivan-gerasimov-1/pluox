@@ -16,7 +16,7 @@ interface IReactUIConstructorParams {
 }
 
 export class ReactUI implements IUserInterface {
-	#containerId: string;
+	readonly #containerId: string;
 	#container?: IRoot;
 
 	constructor(
