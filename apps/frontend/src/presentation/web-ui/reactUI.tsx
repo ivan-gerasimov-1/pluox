@@ -16,19 +16,16 @@ interface IReactUIConstructorParams {
 }
 
 export class ReactUI implements IUserInterface {
-	#window: IWindow;
-
 	#containerId: string;
 	#container?: IRoot;
 
 	constructor(
-		window: IWindow,
+		private readonly window: IWindow,
 		private readonly queryClient: QueryClient,
 		private readonly router: IRouter,
-		private readonly container: IContainer,
+		private readonly diContainer: IContainer,
 		params: IReactUIConstructorParams,
 	) {
-		this.#window = window;
 		this.#containerId = params.containerId;
 	}
 
@@ -49,9 +46,9 @@ export class ReactUI implements IUserInterface {
 			<App
 				queryClient={this.queryClient}
 				router={this.router}
-				diContainer={this.container}
+				diContainer={this.diContainer}
 				onRendered={async () => {
-					let $loader = this.#window.document.getElementById('loader');
+					let $loader = this.window.document.getElementById('loader');
 
 					await delay(350);
 
@@ -81,7 +78,7 @@ export class ReactUI implements IUserInterface {
 	 * @throws {HTMLElementNotFoundError}
 	 */
 	private getRootElement(id: string): HTMLElement {
-		const element = this.#window.document.getElementById(id);
+		const element = this.window.document.getElementById(id);
 
 		if (element === null) {
 			throw new HTMLElementNotFoundError();
