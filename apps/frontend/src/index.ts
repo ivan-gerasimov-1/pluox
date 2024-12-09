@@ -3,32 +3,39 @@ import { QueryClient } from '@tanstack/react-query';
 import { ReactUI, type IUserInterface } from '@root/createUI';
 import { runMigrations } from '@root/migrations';
 import { runMockServiceWorker } from '@root/mockServiceWorker/run';
-import { createAppRouter } from '@root/router';
+import { createAppRouter } from '@root/presentation/web-ui/router';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 import { ECurrency } from '@core/infrastructure/currency/types';
 
 import { createDIContainer } from '@root/diContainer';
-import { EServiceToken } from '@modules/serviceContainer/types';
+import {
+	EServiceToken,
+	type IContainer,
+} from '@modules/serviceContainer/types';
 import { resolveService } from '@modules/serviceContainer/resolveService';
 
 async function main(): Promise<void> {
-	await runMockServiceWorker();
-
 	let diContainer = createDIContainer({
 		isGlobal: true,
 	});
 
-	runMigrations();
+	await runMockServiceWorker();
 
-	loadAppConfig();
-	await getCurrencyRates();
-	loadExpenses();
+	await runCore();
+	await runUI(diContainer);
+}
+
+main();
+
+async function runUI(diContainer: IContainer): Promise<void> {
+	let queryClient = new QueryClient();
+	let appRouter = createAppRouter();
 
 	const ui: IUserInterface = new ReactUI(
 		window,
-		new QueryClient(),
-		createAppRouter(),
+		queryClient,
+		appRouter,
 		diContainer,
 		{
 			containerId: 'saveeRoot',
@@ -40,7 +47,13 @@ async function main(): Promise<void> {
 	await ui.render();
 }
 
-main();
+async function runCore(): Promise<void> {
+	runMigrations();
+
+	loadAppConfig();
+	await getCurrencyRates();
+	loadExpenses();
+}
 
 async function getCurrencyRates(): Promise<void> {
 	let currencyRatesAPI = resolveService(EServiceToken.CURRENCY_RATES_API);

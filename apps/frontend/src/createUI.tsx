@@ -1,13 +1,13 @@
 import { createRoot, type Root } from 'react-dom/client';
 import type { QueryClient } from '@tanstack/react-query';
 
-import type { IRouter } from '@root/router';
+import type { IRouter } from '@root/presentation/web-ui/router';
 
 import type { IContainer } from '@modules/serviceContainer/types';
 
-import { delay } from '@utils/delay';
+import { delay } from '@root/presentation/web-ui/utils/delay';
 
-import { App } from '@components/app/app';
+import { App } from '@root/presentation/web-ui/components/app/app';
 
 interface IWindow extends Window {}
 interface IRoot extends Root {}

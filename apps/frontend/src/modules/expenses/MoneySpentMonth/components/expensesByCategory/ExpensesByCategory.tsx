@@ -8,7 +8,7 @@ import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
 import { expensesByCategoryI18n } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/expensesByCategory.i18n';
 
-import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
+import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
 
 import styles from './ExpensesByCategory.module.css';
 

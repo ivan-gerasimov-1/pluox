@@ -22,16 +22,18 @@
 		"jsx": "react-jsx",
 
 		"paths": {
-			"@domain/*": ["src/core/domain/*"],
+			"@root/*": ["src/*"],
+
 			"@core/*": ["src/core/*"],
-
-			"@components/*": ["src/components/*"],
+			"@domain/*": ["src/core/domain/*"],
 			"@modules/*": ["src/modules/*"],
-			"@screens/*": ["src/screens/*"],
-			"@uiKit/*": ["src/uiKit/*"],
-			"@utils/*": ["src/utils/*"],
+			"@utils/*": ["src/presentation/web-ui/utils/*"],
 
-			"@root/*": ["src/*"]
+			"@components/*": ["src/presentation/web-ui/components/*"],
+			"@screens/*": ["src/screens/*"],
+			"@uiKit/*": ["src/presentation/web-ui/uiKit/*"],
+
+			"@web/*": ["src/presentation/web-ui/*"]
 		}
 	},
 	"include": ["src/**/*"]

@@ -1,15 +1,15 @@
-import { EAppPath } from '@root/appPath';
+import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import { useNavigation } from '@modules/navigation/useNavigation';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
-import { usePending } from '@screens/hooks/usePending';
+import { usePending } from '@root/presentation/web-ui/screens/hooks/usePending';
 
-import { delay } from '@utils/delay';
+import { delay } from '@root/presentation/web-ui/utils/delay';
 
-import { AppLink } from '@uiKit/appLink/appLink';
-import { Button } from '@uiKit/button/button';
+import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 
 import styles from './logInForm.module.css';
 

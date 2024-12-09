@@ -13,7 +13,7 @@ import {
 import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
-import { Separator } from '@uiKit/separator/separator';
+import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';
 
 import styles from './moneySpentMonth.module.css';
 

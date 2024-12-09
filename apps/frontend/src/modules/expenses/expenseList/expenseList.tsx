@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Id, TISODateString } from '@domain/types';
 import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
 import { useService } from '@modules/serviceContainer/react/useService';
-import { Icon } from '@root/uiKit/icon';
+import { Icon } from '@root/presentation/web-ui/uiKit/icon';
 import {
 	SwipeAction,
 	SwipeableList,
@@ -13,7 +13,7 @@ import {
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
 import styles from './expenseList.module.css';
-import { CategoryIcon } from '@uiKit/categoryIcon/categoryIcon';
+import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
 import {
 	deleteOne,
 	getList,

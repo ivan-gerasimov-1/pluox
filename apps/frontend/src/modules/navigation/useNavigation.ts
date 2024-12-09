@@ -1,4 +1,4 @@
-import { EAppPath } from '@root/appPath';
+import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { useNavigate } from 'react-router';
 
 interface INavigation {
