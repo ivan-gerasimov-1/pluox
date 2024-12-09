@@ -1,6 +1,6 @@
 import type { TMonth } from '@domain/amount/useCases/types';
 
-import { dateFn } from '@modules/date/date';
+import { dateFn } from '@root/modules/temporal/temporal';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/react/useService';
 

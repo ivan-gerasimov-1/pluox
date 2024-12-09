@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { dateFn } from '@modules/date/date';
+import { dateFn } from '@root/modules/temporal/temporal';
 
 import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/expenseList/expenseList';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';

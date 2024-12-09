@@ -3,7 +3,7 @@ import { Expense } from '@domain/expense/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import type { Id, TISODateString } from '@domain/types';
 
-import { dateFn } from '@modules/date/date';
+import { dateFn } from '@root/modules/temporal/temporal';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { resolveService } from '@modules/serviceContainer/resolveService';
 

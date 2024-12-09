@@ -2,7 +2,7 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import type { TMonth } from '@domain/amount/useCases/types';
 
-import { dateFn } from '@modules/date/date';
+import { dateFn } from '@root/modules/temporal/temporal';
 
 import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
