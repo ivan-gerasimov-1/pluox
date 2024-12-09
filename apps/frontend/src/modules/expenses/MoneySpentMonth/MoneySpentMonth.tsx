@@ -4,7 +4,7 @@ import { useStore } from 'zustand';
 import { TMonth } from '@domain/amount/useCases/types';
 
 import { useService } from '@modules/serviceContainer/react/useService';
-import { useMonthName } from '@modules/common/hooks/useMonthName/useMonthName';
+import { useMonthName } from '@root/presentation/web-ui/hooks/useMonthName';
 import { ExpensesByCategory } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
 import {
 	getMonthlyAmount,

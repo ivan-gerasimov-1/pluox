@@ -8,7 +8,7 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 
 import { useIntl } from '@modules/intl/useIntl';
-import { useNavigation } from '@modules/navigation/useNavigation';
+import { useNavigation } from '@root/presentation/web-ui/hooks/navigation/useNavigation';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/react/useService';
 

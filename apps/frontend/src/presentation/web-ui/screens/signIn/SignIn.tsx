@@ -1,4 +1,4 @@
-import { LogInForm } from '@modules/auth/logIn/logInForm/logInForm';
+import { LogInForm } from '@root/presentation/web-ui/components/auth/logIn/logInForm/logInForm';
 
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 

@@ -1,6 +1,6 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-import { useNavigation } from '@modules/navigation/useNavigation';
+import { useNavigation } from '@root/presentation/web-ui/hooks/navigation/useNavigation';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
