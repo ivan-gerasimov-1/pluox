@@ -1,14 +1,11 @@
-import { QueryClient } from '@tanstack/react-query';
-
-import { ReactUI, type IUserInterface } from '@root/createUI';
+import { createDIContainer } from '@root/diContainer';
+import { createUI } from '@root/presentation/web-ui';
 import { runMigrations } from '@root/migrations';
 import { runMockServiceWorker } from '@root/mockServiceWorker/run';
-import { createAppRouter } from '@root/presentation/web-ui/router';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 import { ECurrency } from '@core/infrastructure/currency/types';
 
-import { createDIContainer } from '@root/diContainer';
 import {
 	EServiceToken,
 	type IContainer,
@@ -20,8 +17,6 @@ async function main(): Promise<void> {
 		isGlobal: true,
 	});
 
-	await runMockServiceWorker();
-
 	await runCore();
 	await runUI(diContainer);
 }
@@ -29,25 +24,16 @@ async function main(): Promise<void> {
 main();
 
 async function runUI(diContainer: IContainer): Promise<void> {
-	let queryClient = new QueryClient();
-	let appRouter = createAppRouter();
-
-	const ui: IUserInterface = new ReactUI(
-		window,
-		queryClient,
-		appRouter,
-		diContainer,
-		{
-			containerId: 'saveeRoot',
-		},
-	);
+	const ui = createUI(diContainer);
 
 	registerServiceWorker();
 
-	await ui.render();
+	await ui.start();
 }
 
 async function runCore(): Promise<void> {
+	await runMockServiceWorker();
+
 	runMigrations();
 
 	loadAppConfig();

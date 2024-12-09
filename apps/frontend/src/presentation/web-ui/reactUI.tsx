@@ -1,24 +1,18 @@
 import { createRoot, type Root } from 'react-dom/client';
 import type { QueryClient } from '@tanstack/react-query';
 
+import { delay } from '@root/presentation/web-ui/utils/delay';
+import { App } from '@root/presentation/web-ui/components/app/app';
 import type { IRouter } from '@root/presentation/web-ui/router';
+import type { IUserInterface } from '@root/presentation/shared/types';
 
 import type { IContainer } from '@modules/serviceContainer/types';
-
-import { delay } from '@root/presentation/web-ui/utils/delay';
-
-import { App } from '@root/presentation/web-ui/components/app/app';
 
 interface IWindow extends Window {}
 interface IRoot extends Root {}
 
 interface IReactUIConstructorParams {
 	containerId: string;
-}
-
-export interface IUserInterface {
-	render(): Promise<void>;
-	dispose(): IUserInterface;
 }
 
 export class ReactUI implements IUserInterface {
@@ -46,7 +40,7 @@ export class ReactUI implements IUserInterface {
 		return this.#container;
 	}
 
-	public async render(): Promise<void> {
+	public async start(): Promise<void> {
 		if (!this.#container) {
 			this.create();
 		}
