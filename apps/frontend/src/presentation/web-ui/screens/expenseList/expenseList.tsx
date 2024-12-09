@@ -1,13 +1,14 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { dateFn } from '@modules/date/date';
-import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/expenseList';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
+
+import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/expenseList/expenseList';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 
 import { expenseListI18n } from '@root/presentation/web-ui/screens/expenseList/expenseList.i18n';
 
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
-
-import { useSearchParams } from 'react-router-dom';
 
 export function ExpenseListScreen() {
 	let intl = useIntl(expenseListI18n);

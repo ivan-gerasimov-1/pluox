@@ -7,7 +7,7 @@ import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useNavigation } from '@root/presentation/web-ui/hooks/navigation/useNavigation';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/react/useService';
@@ -24,7 +24,7 @@ import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
 import { categoryList } from '@domain/categories/constants';
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheetV2/actionSheet';
-import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer';
+import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';
 

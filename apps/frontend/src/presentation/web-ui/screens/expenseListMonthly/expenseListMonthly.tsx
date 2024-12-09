@@ -2,14 +2,13 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import type { TMonth } from '@domain/amount/useCases/types';
 
-import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
 import { dateFn } from '@modules/date/date';
 
+import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { expenseListMonthlyI18n } from '@root/presentation/web-ui/screens/expenseListMonthly/expenseListMonthly.i18n';
-
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
-import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer';
+import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';

@@ -4,10 +4,8 @@ import {
 	getTotalAmount,
 	QUERY_EXPENSES_TOTAL_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
-
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { moneySpentYearI18n } from '@root/presentation/web-ui/modules/expenses/MoneySpentYear/moneySpentYear.i18n';
-
 import { MoneyCard } from '@root/presentation/web-ui/modules/expenses/moneyCard/moneyCard';
 
 export function MoneySpentYear() {

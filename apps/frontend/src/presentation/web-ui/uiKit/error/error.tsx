@@ -1,5 +1,5 @@
 import { errorI18n } from '@root/presentation/web-ui/uiKit/error/error.i18n';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useNavigation } from '@root/presentation/web-ui/hooks/navigation/useNavigation';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 

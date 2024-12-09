@@ -1,12 +1,12 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth';
-import { MoneySpentYear } from '@root/presentation/web-ui/modules/expenses/MoneySpentYear';
+import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
+import { MoneySpentYear } from '@root/presentation/web-ui/modules/expenses/MoneySpentYear/MoneySpentYear';
 import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
-import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet';
+import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionSheet';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';

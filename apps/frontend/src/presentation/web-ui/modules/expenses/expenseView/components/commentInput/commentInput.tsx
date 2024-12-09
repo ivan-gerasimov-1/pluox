@@ -1,7 +1,9 @@
 import { componentInputI18n } from '@root/presentation/web-ui/modules/expenses/expenseView/components/commentInput/commentInput.i18n';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
-import styles from './commentInput.module.css';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
+
 import type { TComment } from '@domain/types';
+
+import styles from './commentInput.module.css';
 
 export type TCommentInputProps = {
 	value: TComment;

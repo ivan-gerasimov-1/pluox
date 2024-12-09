@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
+
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { expensesByCategoryI18n } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/expensesByCategory.i18n';
 
 import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
