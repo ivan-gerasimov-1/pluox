@@ -21,7 +21,7 @@ import type { IAmount } from '@domain/amount/types';
 import type { ITotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import type { ICategories } from '@domain/categories/types';
 import type { IExpenses } from '@domain/expenses/types';
-import type { IAppConfigStore } from '@modules/appConfig/appConfig.store';
+import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 
 export interface IContainer {

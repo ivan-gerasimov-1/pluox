@@ -23,7 +23,7 @@ import { categoriesFactory } from '@domain/categories/factory';
 import { Expenses } from '@domain/expenses/expenses';
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
-import { AppConfigStore } from '@modules/appConfig/appConfig.store';
+import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
