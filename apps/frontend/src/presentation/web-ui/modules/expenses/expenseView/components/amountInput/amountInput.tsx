@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {
 	validateKey,
 	validateNumber,
-} from '@modules/expenses/expenseView/components/amountInput/helpers';
+} from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/helpers';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { resolveService } from '@modules/serviceContainer/resolveService';
 

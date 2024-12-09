@@ -1,8 +1,8 @@
 import { categoryList } from '@domain/categories/constants';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 import styles from './categoryInput.module.css';
-import { useIntl } from '@modules/intl/useIntl';
-import { categoryInputI18n } from '@modules/expenses/expenseView/components/categoryInput/categoryInput.i18n';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
+import { categoryInputI18n } from '@root/presentation/web-ui/modules/expenses/expenseView/components/categoryInput/categoryInput.i18n';
 import type { TCategory } from '@domain/types';
 
 export type TCategoryInputProps = {

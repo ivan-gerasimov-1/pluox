@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { NumericKeyboard } from '@modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
+import { NumericKeyboard } from '@root/presentation/web-ui/modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { resolveService } from '@modules/serviceContainer/resolveService';

@@ -2,8 +2,8 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import type { TMonth } from '@domain/amount/useCases/types';
 
-import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
-import { useIntl } from '@modules/intl/useIntl';
+import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
 import { dateFn } from '@modules/date/date';
 
 import { expenseListMonthlyI18n } from '@root/presentation/web-ui/screens/expenseListMonthly/expenseListMonthly.i18n';

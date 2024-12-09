@@ -1,6 +1,6 @@
 import { dateFn } from '@modules/date/date';
-import { ExpenseList } from '@modules/expenses/expenseList';
-import { useIntl } from '@modules/intl/useIntl';
+import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/expenseList';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
 
 import { expenseListI18n } from '@root/presentation/web-ui/screens/expenseList/expenseList.i18n';
 

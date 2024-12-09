@@ -1,8 +1,8 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-import { MoneySpentMonth } from '@modules/expenses/MoneySpentMonth';
-import { MoneySpentYear } from '@modules/expenses/MoneySpentYear';
-import { AddExpense } from '@modules/expenses/addExpense/addExpense';
+import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth';
+import { MoneySpentYear } from '@root/presentation/web-ui/modules/expenses/MoneySpentYear';
+import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { EServiceToken } from '@modules/serviceContainer/types';
 

@@ -5,12 +5,12 @@ import { TMonth } from '@domain/amount/useCases/types';
 
 import { useService } from '@modules/serviceContainer/react/useService';
 import { useMonthName } from '@root/presentation/web-ui/hooks/useMonthName';
-import { ExpensesByCategory } from '@modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
+import { ExpensesByCategory } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
 import {
 	getMonthlyAmount,
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
-} from '@modules/expenses/expenses.query';
-import { MoneyCard } from '@modules/expenses/moneyCard/moneyCard';
+} from '@root/presentation/web-ui/modules/expenses/expenses.query';
+import { MoneyCard } from '@root/presentation/web-ui/modules/expenses/moneyCard/moneyCard';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';

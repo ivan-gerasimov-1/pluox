@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ECurrency } from '@core/infrastructure/currency/types';
-import { createDateViewValue } from '@modules/expenses/addExpense/helpers/createDateViewValue';
-import { ExpenseForm } from '@modules/expenses/expenseView/expenseForm';
+import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/addExpense/helpers/createDateViewValue';
+import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/expenseView/expenseForm';
 import {
 	addOne,
 	QUERY_EXPENSES_LIST,
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 	QUERY_EXPENSES_TOTAL_AMOUNT,
-} from '@modules/expenses/expenses.query';
+} from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import type { TExpenseCreateDTO } from '@domain/expense/types';
 
 export function AddExpense() {

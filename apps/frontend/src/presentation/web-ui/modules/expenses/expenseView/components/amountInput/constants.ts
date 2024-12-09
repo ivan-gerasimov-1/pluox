@@ -1,4 +1,4 @@
-import { EKey } from '@modules/expenses/expenseView/components/amountInput/enums';
+import { EKey } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/enums';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { resolveService } from '@modules/serviceContainer/resolveService';
 

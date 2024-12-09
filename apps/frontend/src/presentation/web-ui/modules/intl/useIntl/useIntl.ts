@@ -2,8 +2,11 @@ import { useMemo } from 'react';
 
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
-import { createScopedTranslateFunction } from '@modules/intl/useIntl/translateFunction';
-import { TBaseScope, TUseIntl } from '@modules/intl/useIntl/types';
+import { createScopedTranslateFunction } from '@root/presentation/web-ui/modules/intl/useIntl/translateFunction';
+import {
+	TBaseScope,
+	TUseIntl,
+} from '@root/presentation/web-ui/modules/intl/useIntl/types';
 import { EServiceToken } from '@modules/serviceContainer/types';
 import { useService } from '@modules/serviceContainer/react/useService';
 

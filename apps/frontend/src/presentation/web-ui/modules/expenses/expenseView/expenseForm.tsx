@@ -1,11 +1,11 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
 import type { TCategory, TComment, TISODateString } from '@domain/types';
-import { AmountInput } from '@modules/expenses/expenseView/components/amountInput/amountInput';
-import { CategoryPills } from '@modules/expenses/expenseView/components/categoryPills/categoryPills';
-import { CommentInput } from '@modules/expenses/expenseView/components/commentInput/commentInput';
-import { DateInput } from '@modules/expenses/expenseView/components/dateInput/dateInput';
-import { expenseFormI18n } from '@modules/expenses/expenseView/expenseForm.i18n';
-import { useIntl } from '@modules/intl/useIntl';
+import { AmountInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/amountInput';
+import { CategoryPills } from '@root/presentation/web-ui/modules/expenses/expenseView/components/categoryPills/categoryPills';
+import { CommentInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/commentInput/commentInput';
+import { DateInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/dateInput/dateInput';
+import { expenseFormI18n } from '@root/presentation/web-ui/modules/expenses/expenseView/expenseForm.i18n';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
 import { useReducer } from 'react';
 import styles from './expenseForm.module.css';
 

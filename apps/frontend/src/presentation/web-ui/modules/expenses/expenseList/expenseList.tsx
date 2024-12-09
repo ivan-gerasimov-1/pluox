@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { Id, TISODateString } from '@domain/types';
-import { groupExpenseListByDay } from '@modules/expenses/expenseList/helpers';
+import { groupExpenseListByDay } from '@root/presentation/web-ui/modules/expenses/expenseList/helpers';
 import { useService } from '@modules/serviceContainer/react/useService';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon';
 import {
@@ -20,7 +20,7 @@ import {
 	QUERY_EXPENSES_LIST,
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 	QUERY_EXPENSES_TOTAL_AMOUNT,
-} from '@modules/expenses/expenses.query';
+} from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@modules/serviceContainer/types';
 
 export type TExpenseListProps = {

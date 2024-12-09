@@ -1,5 +1,5 @@
 import { Error } from '@root/presentation/web-ui/uiKit/error/error';
-import { useIntl } from '@modules/intl/useIntl';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl';
 import { errorScreenI18n } from '@root/presentation/web-ui/screens/error/error.i18n';
 import styles from './error.module.css';
 

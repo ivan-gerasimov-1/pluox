@@ -2,7 +2,7 @@ import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import {
 	TBaseScope,
 	TScopedTranslateFunction,
-} from '@modules/intl/useIntl/types';
+} from '@root/presentation/web-ui/modules/intl/useIntl/types';
 
 export function createScopedTranslateFunction<TScope extends TBaseScope>(
 	scope: Record<ELocaleCode, TScope>,
