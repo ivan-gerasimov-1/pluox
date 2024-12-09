@@ -12,7 +12,6 @@ import {
 	Type,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
-import styles from './expenseList.module.css';
 import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
 import {
 	deleteOne,
@@ -22,6 +21,8 @@ import {
 	QUERY_EXPENSES_TOTAL_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@modules/serviceContainer/types';
+
+import styles from './expenseList.module.css';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;

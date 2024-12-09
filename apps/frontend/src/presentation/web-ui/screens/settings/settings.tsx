@@ -18,7 +18,6 @@ import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
 import { settingsI18n } from '@root/presentation/web-ui/screens/settings/settings.i18n';
 
-import styles from './settings.module.css';
 import { IconSelect } from '@root/presentation/web-ui/uiKit/iconSelect/iconSelect';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
@@ -28,12 +27,14 @@ import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/car
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';
 
+import styles from './settings.module.css';
+
 export function SettingsScreen() {
-	let intl = useIntl(settingsI18n);
 	let authService = useService(EServiceToken.AUTH_SERVICE);
-	let navigation = useNavigation();
 	let appConfigStore = useService(EServiceToken.APP_CONFIG_STORE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let intl = useIntl(settingsI18n);
+	let navigation = useNavigation();
 	let appConfigState = useStore(appConfigStore.get());
 
 	let [editBudget, setEditBudget] = useState<boolean>(false);

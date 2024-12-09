@@ -1,7 +1,5 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-import type { TMonth } from '@domain/amount/useCases/types';
-
 import { useService } from '@root/modules/serviceContainer/react/useService';
 import { EServiceToken } from '@root/modules/serviceContainer/types';
 
@@ -14,8 +12,6 @@ import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 
-const MONTH_LIST: TMonth[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
 export function ExpenseListMonthlyScreen() {
 	let intl = useIntl(expenseListMonthlyI18n);
 	let temporal = useService(EServiceToken.TEMPORAL);
@@ -25,7 +21,7 @@ export function ExpenseListMonthlyScreen() {
 			<Header title={intl.translate('title')} />
 
 			<CardContainer>
-				{MONTH_LIST.map((month) => {
+				{temporal.getMonthList().map((month) => {
 					let dateFrom = temporal.getStartOfMonth(month);
 					let dateTo = temporal.getEndOfMonth(month);
 

@@ -14,6 +14,10 @@ import type { ITemporal } from '@root/modules/temporal/types';
 import 'dayjs/locale/ru';
 
 export class Temporal implements ITemporal {
+	static readonly #MONTH_LIST: TMonth[] = [
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+	] as const;
+
 	readonly #dateFn = dayjs;
 
 	constructor(private readonly intl: IIntlService) {
@@ -50,5 +54,9 @@ export class Temporal implements ITemporal {
 
 	public getTimezone(): string {
 		return this.#dateFn.tz.guess();
+	}
+
+	public getMonthList(): TMonth[] {
+		return Temporal.#MONTH_LIST;
 	}
 }

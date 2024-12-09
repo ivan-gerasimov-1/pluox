@@ -1,4 +1,5 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
+
 import styles from './currencyInput.module.css';
 
 type TCurrencyInputProps = {
