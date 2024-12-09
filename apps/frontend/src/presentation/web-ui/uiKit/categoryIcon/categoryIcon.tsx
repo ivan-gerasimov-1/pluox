@@ -1,4 +1,5 @@
 import { getCategoryIcon } from '@domain/categories/getCategoryIcon';
+
 import styles from './categoryIcon.module.css';
 
 export type TCategoryIconProps = {

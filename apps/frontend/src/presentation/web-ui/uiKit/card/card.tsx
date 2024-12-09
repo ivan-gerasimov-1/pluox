@@ -1,5 +1,7 @@
-import { cls } from '@root/presentation/web-ui/utils/classnames';
 import React from 'react';
+
+import { cls } from '@root/presentation/web-ui/utils/classnames';
+
 import styles from './card.module.css';
 
 type TCardProps = {

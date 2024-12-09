@@ -1,12 +1,15 @@
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { useRef, useState } from 'react';
 import type React from 'react';
-import styles from './actionSheet.module.css';
+import { CSSTransition } from 'react-transition-group';
+
+import { cls } from '@root/presentation/web-ui/utils/classnames';
+
 import { useActionSheetContainer } from '@root/presentation/web-ui/uiKit/actionSheet/hooks/useActionSheetContainer';
 import { Backdrop } from '@root/presentation/web-ui/uiKit/actionSheet/components/backdrop/Backdrop';
-import { useRef, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
-import actionSheetContainerStyles from './actionSheetContainer.module.css';
 import { useScrollLock } from '@root/presentation/web-ui/uiKit/hooks/useScrollLock';
+
+import styles from './actionSheet.module.css';
+import actionSheetContainerStyles from './actionSheetContainer.module.css';
 
 export type TActionSheetProps = {
 	isOpen?: boolean;

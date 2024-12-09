@@ -1,9 +1,12 @@
+import { useMemo } from 'react';
+
 import {
 	EIconSize,
 	iconSizeToPx,
 } from '@root/presentation/web-ui/uiKit/icon/iconSize';
-import { useMemo } from 'react';
+
 import { getIcon, EIconName } from './icons';
+
 import styles from './icon.module.css';
 
 type TIconProps = {

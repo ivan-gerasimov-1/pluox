@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
+
 import styles from './backdrop.module.css';
 
 export type TBackdropProps = {

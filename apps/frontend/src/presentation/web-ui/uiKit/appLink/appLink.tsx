@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
-import styles from './appLink.module.css';
+
 import { cls } from '@root/presentation/web-ui/utils/classnames';
+
+import styles from './appLink.module.css';
 
 type TNavigableProps = {
 	to: string;

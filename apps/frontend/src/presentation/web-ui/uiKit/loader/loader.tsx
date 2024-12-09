@@ -1,4 +1,5 @@
 import { cls } from '@root/presentation/web-ui/utils/classnames';
+
 import styles from './loader.module.css';
 
 type TLoaderProps = {

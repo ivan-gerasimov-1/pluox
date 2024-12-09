@@ -1,7 +1,8 @@
-import { errorI18n } from '@root/presentation/web-ui/uiKit/error/error.i18n';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+
+import { errorI18n } from '@root/presentation/web-ui/uiKit/error/error.i18n';
 
 import styles from './error.module.css';
 
