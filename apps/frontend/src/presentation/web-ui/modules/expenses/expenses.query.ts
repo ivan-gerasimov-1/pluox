@@ -3,6 +3,7 @@ import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense
 import type {
 	TExpense,
 	TExpenseCreateDTO,
+	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TISODateString } from '@domain/types';
 
@@ -46,6 +47,13 @@ export function addOne(payload: TExpenseCreateDTO): void {
 				.add(expense)
 				.get(),
 		);
+}
+
+/**
+ * @todo Implement
+ */
+export function updateOne(payload: TExpenseUpdateDTO): void {
+	throw new Error('Not implemented');
 }
 
 /**

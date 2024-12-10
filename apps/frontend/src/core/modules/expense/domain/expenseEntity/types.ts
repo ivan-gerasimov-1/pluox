@@ -29,3 +29,11 @@ export type TExpenseCreateDTO = {
 	category: TCategory;
 	date?: TISODateString;
 };
+
+export type TExpenseUpdateDTO = {
+	amount?: number;
+	currency?: ECurrency;
+	comment?: TComment;
+	category?: TCategory;
+	date?: TISODateString;
+};
