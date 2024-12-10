@@ -7,8 +7,8 @@ import {
 	TBaseScope,
 	TUseIntl,
 } from '@root/presentation/web-ui/modules/intl/useIntl/types';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
 export function useIntl<TScope extends TBaseScope>(
 	scope: Record<ELocaleCode, TScope>,

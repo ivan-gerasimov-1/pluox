@@ -3,8 +3,8 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
 import { MoneySpentYear } from '@root/presentation/web-ui/modules/expenses/MoneySpentYear/MoneySpentYear';
 import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
-import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionSheet';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';

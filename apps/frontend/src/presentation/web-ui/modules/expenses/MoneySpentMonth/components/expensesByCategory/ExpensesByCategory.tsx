@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';

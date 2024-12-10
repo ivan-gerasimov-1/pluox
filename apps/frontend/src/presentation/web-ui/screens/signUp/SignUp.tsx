@@ -1,5 +1,5 @@
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { usePending } from '@root/presentation/web-ui/hooks/usePending';
 

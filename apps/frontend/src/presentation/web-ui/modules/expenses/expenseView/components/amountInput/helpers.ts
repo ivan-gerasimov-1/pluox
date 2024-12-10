@@ -1,5 +1,5 @@
 import { getAllowedSymbols } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/constants';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 export function validateNumber(value: string): boolean {

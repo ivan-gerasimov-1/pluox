@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { NumericKeyboard } from '@root/presentation/web-ui/modules/expenses/expenseView/components/numericKeyboard/numericKeyboard';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 export type TAmountInputProps = {

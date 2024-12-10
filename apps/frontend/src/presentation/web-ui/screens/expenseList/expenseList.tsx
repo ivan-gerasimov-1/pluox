@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/expenseList/expenseList';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';

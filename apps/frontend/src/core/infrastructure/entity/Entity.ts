@@ -2,7 +2,7 @@ import { type IEntity } from '@core/infrastructure/entity/types';
 
 import type { TISODateString, Id } from '@domain/types';
 
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {

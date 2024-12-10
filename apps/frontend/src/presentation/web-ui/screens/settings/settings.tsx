@@ -9,8 +9,8 @@ import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
