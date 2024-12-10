@@ -46,7 +46,8 @@
 		"vite": "6.0.3",
 		"vite-plugin-checker": "0.8.0",
 		"vite-plugin-html": "3.2.2",
-		"vite-plugin-svgr": "4.3.0"
+		"vite-plugin-svgr": "4.3.0",
+		"vite-tsconfig-paths": "5.1.4"
 	},
 	"msw": {
 		"workerDirectory": [

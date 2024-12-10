@@ -1,11 +1,10 @@
-import path from 'path';
-
 import { defineConfig, loadEnv } from 'vite';
 
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import postcssNested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { checker } from 'vite-plugin-checker';
@@ -36,6 +35,7 @@ export default defineConfig(({ mode }) => {
 			},
 			enableBuild: true,
 		}),
+		tsconfigPaths(),
 	];
 
 	if (env.BUNDLE_ANALYZER === 'on') {
@@ -52,19 +52,6 @@ export default defineConfig(({ mode }) => {
 
 		define: {
 			'process.env.NODE_ENV': JSON.stringify(mode),
-		},
-
-		resolve: {
-			alias: {
-				'@domain': path.resolve(__dirname, './src/core/domain'),
-				'@core': path.resolve(__dirname, './src/core'),
-				'@components': path.resolve(__dirname, './src/components'),
-				'@modules': path.resolve(__dirname, './src/modules'),
-				'@screens': path.resolve(__dirname, './src/screens'),
-				'@uiKit': path.resolve(__dirname, './src/uiKit'),
-				'@utils': path.resolve(__dirname, './src/utils'),
-				'@root': path.resolve(__dirname, './src'),
-			},
 		},
 
 		optimizeDeps: {
