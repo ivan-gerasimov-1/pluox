@@ -1,10 +1,10 @@
-import { useState } from 'react';
-
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 import { TMonth } from '@domain/amount/useCases/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
+
+import { useToggle } from '@root/presentation/web-ui/hooks/useToggle';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { expensesByCategoryI18n } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/expensesByCategory.i18n';
@@ -20,7 +20,7 @@ export type TExpensesByCategory = {
 
 export function ExpensesByCategory(props: TExpensesByCategory) {
 	let intl = useIntl(expensesByCategoryI18n);
-	let [showAll, setShowAll] = useState<boolean>(false);
+	let { state: showAll, toggle: toggleShowAll } = useToggle(false);
 
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let expensesService = useService(EServiceToken.EXPENSES);
@@ -66,7 +66,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 					onClick={(event) => {
 						event.preventDefault();
 
-						setShowAll(!showAll);
+						toggleShowAll();
 					}}
 				>
 					{showAll
