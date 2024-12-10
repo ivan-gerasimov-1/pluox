@@ -7,4 +7,5 @@ export interface ITemporal {
 	getEndOfMonth(month?: TMonth): TISODateString;
 	getTimezone(): string;
 	getMonthList(): TMonth[];
+	getISODateString(): TISODateString;
 }

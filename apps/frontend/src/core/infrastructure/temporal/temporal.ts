@@ -59,4 +59,8 @@ export class Temporal implements ITemporal {
 	public getMonthList(): TMonth[] {
 		return Temporal.#MONTH_LIST;
 	}
+
+	public getISODateString(): TISODateString {
+		return this.#dateFn().toISOString();
+	}
 }
