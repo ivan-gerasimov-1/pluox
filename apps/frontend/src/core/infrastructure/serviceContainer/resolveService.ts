@@ -1,8 +1,6 @@
 import { getGlobalContainer } from '@root/diContainer';
 
-import { IServiceMap } from '@root/core/infrastructure/serviceContainer/types';
-
-export type { IServiceMap };
+import type { IServiceMap } from '@root/core/infrastructure/serviceContainer/types';
 
 export function resolveService<T extends keyof IServiceMap = keyof IServiceMap>(
 	serviceId: T,
