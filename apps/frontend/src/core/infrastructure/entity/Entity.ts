@@ -13,7 +13,9 @@ export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 
 	constructor() {
 		let idGenerator = resolveService(EServiceToken.ID_GENERATOR);
-		let currentDate = new Date().toISOString();
+		let temporal = resolveService(EServiceToken.TEMPORAL);
+
+		let currentDate = temporal.getISODateString();
 
 		this.#id = idGenerator.getId();
 
