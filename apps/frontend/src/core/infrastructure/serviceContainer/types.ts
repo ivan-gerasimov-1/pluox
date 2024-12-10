@@ -23,7 +23,7 @@ import type { ICategories } from '@domain/categories/types';
 import type { IExpenses } from '@domain/expenses/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
-import type { ITemporal } from '@root/modules/temporal/types';
+import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;

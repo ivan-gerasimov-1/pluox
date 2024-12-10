@@ -35,7 +35,7 @@ import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRate
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { TotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import { Amount } from '@domain/amount/Amount';
-import { Temporal } from '@root/modules/temporal/temporal';
+import { Temporal } from '@root/core/infrastructure/temporal/temporal';
 
 let globalContainer: IContainer;
 

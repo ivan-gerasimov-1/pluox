@@ -6,7 +6,7 @@ import objectSupport from 'dayjs/plugin/objectSupport';
 import type { TISODateString } from '@root/core/domain/types';
 import type { TMonth } from '@root/core/domain/amount/useCases/types';
 import type { IIntlService } from '@root/core/infrastructure/intl/intlService/types';
-import type { ITemporal } from '@root/modules/temporal/types';
+import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 
 /**
  * @todo Load additional locales in IntlService
