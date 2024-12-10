@@ -8,6 +8,7 @@ import postcssNested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import { checker } from 'vite-plugin-checker';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
@@ -27,6 +28,13 @@ export default defineConfig(({ mode }) => {
 		}),
 		createHtmlPlugin({
 			minify: !isDevelopment,
+		}),
+		checker({
+			typescript: true,
+			overlay: {
+				initialIsOpen: true,
+			},
+			enableBuild: true,
 		}),
 	];
 

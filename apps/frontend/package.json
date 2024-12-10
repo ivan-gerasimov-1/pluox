@@ -6,8 +6,8 @@
 		"analyze": "npm run analyze@prod",
 		"analyze@prod": "cross-env BUNDLE_ANALYZER='on' vite build --mode production",
 		"build": "npm run build@production",
-		"build@development": "tsc && vite build --mode development",
-		"build@production": "tsc && vite build --mode production",
+		"build@development": "vite build --mode development",
+		"build@production": "vite build --mode production",
 		"preview": "vite preview",
 		"start": "vite --mode development"
 	},
@@ -44,6 +44,7 @@
 		"rollup-plugin-visualizer": "5.12.0",
 		"typescript": "5.7.2",
 		"vite": "6.0.3",
+		"vite-plugin-checker": "0.8.0",
 		"vite-plugin-html": "3.2.2",
 		"vite-plugin-svgr": "4.3.0"
 	},
