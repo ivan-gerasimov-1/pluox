@@ -1,21 +1,18 @@
-import { Entity } from '@core/infrastructure/entity/Entity';
 import type { TCategoryDTO } from '@domain/categories/types';
 import type { ICategory } from '@domain/category/types';
-import type { Id } from '@domain/types';
+import type { Id } from '@root/core/domain/types';
 
 /**
- * @todo Convert to ValueObject
+ * @todo Extend from ValueObject
  */
-export class Category extends Entity<TCategoryDTO> implements ICategory {
+export class Category implements ICategory {
+	#id: Id;
 	#name: string;
 	#icon: string;
 	#weight: number;
 
 	private constructor(id: Id, name: string, icon: string, weight: number) {
-		super();
-
-		this.id = id;
-
+		this.#id = id;
 		this.#name = name;
 		this.#icon = icon;
 		this.#weight = weight;
@@ -28,6 +25,10 @@ export class Category extends Entity<TCategoryDTO> implements ICategory {
 		weight: number,
 	): ICategory {
 		return new Category(id, name, icon, weight);
+	}
+
+	public get id(): string {
+		return this.#id;
 	}
 
 	public increaseWeight(): ICategory {

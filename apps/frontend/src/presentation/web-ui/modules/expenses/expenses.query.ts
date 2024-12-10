@@ -22,13 +22,21 @@ export function addOne(payload: TExpenseCreateDTO): void {
 	let expenses = resolveService(EServiceToken.EXPENSES);
 	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
 	let temporal = resolveService(EServiceToken.TEMPORAL);
+	let idGenerator = resolveService(EServiceToken.ID_GENERATOR);
+
+	let id = idGenerator.getId();
+	let currentDate = temporal.getISODateString();
+	let timezone = temporal.getTimezone();
 
 	let expense = Expense.create(
+		id,
 		payload.amount,
 		payload.currency,
 		payload.comment,
 		payload.category,
-		temporal.getTimezone(),
+		timezone,
+		currentDate,
+		currentDate,
 		payload.date,
 	);
 

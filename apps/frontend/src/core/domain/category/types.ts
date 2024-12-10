@@ -1,7 +1,10 @@
-import type { IEntity } from '@core/infrastructure/entity/types';
-import type { TCategoryDTO } from '@domain/categories/types';
+import type { TCategoryDTO } from '@root/core/domain/categories/types';
 
-export interface ICategory extends IEntity<TCategoryDTO> {
+export interface ICategory {
+	readonly id: string;
+
 	increaseWeight(): ICategory;
 	decreaseWeight(): ICategory;
+
+	toObject(): TCategoryDTO;
 }

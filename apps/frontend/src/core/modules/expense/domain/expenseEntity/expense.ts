@@ -4,7 +4,7 @@ import type {
 	IExpense,
 	TExpense,
 } from '@root/core/modules/expense/domain/expenseEntity/types';
-import type { TCategory, TComment, TISODateString } from '@domain/types';
+import type { Id, TCategory, TComment, TISODateString } from '@domain/types';
 
 export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #amount: number;
@@ -15,32 +15,48 @@ export class Expense extends Entity<TExpense> implements IExpense {
 	readonly #timezone: string;
 
 	private constructor(
+		id: Id,
 		amount: number,
 		currency: ECurrency,
 		comment: TComment,
 		category: TCategory,
 		timezone: string,
+		createdAt: TISODateString,
+		modifiedAt?: TISODateString,
 		date?: TISODateString,
 	) {
-		super();
+		super(id, createdAt, modifiedAt);
 
 		this.#amount = amount;
 		this.#currency = currency;
 		this.#comment = comment;
 		this.#category = category;
-		this.#date = date || this.createdAt;
+		this.#date = date ?? this.createdAt;
 		this.#timezone = timezone;
 	}
 
 	public static create(
+		id: Id,
 		amount: number,
 		currency: ECurrency,
 		comment: TComment,
 		category: TCategory = null,
 		timezone: string,
+		createdAt: TISODateString,
+		modifiedAt?: TISODateString,
 		date?: TISODateString,
 	): IExpense {
-		return new Expense(amount, currency, comment, category, timezone, date);
+		return new Expense(
+			id,
+			amount,
+			currency,
+			comment,
+			category,
+			timezone,
+			createdAt,
+			modifiedAt,
+			date,
+		);
 	}
 
 	public toObject(): TExpense {
