@@ -3,6 +3,9 @@ import type { TCategoryDTO } from '@domain/categories/types';
 import type { ICategory } from '@domain/category/types';
 import type { Id } from '@domain/types';
 
+/**
+ * @todo Convert to ValueObject
+ */
 export class Category extends Entity<TCategoryDTO> implements ICategory {
 	#name: string;
 	#icon: string;
