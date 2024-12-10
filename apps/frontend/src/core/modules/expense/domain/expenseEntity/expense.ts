@@ -1,6 +1,9 @@
 import type { ECurrency } from '@core/infrastructure/currency/types';
 import { Entity } from '@core/infrastructure/entity/Entity';
-import type { IExpense, TExpense } from '@domain/expense/types';
+import type {
+	IExpense,
+	TExpense,
+} from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { TCategory, TComment, TISODateString } from '@domain/types';
 
 export class Expense extends Entity<TExpense> implements IExpense {

@@ -1,5 +1,8 @@
 import type { TMonth } from '@domain/amount/useCases/types';
-import type { IExpense, TExpense } from '@domain/expense/types';
+import type {
+	IExpense,
+	TExpense,
+} from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TISODateString } from '@domain/types';
 
 export interface IExpenses {

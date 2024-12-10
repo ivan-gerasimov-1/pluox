@@ -1,6 +1,9 @@
 import type { TMonth } from '@domain/amount/useCases/types';
-import { Expense } from '@domain/expense/expense';
-import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
+import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
+import type {
+	TExpense,
+	TExpenseCreateDTO,
+} from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TISODateString } from '@domain/types';
 
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';

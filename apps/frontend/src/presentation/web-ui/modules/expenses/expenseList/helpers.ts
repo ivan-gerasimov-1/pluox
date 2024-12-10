@@ -1,4 +1,4 @@
-import type { TExpense } from '@domain/expense/types';
+import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 
 export function groupExpenseListByDay(expenseList: TExpense[]): Array<{
 	date: string;

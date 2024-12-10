@@ -3,7 +3,10 @@ import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyC
 
 import type { TMonth } from '@domain/amount/useCases/types';
 import type { ICategories } from '@domain/categories/types';
-import type { IExpense, TExpense } from '@domain/expense/types';
+import type {
+	IExpense,
+	TExpense,
+} from '@root/core/modules/expense/domain/expenseEntity/types';
 import { ExpenseNotFoundError } from '@domain/expenses/errors';
 import type { IExpenses, TExpenses } from '@domain/expenses/types';
 import type { Id, TISODateString } from '@domain/types';

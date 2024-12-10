@@ -1,7 +1,7 @@
 import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
 import type { IExpensesStorage } from '@core/infrastructure/expensesStorage/types';
 
-import type { TExpense } from '@domain/expense/types';
+import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id } from '@domain/types';
 
 export class ExpensesStorage
