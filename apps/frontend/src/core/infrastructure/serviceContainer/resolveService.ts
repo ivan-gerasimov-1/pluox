@@ -5,9 +5,7 @@ import type { IServiceMap } from '@root/core/infrastructure/serviceContainer/typ
 export function resolveService<T extends keyof IServiceMap = keyof IServiceMap>(
 	serviceId: T,
 ): IServiceMap[T] {
-	const service = getGlobalContainer().get(
-		serviceId,
-	) as unknown as IServiceMap[T];
+	const service = getGlobalContainer().get(serviceId);
 
 	return service;
 }
