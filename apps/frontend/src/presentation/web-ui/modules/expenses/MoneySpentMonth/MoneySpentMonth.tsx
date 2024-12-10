@@ -3,14 +3,14 @@ import { useStore } from 'zustand';
 
 import { TMonth } from '@domain/amount/useCases/types';
 
-import { useService } from '@modules/serviceContainer/react/useService';
+import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
 import { ExpensesByCategory } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
 import {
 	getMonthlyAmount,
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { MoneyCard } from '@root/presentation/web-ui/modules/expenses/moneyCard/moneyCard';
-import { EServiceToken } from '@modules/serviceContainer/types';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';
 

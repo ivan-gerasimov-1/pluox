@@ -10,11 +10,11 @@ import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
-import { Container } from '@modules/serviceContainer/container';
+import { Container } from '@root/core/infrastructure/serviceContainer/container';
 import {
 	EServiceToken,
 	type IContainer,
-} from '@modules/serviceContainer/types';
+} from '@root/core/infrastructure/serviceContainer/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';

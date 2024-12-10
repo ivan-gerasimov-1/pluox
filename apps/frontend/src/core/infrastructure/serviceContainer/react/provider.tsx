@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import type { IContainer } from '@modules/serviceContainer/types';
+import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 
 export let ContainerContext = createContext<IContainer | null>(null);
 

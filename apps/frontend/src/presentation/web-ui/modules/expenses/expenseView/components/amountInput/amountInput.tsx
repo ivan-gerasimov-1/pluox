@@ -5,8 +5,8 @@ import {
 	validateKey,
 	validateNumber,
 } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/helpers';
-import { EServiceToken } from '@modules/serviceContainer/types';
-import { resolveService } from '@modules/serviceContainer/resolveService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 import styles from './amountInput.module.css';
 

@@ -3,8 +3,8 @@ import { Expense } from '@domain/expense/expense';
 import type { TExpense, TExpenseCreateDTO } from '@domain/expense/types';
 import type { Id, TISODateString } from '@domain/types';
 
-import { EServiceToken } from '@modules/serviceContainer/types';
-import { resolveService } from '@modules/serviceContainer/resolveService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 export const QUERY_EXPENSES_LIST = Symbol('expenseList');
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');

@@ -1,6 +1,6 @@
 import { EKey } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/enums';
-import { EServiceToken } from '@modules/serviceContainer/types';
-import { resolveService } from '@modules/serviceContainer/resolveService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 export const getAllowedSymbols = () => {
 	let intlService = resolveService(EServiceToken.INTL_SERVICE);

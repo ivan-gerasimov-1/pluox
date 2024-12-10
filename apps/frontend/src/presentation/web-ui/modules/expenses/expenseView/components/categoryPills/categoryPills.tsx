@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import { useService } from '@modules/serviceContainer/react/useService';
-import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 import styles from './categoryPills.module.css';
 

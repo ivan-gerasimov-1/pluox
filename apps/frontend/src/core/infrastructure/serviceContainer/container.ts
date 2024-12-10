@@ -4,7 +4,7 @@ import {
 	type ServiceToken,
 	type IContainer,
 	ServiceScope,
-} from '@modules/serviceContainer/types';
+} from '@root/core/infrastructure/serviceContainer/types';
 
 export class Container implements IContainer {
 	private readonly providers = new Map<ServiceToken, ServiceProvider>();

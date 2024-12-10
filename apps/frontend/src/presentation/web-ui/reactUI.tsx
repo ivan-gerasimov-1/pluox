@@ -6,7 +6,7 @@ import { App } from '@root/presentation/web-ui/components/app/app';
 import type { IRouter } from '@root/presentation/web-ui/router';
 import type { IUserInterface } from '@root/presentation/shared/types';
 
-import type { IContainer } from '@modules/serviceContainer/types';
+import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 
 interface IWindow extends Window {}
 interface IRoot extends Root {}

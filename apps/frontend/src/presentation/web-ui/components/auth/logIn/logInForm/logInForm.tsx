@@ -1,8 +1,8 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { useService } from '@modules/serviceContainer/react/useService';
-import { EServiceToken } from '@modules/serviceContainer/types';
+import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 import { usePending } from '@root/presentation/web-ui/hooks/usePending';
 

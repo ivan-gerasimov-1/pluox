@@ -1,7 +1,7 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-import { useService } from '@root/modules/serviceContainer/react/useService';
-import { EServiceToken } from '@root/modules/serviceContainer/types';
+import { useService } from '@root/core/infrastructure/serviceContainer/react/useService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';

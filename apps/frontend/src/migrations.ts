@@ -1,7 +1,7 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
 
-import { resolveService } from '@modules/serviceContainer/resolveService';
-import { EServiceToken } from '@modules/serviceContainer/types';
+import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 export function runMigrations() {
 	addThaiBahtCurrencyToStoredAppConfig();

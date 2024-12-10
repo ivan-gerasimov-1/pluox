@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import type { IContainer } from '@root/modules/serviceContainer/types';
+import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 import type { IUserInterface } from '@root/presentation/shared/types';
 import { ReactUI } from '@root/presentation/web-ui/reactUI';
 import { createAppRouter } from '@root/presentation/web-ui/router';

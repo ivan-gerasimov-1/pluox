@@ -9,8 +9,8 @@ import { ECurrency } from '@core/infrastructure/currency/types';
 import {
 	EServiceToken,
 	type IContainer,
-} from '@modules/serviceContainer/types';
-import { resolveService } from '@modules/serviceContainer/resolveService';
+} from '@root/core/infrastructure/serviceContainer/types';
+import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 async function main(): Promise<void> {
 	let diContainer = createDIContainer({

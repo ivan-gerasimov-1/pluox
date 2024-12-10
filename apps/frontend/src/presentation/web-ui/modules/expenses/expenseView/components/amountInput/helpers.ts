@@ -1,6 +1,6 @@
 import { getAllowedSymbols } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/constants';
-import { EServiceToken } from '@modules/serviceContainer/types';
-import { resolveService } from '@modules/serviceContainer/resolveService';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 export function validateNumber(value: string): boolean {
 	if (RegExp('[A-z]+').test(value)) {

@@ -1,6 +1,6 @@
 import { getGlobalContainer } from '@root/diContainer';
 
-import { IServiceMap } from '@modules/serviceContainer/types';
+import { IServiceMap } from '@root/core/infrastructure/serviceContainer/types';
 
 export type { IServiceMap };
 
