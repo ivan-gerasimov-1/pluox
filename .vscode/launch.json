@@ -8,24 +8,32 @@
 			"name": "Web App",
 			"type": "node-terminal",
 			"command": "npm --workspace=@savee/frontend start",
-			"request": "launch"
+			"request": "launch",
+			"cwd": "${workspaceFolder}/apps/frontend",
+			"sourceMaps": true,
+			"skipFiles": ["<node_internals>/**"]
 		},
 		{
 			"name": "API",
 			"command": "npm --workspace=@savee/backend-lite start",
 			"request": "launch",
-			"type": "node-terminal"
+			"type": "node-terminal",
+			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"sourceMaps": true,
+			"skipFiles": ["<node_internals>/**"]
 		}
 	],
 	"compounds": [
 		{
 			"name": "App",
 			"configurations": ["Web App", "API"],
-			"stopAll": false,
+			"stopAll": true,
 			"presentation": {
 				"hidden": false,
 				"group": "App",
-				"order": 1
+				"order": 1,
+				"echo": true,
+				"reveal": "always"
 			}
 		}
 	]
