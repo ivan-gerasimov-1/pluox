@@ -82,9 +82,13 @@ export class ExpenseRepository implements IExpenseRepository {
 
 	public delete(id: Id): this {
 		let expense = this.get(id);
-		let expenses = this.dataSource.getItems();
 
-		Reflect.deleteProperty(expenses, id);
+		if (!expense) {
+			throw new Error('Expense does not exist');
+		}
+
+		this.dataSource //
+			.deleteOne(id);
 
 		/**
 		 * @todo Move to Application Layer
@@ -92,9 +96,6 @@ export class ExpenseRepository implements IExpenseRepository {
 		if (expense.category) {
 			this.categories.decreaseWeight(expense.category);
 		}
-
-		this.dataSource //
-			.setItems(expenses);
 
 		return this;
 	}
