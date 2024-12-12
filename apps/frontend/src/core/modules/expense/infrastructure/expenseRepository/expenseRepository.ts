@@ -83,10 +83,6 @@ export class ExpenseRepository implements IExpenseRepository {
 	public delete(id: Id): this {
 		let expense = this.get(id);
 
-		if (!expense) {
-			throw new Error('Expense does not exist');
-		}
-
 		this.dataSource //
 			.deleteOne(id);
 
