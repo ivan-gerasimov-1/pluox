@@ -111,6 +111,9 @@ export class ExpenseRepository implements IExpenseRepository {
 		return this;
 	}
 
+	/**
+	 * @todo Move to UseCase
+	 */
 	public getMonthlyExpensesByCategory(month: TMonth): {
 		id: Id;
 		total: number;
