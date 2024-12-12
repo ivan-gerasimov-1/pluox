@@ -185,12 +185,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_REPOSITORY,
 				useClass: ExpenseRepository,
-				deps: [
-					EServiceToken.APP_CONFIG,
-					EServiceToken.CATEGORIES,
-					EServiceToken.CURRENCY_CONVERTER,
-					EServiceToken.EXPENSE_DATASOURCE,
-				],
+				deps: [EServiceToken.CATEGORIES, EServiceToken.EXPENSE_DATASOURCE],
 			},
 			{
 				token: EServiceToken.EXPENSE_DATASOURCE,

@@ -1,4 +1,3 @@
-import type { TMonth } from '@root/core/domain/amount/useCases/types';
 import type { TExpenses } from '@root/core/domain/expenses/types';
 import type { Id, TISODateString } from '@root/core/domain/types';
 import type {
@@ -19,11 +18,4 @@ export interface IExpenseRepository {
 	}): TExpense[];
 
 	delete(id: Id): IExpenseRepository;
-
-	/**
-	 * @todo Move to UseCase
-	 */
-	getMonthlyExpensesByCategory(
-		month: TMonth,
-	): { id: Id; total: number; percentage: number }[];
 }

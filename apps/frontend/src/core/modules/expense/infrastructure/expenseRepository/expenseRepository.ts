@@ -1,9 +1,6 @@
-import type { TMonth } from '@root/core/domain/amount/useCases/types';
 import type { ICategories } from '@root/core/domain/categories/types';
 import type { TExpenses } from '@root/core/domain/expenses/types';
 import type { Id, TISODateString } from '@root/core/domain/types';
-import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
-import type { ICurrencyConverter } from '@root/core/infrastructure/currency/currencyConverter/types';
 import type {
 	IExpense,
 	TExpense,
@@ -15,9 +12,7 @@ import { ExpenseNotFoundError } from '@root/core/modules/expense/infrastructure/
 
 export class ExpenseRepository implements IExpenseRepository {
 	constructor(
-		private readonly appConfig: IAppConfig,
 		private readonly categories: ICategories,
-		private readonly currencyConverter: ICurrencyConverter,
 		private readonly dataSource: IExpenseDataSource,
 	) {}
 
@@ -94,67 +89,6 @@ export class ExpenseRepository implements IExpenseRepository {
 		}
 
 		return this;
-	}
-
-	/**
-	 * @todo Move to UseCase
-	 */
-	public getMonthlyExpensesByCategory(month: TMonth): {
-		id: Id;
-		total: number;
-		percentage: number;
-	}[] {
-		let currency = this.appConfig.currency;
-
-		let total = 0;
-
-		let expensesByCategory: Record<
-			Id,
-			{
-				id: Id;
-				total: number;
-				percentage: number;
-			}
-		> = {};
-
-		const startDate = new Date(new Date(new Date().getFullYear(), month, 1));
-		const endDate = new Date(new Date(new Date().getFullYear(), month, 30));
-
-		let expenses = this.list({
-			dateFrom: startDate.toISOString(),
-			dateTo: endDate.toISOString(),
-		});
-
-		for (let expense of expenses) {
-			let category = expense.category || '—';
-
-			if (!expensesByCategory[category]) {
-				expensesByCategory[category] = {
-					id: category,
-					total: 0,
-					percentage: 0,
-				};
-			}
-
-			expensesByCategory[category].total += this.currencyConverter.convert(
-				expense.amount,
-				expense.currency,
-				currency,
-			);
-		}
-
-		for (let category in expensesByCategory) {
-			total += expensesByCategory[category].total;
-		}
-
-		for (let category in expensesByCategory) {
-			expensesByCategory[category].percentage =
-				(expensesByCategory[category].total / total) * 100;
-		}
-
-		let result = Object.values(expensesByCategory);
-
-		return result.sort((a, b) => b.total - a.total);
 	}
 
 	private getAll(): TExpenses {
