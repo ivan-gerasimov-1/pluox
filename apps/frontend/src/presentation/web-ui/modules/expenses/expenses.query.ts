@@ -1,5 +1,4 @@
 import type { TMonth } from '@domain/amount/useCases/types';
-import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
 import type {
 	TExpense,
 	TExpenseCreateDTO,
@@ -15,58 +14,28 @@ export const QUERY_EXPENSES_LIST = Symbol('expenseList');
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');
 export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
 
-/**
- * @todo
- * 1. Encapsulate logic in a separate class
- */
 export function addOne(payload: TExpenseCreateDTO): void {
-	let expenses = resolveService(EServiceToken.EXPENSES);
-	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
-	let temporal = resolveService(EServiceToken.TEMPORAL);
-	let idGenerator = resolveService(EServiceToken.ID_GENERATOR);
-
-	let id = idGenerator.getId();
-	let currentDate = temporal.getISODateString();
-	let timezone = temporal.getTimezone();
-
-	let expense = Expense.create(
-		id,
-		payload.amount,
-		payload.currency,
-		payload.comment,
-		payload.category,
-		timezone,
-		currentDate,
-		currentDate,
-		payload.date,
+	let createExpenseUseCase = resolveService(
+		EServiceToken.EXPENSE_CREATE_USE_CASE,
 	);
 
-	expensesStorage //
-		.setItems(
-			expenses //
-				.add(expense)
-				.get(),
-		);
+	createExpenseUseCase.execute(payload);
 }
 
-/**
- * @todo Implement
- */
 export function updateOne(payload: TExpenseUpdateDTO): void {
-	throw new Error('Not implemented');
+	let updateExpenseUseCase = resolveService(
+		EServiceToken.EXPENSE_UPDATE_USE_CASE,
+	);
+
+	updateExpenseUseCase.execute(payload);
 }
 
-/**
- * @todo Encapsulate logic in a separate class
- */
 export function deleteOne(id: Id): void {
-	let expensesService = resolveService(EServiceToken.EXPENSES);
-	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
+	let deleteExpenseUseCase = resolveService(
+		EServiceToken.EXPENSE_DELETE_USE_CASE,
+	);
 
-	let expenses = expensesService.delete(id).get();
-
-	expensesStorage //
-		.setItems(expenses);
+	deleteExpenseUseCase.execute(id);
 }
 
 export function getOne(id: Id): TExpense {

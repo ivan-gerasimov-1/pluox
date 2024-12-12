@@ -24,6 +24,9 @@ import type { IExpenses } from '@domain/expenses/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
+import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
+import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
+import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -78,6 +81,9 @@ export enum EServiceToken {
 	TOTAL_AMOUNT_USE_CASE = 'TotalAmountUseCase',
 	AMOUNT = 'Amount',
 	TEMPORAL = 'Temporal',
+	EXPENSE_CREATE_USE_CASE = 'ExpenseCreateUseCase',
+	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
+	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
 }
 
 export interface IServiceMap {
@@ -107,4 +113,7 @@ export interface IServiceMap {
 	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;
 	[EServiceToken.AMOUNT]: IAmount;
 	[EServiceToken.TEMPORAL]: ITemporal;
+	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
+	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
+	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
 }

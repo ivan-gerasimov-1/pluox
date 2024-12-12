@@ -36,6 +36,9 @@ import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { TotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import { Amount } from '@domain/amount/Amount';
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';
+import { CreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
+import { UpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
+import { DeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
 
 let globalContainer: IContainer;
 
@@ -195,6 +198,25 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.EXPENSES_API,
 				useClass: ExpensesApi,
 				deps: [EServiceToken.BASE_API],
+			},
+			{
+				token: EServiceToken.EXPENSE_CREATE_USE_CASE,
+				useClass: CreateExpenseUseCase,
+				deps: [
+					EServiceToken.EXPENSES,
+					EServiceToken.EXPENSES_STORAGE,
+					EServiceToken.ID_GENERATOR,
+					EServiceToken.TEMPORAL,
+				],
+			},
+			{
+				token: EServiceToken.EXPENSE_UPDATE_USE_CASE,
+				useClass: UpdateExpenseUseCase,
+			},
+			{
+				token: EServiceToken.EXPENSE_DELETE_USE_CASE,
+				useClass: DeleteExpenseUseCase,
+				deps: [EServiceToken.EXPENSES, EServiceToken.EXPENSES_STORAGE],
 			},
 		)
 		/**
