@@ -205,7 +205,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: CreateExpenseUseCase,
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.EXPENSE_DATASOURCE,
 					EServiceToken.ID_GENERATOR,
 					EServiceToken.TEMPORAL,
 				],
