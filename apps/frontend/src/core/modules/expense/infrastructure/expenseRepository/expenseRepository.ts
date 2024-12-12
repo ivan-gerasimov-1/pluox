@@ -22,10 +22,10 @@ export class ExpenseRepository implements IExpenseRepository {
 	) {}
 
 	public add(expense: IExpense): this {
-		let expenses = this.dataSource.getItems();
 		let expenseDTO = expense.toObject();
 
-		Reflect.set(expenses, expense.id, expenseDTO);
+		this.dataSource //
+			.setOne(expenseDTO);
 
 		/**
 		 * @todo Move to Application Layer
@@ -33,9 +33,6 @@ export class ExpenseRepository implements IExpenseRepository {
 		if (expenseDTO.category) {
 			this.categories.increaseWeight(expenseDTO.category);
 		}
-
-		this.dataSource //
-			.setItems(expenses);
 
 		return this;
 	}
