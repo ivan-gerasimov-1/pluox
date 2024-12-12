@@ -68,10 +68,10 @@ function loadAppConfig(): void {
 }
 
 function loadExpenses(): void {
-	let expenses = resolveService(EServiceToken.EXPENSES);
+	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
 	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
 
 	let rawExpenses = expensesStorage.getItems();
 
-	expenses.__addRawExpenses(rawExpenses);
+	expenseRepository.__addRawExpenses(rawExpenses);
 }

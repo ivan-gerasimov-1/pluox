@@ -1,5 +1,3 @@
-import { ExpenseNotFoundError } from '@root/core/domain/expenses/errors';
-
 import type { TMonth } from '@root/core/domain/amount/useCases/types';
 import type { ICategories } from '@root/core/domain/categories/types';
 import type { TExpenses } from '@root/core/domain/expenses/types';
@@ -11,6 +9,8 @@ import type {
 	TExpense,
 } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+
+import { ExpenseNotFoundError } from '@root/core/modules/expense/infrastructure/expenseRepository/errors';
 
 export class ExpenseRepository implements IExpenseRepository {
 	/**

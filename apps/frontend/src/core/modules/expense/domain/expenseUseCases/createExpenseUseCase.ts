@@ -1,10 +1,10 @@
-import type { IExpenses } from '@root/core/domain/expenses/types';
 import type { IUseCase } from '@root/core/domain/types';
 import type { IExpensesStorage } from '@root/core/infrastructure/expensesStorage/types';
 import type { IIdGenerator } from '@root/core/infrastructure/idGenerator/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export interface ICreateExpenseUseCase extends IUseCase {
 	execute(expense: TExpenseCreateDTO): void;
@@ -12,7 +12,7 @@ export interface ICreateExpenseUseCase extends IUseCase {
 
 export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 	constructor(
-		private readonly expenses: IExpenses,
+		private readonly expenseRepository: IExpenseRepository,
 		private readonly expensesStorage: IExpensesStorage,
 		private readonly idGenerator: IIdGenerator,
 		private readonly temporal: ITemporal,
@@ -35,7 +35,7 @@ export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 			payload.date,
 		);
 
-		let expenses = this.expenses //
+		let expenses = this.expenseRepository //
 			.add(expense)
 			.get();
 

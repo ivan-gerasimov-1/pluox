@@ -3,7 +3,7 @@ import type { ECurrency } from '@core/infrastructure/currency/types';
 
 import { getDateParts } from '@domain/amount/useCases/helpers';
 import type { TDateParts } from '@domain/amount/useCases/types';
-import type { IExpenses } from '@domain/expenses/types';
+import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export interface ITotalAmountUseCase {
 	run(dateParts: Partial<TDateParts>, currency: ECurrency): number;
@@ -11,7 +11,7 @@ export interface ITotalAmountUseCase {
 
 export class TotalAmountUseCase implements ITotalAmountUseCase {
 	constructor(
-		private readonly expenses: IExpenses,
+		private readonly expenseRepository: IExpenseRepository,
 		private readonly currencyConverter: ICurrencyConverter,
 	) {}
 
@@ -29,7 +29,7 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 		 * 2. Query only related expenses
 		 * 3. Remove filtering from calculation logic
 		 */
-		let expenses = this.expenses.get();
+		let expenses = this.expenseRepository.get();
 
 		let total = 0;
 

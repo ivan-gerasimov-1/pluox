@@ -1,5 +1,5 @@
 import type { TMonth } from '@root/core/domain/amount/useCases/types';
-import type { TExpenses, IExpenses } from '@root/core/domain/expenses/types';
+import type { TExpenses } from '@root/core/domain/expenses/types';
 import type { Id, TISODateString } from '@root/core/domain/types';
 import type {
 	IExpense,
@@ -17,10 +17,13 @@ export interface IExpenseRepository {
 		dateFrom?: TISODateString;
 		dateTo?: TISODateString;
 	}): TExpense[];
-	delete(id: Id): IExpenses;
+	delete(id: Id): IExpenseRepository;
 
-	/** @description temporary solution */
-	__addRawExpenses(expenses: TExpenses): IExpenses;
+	/**
+	 * @description temporary solution
+	 * @deprecated
+	 */
+	__addRawExpenses(expenses: TExpenses): IExpenseRepository;
 
 	getMonthlyExpensesByCategory(
 		month: TMonth,

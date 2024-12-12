@@ -39,9 +39,9 @@ export function deleteOne(id: Id): void {
 }
 
 export function getOne(id: Id): TExpense {
-	let expenses = resolveService(EServiceToken.EXPENSES);
+	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
 
-	return expenses //
+	return expenseRepository //
 		.get(id);
 }
 
@@ -49,9 +49,9 @@ export function getList(query?: {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
 }): TExpense[] {
-	let expenses = resolveService(EServiceToken.EXPENSES);
+	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
 
-	return expenses //
+	return expenseRepository //
 		.list(
 			query && {
 				dateFrom: query?.dateFrom,

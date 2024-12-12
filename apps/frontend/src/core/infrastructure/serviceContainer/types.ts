@@ -20,13 +20,13 @@ import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 import type { IAmount } from '@domain/amount/types';
 import type { ITotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
 import type { ICategories } from '@domain/categories/types';
-import type { IExpenses } from '@domain/expenses/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
+import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -64,7 +64,7 @@ export enum EServiceToken {
 	CLIENT_ID_STORAGE = 'ClientIdStorage',
 	CLIENT_ID = 'ClientId',
 	CATEGORIES = 'Categories',
-	EXPENSES = 'Expenses',
+	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	APP_CONFIG_STORAGE = 'AppConfigStorage',
 	APP_CONFIG_SERVICE = 'AppConfigService',
 	APP_CONFIG_STORE = 'AppConfigStore',
@@ -96,7 +96,7 @@ export interface IServiceMap {
 	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
 	[EServiceToken.CLIENT_ID]: IClientId;
 	[EServiceToken.CATEGORIES]: ICategories;
-	[EServiceToken.EXPENSES]: IExpenses;
+	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.APP_CONFIG_STORAGE]: IAppConfigStorage;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
 	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;
