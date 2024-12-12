@@ -1,11 +1,11 @@
 import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
 import { CurrencyRatesNotAvailableError } from '@core/infrastructure/currency/currencyRatesStorage/errors';
 import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
-import { AppStorage } from '@core/infrastructure/appStorage/AppStorage';
+import { LocalStorageDataSource } from '@core/infrastructure/appStorage/AppStorage';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 
 export class CurrencyRatesStorage
-	extends AppStorage<TCurrencyRates>
+	extends LocalStorageDataSource<TCurrencyRates>
 	implements ICurrencyRatesStorage
 {
 	static readonly #STORAGE_ID = 'currencyRates';

@@ -1,6 +1,6 @@
-import type { IAppStorage } from '@core/infrastructure/appStorage/types';
+import type { IDataSource } from '@core/infrastructure/appStorage/types';
 
-export interface IUserStorage extends IAppStorage<TUser> {}
+export interface IUserStorage extends IDataSource<TUser> {}
 
 export type TUser = {
 	id: string;

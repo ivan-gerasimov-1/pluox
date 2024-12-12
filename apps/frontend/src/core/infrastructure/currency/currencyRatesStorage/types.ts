@@ -1,8 +1,8 @@
 import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
-import type { IAppStorage } from '@core/infrastructure/appStorage/types';
+import type { IDataSource } from '@core/infrastructure/appStorage/types';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 
-export interface ICurrencyRatesStorage extends IAppStorage<TCurrencyRates> {
+export interface ICurrencyRatesStorage extends IDataSource<TCurrencyRates> {
 	getRates(): TCurrencyRates;
 	setRates(rates: TCurrencyRates): void;
 
