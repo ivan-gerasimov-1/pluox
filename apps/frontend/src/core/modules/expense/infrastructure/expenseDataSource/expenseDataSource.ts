@@ -18,6 +18,20 @@ export class ExpenseDataSource
 		super(ExpenseDataSource.#STORAGE_ID);
 	}
 
+	public setOne(expense: TExpense): IExpenseDataSource {
+		let expenses = this.getItems();
+
+		if (Reflect.has(expenses, expense.id)) {
+			throw new Error('Expense already exists');
+		}
+
+		Reflect.set(expenses, expense.id, expense);
+
+		this.setItems(expenses);
+
+		return this;
+	}
+
 	public getItems(): Record<Id, TExpense> {
 		const value = this.read();
 

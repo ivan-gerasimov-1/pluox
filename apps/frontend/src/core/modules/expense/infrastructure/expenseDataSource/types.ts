@@ -4,4 +4,5 @@ import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/t
 export interface IExpenseDataSource {
 	getItems(): Record<Id, TExpense>;
 	setItems(values: Record<Id, TExpense>): IExpenseDataSource;
+	setOne(expense: TExpense): IExpenseDataSource;
 }
