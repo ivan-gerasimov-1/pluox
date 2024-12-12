@@ -1,29 +1,11 @@
-import type { TMonth } from '@domain/amount/useCases/types';
-import type {
-	IExpense,
-	TExpense,
-} from '@root/core/modules/expense/domain/expenseEntity/types';
-import type { Id, TISODateString } from '@domain/types';
+import type { Id } from '@domain/types';
+import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 
-export interface IExpenses {
-	add(expense: IExpense): this;
-
-	get(): TExpenses;
-	get(id: Id): TExpense;
-	get(id?: Id): TExpenses | TExpense;
-
-	list(query?: {
-		dateFrom?: TISODateString;
-		dateTo?: TISODateString;
-	}): TExpense[];
-	delete(id: Id): IExpenses;
-
-	/** @description temporary solution */
-	__addRawExpenses(expenses: TExpenses): IExpenses;
-
-	getMonthlyExpensesByCategory(
-		month: TMonth,
-	): { id: Id; total: number; percentage: number }[];
-}
+export type {
+	/**
+	 * @deprecated
+	 */
+	IExpenseRepository as IExpenses,
+} from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export type TExpenses = Record<Id, TExpense>;
