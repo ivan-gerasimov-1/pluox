@@ -9,50 +9,33 @@ import type {
 	TExpense,
 } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 
 import { ExpenseNotFoundError } from '@root/core/modules/expense/infrastructure/expenseRepository/errors';
 
 export class ExpenseRepository implements IExpenseRepository {
-	/**
-	 * @deprecated Use DataSource
-	 */
-	readonly #expenses: Map<Id, TExpense>;
-
 	constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly categories: ICategories,
 		private readonly currencyConverter: ICurrencyConverter,
-		/**
-		 * 	@todo
-		 */
-		// private readonly dataSource: IExpenseDataSource,
-	) {
-		this.#expenses = new Map();
-	}
-
-	/**
-	 * @deprecated Use DataSource
-	 */
-	public __addRawExpenses(expenses: TExpenses): IExpenseRepository {
-		for (const [id, value] of Object.entries(expenses)) {
-			this.#expenses.set(id, value);
-
-			if (value.category) {
-				this.categories.increaseWeight(value.category);
-			}
-		}
-
-		return this;
-	}
+		private readonly dataSource: IExpenseDataSource,
+	) {}
 
 	public add(expense: IExpense): this {
+		let expenses = this.dataSource.getItems();
 		let expenseDTO = expense.toObject();
 
-		this.#expenses.set(expense.id, Object.freeze(expenseDTO));
+		Reflect.set(expenses, expense.id, expenseDTO);
 
+		/**
+		 * @todo Move to Application Layer
+		 */
 		if (expenseDTO.category) {
 			this.categories.increaseWeight(expenseDTO.category);
 		}
+
+		this.dataSource //
+			.setItems(expenses);
 
 		return this;
 	}
@@ -71,7 +54,8 @@ export class ExpenseRepository implements IExpenseRepository {
 		dateFrom?: TISODateString;
 		dateTo?: TISODateString;
 	}): TExpense[] {
-		let expenses = Array.from(this.#expenses.values());
+		let expensesMap = this.dataSource.getItems();
+		let expenses = Object.values(expensesMap);
 
 		if (!query) {
 			return expenses.reverse();
@@ -101,12 +85,19 @@ export class ExpenseRepository implements IExpenseRepository {
 
 	public delete(id: Id): this {
 		let expense = this.get(id);
+		let expenses = this.dataSource.getItems();
 
-		this.#expenses.delete(expense.id);
+		Reflect.deleteProperty(expenses, id);
 
+		/**
+		 * @todo Move to Application Layer
+		 */
 		if (expense.category) {
 			this.categories.decreaseWeight(expense.category);
 		}
+
+		this.dataSource //
+			.setItems(expenses);
 
 		return this;
 	}
@@ -173,14 +164,17 @@ export class ExpenseRepository implements IExpenseRepository {
 	}
 
 	private getAll(): TExpenses {
-		return Object.fromEntries(this.#expenses.entries());
+		let expenses = this.dataSource.getItems();
+
+		return expenses;
 	}
 
 	/**
 	 * @throws {ExpenseNotFoundError}
 	 */
 	private getOne(id: Id): TExpense {
-		const expense = this.#expenses.get(id);
+		let expenses = this.dataSource.getItems();
+		let expense = Reflect.get(expenses, id);
 
 		if (expense === undefined) {
 			throw new ExpenseNotFoundError(id);

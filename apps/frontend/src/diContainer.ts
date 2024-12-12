@@ -29,7 +29,6 @@ import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
-import { ExpensesStorage } from '@core/infrastructure/expensesStorage/ExpensesStorage';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { TotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
@@ -39,6 +38,7 @@ import { CreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseU
 import { UpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
 import { DeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
 import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
+import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
 
 let globalContainer: IContainer;
 
@@ -188,11 +188,12 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.APP_CONFIG,
 					EServiceToken.CATEGORIES,
 					EServiceToken.CURRENCY_CONVERTER,
+					EServiceToken.EXPENSE_DATASOURCE,
 				],
 			},
 			{
-				token: EServiceToken.EXPENSES_STORAGE,
-				useClass: ExpensesStorage,
+				token: EServiceToken.EXPENSE_DATASOURCE,
+				useClass: ExpenseDataSource,
 			},
 			{
 				token: EServiceToken.EXPENSES_API,
@@ -204,7 +205,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: CreateExpenseUseCase,
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.EXPENSES_STORAGE,
+					EServiceToken.EXPENSE_DATASOURCE,
 					EServiceToken.ID_GENERATOR,
 					EServiceToken.TEMPORAL,
 				],
@@ -216,10 +217,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_DELETE_USE_CASE,
 				useClass: DeleteExpenseUseCase,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.EXPENSES_STORAGE,
-				],
+				deps: [EServiceToken.EXPENSE_REPOSITORY],
 			},
 		)
 		/**

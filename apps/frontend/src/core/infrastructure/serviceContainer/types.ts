@@ -12,7 +12,6 @@ import type { ICurrencyRates } from '@core/infrastructure/currency/currencyRates
 import type { ICurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/types';
 import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
 import type { IExpensesApi } from '@core/infrastructure/expensesApi/types';
-import type { IExpensesStorage } from '@core/infrastructure/expensesStorage/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
@@ -27,6 +26,7 @@ import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/ex
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -65,6 +65,7 @@ export enum EServiceToken {
 	CLIENT_ID = 'ClientId',
 	CATEGORIES = 'Categories',
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
+	EXPENSE_DATASOURCE = 'ExpenseDataSource',
 	APP_CONFIG_STORAGE = 'AppConfigStorage',
 	APP_CONFIG_SERVICE = 'AppConfigService',
 	APP_CONFIG_STORE = 'AppConfigStore',
@@ -75,7 +76,6 @@ export enum EServiceToken {
 	EXPENSES_API = 'ExpensesApi',
 	USER_STORAGE = 'UserStorage',
 	AUTH_SERVICE = 'AuthService',
-	EXPENSES_STORAGE = 'ExpensesStorage',
 	CURRENCY_RATES_STORAGE = 'CurrencyRatesStorage',
 	CURRENCY_RATES = 'CurrencyRates',
 	TOTAL_AMOUNT_USE_CASE = 'TotalAmountUseCase',
@@ -97,6 +97,7 @@ export interface IServiceMap {
 	[EServiceToken.CLIENT_ID]: IClientId;
 	[EServiceToken.CATEGORIES]: ICategories;
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
+	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
 	[EServiceToken.APP_CONFIG_STORAGE]: IAppConfigStorage;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
 	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;
@@ -107,7 +108,6 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSES_API]: IExpensesApi;
 	[EServiceToken.USER_STORAGE]: IUserStorage;
 	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
-	[EServiceToken.EXPENSES_STORAGE]: IExpensesStorage;
 	[EServiceToken.CURRENCY_RATES_STORAGE]: ICurrencyRatesStorage;
 	[EServiceToken.CURRENCY_RATES]: ICurrencyRates;
 	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;

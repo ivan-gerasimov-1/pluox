@@ -17,14 +17,12 @@ export interface IExpenseRepository {
 		dateFrom?: TISODateString;
 		dateTo?: TISODateString;
 	}): TExpense[];
+
 	delete(id: Id): IExpenseRepository;
 
 	/**
-	 * @description temporary solution
-	 * @deprecated
+	 * @todo Move to UseCase
 	 */
-	__addRawExpenses(expenses: TExpenses): IExpenseRepository;
-
 	getMonthlyExpensesByCategory(
 		month: TMonth,
 	): { id: Id; total: number; percentage: number }[];

@@ -38,7 +38,6 @@ async function runCore(): Promise<void> {
 
 	loadAppConfig();
 	await getCurrencyRates();
-	loadExpenses();
 }
 
 async function getCurrencyRates(): Promise<void> {
@@ -65,13 +64,4 @@ function loadAppConfig(): void {
 	let appConfigService = resolveService(EServiceToken.APP_CONFIG_SERVICE);
 
 	appConfigService.initialize();
-}
-
-function loadExpenses(): void {
-	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
-	let expensesStorage = resolveService(EServiceToken.EXPENSES_STORAGE);
-
-	let rawExpenses = expensesStorage.getItems();
-
-	expenseRepository.__addRawExpenses(rawExpenses);
 }

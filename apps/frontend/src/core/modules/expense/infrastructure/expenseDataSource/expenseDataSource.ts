@@ -1,21 +1,21 @@
 import { LocalStorageDataSource } from '@core/infrastructure/appStorage/AppStorage';
-import type { IExpensesStorage } from '@core/infrastructure/expensesStorage/types';
 
 import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id } from '@domain/types';
+import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 
-export class ExpensesStorage
+export class ExpenseDataSource
 	extends LocalStorageDataSource<{
 		state?: {
 			operations: Record<Id, TExpense>;
 		};
 	}>
-	implements IExpensesStorage
+	implements IExpenseDataSource
 {
 	static readonly #STORAGE_ID: string = 'store/$expenses';
 
 	constructor() {
-		super(ExpensesStorage.#STORAGE_ID);
+		super(ExpenseDataSource.#STORAGE_ID);
 	}
 
 	public getItems(): Record<Id, TExpense> {
@@ -33,7 +33,7 @@ export class ExpensesStorage
 	 * 1. Simplify structure
 	 * 2. Return to update
 	 */
-	public setItems(values: Record<Id, TExpense>): IExpensesStorage {
+	public setItems(values: Record<Id, TExpense>): IExpenseDataSource {
 		this.delete();
 		this.create({
 			state: {
