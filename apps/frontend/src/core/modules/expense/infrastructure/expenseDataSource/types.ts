@@ -5,4 +5,5 @@ export interface IExpenseDataSource {
 	getItems(): Record<Id, TExpense>;
 	setItems(values: Record<Id, TExpense>): IExpenseDataSource;
 	setOne(expense: TExpense): IExpenseDataSource;
+	deleteOne(id: Id): IExpenseDataSource;
 }

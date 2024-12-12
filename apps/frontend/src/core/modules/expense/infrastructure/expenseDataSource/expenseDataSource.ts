@@ -32,6 +32,20 @@ export class ExpenseDataSource
 		return this;
 	}
 
+	public deleteOne(id: Id): IExpenseDataSource {
+		let expenses = this.getItems();
+
+		if (!Reflect.has(expenses, id)) {
+			throw new Error('Expense does not exist');
+		}
+
+		Reflect.deleteProperty(expenses, id);
+
+		this.setItems(expenses);
+
+		return this;
+	}
+
 	public getItems(): Record<Id, TExpense> {
 		const value = this.read();
 
