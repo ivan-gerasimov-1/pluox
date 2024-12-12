@@ -27,6 +27,7 @@ import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/ex
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
+import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -84,6 +85,7 @@ export enum EServiceToken {
 	EXPENSE_CREATE_USE_CASE = 'ExpenseCreateUseCase',
 	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
 	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
+	MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE = 'MonthlyExpensesByCategoryUseCase',
 }
 
 export interface IServiceMap {
@@ -116,4 +118,5 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
+	[EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE]: IMonthlyExpensesByCategoryUseCase;
 }

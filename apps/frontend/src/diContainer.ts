@@ -39,6 +39,7 @@ import { UpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseU
 import { DeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
 import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
 import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
+import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 
 let globalContainer: IContainer;
 
@@ -217,6 +218,15 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.EXPENSE_DELETE_USE_CASE,
 				useClass: DeleteExpenseUseCase,
 				deps: [EServiceToken.EXPENSE_REPOSITORY],
+			},
+			{
+				token: EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
+				useClass: MonthlyExpensesByCategoryUseCase,
+				deps: [
+					EServiceToken.APP_CONFIG,
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.CURRENCY_CONVERTER,
+				],
 			},
 		)
 		/**
