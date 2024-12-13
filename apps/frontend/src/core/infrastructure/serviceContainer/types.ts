@@ -28,6 +28,7 @@ import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/ex
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
+import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -67,6 +68,7 @@ export enum EServiceToken {
 	CATEGORIES = 'Categories',
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
+	EXPENSE_SERVICE = 'ExpenseService',
 	APP_CONFIG_STORAGE = 'AppConfigStorage',
 	APP_CONFIG_SERVICE = 'AppConfigService',
 	APP_CONFIG_STORE = 'AppConfigStore',
@@ -100,6 +102,7 @@ export interface IServiceMap {
 	[EServiceToken.CATEGORIES]: ICategories;
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
+	[EServiceToken.EXPENSE_SERVICE]: IExpenseService;
 	[EServiceToken.APP_CONFIG_STORAGE]: IAppConfigStorage;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
 	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;

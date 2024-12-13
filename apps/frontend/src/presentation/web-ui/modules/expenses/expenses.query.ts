@@ -15,11 +15,9 @@ export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');
 export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
 
 export function addOne(payload: TExpenseCreateDTO): void {
-	let createExpenseUseCase = resolveService(
-		EServiceToken.EXPENSE_CREATE_USE_CASE,
-	);
+	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
 
-	createExpenseUseCase.execute(payload);
+	expenseService.createExpense(payload);
 }
 
 export function updateOne(payload: TExpenseUpdateDTO): void {

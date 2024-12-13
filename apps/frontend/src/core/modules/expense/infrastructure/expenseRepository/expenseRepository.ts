@@ -19,15 +19,7 @@ export class ExpenseRepository implements IExpenseRepository {
 	public add(expense: IExpense): this {
 		let expenseDTO = expense.toObject();
 
-		this.dataSource //
-			.setOne(expenseDTO);
-
-		/**
-		 * @todo Move to Application Layer
-		 */
-		if (expenseDTO.category) {
-			this.categories.increaseWeight(expenseDTO.category);
-		}
+		this.dataSource.setOne(expenseDTO);
 
 		return this;
 	}

@@ -40,6 +40,7 @@ import { DeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseU
 import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
 import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
 import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
+import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
 
 let globalContainer: IContainer;
 
@@ -199,11 +200,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_CREATE_USE_CASE,
 				useClass: CreateExpenseUseCase,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.ID_GENERATOR,
-					EServiceToken.TEMPORAL,
-				],
+				deps: [EServiceToken.ID_GENERATOR, EServiceToken.TEMPORAL],
 			},
 			{
 				token: EServiceToken.EXPENSE_UPDATE_USE_CASE,
@@ -221,6 +218,15 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.APP_CONFIG,
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CURRENCY_CONVERTER,
+				],
+			},
+			{
+				token: EServiceToken.EXPENSE_SERVICE,
+				useClass: ExpenseService,
+				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.CATEGORIES,
+					EServiceToken.EXPENSE_CREATE_USE_CASE,
 				],
 			},
 		)

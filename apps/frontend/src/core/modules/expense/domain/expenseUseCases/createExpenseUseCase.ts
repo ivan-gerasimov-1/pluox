@@ -2,21 +2,22 @@ import type { IUseCase } from '@root/core/domain/types';
 import type { IIdGenerator } from '@root/core/infrastructure/idGenerator/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
-import type { TExpenseCreateDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
-import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type {
+	IExpense,
+	TExpenseCreateDTO,
+} from '@root/core/modules/expense/domain/expenseEntity/types';
 
 export interface ICreateExpenseUseCase extends IUseCase {
-	execute(expense: TExpenseCreateDTO): void;
+	execute(expense: TExpenseCreateDTO): IExpense;
 }
 
 export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 	constructor(
-		private readonly expenseRepository: IExpenseRepository,
 		private readonly idGenerator: IIdGenerator,
 		private readonly temporal: ITemporal,
 	) {}
 
-	public execute(payload: TExpenseCreateDTO): void {
+	public execute(payload: TExpenseCreateDTO): IExpense {
 		let id = this.idGenerator.getId();
 		let currentDate = this.temporal.getISODateString();
 		let timezone = this.temporal.getTimezone();
@@ -33,8 +34,6 @@ export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 			payload.date,
 		);
 
-		this.expenseRepository //
-			.add(expense)
-			.get();
+		return expense;
 	}
 }
