@@ -4,6 +4,11 @@ import type { TExpenseCreateDTO } from '@root/core/modules/expense/domain/expens
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
 
+/**
+ * @todo
+ * Category weight is incorrect on app start because we don’t iterate over
+ * all existing expenses
+ */
 export class ExpenseService implements IExpenseService {
 	constructor(
 		private readonly expenseRepository: IExpenseRepository,
