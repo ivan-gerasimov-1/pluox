@@ -14,6 +14,24 @@
 			"skipFiles": ["<node_internals>/**"]
 		},
 		{
+			// TODO: Add launch config for Chrome in Debug Mode
+			"name": "Web App (Chrome)",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:3000",
+			"webRoot": "${workspaceFolder}/apps/frontend",
+			"port": 9222
+		},
+		{
+			// TODO: Add launch config for Zen Browser in Debug Mode
+			"name": "Web App (Zen Browser)",
+			"type": "firefox",
+			"request": "attach",
+			"url": "http://localhost:3000",
+			"webRoot": "${workspaceFolder}/apps/frontend",
+			"firefoxExecutable": "/Applications/Zen Browser.app/Contents/MacOS/zen"
+		},
+		{
 			"name": "API",
 			"command": "npm --workspace=@savee/backend-lite start",
 			"request": "launch",
