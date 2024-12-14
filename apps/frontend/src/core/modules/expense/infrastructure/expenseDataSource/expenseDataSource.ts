@@ -1,13 +1,13 @@
 import { LocalStorageDataSource } from '@core/infrastructure/appStorage/AppStorage';
 
-import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id } from '@domain/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 
 export class ExpenseDataSource
 	extends LocalStorageDataSource<{
 		state?: {
-			operations: Record<Id, TExpense>;
+			operations: Record<Id, TExpenseDTO>;
 		};
 	}>
 	implements IExpenseDataSource
@@ -18,7 +18,7 @@ export class ExpenseDataSource
 		super(ExpenseDataSource.#STORAGE_ID);
 	}
 
-	public setOne(expense: TExpense): IExpenseDataSource {
+	public setOne(expense: TExpenseDTO): IExpenseDataSource {
 		let expenses = this.getItems();
 
 		if (Reflect.has(expenses, expense.id)) {
@@ -46,7 +46,7 @@ export class ExpenseDataSource
 		return this;
 	}
 
-	public getItems(): Record<Id, TExpense> {
+	public getItems(): Record<Id, TExpenseDTO> {
 		const value = this.read();
 
 		if (!value?.state) {
@@ -61,7 +61,7 @@ export class ExpenseDataSource
 	 * 1. Simplify structure
 	 * 2. Return to update
 	 */
-	public setItems(values: Record<Id, TExpense>): IExpenseDataSource {
+	public setItems(values: Record<Id, TExpenseDTO>): IExpenseDataSource {
 		this.delete();
 		this.create({
 			state: {

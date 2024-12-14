@@ -2,7 +2,7 @@ import type { ICategories } from '@root/core/domain/categories/types';
 import type { Id, TISODateString } from '@root/core/domain/types';
 import type {
 	IExpense,
-	TExpense,
+	TExpenseDTO,
 } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
@@ -23,9 +23,9 @@ export class ExpenseRepository implements IExpenseRepository {
 		return this;
 	}
 
-	public get(): TExpense[];
-	public get(id: Id): TExpense;
-	public get(id?: Id): TExpense[] | TExpense {
+	public get(): TExpenseDTO[];
+	public get(id: Id): TExpenseDTO;
+	public get(id?: Id): TExpenseDTO[] | TExpenseDTO {
 		if (id !== undefined) {
 			return this.getOne(id);
 		}
@@ -36,7 +36,7 @@ export class ExpenseRepository implements IExpenseRepository {
 	public list(query?: {
 		dateFrom?: TISODateString;
 		dateTo?: TISODateString;
-	}): TExpense[] {
+	}): TExpenseDTO[] {
 		let expensesMap = this.dataSource.getItems();
 		let expenses = Object.values(expensesMap);
 
@@ -82,7 +82,7 @@ export class ExpenseRepository implements IExpenseRepository {
 		return this;
 	}
 
-	private getAll(): TExpense[] {
+	private getAll(): TExpenseDTO[] {
 		let expenses = this.dataSource.getItems();
 
 		return Object.values(expenses);
@@ -91,7 +91,7 @@ export class ExpenseRepository implements IExpenseRepository {
 	/**
 	 * @throws {ExpenseNotFoundError}
 	 */
-	private getOne(id: Id): TExpense {
+	private getOne(id: Id): TExpenseDTO {
 		let expenses = this.dataSource.getItems();
 		let expense = Reflect.get(expenses, id);
 
@@ -103,8 +103,8 @@ export class ExpenseRepository implements IExpenseRepository {
 	}
 
 	private sortExpensesByISO8601Date(
-		expenseA: TExpense,
-		expenseB: TExpense,
+		expenseA: TExpenseDTO,
+		expenseB: TExpenseDTO,
 	): -1 | 0 | 1 {
 		const dateA = expenseA.date;
 		const dateB = expenseB.date;

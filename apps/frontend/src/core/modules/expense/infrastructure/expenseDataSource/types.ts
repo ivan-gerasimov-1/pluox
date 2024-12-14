@@ -1,9 +1,9 @@
 import type { Id } from '@root/core/domain/types';
-import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
 
 export interface IExpenseDataSource {
-	getItems(): Record<Id, TExpense>;
-	setItems(values: Record<Id, TExpense>): IExpenseDataSource;
-	setOne(expense: TExpense): IExpenseDataSource;
+	getItems(): Record<Id, TExpenseDTO>;
+	setItems(values: Record<Id, TExpenseDTO>): IExpenseDataSource;
+	setOne(expense: TExpenseDTO): IExpenseDataSource;
 	deleteOne(id: Id): IExpenseDataSource;
 }

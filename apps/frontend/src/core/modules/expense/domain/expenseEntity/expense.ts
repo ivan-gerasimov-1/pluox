@@ -2,11 +2,11 @@ import type { ECurrency } from '@core/infrastructure/currency/types';
 import { Entity } from '@core/infrastructure/entity/Entity';
 import type {
 	IExpense,
-	TExpense,
+	TExpenseDTO,
 } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TCategory, TComment, TISODateString } from '@domain/types';
 
-export class Expense extends Entity<TExpense> implements IExpense {
+export class Expense extends Entity<TExpenseDTO> implements IExpense {
 	readonly #amount: number;
 	readonly #currency: ECurrency;
 	readonly #comment: TComment;
@@ -59,7 +59,7 @@ export class Expense extends Entity<TExpense> implements IExpense {
 		);
 	}
 
-	public toObject(): TExpense {
+	public toObject(): TExpenseDTO {
 		return {
 			id: this.id,
 			amount: this.#amount,

@@ -1,6 +1,6 @@
 import type { TMonth } from '@domain/amount/useCases/types';
 import type {
-	TExpense,
+	TExpenseDTO,
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/domain/expenseEntity/types';
@@ -36,7 +36,7 @@ export function deleteOne(id: Id): void {
 	deleteExpenseUseCase.execute(id);
 }
 
-export function getOne(id: Id): TExpense {
+export function getOne(id: Id): TExpenseDTO {
 	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
 
 	return expenseRepository //
@@ -46,7 +46,7 @@ export function getOne(id: Id): TExpense {
 export function getList(query?: {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
-}): TExpense[] {
+}): TExpenseDTO[] {
 	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
 
 	return expenseRepository //

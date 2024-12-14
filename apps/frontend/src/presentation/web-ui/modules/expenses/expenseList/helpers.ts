@@ -1,14 +1,14 @@
-import type { TExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
 
-export function groupExpenseListByDay(expenseList: TExpense[]): Array<{
+export function groupExpenseListByDay(expenseList: TExpenseDTO[]): Array<{
 	date: string;
-	items: TExpense[];
+	items: TExpenseDTO[];
 }> {
 	let groups: Record<
 		string,
 		{
 			date: string;
-			items: TExpense[];
+			items: TExpenseDTO[];
 		}
 	> = {};
 
@@ -50,7 +50,7 @@ export function groupExpenseListByDay(expenseList: TExpense[]): Array<{
 			},
 			[] as Array<{
 				date: string;
-				items: TExpense[];
+				items: TExpenseDTO[];
 			}>,
 		);
 }
