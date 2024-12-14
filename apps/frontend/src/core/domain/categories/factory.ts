@@ -1,7 +1,7 @@
 import { Categories } from '@domain/categories/Categories';
 import { categoryList } from '@domain/categories/constants';
 import type { ICategories } from '@domain/categories/types';
-import { ITemporal } from '@root/core/infrastructure/temporal/types';
+import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import { Category } from '@root/core/modules/category/category';
 
 export interface ICategoriesFactory {
