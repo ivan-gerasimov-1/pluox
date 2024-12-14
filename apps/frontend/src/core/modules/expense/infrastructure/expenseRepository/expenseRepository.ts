@@ -1,5 +1,4 @@
 import type { ICategories } from '@root/core/domain/categories/types';
-import type { TExpenses } from '@root/core/domain/expenses/types';
 import type { Id, TISODateString } from '@root/core/domain/types';
 import type {
 	IExpense,
@@ -24,9 +23,9 @@ export class ExpenseRepository implements IExpenseRepository {
 		return this;
 	}
 
-	public get(): TExpenses;
+	public get(): TExpense[];
 	public get(id: Id): TExpense;
-	public get(id?: Id): TExpenses | TExpense {
+	public get(id?: Id): TExpense[] | TExpense {
 		if (id !== undefined) {
 			return this.getOne(id);
 		}
@@ -83,10 +82,10 @@ export class ExpenseRepository implements IExpenseRepository {
 		return this;
 	}
 
-	private getAll(): TExpenses {
+	private getAll(): TExpense[] {
 		let expenses = this.dataSource.getItems();
 
-		return expenses;
+		return Object.values(expenses);
 	}
 
 	/**

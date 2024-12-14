@@ -33,7 +33,7 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 
 		let total = 0;
 
-		for (let expense of Object.values(expenses)) {
+		for (let expense of expenses) {
 			let amount = expense.amount;
 			let expenseCurrency = expense.currency;
 			let expenseDateParts = getDateParts(expense.date);
