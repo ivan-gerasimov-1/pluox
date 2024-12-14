@@ -8,6 +8,9 @@ export interface ICategoriesFactory {
 	create(): ICategories;
 }
 
+/**
+ * @todo Calculate category weights on creation
+ */
 export class CategoriesFactory {
 	constructor(private readonly temporal: ITemporal) {}
 
