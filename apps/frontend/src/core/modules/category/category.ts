@@ -1,17 +1,24 @@
 import type { TCategoryDTO } from '@domain/categories/types';
 import type { ICategory } from '@root/core/modules/category/types';
-import type { Id } from '@root/core/domain/types';
+import type { Id, TISODateString } from '@root/core/domain/types';
+import { Entity } from '@root/core/infrastructure/entity/Entity';
 
-/**
- * @todo Extend from ValueObject
- */
-export class Category implements ICategory {
+export class Category extends Entity<TCategoryDTO> implements ICategory {
 	#id: Id;
 	#name: string;
 	#icon: string;
 	#weight: number;
 
-	private constructor(id: Id, name: string, icon: string, weight: number) {
+	constructor(
+		id: Id,
+		name: string,
+		icon: string,
+		weight: number,
+		createdAt: TISODateString,
+		modifiedAt?: TISODateString,
+	) {
+		super(id, createdAt, modifiedAt);
+
 		this.#id = id;
 		this.#name = name;
 		this.#icon = icon;
@@ -23,8 +30,10 @@ export class Category implements ICategory {
 		name: string,
 		icon: string,
 		weight: number,
+		createdAt: TISODateString,
+		modifiedAt?: TISODateString,
 	): ICategory {
-		return new Category(id, name, icon, weight);
+		return new Category(id, name, icon, weight, createdAt, modifiedAt);
 	}
 
 	public get id(): string {
