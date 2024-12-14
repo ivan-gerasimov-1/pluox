@@ -1,5 +1,5 @@
 import type { TCategoryDTO } from '@domain/categories/types';
-import type { ICategory } from '@domain/category/types';
+import type { ICategory } from '@root/core/modules/category/types';
 import type { Id } from '@root/core/domain/types';
 
 /**

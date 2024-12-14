@@ -1,7 +1,7 @@
 import { Categories } from '@domain/categories/Categories';
 import { categoryList } from '@domain/categories/constants';
 import type { ICategories } from '@domain/categories/types';
-import { Category } from '@domain/category/category';
+import { Category } from '@root/core/modules/category/category';
 
 export function categoriesFactory(): ICategories {
 	let categories = new Categories();
