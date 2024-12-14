@@ -1,21 +1,34 @@
 import { Categories } from '@domain/categories/Categories';
 import { categoryList } from '@domain/categories/constants';
 import type { ICategories } from '@domain/categories/types';
+import { ITemporal } from '@root/core/infrastructure/temporal/types';
 import { Category } from '@root/core/modules/category/category';
 
-export function categoriesFactory(): ICategories {
-	let categories = new Categories();
+export interface ICategoriesFactory {
+	create(): ICategories;
+}
 
-	for (const categoryDto of categoryList) {
-		let category = Category.create(
-			categoryDto.id,
-			categoryDto.name,
-			categoryDto.icon,
-			1,
-		);
+export class CategoriesFactory {
+	constructor(private readonly temporal: ITemporal) {}
 
-		categories.add(category);
+	public create(): ICategories {
+		let categories = new Categories();
+
+		let weight = 1;
+		let currentDate = this.temporal.getISODateString();
+
+		for (const categoryDto of categoryList) {
+			let category = Category.create(
+				categoryDto.id,
+				categoryDto.name,
+				categoryDto.icon,
+				weight,
+				currentDate,
+			);
+
+			categories.add(category);
+		}
+
+		return categories;
 	}
-
-	return categories;
 }

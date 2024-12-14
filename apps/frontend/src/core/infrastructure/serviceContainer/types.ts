@@ -29,6 +29,7 @@ import type { IExpenseRepository } from '@root/core/modules/expense/domain/expen
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
+import type { ICategoriesFactory } from '@root/core/domain/categories/factory';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -65,6 +66,7 @@ export enum EServiceToken {
 	ID_GENERATOR = 'IdGenerator',
 	CLIENT_ID_STORAGE = 'ClientIdStorage',
 	CLIENT_ID = 'ClientId',
+	CATEGORIES_FACTORY = 'CategoriesFactory',
 	CATEGORIES = 'Categories',
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
@@ -99,6 +101,7 @@ export interface IServiceMap {
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
 	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
 	[EServiceToken.CLIENT_ID]: IClientId;
+	[EServiceToken.CATEGORIES_FACTORY]: () => ICategoriesFactory;
 	[EServiceToken.CATEGORIES]: ICategories;
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;

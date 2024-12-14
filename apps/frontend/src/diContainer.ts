@@ -19,7 +19,10 @@ import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParse
 import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 import { ClientId } from '@core/infrastructure/clientId/ClientId';
-import { categoriesFactory } from '@domain/categories/factory';
+import {
+	CategoriesFactory,
+	type ICategoriesFactory,
+} from '@domain/categories/factory';
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
@@ -233,10 +236,20 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		/**
 		 * @description Categories
 		 */
-		.register({
-			token: EServiceToken.CATEGORIES,
-			useFactory: categoriesFactory,
-		})
+		.register(
+			{
+				token: EServiceToken.CATEGORIES_FACTORY,
+				useClass: CategoriesFactory,
+				deps: [EServiceToken.TEMPORAL],
+			},
+			{
+				token: EServiceToken.CATEGORIES,
+				useFactory: (categoriesFactory: ICategoriesFactory) => {
+					return categoriesFactory.create();
+				},
+				deps: [EServiceToken.CATEGORIES_FACTORY],
+			},
+		)
 		/**
 		 * @description Amount and use cases
 		 */
