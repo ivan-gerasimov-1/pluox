@@ -11,7 +11,7 @@ import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyC
 import type { ICurrencyRates } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
 import type { ICurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/types';
 import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
-import type { IExpensesApi } from '@core/infrastructure/expensesApi/types';
+import type { IExpensesApi } from '@root/core/modules/expense/infrastructure/expensesApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';

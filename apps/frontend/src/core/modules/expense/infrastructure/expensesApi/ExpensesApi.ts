@@ -1,5 +1,5 @@
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
-import type { IExpensesApi } from '@core/infrastructure/expensesApi/types';
+import type { IExpensesApi } from '@root/core/modules/expense/infrastructure/expensesApi/types';
 
 import type { Id } from '@domain/types';
 
