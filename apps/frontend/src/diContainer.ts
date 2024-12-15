@@ -189,7 +189,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_REPOSITORY,
 				useClass: ExpenseRepository,
-				deps: [EServiceToken.CATEGORIES, EServiceToken.EXPENSE_DATASOURCE],
+				deps: [EServiceToken.EXPENSE_DATASOURCE],
 			},
 			{
 				token: EServiceToken.EXPENSE_DATASOURCE,
@@ -230,6 +230,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CATEGORIES,
 					EServiceToken.EXPENSE_CREATE_USE_CASE,
+					EServiceToken.EXPENSE_DELETE_USE_CASE,
 				],
 			},
 		)

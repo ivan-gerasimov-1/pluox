@@ -1,4 +1,3 @@
-import type { ICategories } from '@root/core/domain/categories/types';
 import type { Id, TISODateString } from '@root/core/domain/types';
 import type {
 	IExpense,
@@ -10,10 +9,7 @@ import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructu
 import { ExpenseNotFoundError } from '@root/core/modules/expense/infrastructure/expenseRepository/errors';
 
 export class ExpenseRepository implements IExpenseRepository {
-	constructor(
-		private readonly categories: ICategories,
-		private readonly dataSource: IExpenseDataSource,
-	) {}
+	constructor(private readonly dataSource: IExpenseDataSource) {}
 
 	public add(expense: IExpense): this {
 		let expenseDTO = expense.toObject();
@@ -67,17 +63,7 @@ export class ExpenseRepository implements IExpenseRepository {
 	}
 
 	public delete(id: Id): this {
-		let expense = this.get(id);
-
-		this.dataSource //
-			.deleteOne(id);
-
-		/**
-		 * @todo Move to Application Layer
-		 */
-		if (expense.category) {
-			this.categories.decreaseWeight(expense.category);
-		}
+		this.dataSource.deleteOne(id);
 
 		return this;
 	}

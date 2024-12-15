@@ -29,11 +29,9 @@ export function updateOne(payload: TExpenseUpdateDTO): void {
 }
 
 export function deleteOne(id: Id): void {
-	let deleteExpenseUseCase = resolveService(
-		EServiceToken.EXPENSE_DELETE_USE_CASE,
-	);
+	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
 
-	deleteExpenseUseCase.execute(id);
+	expenseService.deleteExpense(id);
 }
 
 export function getOne(id: Id): TExpenseDTO {
