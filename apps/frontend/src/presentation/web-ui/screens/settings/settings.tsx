@@ -21,7 +21,7 @@ import { settingsI18n } from '@root/presentation/web-ui/screens/settings/setting
 import { IconSelect } from '@root/presentation/web-ui/uiKit/iconSelect/iconSelect';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-import { categoryList } from '@domain/categories/constants';
+import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheetV2/actionSheet';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
@@ -240,7 +240,7 @@ export function SettingsScreen() {
 						<div className={styles.field}>
 							<div className={styles.fieldData}>
 								<div className={cls(styles.fieldValue, styles.pillsContainer)}>
-									{categoryList.map((category) => {
+									{categoryTemplates.map((category) => {
 										return (
 											<span key={category.id} className={styles.pill}>
 												{category.name}

@@ -1,4 +1,4 @@
-import { categoryList } from '@domain/categories/constants';
+import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
 
 export function getCategoryProperty(
 	categoryId: string | null,
@@ -9,7 +9,9 @@ export function getCategoryProperty(
 		return defaultValue;
 	}
 
-	let category = categoryList.find((category) => categoryId === category.id);
+	let category = categoryTemplates.find(
+		(category) => categoryId === category.id,
+	);
 
 	if (!category) {
 		return categoryId[0].toUpperCase();

@@ -1,4 +1,4 @@
-import { categoryList } from '@domain/categories/constants';
+import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
 import type { TCategory } from '@domain/types';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
@@ -37,7 +37,7 @@ export function CategoryInput(props: TCategoryInputProps) {
 				{intl.translate('inputPlaceholder')}
 			</option>
 
-			{categoryList.map((category) => {
+			{categoryTemplates.map((category) => {
 				return (
 					<option key={category.id} value={category.id}>
 						{category.name}

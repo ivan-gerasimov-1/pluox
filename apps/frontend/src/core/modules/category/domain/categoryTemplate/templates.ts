@@ -1,4 +1,6 @@
-export const categoryList = [
+import type { TCategoryTemplate } from '@root/core/modules/category/domain/categoryTemplate/types';
+
+export const categoryTemplates: TCategoryTemplate[] = [
 	{
 		id: 'auto',
 		name: 'Авто',

@@ -1,5 +1,5 @@
 import { CategoryService } from '@root/core/modules/category/application/categoryService/categoryService';
-import { categoryList } from '@domain/categories/constants';
+import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
@@ -24,7 +24,7 @@ export class CategoryServiceFactory {
 		let weight = 1;
 		let currentDate = this.temporal.getISODateString();
 
-		for (const categoryDto of categoryList) {
+		for (const categoryDto of categoryTemplates) {
 			let category = Category.create(
 				categoryDto.id,
 				categoryDto.name,
