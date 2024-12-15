@@ -230,6 +230,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.APP_CONFIG,
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CURRENCY_CONVERTER,
+					EServiceToken.TEMPORAL,
 				],
 			},
 			{

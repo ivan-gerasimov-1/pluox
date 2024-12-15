@@ -4,6 +4,7 @@ import type { IUseCase } from '@root/core/domain/types';
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 import type { ICurrencyConverter } from '@root/core/infrastructure/currency/currencyConverter/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import { ITemporal } from '@root/core/infrastructure/temporal/types';
 
 export interface IMonthlyExpensesByCategoryUseCase extends IUseCase {
 	execute(month: TMonth): TMonthlyExpensesByCategory[];
@@ -22,6 +23,7 @@ export class MonthlyExpensesByCategoryUseCase
 		private readonly appConfig: IAppConfig,
 		private readonly expenseRepository: IExpenseRepository,
 		private readonly currencyConverter: ICurrencyConverter,
+		private readonly temporal: ITemporal,
 	) {}
 
 	public execute(month: TMonth): TMonthlyExpensesByCategory[] {
@@ -33,7 +35,7 @@ export class MonthlyExpensesByCategoryUseCase
 	): TMonthlyExpensesByCategory[] {
 		let currency = this.appConfig.currency;
 
-		let total = 0;
+		let totalAmount = 0;
 
 		let expensesByCategory: Record<
 			Id,
@@ -44,13 +46,13 @@ export class MonthlyExpensesByCategoryUseCase
 			}
 		> = {};
 
-		const startDate = new Date(new Date(new Date().getFullYear(), month, 1));
-		const endDate = new Date(new Date(new Date().getFullYear(), month, 30));
+		let startDate = this.temporal.getStartOfMonth(month);
+		let endDate = this.temporal.getEndOfMonth(month);
 
 		let expenses = this.expenseRepository.findMany({
 			filter: {
-				dateFrom: startDate.toISOString(),
-				dateTo: endDate.toISOString(),
+				dateFrom: startDate,
+				dateTo: endDate,
 			},
 		});
 
@@ -73,12 +75,12 @@ export class MonthlyExpensesByCategoryUseCase
 		}
 
 		for (let category in expensesByCategory) {
-			total += expensesByCategory[category].total;
+			totalAmount += expensesByCategory[category].total;
 		}
 
 		for (let category in expensesByCategory) {
 			expensesByCategory[category].percentage =
-				(expensesByCategory[category].total / total) * 100;
+				(expensesByCategory[category].total / totalAmount) * 100;
 		}
 
 		let result = Object.values(expensesByCategory);
