@@ -22,18 +22,12 @@ export type TExpenseDTO = {
 	timezone: string;
 };
 
-export type TExpenseCreateDTO = {
-	amount: number;
-	currency: ECurrency;
-	comment: TComment;
-	category: TCategory;
-	date?: TISODateString;
-};
+export type TExpenseCreateDTO = Pick<
+	TExpenseDTO,
+	'amount' | 'currency' | 'comment' | 'category'
+> &
+	Partial<Pick<TExpenseDTO, 'date'>>;
 
-export type TExpenseUpdateDTO = {
-	amount?: number;
-	currency?: ECurrency;
-	comment?: TComment;
-	category?: TCategory;
-	date?: TISODateString;
-};
+export type TExpenseUpdateDTO = Partial<
+	Pick<TExpenseDTO, 'amount' | 'currency' | 'comment' | 'category' | 'date'>
+>;
