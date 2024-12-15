@@ -55,13 +55,13 @@ export function getList(query?: {
 }
 
 export function getTotalAmount(): number {
-	let amount = resolveService(EServiceToken.AMOUNT);
+	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
 
-	return amount.getTotalByYear();
+	return expenseService.getTotalByYear();
 }
 
 export function getMonthlyAmount(month: TMonth): number {
-	let amount = resolveService(EServiceToken.AMOUNT);
+	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
 
-	return amount.getTotalByMonth(month);
+	return expenseService.getTotalByMonth(month);
 }

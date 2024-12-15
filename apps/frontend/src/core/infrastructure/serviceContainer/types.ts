@@ -16,7 +16,6 @@ import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
-import type { IAmount } from '@domain/amount/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategories } from '@domain/categories/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
@@ -84,7 +83,6 @@ export enum EServiceToken {
 	CURRENCY_RATES_STORAGE = 'CurrencyRatesStorage',
 	CURRENCY_RATES = 'CurrencyRates',
 	TOTAL_AMOUNT_USE_CASE = 'TotalAmountUseCase',
-	AMOUNT = 'Amount',
 	TEMPORAL = 'Temporal',
 	EXPENSE_CREATE_USE_CASE = 'ExpenseCreateUseCase',
 	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
@@ -119,7 +117,6 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_RATES_STORAGE]: ICurrencyRatesStorage;
 	[EServiceToken.CURRENCY_RATES]: ICurrencyRates;
 	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;
-	[EServiceToken.AMOUNT]: IAmount;
 	[EServiceToken.TEMPORAL]: ITemporal;
 	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;

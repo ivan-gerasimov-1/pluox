@@ -35,7 +35,6 @@ import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpensesApi } from '@core/infrastructure/expensesApi/ExpensesApi';
 import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
-import { Amount } from '@domain/amount/Amount';
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';
 import { CreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
 import { UpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
@@ -224,14 +223,24 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				],
 			},
 			{
+				token: EServiceToken.TOTAL_AMOUNT_USE_CASE,
+				useClass: TotalAmountUseCase,
+				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.CURRENCY_CONVERTER,
+				],
+			},
+			{
 				token: EServiceToken.EXPENSE_SERVICE,
 				useClass: ExpenseService,
 				deps: [
+					EServiceToken.APP_CONFIG,
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CATEGORIES,
 					EServiceToken.EXPENSE_CREATE_USE_CASE,
 					EServiceToken.EXPENSE_DELETE_USE_CASE,
 					EServiceToken.EXPENSE_UPDATE_USE_CASE,
+					EServiceToken.TOTAL_AMOUNT_USE_CASE,
 				],
 			},
 		)
@@ -250,24 +259,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					return categoriesFactory.create();
 				},
 				deps: [EServiceToken.CATEGORIES_FACTORY],
-			},
-		)
-		/**
-		 * @description Amount and use cases
-		 */
-		.register(
-			{
-				token: EServiceToken.AMOUNT,
-				useClass: Amount,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.TOTAL_AMOUNT_USE_CASE],
-			},
-			{
-				token: EServiceToken.TOTAL_AMOUNT_USE_CASE,
-				useClass: TotalAmountUseCase,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CURRENCY_CONVERTER,
-				],
 			},
 		)
 		.validate();
