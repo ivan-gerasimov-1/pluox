@@ -1,4 +1,4 @@
-import { LocalStorageDataSource } from '@core/infrastructure/appStorage/AppStorage';
+import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
 
 export class AuthStorage

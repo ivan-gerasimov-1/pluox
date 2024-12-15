@@ -1,7 +1,7 @@
 import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
 import { CurrencyRatesNotAvailableError } from '@core/infrastructure/currency/currencyRatesStorage/errors';
 import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
-import { LocalStorageDataSource } from '@core/infrastructure/appStorage/AppStorage';
+import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type { ECurrency } from '@core/infrastructure/currency/types';
 
 export class CurrencyRatesStorage

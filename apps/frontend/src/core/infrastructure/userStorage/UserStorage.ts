@@ -1,4 +1,4 @@
-import { LocalStorageDataSource } from '@core/infrastructure/appStorage/AppStorage';
+import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type {
 	IUserStorage,
 	TUser,

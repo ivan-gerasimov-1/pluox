@@ -1,4 +1,4 @@
-import { LocalStorageDataSource } from '@core/infrastructure/appStorage/AppStorage';
+import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { Id } from '@domain/types';

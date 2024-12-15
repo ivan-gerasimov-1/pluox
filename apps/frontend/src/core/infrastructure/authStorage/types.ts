@@ -1,3 +1,3 @@
-import type { IDataSource } from '@core/infrastructure/appStorage/types';
+import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 
 export interface IAuthStorage extends IDataSource<string> {}

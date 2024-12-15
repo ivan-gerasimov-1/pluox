@@ -1,7 +1,7 @@
-import type { IDataSource } from '@core/infrastructure/appStorage/types';
+import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 import type { Id } from '@domain/types';
 
-import { deepMerge } from '@core/infrastructure/appStorage/deepMerge';
+import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
 
 export class LocalStorageDataSource<T extends {}> implements IDataSource<T> {
 	readonly #ID_PREFIX = '@savee';
