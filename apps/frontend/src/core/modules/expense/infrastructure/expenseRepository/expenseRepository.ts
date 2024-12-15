@@ -1,4 +1,4 @@
-import type { Id, TISODateString } from '@root/core/domain/types';
+import type { Id } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type {
@@ -16,7 +16,7 @@ export class ExpenseRepository implements IExpenseRepository {
 	public create(expense: IExpense): TExpenseDTO {
 		let expenseDTO = expense.toObject();
 
-		this.dataSource.setOne(expenseDTO);
+		this.dataSource.save(expenseDTO);
 
 		return expenseDTO;
 	}
@@ -24,50 +24,15 @@ export class ExpenseRepository implements IExpenseRepository {
 	public update(expense: IExpense): TExpenseDTO {
 		let expenseDTO = expense.toObject();
 
-		this.dataSource.setOne(expenseDTO);
+		this.dataSource.save(expenseDTO);
 
 		return expenseDTO;
 	}
 
-	/**
-	 * @todo Move filter and other logic to DataSource
-	 */
 	public findMany(options?: IExpenseFindManyOptions): IExpenseFindManyResult {
-		let expensesMap = this.dataSource.getItems();
-		let expenses = Object.values(expensesMap);
+		let expenses = this.dataSource.findMany(options);
 
-		if (!options) {
-			return {
-				items: expenses.reverse(),
-				total: expenses.length,
-			};
-		}
-
-		let filteredExpenses = expenses
-			.filter((expense) => {
-				let meetConditions = true;
-				let expenseTimestamp = expense.date;
-
-				if (options?.filter?.dateFrom) {
-					meetConditions = expenseTimestamp >= options.filter.dateFrom;
-
-					if (!meetConditions) {
-						return false;
-					}
-				}
-
-				if (options?.filter?.dateTo) {
-					meetConditions = expenseTimestamp <= options.filter.dateTo;
-				}
-
-				return meetConditions;
-			})
-			.sort(this.sortExpensesByISO8601Date);
-
-		return {
-			items: filteredExpenses,
-			total: filteredExpenses.length,
-		};
+		return expenses;
 	}
 
 	public findOne(query: unknown): TExpenseDTO {
@@ -78,35 +43,23 @@ export class ExpenseRepository implements IExpenseRepository {
 	 * @throws {ExpenseNotFoundError}
 	 */
 	public findById(id: Id): TExpenseDTO {
-		let expenses = this.dataSource.getItems();
-		let expense = Reflect.get(expenses, id);
+		let expense = this.dataSource.findById(id);
 
-		if (expense === undefined) {
+		if (expense === null) {
 			throw new ExpenseNotFoundError(id);
 		}
 
 		return expense;
 	}
 
+	/**
+	 * @throws {ExpenseNotFoundError}
+	 */
 	public remove(id: Id): void {
-		this.dataSource.deleteOne(id);
-	}
+		let deletedExpenseId = this.dataSource.remove(id);
 
-	private sortExpensesByISO8601Date(
-		expenseA: TExpenseDTO,
-		expenseB: TExpenseDTO,
-	): -1 | 0 | 1 {
-		const dateA = expenseA.date;
-		const dateB = expenseB.date;
-
-		if (dateA < dateB) {
-			return 1;
+		if (deletedExpenseId === null) {
+			throw new ExpenseNotFoundError(id);
 		}
-
-		if (dateA > dateB) {
-			return -1;
-		}
-
-		return 0;
 	}
 }

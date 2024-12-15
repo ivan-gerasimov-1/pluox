@@ -3,6 +3,10 @@ import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dat
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { Id } from '@domain/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
+import type {
+	IExpenseFindManyOptions,
+	IExpenseFindManyResult,
+} from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export class ExpenseDataSource
 	extends LocalStorageDataSource<{
@@ -18,35 +22,84 @@ export class ExpenseDataSource
 		super(ExpenseDataSource.#STORAGE_ID);
 	}
 
-	public setOne(expense: TExpenseDTO): IExpenseDataSource {
+	public save(expense: TExpenseDTO): TExpenseDTO {
 		let expenses = this.getItems();
-
-		if (Reflect.has(expenses, expense.id)) {
-			throw new Error('Expense already exists');
-		}
 
 		Reflect.set(expenses, expense.id, expense);
 
 		this.setItems(expenses);
 
-		return this;
+		return expense;
 	}
 
-	public deleteOne(id: Id): IExpenseDataSource {
+	findMany(options?: IExpenseFindManyOptions): IExpenseFindManyResult {
+		let expensesMap = this.getItems();
+		let expenses = Object.values(expensesMap);
+
+		if (!options) {
+			return {
+				items: expenses.reverse(),
+				total: expenses.length,
+			};
+		}
+
+		let filteredExpenses = expenses
+			.filter((expense) => {
+				let meetConditions = true;
+				let expenseTimestamp = expense.date;
+
+				if (options?.filter?.dateFrom) {
+					meetConditions = expenseTimestamp >= options.filter.dateFrom;
+
+					if (!meetConditions) {
+						return false;
+					}
+				}
+
+				if (options?.filter?.dateTo) {
+					meetConditions = expenseTimestamp <= options.filter.dateTo;
+				}
+
+				return meetConditions;
+			})
+			.sort(this.sortExpensesByISO8601Date);
+
+		return {
+			items: filteredExpenses,
+			total: filteredExpenses.length,
+		};
+	}
+
+	findOne(query: unknown): TExpenseDTO {
+		throw new Error('Method not implemented.');
+	}
+
+	findById(id: Id): TExpenseDTO | null {
+		let expenses = this.getItems();
+		let expense = Reflect.get(expenses, id);
+
+		if (expense === undefined) {
+			return null;
+		}
+
+		return expense;
+	}
+
+	public remove(id: Id): Id | null {
 		let expenses = this.getItems();
 
 		if (!Reflect.has(expenses, id)) {
-			throw new Error('Expense does not exist');
+			return null;
 		}
 
 		Reflect.deleteProperty(expenses, id);
 
 		this.setItems(expenses);
 
-		return this;
+		return id;
 	}
 
-	public getItems(): Record<Id, TExpenseDTO> {
+	private getItems(): Record<Id, TExpenseDTO> {
 		const value = this.read();
 
 		if (!value?.state) {
@@ -61,7 +114,7 @@ export class ExpenseDataSource
 	 * 1. Simplify structure
 	 * 2. Return to update
 	 */
-	public setItems(values: Record<Id, TExpenseDTO>): IExpenseDataSource {
+	private setItems(values: Record<Id, TExpenseDTO>): IExpenseDataSource {
 		this.delete();
 		this.create({
 			state: {
@@ -77,5 +130,23 @@ export class ExpenseDataSource
 		// });
 
 		return this;
+	}
+
+	private sortExpensesByISO8601Date(
+		expenseA: TExpenseDTO,
+		expenseB: TExpenseDTO,
+	): -1 | 0 | 1 {
+		const dateA = expenseA.date;
+		const dateB = expenseB.date;
+
+		if (dateA < dateB) {
+			return 1;
+		}
+
+		if (dateA > dateB) {
+			return -1;
+		}
+
+		return 0;
 	}
 }

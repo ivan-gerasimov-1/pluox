@@ -14,6 +14,9 @@ export interface IExpenseRepository {
 	 */
 	findById(id: Id): TExpenseDTO;
 
+	/**
+	 * @throws {ExpenseNotFoundError}
+	 */
 	remove(id: Id): void;
 }
 
