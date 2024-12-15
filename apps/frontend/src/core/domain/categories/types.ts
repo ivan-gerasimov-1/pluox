@@ -2,11 +2,11 @@ import type { ICategory } from '@root/core/modules/category/domain/categoryEntit
 import type { Id } from '@domain/types';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 
-export interface ICategories {
-	add(category: ICategory): ICategories;
+export interface ICategoryService {
+	add(category: ICategory): ICategoryService;
 	remove(category: string): void;
 	list(params?: { useWeights?: boolean }): TCategoryDTO[];
 
-	increaseWeight(id: Id): ICategories;
-	decreaseWeight(id: Id): ICategories;
+	increaseWeight(id: Id): ICategoryService;
+	decreaseWeight(id: Id): ICategoryService;
 }

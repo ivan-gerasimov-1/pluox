@@ -1,16 +1,16 @@
-import type { ICategories } from '@domain/categories/types';
+import type { ICategoryService } from '@domain/categories/types';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 import type { Id } from '@domain/types';
 
-export class Categories implements ICategories {
+export class CategoryService implements ICategoryService {
 	private readonly categories: Map<Id, ICategory>;
 
 	constructor() {
 		this.categories = new Map<Id, ICategory>();
 	}
 
-	public add(category: ICategory): ICategories {
+	public add(category: ICategory): ICategoryService {
 		this.categories.set(category.id, category);
 
 		return this;

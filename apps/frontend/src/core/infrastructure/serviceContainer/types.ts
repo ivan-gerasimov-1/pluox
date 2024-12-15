@@ -17,7 +17,7 @@ import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
-import type { ICategories } from '@domain/categories/types';
+import type { ICategoryService } from '@domain/categories/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
@@ -28,7 +28,7 @@ import type { IExpenseRepository } from '@root/core/modules/expense/domain/expen
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
-import type { ICategoriesFactory } from '@root/core/domain/categories/factory';
+import type { ICategoryServiceFactory } from '@root/core/domain/categories/factory';
 import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
 
 export interface IContainer {
@@ -67,8 +67,8 @@ export enum EServiceToken {
 	ID_GENERATOR = 'IdGenerator',
 	CLIENT_ID_STORAGE = 'ClientIdStorage',
 	CLIENT_ID = 'ClientId',
-	CATEGORIES_FACTORY = 'CategoriesFactory',
-	CATEGORIES = 'Categories',
+	CATEGORY_SERVICE_FACTORY = 'CategoryServiceFactory',
+	CATEGORY_SERVICE = 'CategoryService',
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
 	EXPENSE_SERVICE = 'ExpenseService',
@@ -102,8 +102,8 @@ export interface IServiceMap {
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
 	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
 	[EServiceToken.CLIENT_ID]: IClientId;
-	[EServiceToken.CATEGORIES_FACTORY]: () => ICategoriesFactory;
-	[EServiceToken.CATEGORIES]: ICategories;
+	[EServiceToken.CATEGORY_SERVICE_FACTORY]: () => ICategoryServiceFactory;
+	[EServiceToken.CATEGORY_SERVICE]: ICategoryService;
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
 	[EServiceToken.EXPENSE_SERVICE]: IExpenseService;

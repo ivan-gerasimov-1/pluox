@@ -23,8 +23,8 @@ import {
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 import { ClientId } from '@core/infrastructure/clientId/ClientId';
 import {
-	CategoriesFactory,
-	type ICategoriesFactory,
+	CategoryServiceFactory,
+	type ICategoryServiceFactory,
 } from '@domain/categories/factory';
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
@@ -246,7 +246,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [
 					EServiceToken.APP_CONFIG,
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORIES,
+					EServiceToken.CATEGORY_SERVICE,
 					EServiceToken.EXPENSE_CREATE_USE_CASE,
 					EServiceToken.EXPENSE_DELETE_USE_CASE,
 					EServiceToken.EXPENSE_UPDATE_USE_CASE,
@@ -255,20 +255,20 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			},
 		)
 		/**
-		 * @description Categories
+		 * @description Category
 		 */
 		.register(
 			{
-				token: EServiceToken.CATEGORIES_FACTORY,
-				useClass: CategoriesFactory,
+				token: EServiceToken.CATEGORY_SERVICE_FACTORY,
+				useClass: CategoryServiceFactory,
 				deps: [EServiceToken.TEMPORAL, EServiceToken.EXPENSE_REPOSITORY],
 			},
 			{
-				token: EServiceToken.CATEGORIES,
-				useFactory: (categoriesFactory: ICategoriesFactory) => {
+				token: EServiceToken.CATEGORY_SERVICE,
+				useFactory: (categoriesFactory: ICategoryServiceFactory) => {
 					return categoriesFactory.create();
 				},
-				deps: [EServiceToken.CATEGORIES_FACTORY],
+				deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
 			},
 		)
 		.validate();

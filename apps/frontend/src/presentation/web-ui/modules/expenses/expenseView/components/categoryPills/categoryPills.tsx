@@ -10,7 +10,7 @@ type TCategoryPillsProps = {
 };
 
 export function CategoryPills(props: TCategoryPillsProps) {
-	let categories = useService(EServiceToken.CATEGORIES);
+	let categories = useService(EServiceToken.CATEGORY_SERVICE);
 	let categoryList = useMemo(
 		() =>
 			categories.list({

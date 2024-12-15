@@ -1,4 +1,4 @@
-import type { ICategories } from '@root/core/domain/categories/types';
+import type { ICategoryService } from '@root/core/domain/categories/types';
 import type { Id } from '@root/core/domain/types';
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
@@ -20,7 +20,7 @@ export class ExpenseService implements IExpenseService {
 	constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly expenseRepository: IExpenseRepository,
-		private readonly categories: ICategories,
+		private readonly categoryService: ICategoryService,
 		private readonly createExpenseUseCase: ICreateExpenseUseCase,
 		private readonly deleteExpenseUseCase: IDeleteExpenseUseCase,
 		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
@@ -34,7 +34,7 @@ export class ExpenseService implements IExpenseService {
 		this.expenseRepository.add(expense);
 
 		if (expenseDTO.category) {
-			this.categories.increaseWeight(expenseDTO.category);
+			this.categoryService.increaseWeight(expenseDTO.category);
 		}
 
 		return this;
@@ -52,7 +52,7 @@ export class ExpenseService implements IExpenseService {
 		this.deleteExpenseUseCase.execute(id);
 
 		if (expenseDTO.category) {
-			this.categories.decreaseWeight(expenseDTO.category);
+			this.categoryService.decreaseWeight(expenseDTO.category);
 		}
 
 		return this;

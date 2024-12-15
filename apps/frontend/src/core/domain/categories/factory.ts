@@ -1,25 +1,25 @@
-import { Categories } from '@domain/categories/Categories';
+import { CategoryService } from '@root/core/domain/categories/categoryService';
 import { categoryList } from '@domain/categories/constants';
-import type { ICategories } from '@domain/categories/types';
+import type { ICategoryService } from '@domain/categories/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
-export interface ICategoriesFactory {
-	create(): ICategories;
+export interface ICategoryServiceFactory {
+	create(): ICategoryService;
 }
 
 /**
  * @todo Remove category weights calculations once categories are persisted
  */
-export class CategoriesFactory {
+export class CategoryServiceFactory {
 	constructor(
 		private readonly temporal: ITemporal,
 		private readonly expenseRepository: IExpenseRepository,
 	) {}
 
-	public create(): ICategories {
-		let categories = new Categories();
+	public create(): ICategoryService {
+		let categories = new CategoryService();
 
 		let weight = 1;
 		let currentDate = this.temporal.getISODateString();
@@ -41,7 +41,7 @@ export class CategoriesFactory {
 		return categories;
 	}
 
-	private calculateWeights(categories: ICategories) {
+	private calculateWeights(categories: ICategoryService) {
 		let expenses = this.expenseRepository.get();
 
 		for (let expense of expenses) {
