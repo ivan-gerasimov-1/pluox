@@ -10,10 +10,10 @@ type TCategoryPillsProps = {
 };
 
 export function CategoryPills(props: TCategoryPillsProps) {
-	let categories = useService(EServiceToken.CATEGORY_SERVICE);
-	let categoryList = useMemo(
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
+	let categories = useMemo(
 		() =>
-			categories.list({
+			categoryService.list({
 				useWeights: true,
 			}),
 		[],
@@ -21,7 +21,7 @@ export function CategoryPills(props: TCategoryPillsProps) {
 
 	return (
 		<div className={styles.wrapper}>
-			{categoryList.map((category) => {
+			{categories.map((category) => {
 				return (
 					<button
 						key={category.id}
@@ -34,7 +34,7 @@ export function CategoryPills(props: TCategoryPillsProps) {
 							let isPressed = target.getAttribute('aria-pressed') === 'true';
 							let nextState = !isPressed;
 
-							for (let category of categoryList) {
+							for (let category of categories) {
 								let element = document.getElementById(category.id);
 
 								if (!element) {
