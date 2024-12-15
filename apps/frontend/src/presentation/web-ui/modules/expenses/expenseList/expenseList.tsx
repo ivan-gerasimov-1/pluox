@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { Id, TISODateString } from '@domain/types';
-import { groupExpenseListByDay } from '@root/presentation/web-ui/modules/expenses/expenseList/helpers';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import {
@@ -32,6 +31,7 @@ export type TExpenseListProps = {
 export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let currencyConverter = useService(EServiceToken.CURRENCY_CONVERTER);
+	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let queryClient = useQueryClient();
 
 	let { data: expenseGroups = [] } = useQuery({
@@ -43,7 +43,7 @@ export function ExpenseList(props: TExpenseListProps) {
 				dateFrom,
 				dateTo,
 			});
-			let expenseGroups = groupExpenseListByDay(expenseList);
+			let expenseGroups = expenseService.groupExpenseByDate(expenseList);
 
 			return expenseGroups;
 		},
