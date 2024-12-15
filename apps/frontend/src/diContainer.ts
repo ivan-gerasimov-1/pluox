@@ -16,7 +16,10 @@ import {
 	type IContainer,
 } from '@root/core/infrastructure/serviceContainer/types';
 import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
-import { idGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
+import {
+	IdGeneratorFactory,
+	type IIdGeneratorFactory,
+} from '@core/infrastructure/idGenerator/factory';
 import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
 import { ClientId } from '@core/infrastructure/clientId/ClientId';
 import {
@@ -101,8 +104,15 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.APP_CONFIG, EServiceToken.NUMBER_PARSER],
 			},
 			{
+				token: EServiceToken.ID_GENERATOR_FACTORY,
+				useClass: IdGeneratorFactory,
+			},
+			{
 				token: EServiceToken.ID_GENERATOR,
-				useFactory: idGeneratorFactory,
+				useFactory: (idGeneratorFactory: IIdGeneratorFactory) => {
+					return idGeneratorFactory.create();
+				},
+				deps: [EServiceToken.ID_GENERATOR_FACTORY],
 			},
 			{
 				token: EServiceToken.BASE_API,

@@ -2,18 +2,24 @@ import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import { customAlphabet } from 'nanoid';
 
-const ID_LENGTH = 14;
-const ID_ALPHABET =
-	'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+export interface IIdGeneratorFactory {
+	create(options?: { length?: number; alphabet?: string }): IIdGenerator;
+}
 
-export function idGeneratorFactory(options?: {
-	length?: number;
-	alphabet?: string;
-}): IIdGenerator {
-	let nanoId = customAlphabet(
-		options?.alphabet || ID_ALPHABET,
-		options?.length || ID_LENGTH,
-	);
+export class IdGeneratorFactory {
+	static #ID_LENGTH = 14;
+	static #ID_ALPHABET =
+		'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-	return new IdGenerator(nanoId);
+	public create(options?: {
+		length?: number;
+		alphabet?: string;
+	}): IIdGenerator {
+		let nanoId = customAlphabet(
+			options?.alphabet || IdGeneratorFactory.#ID_ALPHABET,
+			options?.length || IdGeneratorFactory.#ID_LENGTH,
+		);
+
+		return new IdGenerator(nanoId);
+	}
 }

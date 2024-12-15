@@ -29,6 +29,7 @@ import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructu
 import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 import type { ICategoriesFactory } from '@root/core/domain/categories/factory';
+import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -62,6 +63,7 @@ export enum EServiceToken {
 	INTL_SERVICE = 'IntlService',
 	CURRENCY_CONVERTER = 'CurrencyConverter',
 	NUMBER_PARSER = 'NumberParser',
+	ID_GENERATOR_FACTORY = 'IdGeneratorFactory',
 	ID_GENERATOR = 'IdGenerator',
 	CLIENT_ID_STORAGE = 'ClientIdStorage',
 	CLIENT_ID = 'ClientId',
@@ -96,6 +98,7 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_CONVERTER]: ICurrencyConverter;
 	[EServiceToken.APP_CONFIG]: IAppConfig;
 	[EServiceToken.NUMBER_PARSER]: NumberParser;
+	[EServiceToken.ID_GENERATOR_FACTORY]: IIdGeneratorFactory;
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
 	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
 	[EServiceToken.CLIENT_ID]: IClientId;
