@@ -31,7 +31,7 @@ export class ExpenseService implements IExpenseService {
 		let expense = this.createExpenseUseCase.execute(payload);
 		let expenseDTO = expense.toObject();
 
-		this.expenseRepository.add(expense);
+		this.expenseRepository.create(expense);
 
 		if (expenseDTO.category) {
 			this.categoryService.increaseWeight(expenseDTO.category);
@@ -47,7 +47,7 @@ export class ExpenseService implements IExpenseService {
 	}
 
 	public deleteExpense(id: Id): IExpenseService {
-		let expenseDTO = this.expenseRepository.get(id);
+		let expenseDTO = this.expenseRepository.findById(id);
 
 		this.deleteExpenseUseCase.execute(id);
 

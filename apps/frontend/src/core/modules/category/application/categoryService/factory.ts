@@ -42,9 +42,9 @@ export class CategoryServiceFactory {
 	}
 
 	private calculateWeights(categories: ICategoryService) {
-		let expenses = this.expenseRepository.get();
+		let expenses = this.expenseRepository.findMany();
 
-		for (let expense of expenses) {
+		for (let expense of expenses.items) {
 			if (!expense.category) {
 				continue;
 			}

@@ -29,11 +29,11 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 		 * 2. Query only related expenses
 		 * 3. Remove filtering from calculation logic
 		 */
-		let expenses = this.expenseRepository.get();
+		let expenses = this.expenseRepository.findMany();
 
 		let total = 0;
 
-		for (let expense of expenses) {
+		for (let expense of expenses.items) {
 			let amount = expense.amount;
 			let expenseCurrency = expense.currency;
 			let expenseDateParts = getDateParts(expense.date);

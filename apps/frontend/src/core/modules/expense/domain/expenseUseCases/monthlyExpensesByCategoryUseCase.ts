@@ -47,12 +47,14 @@ export class MonthlyExpensesByCategoryUseCase
 		const startDate = new Date(new Date(new Date().getFullYear(), month, 1));
 		const endDate = new Date(new Date(new Date().getFullYear(), month, 30));
 
-		let expenses = this.expenseRepository.list({
-			dateFrom: startDate.toISOString(),
-			dateTo: endDate.toISOString(),
+		let expenses = this.expenseRepository.findMany({
+			filter: {
+				dateFrom: startDate.toISOString(),
+				dateTo: endDate.toISOString(),
+			},
 		});
 
-		for (let expense of expenses) {
+		for (let expense of expenses.items) {
 			let category = expense.category || '—';
 
 			if (!expensesByCategory[category]) {

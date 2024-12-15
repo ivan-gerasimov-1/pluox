@@ -35,8 +35,7 @@ export function deleteOne(id: Id): void {
 export function getOne(id: Id): TExpenseDTO {
 	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
 
-	return expenseRepository //
-		.get(id);
+	return expenseRepository.findById(id);
 }
 
 export function getList(query?: {
@@ -44,14 +43,16 @@ export function getList(query?: {
 	dateTo?: TISODateString;
 }): TExpenseDTO[] {
 	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
-
-	return expenseRepository //
-		.list(
-			query && {
+	let expenses = expenseRepository.findMany(
+		query && {
+			filter: {
 				dateFrom: query?.dateFrom,
 				dateTo: query?.dateTo,
 			},
-		);
+		},
+	);
+
+	return expenses.items;
 }
 
 export function getTotalAmount(): number {

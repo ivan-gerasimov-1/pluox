@@ -9,6 +9,6 @@ export class DeleteExpenseUseCase implements IDeleteExpenseUseCase {
 	constructor(private readonly expenseRepository: IExpenseRepository) {}
 
 	public execute(id: string): void {
-		this.expenseRepository.delete(id);
+		this.expenseRepository.remove(id);
 	}
 }
