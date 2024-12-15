@@ -242,7 +242,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CATEGORIES_FACTORY,
 				useClass: CategoriesFactory,
-				deps: [EServiceToken.TEMPORAL],
+				deps: [EServiceToken.TEMPORAL, EServiceToken.EXPENSE_REPOSITORY],
 			},
 			{
 				token: EServiceToken.CATEGORIES,
