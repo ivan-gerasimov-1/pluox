@@ -231,6 +231,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.CATEGORIES,
 					EServiceToken.EXPENSE_CREATE_USE_CASE,
 					EServiceToken.EXPENSE_DELETE_USE_CASE,
+					EServiceToken.EXPENSE_UPDATE_USE_CASE,
 				],
 			},
 		)

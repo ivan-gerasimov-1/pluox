@@ -1,8 +1,8 @@
-import type { IUseCase } from '@root/core/domain/types';
+import type { Id, IUseCase } from '@root/core/domain/types';
 import type { TExpenseUpdateDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
 
 export interface IUpdateExpenseUseCase extends IUseCase {
-	execute(expense: TExpenseUpdateDTO): void;
+	execute(id: Id, expense: TExpenseUpdateDTO): void;
 }
 
 export class UpdateExpenseUseCase implements IUpdateExpenseUseCase {
@@ -11,7 +11,7 @@ export class UpdateExpenseUseCase implements IUpdateExpenseUseCase {
 	/**
 	 * @todo Add implementation
 	 */
-	public execute(payload: TExpenseUpdateDTO): void {
+	public execute(id: Id, payload: TExpenseUpdateDTO): void {
 		throw new Error('Not implemented');
 	}
 }

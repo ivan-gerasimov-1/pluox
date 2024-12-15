@@ -20,12 +20,10 @@ export function addOne(payload: TExpenseCreateDTO): void {
 	expenseService.createExpense(payload);
 }
 
-export function updateOne(payload: TExpenseUpdateDTO): void {
-	let updateExpenseUseCase = resolveService(
-		EServiceToken.EXPENSE_UPDATE_USE_CASE,
-	);
+export function updateOne(id: Id, payload: TExpenseUpdateDTO): void {
+	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
 
-	updateExpenseUseCase.execute(payload);
+	expenseService.updateExpense(id, payload);
 }
 
 export function deleteOne(id: Id): void {

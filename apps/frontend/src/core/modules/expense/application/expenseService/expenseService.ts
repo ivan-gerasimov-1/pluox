@@ -1,10 +1,14 @@
 import type { ICategories } from '@root/core/domain/categories/types';
 import type { Id } from '@root/core/domain/types';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
-import type { TExpenseCreateDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type {
+	TExpenseCreateDTO,
+	TExpenseUpdateDTO,
+} from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
+import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
@@ -12,6 +16,7 @@ export class ExpenseService implements IExpenseService {
 		private readonly categories: ICategories,
 		private readonly createExpenseUseCase: ICreateExpenseUseCase,
 		private readonly deleteExpenseUseCase: IDeleteExpenseUseCase,
+		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
 	) {}
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
@@ -23,6 +28,12 @@ export class ExpenseService implements IExpenseService {
 		if (expenseDTO.category) {
 			this.categories.increaseWeight(expenseDTO.category);
 		}
+
+		return this;
+	}
+
+	public updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService {
+		this.updateExpenseUseCase.execute(id, payload);
 
 		return this;
 	}
