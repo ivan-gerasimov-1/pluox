@@ -5,7 +5,7 @@ import type { IExpenseService } from '@root/core/modules/expense/application/exp
 import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
-} from '@root/core/modules/expense/domain/expenseEntity/types';
+} from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';

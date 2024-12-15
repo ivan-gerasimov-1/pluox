@@ -3,7 +3,7 @@ import type {
 	TExpenseDTO,
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
-} from '@root/core/modules/expense/domain/expenseEntity/types';
+} from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { Id, TISODateString } from '@domain/types';
 
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';

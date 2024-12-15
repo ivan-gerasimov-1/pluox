@@ -2,7 +2,7 @@ import type { Id } from '@root/core/domain/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
-} from '@root/core/modules/expense/domain/expenseEntity/types';
+} from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 
 export interface IExpenseService {

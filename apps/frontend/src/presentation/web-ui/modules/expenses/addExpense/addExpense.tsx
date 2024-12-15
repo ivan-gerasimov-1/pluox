@@ -9,7 +9,7 @@ import {
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 	QUERY_EXPENSES_TOTAL_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
-import type { TExpenseCreateDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 export function AddExpense() {
 	let queryClient = useQueryClient();

@@ -1,5 +1,5 @@
 import type { Id } from '@root/core/domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 export interface IExpenseDataSource {
 	getItems(): Record<Id, TExpenseDTO>;

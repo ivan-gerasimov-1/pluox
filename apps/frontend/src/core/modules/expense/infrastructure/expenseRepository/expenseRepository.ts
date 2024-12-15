@@ -1,8 +1,6 @@
 import type { Id, TISODateString } from '@root/core/domain/types';
-import type {
-	IExpense,
-	TExpenseDTO,
-} from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 

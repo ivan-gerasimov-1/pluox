@@ -1,5 +1,5 @@
 import type { Id, IUseCase } from '@root/core/domain/types';
-import type { TExpenseUpdateDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseUpdateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 export interface IUpdateExpenseUseCase extends IUseCase {
 	execute(id: Id, expense: TExpenseUpdateDTO): void;

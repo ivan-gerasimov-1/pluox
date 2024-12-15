@@ -1,4 +1,4 @@
-import type { TExpenseDTO } from '@root/core/modules/expense/domain/expenseEntity/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 export function groupExpenseListByDay(expenseList: TExpenseDTO[]): Array<{
 	date: string;
