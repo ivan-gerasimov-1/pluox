@@ -1,6 +1,6 @@
-import { CategoryService } from '@root/core/domain/categories/categoryService';
+import { CategoryService } from '@root/core/modules/category/application/categoryService/categoryService';
 import { categoryList } from '@domain/categories/constants';
-import type { ICategoryService } from '@domain/categories/types';
+import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';

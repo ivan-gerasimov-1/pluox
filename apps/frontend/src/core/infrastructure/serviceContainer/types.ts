@@ -17,7 +17,7 @@ import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
-import type { ICategoryService } from '@domain/categories/types';
+import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
@@ -28,7 +28,7 @@ import type { IExpenseRepository } from '@root/core/modules/expense/domain/expen
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
-import type { ICategoryServiceFactory } from '@root/core/domain/categories/factory';
+import type { ICategoryServiceFactory } from '@root/core/modules/category/application/categoryService/factory';
 import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
 
 export interface IContainer {

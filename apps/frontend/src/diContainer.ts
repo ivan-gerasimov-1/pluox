@@ -25,7 +25,7 @@ import { ClientId } from '@core/infrastructure/clientId/ClientId';
 import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
-} from '@domain/categories/factory';
+} from '@root/core/modules/category/application/categoryService/factory';
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';

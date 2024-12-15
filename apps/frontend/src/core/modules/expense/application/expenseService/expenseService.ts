@@ -1,4 +1,4 @@
-import type { ICategoryService } from '@root/core/domain/categories/types';
+import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { Id } from '@root/core/domain/types';
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';

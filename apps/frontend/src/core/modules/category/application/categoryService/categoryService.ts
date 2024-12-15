@@ -1,4 +1,4 @@
-import type { ICategoryService } from '@domain/categories/types';
+import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 import type { Id } from '@domain/types';
