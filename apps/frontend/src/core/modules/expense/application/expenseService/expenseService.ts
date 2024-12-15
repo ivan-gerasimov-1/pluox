@@ -15,6 +15,10 @@ import type {
 	TMonth,
 } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
+import type {
+	IMonthlyExpensesByCategoryUseCase,
+	TMonthlyExpensesByCategory,
+} from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
@@ -25,6 +29,7 @@ export class ExpenseService implements IExpenseService {
 		private readonly deleteExpenseUseCase: IDeleteExpenseUseCase,
 		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
 		private readonly totalAmountUseCase: ITotalAmountUseCase,
+		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
 	) {}
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
@@ -78,5 +83,11 @@ export class ExpenseService implements IExpenseService {
 			},
 			this.appConfig.currency,
 		);
+	}
+
+	public getMonthlyExpensesByCategory(
+		month: TMonth,
+	): TMonthlyExpensesByCategory[] {
+		return this.monthlyExpensesByCategoryUseCase.execute(month);
 	}
 }

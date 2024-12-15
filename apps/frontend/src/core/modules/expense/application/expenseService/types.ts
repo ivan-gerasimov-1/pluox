@@ -3,6 +3,7 @@ import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { TMonthlyExpensesByCategory } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 
 export interface IExpenseService {
@@ -18,4 +19,6 @@ export interface IExpenseService {
 	 * @todo Add year to the class interface
 	 */
 	getTotalByMonth(month: TMonth): number;
+
+	getMonthlyExpensesByCategory(month: TMonth): TMonthlyExpensesByCategory[];
 }
