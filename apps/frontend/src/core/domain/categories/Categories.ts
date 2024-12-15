@@ -1,6 +1,6 @@
 import type { ICategories } from '@domain/categories/types';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
-import type { ICategory } from '@root/core/modules/category/types';
+import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 import type { Id } from '@domain/types';
 
 export class Categories implements ICategories {

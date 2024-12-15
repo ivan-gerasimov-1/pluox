@@ -2,7 +2,7 @@ import { Categories } from '@domain/categories/Categories';
 import { categoryList } from '@domain/categories/constants';
 import type { ICategories } from '@domain/categories/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
-import { Category } from '@root/core/modules/category/category';
+import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export interface ICategoriesFactory {
