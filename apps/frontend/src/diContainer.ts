@@ -36,7 +36,7 @@ import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
-import { ExpensesApi } from '@root/core/modules/expense/infrastructure/expensesApi/ExpensesApi';
+import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
 import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';
 import { CreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
@@ -206,7 +206,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			},
 			{
 				token: EServiceToken.EXPENSES_API,
-				useClass: ExpensesApi,
+				useClass: ExpenseApi,
 				deps: [EServiceToken.BASE_API],
 			},
 			{

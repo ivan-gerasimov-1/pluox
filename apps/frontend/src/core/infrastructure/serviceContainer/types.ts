@@ -11,7 +11,7 @@ import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyC
 import type { ICurrencyRates } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
 import type { ICurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/types';
 import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
-import type { IExpensesApi } from '@root/core/modules/expense/infrastructure/expensesApi/types';
+import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
@@ -114,7 +114,7 @@ export interface IServiceMap {
 	[EServiceToken.AUTH_STORAGE]: IAuthStorage;
 	[EServiceToken.BASE_API]: IBaseApi;
 	[EServiceToken.AUTH_API]: IAuthApi;
-	[EServiceToken.EXPENSES_API]: IExpensesApi;
+	[EServiceToken.EXPENSES_API]: IExpenseApi;
 	[EServiceToken.USER_STORAGE]: IUserStorage;
 	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
 	[EServiceToken.CURRENCY_RATES_STORAGE]: ICurrencyRatesStorage;
