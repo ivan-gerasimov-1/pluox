@@ -46,6 +46,7 @@ import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/exp
 import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
 import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
+import { GroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 
 let globalContainer: IContainer;
 
@@ -240,6 +241,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CURRENCY_CONVERTER,
 				],
+			},
+			{
+				token: EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE,
+				useClass: GroupExpenseByDateUseCase,
 			},
 			{
 				token: EServiceToken.EXPENSE_SERVICE,
