@@ -8,6 +8,9 @@ import type {
 	TYear,
 } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 
+/**
+ * @deprecated
+ */
 export class Amount implements IAmount {
 	readonly #defaultCurrency: ECurrency;
 
