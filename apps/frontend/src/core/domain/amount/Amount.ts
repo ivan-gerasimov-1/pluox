@@ -2,8 +2,11 @@ import type { ECurrency } from '@core/infrastructure/currency/types';
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 
 import type { IAmount } from '@domain/amount/types';
-import type { ITotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
-import type { TMonth, TYear } from '@domain/amount/useCases/types';
+import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
+import type {
+	TMonth,
+	TYear,
+} from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 
 export class Amount implements IAmount {
 	readonly #defaultCurrency: ECurrency;

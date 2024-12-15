@@ -4,7 +4,7 @@ import timezone from 'dayjs/plugin/timezone';
 import objectSupport from 'dayjs/plugin/objectSupport';
 
 import type { TISODateString } from '@root/core/domain/types';
-import type { TMonth } from '@root/core/domain/amount/useCases/types';
+import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { IIntlService } from '@root/core/infrastructure/intl/intlService/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 

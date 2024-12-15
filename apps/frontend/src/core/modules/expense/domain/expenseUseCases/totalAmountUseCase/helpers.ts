@@ -1,6 +1,6 @@
-import { InvalidMonthError } from '@domain/amount/useCases/errors';
-import { monthGuard } from '@domain/amount/useCases/typeGuards';
-import type { TDateParts } from '@domain/amount/useCases/types';
+import { InvalidMonthError } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/errors';
+import { monthGuard } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/typeGuards';
+import type { TDateParts } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { TISODateString } from '@domain/types';
 
 /**

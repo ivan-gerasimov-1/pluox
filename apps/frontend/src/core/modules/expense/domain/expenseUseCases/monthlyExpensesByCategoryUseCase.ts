@@ -1,4 +1,4 @@
-import type { TMonth } from '@root/core/domain/amount/useCases/types';
+import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { Id } from '@root/core/domain/types';
 import type { IUseCase } from '@root/core/domain/types';
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';

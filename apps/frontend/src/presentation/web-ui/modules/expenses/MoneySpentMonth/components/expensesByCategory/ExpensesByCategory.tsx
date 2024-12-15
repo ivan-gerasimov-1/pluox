@@ -1,7 +1,7 @@
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
-import { TMonth } from '@domain/amount/useCases/types';
+import { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import { getCategoryName } from '@domain/categories/getCategoryName';
 
 import { useToggle } from '@root/presentation/web-ui/hooks/useToggle';

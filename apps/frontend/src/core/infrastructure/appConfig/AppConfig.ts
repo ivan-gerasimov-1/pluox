@@ -1,9 +1,9 @@
 import { ECurrency } from '@core/infrastructure/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
-import { InvalidMonthError } from '@domain/amount/useCases/errors';
-import { monthGuard } from '@domain/amount/useCases/typeGuards';
-import type { TMonth } from '@domain/amount/useCases/types';
+import { InvalidMonthError } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/errors';
+import { monthGuard } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/typeGuards';
+import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 
 export interface IAppConfig {
 	locale: ELocaleCode;

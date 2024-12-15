@@ -17,7 +17,7 @@ import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 import type { IAmount } from '@domain/amount/types';
-import type { ITotalAmountUseCase } from '@domain/amount/useCases/totalAmountUseCase';
+import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategories } from '@domain/categories/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';

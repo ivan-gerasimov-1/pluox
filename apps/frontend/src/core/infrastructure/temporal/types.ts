@@ -1,4 +1,4 @@
-import type { TMonth } from '@root/core/domain/amount/useCases/types';
+import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { TISODateString } from '@root/core/domain/types';
 
 export interface ITemporal {
