@@ -4,6 +4,7 @@ import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 import type {
 	TExpenseCreateDTO,
+	TExpenseDTO,
 	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
@@ -19,6 +20,10 @@ import type {
 	IMonthlyExpensesByCategoryUseCase,
 	TMonthlyExpensesByCategory,
 } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
+import type {
+	IGroupExpenseByDateUseCase,
+	TExpenseGroupByDate,
+} from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
@@ -30,6 +35,7 @@ export class ExpenseService implements IExpenseService {
 		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
 		private readonly totalAmountUseCase: ITotalAmountUseCase,
 		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
+		private readonly groupExpenseByDateUseCase: IGroupExpenseByDateUseCase,
 	) {}
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
@@ -89,5 +95,9 @@ export class ExpenseService implements IExpenseService {
 		month: TMonth,
 	): TMonthlyExpensesByCategory[] {
 		return this.monthlyExpensesByCategoryUseCase.execute(month);
+	}
+
+	public groupExpenseByDate(expenses: TExpenseDTO[]): TExpenseGroupByDate[] {
+		return this.groupExpenseByDateUseCase.execute(expenses);
 	}
 }
