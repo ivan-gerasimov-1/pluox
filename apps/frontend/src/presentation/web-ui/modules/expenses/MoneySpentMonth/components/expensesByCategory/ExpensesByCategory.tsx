@@ -21,13 +21,11 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 	let intl = useIntl(expensesByCategoryI18n);
 	let { state: showAll, toggle: toggleShowAll } = useToggle(false);
 
+	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
-	let monthlyExpensesByCategoryUseCase = useService(
-		EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
-	);
 
-	let expenses = monthlyExpensesByCategoryUseCase.execute(props.month);
+	let expenses = expenseService.getMonthlyExpensesByCategory(props.month);
 	let expensesToRender = showAll ? expenses : expenses.slice(0, 3);
 	let showMoreButton = expenses.length >= 4;
 
