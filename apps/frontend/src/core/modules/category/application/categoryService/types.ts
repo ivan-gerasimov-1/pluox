@@ -9,4 +9,7 @@ export interface ICategoryService {
 
 	increaseWeight(id: Id): ICategoryService;
 	decreaseWeight(id: Id): ICategoryService;
+
+	getCategoryIcon(categoryId: string | null): string;
+	getCategoryName(categoryId: string | null): string;
 }

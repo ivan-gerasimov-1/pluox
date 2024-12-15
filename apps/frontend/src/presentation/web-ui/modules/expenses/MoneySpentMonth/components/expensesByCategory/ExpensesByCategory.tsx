@@ -2,7 +2,6 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 import { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
-import { getCategoryName } from '@domain/categories/getCategoryName';
 
 import { useToggle } from '@root/presentation/web-ui/hooks/useToggle';
 
@@ -22,6 +21,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 	let intl = useIntl(expensesByCategoryI18n);
 	let { state: showAll, toggle: toggleShowAll } = useToggle(false);
 
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let monthlyExpensesByCategoryUseCase = useService(
 		EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
@@ -43,7 +43,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 
 							<div className={styles.categoryInfo}>
 								<span className={styles.categoryName}>
-									{getCategoryName(id)}
+									{categoryService.getCategoryName(id)}
 								</span>
 
 								<span className={styles.categoryPercentage}>

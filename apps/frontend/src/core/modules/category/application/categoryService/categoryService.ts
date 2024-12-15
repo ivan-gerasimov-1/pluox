@@ -60,6 +60,34 @@ export class CategoryService implements ICategoryService {
 		return this;
 	}
 
+	public getCategoryIcon(categoryId: string | null): string {
+		return this.getCategoryProperty(categoryId, 'icon', '?');
+	}
+
+	public getCategoryName(categoryId: string | null): string {
+		return this.getCategoryProperty(categoryId, 'name', '—');
+	}
+
+	private getCategoryProperty(
+		categoryId: string | null,
+		property: 'name' | 'icon',
+		defaultValue: string,
+	): string {
+		if (!categoryId || categoryId === '—') {
+			return defaultValue;
+		}
+
+		let category = this.get(categoryId);
+
+		if (!category) {
+			return categoryId[0].toUpperCase();
+		}
+
+		let categoryDTO = category.toObject();
+
+		return Reflect.get(categoryDTO, property);
+	}
+
 	/**
 	 * @description
 	 * Sort categories by weight.

@@ -1,4 +1,5 @@
-import { getCategoryIcon } from '@domain/categories/getCategoryIcon';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
 import styles from './categoryIcon.module.css';
 
@@ -7,7 +8,11 @@ export type TCategoryIconProps = {
 };
 
 export function CategoryIcon(props: TCategoryIconProps) {
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
+
 	return (
-		<span className={styles.icon}>{getCategoryIcon(props.categoryId)}</span>
+		<span className={styles.icon}>
+			{categoryService.getCategoryIcon(props.categoryId)}
+		</span>
 	);
 }
