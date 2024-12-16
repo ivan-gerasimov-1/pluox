@@ -4,7 +4,7 @@ import { runMigrations } from '@root/migrations';
 import { runMockServiceWorker } from '@root/mockServiceWorker/run';
 import { registerServiceWorker } from '@root/serviceWorker';
 
-import { ECurrency } from '@root/core/modules/currency/types';
+import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import {
 	EServiceToken,

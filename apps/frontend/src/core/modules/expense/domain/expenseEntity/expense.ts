@@ -1,4 +1,4 @@
-import type { ECurrency } from '@root/core/modules/currency/types';
+import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import { Entity } from '@root/core/infrastructure/entity/entity';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TCategory, TComment, TISODateString } from '@domain/types';

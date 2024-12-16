@@ -1,4 +1,4 @@
-import { ECurrency } from '@root/core/modules/currency/types';
+import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import styles from './currencyInput.module.css';
 

@@ -1,4 +1,4 @@
-import { ECurrency } from '@root/core/modules/currency/types';
+import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';

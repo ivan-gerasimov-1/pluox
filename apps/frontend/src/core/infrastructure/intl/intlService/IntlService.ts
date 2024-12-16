@@ -1,5 +1,5 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
-import type { ECurrency } from '@root/core/modules/currency/types';
+import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import { DECIMAL_SEPARATORS } from '@core/infrastructure/intl/constants';
 import { formatCurrency } from '@core/infrastructure/intl/currency';
 import { formatDate } from '@core/infrastructure/intl/date';

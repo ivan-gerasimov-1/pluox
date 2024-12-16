@@ -4,7 +4,7 @@ import type {
 	TCategory,
 	TISODateString,
 } from '@root/core/domain/types';
-import type { ECurrency } from '@root/core/modules/currency/types';
+import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
 export type TExpenseDTO = {
 	id: Id;

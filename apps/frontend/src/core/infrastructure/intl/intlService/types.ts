@@ -1,4 +1,4 @@
-import type { ECurrency } from '@root/core/modules/currency/types';
+import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import type { ELocaleCode } from '@core/infrastructure/intl/enums';
 import type { TDecimalSeparator } from '@core/infrastructure/intl/types';
 
