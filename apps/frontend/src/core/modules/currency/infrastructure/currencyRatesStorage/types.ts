@@ -1,6 +1,8 @@
-import type { TCurrencyRates } from '@root/core/modules/currency/application/currencyRates/types';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type {
+	ECurrency,
+	TCurrencyRates,
+} from '@root/core/modules/currency/domain/types';
 
 export interface ICurrencyRatesStorage extends IDataSource<TCurrencyRates> {
 	getRates(): TCurrencyRates;

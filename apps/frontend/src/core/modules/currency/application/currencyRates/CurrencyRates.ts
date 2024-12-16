@@ -1,5 +1,7 @@
-import type { TCurrencyRates } from '@root/core/modules/currency/application/currencyRates/types';
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type {
+	ECurrency,
+	TCurrencyRates,
+} from '@root/core/modules/currency/domain/types';
 
 import type { ICurrencyRatesStorage } from '@root/core/modules/currency/infrastructure/currencyRatesStorage/types';
 

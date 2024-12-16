@@ -8,3 +8,5 @@ export enum ECurrency {
 	USD = 'USD',
 	THB = 'THB',
 }
+
+export type TCurrencyRates = Record<ECurrency, number>;
