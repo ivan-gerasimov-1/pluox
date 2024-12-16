@@ -4,7 +4,7 @@ import {
 	AppConfig,
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
-import { CurrencyConverter } from '@root/core/modules/currency/currencyConverter/currencyConverter';
+import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
 import { CurrencyRates } from '@root/core/modules/currency/currencyRates/CurrencyRates';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';

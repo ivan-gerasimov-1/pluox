@@ -1,4 +1,4 @@
-import type { ICurrencyConverter } from '@root/core/modules/currency/currencyConverter/types';
+import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import { getDateParts } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/helpers';

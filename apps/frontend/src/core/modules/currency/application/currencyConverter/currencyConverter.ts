@@ -1,4 +1,4 @@
-import type { ICurrencyConverter } from '@root/core/modules/currency/currencyConverter/types';
+import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ICurrencyRates } from '@root/core/modules/currency/currencyRates/CurrencyRates';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
