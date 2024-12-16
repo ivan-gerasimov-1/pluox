@@ -31,7 +31,6 @@ import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfi
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
-import { BaseApi } from '@root/core/infrastructure/baseApi/faseApi';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
@@ -49,6 +48,7 @@ import { ExpenseService } from '@root/core/modules/expense/application/expenseSe
 import { GroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
+import { BaseApi } from '@root/core/infrastructure/baseApi/_baseApi';
 
 let globalContainer: IContainer;
 
