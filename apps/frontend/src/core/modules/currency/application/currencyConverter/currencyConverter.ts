@@ -1,9 +1,9 @@
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRates } from '@root/core/modules/currency/application/currencyRates/CurrencyRates';
+import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/currencyRatesService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
-	constructor(private readonly currencyRates: ICurrencyRates) {}
+	constructor(private readonly currencyRates: ICurrencyRatesService) {}
 
 	/**
 	 * RUB → GEL = RUB → USD → GEL

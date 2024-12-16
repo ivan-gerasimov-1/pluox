@@ -8,7 +8,7 @@ import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 import type { IClientId } from '@core/infrastructure/clientId/types';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRates } from '@root/core/modules/currency/application/currencyRates/CurrencyRates';
+import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/currencyRatesService';
 import type { ICurrencyRatesAPI } from '@root/core/modules/currency/infrastructure/currencyRatesAPI/types';
 import type { ICurrencyRatesStorage } from '@root/core/modules/currency/infrastructure/currencyRatesStorage/types';
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
@@ -126,7 +126,7 @@ export interface IServiceMap {
 	[EServiceToken.USER_STORAGE]: IUserStorage;
 	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
 	[EServiceToken.CURRENCY_RATES_STORAGE]: ICurrencyRatesStorage;
-	[EServiceToken.CURRENCY_RATES]: ICurrencyRates;
+	[EServiceToken.CURRENCY_RATES]: ICurrencyRatesService;
 	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;
 	[EServiceToken.TEMPORAL]: ITemporal;
 	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;

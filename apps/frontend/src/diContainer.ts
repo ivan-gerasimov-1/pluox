@@ -5,7 +5,7 @@ import {
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
-import { CurrencyRates } from '@root/core/modules/currency/application/currencyRates/CurrencyRates';
+import { CurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/currencyRatesService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
@@ -174,7 +174,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			},
 			{
 				token: EServiceToken.CURRENCY_RATES,
-				useClass: CurrencyRates,
+				useClass: CurrencyRatesService,
 				deps: [EServiceToken.CURRENCY_RATES_STORAGE],
 			},
 			{
