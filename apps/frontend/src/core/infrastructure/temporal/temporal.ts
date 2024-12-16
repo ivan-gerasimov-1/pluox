@@ -3,10 +3,12 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import objectSupport from 'dayjs/plugin/objectSupport';
 
-import type { TISODateString } from '@root/core/domain/types';
-import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { IIntlService } from '@root/core/infrastructure/intl/intlService/types';
-import type { ITemporal } from '@root/core/infrastructure/temporal/types';
+import type {
+	ITemporal,
+	TISODateString,
+	TMonth,
+} from '@root/core/infrastructure/temporal/types';
 
 /**
  * @todo Load additional locales in IntlService

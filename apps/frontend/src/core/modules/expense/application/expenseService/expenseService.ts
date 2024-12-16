@@ -11,10 +11,6 @@ import type { IExpenseRepository } from '@root/core/modules/expense/domain/expen
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/deleteExpenseUseCase';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
-import type {
-	TYear,
-	TMonth,
-} from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
 import type {
 	IMonthlyExpensesByCategoryUseCase,
@@ -24,6 +20,7 @@ import type {
 	IGroupExpenseByDateUseCase,
 	TExpenseGroupByDate,
 } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
+import type { TYear, TMonth } from '@root/core/infrastructure/temporal/types';
 
 export class ExpenseService implements IExpenseService {
 	constructor(

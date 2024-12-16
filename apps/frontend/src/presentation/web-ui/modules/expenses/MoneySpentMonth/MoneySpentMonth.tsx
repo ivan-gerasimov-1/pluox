@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useStore } from 'zustand';
 
-import { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
+import type { TMonth } from '@root/core/infrastructure/temporal/types';
 
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { ExpensesByCategory } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';

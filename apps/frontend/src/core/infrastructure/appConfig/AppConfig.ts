@@ -1,10 +1,9 @@
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
-import { InvalidMonthError } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/errors';
-import { monthGuard } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/typeGuards';
-import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { TEnvironment } from '@root/config';
+import type { TMonth } from '@root/core/infrastructure/temporal/types';
+import { getCurrentMonth } from '@root/core/infrastructure/temporal/helpers';
 
 export interface IAppConfig {
 	locale: ELocaleCode;
@@ -94,12 +93,6 @@ export class AppConfig implements IAppConfig {
 	}
 
 	private getCurrentMonth(): TMonth {
-		const month = new Date().getMonth();
-
-		if (!monthGuard(month)) {
-			throw new InvalidMonthError(month);
-		}
-
-		return month;
+		return getCurrentMonth();
 	}
 }

@@ -1,4 +1,5 @@
 import type { Id } from '@root/core/domain/types';
+import type { TMonth } from '@root/core/infrastructure/temporal/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseDTO,
@@ -6,7 +7,6 @@ import type {
 } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { TExpenseGroupByDate } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import type { TMonthlyExpensesByCategory } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
-import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 
 export interface IExpenseService {
 	createExpense(payload: TExpenseCreateDTO): IExpenseService;

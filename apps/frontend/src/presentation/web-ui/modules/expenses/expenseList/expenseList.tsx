@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import type { Id, TISODateString } from '@domain/types';
+import type { Id } from '@domain/types';
+import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import {

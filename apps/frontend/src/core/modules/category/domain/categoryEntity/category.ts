@@ -1,7 +1,8 @@
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
-import type { Id, TISODateString } from '@root/core/domain/types';
+import type { Id } from '@root/core/domain/types';
 import { Entity } from '@root/core/infrastructure/entity/entity';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
+import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 
 export class Category extends Entity<TCategoryDTO> implements ICategory {
 	#id: Id;

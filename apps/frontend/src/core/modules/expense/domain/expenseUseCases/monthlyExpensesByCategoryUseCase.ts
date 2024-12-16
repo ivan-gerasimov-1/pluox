@@ -1,10 +1,12 @@
-import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { Id } from '@root/core/domain/types';
 import type { IUseCase } from '@root/core/domain/types';
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
-import { ITemporal } from '@root/core/infrastructure/temporal/types';
+import type {
+	ITemporal,
+	TMonth,
+} from '@root/core/infrastructure/temporal/types';
 
 export interface IMonthlyExpensesByCategoryUseCase extends IUseCase {
 	execute(month: TMonth): TMonthlyExpensesByCategory[];

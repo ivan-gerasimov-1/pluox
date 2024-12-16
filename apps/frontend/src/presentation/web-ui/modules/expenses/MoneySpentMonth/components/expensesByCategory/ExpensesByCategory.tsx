@@ -1,7 +1,7 @@
+import type { TMonth } from '@root/core/infrastructure/temporal/types';
+
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-
-import { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 
 import { useToggle } from '@root/presentation/web-ui/hooks/useToggle';
 

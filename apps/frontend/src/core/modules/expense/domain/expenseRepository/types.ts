@@ -1,4 +1,5 @@
-import type { Id, TISODateString } from '@root/core/domain/types';
+import type { Id } from '@root/core/domain/types';
+import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 

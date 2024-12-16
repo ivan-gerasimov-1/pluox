@@ -1,8 +1,9 @@
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import { Entity } from '@root/core/infrastructure/entity/entity';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
-import type { Id, TCategory, TComment, TISODateString } from '@domain/types';
+import type { Id, TCategory, TComment } from '@domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 
 export class Expense extends Entity<TExpenseDTO> implements IExpense {
 	readonly #amount: number;

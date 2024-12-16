@@ -1,5 +1,12 @@
-import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
-import type { TISODateString } from '@root/core/domain/types';
+export type TISODateString = string;
+
+export type TMonth = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+export type TYear = number;
+
+export type TDateParts = {
+	month: TMonth;
+	year: TYear;
+};
 
 export interface ITemporal {
 	getMonth(month?: TMonth): string;

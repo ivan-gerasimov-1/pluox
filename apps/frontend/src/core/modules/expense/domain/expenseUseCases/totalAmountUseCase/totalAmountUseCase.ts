@@ -1,9 +1,9 @@
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
-import { getDateParts } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/helpers';
-import type { TDateParts } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { TDateParts } from '@root/core/infrastructure/temporal/types';
+import { getDateParts } from '@root/core/infrastructure/temporal/helpers';
 
 export interface ITotalAmountUseCase {
 	run(dateParts: Partial<TDateParts>, currency: ECurrency): number;
