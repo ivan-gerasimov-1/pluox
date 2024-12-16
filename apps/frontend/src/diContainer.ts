@@ -31,7 +31,7 @@ import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfi
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
-import { BaseApi } from '@core/infrastructure/baseApi/BaseApi';
+import { BaseApi } from '@root/core/infrastructure/baseApi/faseApi';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
