@@ -1,4 +1,4 @@
-import type { TCurrencyRates } from '@root/core/modules/currency/currencyRates/types';
+import type { TCurrencyRates } from '@root/core/modules/currency/application/currencyRates/types';
 import type { ICurrencyRatesAPI } from '@root/core/modules/currency/infrastructure/currencyRatesAPI/types';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 

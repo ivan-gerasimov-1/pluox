@@ -8,7 +8,7 @@ import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 import type { IClientId } from '@core/infrastructure/clientId/types';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRates } from '@root/core/modules/currency/currencyRates/CurrencyRates';
+import type { ICurrencyRates } from '@root/core/modules/currency/application/currencyRates/CurrencyRates';
 import type { ICurrencyRatesAPI } from '@root/core/modules/currency/infrastructure/currencyRatesAPI/types';
 import type { ICurrencyRatesStorage } from '@root/core/modules/currency/currencyRatesStorage/types';
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';

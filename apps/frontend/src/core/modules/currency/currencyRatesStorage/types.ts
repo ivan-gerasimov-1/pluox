@@ -1,4 +1,4 @@
-import type { TCurrencyRates } from '@root/core/modules/currency/currencyRates/types';
+import type { TCurrencyRates } from '@root/core/modules/currency/application/currencyRates/types';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
