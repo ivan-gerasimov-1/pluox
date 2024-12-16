@@ -34,7 +34,7 @@ import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
-import { CurrencyRatesStorage } from '@root/core/modules/currency/currencyRatesStorage/CurrencyRatesStorage';
+import { CurrencyRatesStorage } from '@root/core/modules/currency/infrastructure/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
 import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';

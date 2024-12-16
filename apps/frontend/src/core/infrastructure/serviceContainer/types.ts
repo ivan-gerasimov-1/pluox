@@ -10,7 +10,7 @@ import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/type
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ICurrencyRates } from '@root/core/modules/currency/application/currencyRates/CurrencyRates';
 import type { ICurrencyRatesAPI } from '@root/core/modules/currency/infrastructure/currencyRatesAPI/types';
-import type { ICurrencyRatesStorage } from '@root/core/modules/currency/currencyRatesStorage/types';
+import type { ICurrencyRatesStorage } from '@root/core/modules/currency/infrastructure/currencyRatesStorage/types';
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
