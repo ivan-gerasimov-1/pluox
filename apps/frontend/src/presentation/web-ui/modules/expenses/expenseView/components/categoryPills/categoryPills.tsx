@@ -13,7 +13,7 @@ export function CategoryPills(props: TCategoryPillsProps) {
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 	let categories = useMemo(
 		() =>
-			categoryService.list({
+			categoryService.findAll({
 				useWeights: true,
 			}),
 		[],

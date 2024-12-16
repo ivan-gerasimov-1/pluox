@@ -47,6 +47,8 @@ import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/exp
 import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
 import { GroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
+import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
+import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
 
 let globalContainer: IContainer;
 
@@ -267,14 +269,27 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 */
 		.register(
 			{
+				token: EServiceToken.CATEGORY_DATASOURCE,
+				useClass: CategoryInMemoryDataSource,
+			},
+			{
+				token: EServiceToken.CATEGORY_REPOSITORY,
+				useClass: CategoryRepository,
+				deps: [EServiceToken.CATEGORY_DATASOURCE],
+			},
+			{
 				token: EServiceToken.CATEGORY_SERVICE_FACTORY,
 				useClass: CategoryServiceFactory,
-				deps: [EServiceToken.TEMPORAL, EServiceToken.EXPENSE_REPOSITORY],
+				deps: [
+					EServiceToken.CATEGORY_REPOSITORY,
+					EServiceToken.TEMPORAL,
+					EServiceToken.EXPENSE_REPOSITORY,
+				],
 			},
 			{
 				token: EServiceToken.CATEGORY_SERVICE,
-				useFactory: (categoriesFactory: ICategoryServiceFactory) => {
-					return categoriesFactory.create();
+				useFactory: (categoryServiceFactory: ICategoryServiceFactory) => {
+					return categoryServiceFactory.create();
 				},
 				deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
 			},

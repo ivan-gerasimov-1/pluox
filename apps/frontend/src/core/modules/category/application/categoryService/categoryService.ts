@@ -2,74 +2,80 @@ import type { ICategoryService } from '@root/core/modules/category/application/c
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 import type { Id } from '@domain/types';
+import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
+import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
+import { CategoryNotFoundError } from '@root/core/modules/category/application/categoryService/errors';
 
 export class CategoryService implements ICategoryService {
-	private readonly categories: Map<Id, ICategory>;
+	constructor(private readonly categoryRepository: ICategoryRepository) {}
 
-	constructor() {
-		this.categories = new Map<Id, ICategory>();
-	}
-
-	public add(category: ICategory): ICategoryService {
-		this.categories.set(category.id, category);
+	public create(category: ICategory): ICategoryService {
+		this.categoryRepository.create(category);
 
 		return this;
 	}
 
-	public remove(id: Id) {
-		this.categories.delete(id);
+	public findAll(params?: { useWeights?: boolean }): TCategoryDTO[] {
+		let result = this.categoryRepository.findMany({
+			orderByWeight: params?.useWeights,
+		});
+
+		return result.items;
 	}
 
-	public list(params?: { useWeights?: boolean }): TCategoryDTO[] {
-		let categoryList: TCategoryDTO[] = [];
-
-		for (let category of this.categories.values()) {
-			categoryList.push(category.toObject());
-		}
-
-		if (params?.useWeights) {
-			this.sortByWeight(categoryList);
-		}
-
-		return categoryList;
-	}
-
-	public get(id: Id): ICategory {
-		let category = this.categories.get(id);
+	public findById(id: Id): ICategory {
+		let category = this.categoryRepository.findById(id);
 
 		if (!category) {
-			throw new Error('Not Found');
+			throw new CategoryNotFoundError(id);
 		}
 
-		return category;
+		return Category.create(
+			category.id,
+			category.name,
+			category.icon,
+			category.weight,
+			category.createdAt,
+			category.modifiedAt,
+		);
+	}
+
+	public remove(id: Id): ICategoryService {
+		this.categoryRepository.remove(id);
+
+		return this;
 	}
 
 	public increaseWeight(id: Id) {
-		let category = this.get(id);
+		let category = this.findById(id);
 
 		category.increaseWeight();
+
+		this.categoryRepository.update(category);
 
 		return this;
 	}
 
 	public decreaseWeight(id: Id) {
-		let category = this.get(id);
+		let category = this.findById(id);
 
 		category.decreaseWeight();
+
+		this.categoryRepository.update(category);
 
 		return this;
 	}
 
-	public getCategoryIcon(categoryId: string | null): string {
+	public getCategoryIcon(categoryId: Id | null): string {
 		return this.getCategoryProperty(categoryId, 'icon', '?');
 	}
 
-	public getCategoryName(categoryId: string | null): string {
+	public getCategoryName(categoryId: Id | null): string {
 		return this.getCategoryProperty(categoryId, 'name', '—');
 	}
 
 	private getCategoryProperty(
-		categoryId: string | null,
+		categoryId: Id | null,
 		property: 'name' | 'icon',
 		defaultValue: string,
 	): string {
@@ -77,7 +83,7 @@ export class CategoryService implements ICategoryService {
 			return defaultValue;
 		}
 
-		let category = this.get(categoryId);
+		let category = this.findById(categoryId);
 
 		if (!category) {
 			return categoryId[0].toUpperCase();
@@ -86,24 +92,5 @@ export class CategoryService implements ICategoryService {
 		let categoryDTO = category.toObject();
 
 		return Reflect.get(categoryDTO, property);
-	}
-
-	/**
-	 * @description
-	 * Sort categories by weight.
-	 * WARNING: this method mutates the original array
-	 */
-	private sortByWeight(categoryList: TCategoryDTO[]): TCategoryDTO[] {
-		return categoryList.sort((aCategory, bCategory) => {
-			if (aCategory.weight > bCategory.weight) {
-				return -1;
-			}
-
-			if (aCategory.weight < bCategory.weight) {
-				return 1;
-			}
-
-			return 0;
-		});
 	}
 }

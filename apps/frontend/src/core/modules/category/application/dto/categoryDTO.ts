@@ -1,4 +1,4 @@
-import type { Id } from '@root/core/domain/types';
+import type { Id, TISODateString } from '@root/core/domain/types';
 
 export type TCategoryCreateDTO = {
 	id: Id;
@@ -11,4 +11,6 @@ export type TCategoryDTO = {
 	name: string;
 	icon: string;
 	weight: number;
+	createdAt: TISODateString;
+	modifiedAt: TISODateString;
 };

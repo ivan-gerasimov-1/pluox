@@ -58,6 +58,8 @@ export class Category extends Entity<TCategoryDTO> implements ICategory {
 			name: this.#name,
 			icon: this.#icon,
 			weight: this.#weight,
+			createdAt: this.createdAt,
+			modifiedAt: this.modifiedAt,
 		};
 	}
 }

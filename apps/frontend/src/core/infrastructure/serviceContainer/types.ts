@@ -31,6 +31,8 @@ import type { IExpenseService } from '@root/core/modules/expense/application/exp
 import type { ICategoryServiceFactory } from '@root/core/modules/category/application/categoryService/factory';
 import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
 import type { IGroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
+import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
+import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -70,6 +72,8 @@ export enum EServiceToken {
 	CLIENT_ID = 'ClientId',
 	CATEGORY_SERVICE_FACTORY = 'CategoryServiceFactory',
 	CATEGORY_SERVICE = 'CategoryService',
+	CATEGORY_REPOSITORY = 'CategoryRepository',
+	CATEGORY_DATASOURCE = 'CategoryDataSource',
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
 	EXPENSE_SERVICE = 'ExpenseService',
@@ -106,6 +110,8 @@ export interface IServiceMap {
 	[EServiceToken.CLIENT_ID]: IClientId;
 	[EServiceToken.CATEGORY_SERVICE_FACTORY]: () => ICategoryServiceFactory;
 	[EServiceToken.CATEGORY_SERVICE]: ICategoryService;
+	[EServiceToken.CATEGORY_REPOSITORY]: ICategoryRepository;
+	[EServiceToken.CATEGORY_DATASOURCE]: ICategoryDataSource;
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
 	[EServiceToken.EXPENSE_SERVICE]: IExpenseService;
