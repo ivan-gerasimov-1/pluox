@@ -31,7 +31,7 @@ export type TExpenseListProps = {
 
 export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
-	let currencyConverter = useService(EServiceToken.CURRENCY_CONVERTER);
+	let currencyRatesService = useService(EServiceToken.CURRENCY_RATES_SERVICE);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let queryClient = useQueryClient();
 
@@ -128,7 +128,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 										<span className={styles.expenseInMainCurrency}>
 											{intlService.formatCurrency(
-												currencyConverter.convert(
+												currencyRatesService.convert(
 													item.amount,
 													item.currency,
 													intlService.currency,

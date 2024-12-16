@@ -1,4 +1,4 @@
-import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
+import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
@@ -12,7 +12,7 @@ export interface ITotalAmountUseCase {
 export class TotalAmountUseCase implements ITotalAmountUseCase {
 	constructor(
 		private readonly expenseRepository: IExpenseRepository,
-		private readonly currencyConverter: ICurrencyConverter,
+		private readonly currencyRatesService: ICurrencyRatesService,
 	) {}
 
 	public run(dateParts: TDateParts, currency: ECurrency) {
@@ -47,7 +47,7 @@ export class TotalAmountUseCase implements ITotalAmountUseCase {
 				continue;
 			}
 
-			total += this.currencyConverter.convert(
+			total += this.currencyRatesService.convert(
 				amount,
 				expenseCurrency,
 				currency,

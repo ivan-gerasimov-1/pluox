@@ -1,22 +1,19 @@
-import type {
-	ECurrency,
-	TCurrencyRates,
-} from '@root/core/modules/currency/domain/types';
-
+import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/types';
 import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
-
-export interface ICurrencyRatesService {
-	get(currency: ECurrency): number;
-}
+import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 
 export class CurrencyRatesService implements ICurrencyRatesService {
-	readonly #rates: TCurrencyRates;
-
-	constructor(currencyRatesStorage: ICurrencyRatesDataSource) {
-		this.#rates = currencyRatesStorage.findAll();
-	}
+	constructor(
+		private readonly currencyRatesDataSource: ICurrencyRatesDataSource,
+		private readonly currencyConverter: ICurrencyConverter,
+	) {}
 
 	public get(currency: ECurrency): number {
-		return this.#rates[currency];
+		return this.currencyRatesDataSource.find(currency);
+	}
+
+	public convert(amount: number, from: ECurrency, to: ECurrency): number {
+		return this.currencyConverter.convert(amount, from, to);
 	}
 }

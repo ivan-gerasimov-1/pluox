@@ -1,7 +1,7 @@
 import type { Id } from '@root/core/domain/types';
 import type { IUseCase } from '@root/core/domain/types';
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
-import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
+import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type {
 	ITemporal,
@@ -24,7 +24,7 @@ export class MonthlyExpensesByCategoryUseCase
 	constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly expenseRepository: IExpenseRepository,
-		private readonly currencyConverter: ICurrencyConverter,
+		private readonly currencyRatesService: ICurrencyRatesService,
 		private readonly temporal: ITemporal,
 	) {}
 
@@ -69,7 +69,7 @@ export class MonthlyExpensesByCategoryUseCase
 				};
 			}
 
-			expensesByCategory[category].total += this.currencyConverter.convert(
+			expensesByCategory[category].total += this.currencyRatesService.convert(
 				expense.amount,
 				expense.currency,
 				currency,

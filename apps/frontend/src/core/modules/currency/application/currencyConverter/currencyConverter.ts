@@ -1,9 +1,12 @@
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/currencyRatesService';
+import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
+
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
-	constructor(private readonly currencyRates: ICurrencyRatesService) {}
+	constructor(
+		private readonly currencyRatesDataSource: ICurrencyRatesDataSource,
+	) {}
 
 	/**
 	 * RUB → GEL = RUB → USD → GEL
@@ -24,10 +27,10 @@ export class CurrencyConverter implements ICurrencyConverter {
 			return amountInUsd;
 		}
 
-		return amountInUsd * this.currencyRates.get(to);
+		return amountInUsd * this.currencyRatesDataSource.find(to);
 	}
 
 	private convertToUsd(amount: number, from: ECurrency): number {
-		return amount / this.currencyRates.get(from);
+		return amount / this.currencyRatesDataSource.find(from);
 	}
 }

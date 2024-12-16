@@ -173,12 +173,15 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CURRENCY_RATES_SERVICE,
 				useClass: CurrencyRatesService,
-				deps: [EServiceToken.CURRENCY_RATES_DATASOURCE],
+				deps: [
+					EServiceToken.CURRENCY_RATES_DATASOURCE,
+					EServiceToken.CURRENCY_CONVERTER,
+				],
 			},
 			{
 				token: EServiceToken.CURRENCY_CONVERTER,
 				useClass: CurrencyConverter,
-				deps: [EServiceToken.CURRENCY_RATES_SERVICE],
+				deps: [EServiceToken.CURRENCY_RATES_DATASOURCE],
 			},
 			{
 				token: EServiceToken.CURRENCY_RATES_API,
@@ -224,7 +227,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [
 					EServiceToken.APP_CONFIG,
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CURRENCY_CONVERTER,
+					EServiceToken.CURRENCY_RATES_SERVICE,
 					EServiceToken.TEMPORAL,
 				],
 			},
@@ -233,7 +236,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: TotalAmountUseCase,
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CURRENCY_CONVERTER,
+					EServiceToken.CURRENCY_RATES_SERVICE,
 				],
 			},
 			{
