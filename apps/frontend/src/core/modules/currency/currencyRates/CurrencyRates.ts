@@ -1,7 +1,7 @@
-import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
-import type { ECurrency } from '@core/infrastructure/currency/types';
+import type { TCurrencyRates } from '@root/core/modules/currency/currencyRates/types';
+import type { ECurrency } from '@root/core/modules/currency/types';
 
-import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
+import type { ICurrencyRatesStorage } from '@root/core/modules/currency/currencyRatesStorage/types';
 
 export interface ICurrencyRates {
 	get(currency: ECurrency): number;

@@ -4,9 +4,9 @@ import {
 	AppConfig,
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
-import { CurrencyConverter } from '@core/infrastructure/currency/currencyConverter/currencyConverter';
-import { CurrencyRates } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
-import { ECurrency } from '@core/infrastructure/currency/types';
+import { CurrencyConverter } from '@root/core/modules/currency/currencyConverter/currencyConverter';
+import { CurrencyRates } from '@root/core/modules/currency/currencyRates/CurrencyRates';
+import { ECurrency } from '@root/core/modules/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
 
@@ -29,12 +29,12 @@ import {
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
-import { CurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/CurrencyRatesAPI';
+import { CurrencyRatesAPI } from '@root/core/modules/currency/currencyRatesAPI/CurrencyRatesAPI';
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
-import { CurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/CurrencyRatesStorage';
+import { CurrencyRatesStorage } from '@root/core/modules/currency/currencyRatesStorage/CurrencyRatesStorage';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
 import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';

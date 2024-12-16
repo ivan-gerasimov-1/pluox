@@ -1,5 +1,5 @@
-import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
-import type { ECurrency } from '@core/infrastructure/currency/types';
+import type { ICurrencyConverter } from '@root/core/modules/currency/currencyConverter/types';
+import type { ECurrency } from '@root/core/modules/currency/types';
 
 import { getDateParts } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/helpers';
 import type { TDateParts } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/types';

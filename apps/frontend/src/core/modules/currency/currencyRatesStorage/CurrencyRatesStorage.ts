@@ -1,8 +1,8 @@
-import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
-import { CurrencyRatesNotAvailableError } from '@core/infrastructure/currency/currencyRatesStorage/errors';
-import type { ICurrencyRatesStorage } from '@core/infrastructure/currency/currencyRatesStorage/types';
+import type { TCurrencyRates } from '@root/core/modules/currency/currencyRates/types';
+import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/currencyRatesStorage/errors';
+import type { ICurrencyRatesStorage } from '@root/core/modules/currency/currencyRatesStorage/types';
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { ECurrency } from '@core/infrastructure/currency/types';
+import type { ECurrency } from '@root/core/modules/currency/types';
 
 export class CurrencyRatesStorage
 	extends LocalStorageDataSource<TCurrencyRates>

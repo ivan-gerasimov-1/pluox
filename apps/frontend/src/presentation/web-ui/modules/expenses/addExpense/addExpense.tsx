@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { ECurrency } from '@core/infrastructure/currency/types';
+import { ECurrency } from '@root/core/modules/currency/types';
 import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/addExpense/helpers/createDateViewValue';
 import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/expenseView/expenseForm';
 import {

@@ -1,4 +1,4 @@
-import { ECurrency } from '@core/infrastructure/currency/types';
+import { ECurrency } from '@root/core/modules/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 import { InvalidMonthError } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/errors';

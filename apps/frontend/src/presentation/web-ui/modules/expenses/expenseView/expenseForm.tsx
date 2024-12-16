@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 
-import { ECurrency } from '@core/infrastructure/currency/types';
+import { ECurrency } from '@root/core/modules/currency/types';
 
 import type { TCategory, TComment, TISODateString } from '@domain/types';
 

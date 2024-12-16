@@ -1,6 +1,6 @@
-import type { TCurrencyRates } from '@core/infrastructure/currency/currencyRates/types';
-import type { ICurrencyRatesAPI } from '@core/infrastructure/currency/currencyRatesAPI/types';
-import { ECurrency } from '@core/infrastructure/currency/types';
+import type { TCurrencyRates } from '@root/core/modules/currency/currencyRates/types';
+import type { ICurrencyRatesAPI } from '@root/core/modules/currency/currencyRatesAPI/types';
+import { ECurrency } from '@root/core/modules/currency/types';
 
 export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 	readonly #apiEndpoint: string;

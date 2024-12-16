@@ -1,6 +1,6 @@
-import type { ICurrencyConverter } from '@core/infrastructure/currency/currencyConverter/types';
-import type { ICurrencyRates } from '@core/infrastructure/currency/currencyRates/CurrencyRates';
-import { ECurrency } from '@core/infrastructure/currency/types';
+import type { ICurrencyConverter } from '@root/core/modules/currency/currencyConverter/types';
+import type { ICurrencyRates } from '@root/core/modules/currency/currencyRates/CurrencyRates';
+import { ECurrency } from '@root/core/modules/currency/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
 	constructor(private readonly currencyRates: ICurrencyRates) {}

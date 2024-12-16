@@ -3,7 +3,7 @@ import { useStore } from 'zustand';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import { ECurrency } from '@core/infrastructure/currency/types';
+import { ECurrency } from '@root/core/modules/currency/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
 
