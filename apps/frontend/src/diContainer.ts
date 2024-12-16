@@ -184,13 +184,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			},
 			{
 				token: EServiceToken.CURRENCY_RATES_API,
-				useFactory: (appConfig: IAppConfig) => {
-					return new CurrencyRatesAPI(
-						appConfig.openExchangeRates.apiUrl,
-						appConfig.openExchangeRates.apiKey,
-						appConfig.availabelCurrencies,
-					);
-				},
+				useClass: CurrencyRatesAPI,
 				deps: [EServiceToken.APP_CONFIG],
 			},
 		)

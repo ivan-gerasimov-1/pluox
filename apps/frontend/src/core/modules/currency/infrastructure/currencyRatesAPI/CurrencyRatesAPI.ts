@@ -3,31 +3,32 @@ import type {
 	ECurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
+import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 
 export class CurrencyRatesAPI implements ICurrencyRatesAPI {
-	readonly #apiEndpoint: string;
-	readonly #apiKey: string;
-	readonly #availableCurrencies: ECurrency[];
+	constructor(private readonly appConfig: IAppConfig) {}
 
-	constructor(
-		apiEndpoint: string,
-		apiKey: string,
-		availableCurrencies: ECurrency[],
-	) {
-		this.#apiEndpoint = apiEndpoint;
-		this.#apiKey = apiKey;
-		this.#availableCurrencies = availableCurrencies;
+	private get apiEndpoint(): string {
+		return this.appConfig.openExchangeRates.apiUrl;
+	}
+
+	private get apiKey(): string {
+		return this.appConfig.openExchangeRates.apiKey;
+	}
+
+	private get availableCurrencies(): ECurrency[] {
+		return this.appConfig.availabelCurrencies;
 	}
 
 	public async get(): Promise<TCurrencyRates> {
 		let queryParams = this.makeQueryParams();
 
 		let response = await window.fetch(
-			`${this.#apiEndpoint}/latest.json${queryParams}`,
+			`${this.apiEndpoint}/latest.json${queryParams}`,
 			{
 				method: 'GET',
 				headers: {
-					Authorization: `Token ${this.#apiKey}`,
+					Authorization: `Token ${this.apiKey}`,
 				},
 			},
 		);
@@ -40,7 +41,7 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 	private makeQueryParams(): string {
 		let query = '?';
 		let queryParams = {
-			symbols: this.#availableCurrencies.join(','),
+			symbols: this.availableCurrencies.join(','),
 			prettyprint: 0,
 		};
 
