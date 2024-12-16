@@ -27,14 +27,14 @@ export class AppConfig implements IAppConfig {
 	#availableCurrencies: ECurrency[];
 	#budget: number | null;
 
-	#currentMonth: TMonth;
+	public readonly currentMonth: TMonth;
 
-	#openExchangeRates: {
+	public readonly openExchangeRates: {
 		apiUrl: string;
 		apiKey: string;
 	};
 
-	#apiUrl: string;
+	public readonly apiUrl: string;
 
 	constructor(
 		environment: TEnvironment,
@@ -51,14 +51,14 @@ export class AppConfig implements IAppConfig {
 			ECurrency.THB,
 		];
 		this.#budget = 4800;
-		this.#currentMonth = this.getCurrentMonth();
+		this.currentMonth = this.getCurrentMonth();
 
-		this.#openExchangeRates = {
+		this.openExchangeRates = {
 			apiUrl: 'https://openexchangerates.org/api',
 			apiKey: 'fd33278c63404c26b51d7d37ae50731d',
 		};
 
-		this.#apiUrl = environment.apiUrl;
+		this.apiUrl = environment.apiUrl;
 	}
 
 	public get locale(): ELocaleCode {
@@ -91,21 +91,6 @@ export class AppConfig implements IAppConfig {
 
 	public set budget(value: number | null) {
 		this.#budget = value;
-	}
-
-	public get currentMonth(): TMonth {
-		return this.#currentMonth;
-	}
-
-	public get openExchangeRates(): {
-		apiUrl: string;
-		apiKey: string;
-	} {
-		return this.#openExchangeRates;
-	}
-
-	public get apiUrl(): string {
-		return this.#apiUrl;
 	}
 
 	private getCurrentMonth(): TMonth {
