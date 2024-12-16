@@ -71,9 +71,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.APP_CONFIG,
 				useFactory: (environment: TEnvironment) => {
-					let apiUrl = environment.apiUrl;
-
-					return new AppConfig(ELocaleCode.RU_RU, ECurrency.USD, apiUrl);
+					return new AppConfig(environment, ELocaleCode.RU_RU, ECurrency.USD);
 				},
 				deps: [EServiceToken.ENVIRONMENT],
 			},
