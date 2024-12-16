@@ -34,7 +34,7 @@ import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
-import { CurrencyRatesStorage } from '@root/core/modules/currency/infrastructure/currencyRatesStorage/CurrencyRatesStorage';
+import { CurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/currencyRatesDataSource';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
 import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';
@@ -169,18 +169,18 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 */
 		.register(
 			{
-				token: EServiceToken.CURRENCY_RATES_STORAGE,
-				useClass: CurrencyRatesStorage,
+				token: EServiceToken.CURRENCY_RATES_DATASOURCE,
+				useClass: CurrencyRatesDataSource,
 			},
 			{
-				token: EServiceToken.CURRENCY_RATES,
+				token: EServiceToken.CURRENCY_RATES_SERVICE,
 				useClass: CurrencyRatesService,
-				deps: [EServiceToken.CURRENCY_RATES_STORAGE],
+				deps: [EServiceToken.CURRENCY_RATES_DATASOURCE],
 			},
 			{
 				token: EServiceToken.CURRENCY_CONVERTER,
 				useClass: CurrencyConverter,
-				deps: [EServiceToken.CURRENCY_RATES],
+				deps: [EServiceToken.CURRENCY_RATES_SERVICE],
 			},
 			{
 				token: EServiceToken.CURRENCY_RATES_API,
@@ -208,7 +208,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: ExpenseDataSource,
 			},
 			{
-				token: EServiceToken.EXPENSES_API,
+				token: EServiceToken.EXPENSE_API,
 				useClass: ExpenseApi,
 				deps: [EServiceToken.BASE_API],
 			},

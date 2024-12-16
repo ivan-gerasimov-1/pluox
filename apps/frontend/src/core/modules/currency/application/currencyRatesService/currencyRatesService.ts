@@ -3,7 +3,7 @@ import type {
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
 
-import type { ICurrencyRatesStorage } from '@root/core/modules/currency/infrastructure/currencyRatesStorage/types';
+import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
 
 export interface ICurrencyRatesService {
 	get(currency: ECurrency): number;
@@ -12,8 +12,8 @@ export interface ICurrencyRatesService {
 export class CurrencyRatesService implements ICurrencyRatesService {
 	readonly #rates: TCurrencyRates;
 
-	constructor(currencyRatesStorage: ICurrencyRatesStorage) {
-		this.#rates = currencyRatesStorage.getRates();
+	constructor(currencyRatesStorage: ICurrencyRatesDataSource) {
+		this.#rates = currencyRatesStorage.findAll();
 	}
 
 	public get(currency: ECurrency): number {
