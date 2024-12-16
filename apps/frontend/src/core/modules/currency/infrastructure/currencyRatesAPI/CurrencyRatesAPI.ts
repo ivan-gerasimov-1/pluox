@@ -17,7 +17,7 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 	}
 
 	private get availableCurrencies(): ECurrency[] {
-		return this.appConfig.availabelCurrencies;
+		return this.appConfig.availableCurrencies;
 	}
 
 	public async get(): Promise<TCurrencyRates> {

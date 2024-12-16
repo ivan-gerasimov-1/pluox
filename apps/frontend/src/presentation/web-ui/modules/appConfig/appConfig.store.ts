@@ -21,7 +21,7 @@ export class AppConfigStore implements IAppConfigStore {
 				locale: this.appConfig.locale,
 				budget: this.appConfig.budget,
 				currency: this.appConfig.currency,
-				availabelCurrencies: this.appConfig.availabelCurrencies,
+				availabelCurrencies: this.appConfig.availableCurrencies,
 			};
 		});
 	}

@@ -30,7 +30,7 @@ export class AppConfigService implements IAppConfigService {
 			locale: this.appConfig.locale,
 			budget: this.appConfig.budget,
 			currency: this.appConfig.currency,
-			availabelCurrencies: this.appConfig.availabelCurrencies,
+			availabelCurrencies: this.appConfig.availableCurrencies,
 		};
 
 		this.appConfigStorage.update(nextConfig);

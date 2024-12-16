@@ -8,8 +8,9 @@ import type { TMonth } from '@root/core/modules/expense/domain/expenseUseCases/t
 export interface IAppConfig {
 	locale: ELocaleCode;
 	currency: ECurrency;
-	availabelCurrencies: ECurrency[];
+	availableCurrencies: ECurrency[];
 	budget: number | null;
+
 	readonly currentMonth: TMonth;
 	readonly apiUrl: string;
 
@@ -71,11 +72,11 @@ export class AppConfig implements IAppConfig {
 		this.#currency = value;
 	}
 
-	public get availabelCurrencies(): ECurrency[] {
+	public get availableCurrencies(): ECurrency[] {
 		return this.#availableCurrencies;
 	}
 
-	public set availabelCurrencies(value: ECurrency[]) {
+	public set availableCurrencies(value: ECurrency[]) {
 		this.#availableCurrencies = value;
 	}
 
