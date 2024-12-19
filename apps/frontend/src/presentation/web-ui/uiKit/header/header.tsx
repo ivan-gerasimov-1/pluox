@@ -1,4 +1,4 @@
-import { useMatch, useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router';
 
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 

@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router';
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { IRouter } from '@root/presentation/web-ui/router';
@@ -31,12 +31,7 @@ export function App(props: IAppProps) {
 		<StrictMode>
 			<ContainerProvider container={props.diContainer}>
 				<QueryClientProvider client={props.queryClient}>
-					<RouterProvider
-						router={props.router}
-						future={{
-							v7_startTransition: true,
-						}}
-					/>
+					<RouterProvider router={props.router} />
 				</QueryClientProvider>
 			</ContainerProvider>
 		</StrictMode>
