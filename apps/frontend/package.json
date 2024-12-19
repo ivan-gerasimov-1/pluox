@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"analyze": "npm run analyze:production",
-		"analyze:production": "cross-env BUNDLE_ANALYZER='on' vite build --mode production",
+		"analyze:production": "BUNDLE_ANALYZER='on' vite build --mode production",
 		"build": "npm run build:production",
 		"build:development": "vite build --mode development",
 		"build:production": "vite build --mode production",
