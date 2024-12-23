@@ -1,11 +1,11 @@
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
+import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
 	constructor(
-		private readonly currencyRatesDataSource: ICurrencyRatesDataSource,
+		private readonly currencyRateRepository: ICurrencyRateRepository,
 	) {}
 
 	/**
@@ -27,10 +27,10 @@ export class CurrencyConverter implements ICurrencyConverter {
 			return amountInUsd;
 		}
 
-		return amountInUsd * this.currencyRatesDataSource.find(to);
+		return amountInUsd * this.currencyRateRepository.findByCode(to).rate;
 	}
 
 	private convertToUsd(amount: number, from: ECurrency): number {
-		return amount / this.currencyRatesDataSource.find(from);
+		return amount / this.currencyRateRepository.findByCode(from).rate;
 	}
 }

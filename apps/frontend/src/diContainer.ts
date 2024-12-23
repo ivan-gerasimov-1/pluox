@@ -187,7 +187,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CURRENCY_CONVERTER,
 				useClass: CurrencyConverter,
-				deps: [EServiceToken.CURRENCY_RATES_DATASOURCE],
+				deps: [EServiceToken.CURRENCY_RATE_REPOSITORY],
 			},
 			{
 				token: EServiceToken.CURRENCY_RATES_API,
