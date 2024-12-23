@@ -67,7 +67,7 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	private cleareStorages(): void {
-		this.authStorage.delete();
-		this.userStorage.delete();
+		this.authStorage.clean();
+		this.userStorage.clean();
 	}
 }

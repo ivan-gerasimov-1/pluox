@@ -47,7 +47,7 @@ export class LocalStorageDataSource<T extends {}> implements IDataSource<T> {
 		return this.parseSafe(rawData);
 	}
 
-	public delete(): void {
+	public clean(): void {
 		window.localStorage.removeItem(this.#id);
 	}
 

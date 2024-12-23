@@ -115,7 +115,8 @@ export class ExpenseDataSource
 	 * 2. Return to update
 	 */
 	private setItems(values: Record<Id, TExpenseDTO>): IExpenseDataSource {
-		this.delete();
+		this.clean();
+
 		this.create({
 			state: {
 				operations: values,
