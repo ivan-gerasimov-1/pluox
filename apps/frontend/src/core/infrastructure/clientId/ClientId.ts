@@ -9,9 +9,9 @@ export class ClientId implements IClientId {
 
 	constructor(
 		private readonly idGenerator: IIdGenerator,
-		private readonly storage: IClientIdDataSource,
+		private readonly dataSource: IClientIdDataSource,
 	) {
-		this.#clientId = storage.read() || this.createId();
+		this.#clientId = dataSource.read() || this.createId();
 	}
 
 	public get(): Id {
@@ -21,7 +21,7 @@ export class ClientId implements IClientId {
 	private createId(): Id {
 		let id = this.idGenerator.getId();
 
-		this.storage.create(id);
+		this.dataSource.create(id);
 
 		return id;
 	}
