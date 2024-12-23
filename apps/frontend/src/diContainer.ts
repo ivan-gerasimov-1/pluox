@@ -29,7 +29,7 @@ import {
 import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
-import { CurrencyRatesAPI } from '@root/core/modules/currency/infrastructure/currencyRatesAPI/CurrencyRatesAPI';
+import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
 import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
@@ -190,8 +190,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.CURRENCY_RATE_REPOSITORY],
 			},
 			{
-				token: EServiceToken.CURRENCY_RATES_API,
-				useClass: CurrencyRatesAPI,
+				token: EServiceToken.CURRENCY_RATE_API,
+				useClass: CurrencyRateAPI,
 				deps: [EServiceToken.APP_CONFIG],
 			},
 		)

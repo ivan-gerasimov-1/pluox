@@ -1,5 +1,5 @@
 import type { TCurrencyRates } from '@root/core/modules/currency/domain/types';
 
-export interface ICurrencyRatesAPI {
+export interface ICurrencyRateAPI {
 	get(): Promise<TCurrencyRates>;
 }

@@ -9,7 +9,7 @@ import type { IClientId } from '@core/infrastructure/clientId/types';
 import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
-import type { ICurrencyRatesAPI } from '@root/core/modules/currency/infrastructure/currencyRatesAPI/types';
+import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
@@ -75,7 +75,7 @@ export enum EServiceToken {
 	CURRENCY_CONVERTER = 'CurrencyConverter',
 	CURRENCY_RATES_DATASOURCE = 'CurrencyRatesStorage',
 	CURRENCY_RATE_SERVICE = 'CurrencyRateService',
-	CURRENCY_RATES_API = 'CurrencyRatesAPI',
+	CURRENCY_RATE_API = 'CurrencyRateAPI',
 	CURRENCY_RATE_REPOSITORY = 'CurrencyRateRepository',
 
 	ID_GENERATOR_FACTORY = 'IdGeneratorFactory',
@@ -132,7 +132,8 @@ export interface IServiceMap {
 	[EServiceToken.APP_CONFIG_STORAGE]: IAppConfigStorage;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
 	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;
-	[EServiceToken.CURRENCY_RATES_API]: ICurrencyRatesAPI;
+
+	[EServiceToken.CURRENCY_RATE_API]: ICurrencyRateAPI;
 	[EServiceToken.CURRENCY_RATE_REPOSITORY]: ICurrencyRateRepository;
 
 	[EServiceToken.AUTH_STORAGE]: IAuthStorage;

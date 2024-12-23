@@ -1,11 +1,11 @@
-import type { ICurrencyRatesAPI } from '@root/core/modules/currency/infrastructure/currencyRatesAPI/types';
+import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type {
 	ECurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 
-export class CurrencyRatesAPI implements ICurrencyRatesAPI {
+export class CurrencyRateAPI implements ICurrencyRateAPI {
 	constructor(private readonly appConfig: IAppConfig) {}
 
 	private get apiEndpoint(): string {

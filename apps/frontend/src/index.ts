@@ -41,7 +41,7 @@ async function runCore(): Promise<void> {
 }
 
 async function getCurrencyRates(): Promise<void> {
-	let currencyRatesAPI = resolveService(EServiceToken.CURRENCY_RATES_API);
+	let currencyRateAPI = resolveService(EServiceToken.CURRENCY_RATE_API);
 	let currencyRatesDataSource = resolveService(
 		EServiceToken.CURRENCY_RATES_DATASOURCE,
 	);
@@ -54,7 +54,7 @@ async function getCurrencyRates(): Promise<void> {
 		return;
 	}
 
-	let currencyRates = await currencyRatesAPI.get();
+	let currencyRates = await currencyRateAPI.get();
 
 	currencyRatesDataSource.save(currencyRates);
 }
