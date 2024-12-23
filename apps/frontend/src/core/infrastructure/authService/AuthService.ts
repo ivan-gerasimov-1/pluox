@@ -2,13 +2,13 @@ import { UserNotFoundError } from '@core/infrastructure/authService/errors';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
 import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
-import type { IUserStorage } from '@core/infrastructure/userStorage/types';
+import type { IUserDataSource } from '@root/core/infrastructure/userDataSource/types';
 
 export class AuthService implements IAuthSerivce {
 	constructor(
 		private readonly authApi: IAuthApi,
 		private readonly authDataSource: IAuthDataSource,
-		private readonly userStorage: IUserStorage,
+		private readonly userDataSource: IUserDataSource,
 	) {}
 
 	public async signIn(
@@ -19,7 +19,7 @@ export class AuthService implements IAuthSerivce {
 	}> {
 		const result = await this.authApi.signIn(email, password);
 
-		this.userStorage.update({
+		this.userDataSource.update({
 			email: result.email,
 		});
 
@@ -43,7 +43,7 @@ export class AuthService implements IAuthSerivce {
 
 		this.cleareStorages();
 
-		this.userStorage.create({
+		this.userDataSource.create({
 			id: result.id,
 			email: result.email,
 		});
@@ -68,6 +68,6 @@ export class AuthService implements IAuthSerivce {
 
 	private cleareStorages(): void {
 		this.authDataSource.clean();
-		this.userStorage.clean();
+		this.userDataSource.clean();
 	}
 }

@@ -1,16 +1,16 @@
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type {
-	IUserStorage,
+	IUserDataSource,
 	TUser,
-} from '@core/infrastructure/userStorage/types';
+} from '@root/core/infrastructure/userDataSource/types';
 
-export class UserStorage
+export class UserDataSource
 	extends LocalStorageDataSource<TUser>
-	implements IUserStorage
+	implements IUserDataSource
 {
 	static readonly #STORAGE_ID: string = 'user';
 
 	constructor() {
-		super(UserStorage.#STORAGE_ID);
+		super(UserDataSource.#STORAGE_ID);
 	}
 }

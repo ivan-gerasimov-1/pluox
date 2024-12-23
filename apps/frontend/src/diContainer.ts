@@ -32,7 +32,7 @@ import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appC
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
 import { AuthDataSource } from '@root/core/infrastructure/authDataSource/authDataSource';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
-import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
+import { UserDataSource } from '@root/core/infrastructure/userDataSource/userDataSource';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
@@ -146,12 +146,12 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [
 					EServiceToken.AUTH_API,
 					EServiceToken.AUTH_DATASOURCE,
-					EServiceToken.USER_STORAGE,
+					EServiceToken.USER_DATASOURCE,
 				],
 			},
 			{
-				token: EServiceToken.USER_STORAGE,
-				useClass: UserStorage,
+				token: EServiceToken.USER_DATASOURCE,
+				useClass: UserDataSource,
 			},
 			{
 				token: EServiceToken.CLIENT_ID_DATASOURCE,

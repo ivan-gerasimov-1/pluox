@@ -15,7 +15,7 @@ import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expe
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
 import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
-import type { IUserStorage } from '@core/infrastructure/userStorage/types';
+import type { IUserDataSource } from '@root/core/infrastructure/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
@@ -100,7 +100,7 @@ export enum EServiceToken {
 	AUTH_API = 'AuthApi',
 	EXPENSE_API = 'ExpensesApi',
 
-	USER_STORAGE = 'UserStorage',
+	USER_DATASOURCE = 'UserDataSource',
 
 	TEMPORAL = 'Temporal',
 
@@ -141,7 +141,7 @@ export interface IServiceMap {
 	[EServiceToken.BASE_API]: IBaseApi;
 	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.EXPENSE_API]: IExpenseApi;
-	[EServiceToken.USER_STORAGE]: IUserStorage;
+	[EServiceToken.USER_DATASOURCE]: IUserDataSource;
 	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
 
 	[EServiceToken.CURRENCY_RATE_DATASOURCE]: ICurrencyRateDataSource;
