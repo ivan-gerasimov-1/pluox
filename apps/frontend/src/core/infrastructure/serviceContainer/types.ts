@@ -33,6 +33,7 @@ import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/
 import type { IGroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
+import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -75,6 +76,7 @@ export enum EServiceToken {
 	CURRENCY_RATES_DATASOURCE = 'CurrencyRatesStorage',
 	CURRENCY_RATES_SERVICE = 'CurrencyRates',
 	CURRENCY_RATES_API = 'CurrencyRatesAPI',
+	CURRENCY_RATE_REPOSITORY = 'CurrencyRateRepository',
 
 	ID_GENERATOR_FACTORY = 'IdGeneratorFactory',
 	ID_GENERATOR = 'IdGenerator',
@@ -131,6 +133,8 @@ export interface IServiceMap {
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
 	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;
 	[EServiceToken.CURRENCY_RATES_API]: ICurrencyRatesAPI;
+	[EServiceToken.CURRENCY_RATE_REPOSITORY]: ICurrencyRateRepository;
+
 	[EServiceToken.AUTH_STORAGE]: IAuthStorage;
 	[EServiceToken.BASE_API]: IBaseApi;
 	[EServiceToken.AUTH_API]: IAuthApi;

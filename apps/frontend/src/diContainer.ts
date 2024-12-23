@@ -49,6 +49,7 @@ import { GroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/exp
 import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
 import { BaseApi } from '@root/core/infrastructure/baseApi/baseApi';
+import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 
 let globalContainer: IContainer;
 
@@ -177,6 +178,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.CURRENCY_RATES_DATASOURCE,
 					EServiceToken.CURRENCY_CONVERTER,
 				],
+			},
+			{
+				token: EServiceToken.CURRENCY_RATE_REPOSITORY,
+				useClass: CurrencyRateRepository,
+				deps: [EServiceToken.CURRENCY_RATES_DATASOURCE],
 			},
 			{
 				token: EServiceToken.CURRENCY_CONVERTER,
