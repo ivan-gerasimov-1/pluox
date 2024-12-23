@@ -32,7 +32,8 @@ export class LocalStorageDataSource<T extends {}> implements IDataSource<T> {
 			throw new Error('Storage is empty, initialize it first');
 		} */
 
-		let data = deepMerge(this.read() ?? {}, payload);
+		let prevData = this.read() ?? {};
+		let data = deepMerge(prevData, payload);
 
 		window.localStorage.setItem(this.#id, JSON.stringify(data));
 	}
