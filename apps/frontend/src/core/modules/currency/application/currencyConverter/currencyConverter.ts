@@ -27,10 +27,10 @@ export class CurrencyConverter implements ICurrencyConverter {
 			return amountInUsd;
 		}
 
-		return amountInUsd * this.currencyRateRepository.findByCode(to).rate;
+		return amountInUsd * this.currencyRateRepository.findRateByCode(to);
 	}
 
 	private convertToUsd(amount: number, from: ECurrency): number {
-		return amount / this.currencyRateRepository.findByCode(from).rate;
+		return amount / this.currencyRateRepository.findRateByCode(from);
 	}
 }
