@@ -1,15 +1,15 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
-import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
+import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 
 export class BaseApi implements IBaseApi {
 	constructor(
 		private readonly appConfig: IAppConfig,
-		private readonly authStorage: IAuthStorage,
+		private readonly authDataSource: IAuthDataSource,
 	) {}
 
 	private get authToken(): string {
-		const token = this.authStorage.read();
+		const token = this.authDataSource.read();
 
 		if (!token) {
 			return '';

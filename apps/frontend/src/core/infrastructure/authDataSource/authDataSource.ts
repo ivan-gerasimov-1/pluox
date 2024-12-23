@@ -1,13 +1,13 @@
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
+import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
 
-export class AuthStorage
+export class AuthDataSource
 	extends LocalStorageDataSource<string>
-	implements IAuthStorage
+	implements IAuthDataSource
 {
 	static readonly #STORAGE_ID: string = 'token';
 
 	constructor() {
-		super(AuthStorage.#STORAGE_ID);
+		super(AuthDataSource.#STORAGE_ID);
 	}
 }

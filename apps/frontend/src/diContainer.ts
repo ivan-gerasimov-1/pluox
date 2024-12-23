@@ -30,7 +30,7 @@ import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfi
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
-import { AuthStorage } from '@core/infrastructure/authStorage/AuthStorage';
+import { AuthDataSource } from '@root/core/infrastructure/authDataSource/authDataSource';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
 import { UserStorage } from '@core/infrastructure/userStorage/UserStorage';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
@@ -119,7 +119,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.BASE_API,
 				useClass: BaseApi,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_STORAGE],
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_DATASOURCE],
 			},
 			{
 				token: EServiceToken.TEMPORAL,
@@ -132,8 +132,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 */
 		.register(
 			{
-				token: EServiceToken.AUTH_STORAGE,
-				useClass: AuthStorage,
+				token: EServiceToken.AUTH_DATASOURCE,
+				useClass: AuthDataSource,
 			},
 			{
 				token: EServiceToken.AUTH_API,
@@ -145,7 +145,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: AuthService,
 				deps: [
 					EServiceToken.AUTH_API,
-					EServiceToken.AUTH_STORAGE,
+					EServiceToken.AUTH_DATASOURCE,
 					EServiceToken.USER_STORAGE,
 				],
 			},

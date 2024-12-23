@@ -3,7 +3,7 @@ import type { IAppConfigService } from '@core/infrastructure/appConfigService/Ap
 import type { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
-import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
+import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 import type { IClientId } from '@core/infrastructure/clientId/types';
 import type { IClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/types';
@@ -93,7 +93,7 @@ export enum EServiceToken {
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
 	EXPENSE_SERVICE = 'ExpenseService',
 
-	AUTH_STORAGE = 'AuthStorage',
+	AUTH_DATASOURCE = 'AuthDataSource',
 	AUTH_SERVICE = 'AuthService',
 
 	BASE_API = 'BaseApi',
@@ -136,7 +136,7 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_RATE_API]: ICurrencyRateAPI;
 	[EServiceToken.CURRENCY_RATE_REPOSITORY]: ICurrencyRateRepository;
 
-	[EServiceToken.AUTH_STORAGE]: IAuthStorage;
+	[EServiceToken.AUTH_DATASOURCE]: IAuthDataSource;
 	[EServiceToken.BASE_API]: IBaseApi;
 	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.EXPENSE_API]: IExpenseApi;

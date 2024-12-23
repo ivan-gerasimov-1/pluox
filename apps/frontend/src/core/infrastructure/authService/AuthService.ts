@@ -1,13 +1,13 @@
 import { UserNotFoundError } from '@core/infrastructure/authService/errors';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
-import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
+import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
 import type { IUserStorage } from '@core/infrastructure/userStorage/types';
 
 export class AuthService implements IAuthSerivce {
 	constructor(
 		private readonly authApi: IAuthApi,
-		private readonly authStorage: IAuthStorage,
+		private readonly authDataSource: IAuthDataSource,
 		private readonly userStorage: IUserStorage,
 	) {}
 
@@ -48,7 +48,7 @@ export class AuthService implements IAuthSerivce {
 			email: result.email,
 		});
 
-		this.authStorage.create(result.token);
+		this.authDataSource.create(result.token);
 
 		return {
 			id: result.id,
@@ -61,13 +61,13 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	public isAuthenticated(): boolean {
-		const hasToken = !this.authStorage.isEmpty();
+		const hasToken = !this.authDataSource.isEmpty();
 
 		return hasToken;
 	}
 
 	private cleareStorages(): void {
-		this.authStorage.clean();
+		this.authDataSource.clean();
 		this.userStorage.clean();
 	}
 }
