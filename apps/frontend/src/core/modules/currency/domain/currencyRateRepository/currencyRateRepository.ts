@@ -16,6 +16,8 @@ export interface ICurrencyRateRepository {
 	 */
 	findByCode(code: ECurrency): TCurrencyRateDTO;
 
+	findRateByCode(code: ECurrency): number;
+
 	/**
 	 * @throws {CategoryNotFoundError}
 	 */

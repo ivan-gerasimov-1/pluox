@@ -37,6 +37,12 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 		};
 	}
 
+	public findRateByCode(code: ECurrency): number {
+		let currencyRateDTO = this.findByCode(code);
+
+		return currencyRateDTO.rate;
+	}
+
 	public remove(id: Id): void {
 		throw new NotImplementedError();
 	}
