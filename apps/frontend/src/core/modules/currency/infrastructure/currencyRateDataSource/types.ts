@@ -4,7 +4,7 @@ import type {
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
 
-export interface ICurrencyRatesDataSource extends IDataSource<TCurrencyRates> {
+export interface ICurrencyRateDataSource extends IDataSource<TCurrencyRates> {
 	findAll(): TCurrencyRates;
 	find(currency: ECurrency): number;
 

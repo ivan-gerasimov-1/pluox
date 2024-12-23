@@ -5,11 +5,11 @@ import type {
 	TCurrencyFindManyResult,
 } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
+import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateRepository implements ICurrencyRateRepository {
 	constructor(
-		private readonly currencyRateDataSource: ICurrencyRatesDataSource,
+		private readonly currencyRateDataSource: ICurrencyRateDataSource,
 	) {}
 
 	public create(currency: TCurrencyRateDTO): TCurrencyRateDTO {

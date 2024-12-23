@@ -1,19 +1,19 @@
-import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/errors';
-import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
+import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
+import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type {
 	ECurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
 
-export class CurrencyRatesDataSource
+export class CurrencyRateDataSource
 	extends LocalStorageDataSource<TCurrencyRates>
-	implements ICurrencyRatesDataSource
+	implements ICurrencyRateDataSource
 {
 	static readonly #STORAGE_ID = 'currencyRates';
 
 	constructor() {
-		super(CurrencyRatesDataSource.#STORAGE_ID);
+		super(CurrencyRateDataSource.#STORAGE_ID);
 	}
 
 	/**

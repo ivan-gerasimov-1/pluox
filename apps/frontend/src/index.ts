@@ -42,21 +42,21 @@ async function runCore(): Promise<void> {
 
 async function getCurrencyRates(): Promise<void> {
 	let currencyRateAPI = resolveService(EServiceToken.CURRENCY_RATE_API);
-	let currencyRatesDataSource = resolveService(
-		EServiceToken.CURRENCY_RATES_DATASOURCE,
+	let currencyRateDataSource = resolveService(
+		EServiceToken.CURRENCY_RATE_DATASOURCE,
 	);
 
 	let hasAllCurrencies = Object.values(ECurrency).every((currency) => {
-		return currencyRatesDataSource.exists(currency);
+		return currencyRateDataSource.exists(currency);
 	});
 
-	if (!currencyRatesDataSource.isEmpty() && hasAllCurrencies) {
+	if (!currencyRateDataSource.isEmpty() && hasAllCurrencies) {
 		return;
 	}
 
 	let currencyRates = await currencyRateAPI.get();
 
-	currencyRatesDataSource.save(currencyRates);
+	currencyRateDataSource.save(currencyRates);
 }
 
 function loadAppConfig(): void {
