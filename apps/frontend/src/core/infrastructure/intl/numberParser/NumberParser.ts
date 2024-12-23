@@ -1,9 +1,7 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { INumberParser } from '@root/core/infrastructure/intl/numberParser/types';
 
-/**
- * @todo Define interface
- */
-export class NumberParser {
+export class NumberParser implements INumberParser {
 	readonly #group: RegExp = new RegExp('');
 	readonly #decimal: RegExp = new RegExp('');
 	readonly #numeral: RegExp = new RegExp('');
