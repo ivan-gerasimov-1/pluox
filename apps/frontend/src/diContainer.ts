@@ -175,7 +175,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.CURRENCY_RATE_SERVICE,
 				useClass: CurrencyRateService,
 				deps: [
-					EServiceToken.CURRENCY_RATES_DATASOURCE,
+					EServiceToken.CURRENCY_RATE_REPOSITORY,
 					EServiceToken.CURRENCY_CONVERTER,
 				],
 			},
