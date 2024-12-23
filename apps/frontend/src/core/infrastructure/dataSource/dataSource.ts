@@ -22,16 +22,6 @@ export class LocalStorageDataSource<T extends {}> implements IDataSource<T> {
 		window.localStorage.setItem(this.#id, JSON.stringify(payload));
 	}
 
-	public read(): T | null {
-		const rawData = this.readRaw();
-
-		if (rawData === null) {
-			return null;
-		}
-
-		return this.parse(rawData);
-	}
-
 	/**
 	 * @todo Restore isEmpty check and remove default value for this.read()
 	 */
@@ -45,6 +35,16 @@ export class LocalStorageDataSource<T extends {}> implements IDataSource<T> {
 		let data = deepMerge(this.read() ?? {}, payload);
 
 		window.localStorage.setItem(this.#id, JSON.stringify(data));
+	}
+
+	public read(): T | null {
+		const rawData = this.readRaw();
+
+		if (rawData === null) {
+			return null;
+		}
+
+		return this.parseSafe(rawData);
 	}
 
 	public delete(): void {
@@ -62,7 +62,7 @@ export class LocalStorageDataSource<T extends {}> implements IDataSource<T> {
 		return window.localStorage.getItem(this.#id);
 	}
 
-	private parse(payload: string): T | null {
+	private parseSafe(payload: string): T | null {
 		try {
 			return JSON.parse(payload);
 		} catch {
