@@ -22,18 +22,7 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 
 	public async get(): Promise<TCurrencyRates> {
 		let queryParams = this.makeQueryParams();
-
-		let response = await window.fetch(
-			`${this.apiEndpoint}/latest.json${queryParams}`,
-			{
-				method: 'GET',
-				headers: {
-					Authorization: `Token ${this.apiKey}`,
-				},
-			},
-		);
-
-		let result = await response.json();
+		let result = await this.fetch(queryParams);
 
 		return result.rates;
 	}
@@ -50,5 +39,21 @@ export class CurrencyRatesAPI implements ICurrencyRatesAPI {
 		}
 
 		return query;
+	}
+
+	private async fetch(queryParams: string): Promise<{
+		rates: TCurrencyRates;
+	}> {
+		let response = await window.fetch(
+			`${this.apiEndpoint}/latest.json${queryParams}`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: `Token ${this.apiKey}`,
+				},
+			},
+		);
+
+		return response.json();
 	}
 }
