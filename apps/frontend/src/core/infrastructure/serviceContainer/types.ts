@@ -1,6 +1,6 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { IAppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
-import type { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
+import type { IAppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/types';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';
 import type { IAuthSerivce } from '@core/infrastructure/authService/types';
 import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
@@ -65,7 +65,7 @@ export enum EServiceToken {
 	ENVIRONMENT = 'Environment',
 
 	APP_CONFIG = 'AppConfig',
-	APP_CONFIG_STORAGE = 'AppConfigStorage',
+	APP_CONFIG_DATASOURCE = 'AppConfigDataSource',
 	APP_CONFIG_SERVICE = 'AppConfigService',
 	APP_CONFIG_STORE = 'AppConfigStore',
 
@@ -129,7 +129,8 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
 	[EServiceToken.EXPENSE_SERVICE]: IExpenseService;
-	[EServiceToken.APP_CONFIG_STORAGE]: IAppConfigStorage;
+
+	[EServiceToken.APP_CONFIG_DATASOURCE]: IAppConfigDataSource;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
 	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;
 

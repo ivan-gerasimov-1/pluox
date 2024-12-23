@@ -1,6 +1,6 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { TAppConfig } from '@core/infrastructure/appConfig/types';
-import type { IAppConfigStorage } from '@core/infrastructure/appConfigStorage/types';
+import type { IAppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/types';
 
 export interface IAppConfigService {
 	initialize(): IAppConfigService;
@@ -10,11 +10,11 @@ export interface IAppConfigService {
 export class AppConfigService implements IAppConfigService {
 	constructor(
 		private readonly appConfig: IAppConfig,
-		private readonly appConfigStorage: IAppConfigStorage,
+		private readonly appConfigDataSource: IAppConfigDataSource,
 	) {}
 
 	public initialize(): this {
-		let config = this.appConfigStorage.read();
+		let config = this.appConfigDataSource.read();
 
 		if (config) {
 			this.updateAppConfig(config);
@@ -33,7 +33,7 @@ export class AppConfigService implements IAppConfigService {
 			availabelCurrencies: this.appConfig.availableCurrencies,
 		};
 
-		this.appConfigStorage.update(nextConfig);
+		this.appConfigDataSource.update(nextConfig);
 
 		return nextConfig;
 	}

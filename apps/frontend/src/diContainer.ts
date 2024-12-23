@@ -26,7 +26,7 @@ import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
 } from '@root/core/modules/category/application/categoryService/factory';
-import { AppConfigStorage } from '@core/infrastructure/appConfigStorage/AppConfigStorage';
+import { AppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/appConfigDataSource';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
@@ -77,13 +77,13 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.ENVIRONMENT],
 			},
 			{
-				token: EServiceToken.APP_CONFIG_STORAGE,
-				useClass: AppConfigStorage,
+				token: EServiceToken.APP_CONFIG_DATASOURCE,
+				useClass: AppConfigDataSource,
 			},
 			{
 				token: EServiceToken.APP_CONFIG_SERVICE,
 				useClass: AppConfigService,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_STORAGE],
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_DATASOURCE],
 			},
 			{
 				token: EServiceToken.APP_CONFIG_STORE,

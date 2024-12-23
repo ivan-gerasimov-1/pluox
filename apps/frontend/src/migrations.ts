@@ -11,7 +11,7 @@ export function runMigrations() {
  * №1. Add THB to stored appConfig
  */
 export function addThaiBahtCurrencyToStoredAppConfig() {
-	let appConfigStorage = resolveService(EServiceToken.APP_CONFIG_STORAGE);
+	let appConfigStorage = resolveService(EServiceToken.APP_CONFIG_DATASOURCE);
 	let appConfig = appConfigStorage.read();
 
 	if (!appConfig) {
