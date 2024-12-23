@@ -1,4 +1,4 @@
-import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/types';
+import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
@@ -12,7 +12,7 @@ export interface ITotalAmountUseCase {
 export class TotalAmountUseCase implements ITotalAmountUseCase {
 	constructor(
 		private readonly expenseRepository: IExpenseRepository,
-		private readonly currencyRatesService: ICurrencyRatesService,
+		private readonly currencyRatesService: ICurrencyRateService,
 	) {}
 
 	public run(dateParts: TDateParts, currency: ECurrency) {

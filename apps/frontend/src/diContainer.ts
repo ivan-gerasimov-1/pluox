@@ -5,7 +5,7 @@ import {
 	type IAppConfig,
 } from '@core/infrastructure/appConfig/AppConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
-import { CurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/currencyRatesService';
+import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
@@ -172,8 +172,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: CurrencyRatesDataSource,
 			},
 			{
-				token: EServiceToken.CURRENCY_RATES_SERVICE,
-				useClass: CurrencyRatesService,
+				token: EServiceToken.CURRENCY_RATE_SERVICE,
+				useClass: CurrencyRateService,
 				deps: [
 					EServiceToken.CURRENCY_RATES_DATASOURCE,
 					EServiceToken.CURRENCY_CONVERTER,
@@ -233,7 +233,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [
 					EServiceToken.APP_CONFIG,
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CURRENCY_RATES_SERVICE,
+					EServiceToken.CURRENCY_RATE_SERVICE,
 					EServiceToken.TEMPORAL,
 				],
 			},
@@ -242,7 +242,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: TotalAmountUseCase,
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CURRENCY_RATES_SERVICE,
+					EServiceToken.CURRENCY_RATE_SERVICE,
 				],
 			},
 			{

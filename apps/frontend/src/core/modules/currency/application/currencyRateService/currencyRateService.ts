@@ -1,9 +1,9 @@
-import type { ICurrencyRatesService } from '@root/core/modules/currency/application/currencyRatesService/types';
+import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
 import type { ICurrencyRatesDataSource } from '@root/core/modules/currency/infrastructure/currencyRatesDataSource/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 
-export class CurrencyRatesService implements ICurrencyRatesService {
+export class CurrencyRateService implements ICurrencyRateService {
 	constructor(
 		private readonly currencyRatesDataSource: ICurrencyRatesDataSource,
 		private readonly currencyConverter: ICurrencyConverter,

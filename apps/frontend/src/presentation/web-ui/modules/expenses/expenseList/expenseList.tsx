@@ -31,7 +31,7 @@ export type TExpenseListProps = {
 
 export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
-	let currencyRatesService = useService(EServiceToken.CURRENCY_RATES_SERVICE);
+	let currencyRatesService = useService(EServiceToken.CURRENCY_RATE_SERVICE);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let queryClient = useQueryClient();
 
