@@ -1,15 +1,15 @@
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
+import type { IClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/types';
 
 import type { Id } from '@domain/types';
 
-export class ClientIdStorage
+export class ClientIdDataSource
 	extends LocalStorageDataSource<Id>
-	implements IClientIdStorage
+	implements IClientIdDataSource
 {
 	static readonly #STORAGE_ID: Id = 'clientId';
 
 	constructor() {
-		super(ClientIdStorage.#STORAGE_ID);
+		super(ClientIdDataSource.#STORAGE_ID);
 	}
 }

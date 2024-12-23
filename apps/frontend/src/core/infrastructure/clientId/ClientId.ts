@@ -1,5 +1,5 @@
 import type { IClientId } from '@core/infrastructure/clientId/types';
-import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
+import type { IClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 
 import type { Id } from '@domain/types';
@@ -9,7 +9,7 @@ export class ClientId implements IClientId {
 
 	constructor(
 		private readonly idGenerator: IIdGenerator,
-		private readonly storage: IClientIdStorage,
+		private readonly storage: IClientIdDataSource,
 	) {
 		this.#clientId = storage.read() || this.createId();
 	}

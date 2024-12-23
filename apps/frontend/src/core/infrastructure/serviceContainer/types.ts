@@ -6,7 +6,7 @@ import type { IAuthSerivce } from '@core/infrastructure/authService/types';
 import type { IAuthStorage } from '@core/infrastructure/authStorage/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 import type { IClientId } from '@core/infrastructure/clientId/types';
-import type { IClientIdStorage } from '@core/infrastructure/clientIdStorage/types';
+import type { IClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/types';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
@@ -81,7 +81,7 @@ export enum EServiceToken {
 	ID_GENERATOR_FACTORY = 'IdGeneratorFactory',
 	ID_GENERATOR = 'IdGenerator',
 
-	CLIENT_ID_STORAGE = 'ClientIdStorage',
+	CLIENT_ID_DATASOURCE = 'ClientIdDataSource',
 	CLIENT_ID = 'ClientId',
 
 	CATEGORY_SERVICE_FACTORY = 'CategoryServiceFactory',
@@ -120,7 +120,7 @@ export interface IServiceMap {
 	[EServiceToken.NUMBER_PARSER]: NumberParser;
 	[EServiceToken.ID_GENERATOR_FACTORY]: IIdGeneratorFactory;
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
-	[EServiceToken.CLIENT_ID_STORAGE]: IClientIdStorage;
+	[EServiceToken.CLIENT_ID_DATASOURCE]: IClientIdDataSource;
 	[EServiceToken.CLIENT_ID]: IClientId;
 	[EServiceToken.CATEGORY_SERVICE_FACTORY]: () => ICategoryServiceFactory;
 	[EServiceToken.CATEGORY_SERVICE]: ICategoryService;

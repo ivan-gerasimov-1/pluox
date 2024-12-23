@@ -20,7 +20,7 @@ import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
-import { ClientIdStorage } from '@core/infrastructure/clientIdStorage/ClientIdStorage';
+import { ClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/ClientIdDataSource';
 import { ClientId } from '@core/infrastructure/clientId/ClientId';
 import {
 	CategoryServiceFactory,
@@ -154,13 +154,13 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: UserStorage,
 			},
 			{
-				token: EServiceToken.CLIENT_ID_STORAGE,
-				useClass: ClientIdStorage,
+				token: EServiceToken.CLIENT_ID_DATASOURCE,
+				useClass: ClientIdDataSource,
 			},
 			{
 				token: EServiceToken.CLIENT_ID,
 				useClass: ClientId,
-				deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_STORAGE],
+				deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_DATASOURCE],
 			},
 		)
 		/**
