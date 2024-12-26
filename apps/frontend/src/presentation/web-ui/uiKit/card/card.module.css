@@ -2,7 +2,7 @@
 	padding-block: 25px;
 	padding-inline: 20px;
 
-	border: 1px solid var(--bc-90);
+	border: var(--border-90);
 	border-radius: var(--br-100);
 
 	background-color: var(--white-200);
