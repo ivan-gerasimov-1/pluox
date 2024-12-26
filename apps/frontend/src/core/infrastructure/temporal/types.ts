@@ -12,6 +12,8 @@ export interface ITemporal {
 	getMonth(month?: TMonth): string;
 	getStartOfMonth(month?: TMonth): TISODateString;
 	getEndOfMonth(month?: TMonth): TISODateString;
+	getStartOfDay(): TISODateString;
+	getEndOfDay(): TISODateString;
 	getTimezone(): string;
 	getMonthList(): TMonth[];
 	getISODateString(): TISODateString;

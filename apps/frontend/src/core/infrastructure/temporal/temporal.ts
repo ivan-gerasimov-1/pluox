@@ -54,6 +54,14 @@ export class Temporal implements ITemporal {
 			.toISOString();
 	}
 
+	public getStartOfDay(): TISODateString {
+		return this.#dateFn().startOf('day').toISOString();
+	}
+
+	public getEndOfDay(): TISODateString {
+		return this.#dateFn().endOf('day').toISOString();
+	}
+
 	public getTimezone(): string {
 		return this.#dateFn.tz.guess();
 	}
