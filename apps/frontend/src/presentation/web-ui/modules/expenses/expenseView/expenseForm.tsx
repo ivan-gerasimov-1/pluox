@@ -1,13 +1,13 @@
 import { useReducer } from 'react';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { TCategory, TComment } from '@domain/types';
+import type { TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { AmountInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryPills } from '@root/presentation/web-ui/modules/expenses/expenseView/components/categoryPills/categoryPills';
-import { CommentInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/commentInput/commentInput';
+import { DescriptionInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/commentInput/descriptionInput';
 import { DateInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/dateInput/dateInput';
 import { expenseFormI18n } from '@root/presentation/web-ui/modules/expenses/expenseView/expenseForm.i18n';
 
@@ -17,14 +17,14 @@ export type TExpenseFormProps = {
 	onSubmit(payload: {
 		amount: number;
 		currency: ECurrency;
-		comment: TComment;
+		comment: TDescription;
 		category: TCategory;
 		date: TISODateString;
 	}): void;
 
 	amount: number;
 	currency: ECurrency;
-	comment: TComment;
+	comment: TDescription;
 	category: TCategory;
 	date: TISODateString;
 };
@@ -151,7 +151,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			</div>
 
 			<div className={styles.formGroup}>
-				<CommentInput
+				<DescriptionInput
 					value={formState.comment}
 					onChange={(comment: string) => {
 						dispatch({
@@ -185,7 +185,7 @@ type TExpenseFormReducerAction = Partial<TExpenseFormReducerState> & {
 type TExpenseFormReducerState = {
 	amount: number;
 	currency: ECurrency;
-	comment: TComment;
+	comment: TDescription;
 	category: TCategory;
 	date: TISODateString;
 };

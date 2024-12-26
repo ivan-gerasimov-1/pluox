@@ -1,14 +1,14 @@
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import { Entity } from '@root/core/infrastructure/entity/entity';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
-import type { Id, TCategory, TComment } from '@domain/types';
+import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 
 export class Expense extends Entity<TExpenseDTO> implements IExpense {
 	readonly #amount: number;
 	readonly #currency: ECurrency;
-	readonly #comment: TComment;
+	readonly #comment: TDescription;
 	readonly #category: TCategory;
 	readonly #date: TISODateString;
 	readonly #timezone: string;
@@ -17,7 +17,7 @@ export class Expense extends Entity<TExpenseDTO> implements IExpense {
 		id: Id,
 		amount: number,
 		currency: ECurrency,
-		comment: TComment,
+		comment: TDescription,
 		category: TCategory,
 		timezone: string,
 		createdAt: TISODateString,
@@ -38,7 +38,7 @@ export class Expense extends Entity<TExpenseDTO> implements IExpense {
 		id: Id,
 		amount: number,
 		currency: ECurrency,
-		comment: TComment,
+		comment: TDescription,
 		category: TCategory = null,
 		timezone: string,
 		createdAt: TISODateString,

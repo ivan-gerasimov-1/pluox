@@ -1,4 +1,4 @@
-import type { Id, TComment, TCategory } from '@root/core/domain/types';
+import type { Id, TDescription, TCategory } from '@root/core/domain/types';
 import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
@@ -10,7 +10,7 @@ export type TExpenseDTO = {
 	 */
 	amount: number;
 	currency: ECurrency;
-	comment: TComment;
+	comment: TDescription;
 	category: TCategory;
 	date: TISODateString;
 	createdAt: TISODateString;
