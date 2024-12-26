@@ -4,11 +4,13 @@ import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { TAppConfig } from '@core/infrastructure/appConfig/types';
 import type { IAppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 
+/** @deprecated */
 export interface IAppConfigStore {
 	get(): StoreApi<TAppConfig>;
 	set(config: Partial<TAppConfig>): void;
 }
 
+/** @deprecated */
 export class AppConfigStore implements IAppConfigStore {
 	private readonly store: StoreApi<TAppConfig>;
 
