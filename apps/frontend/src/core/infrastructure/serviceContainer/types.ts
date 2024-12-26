@@ -18,7 +18,6 @@ import type { NumberParser } from '@core/infrastructure/intl/numberParser/Number
 import type { IUserDataSource } from '@root/core/infrastructure/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
-import type { IAppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import type { TEnvironment } from '@root/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
@@ -67,7 +66,6 @@ export enum EServiceToken {
 	APP_CONFIG = 'AppConfig',
 	APP_CONFIG_DATASOURCE = 'AppConfigDataSource',
 	APP_CONFIG_SERVICE = 'AppConfigService',
-	APP_CONFIG_STORE = 'AppConfigStore',
 
 	INTL_SERVICE = 'IntlService',
 	NUMBER_PARSER = 'NumberParser',
@@ -132,7 +130,6 @@ export interface IServiceMap {
 
 	[EServiceToken.APP_CONFIG_DATASOURCE]: IAppConfigDataSource;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
-	[EServiceToken.APP_CONFIG_STORE]: IAppConfigStore;
 
 	[EServiceToken.CURRENCY_RATE_API]: ICurrencyRateAPI;
 	[EServiceToken.CURRENCY_RATE_REPOSITORY]: ICurrencyRateRepository;

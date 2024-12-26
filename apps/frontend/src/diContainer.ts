@@ -28,7 +28,6 @@ import {
 } from '@root/core/modules/category/application/categoryService/factory';
 import { AppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/appConfigDataSource';
 import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
-import { AppConfigStore } from '@root/presentation/web-ui/modules/appConfig/appConfig.store';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
 import { AuthDataSource } from '@root/core/infrastructure/authDataSource/authDataSource';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
@@ -84,11 +83,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.APP_CONFIG_SERVICE,
 				useClass: AppConfigService,
 				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_DATASOURCE],
-			},
-			{
-				token: EServiceToken.APP_CONFIG_STORE,
-				useClass: AppConfigStore,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_SERVICE],
 			},
 		)
 		/**
