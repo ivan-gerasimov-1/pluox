@@ -1,9 +1,11 @@
 import type { TAppConfig } from '@root/core/infrastructure/appConfig/types';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
+import type { TMonth } from '@root/core/infrastructure/temporal/types';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 export const QUERY_APP_CONFIG = Symbol('appConfig').description;
 export const QUERY_APP_CONFIG_BUDGET = Symbol('appConfigBudget').description;
+export const QUERY_APP_CONFIG_MONTH = Symbol('appConfigMonth').description;
 
 export function getAppConfig(): TAppConfig {
 	let appConfig = resolveService(EServiceToken.APP_CONFIG);
@@ -20,6 +22,12 @@ export function getBudget(): number {
 	let appConfig = resolveService(EServiceToken.APP_CONFIG);
 
 	return appConfig.budget ?? 0;
+}
+
+export function getMonth(): TMonth {
+	let appConfig = resolveService(EServiceToken.APP_CONFIG);
+
+	return appConfig.currentMonth;
 }
 
 export function updateAppConfig(payload: Partial<TAppConfig>): TAppConfig {
