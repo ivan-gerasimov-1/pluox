@@ -5,7 +5,7 @@
 	padding: 10px 15px;
 
 	border: none;
-	border-radius: var(--border-radius-small);
+	border-radius: var(--br-90);
 
 	font-size: var(--fs-90);
 	font-family: inherit;
@@ -17,11 +17,11 @@
 
 	outline: none;
 
-	transition: box-shadow var(--transition-defaults);
+	transition: box-shadow var(--transition-100);
 }
 
 .red {
-	color: var(--color-white);
+	color: var(--color-white-100);
 	background-color: var(--color-red-400);
 
 	&:hover,
@@ -36,17 +36,17 @@
 
 .none {
 	color: inherit;
-	background-color: var(--color-white);
+	background-color: var(--color-white-100);
 
-	border: 1px solid var(--color-black);
+	border: 1px solid var(--fc-100);
 
 	&:hover,
 	&:focus {
-		box-shadow: 0px 10px 30px -10px var(--color-black);
+		box-shadow: 0px 10px 30px -10px var(--fc-100);
 	}
 
 	&:active {
-		box-shadow: 0px 5px 30px -10px var(--color-black);
+		box-shadow: 0px 5px 30px -10px var(--fc-100);
 	}
 }
 

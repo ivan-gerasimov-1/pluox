@@ -10,11 +10,11 @@
 	font-family: inherit;
 
 	color: inherit;
-	background-color: var(--color-pure-white);
+	background-color: var(--color-white-110);
 
-	border: var(--border-defaults);
+	border: var(--border-100);
 	border-width: 2px;
-	border-radius: var(--border-radius-small);
+	border-radius: var(--br-90);
 
 	outline: none;
 }

@@ -8,8 +8,8 @@
 
 	color: inherit;
 
-	border: var(--border-defaults);
-	border-radius: var(--border-radius-small);
+	border: var(--border-100);
+	border-radius: var(--br-90);
 
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;

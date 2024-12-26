@@ -1,8 +1,8 @@
 .actionSheetWrapper {
 	padding: 1rem;
 
-	border-top-left-radius: var(--border-radius-default);
-	border-top-right-radius: var(--border-radius-default);
+	border-top-left-radius: var(--br-100);
+	border-top-right-radius: var(--br-100);
 }
 
 .header {

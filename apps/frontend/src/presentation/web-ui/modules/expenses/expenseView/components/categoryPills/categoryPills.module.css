@@ -25,17 +25,17 @@
 	line-height: 1;
 	font-size: var(--fs-90);
 
-	color: var(--color-black);
-	background-color: var(--color-pure-white);
-	border: var(--border-defaults);
-	border-radius: var(--border-radius-small);
+	color: var(--fc-100);
+	background-color: var(--color-white-110);
+	border: var(--border-100);
+	border-radius: var(--br-90);
 
 	transition:
-		border-color var(--transition-defaults),
-		background-color var(--transition-defaults);
+		border-color var(--transition-100),
+		background-color var(--transition-100);
 
 	&[aria-pressed='true'] {
 		background-color: var(--color-grey-200);
-		border-color: var(--color-black);
+		border-color: var(--fc-100);
 	}
 }

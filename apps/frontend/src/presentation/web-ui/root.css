@@ -1,13 +1,17 @@
 @import './reset.css';
 
 :root {
+	/* navbar */
+	--navbar-height: 4rem;
+
+	/** body */
 	--body-padding-bottom: calc(var(--navbar-height) + 2rem);
 
 	/* color */
-	--color-white: #fafafa;
-	--color-pure-white: #fff;
-	--color-black: #333;
-	--color-pure-black: #000;
+	--color-white-100: #fafafa;
+	--color-white-110: #fff;
+	--color-black-100: #333;
+	--color-black-110: #000;
 
 	--color-grey-100: #f5f5f5;
 	--color-grey-200: #eee;
@@ -19,8 +23,6 @@
 	--color-red-400: #ef5350;
 
 	--color-green-600: #43a047;
-
-	--text-color: var(--color-black);
 
 	/* Font size */
 	--fs-90: calc(var(--fs-100) - 2px);
@@ -36,29 +38,28 @@
 	--fc-70: var(--color-grey-500);
 	--fc-80: var(--color-grey-600);
 	--fc-90: var(--color-grey-700);
-	--fc-100: var(--text-color);
+	--fc-100: var(--color-black-100);
 
 	/** Font weight */
 	--fw-100: 400;
 	--fw-200: 600;
 
 	/* border */
-	--border-color: var(--color-grey-300);
-	--border-color-light: var(--color-grey-200);
-	--border-defaults: 1px solid var(--border-color);
-	--border-light: 1px solid var(--border-color-light);
+	--bc-80: var(--color-grey-100);
+	--bc-90: var(--color-grey-200);
+	--bc-100: var(--color-grey-300);
+	--bc-200: var(--color-grey-500);
+	--bc-300: var(--color-grey-700);
+	--bc-900: var(--color-black-100);
 
-	--border-radius-90: calc(var(--border-radius-100) - 10px);
-	--border-radius-100: 24px;
+	--border-90: 1px solid var(--bc-90);
+	--border-100: 1px solid var(--bc-100);
 
-	--border-radius-small: var(--border-radius-90);
-	--border-radius-default: var(--border-radius-100);
+	--br-90: calc(var(--br-100) - 10px);
+	--br-100: 24px;
 
 	/* misc */
-	--transition-defaults: 0.15s ease-in-out;
-
-	/* navbar */
-	--navbar-height: 4rem;
+	--transition-100: 0.15s ease-in-out;
 
 	/* ActionSheet */
 	--action-sheet-start: 85%;

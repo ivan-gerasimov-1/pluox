@@ -12,10 +12,10 @@
 
 	color: inherit;
 
-	border: var(--border-defaults);
-	border-radius: var(--border-radius-small);
+	border: var(--border-100);
+	border-radius: var(--br-90);
 
-	background-color: var(--color-pure-white);
+	background-color: var(--color-white-110);
 
 	appearance: none;
 	outline: none;

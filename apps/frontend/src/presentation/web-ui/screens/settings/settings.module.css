@@ -61,8 +61,8 @@
 	font-size: var(--fs-90);
 	text-align: center;
 
-	border: var(--border-defaults);
-	border-radius: var(--border-radius-small);
+	border: var(--border-100);
+	border-radius: var(--br-90);
 }
 
 .categories {
@@ -80,8 +80,8 @@
 	display: flex;
 	align-items: center;
 
-	border: var(--border-light);
-	border-radius: var(--border-radius-small);
+	border: var(--border-90);
+	border-radius: var(--br-90);
 }
 
 .budgetCurrency {

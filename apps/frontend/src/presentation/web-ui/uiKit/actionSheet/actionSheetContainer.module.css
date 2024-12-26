@@ -10,11 +10,11 @@
 	padding-top: 0.75rem;
 	padding-bottom: 1.5rem;
 
-	background-color: var(--color-pure-white);
+	background-color: var(--color-white-110);
 	box-shadow: 0 -0.5em 2.5em -0.5em rgba(0, 0, 0, 0.25);
 
-	border-top-left-radius: var(--border-radius-default);
-	border-top-right-radius: var(--border-radius-default);
+	border-top-left-radius: var(--br-100);
+	border-top-right-radius: var(--br-100);
 
 	transform: translateY(var(--action-sheet-start));
 
