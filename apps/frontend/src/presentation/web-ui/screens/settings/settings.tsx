@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import { useStore } from 'zustand';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 import { getLanguageNameByLocale } from '@core/infrastructure/intl/helpers';
+
+import {
+	getAppConfig,
+	updateAppConfig,
+	QUERY_APP_CONFIG,
+} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+import { TAppConfig } from '@root/core/infrastructure/appConfig/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
@@ -29,15 +36,56 @@ import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';
 
 import styles from './settings.module.css';
 
+/**
+ * @todo
+ * 1. Don’t refetch *appConfig* on mount
+ * 2. Invalidate all related to *appConfig* queries.
+ *    For some reason, *appConfig* is not invalidated on mutation if
+ *    *queryKey* contains *QUERY_APP_CONFIG_BUDGET*
+ */
 export function SettingsScreen() {
 	let authService = useService(EServiceToken.AUTH_SERVICE);
-	let appConfigStore = useService(EServiceToken.APP_CONFIG_STORE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let intl = useIntl(settingsI18n);
 	let navigation = useNavigation();
-	let appConfigState = useStore(appConfigStore.get());
 
-	let [editBudget, setEditBudget] = useState<boolean>(false);
+	let queryClient = useQueryClient();
+
+	let {
+		data: appConfig = {
+			locale: ELocaleCode.EN_US,
+			budget: null,
+			currency: ECurrency.USD,
+			availabelCurrencies: [ECurrency.USD, ECurrency.EUR],
+		},
+	} = useQuery({
+		queryKey: [QUERY_APP_CONFIG],
+		queryFn: getAppConfig,
+		// refetchOnMount: false,
+	});
+
+	let { mutate: mutateAppConfig } = useMutation({
+		mutationFn: async (payload: Partial<TAppConfig>) => {
+			updateAppConfig(payload);
+		},
+		onSuccess: async (data, variables) => {
+			let queryKey = [QUERY_APP_CONFIG];
+
+			/** @todo #1 */
+			// if (variables.budget !== undefined) {
+			// 	queryKey.push(QUERY_APP_CONFIG_BUDGET);
+			// }
+
+			await queryClient.invalidateQueries({
+				queryKey,
+			});
+		},
+	});
+
+	let [editBudgetForm, setEditBudgetForm] = useState({
+		isOpen: false,
+		budget: appConfig.budget,
+	});
 
 	return (
 		<>
@@ -118,7 +166,7 @@ export function SettingsScreen() {
 								</span>
 
 								<span className={styles.fieldValue}>
-									{getLanguageNameByLocale(appConfigState.locale)}
+									{getLanguageNameByLocale(appConfig.locale)}
 								</span>
 							</div>
 
@@ -126,9 +174,9 @@ export function SettingsScreen() {
 								id="locale"
 								name="locale"
 								icon={EIconName.CaretDown}
-								value={appConfigState.locale}
+								value={appConfig.locale}
 								onChange={(locale) => {
-									appConfigStore.set({
+									mutateAppConfig({
 										locale,
 									});
 								}}
@@ -157,18 +205,16 @@ export function SettingsScreen() {
 									{intl.translate('currencyMain')}
 								</span>
 
-								<span className={styles.fieldValue}>
-									{appConfigState.currency}
-								</span>
+								<span className={styles.fieldValue}>{appConfig.currency}</span>
 							</div>
 
 							<IconSelect
 								id="currency"
 								name="currency"
 								icon={EIconName.CaretDown}
-								value={appConfigState.currency}
+								value={appConfig.currency}
 								onChange={(currency) => {
-									appConfigStore.set({
+									mutateAppConfig({
 										currency,
 									});
 								}}
@@ -188,7 +234,7 @@ export function SettingsScreen() {
 								</span>
 
 								<div className={cls(styles.fieldValue, styles.pillsContainer)}>
-									{appConfigState.availabelCurrencies.map((currency) => {
+									{appConfig.availabelCurrencies.map((currency) => {
 										return (
 											<span key={currency} className={styles.pill}>
 												{currency}
@@ -214,19 +260,20 @@ export function SettingsScreen() {
 
 						<div className={styles.field}>
 							<div className={styles.fieldData}>
-								<span className={styles.fieldLabel}>
-									{appConfigState.currency}
-								</span>
+								<span className={styles.fieldLabel}>{appConfig.currency}</span>
 
 								<span className={styles.fieldValue}>
-									{intlService.formatCurrency(appConfigState.budget || 0)}
+									{intlService.formatCurrency(appConfig.budget || 0)}
 								</span>
 							</div>
 
 							<IconButton
 								iconName={EIconName.Edit}
 								onClick={() => {
-									setEditBudget(true);
+									setEditBudgetForm({
+										isOpen: true,
+										budget: appConfig.budget,
+									});
 								}}
 							/>
 						</div>
@@ -262,23 +309,29 @@ export function SettingsScreen() {
 			</Screen>
 
 			<ActionSheet
-				onClose={() => setEditBudget(false)}
-				isOpen={editBudget}
+				onClose={() =>
+					setEditBudgetForm(() => ({
+						isOpen: false,
+						budget: appConfig.budget,
+					}))
+				}
+				isOpen={editBudgetForm.isOpen}
 				height="small"
 			>
 				<div className={styles.budgetContainer}>
-					<span className={styles.budgetCurrency}>
-						{appConfigState.currency}
-					</span>
+					<span className={styles.budgetCurrency}>{appConfig.currency}</span>
 
 					<input
 						type="number"
 						className={styles.budgetInput}
-						value={appConfigState.budget || 0}
+						value={editBudgetForm.budget ?? 0}
 						onChange={(event) => {
 							const budget = Number.parseInt(event.target.value);
 
-							appConfigStore.set({ budget });
+							setEditBudgetForm((prevState) => ({
+								...prevState,
+								budget,
+							}));
 						}}
 					/>
 				</div>
@@ -288,7 +341,16 @@ export function SettingsScreen() {
 						marginTop: '20px',
 					}}
 					onClick={() => {
-						setEditBudget(false);
+						mutateAppConfig({
+							budget: editBudgetForm.budget,
+						});
+
+						setEditBudgetForm((prevState) => {
+							return {
+								...prevState,
+								isOpen: false,
+							};
+						});
 					}}
 					size="m"
 					isWide
