@@ -42,8 +42,6 @@ export class NumberParser implements INumberParser {
 			this.initialize();
 		}
 
-		console.log(this.formatterCache);
-
 		let parsedValue = value
 			.trim()
 			.replace(this.groupRegExp, '')
