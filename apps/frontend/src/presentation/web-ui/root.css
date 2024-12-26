@@ -65,6 +65,7 @@
 
 	/* misc */
 	--transition-100: 0.15s ease-in-out;
+	--transition-200: 0.25s ease-in-out;
 
 	/* ActionSheet */
 	--action-sheet-start: 85%;

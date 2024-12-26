@@ -39,7 +39,7 @@
 }
 
 .radioInputTitle {
-	transition: color 0.25s ease-in-out;
+	transition: color var(--transition-200);
 
 	color: var(--color-text);
 
@@ -62,7 +62,7 @@
 
 	background-color: var(--white-200);
 
-	transition: background-color 0.25s ease-in-out;
+	transition: background-color var(--transition-200);
 
 	appearance: none;
 	outline: none;
