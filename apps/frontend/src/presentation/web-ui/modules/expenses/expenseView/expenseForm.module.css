@@ -11,7 +11,7 @@
 	font-size: var(--fs-300);
 
 	color: inherit;
-	background-color: var(--color-white-110);
+	background-color: var(--white-200);
 
 	border: var(--border-100);
 	border-color: var(--bc-900);
@@ -46,7 +46,7 @@
 
 	border: var(--border-100);
 	border-radius: var(--br-90);
-	background-color: var(--color-white-110);
+	background-color: var(--white-200);
 
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;

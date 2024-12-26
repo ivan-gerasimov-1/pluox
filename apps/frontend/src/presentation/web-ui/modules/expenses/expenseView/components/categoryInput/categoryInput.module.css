@@ -10,7 +10,7 @@
 	font-family: inherit;
 
 	color: inherit;
-	background-color: var(--color-white-110);
+	background-color: var(--white-200);
 
 	border: var(--border-100);
 	border-width: 2px;
@@ -20,5 +20,5 @@
 }
 
 .isEmpty {
-	color: var(--color-grey-600);
+	color: var(--grey-600);
 }

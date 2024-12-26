@@ -26,7 +26,7 @@
 	font-size: var(--fs-90);
 
 	color: var(--fc-100);
-	background-color: var(--color-white-110);
+	background-color: var(--white-200);
 	border: var(--border-100);
 	border-radius: var(--br-90);
 
@@ -35,7 +35,7 @@
 		background-color var(--transition-100);
 
 	&[aria-pressed='true'] {
-		background-color: var(--color-grey-200);
+		background-color: var(--grey-200);
 		border-color: var(--fc-100);
 	}
 }

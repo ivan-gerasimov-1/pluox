@@ -47,7 +47,7 @@
 	background: none;
 	appearance: none;
 
-	background-color: var(--color-red-400);
+	background-color: var(--red-100);
 }
 
 .amount {
@@ -80,11 +80,7 @@
 	margin-right: 5px;
 
 	background-size: 10px 30px;
-	background-image: radial-gradient(
-		circle,
-		var(--color-grey-500) 1px,
-		transparent 0
-	);
+	background-image: radial-gradient(circle, var(--grey-500) 1px, transparent 0);
 }
 
 .comment {

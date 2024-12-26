@@ -60,7 +60,7 @@
 	border: 0 none;
 	border-radius: 0;
 
-	background-color: var(--color-white-110);
+	background-color: var(--white-200);
 
 	transition: background-color 0.25s ease-in-out;
 
@@ -69,7 +69,7 @@
 
 	&:checked {
 		background-color: #50c878;
-		background-color: var(--color-grey-300);
+		background-color: var(--grey-300);
 	}
 
 	&:focus:not(:checked):not(:active) {
