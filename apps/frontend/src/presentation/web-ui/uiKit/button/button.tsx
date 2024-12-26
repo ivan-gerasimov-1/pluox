@@ -14,6 +14,10 @@ export type TButtonProps = {
 	onClick: () => void;
 };
 
+/**
+ * @todo
+ * 1. Investigate usage of onPointerDown/onKeyDown
+ */
 export function Button(props: React.PropsWithChildren<TButtonProps>) {
 	let type = props.type ?? 'button';
 	let color = props.color || 'none';
@@ -28,7 +32,7 @@ export function Button(props: React.PropsWithChildren<TButtonProps>) {
 				[styles[color]]: true,
 				[styles.wide]: isWide,
 			})}
-			onMouseDown={props.onClick}
+			onClick={props.onClick}
 		>
 			{props.children}
 		</button>
