@@ -64,6 +64,7 @@
 	--br-100: 24px;
 
 	/* misc */
+	--transition-90: 0.1s ease-in-out;
 	--transition-100: 0.15s ease-in-out;
 	--transition-200: 0.25s ease-in-out;
 

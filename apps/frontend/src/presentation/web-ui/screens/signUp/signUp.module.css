@@ -63,7 +63,7 @@
 	font-size: 14px;
 	font-weight: 600;
 
-	transition: all 0.1s ease-in-out;
+	transition: all var(--transition-90);
 
 	/* &:active {
 		box-shadow: 0 2px #d63232;
