@@ -38,7 +38,7 @@
 	color: inherit;
 	background-color: var(--white-100);
 
-	border: 1px solid var(--fc-100);
+	border: 1px solid var(--bc-900);
 
 	&:hover,
 	&:focus {

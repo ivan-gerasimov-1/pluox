@@ -36,6 +36,6 @@
 
 	&[aria-pressed='true'] {
 		background-color: var(--grey-200);
-		border-color: var(--fc-100);
+		border-color: var(--bc-900);
 	}
 }
