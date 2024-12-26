@@ -68,7 +68,6 @@
 	outline: none;
 
 	&:checked {
-		background-color: #50c878;
 		background-color: var(--grey-300);
 	}
 
