@@ -3,8 +3,6 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
 import { MoneySpentYear } from '@root/presentation/web-ui/modules/expenses/MoneySpentYear/MoneySpentYear';
 import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionSheet';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
@@ -14,9 +12,15 @@ import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/car
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 
 import styles from './main.module.css';
+import { useQuery } from '@tanstack/react-query';
+import { QUERY_APP_CONFIG_MONTH } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+import { getCurrentMonth } from '@root/core/infrastructure/temporal/helpers';
 
 export function MainScreen() {
-	let appConfig = useService(EServiceToken.APP_CONFIG);
+	let { data: currentMonth } = useQuery({
+		queryKey: [QUERY_APP_CONFIG_MONTH],
+		queryFn: getCurrentMonth,
+	});
 
 	return (
 		<>
@@ -26,7 +30,7 @@ export function MainScreen() {
 				<CardContainer>
 					<AppLink to={EAppPath.EXPENSES}>
 						<Card touchable>
-							<MoneySpentMonth month={appConfig.currentMonth} />
+							<MoneySpentMonth month={currentMonth ?? 0} />
 						</Card>
 					</AppLink>
 
