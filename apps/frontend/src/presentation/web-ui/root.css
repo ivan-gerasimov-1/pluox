@@ -11,7 +11,7 @@
 	--white-100: #fafafa;
 	--white-200: #fff;
 	--black-100: #333;
-	--black-200: #000;
+	--black-200: #252525;
 
 	/* Grey color */
 	--grey-100: #f5f5f5;
@@ -46,6 +46,7 @@
 	/** Font weight */
 	--fw-100: 400;
 	--fw-200: 600;
+	--fw-300: 800;
 
 	/** Border color */
 	--bc-80: var(--grey-100);
