@@ -13,9 +13,10 @@ import { resolveService } from '@root/core/infrastructure/serviceContainer/resol
 
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
-export const QUERY_EXPENSES_LIST = Symbol('expenseList');
-export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount');
-export const QUERY_EXPENSES_MONTHLY_AMOUNT = Symbol('monthlyAmount');
+export const QUERY_EXPENSES_LIST = Symbol('expenseList').description;
+export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount').description;
+export const QUERY_EXPENSES_MONTHLY_AMOUNT =
+	Symbol('monthlyAmount').description;
 
 export function addOne(payload: TExpenseCreateDTO): void {
 	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
