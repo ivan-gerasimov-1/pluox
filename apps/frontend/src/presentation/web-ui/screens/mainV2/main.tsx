@@ -153,7 +153,7 @@ export function MainScreen() {
 									style={{
 										display: 'flex',
 										justifyContent: 'space-between',
-										marginBlockEnd: '5px',
+										marginBlockEnd: '10px',
 									}}
 								>
 									<div>{categoryService.getCategoryIcon(id)}</div>
