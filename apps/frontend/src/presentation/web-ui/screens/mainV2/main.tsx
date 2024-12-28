@@ -87,8 +87,6 @@ export function MainScreen() {
 
 	let categories = useCategories(currentMonth);
 
-	console.log(categories);
-
 	return (
 		<>
 			<Screen className={styles.screenWithBottomSpace}>
