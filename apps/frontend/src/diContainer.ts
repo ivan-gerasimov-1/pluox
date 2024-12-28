@@ -267,6 +267,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.TOTAL_AMOUNT_USE_CASE,
 					EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
 					EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE,
+					EServiceToken.DAILY_AMOUNT_USE_CASE,
 				],
 			},
 		)

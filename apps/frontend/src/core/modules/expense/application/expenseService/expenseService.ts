@@ -21,6 +21,7 @@ import type {
 	TExpenseGroupByDate,
 } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import type { TYear, TMonth } from '@root/core/infrastructure/temporal/types';
+import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
@@ -33,6 +34,7 @@ export class ExpenseService implements IExpenseService {
 		private readonly totalAmountUseCase: ITotalAmountUseCase,
 		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
 		private readonly groupExpenseByDateUseCase: IGroupExpenseByDateUseCase,
+		private readonly dailyAmountUseCase: IDailyAmountUseCase,
 	) {}
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
@@ -86,6 +88,10 @@ export class ExpenseService implements IExpenseService {
 			},
 			this.appConfig.currency,
 		);
+	}
+
+	public getTotalByDay(): number {
+		return this.dailyAmountUseCase.execute();
 	}
 
 	public getMonthlyExpensesByCategory(

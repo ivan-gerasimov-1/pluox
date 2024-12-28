@@ -21,6 +21,7 @@ export interface IExpenseService {
 	 * @todo Add year to the class interface
 	 */
 	getTotalByMonth(month: TMonth): number;
+	getTotalByDay(): number;
 
 	getMonthlyExpensesByCategory(month: TMonth): TMonthlyExpensesByCategory[];
 
