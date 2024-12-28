@@ -39,8 +39,8 @@ const EXPENSE_ROUTES = [
 const MAIN_ROUTES = [
 	{
 		path: EAppPath.MAIN,
-		Component: MainScreen,
-		// Component: MainScreenV2,
+		// Component: MainScreen,
+		Component: MainScreenV2,
 	},
 
 	{
