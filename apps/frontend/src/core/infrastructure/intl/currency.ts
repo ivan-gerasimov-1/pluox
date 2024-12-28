@@ -10,6 +10,10 @@ enum ENumberFormatStyle {
 	CURRENCY = 'currency',
 }
 
+/**
+ * @todo
+ * 1. Fix performance issue with Intl.NumberFormat intanciation on every call
+ */
 export function formatCurrency(
 	value: number,
 	currency: ECurrency,
