@@ -21,7 +21,9 @@ import {
 import { getCurrentMonth } from '@root/core/infrastructure/temporal/helpers';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 import {
+	QUERY_EXPENSES_DAILY_AMOUNT,
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
+	getDailyAmount,
 	getMonthlyAmount,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
@@ -57,11 +59,21 @@ function useBudget(): number {
 	return data as number;
 }
 
+function useDailyAmount(): number {
+	let { data } = useQuery({
+		queryKey: [QUERY_EXPENSES_DAILY_AMOUNT],
+		queryFn: getDailyAmount,
+	});
+
+	return data ?? 0;
+}
+
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 
 	let currentMonth = useCurrentMonth();
 	let monthlyTotal = useMonthlyAmount(currentMonth);
+	let dailyTotal = useDailyAmount();
 	let budget = useBudget();
 
 	let leftover = budget - monthlyTotal;
@@ -83,7 +95,11 @@ export function MainScreen() {
 				</div>
 
 				<div className={styles.cardContainer}>
-					<div className={cls(styles.card, styles.todayCard)}>Сегодня</div>
+					<div className={cls(styles.card, styles.todayCard)}>
+						<div>Сегодня</div>
+
+						{intlService.formatCurrency(dailyTotal)}
+					</div>
 					<div className={cls(styles.card)}>
 						<div>Остаток</div>
 
