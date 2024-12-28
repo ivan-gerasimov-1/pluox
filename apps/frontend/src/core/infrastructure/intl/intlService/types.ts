@@ -11,6 +11,7 @@ export interface IIntlService {
 		value: number,
 		options?: {
 			currency?: ECurrency;
+			hideDecimal?: boolean;
 		},
 	): string;
 	formatDate(value: number | string | Date): string;

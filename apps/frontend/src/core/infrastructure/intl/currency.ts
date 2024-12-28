@@ -18,10 +18,14 @@ export function formatCurrency(
 	value: number,
 	currency: ECurrency,
 	locale: ELocaleCode,
+	options?: {
+		hideDecimal?: boolean;
+	},
 ): string {
 	return Intl.NumberFormat(locale, {
 		style: ENumberFormatStyle.CURRENCY,
 		currency,
 		currencyDisplay: ECurrencyDisplay.NARROW_SYMBOL,
+		maximumFractionDigits: options?.hideDecimal ? 0 : 2,
 	}).format(value);
 }

@@ -31,12 +31,16 @@ export class IntlService implements IIntlService {
 		value: number,
 		options?: {
 			currency?: ECurrency;
+			hideDecimal?: boolean;
 		},
 	): string {
 		return formatCurrency(
 			value,
 			options?.currency || this.currency,
 			this.locale,
+			{
+				hideDecimal: options?.hideDecimal,
+			},
 		);
 	}
 
