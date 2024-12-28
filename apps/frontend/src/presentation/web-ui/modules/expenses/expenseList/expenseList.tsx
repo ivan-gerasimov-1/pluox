@@ -121,7 +121,9 @@ export function ExpenseList(props: TExpenseListProps) {
 								<div className={styles.info}>
 									<div className={styles.amount}>
 										<span className={styles.expense}>
-											{intlService.formatCurrency(item.amount, item.currency)}
+											{intlService.formatCurrency(item.amount, {
+												currency: item.currency,
+											})}
 										</span>
 
 										<span className={styles.dotFilledSpace} />
@@ -133,7 +135,6 @@ export function ExpenseList(props: TExpenseListProps) {
 													item.currency,
 													intlService.currency,
 												),
-												intlService.currency,
 											)}
 										</span>
 									</div>

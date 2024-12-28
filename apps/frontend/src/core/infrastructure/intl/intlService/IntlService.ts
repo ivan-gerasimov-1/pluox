@@ -27,8 +27,17 @@ export class IntlService implements IIntlService {
 		return this.getDecimalSeparator(this.locale);
 	}
 
-	public formatCurrency(value: number, currency?: ECurrency): string {
-		return formatCurrency(value, currency || this.currency, this.locale);
+	public formatCurrency(
+		value: number,
+		options?: {
+			currency?: ECurrency;
+		},
+	): string {
+		return formatCurrency(
+			value,
+			options?.currency || this.currency,
+			this.locale,
+		);
 	}
 
 	public formatDate(value: number | string | Date): string {

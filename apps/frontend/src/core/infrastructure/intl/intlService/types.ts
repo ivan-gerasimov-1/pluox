@@ -7,7 +7,12 @@ export interface IIntlService {
 	readonly currency: ECurrency;
 	readonly decimalSeparator: TDecimalSeparator;
 
-	formatCurrency(value: number, currency?: ECurrency): string;
+	formatCurrency(
+		value: number,
+		options?: {
+			currency?: ECurrency;
+		},
+	): string;
 	formatDate(value: number | string | Date): string;
 	parseNumber(value: string): number;
 }
