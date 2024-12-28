@@ -92,20 +92,22 @@ export function MainScreen() {
 			<Screen className={styles.screenWithBottomSpace}>
 				<Header title="Savee" />
 
-				<div className={styles.title}>
-					<span>
-						{intlService.formatCurrency(monthlyTotal, {
-							hideDecimal: true,
-						})}
-					</span>
-					<span
-						style={{
-							color: 'var(--grey-800)',
-						}}
-					>
-						{ECurrency.USD}
-					</span>
-				</div>
+				<AppLink to={EAppPath.EXPENSES}>
+					<div className={styles.title}>
+						<span>
+							{intlService.formatCurrency(monthlyTotal, {
+								hideDecimal: true,
+							})}
+						</span>
+						<span
+							style={{
+								color: 'var(--grey-800)',
+							}}
+						>
+							{ECurrency.USD}
+						</span>
+					</div>
+				</AppLink>
 
 				<div className={styles.cardContainer}>
 					<div className={cls(styles.card, styles.todayCard)}>
