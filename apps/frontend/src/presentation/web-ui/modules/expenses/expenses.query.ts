@@ -17,6 +17,7 @@ export const QUERY_EXPENSES_LIST = Symbol('expenseList').description;
 export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount').description;
 export const QUERY_EXPENSES_MONTHLY_AMOUNT =
 	Symbol('monthlyAmount').description;
+export const QUERY_EXPENSES_DAILY_AMOUNT = Symbol('dailyAmount').description;
 
 export function addOne(payload: TExpenseCreateDTO): void {
 	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
@@ -69,4 +70,10 @@ export function getMonthlyAmount(month: TMonth): number {
 	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
 
 	return expenseService.getTotalByMonth(month);
+}
+
+export function getDailyAmount(): number {
+	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
+
+	return expenseService.getTotalByDay();
 }
