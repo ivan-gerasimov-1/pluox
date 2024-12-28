@@ -5,6 +5,7 @@ import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/
 import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/expenseView/expenseForm';
 import {
 	addOne,
+	QUERY_EXPENSES_DAILY_AMOUNT,
 	QUERY_EXPENSES_LIST,
 	QUERY_EXPENSES_MONTHLY_AMOUNT,
 	QUERY_EXPENSES_TOTAL_AMOUNT,
@@ -37,6 +38,10 @@ export function AddExpense() {
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [QUERY_EXPENSES_LIST],
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [QUERY_EXPENSES_DAILY_AMOUNT],
 					refetchType: 'all',
 				}),
 			]);
