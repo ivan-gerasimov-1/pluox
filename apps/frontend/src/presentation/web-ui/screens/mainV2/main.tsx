@@ -95,7 +95,11 @@ export function MainScreen() {
 				<Header title="Savee" />
 
 				<div className={styles.title}>
-					<span>{intlService.formatCurrency(monthlyTotal)}</span>
+					<span>
+						{intlService.formatCurrency(monthlyTotal, {
+							hideDecimal: true,
+						})}
+					</span>
 					<span
 						style={{
 							color: 'var(--grey-800)',
@@ -115,7 +119,9 @@ export function MainScreen() {
 								fontWeight: 'var(--fw-200)',
 							}}
 						>
-							{intlService.formatCurrency(dailyTotal)}
+							{intlService.formatCurrency(dailyTotal, {
+								hideDecimal: true,
+							})}
 						</div>
 					</div>
 					<div className={cls(styles.card)}>
@@ -127,7 +133,9 @@ export function MainScreen() {
 								fontWeight: 'var(--fw-200)',
 							}}
 						>
-							{intlService.formatCurrency(leftover)}
+							{intlService.formatCurrency(leftover, {
+								hideDecimal: true,
+							})}
 						</div>
 					</div>
 					<div className={cls(styles.card, styles.categoryCard)}>
@@ -152,7 +160,11 @@ export function MainScreen() {
 								>
 									<div>{categoryService.getCategoryIcon(id)}</div>
 
-									<div>{intlService.formatCurrency(total)}</div>
+									<div>
+										{intlService.formatCurrency(total, {
+											hideDecimal: true,
+										})}
+									</div>
 								</li>
 							))}
 						</ul>
