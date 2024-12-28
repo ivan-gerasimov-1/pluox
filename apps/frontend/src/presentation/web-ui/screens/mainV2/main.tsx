@@ -68,8 +68,15 @@ function useDailyAmount(): number {
 	return data ?? 0;
 }
 
+function useCategories(month: TMonth) {
+	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
+
+	return expenseService.getMonthlyExpensesByCategory(month);
+}
+
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
 	let currentMonth = useCurrentMonth();
 	let monthlyTotal = useMonthlyAmount(currentMonth);
@@ -77,6 +84,10 @@ export function MainScreen() {
 	let budget = useBudget();
 
 	let leftover = budget - monthlyTotal;
+
+	let categories = useCategories(currentMonth);
+
+	console.log(categories);
 
 	return (
 		<>
@@ -98,14 +109,54 @@ export function MainScreen() {
 					<div className={cls(styles.card, styles.todayCard)}>
 						<div>Сегодня</div>
 
-						{intlService.formatCurrency(dailyTotal)}
+						<div
+							style={{
+								marginBlockStart: '5px',
+								fontWeight: 'var(--fw-200)',
+							}}
+						>
+							{intlService.formatCurrency(dailyTotal)}
+						</div>
 					</div>
 					<div className={cls(styles.card)}>
 						<div>Остаток</div>
 
-						{intlService.formatCurrency(leftover)}
+						<div
+							style={{
+								marginBlockStart: '5px',
+								fontWeight: 'var(--fw-200)',
+							}}
+						>
+							{intlService.formatCurrency(leftover)}
+						</div>
 					</div>
-					<div className={cls(styles.card, styles.categoryCard)}>Категории</div>
+					<div className={cls(styles.card, styles.categoryCard)}>
+						<div>Категории</div>
+
+						<ul
+							style={{
+								width: '100%',
+								padding: 0,
+								listStyle: 'none',
+								fontWeight: 'var(--fw-200)',
+							}}
+						>
+							{categories.map(({ id, total }) => (
+								<li
+									key={id}
+									style={{
+										display: 'flex',
+										justifyContent: 'space-between',
+										marginBlockEnd: '5px',
+									}}
+								>
+									<div>{categoryService.getCategoryIcon(id)}</div>
+
+									<div>{intlService.formatCurrency(total)}</div>
+								</li>
+							))}
+						</ul>
+					</div>
 				</div>
 
 				{/* <CardContainer>
