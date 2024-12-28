@@ -49,6 +49,7 @@ import { CategoryRepository } from '@root/core/modules/category/infrastructure/c
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
 import { BaseApi } from '@root/core/infrastructure/baseApi/baseApi';
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
+import { DailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 
 let globalContainer: IContainer;
 
@@ -237,6 +238,16 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CURRENCY_RATE_SERVICE,
+				],
+			},
+			{
+				token: EServiceToken.DAILY_AMOUNT_USE_CASE,
+				useClass: DailyAmountUseCase,
+				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.TEMPORAL,
+					EServiceToken.CURRENCY_RATE_SERVICE,
+					EServiceToken.APP_CONFIG,
 				],
 			},
 			{

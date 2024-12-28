@@ -33,6 +33,7 @@ import type { IGroupExpenseByDateUseCase } from '@root/core/modules/expense/doma
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
+import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -108,6 +109,7 @@ export enum EServiceToken {
 	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
 	MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE = 'MonthlyExpensesByCategoryUseCase',
 	GROUP_EXPENSE_BY_DATE_USE_CASE = 'GroupExpensesByDateUseCase',
+	DAILY_AMOUNT_USE_CASE = 'DailyAmountUseCase',
 }
 
 export interface IServiceMap {
@@ -151,4 +153,5 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
 	[EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE]: IMonthlyExpensesByCategoryUseCase;
 	[EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE]: IGroupExpenseByDateUseCase;
+	[EServiceToken.DAILY_AMOUNT_USE_CASE]: IDailyAmountUseCase;
 }
