@@ -13,21 +13,86 @@ import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 
 import styles from './main.module.css';
 import { useQuery } from '@tanstack/react-query';
-import { QUERY_APP_CONFIG_MONTH } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+import {
+	getBudget,
+	QUERY_APP_CONFIG_BUDGET,
+	QUERY_APP_CONFIG_MONTH,
+} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
 import { getCurrentMonth } from '@root/core/infrastructure/temporal/helpers';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
+import {
+	QUERY_EXPENSES_MONTHLY_AMOUNT,
+	getMonthlyAmount,
+} from '@root/presentation/web-ui/modules/expenses/expenses.query';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { TMonth } from '@root/core/infrastructure/temporal/types';
+import { ECurrency } from '@root/core/modules/currency/domain/types';
 
-export function MainScreen() {
-	let { data: currentMonth } = useQuery({
+function useCurrentMonth(): TMonth {
+	let { data } = useQuery({
 		queryKey: [QUERY_APP_CONFIG_MONTH],
 		queryFn: getCurrentMonth,
 	});
+
+	return data as TMonth;
+}
+
+function useMonthlyAmount(month: TMonth): number {
+	let { data } = useQuery({
+		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, month],
+		queryFn: () => getMonthlyAmount(month),
+		refetchOnMount: false,
+	});
+
+	return data as number;
+}
+
+function useBudget(): number {
+	let { data } = useQuery({
+		queryKey: [QUERY_APP_CONFIG_BUDGET],
+		queryFn: getBudget,
+	});
+
+	return data as number;
+}
+
+export function MainScreen() {
+	let intlService = useService(EServiceToken.INTL_SERVICE);
+
+	let currentMonth = useCurrentMonth();
+	let monthlyTotal = useMonthlyAmount(currentMonth);
+	let budget = useBudget();
+
+	let leftover = budget - monthlyTotal;
 
 	return (
 		<>
 			<Screen className={styles.screenWithBottomSpace}>
 				<Header title="Savee" />
 
-				<CardContainer>
+				<div className={styles.title}>
+					<span>{intlService.formatCurrency(monthlyTotal)}</span>
+					<span
+						style={{
+							color: 'var(--grey-800)',
+						}}
+					>
+						{ECurrency.USD}
+					</span>
+				</div>
+
+				<div className={styles.cardContainer}>
+					<div className={cls(styles.card, styles.todayCard)}>Сегодня</div>
+					<div className={cls(styles.card)}>
+						<div>Остаток</div>
+
+						{intlService.formatCurrency(leftover)}
+					</div>
+					<div className={cls(styles.card, styles.categoryCard)}>Категории</div>
+				</div>
+
+				{/* <CardContainer>
 					<AppLink to={EAppPath.EXPENSES}>
 						<Card touchable>
 							<MoneySpentMonth month={currentMonth ?? 0} />
@@ -39,7 +104,7 @@ export function MainScreen() {
 							<MoneySpentYear />
 						</Card>
 					</AppLink>
-				</CardContainer>
+				</CardContainer> */}
 			</Screen>
 
 			<ActionSheet>
