@@ -25,9 +25,9 @@ export function getBudget(): number {
 }
 
 export function getMonth(): TMonth {
-	let appConfig = resolveService(EServiceToken.APP_CONFIG);
+	let temporal = resolveService(EServiceToken.TEMPORAL);
 
-	return appConfig.currentMonth;
+	return temporal.getCurrentMonth();
 }
 
 export function updateAppConfig(payload: Partial<TAppConfig>): TAppConfig {

@@ -2,8 +2,6 @@ import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
 import type { TEnvironment } from '@root/config';
-import type { TMonth } from '@root/core/infrastructure/temporal/types';
-import { getCurrentMonth } from '@root/core/infrastructure/temporal/helpers';
 
 export interface IAppConfig {
 	locale: ELocaleCode;
@@ -11,7 +9,6 @@ export interface IAppConfig {
 	availableCurrencies: ECurrency[];
 	budget: number | null;
 
-	readonly currentMonth: TMonth;
 	readonly apiUrl: string;
 
 	readonly openExchangeRates: {
@@ -25,8 +22,6 @@ export class AppConfig implements IAppConfig {
 	#currency: ECurrency;
 	#availableCurrencies: ECurrency[];
 	#budget: number | null;
-
-	public readonly currentMonth: TMonth;
 
 	public readonly openExchangeRates: {
 		apiUrl: string;
@@ -50,7 +45,6 @@ export class AppConfig implements IAppConfig {
 			ECurrency.THB,
 		];
 		this.#budget = 4800;
-		this.currentMonth = this.getCurrentMonth();
 
 		this.openExchangeRates = {
 			apiUrl: 'https://openexchangerates.org/api',
@@ -90,9 +84,5 @@ export class AppConfig implements IAppConfig {
 
 	public set budget(value: number | null) {
 		this.#budget = value;
-	}
-
-	private getCurrentMonth(): TMonth {
-		return getCurrentMonth();
 	}
 }
