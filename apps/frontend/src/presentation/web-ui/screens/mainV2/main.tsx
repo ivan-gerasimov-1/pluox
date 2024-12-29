@@ -15,10 +15,10 @@ import styles from './main.module.css';
 import { useQuery } from '@tanstack/react-query';
 import {
 	getBudget,
+	getMonth,
 	QUERY_APP_CONFIG_BUDGET,
 	QUERY_APP_CONFIG_MONTH,
 } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
-import { getCurrentMonth } from '@root/core/infrastructure/temporal/helpers';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 import {
 	QUERY_EXPENSES_DAILY_AMOUNT,
@@ -34,7 +34,7 @@ import { ECurrency } from '@root/core/modules/currency/domain/types';
 function useCurrentMonth(): TMonth {
 	let { data } = useQuery({
 		queryKey: [QUERY_APP_CONFIG_MONTH],
-		queryFn: getCurrentMonth,
+		queryFn: getMonth,
 	});
 
 	return data as TMonth;

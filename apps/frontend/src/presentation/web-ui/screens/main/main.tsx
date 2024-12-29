@@ -13,13 +13,15 @@ import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 
 import styles from './main.module.css';
 import { useQuery } from '@tanstack/react-query';
-import { QUERY_APP_CONFIG_MONTH } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
-import { getCurrentMonth } from '@root/core/infrastructure/temporal/helpers';
+import {
+	getMonth,
+	QUERY_APP_CONFIG_MONTH,
+} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
 
 export function MainScreen() {
 	let { data: currentMonth } = useQuery({
 		queryKey: [QUERY_APP_CONFIG_MONTH],
-		queryFn: getCurrentMonth,
+		queryFn: getMonth,
 	});
 
 	return (
