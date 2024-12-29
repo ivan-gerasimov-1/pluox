@@ -34,7 +34,7 @@ function getApiUrl(env?: string | EEnvironment): string {
 
 function getOpenExchangeRatesApi(env?: string | EEnvironment) {
 	return {
-		apiUrl: 'https://openexchangerates.org/api',
-		apiKey: 'fd33278c63404c26b51d7d37ae50731d',
+		apiUrl: process.env.APP_OPEN_EXCHANGE_RATES_API_URL as string,
+		apiKey: process.env.APP_OPEN_EXCHANGE_RATES_API_KEY as string,
 	};
 }

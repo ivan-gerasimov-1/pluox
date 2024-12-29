@@ -11,6 +11,7 @@ import { checker } from 'vite-plugin-checker';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
+	const appEnv = loadEnv(mode, process.cwd(), 'APP');
 	const isDevelopment = mode === 'development';
 
 	const plugins = [
@@ -51,7 +52,15 @@ export default defineConfig(({ mode }) => {
 		plugins,
 
 		define: {
-			'process.env.NODE_ENV': JSON.stringify(mode),
+			process: {
+				env: {
+					NODE_ENV: mode,
+					APP_OPEN_EXCHANGE_RATES_API_URL:
+						appEnv.APP_OPEN_EXCHANGE_RATES_API_URL,
+					APP_OPEN_EXCHANGE_RATES_API_KEY:
+						appEnv.APP_OPEN_EXCHANGE_RATES_API_KEY,
+				},
+			},
 		},
 
 		optimizeDeps: {
