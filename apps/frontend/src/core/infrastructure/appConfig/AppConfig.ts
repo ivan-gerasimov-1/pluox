@@ -46,11 +46,7 @@ export class AppConfig implements IAppConfig {
 		];
 		this.#budget = 4800;
 
-		this.openExchangeRates = {
-			apiUrl: 'https://openexchangerates.org/api',
-			apiKey: 'fd33278c63404c26b51d7d37ae50731d',
-		};
-
+		this.openExchangeRates = environment.openExchangeRates;
 		this.apiUrl = environment.apiUrl;
 	}
 
