@@ -52,15 +52,13 @@ export default defineConfig(({ mode }) => {
 		plugins,
 
 		define: {
-			process: {
-				env: {
-					NODE_ENV: mode,
-					APP_OPEN_EXCHANGE_RATES_API_URL:
-						appEnv.APP_OPEN_EXCHANGE_RATES_API_URL,
-					APP_OPEN_EXCHANGE_RATES_API_KEY:
-						appEnv.APP_OPEN_EXCHANGE_RATES_API_KEY,
-				},
-			},
+			'process.env.NODE_ENV': JSON.stringify(mode),
+			'process.env.APP_OPEN_EXCHANGE_RATES_API_URL': JSON.stringify(
+				appEnv.APP_OPEN_EXCHANGE_RATES_API_URL,
+			),
+			'process.env.APP_OPEN_EXCHANGE_RATES_API_KEY': JSON.stringify(
+				appEnv.APP_OPEN_EXCHANGE_RATES_API_KEY,
+			),
 		},
 
 		optimizeDeps: {
