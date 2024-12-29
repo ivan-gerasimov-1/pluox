@@ -9,6 +9,8 @@ import type {
 	TISODateString,
 	TMonth,
 } from '@root/core/infrastructure/temporal/types';
+import { monthGuard } from '@root/core/infrastructure/temporal/typeGuards';
+import { InvalidMonthError } from '@root/core/infrastructure/temporal/errors';
 
 /**
  * @todo Load additional locales in IntlService
@@ -36,6 +38,16 @@ export class Temporal implements ITemporal {
 		})
 			.locale(localeCode)
 			.format('MMMM');
+	}
+
+	public getCurrentMonth(): TMonth {
+		const month = new Date().getMonth();
+
+		if (!monthGuard(month)) {
+			throw new InvalidMonthError(month);
+		}
+
+		return month;
 	}
 
 	public getStartOfMonth(month?: TMonth): TISODateString {

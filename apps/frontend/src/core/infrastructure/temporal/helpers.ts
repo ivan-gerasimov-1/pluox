@@ -7,6 +7,7 @@ import type {
 } from '@root/core/infrastructure/temporal/types';
 
 /**
+ * @deprecated
  * @throws InvalidMonthError
  */
 export function getCurrentMonth(): TMonth {
