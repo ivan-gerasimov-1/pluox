@@ -1,9 +1,6 @@
 import { environment, type TEnvironment } from '@root/config';
 
-import {
-	AppConfig,
-	type IAppConfig,
-} from '@core/infrastructure/appConfig/AppConfig';
+import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
 import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
@@ -71,10 +68,9 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			},
 			{
 				token: EServiceToken.APP_CONFIG,
-				useFactory: (environment: TEnvironment) => {
-					return new AppConfig(environment, ELocaleCode.RU_RU, ECurrency.USD);
+				useFactory: () => {
+					return new AppConfig(ELocaleCode.RU_RU, ECurrency.USD);
 				},
-				deps: [EServiceToken.ENVIRONMENT],
 			},
 			{
 				token: EServiceToken.APP_CONFIG_DATASOURCE,
@@ -114,7 +110,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.BASE_API,
 				useClass: BaseApi,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.AUTH_DATASOURCE],
+				deps: [EServiceToken.ENVIRONMENT, EServiceToken.AUTH_DATASOURCE],
 			},
 			{
 				token: EServiceToken.TEMPORAL,
@@ -187,7 +183,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CURRENCY_RATE_API,
 				useClass: CurrencyRateAPI,
-				deps: [EServiceToken.APP_CONFIG],
+				deps: [EServiceToken.ENVIRONMENT, EServiceToken.APP_CONFIG],
 			},
 		)
 		/**

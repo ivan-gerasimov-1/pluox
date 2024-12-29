@@ -1,10 +1,10 @@
-import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { TEnvironment } from '@root/config';
 import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 
 export class BaseApi implements IBaseApi {
 	constructor(
-		private readonly appConfig: IAppConfig,
+		private readonly environment: TEnvironment,
 		private readonly authDataSource: IAuthDataSource,
 	) {}
 
@@ -22,11 +22,15 @@ export class BaseApi implements IBaseApi {
 		return `Bearer ${this.authToken}`;
 	}
 
+	private get baseUrl(): string {
+		return this.environment.apiUrl;
+	}
+
 	public async request<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
 	): Promise<TResponse> {
-		const responseRaw = await fetch(`${this.appConfig.apiUrl}${path}`, {
+		const responseRaw = await fetch(`${this.baseUrl}${path}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

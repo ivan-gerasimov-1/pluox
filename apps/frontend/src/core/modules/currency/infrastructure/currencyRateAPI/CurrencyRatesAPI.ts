@@ -1,3 +1,4 @@
+import type { TEnvironment } from '@root/config';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type {
 	ECurrency,
@@ -6,14 +7,17 @@ import type {
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
 
 export class CurrencyRateAPI implements ICurrencyRateAPI {
-	constructor(private readonly appConfig: IAppConfig) {}
+	constructor(
+		private readonly environment: TEnvironment,
+		private readonly appConfig: IAppConfig,
+	) {}
 
 	private get apiEndpoint(): string {
-		return this.appConfig.openExchangeRates.apiUrl;
+		return this.environment.openExchangeRates.apiUrl;
 	}
 
 	private get apiKey(): string {
-		return this.appConfig.openExchangeRates.apiKey;
+		return this.environment.openExchangeRates.apiKey;
 	}
 
 	private get availableCurrencies(): ECurrency[] {

@@ -1,20 +1,11 @@
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@core/infrastructure/intl/enums';
 
-import type { TEnvironment } from '@root/config';
-
 export interface IAppConfig {
 	locale: ELocaleCode;
 	currency: ECurrency;
 	availableCurrencies: ECurrency[];
 	budget: number | null;
-
-	readonly apiUrl: string;
-
-	readonly openExchangeRates: {
-		apiUrl: string;
-		apiKey: string;
-	};
 }
 
 export class AppConfig implements IAppConfig {
@@ -23,18 +14,7 @@ export class AppConfig implements IAppConfig {
 	#availableCurrencies: ECurrency[];
 	#budget: number | null;
 
-	public readonly openExchangeRates: {
-		apiUrl: string;
-		apiKey: string;
-	};
-
-	public readonly apiUrl: string;
-
-	constructor(
-		environment: TEnvironment,
-		locale: ELocaleCode,
-		currency: ECurrency,
-	) {
+	constructor(locale: ELocaleCode, currency: ECurrency) {
 		this.#locale = locale;
 		this.#currency = currency;
 		this.#availableCurrencies = [
@@ -45,9 +25,6 @@ export class AppConfig implements IAppConfig {
 			ECurrency.THB,
 		];
 		this.#budget = 4800;
-
-		this.openExchangeRates = environment.openExchangeRates;
-		this.apiUrl = environment.apiUrl;
 	}
 
 	public get locale(): ELocaleCode {
