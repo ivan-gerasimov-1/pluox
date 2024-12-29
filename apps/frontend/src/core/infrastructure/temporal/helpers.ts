@@ -3,22 +3,7 @@ import { monthGuard } from '@root/core/infrastructure/temporal/typeGuards';
 import type {
 	TDateParts,
 	TISODateString,
-	TMonth,
 } from '@root/core/infrastructure/temporal/types';
-
-/**
- * @deprecated
- * @throws InvalidMonthError
- */
-export function getCurrentMonth(): TMonth {
-	const month = new Date().getMonth();
-
-	if (!monthGuard(month)) {
-		throw new InvalidMonthError(month);
-	}
-
-	return month;
-}
 
 /**
  * @throws InvalidMonthError
