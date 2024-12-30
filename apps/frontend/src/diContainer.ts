@@ -27,7 +27,7 @@ import { AppConfigDataSource } from '@root/core/infrastructure/appConfigDataSour
 import { AppConfigService } from '@root/core/infrastructure/appConfigService/appConfigService';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
 import { AuthDataSource } from '@root/core/infrastructure/authDataSource/authDataSource';
-import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
+import { AuthApi } from '@root/core/infrastructure/authApi/authApi';
 import { UserDataSource } from '@root/core/infrastructure/userDataSource/userDataSource';
 import { AuthService } from '@core/infrastructure/authService/AuthService';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
