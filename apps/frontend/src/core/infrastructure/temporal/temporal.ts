@@ -3,7 +3,7 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import objectSupport from 'dayjs/plugin/objectSupport';
 
-import type { IIntlService } from '@root/core/infrastructure/intl/intlService/types';
+import type { IIntlService } from '@root/core/modules/intl/intlService/types';
 import type {
 	ITemporal,
 	TISODateString,

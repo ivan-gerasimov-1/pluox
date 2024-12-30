@@ -1,6 +1,6 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
-import { ELocaleCode } from '@root/core/infrastructure/intl/enums';
-import type { INumberParser } from '@root/core/infrastructure/intl/numberParser/types';
+import { ELocaleCode } from '@root/core/modules/intl/enums';
+import type { INumberParser } from '@root/core/modules/intl/numberParser/types';
 
 type IndexReplacer = (digit: string) => string;
 type NumberFormatterCache = Map<ELocaleCode, Intl.NumberFormat>;

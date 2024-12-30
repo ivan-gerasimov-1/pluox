@@ -1,6 +1,6 @@
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { ELocaleCode } from '@core/infrastructure/intl/enums';
-import type { TDecimalSeparator } from '@core/infrastructure/intl/types';
+import type { ELocaleCode } from '@root/core/modules/intl/enums';
+import type { TDecimalSeparator } from '@root/core/modules/intl/types';
 
 export interface IIntlService {
 	readonly locale: ELocaleCode;

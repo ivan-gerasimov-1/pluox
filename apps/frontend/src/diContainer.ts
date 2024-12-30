@@ -4,15 +4,15 @@ import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
 import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ELocaleCode } from '@core/infrastructure/intl/enums';
-import { IntlService } from '@core/infrastructure/intl/intlService/IntlService';
+import { ELocaleCode } from '@root/core/modules/intl/enums';
+import { IntlService } from '@root/core/modules/intl/intlService/IntlService';
 
 import { Container } from '@root/core/infrastructure/serviceContainer/container';
 import {
 	EServiceToken,
 	type IContainer,
 } from '@root/core/infrastructure/serviceContainer/types';
-import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
+import { NumberParser } from '@root/core/modules/intl/numberParser/NumberParser';
 import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,

@@ -1,4 +1,4 @@
-import { ELocaleCode } from '@core/infrastructure/intl/enums';
+import { ELocaleCode } from '@root/core/modules/intl/enums';
 
 export const expenseFormI18n = {
 	[ELocaleCode.RU_RU]: {

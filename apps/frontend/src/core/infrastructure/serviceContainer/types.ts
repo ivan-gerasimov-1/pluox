@@ -13,8 +13,8 @@ import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructur
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
-import type { IIntlService } from '@core/infrastructure/intl/intlService/types';
-import type { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
+import type { IIntlService } from '@root/core/modules/intl/intlService/types';
+import type { NumberParser } from '@root/core/modules/intl/numberParser/NumberParser';
 import type { IUserDataSource } from '@root/core/infrastructure/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';

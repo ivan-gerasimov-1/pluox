@@ -1,13 +1,13 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import { DECIMAL_SEPARATORS } from '@core/infrastructure/intl/constants';
-import { formatCurrency } from '@core/infrastructure/intl/currency';
-import { formatDate } from '@core/infrastructure/intl/date';
-import type { ELocaleCode } from '@core/infrastructure/intl/enums';
-import { UnsupportedDecimalSeparatorError } from '@core/infrastructure/intl/intlService/errors';
-import { IIntlService } from '@core/infrastructure/intl/intlService/types';
-import { NumberParser } from '@core/infrastructure/intl/numberParser/NumberParser';
-import type { TDecimalSeparator } from '@core/infrastructure/intl/types';
+import { DECIMAL_SEPARATORS } from '@root/core/modules/intl/constants';
+import { formatCurrency } from '@root/core/modules/intl/currency';
+import { formatDate } from '@root/core/modules/intl/date';
+import type { ELocaleCode } from '@root/core/modules/intl/enums';
+import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/intlService/errors';
+import { IIntlService } from '@root/core/modules/intl/intlService/types';
+import { NumberParser } from '@root/core/modules/intl/numberParser/NumberParser';
+import type { TDecimalSeparator } from '@root/core/modules/intl/types';
 
 export class IntlService implements IIntlService {
 	constructor(
