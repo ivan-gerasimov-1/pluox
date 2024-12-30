@@ -1,18 +1,19 @@
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import { DECIMAL_SEPARATORS } from '@root/core/modules/intl/domain/constants';
-import { formatCurrency } from '@root/core/modules/intl/application/currency';
 import { formatDate } from '@root/core/modules/intl/application/date';
 import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/domain/errors';
 import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
 import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
+import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
 
 export class IntlService implements IIntlService {
 	constructor(
 		private readonly appConfig: IAppConfig,
 		private readonly numberParser: INumberParser,
+		private readonly currencyFormatter: ICurrencyFormatter,
 	) {}
 
 	public get locale(): ELocaleCode {
@@ -34,7 +35,7 @@ export class IntlService implements IIntlService {
 			hideDecimal?: boolean;
 		},
 	): string {
-		return formatCurrency(
+		return this.currencyFormatter.format(
 			value,
 			options?.currency || this.currency,
 			this.locale,

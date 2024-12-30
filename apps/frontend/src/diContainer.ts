@@ -47,6 +47,7 @@ import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastr
 import { BaseApi } from '@root/core/infrastructure/baseApi/baseApi';
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 import { DailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
+import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/numberParser/currencyFormatter/currencyFormatter';
 
 let globalContainer: IContainer;
 
@@ -92,9 +93,17 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.APP_CONFIG],
 			},
 			{
+				token: EServiceToken.CURRENCY_FORMATTER,
+				useClass: CurrencyFormatter,
+			},
+			{
 				token: EServiceToken.INTL_SERVICE,
 				useClass: IntlService,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.NUMBER_PARSER],
+				deps: [
+					EServiceToken.APP_CONFIG,
+					EServiceToken.NUMBER_PARSER,
+					EServiceToken.CURRENCY_FORMATTER,
+				],
 			},
 			{
 				token: EServiceToken.ID_GENERATOR_FACTORY,
