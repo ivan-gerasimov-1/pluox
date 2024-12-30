@@ -17,7 +17,7 @@ import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
-import { ClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/ClientIdDataSource';
+import { ClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/clientIdDataSource';
 import { ClientId } from '@root/core/infrastructure/clientId/clientId';
 import {
 	CategoryServiceFactory,
