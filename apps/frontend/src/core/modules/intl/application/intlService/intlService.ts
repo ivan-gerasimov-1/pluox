@@ -5,14 +5,14 @@ import { formatCurrency } from '@root/core/modules/intl/application/currency';
 import { formatDate } from '@root/core/modules/intl/application/date';
 import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/domain/errors';
-import { IIntlService } from '@root/core/modules/intl/application/intlService/types';
-import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
+import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
 import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
+import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 
 export class IntlService implements IIntlService {
 	constructor(
 		private readonly appConfig: IAppConfig,
-		private readonly numberParser: NumberParser,
+		private readonly numberParser: INumberParser,
 	) {}
 
 	public get locale(): ELocaleCode {

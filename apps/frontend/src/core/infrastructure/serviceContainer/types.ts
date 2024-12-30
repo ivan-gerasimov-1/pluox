@@ -14,7 +14,6 @@ import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infras
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
-import type { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
 import type { IUserDataSource } from '@root/core/infrastructure/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
@@ -34,6 +33,7 @@ import type { ICategoryRepository } from '@root/core/modules/category/domain/cat
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
 import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
+import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -117,7 +117,7 @@ export interface IServiceMap {
 	[EServiceToken.INTL_SERVICE]: IIntlService;
 	[EServiceToken.CURRENCY_CONVERTER]: ICurrencyConverter;
 	[EServiceToken.APP_CONFIG]: IAppConfig;
-	[EServiceToken.NUMBER_PARSER]: NumberParser;
+	[EServiceToken.NUMBER_PARSER]: INumberParser;
 	[EServiceToken.ID_GENERATOR_FACTORY]: IIdGeneratorFactory;
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
 	[EServiceToken.CLIENT_ID_DATASOURCE]: IClientIdDataSource;
