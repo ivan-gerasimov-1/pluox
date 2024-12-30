@@ -1,4 +1,4 @@
-import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 

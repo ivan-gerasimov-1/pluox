@@ -1,6 +1,6 @@
 import { environment, type TEnvironment } from '@root/config';
 
-import { AppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import { AppConfig } from '@root/core/infrastructure/appConfig/appConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
 import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';

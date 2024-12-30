@@ -1,4 +1,4 @@
-import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
 import type { TAppConfig } from '@core/infrastructure/appConfig/types';
 import type { IAppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/types';
 

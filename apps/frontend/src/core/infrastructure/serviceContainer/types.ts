@@ -1,4 +1,4 @@
-import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
+import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
 import type { IAppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
 import type { IAppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/types';
 import type { IAuthApi } from '@core/infrastructure/authApi/types';

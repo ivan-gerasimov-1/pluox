@@ -4,7 +4,7 @@ import type {
 	ECurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
-import type { IAppConfig } from '@root/core/infrastructure/appConfig/AppConfig';
+import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
 
 export class CurrencyRateAPI implements ICurrencyRateAPI {
 	constructor(
