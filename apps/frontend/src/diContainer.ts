@@ -5,7 +5,7 @@ import { CurrencyConverter } from '@root/core/modules/currency/application/curre
 import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-import { IntlService } from '@root/core/modules/intl/application/intlService/IntlService';
+import { IntlService } from '@root/core/modules/intl/application/intlService/intlService';
 
 import { Container } from '@root/core/infrastructure/serviceContainer/container';
 import {
