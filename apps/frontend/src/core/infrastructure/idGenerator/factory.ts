@@ -1,4 +1,4 @@
-import { IdGenerator } from '@core/infrastructure/idGenerator/IdGenerator';
+import { IdGenerator } from '@root/core/infrastructure/idGenerator/idGenerator';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import { customAlphabet } from 'nanoid';
 
