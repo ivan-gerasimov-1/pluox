@@ -6,7 +6,7 @@ import { formatDate } from '@root/core/modules/intl/application/date';
 import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/domain/errors';
 import { IIntlService } from '@root/core/modules/intl/application/intlService/types';
-import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/NumberParser';
+import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
 import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
 
 export class IntlService implements IIntlService {

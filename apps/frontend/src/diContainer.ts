@@ -12,7 +12,7 @@ import {
 	EServiceToken,
 	type IContainer,
 } from '@root/core/infrastructure/serviceContainer/types';
-import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/NumberParser';
+import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
 import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
