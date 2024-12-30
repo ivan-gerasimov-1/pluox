@@ -1,4 +1,4 @@
-import { ELocaleCode } from '@root/core/modules/intl/enums';
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
 enum EDay {
 	NUMERIC = 'numeric',

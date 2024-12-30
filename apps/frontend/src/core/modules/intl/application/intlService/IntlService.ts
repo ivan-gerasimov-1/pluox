@@ -1,13 +1,13 @@
 import type { IAppConfig } from '@core/infrastructure/appConfig/AppConfig';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import { DECIMAL_SEPARATORS } from '@root/core/modules/intl/constants';
-import { formatCurrency } from '@root/core/modules/intl/currency';
-import { formatDate } from '@root/core/modules/intl/date';
-import type { ELocaleCode } from '@root/core/modules/intl/enums';
-import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/intlService/errors';
-import { IIntlService } from '@root/core/modules/intl/intlService/types';
-import { NumberParser } from '@root/core/modules/intl/numberParser/NumberParser';
-import type { TDecimalSeparator } from '@root/core/modules/intl/types';
+import { DECIMAL_SEPARATORS } from '@root/core/modules/intl/domain/constants';
+import { formatCurrency } from '@root/core/modules/intl/application/currency';
+import { formatDate } from '@root/core/modules/intl/application/date';
+import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/domain/errors';
+import { IIntlService } from '@root/core/modules/intl/application/intlService/types';
+import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/NumberParser';
+import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
 
 export class IntlService implements IIntlService {
 	constructor(

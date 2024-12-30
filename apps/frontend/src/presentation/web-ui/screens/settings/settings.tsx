@@ -4,8 +4,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ELocaleCode } from '@root/core/modules/intl/enums';
-import { getLanguageNameByLocale } from '@root/core/modules/intl/helpers';
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
 
 import {
 	getAppConfig,

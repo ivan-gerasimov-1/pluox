@@ -1,5 +1,5 @@
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ELocaleCode } from '@root/core/modules/intl/enums';
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
 export interface IAppConfig {
 	locale: ELocaleCode;
