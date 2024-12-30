@@ -24,7 +24,7 @@ import {
 	type ICategoryServiceFactory,
 } from '@root/core/modules/category/application/categoryService/factory';
 import { AppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/appConfigDataSource';
-import { AppConfigService } from '@core/infrastructure/appConfigService/AppConfigService';
+import { AppConfigService } from '@root/core/infrastructure/appConfigService/appConfigService';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
 import { AuthDataSource } from '@root/core/infrastructure/authDataSource/authDataSource';
 import { AuthApi } from '@core/infrastructure/authApi/AuthApi';
