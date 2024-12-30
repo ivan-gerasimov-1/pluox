@@ -29,7 +29,7 @@ import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/curr
 import { AuthDataSource } from '@root/core/infrastructure/authDataSource/authDataSource';
 import { AuthApi } from '@root/core/infrastructure/authApi/authApi';
 import { UserDataSource } from '@root/core/infrastructure/userDataSource/userDataSource';
-import { AuthService } from '@core/infrastructure/authService/AuthService';
+import { AuthService } from '@root/core/infrastructure/authService/authService';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
 import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
