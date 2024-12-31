@@ -38,7 +38,7 @@ import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain
 import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
-import type { IDateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/types';
+import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;

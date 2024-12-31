@@ -7,7 +7,7 @@ import type { IIntlService } from '@root/core/modules/intl/application/intlServi
 import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
-import type { IDateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/types';
+import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
 
 export class IntlService implements IIntlService {
 	constructor(

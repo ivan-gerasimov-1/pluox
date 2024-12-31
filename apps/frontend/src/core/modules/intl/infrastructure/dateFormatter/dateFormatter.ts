@@ -1,6 +1,6 @@
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
+import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import {
-	type IDateFormatter,
 	EDay,
 	EMonth,
 	EYear,
