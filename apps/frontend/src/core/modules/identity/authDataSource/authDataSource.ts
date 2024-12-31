@@ -1,5 +1,5 @@
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
+import type { IAuthDataSource } from '@root/core/modules/identity/authDataSource/types';
 
 export class AuthDataSource
 	extends LocalStorageDataSource<string>

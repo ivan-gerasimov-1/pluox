@@ -2,7 +2,7 @@ import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dat
 import type {
 	IUserDataSource,
 	TUser,
-} from '@root/core/infrastructure/userDataSource/types';
+} from '@root/core/modules/identity/userDataSource/types';
 
 export class UserDataSource
 	extends LocalStorageDataSource<TUser>

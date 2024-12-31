@@ -1,5 +1,5 @@
 import type { TEnvironment } from '@root/config';
-import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
+import type { IAuthDataSource } from '@root/core/modules/identity/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 
 export class BaseApi implements IBaseApi {

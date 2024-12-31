@@ -1,12 +1,12 @@
 import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
 import type { IAppConfigService } from '@root/core/infrastructure/appConfigService/appConfigService';
 import type { IAppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/types';
-import type { IAuthApi } from '@core/infrastructure/authApi/types';
-import type { IAuthSerivce } from '@core/infrastructure/authService/types';
-import type { IAuthDataSource } from '@root/core/infrastructure/authDataSource/types';
+import type { IAuthApi } from '@root/core/modules/identity/authApi/types';
+import type { IAuthSerivce } from '@root/core/modules/identity/authService/types';
+import type { IAuthDataSource } from '@root/core/modules/identity/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
-import type { IClientId } from '@core/infrastructure/clientId/types';
-import type { IClientIdDataSource } from '@root/core/infrastructure/clientIdDataSource/types';
+import type { IClientId } from '@root/core/modules/identity/clientId/types';
+import type { IClientIdDataSource } from '@root/core/modules/identity/clientIdDataSource/types';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
@@ -14,7 +14,7 @@ import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infras
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
 import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
-import type { IUserDataSource } from '@root/core/infrastructure/userDataSource/types';
+import type { IUserDataSource } from '@root/core/modules/identity/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { TEnvironment } from '@root/config';
