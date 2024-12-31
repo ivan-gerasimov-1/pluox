@@ -47,7 +47,7 @@ import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastr
 import { BaseApi } from '@root/core/infrastructure/baseApi/baseApi';
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 import { DailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
-import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/numberParser/currencyFormatter/currencyFormatter';
+import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
 
 let globalContainer: IContainer;
 

@@ -4,7 +4,7 @@ import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import {
 	ECurrencyDisplay,
 	ENumberFormatStyle,
-} from '@root/core/modules/intl/infrastructure/numberParser/currencyFormatter/types';
+} from '@root/core/modules/intl/infrastructure/currencyFormatter/types';
 
 /**
  * @todo
