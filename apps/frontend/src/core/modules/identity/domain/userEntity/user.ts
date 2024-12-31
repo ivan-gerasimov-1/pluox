@@ -2,7 +2,7 @@ import { Entity } from '@root/core/domain/entity/entity';
 import type {
 	TUserDTO,
 	TUserCreateDTO,
-} from '@root/core/modules/identity/application/dto/userDto';
+} from '@root/core/modules/identity/application/dto/userDTO';
 import type { IUser } from '@root/core/modules/identity/domain/userEntity/types';
 
 export class User extends Entity<TUserDTO> implements IUser {
