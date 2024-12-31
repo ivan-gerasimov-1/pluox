@@ -1,4 +1,4 @@
-import type { TEnvironment } from '@root/core/modules/settings/config';
+import type { TEnvironment } from '@root/core/modules/settings/infrastructure/config';
 import type { IAuthDataSource } from '@root/core/modules/identity/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 

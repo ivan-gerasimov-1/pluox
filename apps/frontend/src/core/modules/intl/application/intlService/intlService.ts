@@ -1,4 +1,4 @@
-import type { IAppConfig } from '@root/core/modules/settings/appConfig/appConfig';
+import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import { DECIMAL_SEPARATORS } from '@root/core/modules/intl/domain/constants';
 import { formatDate } from '@root/core/modules/intl/application/date';

@@ -1,4 +1,4 @@
-import type { TAppConfig } from '@root/core/modules/settings/appConfig/types';
+import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import type { TMonth } from '@root/core/infrastructure/temporal/types';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';

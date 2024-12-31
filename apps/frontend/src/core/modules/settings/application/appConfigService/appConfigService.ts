@@ -1,11 +1,9 @@
-import type { IAppConfig } from '@root/core/modules/settings/appConfig/appConfig';
-import type { TAppConfig } from '@root/core/modules/settings/appConfig/types';
-import type { IAppConfigDataSource } from '@root/core/modules/settings/appConfigDataSource/types';
-
-export interface IAppConfigService {
-	initialize(): IAppConfigService;
-	update(config: Partial<TAppConfig>): TAppConfig;
-}
+import type { IAppConfigService } from '@root/core/modules/settings/application/appConfigService/types';
+import type {
+	IAppConfig,
+	TAppConfig,
+} from '@root/core/modules/settings/domain/appConfig/types';
+import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
 
 export class AppConfigService implements IAppConfigService {
 	constructor(

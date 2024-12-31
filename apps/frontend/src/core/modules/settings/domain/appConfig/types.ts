@@ -7,3 +7,10 @@ export type TAppConfig = {
 	availabelCurrencies: ECurrency[];
 	budget: number | null;
 };
+
+export interface IAppConfig {
+	locale: ELocaleCode;
+	currency: ECurrency;
+	availableCurrencies: ECurrency[];
+	budget: number | null;
+}

@@ -1,6 +1,6 @@
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { Id } from '@root/core/domain/types';
-import type { IAppConfig } from '@root/core/modules/settings/appConfig/appConfig';
+import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 import type {
 	TExpenseCreateDTO,

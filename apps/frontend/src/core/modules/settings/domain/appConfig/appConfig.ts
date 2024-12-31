@@ -1,12 +1,6 @@
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-
-export interface IAppConfig {
-	locale: ELocaleCode;
-	currency: ECurrency;
-	availableCurrencies: ECurrency[];
-	budget: number | null;
-}
+import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 
 export class AppConfig implements IAppConfig {
 	#locale: ELocaleCode;

@@ -1,6 +1,6 @@
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { TAppConfig } from '@root/core/modules/settings/appConfig/types';
-import type { IAppConfigDataSource } from '@root/core/modules/settings/appConfigDataSource/types';
+import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
+import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
 
 export class AppConfigDataSource
 	extends LocalStorageDataSource<TAppConfig>
