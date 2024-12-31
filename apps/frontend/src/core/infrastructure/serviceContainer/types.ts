@@ -1,6 +1,6 @@
-import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
-import type { IAppConfigService } from '@root/core/infrastructure/appConfigService/appConfigService';
-import type { IAppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/types';
+import type { IAppConfig } from '@root/core/modules/settings/appConfig/appConfig';
+import type { IAppConfigService } from '@root/core/modules/settings/appConfigService/appConfigService';
+import type { IAppConfigDataSource } from '@root/core/modules/settings/appConfigDataSource/types';
 import type { IAuthApi } from '@root/core/modules/identity/authApi/types';
 import type { IAuthSerivce } from '@root/core/modules/identity/authService/types';
 import type { IAuthDataSource } from '@root/core/modules/identity/authDataSource/types';
@@ -17,7 +17,7 @@ import type { IIntlService } from '@root/core/modules/intl/application/intlServi
 import type { IUserDataSource } from '@root/core/modules/identity/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
-import type { TEnvironment } from '@root/config';
+import type { TEnvironment } from '@root/core/modules/settings/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';

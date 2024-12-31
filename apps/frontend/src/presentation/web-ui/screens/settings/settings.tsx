@@ -12,7 +12,7 @@ import {
 	updateAppConfig,
 	QUERY_APP_CONFIG,
 } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
-import { TAppConfig } from '@root/core/infrastructure/appConfig/types';
+import { TAppConfig } from '@root/core/modules/settings/appConfig/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';

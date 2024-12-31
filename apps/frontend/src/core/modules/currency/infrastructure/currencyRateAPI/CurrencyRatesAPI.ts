@@ -1,10 +1,10 @@
-import type { TEnvironment } from '@root/config';
+import type { TEnvironment } from '@root/core/modules/settings/config';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type {
 	ECurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
-import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
+import type { IAppConfig } from '@root/core/modules/settings/appConfig/appConfig';
 
 export class CurrencyRateAPI implements ICurrencyRateAPI {
 	constructor(

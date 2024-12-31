@@ -1,6 +1,6 @@
-import { environment, type TEnvironment } from '@root/config';
+import { environment } from '@root/core/modules/settings/config';
 
-import { AppConfig } from '@root/core/infrastructure/appConfig/appConfig';
+import { AppConfig } from '@root/core/modules/settings/appConfig/appConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
 import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
@@ -23,8 +23,8 @@ import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
 } from '@root/core/modules/category/application/categoryService/factory';
-import { AppConfigDataSource } from '@root/core/infrastructure/appConfigDataSource/appConfigDataSource';
-import { AppConfigService } from '@root/core/infrastructure/appConfigService/appConfigService';
+import { AppConfigDataSource } from '@root/core/modules/settings/appConfigDataSource/appConfigDataSource';
+import { AppConfigService } from '@root/core/modules/settings/appConfigService/appConfigService';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
 import { AuthDataSource } from '@root/core/modules/identity/authDataSource/authDataSource';
 import { AuthApi } from '@root/core/modules/identity/authApi/authApi';

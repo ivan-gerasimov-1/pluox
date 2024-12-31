@@ -1,6 +1,6 @@
 import type { Id } from '@root/core/domain/types';
 import type { IUseCase } from '@root/core/domain/types';
-import type { IAppConfig } from '@root/core/infrastructure/appConfig/appConfig';
+import type { IAppConfig } from '@root/core/modules/settings/appConfig/appConfig';
 import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type {
