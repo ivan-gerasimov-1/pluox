@@ -1,5 +1,5 @@
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { IClientIdDataSource } from '@root/core/modules/identity/clientIdDataSource/types';
+import type { IClientIdDataSource } from '@root/core/modules/identity/infrastructure/clientIdDataSource/types';
 
 import type { Id } from '@domain/types';
 

@@ -17,8 +17,8 @@ import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
-import { ClientIdDataSource } from '@root/core/modules/identity/clientIdDataSource/clientIdDataSource';
-import { ClientId } from '@root/core/modules/identity/clientId/clientId';
+import { ClientIdDataSource } from '@root/core/modules/identity/infrastructure/clientIdDataSource/clientIdDataSource';
+import { ClientId } from '@root/core/modules/identity/domain/clientId/clientId';
 import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
@@ -26,10 +26,10 @@ import {
 import { AppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSource';
 import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/CurrencyRatesAPI';
-import { AuthDataSource } from '@root/core/modules/identity/authDataSource/authDataSource';
-import { AuthApi } from '@root/core/modules/identity/authApi/authApi';
-import { UserDataSource } from '@root/core/modules/identity/userDataSource/userDataSource';
-import { AuthService } from '@root/core/modules/identity/authService/authService';
+import { AuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/authDataSource';
+import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
+import { UserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/userDataSource';
+import { AuthService } from '@root/core/modules/identity/application/authService/authService';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
 import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';

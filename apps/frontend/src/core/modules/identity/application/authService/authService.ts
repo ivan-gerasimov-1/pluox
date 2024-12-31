@@ -1,8 +1,8 @@
-import { UserNotFoundError } from '@root/core/modules/identity/authService/errors';
-import type { IAuthApi } from '@root/core/modules/identity/authApi/types';
-import type { IAuthSerivce } from '@root/core/modules/identity/authService/types';
-import type { IAuthDataSource } from '@root/core/modules/identity/authDataSource/types';
-import type { IUserDataSource } from '@root/core/modules/identity/userDataSource/types';
+import { UserNotFoundError } from '@root/core/modules/identity/application/authService/errors';
+import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
+import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
+import type { IAuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/types';
+import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
 
 export class AuthService implements IAuthSerivce {
 	constructor(
