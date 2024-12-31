@@ -17,7 +17,11 @@ import type { IIntlService } from '@root/core/modules/intl/application/intlServi
 import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
-import type { TEnvironment } from '@root/core/modules/settings/infrastructure/config';
+import type {
+	IEnvironment,
+	TEnvironment,
+	TProcessEnv,
+} from '@root/core/modules/settings/infrastructure/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';
@@ -63,6 +67,9 @@ export interface ServiceProvider<T = unknown> {
 }
 
 export enum EServiceToken {
+	/** @deprecated */
+	_ENVIRONMENT = '_Environment',
+	PROCESS_ENV = 'ProcessEnv',
 	ENVIRONMENT = 'Environment',
 
 	APP_CONFIG = 'AppConfig',
@@ -115,7 +122,11 @@ export enum EServiceToken {
 }
 
 export interface IServiceMap {
-	[EServiceToken.ENVIRONMENT]: TEnvironment;
+	/** @deprecated */
+	[EServiceToken._ENVIRONMENT]: TEnvironment;
+	[EServiceToken.PROCESS_ENV]: TProcessEnv;
+	[EServiceToken.ENVIRONMENT]: IEnvironment;
+
 	[EServiceToken.INTL_SERVICE]: IIntlService;
 	[EServiceToken.CURRENCY_CONVERTER]: ICurrencyConverter;
 	[EServiceToken.APP_CONFIG]: IAppConfig;
