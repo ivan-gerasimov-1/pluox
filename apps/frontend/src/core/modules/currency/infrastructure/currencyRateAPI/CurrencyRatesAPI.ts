@@ -1,4 +1,4 @@
-import type { IEnvironment } from '@root/core/modules/settings/infrastructure/config';
+import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type {
 	ECurrency,

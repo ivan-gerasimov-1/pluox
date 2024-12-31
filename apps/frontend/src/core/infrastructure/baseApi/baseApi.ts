@@ -1,4 +1,4 @@
-import type { IEnvironment } from '@root/core/modules/settings/infrastructure/config';
+import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
 import type { IAuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 

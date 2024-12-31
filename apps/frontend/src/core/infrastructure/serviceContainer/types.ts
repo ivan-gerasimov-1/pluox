@@ -20,7 +20,7 @@ import type { ICategoryService } from '@root/core/modules/category/application/c
 import type {
 	IEnvironment,
 	TProcessEnv,
-} from '@root/core/modules/settings/infrastructure/config';
+} from '@root/core/modules/settings/infrastructure/environment/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/updateExpenseUseCase';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/domain/expenseUseCases/createExpenseUseCase';

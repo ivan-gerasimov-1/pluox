@@ -1,4 +1,4 @@
-import { Environment } from '@root/core/modules/settings/infrastructure/config';
+import { Environment } from '@root/core/modules/settings/infrastructure/environment/environment';
 
 import { AppConfig } from '@root/core/modules/settings/domain/appConfig/appConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
