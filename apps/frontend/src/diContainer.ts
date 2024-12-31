@@ -48,6 +48,7 @@ import { BaseApi } from '@root/core/infrastructure/baseApi/baseApi';
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 import { DailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
+import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
 
 let globalContainer: IContainer;
 
@@ -102,12 +103,17 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: CurrencyFormatter,
 			},
 			{
+				token: EServiceToken.DATE_FORMATTER,
+				useClass: DateFormatter,
+			},
+			{
 				token: EServiceToken.INTL_SERVICE,
 				useClass: IntlService,
 				deps: [
 					EServiceToken.APP_CONFIG,
 					EServiceToken.NUMBER_PARSER,
 					EServiceToken.CURRENCY_FORMATTER,
+					EServiceToken.DATE_FORMATTER,
 				],
 			},
 			{

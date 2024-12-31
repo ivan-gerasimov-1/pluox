@@ -38,6 +38,7 @@ import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain
 import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
+import type { IDateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -76,6 +77,7 @@ export enum EServiceToken {
 	INTL_SERVICE = 'IntlService',
 	NUMBER_PARSER = 'NumberParser',
 	CURRENCY_FORMATTER = 'CurrencyFormatter',
+	DATE_FORMATTER = 'DateFormatter',
 
 	CURRENCY_CONVERTER = 'CurrencyConverter',
 	CURRENCY_RATE_DATASOURCE = 'CurrencyRateDataSource',
@@ -128,6 +130,7 @@ export interface IServiceMap {
 
 	[EServiceToken.NUMBER_PARSER]: INumberParser;
 	[EServiceToken.CURRENCY_FORMATTER]: ICurrencyFormatter;
+	[EServiceToken.DATE_FORMATTER]: IDateFormatter;
 
 	[EServiceToken.ID_GENERATOR_FACTORY]: IIdGeneratorFactory;
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
