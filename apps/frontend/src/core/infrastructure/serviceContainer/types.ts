@@ -19,7 +19,6 @@ import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expe
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type {
 	IEnvironment,
-	TEnvironment,
 	TProcessEnv,
 } from '@root/core/modules/settings/infrastructure/config';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
@@ -67,8 +66,6 @@ export interface ServiceProvider<T = unknown> {
 }
 
 export enum EServiceToken {
-	/** @deprecated */
-	_ENVIRONMENT = '_Environment',
 	PROCESS_ENV = 'ProcessEnv',
 	ENVIRONMENT = 'Environment',
 
@@ -122,8 +119,6 @@ export enum EServiceToken {
 }
 
 export interface IServiceMap {
-	/** @deprecated */
-	[EServiceToken._ENVIRONMENT]: TEnvironment;
 	[EServiceToken.PROCESS_ENV]: TProcessEnv;
 	[EServiceToken.ENVIRONMENT]: IEnvironment;
 

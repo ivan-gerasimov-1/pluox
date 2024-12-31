@@ -1,10 +1,10 @@
-import type { TEnvironment } from '@root/core/modules/settings/infrastructure/config';
+import type { IEnvironment } from '@root/core/modules/settings/infrastructure/config';
 import type { IAuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 
 export class BaseApi implements IBaseApi {
 	constructor(
-		private readonly environment: TEnvironment,
+		private readonly environment: IEnvironment,
 		private readonly authDataSource: IAuthDataSource,
 	) {}
 

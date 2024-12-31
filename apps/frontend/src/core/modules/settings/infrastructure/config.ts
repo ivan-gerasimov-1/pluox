@@ -1,4 +1,4 @@
-enum EEnvironment {
+const enum EEnvironment {
 	DEVELOPMENT = 'development',
 	PRODUCTION = 'production',
 }
@@ -76,44 +76,4 @@ export class Environment implements IEnvironment {
 			apiKey: process.env.APP_OPEN_EXCHANGE_RATES_API_KEY as string,
 		};
 	}
-}
-
-/** @deprecated */
-export type TEnvironment = {
-	isDevelopment: boolean;
-	apiUrl: string;
-	openExchangeRates: {
-		apiUrl: string;
-		apiKey: string;
-	};
-};
-
-export let environment: TEnvironment = {
-	isDevelopment: isDevelopment(process.env.NODE_ENV),
-	apiUrl: getApiUrl(process.env.NODE_ENV),
-	openExchangeRates: getOpenExchangeRatesApi(process.env.NODE_ENV),
-};
-
-/** @deprecated */
-function isDevelopment(environment?: string | EEnvironment) {
-	return environment === EEnvironment.DEVELOPMENT;
-}
-
-/** @deprecated */
-function getApiUrl(env?: string | EEnvironment): string {
-	if (isDevelopment(env)) {
-		return '/api';
-	}
-
-	return window.location.hostname.includes('vercel.app')
-		? 'https://savee-api.gerasimov.dev'
-		: 'https://savee-api-v2.gerasimov.dev';
-}
-
-/** @deprecated */
-function getOpenExchangeRatesApi(env?: string | EEnvironment) {
-	return {
-		apiUrl: process.env.APP_OPEN_EXCHANGE_RATES_API_URL as string,
-		apiKey: process.env.APP_OPEN_EXCHANGE_RATES_API_KEY as string,
-	};
 }

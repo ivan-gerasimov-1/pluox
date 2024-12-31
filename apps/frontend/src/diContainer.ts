@@ -1,7 +1,4 @@
-import {
-	Environment,
-	environment,
-} from '@root/core/modules/settings/infrastructure/config';
+import { Environment } from '@root/core/modules/settings/infrastructure/config';
 
 import { AppConfig } from '@root/core/modules/settings/domain/appConfig/appConfig';
 import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
@@ -67,11 +64,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 */
 		.register(
 			{
-				/** @deprecated */
-				token: EServiceToken._ENVIRONMENT,
-				useValue: environment,
-			},
-			{
 				token: EServiceToken.PROCESS_ENV,
 				useValue: process.env,
 			},
@@ -132,7 +124,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.BASE_API,
 				useClass: BaseApi,
-				deps: [EServiceToken._ENVIRONMENT, EServiceToken.AUTH_DATASOURCE],
+				deps: [EServiceToken.ENVIRONMENT, EServiceToken.AUTH_DATASOURCE],
 			},
 			{
 				token: EServiceToken.TEMPORAL,
@@ -205,7 +197,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CURRENCY_RATE_API,
 				useClass: CurrencyRateAPI,
-				deps: [EServiceToken._ENVIRONMENT, EServiceToken.APP_CONFIG],
+				deps: [EServiceToken.ENVIRONMENT, EServiceToken.APP_CONFIG],
 			},
 		)
 		/**
