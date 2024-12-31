@@ -13,11 +13,8 @@ import {
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 async function main(): Promise<void> {
-	let diContainer = createDIContainer({
-		isGlobal: true,
-	});
+	let diContainer = await runCore();
 
-	await runCore();
 	await runUI(diContainer);
 }
 
@@ -31,13 +28,19 @@ async function runUI(diContainer: IContainer): Promise<void> {
 	await ui.start();
 }
 
-async function runCore(): Promise<void> {
+async function runCore(): Promise<IContainer> {
 	await runMockServiceWorker();
+
+	let diContainer = createDIContainer({
+		isGlobal: true,
+	});
 
 	runMigrations();
 
 	loadAppConfig();
 	await getCurrencyRates();
+
+	return diContainer;
 }
 
 async function getCurrencyRates(): Promise<void> {
