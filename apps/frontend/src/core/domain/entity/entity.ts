@@ -1,4 +1,4 @@
-import type { IEntity } from '@core/infrastructure/entity/types';
+import type { IEntity } from '@root/core/domain/entity/types';
 
 import type { Id } from '@domain/types';
 import type { TISODateString } from '@root/core/infrastructure/temporal/types';

@@ -1,5 +1,5 @@
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import { Entity } from '@root/core/infrastructure/entity/entity';
+import { Entity } from '@root/core/domain/entity/entity';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
