@@ -41,7 +41,7 @@ export class AuthService implements IAuthSerivce {
 			throw new UserNotFoundError();
 		}
 
-		this.cleareStorages();
+		this.clearStorages();
 
 		this.userDataSource.create({
 			id: result.id,
@@ -57,7 +57,7 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	public async signOut(): Promise<void> {
-		this.cleareStorages();
+		this.clearStorages();
 	}
 
 	public isAuthenticated(): boolean {
@@ -66,8 +66,8 @@ export class AuthService implements IAuthSerivce {
 		return hasToken;
 	}
 
-	private cleareStorages(): void {
-		this.authDataSource.clean();
-		this.userDataSource.clean();
+	private clearStorages(): void {
+		this.authDataSource.clear();
+		this.userDataSource.clear();
 	}
 }

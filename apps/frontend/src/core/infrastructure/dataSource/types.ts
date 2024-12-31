@@ -3,7 +3,7 @@ export interface IDataSource<T extends {} = {}> {
 	read(): T | null;
 	update(payload: Partial<T>): void;
 
-	clean(): void;
+	clear(): void;
 
 	isEmpty(): boolean;
 }
