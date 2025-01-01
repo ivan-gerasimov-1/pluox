@@ -46,6 +46,9 @@ export class AuthService implements IAuthSerivce {
 		this.userDataSource.create({
 			id: result.id,
 			email: result.email,
+			name: result.name,
+			createdAt: result.createdAt,
+			modifiedAt: result.modifiedAt,
 		});
 
 		this.authDataSource.create(result.token);

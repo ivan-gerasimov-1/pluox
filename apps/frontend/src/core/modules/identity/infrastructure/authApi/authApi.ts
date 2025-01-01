@@ -32,6 +32,9 @@ export class AuthApi implements IAuthApi {
 	): Promise<{
 		id: string;
 		email: string;
+		name: string;
+		createdAt: string;
+		modifiedAt: string;
 		token: string;
 	}> {
 		const response = await this.api.request<
@@ -42,6 +45,9 @@ export class AuthApi implements IAuthApi {
 			{
 				id: string;
 				email: string;
+				name: string;
+				createdAt: string;
+				modifiedAt: string;
 				token: string;
 			}
 		>('/login', {
@@ -52,6 +58,9 @@ export class AuthApi implements IAuthApi {
 		return {
 			id: response.id,
 			email: response.email,
+			name: response.name,
+			createdAt: response.createdAt,
+			modifiedAt: response.modifiedAt,
 			token: response.token,
 		};
 	}

@@ -11,6 +11,9 @@ export interface IAuthApi {
 	): Promise<{
 		id: string;
 		email: string;
+		name: string;
+		createdAt: string;
+		modifiedAt: string;
 		token: string;
 	}>;
 }

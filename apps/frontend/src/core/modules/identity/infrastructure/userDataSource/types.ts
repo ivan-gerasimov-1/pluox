@@ -1,8 +1,4 @@
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
+import type { TUserDTO } from '@root/core/modules/identity/application/dto/userDTO';
 
-export interface IUserDataSource extends IDataSource<TUser> {}
-
-export type TUser = {
-	id: string;
-	email: string;
-};
+export interface IUserDataSource extends IDataSource<TUserDTO> {}
