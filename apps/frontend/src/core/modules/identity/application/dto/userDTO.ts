@@ -4,6 +4,7 @@ import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 export type TUserDTO = {
 	id: string;
 	email: string;
+	name: string;
 	password: string;
 	createdAt: TISODateString;
 	modifiedAt: TISODateString;
@@ -12,6 +13,7 @@ export type TUserDTO = {
 export type TUserCreateDTO = {
 	id: Id;
 	email: string;
+	name: string;
 	password: string;
 	createdAt: TISODateString;
 	modifiedAt?: TISODateString;
