@@ -4,4 +4,5 @@ import type { TUserDTO } from '@root/core/modules/identity/application/dto/userD
 export interface IUser extends IEntity<TUserDTO> {
 	readonly id: string;
 	readonly email: string;
+	readonly name: string;
 }
