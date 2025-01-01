@@ -14,7 +14,7 @@ export class ExpenseRepository implements IExpenseRepository {
 	constructor(private readonly dataSource: IExpenseDataSource) {}
 
 	public create(expense: IExpense): TExpenseDTO {
-		let expenseDTO = expense.toObject();
+		let expenseDTO = expense.toDTO();
 
 		this.dataSource.save(expenseDTO);
 
@@ -22,7 +22,7 @@ export class ExpenseRepository implements IExpenseRepository {
 	}
 
 	public update(expense: IExpense): TExpenseDTO {
-		let expenseDTO = expense.toObject();
+		let expenseDTO = expense.toDTO();
 
 		this.dataSource.save(expenseDTO);
 

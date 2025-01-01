@@ -89,7 +89,7 @@ export class CategoryService implements ICategoryService {
 			return categoryId[0].toUpperCase();
 		}
 
-		let categoryDTO = category.toObject();
+		let categoryDTO = category.toDTO();
 
 		return Reflect.get(categoryDTO, property);
 	}

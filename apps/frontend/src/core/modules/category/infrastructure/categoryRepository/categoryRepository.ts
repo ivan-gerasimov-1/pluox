@@ -11,13 +11,13 @@ export class CategoryRepository implements ICategoryRepository {
 	constructor(private readonly dataSource: ICategoryDataSource) {}
 
 	public create(category: ICategory): TCategoryDTO {
-		let categoryDto = category.toObject();
+		let categoryDto = category.toDTO();
 
 		return this.dataSource.save(categoryDto);
 	}
 
 	public update(category: ICategory): TCategoryDTO {
-		let categoryDto = category.toObject();
+		let categoryDto = category.toDTO();
 
 		return this.dataSource.save(categoryDto);
 	}

@@ -58,7 +58,7 @@ export class Expense extends Entity<TExpenseDTO> implements IExpense {
 		);
 	}
 
-	public toObject(): TExpenseDTO {
+	public toDTO(): TExpenseDTO {
 		return {
 			id: this.id,
 			amount: this.#amount,

@@ -39,7 +39,7 @@ export class ExpenseService implements IExpenseService {
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
 		let expense = this.createExpenseUseCase.execute(payload);
-		let expenseDTO = expense.toObject();
+		let expenseDTO = expense.toDTO();
 
 		this.expenseRepository.create(expense);
 

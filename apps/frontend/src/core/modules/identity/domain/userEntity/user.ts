@@ -28,7 +28,7 @@ export class User extends Entity<TUserDTO> implements IUser {
 		return this.#password;
 	}
 
-	toObject(): TUserDTO {
+	toDTO(): TUserDTO {
 		return {
 			id: this.id,
 			email: this.#email,

@@ -53,7 +53,7 @@ export class Category extends Entity<TCategoryDTO> implements ICategory {
 		return this;
 	}
 
-	public toObject(): TCategoryDTO {
+	public toDTO(): TCategoryDTO {
 		return {
 			id: this.id,
 			name: this.#name,
