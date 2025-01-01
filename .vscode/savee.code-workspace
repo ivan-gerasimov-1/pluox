@@ -17,5 +17,7 @@
 			"path": "../.github/workflows",
 		},
 	],
-	"settings": {},
+	"settings": {
+		"typescript.tsdk": "root/node_modules/typescript/lib",
+	},
 }
