@@ -50,6 +50,7 @@ import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/curren
 import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
 import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
 import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
+import { ClientIdService } from '@root/core/modules/identity/application/clientIdService/clientIdService';
 
 let globalContainer: IContainer;
 
@@ -165,6 +166,15 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.USER_DATASOURCE,
 				useClass: UserDataSource,
 			},
+
+			{
+				token: EServiceToken.CLIENT_ID_SERVICE,
+				useClass: ClientIdService,
+				deps: [
+					EServiceToken.CLIENT_ID_DATASOURCE,
+					EServiceToken.CLIENT_ID_FACTORY,
+				],
+			},
 			{
 				token: EServiceToken.CLIENT_ID_DATASOURCE,
 				useClass: ClientIdDataSource,
@@ -179,7 +189,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CLIENT_ID_FACTORY,
 				useClass: ClientIdFactory,
-				deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_DATASOURCE],
+				deps: [EServiceToken.ID_GENERATOR],
 			},
 		)
 		/**

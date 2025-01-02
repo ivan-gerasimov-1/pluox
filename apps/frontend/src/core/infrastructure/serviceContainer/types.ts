@@ -42,6 +42,7 @@ import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expe
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
 import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
+import type { IClientIdService } from '@root/core/modules/identity/application/clientIdService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -94,6 +95,7 @@ export enum EServiceToken {
 	CLIENT_ID_DATASOURCE = 'ClientIdDataSource',
 	CLIENT_ID_FACTORY = 'ClientIdFactory',
 	CLIENT_ID = 'ClientId',
+	CLIENT_ID_SERVICE = 'ClientIdService',
 
 	CATEGORY_SERVICE_FACTORY = 'CategoryServiceFactory',
 	CATEGORY_SERVICE = 'CategoryService',
@@ -142,6 +144,7 @@ export interface IServiceMap {
 	[EServiceToken.CLIENT_ID_DATASOURCE]: IClientIdDataSource;
 	[EServiceToken.CLIENT_ID_FACTORY]: IClientIdFactory;
 	[EServiceToken.CLIENT_ID]: IClientId;
+	[EServiceToken.CLIENT_ID_SERVICE]: IClientIdService;
 
 	[EServiceToken.CATEGORY_SERVICE_FACTORY]: () => ICategoryServiceFactory;
 	[EServiceToken.CATEGORY_SERVICE]: ICategoryService;

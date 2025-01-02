@@ -5,24 +5,18 @@ import type {
 	IClientId,
 	IClientIdFactory,
 } from '@root/core/modules/identity/domain/clientId/types';
-import type { IClientIdDataSource } from '@root/core/modules/identity/infrastructure/clientIdDataSource/types';
 
 export class ClientIdFactory implements IClientIdFactory {
-	constructor(
-		private readonly idGenerator: IIdGenerator,
-		private readonly dataSource: IClientIdDataSource,
-	) {}
+	constructor(private readonly idGenerator: IIdGenerator) {}
 
-	public create(existingId?: Id): IClientId {
-		let id = existingId ?? this.dataSource.read() ?? this.createId();
+	public create(existingId?: Id | null): IClientId {
+		let id = existingId ?? this.createId();
 
 		return new ClientId(id);
 	}
 
 	private createId(): Id {
 		let id = this.idGenerator.getId();
-
-		this.dataSource.create(id);
 
 		return id;
 	}
