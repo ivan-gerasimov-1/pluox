@@ -1,5 +1,7 @@
 /**
- * @todo Move UserFactory to DI
+ * @todo
+ * 1. Move UserFactory to DI
+ * 2. Implement UserRepository and store multiple users
  */
 import type { TUserCreateDTO } from '@root/core/modules/identity/application/dto/userDTO';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
@@ -10,6 +12,7 @@ export interface IUserFactory {
 	create(userCreateDTO: TUserCreateDTO): IUser;
 }
 
+/** @todo №1 */
 export class UserFactory implements IUserFactory {
 	public create(userCreateDTO: TUserCreateDTO): IUser {
 		return new User(userCreateDTO);
