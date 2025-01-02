@@ -18,7 +18,6 @@ import {
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
 import { ClientIdDataSource } from '@root/core/modules/identity/infrastructure/clientIdDataSource/clientIdDataSource';
-import { ClientId } from '@root/core/modules/identity/domain/clientId/clientId';
 import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
@@ -49,6 +48,8 @@ import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructu
 import { DailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
 import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
+import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
+import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
 
 let globalContainer: IContainer;
 
@@ -170,7 +171,14 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			},
 			{
 				token: EServiceToken.CLIENT_ID,
-				useClass: ClientId,
+				useFactory: (clientIdFactory: IClientIdFactory) => {
+					return clientIdFactory.create();
+				},
+				deps: [EServiceToken.CLIENT_ID_FACTORY],
+			},
+			{
+				token: EServiceToken.CLIENT_ID_FACTORY,
+				useClass: ClientIdFactory,
 				deps: [EServiceToken.ID_GENERATOR, EServiceToken.CLIENT_ID_DATASOURCE],
 			},
 		)

@@ -1,28 +1,5 @@
 import type { IClientId } from '@root/core/modules/identity/domain/clientId/types';
-import type { IClientIdDataSource } from '@root/core/modules/identity/infrastructure/clientIdDataSource/types';
-import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
-
 import type { Id } from '@domain/types';
+import { ValueObject } from '@root/core/domain/valueObject/valueObject';
 
-export class ClientId implements IClientId {
-	readonly #clientId: string;
-
-	constructor(
-		private readonly idGenerator: IIdGenerator,
-		private readonly dataSource: IClientIdDataSource,
-	) {
-		this.#clientId = dataSource.read() || this.createId();
-	}
-
-	public get(): Id {
-		return this.#clientId;
-	}
-
-	private createId(): Id {
-		let id = this.idGenerator.getId();
-
-		this.dataSource.create(id);
-
-		return id;
-	}
-}
+export class ClientId extends ValueObject<Id> implements IClientId {}
