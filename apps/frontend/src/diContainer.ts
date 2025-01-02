@@ -52,6 +52,7 @@ import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/cli
 import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
 import { ClientIdService } from '@root/core/modules/identity/application/clientIdService/clientIdService';
 import { UserService } from '@root/core/modules/identity/application/userService/userService';
+import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
 
 let globalContainer: IContainer;
 
@@ -145,6 +146,20 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 * @description Authentication and user management
 		 */
 		.register(
+			{
+				token: EServiceToken.SESSION_SERVICE,
+				useClass: SessionService,
+				deps: [
+					EServiceToken.CLIENT_ID_SERVICE,
+
+					EServiceToken.USER_SERVICE,
+					EServiceToken.USER_DATASOURCE,
+
+					EServiceToken.ID_GENERATOR,
+					EServiceToken.TEMPORAL,
+				],
+			},
+
 			{
 				token: EServiceToken.AUTH_DATASOURCE,
 				useClass: AuthDataSource,
