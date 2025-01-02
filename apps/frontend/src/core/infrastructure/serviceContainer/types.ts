@@ -43,6 +43,7 @@ import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
 import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
 import type { IClientIdService } from '@root/core/modules/identity/application/clientIdService/types';
+import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -113,6 +114,7 @@ export enum EServiceToken {
 	AUTH_API = 'AuthApi',
 	EXPENSE_API = 'ExpensesApi',
 
+	USER_SERVICE = 'UserService',
 	USER_DATASOURCE = 'UserDataSource',
 
 	TEMPORAL = 'Temporal',
@@ -164,8 +166,10 @@ export interface IServiceMap {
 	[EServiceToken.BASE_API]: IBaseApi;
 	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.EXPENSE_API]: IExpenseApi;
-	[EServiceToken.USER_DATASOURCE]: IUserDataSource;
 	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
+
+	[EServiceToken.USER_SERVICE]: IUserService;
+	[EServiceToken.USER_DATASOURCE]: IUserDataSource;
 
 	[EServiceToken.CURRENCY_RATE_DATASOURCE]: ICurrencyRateDataSource;
 	[EServiceToken.CURRENCY_RATE_SERVICE]: ICurrencyRateService;

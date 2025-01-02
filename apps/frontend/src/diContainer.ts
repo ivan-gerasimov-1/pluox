@@ -51,6 +51,7 @@ import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormat
 import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
 import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
 import { ClientIdService } from '@root/core/modules/identity/application/clientIdService/clientIdService';
+import { UserService } from '@root/core/modules/identity/application/userService/userService';
 
 let globalContainer: IContainer;
 
@@ -162,9 +163,14 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.USER_DATASOURCE,
 				],
 			},
+
 			{
 				token: EServiceToken.USER_DATASOURCE,
 				useClass: UserDataSource,
+			},
+			{
+				token: EServiceToken.USER_SERVICE,
+				useClass: UserService,
 			},
 
 			{
