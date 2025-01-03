@@ -39,12 +39,11 @@ export class ExpenseService implements IExpenseService {
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
 		let expense = this.createExpenseUseCase.execute(payload);
-		let expenseDTO = expense.toDTO();
 
-		this.expenseRepository.create(expense);
+		this.expenseRepository.save(expense);
 
-		if (expenseDTO.category) {
-			this.categoryService.increaseWeight(expenseDTO.category);
+		if (expense.category) {
+			this.categoryService.increaseWeight(expense.category);
 		}
 
 		return this;
@@ -57,12 +56,12 @@ export class ExpenseService implements IExpenseService {
 	}
 
 	public deleteExpense(id: Id): IExpenseService {
-		let expenseDTO = this.expenseRepository.findById(id);
+		let expense = this.expenseRepository.findById(id);
 
 		this.deleteExpenseUseCase.execute(id);
 
-		if (expenseDTO.category) {
-			this.categoryService.decreaseWeight(expenseDTO.category);
+		if (expense?.category) {
+			this.categoryService.decreaseWeight(expense.category);
 		}
 
 		return this;

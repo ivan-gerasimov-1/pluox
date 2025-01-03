@@ -37,10 +37,11 @@ export function deleteOne(id: Id): void {
 	expenseService.deleteExpense(id);
 }
 
-export function getOne(id: Id): TExpenseDTO {
+export function getOne(id: Id): TExpenseDTO | null {
 	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
+	let expense = expenseRepository.findById(id);
 
-	return expenseRepository.findById(id);
+	return expense ? expense.toDTO() : null;
 }
 
 export function getList(query?: {
@@ -57,7 +58,9 @@ export function getList(query?: {
 		},
 	);
 
-	return expenses.items;
+	return expenses.items.map((expense) => {
+		return expense.toDTO();
+	});
 }
 
 export function getTotalAmount(): number {

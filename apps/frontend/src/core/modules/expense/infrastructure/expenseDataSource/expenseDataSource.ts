@@ -3,10 +3,7 @@ import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dat
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { Id } from '@domain/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
-import type {
-	IExpenseFindManyOptions,
-	IExpenseFindManyResult,
-} from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseFindOptions } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export class ExpenseDataSource
 	extends LocalStorageDataSource<{
@@ -32,7 +29,10 @@ export class ExpenseDataSource
 		return expense;
 	}
 
-	findMany(options?: IExpenseFindManyOptions): IExpenseFindManyResult {
+	public findMany(options?: IExpenseFindOptions): {
+		items: TExpenseDTO[];
+		total: number;
+	} {
 		let expensesMap = this.getItems();
 		let expenses = Object.values(expensesMap);
 
@@ -85,10 +85,11 @@ export class ExpenseDataSource
 		return expense;
 	}
 
-	public remove(id: Id): Id | null {
+	public remove(id: Id): TExpenseDTO | null {
 		let expenses = this.getItems();
+		let expense = Reflect.get(expenses, id);
 
-		if (!Reflect.has(expenses, id)) {
+		if (expense === undefined) {
 			return null;
 		}
 
@@ -96,7 +97,7 @@ export class ExpenseDataSource
 
 		this.setItems(expenses);
 
-		return id;
+		return expense;
 	}
 
 	private getItems(): Record<Id, TExpenseDTO> {

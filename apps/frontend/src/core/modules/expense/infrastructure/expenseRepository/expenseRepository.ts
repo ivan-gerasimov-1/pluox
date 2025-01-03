@@ -1,65 +1,56 @@
 import type { Id } from '@root/core/domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type {
-	IExpenseFindManyOptions,
-	IExpenseFindManyResult,
+	IExpenseFindOptions,
 	IExpenseRepository,
 } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
-
-import { ExpenseNotFoundError } from '@root/core/modules/expense/infrastructure/expenseRepository/errors';
+import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
 
 export class ExpenseRepository implements IExpenseRepository {
-	constructor(private readonly dataSource: IExpenseDataSource) {}
+	constructor(
+		private readonly dataSource: IExpenseDataSource,
+		private readonly expenseMapper: IExpenseMapper,
+	) {}
 
-	public create(expense: IExpense): TExpenseDTO {
-		let expenseDTO = expense.toDTO();
+	public save(expense: IExpense): IExpense {
+		let expenseDTO = this.expenseMapper.toDTO(expense);
 
-		this.dataSource.save(expenseDTO);
+		let newExpenseDTO = this.dataSource.save(expenseDTO);
 
-		return expenseDTO;
+		return this.expenseMapper.toEntity(newExpenseDTO);
 	}
 
-	public update(expense: IExpense): TExpenseDTO {
-		let expenseDTO = expense.toDTO();
-
-		this.dataSource.save(expenseDTO);
-
-		return expenseDTO;
-	}
-
-	public findMany(options?: IExpenseFindManyOptions): IExpenseFindManyResult {
+	public findMany(options?: IExpenseFindOptions) {
 		let expenses = this.dataSource.findMany(options);
 
-		return expenses;
+		return {
+			items: expenses.items.map(this.expenseMapper.toEntity),
+			total: expenses.total,
+		};
 	}
 
-	public findOne(query: unknown): TExpenseDTO {
+	public findOne(options: IExpenseFindOptions): IExpense {
 		throw new Error('Not implemented');
 	}
 
-	/**
-	 * @throws {ExpenseNotFoundError}
-	 */
-	public findById(id: Id): TExpenseDTO {
+	public findById(id: Id): IExpense | null {
 		let expense = this.dataSource.findById(id);
 
 		if (expense === null) {
-			throw new ExpenseNotFoundError(id);
+			return null;
 		}
 
-		return expense;
+		return this.expenseMapper.toEntity(expense);
 	}
 
-	/**
-	 * @throws {ExpenseNotFoundError}
-	 */
-	public remove(id: Id): void {
-		let deletedExpenseId = this.dataSource.remove(id);
+	public remove(id: Id): IExpense | null {
+		let expense = this.dataSource.remove(id);
 
-		if (deletedExpenseId === null) {
-			throw new ExpenseNotFoundError(id);
+		if (expense === null) {
+			return null;
 		}
+
+		return this.expenseMapper.toEntity(expense);
 	}
 }
