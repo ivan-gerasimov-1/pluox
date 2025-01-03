@@ -39,9 +39,10 @@ export function deleteOne(id: Id): void {
 
 export function getOne(id: Id): TExpenseDTO | null {
 	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
+	let expenseMapper = resolveService(EServiceToken.EXPENSE_MAPPER);
 	let expense = expenseRepository.findById(id);
 
-	return expense ? expense.toDTO() : null;
+	return expense ? expenseMapper.toDTO(expense) : null;
 }
 
 export function getList(query?: {
@@ -49,6 +50,8 @@ export function getList(query?: {
 	dateTo?: TISODateString;
 }): TExpenseDTO[] {
 	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
+	let expenseMapper = resolveService(EServiceToken.EXPENSE_MAPPER);
+
 	let expenses = expenseRepository.findMany(
 		query && {
 			filter: {
@@ -59,7 +62,7 @@ export function getList(query?: {
 	);
 
 	return expenses.items.map((expense) => {
-		return expense.toDTO();
+		return expenseMapper.toDTO(expense);
 	});
 }
 
