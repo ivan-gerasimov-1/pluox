@@ -1,11 +1,8 @@
 import { Entity } from '@root/core/domain/entity/entity';
-import type {
-	TUserDTO,
-	TUserCreateDTO,
-} from '@root/core/modules/identity/application/dto/userDTO';
+import type { TUserCreateDTO } from '@root/core/modules/identity/application/dto/userDTO';
 import type { IUser } from '@root/core/modules/identity/domain/userEntity/types';
 
-export class User extends Entity<TUserDTO> implements IUser {
+export class User extends Entity implements IUser {
 	#email: string;
 	#name: string;
 
@@ -26,15 +23,5 @@ export class User extends Entity<TUserDTO> implements IUser {
 
 	public get name(): string {
 		return this.#name;
-	}
-
-	public toDTO(): TUserDTO {
-		return {
-			id: this.id,
-			email: this.#email,
-			name: this.#name,
-			createdAt: this.createdAt,
-			modifiedAt: this.modifiedAt,
-		};
 	}
 }

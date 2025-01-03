@@ -2,10 +2,9 @@ import type { ECurrency } from '@root/core/modules/currency/domain/types';
 import { Entity } from '@root/core/domain/entity/entity';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TCategory, TDescription } from '@domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 
-export class Expense extends Entity<TExpenseDTO> implements IExpense {
+export class Expense extends Entity implements IExpense {
 	readonly #amount: number;
 	readonly #currency: ECurrency;
 	readonly #comment: TDescription;
@@ -80,9 +79,5 @@ export class Expense extends Entity<TExpenseDTO> implements IExpense {
 			modifiedAt,
 			date,
 		);
-	}
-
-	public toDTO(): TExpenseDTO {
-		throw new Error('Method Deprecated');
 	}
 }

@@ -1,10 +1,9 @@
-import { type IEntity } from '@root/core/domain/entity/types';
+import type { IEntity } from '@root/core/domain/entity/types';
 import type { TCategory, TDescription } from '@root/core/domain/types';
 import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
-export interface IExpense extends IEntity<TExpenseDTO> {
+export interface IExpense extends IEntity {
 	readonly amount: number;
 	readonly currency: ECurrency;
 

@@ -1,10 +1,9 @@
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 import type { Id } from '@root/core/domain/types';
 import { Entity } from '@root/core/domain/entity/entity';
-import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 
-export class Category extends Entity<TCategoryDTO> implements ICategory {
+export class Category extends Entity implements ICategory {
 	#id: Id;
 	#name: string;
 	#icon: string;
@@ -63,16 +62,5 @@ export class Category extends Entity<TCategoryDTO> implements ICategory {
 		this.#weight--;
 
 		return this;
-	}
-
-	public toDTO(): TCategoryDTO {
-		return {
-			id: this.id,
-			name: this.#name,
-			icon: this.#icon,
-			weight: this.#weight,
-			createdAt: this.createdAt,
-			modifiedAt: this.modifiedAt,
-		};
 	}
 }
