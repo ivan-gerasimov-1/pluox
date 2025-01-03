@@ -15,3 +15,5 @@ export type TUserCreateDTO = {
 	name: string;
 	createdAt: TISODateString;
 };
+
+export type TUserUpdateDTO = Partial<Pick<TUserCreateDTO, 'email' | 'name'>>;
