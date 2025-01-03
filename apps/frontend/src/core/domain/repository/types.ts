@@ -1,18 +1,13 @@
 import type { Id } from '@root/core/domain/types';
 
-export interface IRepository<TEntity, TCreateDTO, TUpdateDTO, TFindOptions> {
+export interface IRepository<TEntity, TFindOptions> {
 	/**
 	 * @description
-	 * Creates a new entity
+	 * Saves a domain object to the storage.
+	 * If the object is new, it creates it; if it already exists, it updates it.
+	 * @returns The saved domain object
 	 */
-	create(entityCreateDTO: TCreateDTO): TEntity;
-
-	/**
-	 * @description
-	 * Updates an existing entity
-	 * @returns Updated entity or null if not found
-	 */
-	update(id: Id, entityUpdateDTO: TUpdateDTO): TEntity | null;
+	save(entity: TEntity): TEntity;
 
 	/**
 	 * @description
@@ -42,7 +37,6 @@ export interface IRepository<TEntity, TCreateDTO, TUpdateDTO, TFindOptions> {
 
 export type TFindManyOptions<T> = T & {
 	limit?: number;
-	offset?: number;
 };
 
 export type TFindManyResult<T> = {
