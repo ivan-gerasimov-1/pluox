@@ -13,9 +13,6 @@ export class SessionService implements ISessionService {
 		private readonly userService: IUserService,
 		private readonly userDataSource: IUserDataSource,
 		private readonly userMapper: IUserMapper,
-
-		private readonly idGenerator: IIdGenerator,
-		private readonly temporal: ITemporal,
 	) {}
 
 	public start(): void {
@@ -36,14 +33,9 @@ export class SessionService implements ISessionService {
 		if (userDto) {
 			this.userService.createUser(userDto);
 		} else {
-			let id = this.idGenerator.getId();
-			let createdAt = this.temporal.getISODateString();
-
 			let user = this.userService.createUser({
-				id,
 				email: '',
 				name: '',
-				createdAt,
 			});
 
 			let userDTO = this.userMapper.toDTO(user);

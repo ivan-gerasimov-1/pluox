@@ -158,9 +158,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.USER_SERVICE,
 					EServiceToken.USER_DATASOURCE,
 					EServiceToken.USER_MAPPER,
-
-					EServiceToken.ID_GENERATOR,
-					EServiceToken.TEMPORAL,
 				],
 			},
 
@@ -190,7 +187,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.USER_SERVICE,
 				useClass: UserService,
-				deps: [EServiceToken.USER_MAPPER],
+				deps: [
+					EServiceToken.USER_MAPPER,
+					EServiceToken.ID_GENERATOR,
+					EServiceToken.TEMPORAL,
+				],
 			},
 			{
 				token: EServiceToken.USER_MAPPER,

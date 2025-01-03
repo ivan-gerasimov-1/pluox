@@ -10,10 +10,10 @@ export type TUserDTO = {
 };
 
 export type TUserCreateDTO = {
-	id: Id;
+	id?: Id;
 	email: string;
 	name: string;
-	createdAt: TISODateString;
+	createdAt?: TISODateString;
 	modifiedAt?: TISODateString;
 };
 
