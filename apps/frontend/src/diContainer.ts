@@ -190,6 +190,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.USER_SERVICE,
 				useClass: UserService,
+				deps: [EServiceToken.USER_MAPPER],
 			},
 			{
 				token: EServiceToken.USER_MAPPER,

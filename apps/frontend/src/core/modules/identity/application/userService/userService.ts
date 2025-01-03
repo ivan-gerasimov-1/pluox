@@ -1,32 +1,19 @@
 /**
  * @todo
- * 1. Move UserFactory to DI
- * 2. Implement UserRepository and store multiple users
+ * 1. Implement UserRepository and store multiple users
  */
 import type { TUserCreateDTO } from '@root/core/modules/identity/application/dto/userDTO';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 import type { IUser } from '@root/core/modules/identity/domain/userEntity/types';
-import { User } from '@root/core/modules/identity/domain/userEntity/user';
-
-export interface IUserFactory {
-	create(userCreateDTO: TUserCreateDTO): IUser;
-}
-
-/** @todo №1 */
-export class UserFactory implements IUserFactory {
-	public create(userCreateDTO: TUserCreateDTO): IUser {
-		return new User(userCreateDTO);
-	}
-}
+import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
 
 export class UserService implements IUserService {
-	#userFactory: IUserFactory;
-
-	constructor() {
-		this.#userFactory = new UserFactory();
-	}
+	constructor(private readonly userMapper: IUserMapper) {}
 
 	public createUser(userCreateDTO: TUserCreateDTO): IUser {
-		return this.#userFactory.create(userCreateDTO);
+		return this.userMapper.toEntity({
+			...userCreateDTO,
+			modifiedAt: userCreateDTO.modifiedAt ?? userCreateDTO.createdAt,
+		});
 	}
 }

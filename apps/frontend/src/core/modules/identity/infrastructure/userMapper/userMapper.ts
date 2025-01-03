@@ -15,12 +15,12 @@ export class UserMapper implements IUserMapper {
 	}
 
 	public toEntity(userDTO: TUserDTO): IUser {
-		return User.create({
-			id: userDTO.id,
-			email: userDTO.email,
-			name: userDTO.name,
-			createdAt: userDTO.createdAt,
-			modifiedAt: userDTO.modifiedAt,
-		});
+		return User.create(
+			userDTO.id,
+			userDTO.email,
+			userDTO.name,
+			userDTO.createdAt,
+			userDTO.modifiedAt,
+		);
 	}
 }
