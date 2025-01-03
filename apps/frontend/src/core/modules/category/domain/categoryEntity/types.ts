@@ -2,6 +2,10 @@ import type { TCategoryDTO } from '@root/core/modules/category/application/dto/c
 import type { IEntity } from '@root/core/domain/entity/types';
 
 export interface ICategory extends IEntity<TCategoryDTO> {
+	name: string;
+	icon: string;
+	weight: number;
+
 	increaseWeight(): ICategory;
 	decreaseWeight(): ICategory;
 }

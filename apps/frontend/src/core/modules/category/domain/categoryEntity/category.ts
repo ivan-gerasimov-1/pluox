@@ -41,6 +41,18 @@ export class Category extends Entity<TCategoryDTO> implements ICategory {
 		return this.#id;
 	}
 
+	public get name(): string {
+		return this.#name;
+	}
+
+	public get icon(): string {
+		return this.#icon;
+	}
+
+	public get weight(): number {
+		return this.#weight;
+	}
+
 	public increaseWeight(): ICategory {
 		this.#weight++;
 
