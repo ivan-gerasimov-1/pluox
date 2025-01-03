@@ -54,6 +54,7 @@ import { ClientIdService } from '@root/core/modules/identity/application/clientI
 import { UserService } from '@root/core/modules/identity/application/userService/userService';
 import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
 import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
+import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
 
 let globalContainer: IContainer;
 
@@ -343,6 +344,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.CATEGORY_REPOSITORY,
 				useClass: CategoryRepository,
 				deps: [EServiceToken.CATEGORY_DATASOURCE],
+			},
+			{
+				token: EServiceToken.CATEGORY_MAPPER,
+				useClass: CategoryMapper,
 			},
 			{
 				token: EServiceToken.CATEGORY_SERVICE_FACTORY,

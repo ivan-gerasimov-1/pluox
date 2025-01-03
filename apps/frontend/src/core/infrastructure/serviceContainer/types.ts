@@ -46,6 +46,7 @@ import type { IClientIdService } from '@root/core/modules/identity/application/c
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
+import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -104,6 +105,7 @@ export enum EServiceToken {
 	CATEGORY_SERVICE = 'CategoryService',
 	CATEGORY_REPOSITORY = 'CategoryRepository',
 	CATEGORY_DATASOURCE = 'CategoryDataSource',
+	CATEGORY_MAPPER = 'CategoryMapper',
 
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
@@ -157,6 +159,7 @@ export interface IServiceMap {
 	[EServiceToken.CATEGORY_SERVICE]: ICategoryService;
 	[EServiceToken.CATEGORY_REPOSITORY]: ICategoryRepository;
 	[EServiceToken.CATEGORY_DATASOURCE]: ICategoryDataSource;
+	[EServiceToken.CATEGORY_MAPPER]: ICategoryMapper;
 
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
