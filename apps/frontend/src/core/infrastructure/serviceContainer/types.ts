@@ -47,6 +47,7 @@ import type { ISessionService } from '@root/core/modules/identity/application/se
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
 import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
+import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -123,6 +124,7 @@ export enum EServiceToken {
 
 	USER_SERVICE = 'UserService',
 	USER_DATASOURCE = 'UserDataSource',
+	USER_MAPPER = 'UserMapper',
 
 	TEMPORAL = 'Temporal',
 
@@ -181,6 +183,7 @@ export interface IServiceMap {
 
 	[EServiceToken.USER_SERVICE]: IUserService;
 	[EServiceToken.USER_DATASOURCE]: IUserDataSource;
+	[EServiceToken.USER_MAPPER]: IUserMapper;
 
 	[EServiceToken.CURRENCY_RATE_DATASOURCE]: ICurrencyRateDataSource;
 	[EServiceToken.CURRENCY_RATE_SERVICE]: ICurrencyRateService;
