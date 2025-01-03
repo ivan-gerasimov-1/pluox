@@ -5,7 +5,17 @@ import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/e
 
 export class ExpenseMapper implements IExpenseMapper {
 	public toDTO(expense: IExpense): TExpenseDTO {
-		return expense.toDTO();
+		return {
+			id: expense.id,
+			amount: expense.amount,
+			currency: expense.currency,
+			comment: expense.comment,
+			category: expense.category,
+			date: expense.date,
+			createdAt: expense.createdAt,
+			modifiedAt: expense.modifiedAt,
+			timezone: expense.timezone,
+		};
 	}
 
 	public toEntity(expenseDTO: TExpenseDTO): IExpense {
