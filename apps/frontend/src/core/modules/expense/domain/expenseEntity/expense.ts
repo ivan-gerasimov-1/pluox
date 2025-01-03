@@ -50,6 +50,14 @@ export class Expense extends Entity<TExpenseDTO> implements IExpense {
 		return this.#date;
 	}
 
+	public get comment(): TDescription {
+		return this.#comment;
+	}
+
+	public get timezone(): string {
+		return this.#timezone;
+	}
+
 	public static create(
 		id: Id,
 		amount: number,

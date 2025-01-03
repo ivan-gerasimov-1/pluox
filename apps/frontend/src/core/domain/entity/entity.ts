@@ -6,8 +6,8 @@ import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 	readonly #id: Id;
 
-	protected readonly createdAt: TISODateString;
-	protected modifiedAt: TISODateString;
+	public readonly createdAt: TISODateString;
+	public readonly modifiedAt: TISODateString;
 
 	constructor(id: Id, createdAt: TISODateString, modifiedAt?: TISODateString) {
 		this.#id = id;
