@@ -9,12 +9,7 @@ export interface IExpense extends IEntity<TExpenseDTO> {
 	readonly currency: ECurrency;
 
 	readonly category: TCategory;
-
 	readonly comment: TDescription;
-
 	readonly date: TISODateString;
-	readonly createdAt: TISODateString;
-	readonly modifiedAt: TISODateString;
-
 	readonly timezone: string;
 }
