@@ -13,7 +13,7 @@ export class CategoryService implements ICategoryService {
 	) {}
 
 	public create(category: ICategory): ICategoryService {
-		this.categoryRepository.create(category);
+		this.categoryRepository.save(category);
 
 		return this;
 	}
@@ -47,7 +47,7 @@ export class CategoryService implements ICategoryService {
 
 		category.increaseWeight();
 
-		this.categoryRepository.update(category);
+		this.categoryRepository.save(category);
 
 		return this;
 	}
@@ -57,7 +57,7 @@ export class CategoryService implements ICategoryService {
 
 		category.decreaseWeight();
 
-		this.categoryRepository.update(category);
+		this.categoryRepository.save(category);
 
 		return this;
 	}

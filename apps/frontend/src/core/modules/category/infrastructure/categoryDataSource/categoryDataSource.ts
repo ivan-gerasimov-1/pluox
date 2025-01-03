@@ -1,6 +1,5 @@
-import { Id } from '@root/core/domain/types';
-import { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
-import { ICategoryFindManyResult } from '@root/core/modules/category/domain/categoryRepository/types';
+import type { Id } from '@root/core/domain/types';
+import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 
 export class CategoryInMemoryDataSource implements ICategoryDataSource {
@@ -16,7 +15,10 @@ export class CategoryInMemoryDataSource implements ICategoryDataSource {
 		return categoryDto;
 	}
 
-	findMany(options?: { orderByWeight?: boolean }): ICategoryFindManyResult {
+	findMany(options?: { orderByWeight?: boolean }): {
+		items: TCategoryDTO[];
+		total: number;
+	} {
 		let categories: TCategoryDTO[] = [];
 
 		for (let category of this.storage.values()) {
@@ -47,14 +49,16 @@ export class CategoryInMemoryDataSource implements ICategoryDataSource {
 		return category;
 	}
 
-	remove(id: Id): Id | null {
-		if (!this.storage.has(id)) {
+	remove(id: Id): TCategoryDTO | null {
+		let category = this.storage.get(id);
+
+		if (!category) {
 			return null;
 		}
 
 		this.storage.delete(id);
 
-		return id;
+		return category;
 	}
 
 	/**

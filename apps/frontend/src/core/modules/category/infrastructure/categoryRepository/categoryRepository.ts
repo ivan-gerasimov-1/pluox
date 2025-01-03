@@ -1,8 +1,7 @@
 import type { Id } from '@root/core/domain/types';
-import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 import type {
-	ICategoryFindManyResult,
+	ICategoryFindOptions,
 	ICategoryRepository,
 } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
@@ -14,46 +13,45 @@ export class CategoryRepository implements ICategoryRepository {
 		private readonly mapper: ICategoryMapper,
 	) {}
 
-	public create(category: ICategory): TCategoryDTO {
-		let categoryDto = this.mapper.toDTO(category);
+	public save(category: ICategory): ICategory {
+		let categoryDTO = this.mapper.toDTO(category);
+		let newCategoryDTO = this.dataSource.save(categoryDTO);
 
-		return this.dataSource.save(categoryDto);
+		return this.mapper.toEntity(newCategoryDTO);
 	}
 
-	public update(category: ICategory): TCategoryDTO {
-		let categoryDto = this.mapper.toDTO(category);
-
-		return this.dataSource.save(categoryDto);
-	}
-
-	public findMany(options?: {
-		orderByWeight?: boolean;
-	}): ICategoryFindManyResult {
+	public findMany(options?: ICategoryFindOptions) {
 		let result = this.dataSource.findMany({
 			orderByWeight: options?.orderByWeight,
 		});
 
 		return {
-			items: result.items,
+			items: result.items.map(this.mapper.toEntity),
 			total: result.total,
 		};
 	}
 
-	public findOne(): TCategoryDTO {
+	public findOne(): ICategory {
 		throw new Error('Not Implemented');
 	}
 
-	public findById(id: Id): TCategoryDTO {
+	public findById(id: Id): ICategory | null {
 		let category = this.dataSource.findById(id);
 
 		if (!category) {
-			throw new Error(`Category with id ${id} not found`);
+			return null;
 		}
 
-		return category;
+		return this.mapper.toEntity(category);
 	}
 
-	public remove(id: Id): void {
-		this.dataSource.remove(id);
+	public remove(id: Id): ICategory | null {
+		let category = this.dataSource.remove(id);
+
+		if (!category) {
+			return null;
+		}
+
+		return this.mapper.toEntity(category);
 	}
 }
