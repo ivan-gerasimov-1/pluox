@@ -6,17 +6,25 @@ import type { TISODateString } from '@root/core/infrastructure/temporal/types';
 export abstract class Entity implements IEntity {
 	readonly #id: Id;
 
-	public readonly createdAt: TISODateString;
-	public readonly modifiedAt: TISODateString;
+	readonly #createdAt: TISODateString;
+	readonly #modifiedAt: TISODateString;
 
 	constructor(id: Id, createdAt: TISODateString, modifiedAt?: TISODateString) {
 		this.#id = id;
 
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt ?? createdAt;
+		this.#createdAt = createdAt;
+		this.#modifiedAt = modifiedAt ?? createdAt;
 	}
 
 	public get id(): Id {
 		return this.#id;
+	}
+
+	public get createdAt(): TISODateString {
+		return this.#createdAt;
+	}
+
+	public get modifiedAt(): TISODateString {
+		return this.#modifiedAt;
 	}
 }
