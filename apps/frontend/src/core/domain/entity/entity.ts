@@ -20,5 +20,6 @@ export abstract class Entity<TEntityDTO> implements IEntity<TEntityDTO> {
 		return this.#id;
 	}
 
+	/** @deprecated */
 	public abstract toDTO(): TEntityDTO;
 }
