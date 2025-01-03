@@ -53,6 +53,7 @@ import type { IClientIdFactory } from '@root/core/modules/identity/domain/client
 import { ClientIdService } from '@root/core/modules/identity/application/clientIdService/clientIdService';
 import { UserService } from '@root/core/modules/identity/application/userService/userService';
 import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
+import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
 
 let globalContainer: IContainer;
 
@@ -250,9 +251,13 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 */
 		.register(
 			{
+				token: EServiceToken.EXPENSE_MAPPER,
+				useClass: ExpenseMapper,
+			},
+			{
 				token: EServiceToken.EXPENSE_REPOSITORY,
 				useClass: ExpenseRepository,
-				deps: [EServiceToken.EXPENSE_DATASOURCE],
+				deps: [EServiceToken.EXPENSE_DATASOURCE, EServiceToken.EXPENSE_MAPPER],
 			},
 			{
 				token: EServiceToken.EXPENSE_DATASOURCE,
