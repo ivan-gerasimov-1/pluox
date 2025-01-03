@@ -1,10 +1,10 @@
-import { CategoryService } from '@root/core/modules/category/application/categoryService/categoryService';
-import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
-import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
-import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
-import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import { CategoryService } from '@root/core/modules/category/application/categoryService/categoryService';
+import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
+import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
+import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
+import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export interface ICategoryServiceFactory {
 	create(): ICategoryService;
@@ -16,24 +16,29 @@ export interface ICategoryServiceFactory {
 export class CategoryServiceFactory {
 	constructor(
 		private readonly categoryRepository: ICategoryRepository,
+		private readonly categoryMapper: ICategoryMapper,
 		private readonly temporal: ITemporal,
 		private readonly expenseRepository: IExpenseRepository,
 	) {}
 
 	public create(): ICategoryService {
-		let categories = new CategoryService(this.categoryRepository);
+		let categories = new CategoryService(
+			this.categoryRepository,
+			this.categoryMapper,
+		);
 
 		let weight = 1;
 		let currentDate = this.temporal.getISODateString();
 
 		for (let categoryTemplate of categoryTemplates) {
-			let category = Category.create(
-				categoryTemplate.id,
-				categoryTemplate.name,
-				categoryTemplate.icon,
+			let category = this.categoryMapper.toEntity({
+				id: categoryTemplate.id,
+				name: categoryTemplate.name,
+				icon: categoryTemplate.icon,
 				weight,
-				currentDate,
-			);
+				createdAt: currentDate,
+				modifiedAt: currentDate,
+			});
 
 			categories.create(category);
 		}

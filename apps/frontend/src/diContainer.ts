@@ -343,7 +343,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CATEGORY_REPOSITORY,
 				useClass: CategoryRepository,
-				deps: [EServiceToken.CATEGORY_DATASOURCE],
+				deps: [
+					EServiceToken.CATEGORY_DATASOURCE,
+					EServiceToken.CATEGORY_MAPPER,
+				],
 			},
 			{
 				token: EServiceToken.CATEGORY_MAPPER,
@@ -354,6 +357,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: CategoryServiceFactory,
 				deps: [
 					EServiceToken.CATEGORY_REPOSITORY,
+					EServiceToken.CATEGORY_MAPPER,
 					EServiceToken.TEMPORAL,
 					EServiceToken.EXPENSE_REPOSITORY,
 				],

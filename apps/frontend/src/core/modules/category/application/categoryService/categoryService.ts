@@ -1,13 +1,16 @@
+import type { Id } from '@domain/types';
+import { CategoryNotFoundError } from '@root/core/modules/category/application/categoryService/errors';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
-import type { Id } from '@domain/types';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
-import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
-import { CategoryNotFoundError } from '@root/core/modules/category/application/categoryService/errors';
+import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
 
 export class CategoryService implements ICategoryService {
-	constructor(private readonly categoryRepository: ICategoryRepository) {}
+	constructor(
+		private readonly categoryRepository: ICategoryRepository,
+		private readonly categoryMapper: ICategoryMapper,
+	) {}
 
 	public create(category: ICategory): ICategoryService {
 		this.categoryRepository.create(category);
@@ -30,14 +33,7 @@ export class CategoryService implements ICategoryService {
 			throw new CategoryNotFoundError(id);
 		}
 
-		return Category.create(
-			category.id,
-			category.name,
-			category.icon,
-			category.weight,
-			category.createdAt,
-			category.modifiedAt,
-		);
+		return this.categoryMapper.toEntity(category);
 	}
 
 	public remove(id: Id): ICategoryService {
@@ -89,7 +85,7 @@ export class CategoryService implements ICategoryService {
 			return categoryId[0].toUpperCase();
 		}
 
-		let categoryDTO = category.toDTO();
+		let categoryDTO = this.categoryMapper.toDTO(category);
 
 		return Reflect.get(categoryDTO, property);
 	}

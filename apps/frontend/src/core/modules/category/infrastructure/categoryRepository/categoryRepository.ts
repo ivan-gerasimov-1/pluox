@@ -6,18 +6,22 @@ import type {
 	ICategoryRepository,
 } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
+import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
 
 export class CategoryRepository implements ICategoryRepository {
-	constructor(private readonly dataSource: ICategoryDataSource) {}
+	constructor(
+		private readonly dataSource: ICategoryDataSource,
+		private readonly mapper: ICategoryMapper,
+	) {}
 
 	public create(category: ICategory): TCategoryDTO {
-		let categoryDto = category.toDTO();
+		let categoryDto = this.mapper.toDTO(category);
 
 		return this.dataSource.save(categoryDto);
 	}
 
 	public update(category: ICategory): TCategoryDTO {
-		let categoryDto = category.toDTO();
+		let categoryDto = this.mapper.toDTO(category);
 
 		return this.dataSource.save(categoryDto);
 	}
