@@ -5,14 +5,14 @@ export interface IRepository<TEntity, TCreateDTO, TUpdateDTO, TFindOptions> {
 	 * @description
 	 * Creates a new entity
 	 */
-	create(entity: TCreateDTO): TEntity;
+	create(entityCreateDTO: TCreateDTO): TEntity;
 
 	/**
 	 * @description
 	 * Updates an existing entity
 	 * @returns Updated entity or null if not found
 	 */
-	update(id: Id, entity: TUpdateDTO): TEntity | null;
+	update(id: Id, entityUpdateDTO: TUpdateDTO): TEntity | null;
 
 	/**
 	 * @description
