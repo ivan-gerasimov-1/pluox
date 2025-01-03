@@ -82,18 +82,7 @@ export class Expense extends Entity<TExpenseDTO> implements IExpense {
 		);
 	}
 
-	/** @deprecated */
 	public toDTO(): TExpenseDTO {
-		return {
-			id: this.id,
-			amount: this.#amount,
-			currency: this.#currency,
-			comment: this.#comment,
-			category: this.#category,
-			date: this.#date,
-			createdAt: this.createdAt,
-			modifiedAt: this.modifiedAt,
-			timezone: this.#timezone,
-		};
+		throw new Error('Method Deprecated');
 	}
 }
