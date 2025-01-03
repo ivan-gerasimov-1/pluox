@@ -4,6 +4,7 @@ import type { IUserService } from '@root/core/modules/identity/application/userS
 import type { IIdGenerator } from '@root/core/infrastructure/idGenerator/types';
 import type { ITemporal } from '@root/core/infrastructure/temporal/types';
 import type { IClientIdService } from '@root/core/modules/identity/application/clientIdService/types';
+import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
 
 export class SessionService implements ISessionService {
 	constructor(
@@ -11,6 +12,7 @@ export class SessionService implements ISessionService {
 
 		private readonly userService: IUserService,
 		private readonly userDataSource: IUserDataSource,
+		private readonly userMapper: IUserMapper,
 
 		private readonly idGenerator: IIdGenerator,
 		private readonly temporal: ITemporal,
@@ -44,7 +46,7 @@ export class SessionService implements ISessionService {
 				createdAt,
 			});
 
-			let userDTO = user.toDTO();
+			let userDTO = this.userMapper.toDTO(user);
 
 			this.userDataSource.create(userDTO);
 		}
