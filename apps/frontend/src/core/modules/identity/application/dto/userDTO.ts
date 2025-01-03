@@ -14,5 +14,4 @@ export type TUserCreateDTO = {
 	email: string;
 	name: string;
 	createdAt: TISODateString;
-	modifiedAt?: TISODateString;
 };

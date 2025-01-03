@@ -35,14 +35,13 @@ export class SessionService implements ISessionService {
 			this.userService.createUser(userDto);
 		} else {
 			let id = this.idGenerator.getId();
-			let currentDate = this.temporal.getISODateString();
+			let createdAt = this.temporal.getISODateString();
 
 			let user = this.userService.createUser({
 				id,
 				email: '',
 				name: '',
-				createdAt: currentDate,
-				modifiedAt: currentDate,
+				createdAt,
 			});
 
 			let userDTO = user.toDTO();
