@@ -5,7 +5,6 @@ import type {
 	TUserDTO,
 } from '@root/core/modules/identity/application/dto/userDTO';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
-import type { IUser } from '@root/core/modules/identity/domain/userEntity/types';
 import type { IUserRepository } from '@root/core/modules/identity/domain/userRepository/types';
 import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
 
@@ -17,18 +16,22 @@ export class UserService implements IUserService {
 		private readonly temporal: ITemporal,
 	) {}
 
-	public createUser(userCreateDTO: TUserCreateDTO): IUser {
+	public createUser(userCreateDTO: TUserCreateDTO): TUserDTO {
 		let id = userCreateDTO.id ?? this.idGenerator.getId();
 		let createdAt = userCreateDTO.createdAt ?? this.temporal.getISODateString();
 		let modifiedAt = userCreateDTO.modifiedAt ?? createdAt;
 
-		return this.userMapper.toEntity({
+		let user = this.userMapper.toEntity({
 			id,
 			email: userCreateDTO.email,
 			name: userCreateDTO.name,
 			createdAt,
 			modifiedAt,
 		});
+
+		let newUser = this.userRepository.save(user);
+
+		return this.userMapper.toDTO(newUser);
 	}
 
 	public getMainUser(): TUserDTO | null {

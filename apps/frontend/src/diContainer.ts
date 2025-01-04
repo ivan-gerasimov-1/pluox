@@ -153,13 +153,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.SESSION_SERVICE,
 				useClass: SessionService,
-				deps: [
-					EServiceToken.CLIENT_ID_SERVICE,
-
-					EServiceToken.USER_SERVICE,
-					EServiceToken.USER_DATASOURCE,
-					EServiceToken.USER_MAPPER,
-				],
+				deps: [EServiceToken.CLIENT_ID_SERVICE, EServiceToken.USER_SERVICE],
 			},
 
 			{
