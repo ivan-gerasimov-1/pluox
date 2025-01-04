@@ -172,6 +172,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.AUTH_API,
 					EServiceToken.AUTH_DATASOURCE,
 					EServiceToken.USER_DATASOURCE,
+					EServiceToken.USER_SERVICE,
 				],
 			},
 

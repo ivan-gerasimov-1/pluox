@@ -13,18 +13,27 @@ import type { IUserMapper } from '@root/core/modules/identity/infrastructure/use
 
 export class UserRepository implements IUserRepository {
 	constructor(
-		private readonly userDataSource: IUserDataSource,
-		private readonly userMapper: IUserMapper,
+		private readonly dataSource: IUserDataSource,
+		private readonly mapper: IUserMapper,
 	) {}
 
-	public save(entity: IUser): IUser {
-		throw new Error('Not Implemented');
+	public save(user: IUser): IUser {
+		let userDTO = this.mapper.toDTO(user);
+
+		let savedUserDTO = this.dataSource.save(userDTO);
+
+		return this.mapper.toEntity(savedUserDTO);
 	}
 
 	public findMany(
 		options?: TFindManyOptions<TUserFindOptions>,
 	): TFindManyResult<IUser> {
-		throw new Error('Not Implemented');
+		let users = this.dataSource.findMany(options);
+
+		return {
+			items: users.items.map(this.mapper.toEntity),
+			total: users.total,
+		};
 	}
 
 	public findOne(options: TUserFindOptions): IUser | null {

@@ -3,12 +3,18 @@ import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authAp
 import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
 import type { IAuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/types';
 import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
+import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 
+/**
+ * @todo
+ * 1. Add proper management of users
+ */
 export class AuthService implements IAuthSerivce {
 	constructor(
 		private readonly authApi: IAuthApi,
 		private readonly authDataSource: IAuthDataSource,
 		private readonly userDataSource: IUserDataSource,
+		private readonly userService: IUserService,
 	) {}
 
 	public async signIn(
@@ -19,9 +25,9 @@ export class AuthService implements IAuthSerivce {
 	}> {
 		const result = await this.authApi.signIn(email, password);
 
-		this.userDataSource.update({
-			email: result.email,
-		});
+		// this.userDataSource.update({
+		// 	email: result.email,
+		// });
 
 		return {
 			email: result.email,
@@ -43,7 +49,7 @@ export class AuthService implements IAuthSerivce {
 
 		this.clearStorages();
 
-		this.userDataSource.create({
+		this.userService.createUser({
 			id: result.id,
 			email: result.email,
 			name: result.name,
