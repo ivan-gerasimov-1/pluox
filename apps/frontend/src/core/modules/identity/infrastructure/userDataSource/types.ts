@@ -12,4 +12,5 @@ export interface IUserDataSource extends IDataSource<Record<string, TUserDTO>> {
 	findMany(
 		options?: TFindManyOptions<TUserFindOptions>,
 	): TFindManyResult<TUserDTO>;
+	findById(id: string): TUserDTO | null;
 }

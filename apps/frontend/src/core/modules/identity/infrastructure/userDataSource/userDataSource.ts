@@ -48,4 +48,14 @@ export class UserDataSource
 			total: filteredUsers.length,
 		};
 	}
+
+	public findById(id: string): TUserDTO | null {
+		let users = this.read();
+
+		if (!users) {
+			return null;
+		}
+
+		return users[id] ?? null;
+	}
 }

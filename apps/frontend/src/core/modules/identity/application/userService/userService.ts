@@ -34,6 +34,17 @@ export class UserService implements IUserService {
 		return this.userMapper.toDTO(newUser);
 	}
 
+	public getUserById(id: string): TUserDTO | null {
+		let user = this.userRepository.findById(id);
+
+		if (!user) {
+			return null;
+		}
+
+		return this.userMapper.toDTO(user);
+	}
+
+	/** @deprecated */
 	public getMainUser(): TUserDTO | null {
 		let {
 			items: [user],

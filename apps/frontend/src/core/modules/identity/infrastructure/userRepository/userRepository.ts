@@ -41,7 +41,9 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public findById(id: Id): IUser | null {
-		throw new Error('Not Implemented');
+		let user = this.dataSource.findById(id);
+
+		return user ? this.mapper.toEntity(user) : null;
 	}
 
 	public remove(id: Id): IUser | null {
