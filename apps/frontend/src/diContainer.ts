@@ -52,7 +52,7 @@ import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/cli
 import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
 import { ClientIdService } from '@root/core/modules/identity/application/clientIdService/clientIdService';
 import { UserService } from '@root/core/modules/identity/application/userService/userService';
-import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
+import { LaunchControl } from '@root/core/modules/bootstrap/application/launchControl/launchControl';
 import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
 import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
 import { UserMapper } from '@root/core/modules/identity/infrastructure/userMapper/userMapper';
@@ -151,8 +151,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 */
 		.register(
 			{
-				token: EServiceToken.SESSION_SERVICE,
-				useClass: SessionService,
+				token: EServiceToken.LAUNCH_CONTROL,
+				useClass: LaunchControl,
 				deps: [EServiceToken.CLIENT_ID_SERVICE, EServiceToken.USER_SERVICE],
 			},
 

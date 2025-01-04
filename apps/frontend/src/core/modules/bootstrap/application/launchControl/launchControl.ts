@@ -1,8 +1,8 @@
 import type { IClientIdService } from '@root/core/modules/identity/application/clientIdService/types';
-import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
+import type { ILauchControl } from '@root/core/modules/bootstrap/application/launchControl/types';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 
-export class SessionService implements ISessionService {
+export class LaunchControl implements ILauchControl {
 	constructor(
 		private readonly clientIdService: IClientIdService,
 		private readonly userService: IUserService,

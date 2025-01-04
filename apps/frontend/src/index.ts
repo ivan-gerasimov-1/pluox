@@ -39,7 +39,7 @@ async function runCore(): Promise<IContainer> {
 
 	loadAppConfig();
 	await getCurrencyRates();
-	startSession();
+	startApp();
 
 	return diContainer;
 }
@@ -69,8 +69,8 @@ function loadAppConfig(): void {
 	appConfigService.initialize();
 }
 
-function startSession(): void {
-	let sessionService = resolveService(EServiceToken.SESSION_SERVICE);
+function startApp(): void {
+	let launchControl = resolveService(EServiceToken.LAUNCH_CONTROL);
 
-	sessionService.start();
+	launchControl.start();
 }
