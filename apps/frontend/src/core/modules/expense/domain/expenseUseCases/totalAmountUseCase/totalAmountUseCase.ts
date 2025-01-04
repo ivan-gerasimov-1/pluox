@@ -2,7 +2,7 @@ import type { ICurrencyRateService } from '@root/core/modules/currency/applicati
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
-import type { TDateParts } from '@root/core/infrastructure/temporal/types';
+import type { TDateParts } from '@root/core/domain/temporal/types';
 import { getDateParts } from '@root/core/infrastructure/temporal/helpers';
 
 export interface ITotalAmountUseCase {

@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import type { TCategory, TDescription } from '@domain/types';
-import type { TISODateString } from '@root/core/infrastructure/temporal/types';
+import type { TISODateString } from '@root/core/domain/temporal/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { AmountInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/amountInput';

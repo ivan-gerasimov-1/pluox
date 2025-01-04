@@ -3,7 +3,7 @@ import { monthGuard } from '@root/core/infrastructure/temporal/typeGuards';
 import type {
 	TDateParts,
 	TISODateString,
-} from '@root/core/infrastructure/temporal/types';
+} from '@root/core/domain/temporal/types';
 
 /**
  * @throws InvalidMonthError

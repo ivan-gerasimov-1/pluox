@@ -8,7 +8,7 @@ import type {
 	ITemporal,
 	TISODateString,
 	TMonth,
-} from '@root/core/infrastructure/temporal/types';
+} from '@root/core/domain/temporal/types';
 import { monthGuard } from '@root/core/infrastructure/temporal/typeGuards';
 import { InvalidMonthError } from '@root/core/infrastructure/temporal/errors';
 

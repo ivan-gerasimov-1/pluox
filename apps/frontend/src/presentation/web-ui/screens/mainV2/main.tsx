@@ -28,7 +28,7 @@ import {
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { TMonth } from '@root/core/infrastructure/temporal/types';
+import { TMonth } from '@root/core/domain/temporal/types';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 function useCurrentMonth(): TMonth {

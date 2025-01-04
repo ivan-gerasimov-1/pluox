@@ -20,7 +20,7 @@ import type {
 	IGroupExpenseByDateUseCase,
 	TExpenseGroupByDate,
 } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
-import type { TYear, TMonth } from '@root/core/infrastructure/temporal/types';
+import type { TYear, TMonth } from '@root/core/domain/temporal/types';
 import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 
 export class ExpenseService implements IExpenseService {

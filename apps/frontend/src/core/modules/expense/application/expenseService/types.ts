@@ -1,5 +1,5 @@
 import type { Id } from '@root/core/domain/types';
-import type { TMonth } from '@root/core/infrastructure/temporal/types';
+import type { TMonth } from '@root/core/domain/temporal/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseDTO,

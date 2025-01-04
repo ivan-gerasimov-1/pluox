@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { TMonth } from '@root/core/infrastructure/temporal/types';
+import type { TMonth } from '@root/core/domain/temporal/types';
 
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';

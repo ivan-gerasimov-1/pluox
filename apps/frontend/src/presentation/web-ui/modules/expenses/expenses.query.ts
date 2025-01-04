@@ -1,7 +1,4 @@
-import type {
-	TISODateString,
-	TMonth,
-} from '@root/core/infrastructure/temporal/types';
+import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
 import type {
 	TExpenseDTO,
 	TExpenseCreateDTO,

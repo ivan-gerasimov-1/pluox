@@ -1,4 +1,4 @@
-import type { ITemporal } from '@root/core/infrastructure/temporal/types';
+import type { ITemporal } from '@root/core/domain/temporal/types';
 import { CategoryService } from '@root/core/modules/category/application/categoryService/categoryService';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
