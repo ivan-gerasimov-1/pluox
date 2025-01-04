@@ -56,6 +56,7 @@ import { SessionService } from '@root/core/modules/identity/application/sessionS
 import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
 import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
 import { UserMapper } from '@root/core/modules/identity/infrastructure/userMapper/userMapper';
+import { UserRepository } from '@root/core/modules/identity/infrastructure/userRepository/userRepository';
 
 let globalContainer: IContainer;
 
@@ -196,6 +197,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.USER_MAPPER,
 				useClass: UserMapper,
+			},
+			{
+				token: EServiceToken.USER_REPOSITORY,
+				useClass: UserRepository,
+				deps: [EServiceToken.USER_DATASOURCE, EServiceToken.USER_MAPPER],
 			},
 
 			{
