@@ -2,7 +2,7 @@
  * @todo
  * 1. Implement UserRepository and store multiple users
  */
-import type { IIdGenerator } from '@root/core/infrastructure/idGenerator/types';
+import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
 import type { TUserCreateDTO } from '@root/core/modules/identity/application/dto/userDTO';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';

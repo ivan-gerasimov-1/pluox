@@ -15,7 +15,7 @@ import type { ICurrencyRateService } from '@root/core/modules/currency/applicati
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
-import type { IIdGenerator } from '@core/infrastructure/idGenerator/types';
+import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
 import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';

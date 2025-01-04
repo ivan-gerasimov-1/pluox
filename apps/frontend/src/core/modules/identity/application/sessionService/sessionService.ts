@@ -1,7 +1,7 @@
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
-import type { IIdGenerator } from '@root/core/infrastructure/idGenerator/types';
+import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
 import type { IClientIdService } from '@root/core/modules/identity/application/clientIdService/types';
 import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';

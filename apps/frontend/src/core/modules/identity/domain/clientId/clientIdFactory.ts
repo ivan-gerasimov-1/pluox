@@ -1,5 +1,5 @@
 import type { Id } from '@root/core/domain/types';
-import type { IIdGenerator } from '@root/core/infrastructure/idGenerator/types';
+import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import { ClientId } from '@root/core/modules/identity/domain/clientId/clientId';
 import type {
 	IClientId,

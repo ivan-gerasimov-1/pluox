@@ -1,7 +1,3 @@
-import type { Id } from '@domain/types';
+import type { Id } from '@root/core/domain/types';
 
 export type TIdSource = () => Id;
-
-export interface IIdGenerator {
-	getId(): Id;
-}

@@ -1,5 +1,5 @@
 import type { IUseCase } from '@root/core/domain/types';
-import type { IIdGenerator } from '@root/core/infrastructure/idGenerator/types';
+import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
