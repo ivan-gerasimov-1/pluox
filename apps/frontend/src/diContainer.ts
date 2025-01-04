@@ -153,7 +153,13 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.LAUNCH_CONTROL,
 				useClass: LaunchControl,
-				deps: [EServiceToken.CLIENT_ID_SERVICE, EServiceToken.USER_SERVICE],
+				deps: [
+					EServiceToken.CLIENT_ID_SERVICE,
+					EServiceToken.USER_SERVICE,
+					EServiceToken.APP_CONFIG_SERVICE,
+					EServiceToken.CURRENCY_RATE_API,
+					EServiceToken.CURRENCY_RATE_DATASOURCE,
+				],
 			},
 
 			{

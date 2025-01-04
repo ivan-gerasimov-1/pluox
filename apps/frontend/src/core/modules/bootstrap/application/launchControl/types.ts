@@ -1,3 +1,3 @@
 export interface ILauchControl {
-	start(): void;
+	start(): Promise<void>;
 }

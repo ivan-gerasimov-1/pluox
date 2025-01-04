@@ -4,13 +4,10 @@ import { runMigrations } from '@root/migrations';
 import { runMockServiceWorker } from '@root/mockServiceWorker/run';
 import { registerServiceWorker } from '@root/serviceWorker';
 
-import { ECurrency } from '@root/core/modules/currency/domain/types';
-
 import {
 	EServiceToken,
 	type IContainer,
 } from '@root/core/infrastructure/serviceContainer/types';
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 async function main(): Promise<void> {
 	let diContainer = await runCore();
@@ -20,14 +17,6 @@ async function main(): Promise<void> {
 
 main();
 
-async function runUI(diContainer: IContainer): Promise<void> {
-	const ui = createUI(diContainer);
-
-	registerServiceWorker();
-
-	await ui.start();
-}
-
 async function runCore(): Promise<IContainer> {
 	await runMockServiceWorker();
 
@@ -35,42 +24,19 @@ async function runCore(): Promise<IContainer> {
 		isGlobal: true,
 	});
 
+	let launchControl = diContainer.get(EServiceToken.LAUNCH_CONTROL);
+
 	runMigrations();
 
-	loadAppConfig();
-	await getCurrencyRates();
-	startApp();
+	await launchControl.start();
 
 	return diContainer;
 }
 
-async function getCurrencyRates(): Promise<void> {
-	let currencyRateAPI = resolveService(EServiceToken.CURRENCY_RATE_API);
-	let currencyRateDataSource = resolveService(
-		EServiceToken.CURRENCY_RATE_DATASOURCE,
-	);
+async function runUI(diContainer: IContainer): Promise<void> {
+	const ui = createUI(diContainer);
 
-	let hasAllCurrencies = Object.values(ECurrency).every((currency) => {
-		return currencyRateDataSource.exists(currency);
-	});
+	registerServiceWorker();
 
-	if (!currencyRateDataSource.isEmpty() && hasAllCurrencies) {
-		return;
-	}
-
-	let currencyRates = await currencyRateAPI.get();
-
-	currencyRateDataSource.save(currencyRates);
-}
-
-function loadAppConfig(): void {
-	let appConfigService = resolveService(EServiceToken.APP_CONFIG_SERVICE);
-
-	appConfigService.initialize();
-}
-
-function startApp(): void {
-	let launchControl = resolveService(EServiceToken.LAUNCH_CONTROL);
-
-	launchControl.start();
+	await ui.start();
 }
