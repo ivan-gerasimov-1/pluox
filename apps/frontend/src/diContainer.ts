@@ -189,6 +189,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.USER_SERVICE,
 				useClass: UserService,
 				deps: [
+					EServiceToken.USER_REPOSITORY,
 					EServiceToken.USER_MAPPER,
 					EServiceToken.ID_GENERATOR,
 					EServiceToken.TEMPORAL,

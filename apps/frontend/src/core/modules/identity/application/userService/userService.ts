@@ -1,16 +1,17 @@
-/**
- * @todo
- * 1. Implement UserRepository and store multiple users
- */
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { TUserCreateDTO } from '@root/core/modules/identity/application/dto/userDTO';
+import type {
+	TUserCreateDTO,
+	TUserDTO,
+} from '@root/core/modules/identity/application/dto/userDTO';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 import type { IUser } from '@root/core/modules/identity/domain/userEntity/types';
+import type { IUserRepository } from '@root/core/modules/identity/domain/userRepository/types';
 import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
 
 export class UserService implements IUserService {
 	constructor(
+		private readonly userRepository: IUserRepository,
 		private readonly userMapper: IUserMapper,
 		private readonly idGenerator: IIdGenerator,
 		private readonly temporal: ITemporal,
@@ -28,5 +29,17 @@ export class UserService implements IUserService {
 			createdAt,
 			modifiedAt,
 		});
+	}
+
+	public getMainUser(): TUserDTO | null {
+		let {
+			items: [user],
+		} = this.userRepository.findMany();
+
+		if (!user) {
+			return null;
+		}
+
+		return this.userMapper.toDTO(user);
 	}
 }
