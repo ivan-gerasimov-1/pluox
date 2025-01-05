@@ -79,7 +79,8 @@
 				left: 0;
 				right: 0;
 				bottom: 0;
-				padding: 15px;
+				padding-inline: 15px;
+				padding-block: 25px;
 				transition: opacity 0.15s ease-in-out;
 				background-color: #fafafa;
 				z-index: 1;
@@ -95,11 +96,13 @@
 				display: flex;
 				justify-content: flex-end;
 				height: 35px;
+				padding-inline: 2px;
+				padding-block: 1px;
 			}
 
 			.skeletonBox {
-				width: 30px;
-				height: 30px;
+				width: 28px;
+				height: 28px;
 				background-color: rgb(179, 177, 177);
 				border-radius: 100%;
 			}
@@ -119,15 +122,17 @@
 				box-shadow: 0 1.5em 2.5em -0.5em rgba(0, 0, 0, 0.125);
 			}
 
-			.skeletonCard--small {
-				height: 124px;
-			}
-
 			.block {
 				width: 75px;
 				height: 15px;
 
 				background-color: rgb(179, 177, 177);
+			}
+
+			.block--amount {
+				height: 40px;
+				width: 150px;
+				margin-block-start: 35px;
 			}
 		</style>
 	</head>
@@ -137,9 +142,13 @@
 			<div class="skeletonHeader">
 				<div class="skeletonBox"></div>
 			</div>
+
+			<div class="block block--amount"></div>
+
 			<div class="skeletonCard">
 				<div class="block"></div>
 			</div>
+
 			<div class="loaderContainer">
 				<div class="loaderContent"></div>
 			</div>
