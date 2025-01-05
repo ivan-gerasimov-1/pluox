@@ -99,13 +99,6 @@ export function MainScreen() {
 								hideDecimal: true,
 							})}
 						</span>
-						<span
-							style={{
-								color: 'var(--grey-800)',
-							}}
-						>
-							{ECurrency.USD}
-						</span>
 					</div>
 				</AppLink>
 
