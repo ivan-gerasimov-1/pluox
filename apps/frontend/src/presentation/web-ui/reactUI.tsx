@@ -31,7 +31,7 @@ export class ReactUI implements IUserInterface {
 
 	private get root(): IRoot {
 		if (!this.#container) {
-			throw new Error('Not initialized');
+			throw new NotInitializedError();
 		}
 
 		return this.#container;
@@ -91,5 +91,11 @@ export class ReactUI implements IUserInterface {
 class HTMLElementNotFoundError extends Error {
 	constructor() {
 		super('HTMLElement Not Found');
+	}
+}
+
+class NotInitializedError extends Error {
+	constructor() {
+		super('Not initialized');
 	}
 }
