@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => {
 		}),
 		tsconfigPaths(),
 		VitePWA({
-			manifest: false,
+			registerType: 'autoUpdate',
 		}),
 	];
 
