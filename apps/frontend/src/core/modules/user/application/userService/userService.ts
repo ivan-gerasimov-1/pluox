@@ -3,10 +3,10 @@ import type { ITemporal } from '@root/core/domain/temporal/types';
 import type {
 	TUserCreateDTO,
 	TUserDTO,
-} from '@root/core/modules/identity/application/dto/userDTO';
-import type { IUserService } from '@root/core/modules/identity/application/userService/types';
-import type { IUserRepository } from '@root/core/modules/identity/domain/userRepository/types';
-import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
+} from '@root/core/modules/user/application/dto/userDTO';
+import type { IUserService } from '@root/core/modules/user/application/userService/types';
+import type { IUserRepository } from '@root/core/modules/user/domain/userRepository/types';
+import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMapper/types';
 
 export class UserService implements IUserService {
 	constructor(

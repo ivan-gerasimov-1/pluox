@@ -3,9 +3,9 @@ import type {
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { TUserDTO } from '@root/core/modules/identity/application/dto/userDTO';
-import type { TUserFindOptions } from '@root/core/modules/identity/domain/userRepository/types';
-import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
+import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
+import type { TUserFindOptions } from '@root/core/modules/user/domain/userRepository/types';
+import type { IUserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/types';
 
 export class UserDataSource
 	extends LocalStorageDataSource<Record<string, TUserDTO>>

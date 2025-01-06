@@ -1,7 +1,7 @@
 import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
 import { SessionNotFoundError } from '@root/core/modules/identity/application/sessionService/errors';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
-import type { IUserService } from '@root/core/modules/identity/application/userService/types';
+import type { IUserService } from '@root/core/modules/user/application/userService/types';
 import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
 import { Session } from '@root/core/modules/identity/domain/session/session';
 import type { ISession } from '@root/core/modules/identity/domain/session/types';

@@ -1,7 +1,7 @@
-import type { TUserDTO } from '@root/core/modules/identity/application/dto/userDTO';
-import type { IUser } from '@root/core/modules/identity/domain/userEntity/types';
-import { User } from '@root/core/modules/identity/domain/userEntity/user';
-import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
+import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
+import type { IUser } from '@root/core/modules/user/domain/userEntity/types';
+import { User } from '@root/core/modules/user/domain/userEntity/user';
+import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMapper/types';
 
 export class UserMapper implements IUserMapper {
 	public toDTO(user: IUser): TUserDTO {

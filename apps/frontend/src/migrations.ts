@@ -2,7 +2,7 @@ import { ECurrency } from '@root/core/modules/currency/domain/types';
 
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import type { TUserDTO } from '@root/core/modules/identity/application/dto/userDTO';
+import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type { Id } from '@root/core/domain/types';
 

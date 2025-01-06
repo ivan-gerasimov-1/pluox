@@ -25,7 +25,7 @@ import { AppConfigDataSource } from '@root/core/modules/settings/infrastructure/
 import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
 import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
-import { UserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/userDataSource';
+import { UserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/userDataSource';
 import { AuthService } from '@root/core/modules/identity/application/authService/authService';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
@@ -48,12 +48,12 @@ import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/curren
 import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
 import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
 import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
-import { UserService } from '@root/core/modules/identity/application/userService/userService';
+import { UserService } from '@root/core/modules/user/application/userService/userService';
 import { LaunchControl } from '@root/core/modules/bootstrap/application/launchControl/launchControl';
 import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
 import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
-import { UserMapper } from '@root/core/modules/identity/infrastructure/userMapper/userMapper';
-import { UserRepository } from '@root/core/modules/identity/infrastructure/userRepository/userRepository';
+import { UserMapper } from '@root/core/modules/user/infrastructure/userMapper/userMapper';
+import { UserRepository } from '@root/core/modules/user/infrastructure/userRepository/userRepository';
 import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
 import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
 

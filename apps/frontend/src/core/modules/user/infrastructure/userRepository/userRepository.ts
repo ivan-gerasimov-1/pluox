@@ -3,13 +3,13 @@ import type {
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
 import type { Id } from '@root/core/domain/types';
-import type { IUser } from '@root/core/modules/identity/domain/userEntity/types';
+import type { IUser } from '@root/core/modules/user/domain/userEntity/types';
 import type {
 	IUserRepository,
 	TUserFindOptions,
-} from '@root/core/modules/identity/domain/userRepository/types';
-import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
-import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
+} from '@root/core/modules/user/domain/userRepository/types';
+import type { IUserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/types';
+import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMapper/types';
 
 export class UserRepository implements IUserRepository {
 	constructor(

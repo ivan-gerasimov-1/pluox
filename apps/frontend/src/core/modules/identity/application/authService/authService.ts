@@ -1,7 +1,7 @@
 import { UserNotFoundError } from '@root/core/modules/identity/application/authService/errors';
 import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
-import type { IUserService } from '@root/core/modules/identity/application/userService/types';
+import type { IUserService } from '@root/core/modules/user/application/userService/types';
 import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
 
 /**

@@ -15,7 +15,7 @@ import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infras
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
-import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
+import type { IUserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/types';
 import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type {
@@ -41,11 +41,11 @@ import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
 import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
 import type { ILauchControl } from '@root/core/modules/bootstrap/application/launchControl/types';
-import type { IUserService } from '@root/core/modules/identity/application/userService/types';
+import type { IUserService } from '@root/core/modules/user/application/userService/types';
 import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
 import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
-import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
-import type { IUserRepository } from '@root/core/modules/identity/domain/userRepository/types';
+import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMapper/types';
+import type { IUserRepository } from '@root/core/modules/user/domain/userRepository/types';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
 
