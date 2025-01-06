@@ -6,7 +6,4 @@ import {
 export interface IUserService {
 	createUser(payload: TUserCreateDTO): TUserDTO;
 	getUserById(id: string): TUserDTO | null;
-
-	/** @deprecated */
-	getMainUser(): TUserDTO | null;
 }

@@ -17,7 +17,6 @@ import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
-import { ClientIdDataSource } from '@root/core/modules/identity/infrastructure/clientIdDataSource/clientIdDataSource';
 import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
@@ -50,13 +49,14 @@ import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/curren
 import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
 import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
 import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
-import { ClientIdService } from '@root/core/modules/identity/application/clientIdService/clientIdService';
 import { UserService } from '@root/core/modules/identity/application/userService/userService';
 import { LaunchControl } from '@root/core/modules/bootstrap/application/launchControl/launchControl';
 import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
 import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
 import { UserMapper } from '@root/core/modules/identity/infrastructure/userMapper/userMapper';
 import { UserRepository } from '@root/core/modules/identity/infrastructure/userRepository/userRepository';
+import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
+import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
 
 let globalContainer: IContainer;
 
@@ -150,18 +150,48 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 		 * @description Authentication and user management
 		 */
 		.register(
+			/** Launch control */
 			{
 				token: EServiceToken.LAUNCH_CONTROL,
 				useClass: LaunchControl,
 				deps: [
-					EServiceToken.CLIENT_ID_SERVICE,
-					EServiceToken.USER_SERVICE,
+					EServiceToken.SESSION_SERVICE,
 					EServiceToken.APP_CONFIG_SERVICE,
 					EServiceToken.CURRENCY_RATE_API,
 					EServiceToken.CURRENCY_RATE_DATASOURCE,
 				],
 			},
 
+			/** Session */
+			{
+				token: EServiceToken.SESSION_DATASOURCE,
+				useFactory: sessionDataSourceFactory,
+			},
+			{
+				token: EServiceToken.SESSION_SERVICE,
+				useClass: SessionService,
+				deps: [
+					EServiceToken.SESSION_DATASOURCE,
+					EServiceToken.CLIENT_ID_FACTORY,
+					EServiceToken.USER_SERVICE,
+				],
+			},
+
+			/** ClientId */
+			{
+				token: EServiceToken.CLIENT_ID,
+				useFactory: (clientIdFactory: IClientIdFactory) => {
+					return clientIdFactory.create();
+				},
+				deps: [EServiceToken.CLIENT_ID_FACTORY],
+			},
+			{
+				token: EServiceToken.CLIENT_ID_FACTORY,
+				useClass: ClientIdFactory,
+				deps: [EServiceToken.ID_GENERATOR],
+			},
+
+			/** Authentication */
 			{
 				token: EServiceToken.AUTH_DATASOURCE,
 				useClass: AuthDataSource,
@@ -182,6 +212,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				],
 			},
 
+			/** User */
 			{
 				token: EServiceToken.USER_DATASOURCE,
 				useClass: UserDataSource,
@@ -204,31 +235,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.USER_REPOSITORY,
 				useClass: UserRepository,
 				deps: [EServiceToken.USER_DATASOURCE, EServiceToken.USER_MAPPER],
-			},
-
-			{
-				token: EServiceToken.CLIENT_ID_SERVICE,
-				useClass: ClientIdService,
-				deps: [
-					EServiceToken.CLIENT_ID_DATASOURCE,
-					EServiceToken.CLIENT_ID_FACTORY,
-				],
-			},
-			{
-				token: EServiceToken.CLIENT_ID_DATASOURCE,
-				useClass: ClientIdDataSource,
-			},
-			{
-				token: EServiceToken.CLIENT_ID,
-				useFactory: (clientIdFactory: IClientIdFactory) => {
-					return clientIdFactory.create();
-				},
-				deps: [EServiceToken.CLIENT_ID_FACTORY],
-			},
-			{
-				token: EServiceToken.CLIENT_ID_FACTORY,
-				useClass: ClientIdFactory,
-				deps: [EServiceToken.ID_GENERATOR],
 			},
 		)
 		/**

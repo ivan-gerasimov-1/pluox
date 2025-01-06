@@ -9,7 +9,6 @@ import type {
 	IClientId,
 	IClientIdFactory,
 } from '@root/core/modules/identity/domain/clientId/types';
-import type { IClientIdDataSource } from '@root/core/modules/identity/infrastructure/clientIdDataSource/types';
 import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
 import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
@@ -42,13 +41,14 @@ import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expe
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
 import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
-import type { IClientIdService } from '@root/core/modules/identity/application/clientIdService/types';
 import type { ILauchControl } from '@root/core/modules/bootstrap/application/launchControl/types';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
 import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
 import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
 import type { IUserMapper } from '@root/core/modules/identity/infrastructure/userMapper/types';
 import type { IUserRepository } from '@root/core/modules/identity/domain/userRepository/types';
+import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
+import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -98,10 +98,11 @@ export enum EServiceToken {
 	ID_GENERATOR_FACTORY = 'IdGeneratorFactory',
 	ID_GENERATOR = 'IdGenerator',
 
-	CLIENT_ID_DATASOURCE = 'ClientIdDataSource',
-	CLIENT_ID_FACTORY = 'ClientIdFactory',
+	SESSION_DATASOURCE = 'SessionDataSource',
+	SESSION_SERVICE = 'SessionService',
+
 	CLIENT_ID = 'ClientId',
-	CLIENT_ID_SERVICE = 'ClientIdService',
+	CLIENT_ID_FACTORY = 'ClientIdFactory',
 
 	CATEGORY_SERVICE_FACTORY = 'CategoryServiceFactory',
 	CATEGORY_SERVICE = 'CategoryService',
@@ -154,10 +155,11 @@ export interface IServiceMap {
 	[EServiceToken.ID_GENERATOR_FACTORY]: IIdGeneratorFactory;
 	[EServiceToken.ID_GENERATOR]: IIdGenerator;
 
-	[EServiceToken.CLIENT_ID_DATASOURCE]: IClientIdDataSource;
-	[EServiceToken.CLIENT_ID_FACTORY]: IClientIdFactory;
+	[EServiceToken.SESSION_DATASOURCE]: ISessionDataSource;
+	[EServiceToken.SESSION_SERVICE]: ISessionService;
+
 	[EServiceToken.CLIENT_ID]: IClientId;
-	[EServiceToken.CLIENT_ID_SERVICE]: IClientIdService;
+	[EServiceToken.CLIENT_ID_FACTORY]: IClientIdFactory;
 
 	[EServiceToken.CATEGORY_SERVICE_FACTORY]: () => ICategoryServiceFactory;
 	[EServiceToken.CATEGORY_SERVICE]: ICategoryService;
