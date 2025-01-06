@@ -119,7 +119,7 @@ function moveAuthTokenToSession(): void {
 }
 
 /**
- * №5 Migrate expenses to new format and storage id
+ * №5. Migrate expenses to new format and storage id
  */
 export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 	const OLD_EXPENSES_STORAGE_ID = 'store/$expenses';
