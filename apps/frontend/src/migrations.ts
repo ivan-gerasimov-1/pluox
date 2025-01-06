@@ -7,6 +7,10 @@ import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dat
 import type { Id } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
+/**
+ * @todo
+ * 1. Add list of applied migrations and skip them on sequential run
+ */
 export function runMigrations() {
 	addThaiBahtCurrencyToStoredAppConfig();
 	convertUserObjectToUserMap();
