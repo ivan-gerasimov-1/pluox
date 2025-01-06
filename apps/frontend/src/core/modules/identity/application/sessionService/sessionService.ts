@@ -40,12 +40,16 @@ export class SessionService implements ISessionService {
 			: this.createNewSession();
 	}
 
-	public setAuthToken(authToken: string): void {
+	public setAuthToken(authToken: string | null): void {
 		this.session.setAuthToken(authToken);
+
+		this.sessionDataSource.update({
+			authToken,
+		});
 	}
 
 	public removeAuthToken(): void {
-		this.session.setAuthToken(null);
+		this.setAuthToken(null);
 	}
 
 	private createNewSession(): ISession {
