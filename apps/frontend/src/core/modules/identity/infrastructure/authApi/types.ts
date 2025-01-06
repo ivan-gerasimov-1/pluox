@@ -1,5 +1,5 @@
 export interface IAuthApi {
-	signIn(
+	signUp(
 		email: string,
 		password: string,
 	): Promise<{

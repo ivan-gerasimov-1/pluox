@@ -4,7 +4,7 @@ import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 export class AuthApi implements IAuthApi {
 	constructor(private readonly api: IBaseApi) {}
 
-	public async signIn(
+	public async signUp(
 		email: string,
 		password: string,
 	): Promise<{
@@ -15,7 +15,9 @@ export class AuthApi implements IAuthApi {
 				email: string;
 				password: string;
 			},
-			{ email: string }
+			{
+				email: string;
+			}
 		>('/signup', {
 			email,
 			password,
