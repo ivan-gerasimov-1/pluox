@@ -179,6 +179,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.SESSION_FACTORY,
 				useClass: SessionFactory,
+				deps: [EServiceToken.CLIENT_ID_FACTORY, EServiceToken.USER_SERVICE],
 			},
 
 			/** ClientId */
