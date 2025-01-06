@@ -189,8 +189,6 @@ export function renameCommentOfExpenseDTOToDescription(): void {
 		Reflect.deleteProperty(expense, 'comment');
 	}
 
-	console.log(expenses);
-
 	expenseDataSource.clear();
 	expenseDataSource.create(expenses);
 }
