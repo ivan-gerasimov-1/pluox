@@ -56,6 +56,7 @@ import { UserMapper } from '@root/core/modules/user/infrastructure/userMapper/us
 import { UserRepository } from '@root/core/modules/user/infrastructure/userRepository/userRepository';
 import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
 import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
+import { SessionFactory } from '@root/core/modules/identity/domain/session/sessionFactory';
 
 let globalContainer: IContainer;
 
@@ -174,6 +175,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.CLIENT_ID_FACTORY,
 					EServiceToken.USER_SERVICE,
 				],
+			},
+			{
+				token: EServiceToken.SESSION_FACTORY,
+				useClass: SessionFactory,
 			},
 
 			/** ClientId */

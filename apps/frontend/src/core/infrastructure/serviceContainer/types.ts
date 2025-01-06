@@ -48,6 +48,7 @@ import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMap
 import type { IUserRepository } from '@root/core/modules/user/domain/userRepository/types';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
+import type { ISessionFactory } from '@root/core/modules/identity/domain/session/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -99,6 +100,7 @@ export enum EServiceToken {
 
 	SESSION_DATASOURCE = 'SessionDataSource',
 	SESSION_SERVICE = 'SessionService',
+	SESSION_FACTORY = 'SessionFactory',
 
 	CLIENT_ID = 'ClientId',
 	CLIENT_ID_FACTORY = 'ClientIdFactory',
@@ -157,6 +159,7 @@ export interface IServiceMap {
 
 	[EServiceToken.SESSION_DATASOURCE]: ISessionDataSource;
 	[EServiceToken.SESSION_SERVICE]: ISessionService;
+	[EServiceToken.SESSION_FACTORY]: ISessionFactory;
 
 	[EServiceToken.CLIENT_ID]: IClientId;
 	[EServiceToken.CLIENT_ID_FACTORY]: IClientIdFactory;
