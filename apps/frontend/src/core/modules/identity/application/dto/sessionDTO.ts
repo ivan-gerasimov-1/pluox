@@ -1,4 +1,4 @@
 export type TSessionDTO = {
 	clientId: string;
-	value: string;
+	userId: string;
 };
