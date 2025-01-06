@@ -24,7 +24,6 @@ import {
 import { AppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSource';
 import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
-import { AuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/authDataSource';
 import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
 import { UserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/userDataSource';
 import { AuthService } from '@root/core/modules/identity/application/authService/authService';
@@ -57,6 +56,7 @@ import { UserMapper } from '@root/core/modules/identity/infrastructure/userMappe
 import { UserRepository } from '@root/core/modules/identity/infrastructure/userRepository/userRepository';
 import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
 import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
+import { authDataSourceFactory } from '@root/core/modules/identity/infrastructure/authDataSource/authDataSourceFactory';
 
 let globalContainer: IContainer;
 
@@ -194,7 +194,9 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			/** Authentication */
 			{
 				token: EServiceToken.AUTH_DATASOURCE,
-				useClass: AuthDataSource,
+				useFactory: () => {
+					return authDataSourceFactory();
+				},
 			},
 			{
 				token: EServiceToken.AUTH_API,
