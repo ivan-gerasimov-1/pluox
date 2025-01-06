@@ -1,5 +1,5 @@
 export interface IAuthSerivce {
-	signIn(
+	signUp(
 		email: string,
 		password: string,
 	): Promise<{
@@ -13,5 +13,5 @@ export interface IAuthSerivce {
 		id: string;
 		email: string;
 	}>;
-	signOut(): Promise<void>;
+	logOut(): Promise<void>;
 }

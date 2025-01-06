@@ -15,7 +15,7 @@ export class AuthService implements IAuthSerivce {
 		private readonly sessionService: ISessionService,
 	) {}
 
-	public async signIn(
+	public async signUp(
 		email: string,
 		password: string,
 	): Promise<{
@@ -61,7 +61,7 @@ export class AuthService implements IAuthSerivce {
 		};
 	}
 
-	public async signOut(): Promise<void> {
+	public async logOut(): Promise<void> {
 		this.sessionService.removeAuthToken();
 	}
 }

@@ -25,7 +25,7 @@ export function SignUpScreen() {
 		try {
 			setPending(true);
 
-			await authService.signIn(email, password);
+			await authService.signUp(email, password);
 			navigation.loginPage();
 		} catch (error) {
 			console.log(error);

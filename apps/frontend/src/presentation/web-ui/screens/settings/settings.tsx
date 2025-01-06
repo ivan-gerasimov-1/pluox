@@ -144,7 +144,7 @@ export function SettingsScreen() {
 										return;
 									}
 
-									authService.signOut();
+									authService.logOut();
 
 									navigation.mainPage();
 								}}
