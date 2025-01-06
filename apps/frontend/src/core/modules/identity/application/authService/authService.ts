@@ -3,6 +3,10 @@ import type { IAuthSerivce } from '@root/core/modules/identity/application/authS
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { IUserService } from '@root/core/modules/user/application/userService/types';
 import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
+import type {
+	TSignUpResponseDTO,
+	TLogInResponseDTO,
+} from '@root/core/modules/identity/application/dto/authDTO';
 
 /**
  * @todo
@@ -18,10 +22,8 @@ export class AuthService implements IAuthSerivce {
 	public async signUp(
 		email: string,
 		password: string,
-	): Promise<{
-		email: string;
-	}> {
-		const result = await this.authApi.signIn(email, password);
+	): Promise<TSignUpResponseDTO> {
+		const result = await this.authApi.signUp(email, password);
 
 		// this.userDataSource.update({
 		// 	email: result.email,
@@ -35,10 +37,7 @@ export class AuthService implements IAuthSerivce {
 	public async logIn(
 		email: string,
 		password: string,
-	): Promise<{
-		id: string;
-		email: string;
-	}> {
+	): Promise<TLogInResponseDTO> {
 		const result = await this.authApi.logIn(email, password);
 
 		if (!result.id || !result.email) {
