@@ -13,6 +13,7 @@ export function runMigrations() {
 	moveClientIdToSession();
 	moveAuthTokenToSession();
 	migrateExpenseInStorageToNewFormatAndStorageId();
+	addUserIdToExpense();
 }
 
 /**
@@ -140,4 +141,25 @@ export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 	expenseDataSource.create(expenses?.state.operations);
 
 	oldExpenseDataSource.clear();
+}
+
+/**
+ * №6. Add userId to expenses
+ */
+export function addUserIdToExpense(): void {
+	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
+	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
+
+	let sessionDTO = sessionDataSource.read();
+	let expenses = expenseDataSource.read();
+
+	if (!sessionDTO || !expenses) {
+		return;
+	}
+
+	for (let expense of Object.values(expenses)) {
+		expense.userId = sessionDTO.userId;
+	}
+
+	expenseDataSource.update(expenses);
 }

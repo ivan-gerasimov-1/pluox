@@ -4,6 +4,8 @@ import type { TISODateString } from '@root/core/domain/temporal/types';
 import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
 export interface IExpense extends IEntity {
+	readonly userId: string;
+
 	readonly amount: number;
 	readonly currency: ECurrency;
 

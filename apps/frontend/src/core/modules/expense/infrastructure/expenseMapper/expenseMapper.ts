@@ -7,6 +7,7 @@ export class ExpenseMapper implements IExpenseMapper {
 	public toDTO(expense: IExpense): TExpenseDTO {
 		return {
 			id: expense.id,
+			userId: expense.userId,
 			amount: expense.amount,
 			currency: expense.currency,
 			comment: expense.comment,
@@ -21,6 +22,7 @@ export class ExpenseMapper implements IExpenseMapper {
 	public toEntity(expenseDTO: TExpenseDTO): IExpense {
 		return Expense.create(
 			expenseDTO.id,
+			expenseDTO.userId,
 			expenseDTO.amount,
 			expenseDTO.currency,
 			expenseDTO.comment,

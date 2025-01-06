@@ -4,6 +4,7 @@ import type { ECurrency } from '@root/core/modules/currency/domain/types';
 
 export type TExpenseDTO = {
 	id: Id;
+	userId: Id;
 	/**
 	 * @todo
 	 * - Use specialized library to store big numbers
