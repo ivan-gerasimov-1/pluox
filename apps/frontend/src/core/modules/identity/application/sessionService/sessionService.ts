@@ -11,14 +11,14 @@ export class SessionService implements ISessionService {
 	#session: ISession | null;
 
 	constructor(
-		private readonly sessionStorage: ISessionDataSource,
+		private readonly sessionDataSource: ISessionDataSource,
 		private readonly clientIdFactory: IClientIdFactory,
 		private readonly userService: IUserService,
 	) {
 		this.#session = null;
 	}
 
-	private get session(): ISession {
+	public get session(): ISession {
 		if (!this.#session) {
 			throw new SessionNotFoundError();
 		}
@@ -26,12 +26,28 @@ export class SessionService implements ISessionService {
 		return this.#session;
 	}
 
+	public get authToken(): string | null {
+		return this.session.authToken;
+	}
+
+	public get isAuthenticated(): boolean {
+		return Boolean(this.session.authToken);
+	}
+
 	public start(): void {
-		let sessionDTO = this.sessionStorage.read();
+		let sessionDTO = this.sessionDataSource.read();
 
 		this.#session = sessionDTO
 			? this.createSessionFromDTO(sessionDTO)
 			: this.createNewSession();
+	}
+
+	public setAuthToken(authToken: string): void {
+		this.session.setAuthToken(authToken);
+	}
+
+	public removeAuthToken(): void {
+		this.session.setAuthToken(null);
 	}
 
 	private createSessionFromDTO(sessionDTO: TSessionDTO): ISession {
@@ -51,7 +67,7 @@ export class SessionService implements ISessionService {
 
 		let session = new Session(clientId, user.id, null);
 
-		this.sessionStorage.create({
+		this.sessionDataSource.create({
 			clientId: session.clientId.getValue(),
 			userId: session.userId,
 			authToken: session.authToken,

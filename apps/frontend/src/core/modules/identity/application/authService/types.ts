@@ -14,6 +14,4 @@ export interface IAuthSerivce {
 		email: string;
 	}>;
 	signOut(): Promise<void>;
-
-	isAuthenticated(): boolean;
 }

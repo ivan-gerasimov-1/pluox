@@ -1,25 +1,17 @@
 import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
-import type { IAuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
+import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 
 export class BaseApi implements IBaseApi {
 	constructor(
 		private readonly environment: IEnvironment,
-		private readonly authDataSource: IAuthDataSource,
+		private readonly sessionService: ISessionService,
 	) {}
 
-	private get authToken(): string {
-		const token = this.authDataSource.read();
-
-		if (!token) {
-			return '';
-		}
-
-		return token;
-	}
-
 	private get authorizationHeader(): string {
-		return `Bearer ${this.authToken}`;
+		let authToken = this.sessionService.authToken ?? '';
+
+		return `Bearer ${authToken}`;
 	}
 
 	private get baseUrl(): string {

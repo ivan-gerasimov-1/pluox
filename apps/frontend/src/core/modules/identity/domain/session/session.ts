@@ -27,6 +27,10 @@ export class Session extends ValueObject<TSessionValue> implements ISession {
 		return this.value.authToken;
 	}
 
+	public setAuthToken(authToken: string | null): void {
+		this.value.authToken = authToken;
+	}
+
 	public override equals(other: ISession): boolean {
 		return this.clientId.equals(other.clientId) && this.userId === other.userId;
 	}

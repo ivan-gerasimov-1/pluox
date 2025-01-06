@@ -3,7 +3,6 @@ import type { IAppConfigService } from '@root/core/modules/settings/application/
 import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
 import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
 import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
-import type { IAuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/types';
 import type { IBaseApi } from '@core/infrastructure/baseApi/types';
 import type {
 	IClientId,
@@ -117,6 +116,7 @@ export enum EServiceToken {
 
 	LAUNCH_CONTROL = 'LaunchControl',
 
+	/** @deprecated */
 	AUTH_DATASOURCE = 'AuthDataSource',
 	AUTH_SERVICE = 'AuthService',
 
@@ -179,7 +179,7 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_RATE_REPOSITORY]: ICurrencyRateRepository;
 
 	[EServiceToken.LAUNCH_CONTROL]: ILauchControl;
-	[EServiceToken.AUTH_DATASOURCE]: IAuthDataSource;
+
 	[EServiceToken.BASE_API]: IBaseApi;
 	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.EXPENSE_API]: IExpenseApi;

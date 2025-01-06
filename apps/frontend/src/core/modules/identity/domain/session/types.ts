@@ -12,4 +12,6 @@ export interface ISession extends ValueObject<TSessionValue> {
 	readonly clientId: IClientId;
 	readonly userId: Id;
 	readonly authToken: string | null;
+
+	setAuthToken(authToken: string | null): void;
 }

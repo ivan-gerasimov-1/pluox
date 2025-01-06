@@ -1,9 +1,8 @@
 import { UserNotFoundError } from '@root/core/modules/identity/application/authService/errors';
-import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
 import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
-import type { IAuthDataSource } from '@root/core/modules/identity/infrastructure/authDataSource/types';
-import type { IUserDataSource } from '@root/core/modules/identity/infrastructure/userDataSource/types';
+import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
+import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
 
 /**
  * @todo
@@ -12,9 +11,8 @@ import type { IUserService } from '@root/core/modules/identity/application/userS
 export class AuthService implements IAuthSerivce {
 	constructor(
 		private readonly authApi: IAuthApi,
-		private readonly authDataSource: IAuthDataSource,
-		private readonly userDataSource: IUserDataSource,
 		private readonly userService: IUserService,
+		private readonly sessionService: ISessionService,
 	) {}
 
 	public async signIn(
@@ -47,8 +45,6 @@ export class AuthService implements IAuthSerivce {
 			throw new UserNotFoundError();
 		}
 
-		this.clearStorages();
-
 		this.userService.createUser({
 			id: result.id,
 			email: result.email,
@@ -57,7 +53,7 @@ export class AuthService implements IAuthSerivce {
 			modifiedAt: result.modifiedAt,
 		});
 
-		this.authDataSource.create(result.token);
+		this.sessionService.setAuthToken(result.token);
 
 		return {
 			id: result.id,
@@ -66,17 +62,6 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	public async signOut(): Promise<void> {
-		this.clearStorages();
-	}
-
-	public isAuthenticated(): boolean {
-		const hasToken = !this.authDataSource.isEmpty();
-
-		return hasToken;
-	}
-
-	private clearStorages(): void {
-		this.authDataSource.clear();
-		this.userDataSource.clear();
+		this.sessionService.removeAuthToken();
 	}
 }

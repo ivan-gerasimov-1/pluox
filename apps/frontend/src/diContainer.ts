@@ -56,7 +56,6 @@ import { UserMapper } from '@root/core/modules/identity/infrastructure/userMappe
 import { UserRepository } from '@root/core/modules/identity/infrastructure/userRepository/userRepository';
 import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
 import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
-import { authDataSourceFactory } from '@root/core/modules/identity/infrastructure/authDataSource/authDataSourceFactory';
 
 let globalContainer: IContainer;
 
@@ -138,7 +137,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.BASE_API,
 				useClass: BaseApi,
-				deps: [EServiceToken.ENVIRONMENT, EServiceToken.AUTH_DATASOURCE],
+				deps: [EServiceToken.ENVIRONMENT, EServiceToken.SESSION_SERVICE],
 			},
 			{
 				token: EServiceToken.TEMPORAL,
@@ -193,12 +192,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 
 			/** Authentication */
 			{
-				token: EServiceToken.AUTH_DATASOURCE,
-				useFactory: () => {
-					return authDataSourceFactory();
-				},
-			},
-			{
 				token: EServiceToken.AUTH_API,
 				useClass: AuthApi,
 				deps: [EServiceToken.BASE_API],
@@ -208,9 +201,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: AuthService,
 				deps: [
 					EServiceToken.AUTH_API,
-					EServiceToken.AUTH_DATASOURCE,
-					EServiceToken.USER_DATASOURCE,
 					EServiceToken.USER_SERVICE,
+					EServiceToken.SESSION_SERVICE,
 				],
 			},
 
