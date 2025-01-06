@@ -28,7 +28,7 @@ export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 			userId,
 			payload.amount,
 			payload.currency,
-			payload.comment,
+			payload.description,
 			payload.category,
 			timezone,
 			currentDate,

@@ -8,7 +8,7 @@ export class Expense extends Entity implements IExpense {
 	readonly #userId: Id;
 	readonly #amount: number;
 	readonly #currency: ECurrency;
-	readonly #comment: TDescription;
+	readonly #description: TDescription;
 	readonly #category: TCategory;
 	readonly #date: TISODateString;
 	readonly #timezone: string;
@@ -18,7 +18,7 @@ export class Expense extends Entity implements IExpense {
 		userId: Id,
 		amount: number,
 		currency: ECurrency,
-		comment: TDescription,
+		description: TDescription,
 		category: TCategory,
 		timezone: string,
 		createdAt: TISODateString,
@@ -30,7 +30,7 @@ export class Expense extends Entity implements IExpense {
 		this.#userId = userId;
 		this.#amount = amount;
 		this.#currency = currency;
-		this.#comment = comment;
+		this.#description = description;
 		this.#category = category;
 		this.#date = date ?? this.createdAt;
 		this.#timezone = timezone;
@@ -56,8 +56,8 @@ export class Expense extends Entity implements IExpense {
 		return this.#date;
 	}
 
-	public get comment(): TDescription {
-		return this.#comment;
+	public get description(): TDescription {
+		return this.#description;
 	}
 
 	public get timezone(): string {
@@ -69,7 +69,7 @@ export class Expense extends Entity implements IExpense {
 		userId: Id,
 		amount: number,
 		currency: ECurrency,
-		comment: TDescription,
+		description: TDescription,
 		category: TCategory = null,
 		timezone: string,
 		createdAt: TISODateString,
@@ -81,7 +81,7 @@ export class Expense extends Entity implements IExpense {
 			userId,
 			amount,
 			currency,
-			comment,
+			description,
 			category,
 			timezone,
 			createdAt,

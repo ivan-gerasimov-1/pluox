@@ -139,8 +139,8 @@ export function ExpenseList(props: TExpenseListProps) {
 										</span>
 									</div>
 
-									{item.comment && (
-										<div className={styles.comment}>{item.comment}</div>
+									{item.description && (
+										<div className={styles.description}>{item.description}</div>
 									)}
 								</div>
 							</SwipeableListItem>

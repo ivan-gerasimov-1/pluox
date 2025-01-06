@@ -14,6 +14,7 @@ export function runMigrations() {
 	moveAuthTokenToSession();
 	migrateExpenseInStorageToNewFormatAndStorageId();
 	addUserIdToExpense();
+	renameCommentOfExpenseDTOToDescription();
 }
 
 /**
@@ -162,4 +163,34 @@ export function addUserIdToExpense(): void {
 	}
 
 	expenseDataSource.update(expenses);
+}
+
+/**
+ * №7. Rename comment of ExpenseDTO to description
+ */
+export function renameCommentOfExpenseDTOToDescription(): void {
+	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
+
+	let expenses = expenseDataSource.read();
+
+	if (!expenses) {
+		return;
+	}
+
+	for (let expense of Object.values(expenses)) {
+		if (expense.description !== undefined) {
+			continue;
+		}
+
+		expense.description =
+			// @ts-expect-error
+			expense.comment ?? '';
+
+		Reflect.deleteProperty(expense, 'comment');
+	}
+
+	console.log(expenses);
+
+	expenseDataSource.clear();
+	expenseDataSource.create(expenses);
 }

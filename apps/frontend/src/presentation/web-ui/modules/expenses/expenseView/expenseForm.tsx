@@ -17,14 +17,14 @@ export type TExpenseFormProps = {
 	onSubmit(payload: {
 		amount: number;
 		currency: ECurrency;
-		comment: TDescription;
+		description: TDescription;
 		category: TCategory;
 		date: TISODateString;
 	}): void;
 
 	amount: number;
 	currency: ECurrency;
-	comment: TDescription;
+	description: TDescription;
 	category: TCategory;
 	date: TISODateString;
 };
@@ -34,7 +34,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	let [formState, dispatch] = useReducer(expenseFormReducer, {
 		amount: props.amount,
 		currency: props.currency,
-		comment: props.comment,
+		description: props.description,
 		category: props.category,
 		date: props.date,
 	});
@@ -49,7 +49,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 		props.onSubmit({
 			amount: formState.amount,
 			currency: formState.currency,
-			comment: formState.comment,
+			description: formState.description,
 			category: formState.category || null,
 			date: convertDateToModelValue(formState.date),
 		});
@@ -63,7 +63,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 
 			amount: props.amount,
 			currency: props.currency,
-			comment: props.comment,
+			description: props.description,
 			category: props.category,
 			date: props.date,
 		});
@@ -152,11 +152,11 @@ export function ExpenseForm(props: TExpenseFormProps) {
 
 			<div className={styles.formGroup}>
 				<DescriptionInput
-					value={formState.comment}
-					onChange={(comment: string) => {
+					value={formState.description}
+					onChange={(description: string) => {
 						dispatch({
-							type: EExpenseFormReducerAction.SET_COMMENT,
-							comment,
+							type: EExpenseFormReducerAction.SET_DESCRIPTION,
+							description: description,
 						});
 					}}
 				/>
@@ -172,7 +172,7 @@ function convertDateToModelValue(date: string): TISODateString {
 export const enum EExpenseFormReducerAction {
 	SET_AMOUNT = 'setAmount',
 	SET_CURRENCY = 'setCurrency',
-	SET_COMMENT = 'setComment',
+	SET_DESCRIPTION = 'setDescription',
 	SET_DATE = 'setDate',
 	SET_CATEGORY = 'setCategory',
 	RESET = 'reset',
@@ -185,7 +185,7 @@ type TExpenseFormReducerAction = Partial<TExpenseFormReducerState> & {
 type TExpenseFormReducerState = {
 	amount: number;
 	currency: ECurrency;
-	comment: TDescription;
+	description: TDescription;
 	category: TCategory;
 	date: TISODateString;
 };
@@ -214,12 +214,12 @@ function expenseFormReducer(
 				currency,
 			};
 		}
-		case EExpenseFormReducerAction.SET_COMMENT: {
-			let comment = action.comment as string;
+		case EExpenseFormReducerAction.SET_DESCRIPTION: {
+			let description = action.description as string;
 
 			return {
 				...state,
-				comment,
+				description,
 			};
 		}
 		case EExpenseFormReducerAction.SET_DATE: {
@@ -241,7 +241,7 @@ function expenseFormReducer(
 		case EExpenseFormReducerAction.RESET: {
 			let amount = action.amount as number;
 			let currency = action.currency as ECurrency;
-			let comment = action.comment as string;
+			let description = action.description as string;
 			let date = action.date as string;
 			let category = action.category as string;
 
@@ -249,7 +249,7 @@ function expenseFormReducer(
 				...state,
 				amount,
 				currency,
-				comment,
+				description,
 				date,
 				category,
 			};

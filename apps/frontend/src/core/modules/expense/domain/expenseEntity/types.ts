@@ -10,7 +10,7 @@ export interface IExpense extends IEntity {
 	readonly currency: ECurrency;
 
 	readonly category: TCategory;
-	readonly comment: TDescription;
+	readonly description: TDescription;
 	readonly date: TISODateString;
 	readonly timezone: string;
 }

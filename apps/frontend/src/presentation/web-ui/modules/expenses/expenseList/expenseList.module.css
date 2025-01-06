@@ -83,7 +83,7 @@
 	background-image: radial-gradient(circle, var(--grey-500) 1px, transparent 0);
 }
 
-.comment {
+.description {
 	margin-top: 10px;
 
 	font-size: var(--fs-90);

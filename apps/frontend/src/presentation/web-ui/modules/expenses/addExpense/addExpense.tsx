@@ -56,7 +56,7 @@ export function AddExpense() {
 			onSubmit={addExpense.mutate}
 			amount={0}
 			currency={defaultCurrency}
-			comment=""
+			description=""
 			category=""
 			date={createDateViewValue()}
 		/>
