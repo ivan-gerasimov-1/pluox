@@ -1,10 +1,9 @@
-import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
 import { SessionNotFoundError } from '@root/core/modules/identity/application/sessionService/errors';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
-import type { IUserService } from '@root/core/modules/user/application/userService/types';
-import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
-import { Session } from '@root/core/modules/identity/domain/session/session';
-import type { ISession } from '@root/core/modules/identity/domain/session/types';
+import type {
+	ISession,
+	ISessionFactory,
+} from '@root/core/modules/identity/domain/session/types';
 import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
 
 export class SessionService implements ISessionService {
@@ -12,8 +11,7 @@ export class SessionService implements ISessionService {
 
 	constructor(
 		private readonly sessionDataSource: ISessionDataSource,
-		private readonly clientIdFactory: IClientIdFactory,
-		private readonly userService: IUserService,
+		private readonly sessionFactory: ISessionFactory,
 	) {
 		this.#session = null;
 	}
@@ -38,7 +36,7 @@ export class SessionService implements ISessionService {
 		let sessionDTO = this.sessionDataSource.read();
 
 		this.#session = sessionDTO
-			? this.createSessionFromDTO(sessionDTO)
+			? this.sessionFactory.create(sessionDTO)
 			: this.createNewSession();
 	}
 
@@ -50,22 +48,8 @@ export class SessionService implements ISessionService {
 		this.session.setAuthToken(null);
 	}
 
-	private createSessionFromDTO(sessionDTO: TSessionDTO): ISession {
-		return new Session(
-			this.clientIdFactory.create(sessionDTO.clientId),
-			sessionDTO.userId,
-			sessionDTO.authToken,
-		);
-	}
-
 	private createNewSession(): ISession {
-		let clientId = this.clientIdFactory.create();
-		let user = this.userService.createUser({
-			email: '',
-			name: '',
-		});
-
-		let session = new Session(clientId, user.id, null);
+		let session = this.sessionFactory.create();
 
 		this.sessionDataSource.create({
 			clientId: session.clientId.getValue(),
