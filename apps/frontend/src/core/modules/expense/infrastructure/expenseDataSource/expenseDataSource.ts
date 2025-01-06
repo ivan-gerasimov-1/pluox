@@ -6,14 +6,10 @@ import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructu
 import type { IExpenseFindOptions } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export class ExpenseDataSource
-	extends LocalStorageDataSource<{
-		state?: {
-			operations: Record<Id, TExpenseDTO>;
-		};
-	}>
+	extends LocalStorageDataSource<Record<Id, TExpenseDTO>>
 	implements IExpenseDataSource
 {
-	static readonly #STORAGE_ID: string = 'store/$expenses';
+	static readonly #STORAGE_ID: string = 'expenses';
 
 	constructor() {
 		super(ExpenseDataSource.#STORAGE_ID);
@@ -101,29 +97,25 @@ export class ExpenseDataSource
 	}
 
 	private getItems(): Record<Id, TExpenseDTO> {
-		const value = this.read();
+		const expenses = this.read();
 
-		if (!value?.state) {
+		if (!expenses) {
 			return {};
 		}
 
-		return value.state.operations;
+		return expenses;
 	}
 
 	/**
 	 * @todo
-	 * 1. Simplify structure
+	 * ✓ 1. Simplify structure
 	 * 2. Return to update
+	 *    Usage of update is not working on delete operations due to deep merge
 	 */
-	private setItems(values: Record<Id, TExpenseDTO>): IExpenseDataSource {
+	private setItems(expenses: Record<Id, TExpenseDTO>): IExpenseDataSource {
 		this.clear();
 
-		this.create({
-			state: {
-				operations: values,
-			},
-			// version: 0,
-		});
+		this.create(expenses);
 
 		// this.update({
 		// 	state: {

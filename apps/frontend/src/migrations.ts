@@ -5,12 +5,14 @@ import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types'
 import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type { Id } from '@root/core/domain/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 export function runMigrations() {
 	addThaiBahtCurrencyToStoredAppConfig();
 	convertUserObjectToUserMap();
 	moveClientIdToSession();
 	moveAuthTokenToSession();
+	migrateExpenseInStorageToNewFormatAndStorageId();
 }
 
 /**
@@ -114,4 +116,28 @@ function moveAuthTokenToSession(): void {
 	}
 
 	authDataSource.clear();
+}
+
+/**
+ * №5 Migrate expenses to new format and storage id
+ */
+export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
+	const OLD_EXPENSES_STORAGE_ID = 'store/$expenses';
+
+	let oldExpenseDataSource = new LocalStorageDataSource<{
+		state: {
+			operations: Record<string, TExpenseDTO>;
+		};
+	}>(OLD_EXPENSES_STORAGE_ID);
+	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
+
+	let expenses = oldExpenseDataSource.read();
+
+	if (!expenses) {
+		return;
+	}
+
+	expenseDataSource.create(expenses?.state.operations);
+
+	oldExpenseDataSource.clear();
 }

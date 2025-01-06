@@ -1,8 +1,10 @@
 import type { Id } from '@root/core/domain/types';
+import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpenseFindOptions } from '@root/core/modules/expense/domain/expenseRepository/types';
 
-export interface IExpenseDataSource {
+export interface IExpenseDataSource
+	extends IDataSource<Record<Id, TExpenseDTO>> {
 	save(expense: TExpenseDTO): TExpenseDTO;
 
 	findMany(options?: IExpenseFindOptions): {
