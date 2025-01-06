@@ -6,6 +6,8 @@ export interface ISessionService {
 	readonly authToken: string | null;
 	readonly isAuthenticated: boolean;
 
+	readonly userId: string;
+
 	start(): void;
 
 	setAuthToken(authToken: string): void;

@@ -32,6 +32,10 @@ export class SessionService implements ISessionService {
 		return Boolean(this.session.authToken);
 	}
 
+	public get userId(): string {
+		return this.session.userId;
+	}
+
 	public start(): void {
 		let sessionDTO = this.sessionDataSource.read();
 
