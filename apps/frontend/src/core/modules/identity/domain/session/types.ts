@@ -5,9 +5,11 @@ import type { IClientId } from '@root/core/modules/identity/domain/clientId/type
 export type TSessionValue = {
 	clientId: IClientId;
 	userId: Id;
+	authToken: string | null;
 };
 
 export interface ISession extends ValueObject<TSessionValue> {
 	readonly clientId: IClientId;
 	readonly userId: Id;
+	readonly authToken: string | null;
 }

@@ -7,10 +7,11 @@ import type {
 } from '@root/core/modules/identity/domain/session/types';
 
 export class Session extends ValueObject<TSessionValue> implements ISession {
-	constructor(clientId: IClientId, userId: Id) {
+	constructor(clientId: IClientId, userId: Id, authToken: string | null) {
 		super({
 			clientId,
 			userId,
+			authToken,
 		});
 	}
 
@@ -20,6 +21,10 @@ export class Session extends ValueObject<TSessionValue> implements ISession {
 
 	public get userId(): Id {
 		return this.value.userId;
+	}
+
+	public get authToken(): string | null {
+		return this.value.authToken;
 	}
 
 	public override equals(other: ISession): boolean {

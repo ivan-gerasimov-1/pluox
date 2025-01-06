@@ -1,16 +1,11 @@
+import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
+import { SessionNotFoundError } from '@root/core/modules/identity/application/sessionService/errors';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { IUserService } from '@root/core/modules/identity/application/userService/types';
+import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
+import { Session } from '@root/core/modules/identity/domain/session/session';
 import type { ISession } from '@root/core/modules/identity/domain/session/types';
 import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
-import { Session } from '@root/core/modules/identity/domain/session/session';
-import type {
-	IClientId,
-	IClientIdFactory,
-} from '@root/core/modules/identity/domain/clientId/types';
-import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
-import type { Id } from '@root/core/domain/types';
-import type { TUserDTO } from '@root/core/modules/identity/application/dto/userDTO';
-import { SessionNotFoundError } from '@root/core/modules/identity/application/sessionService/errors';
 
 export class SessionService implements ISessionService {
 	#session: ISession | null;
@@ -32,44 +27,36 @@ export class SessionService implements ISessionService {
 	}
 
 	public start(): void {
-		const sessionDTO = this.restoreSessionFromStorage();
+		let sessionDTO = this.sessionStorage.read();
 
-		if (sessionDTO) {
-			this.#session = this.createSession(
-				this.createClientId(sessionDTO.clientId),
-				sessionDTO.userId,
-			);
-
-			return;
-		}
-
-		let clientId = this.createClientId();
-		let user = this.createNewUser();
-
-		this.#session = this.createSession(clientId, user.id);
-
-		this.sessionStorage.create({
-			clientId: this.#session.clientId.getValue(),
-			userId: this.#session.userId,
-		});
+		this.#session = sessionDTO
+			? this.createSessionFromDTO(sessionDTO)
+			: this.createNewSession();
 	}
 
-	private restoreSessionFromStorage(): TSessionDTO | null {
-		return this.sessionStorage.read();
+	private createSessionFromDTO(sessionDTO: TSessionDTO): ISession {
+		return new Session(
+			this.clientIdFactory.create(sessionDTO.clientId),
+			sessionDTO.userId,
+			sessionDTO.authToken,
+		);
 	}
 
-	private createSession(clientId: IClientId, userId: Id): ISession {
-		return new Session(clientId, userId);
-	}
-
-	private createClientId(id?: Id): IClientId {
-		return this.clientIdFactory.create(id);
-	}
-
-	private createNewUser(): TUserDTO {
-		return this.userService.createUser({
+	private createNewSession(): ISession {
+		let clientId = this.clientIdFactory.create();
+		let user = this.userService.createUser({
 			email: '',
 			name: '',
 		});
+
+		let session = new Session(clientId, user.id, null);
+
+		this.sessionStorage.create({
+			clientId: session.clientId.getValue(),
+			userId: session.userId,
+			authToken: session.authToken,
+		});
+
+		return session;
 	}
 }

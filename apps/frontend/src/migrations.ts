@@ -10,6 +10,7 @@ export function runMigrations() {
 	addThaiBahtCurrencyToStoredAppConfig();
 	convertUserObjectToUserMap();
 	moveClientIdToSession();
+	moveAuthTokenToSession();
 }
 
 /**
@@ -77,15 +78,40 @@ function moveClientIdToSession(): void {
 		return;
 	}
 
-	let user = userService.createUser({
-		email: '',
-		name: '',
-	});
+	if (sessionDataSource.isEmpty()) {
+		let user = userService.createUser({
+			email: '',
+			name: '',
+		});
 
-	sessionDataSource.create({
-		clientId,
-		userId: user.id,
-	});
+		sessionDataSource.create({
+			clientId,
+			userId: user.id,
+			authToken: null,
+		});
+	} else {
+		sessionDataSource.update({
+			clientId,
+		});
+	}
 
 	clientIdDataSource.clear();
+}
+
+/**
+ * №4. Move authToken to Session
+ */
+function moveAuthTokenToSession(): void {
+	let authDataSource = new LocalStorageDataSource<string>('token');
+	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
+
+	if (!sessionDataSource.isEmpty()) {
+		let authToken = authDataSource.read();
+
+		sessionDataSource.update({
+			authToken,
+		});
+	}
+
+	authDataSource.clear();
 }
