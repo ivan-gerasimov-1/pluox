@@ -1,6 +1,10 @@
 import type { Id } from '@root/core/domain/types';
 import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
 import type {
+	IAuthToken,
+	IAuthTokenFactory,
+} from '@root/core/modules/identity/domain/authToken/types';
+import type {
 	IClientId,
 	IClientIdFactory,
 } from '@root/core/modules/identity/domain/clientId/types';
@@ -15,6 +19,7 @@ import type { IUserService } from '@root/core/modules/user/application/userServi
 export class SessionFactory implements ISessionFactory {
 	constructor(
 		private readonly clientIdFactory: IClientIdFactory,
+		private readonly authTokenFactory: IAuthTokenFactory,
 		private readonly userService: IUserService,
 	) {}
 
@@ -23,12 +28,12 @@ export class SessionFactory implements ISessionFactory {
 	public create(
 		clientId: IClientId,
 		userId: Id,
-		authToken: string | null,
+		authToken: IAuthToken | null,
 	): ISession;
 	public create(
 		arg1?: IClientId | TSessionDTO,
 		arg2?: Id,
-		arg3?: string | null,
+		arg3?: IAuthToken | null,
 	): ISession {
 		if (!arg1) {
 			return this.createNew();
@@ -40,7 +45,7 @@ export class SessionFactory implements ISessionFactory {
 
 		if (
 			typeof arg2 === 'string' &&
-			(typeof arg3 === 'string' || arg3 === null)
+			(arg3?.getValue() !== undefined || arg3 === null)
 		) {
 			return this.createFromParams(arg1, arg2, arg3 ?? null);
 		}
@@ -55,7 +60,7 @@ export class SessionFactory implements ISessionFactory {
 	private createFromParams(
 		clientId: IClientId,
 		userId: Id,
-		authToken: string | null,
+		authToken: IAuthToken | null,
 	): ISession {
 		return new Session(clientId, userId, authToken);
 	}
@@ -71,10 +76,14 @@ export class SessionFactory implements ISessionFactory {
 	}
 
 	private createFromDTO(sessionDTO: TSessionDTO): ISession {
+		let authToken = sessionDTO.authToken
+			? this.authTokenFactory.create(sessionDTO.authToken)
+			: null;
+
 		return new Session(
 			this.clientIdFactory.create(sessionDTO.clientId),
 			sessionDTO.userId,
-			sessionDTO.authToken,
+			authToken,
 		);
 	}
 }

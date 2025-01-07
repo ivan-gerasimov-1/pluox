@@ -24,12 +24,12 @@ export class SessionService implements ISessionService {
 		return this.#session;
 	}
 
-	public get authToken(): string | null {
-		return this.session.authToken;
+	public get accessToken(): string | null {
+		return this.session.authToken?.getValue().accessToken ?? null;
 	}
 
 	public get isAuthenticated(): boolean {
-		return Boolean(this.session.authToken);
+		return Boolean(this.session.authToken?.getValue().accessToken);
 	}
 
 	public get userId(): string {
@@ -44,16 +44,16 @@ export class SessionService implements ISessionService {
 			: this.createNewSession();
 	}
 
-	public setAuthToken(authToken: string | null): void {
-		this.session.setAuthToken(authToken);
+	public setAccessToken(accessToken: string | null): void {
+		this.session.setAccessToken(accessToken);
 
 		this.sessionDataSource.update({
-			authToken,
+			authToken: this.session.authToken?.getValue() ?? null,
 		});
 	}
 
-	public removeAuthToken(): void {
-		this.setAuthToken(null);
+	public removeAccessToken(): void {
+		this.setAccessToken(null);
 	}
 
 	private createNewSession(): ISession {
@@ -62,7 +62,7 @@ export class SessionService implements ISessionService {
 		this.sessionDataSource.create({
 			clientId: session.clientId.getValue(),
 			userId: session.userId,
-			authToken: session.authToken,
+			authToken: session.authToken?.getValue() ?? null,
 		});
 
 		return session;

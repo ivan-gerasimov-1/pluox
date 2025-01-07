@@ -52,7 +52,7 @@ export class AuthService implements IAuthSerivce {
 			modifiedAt: result.modifiedAt,
 		});
 
-		this.sessionService.setAuthToken(result.token);
+		this.sessionService.setAccessToken(result.token);
 
 		return {
 			id: result.id,
@@ -61,6 +61,6 @@ export class AuthService implements IAuthSerivce {
 	}
 
 	public async logOut(): Promise<void> {
-		this.sessionService.removeAuthToken();
+		this.sessionService.removeAccessToken();
 	}
 }

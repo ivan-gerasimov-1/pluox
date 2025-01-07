@@ -11,4 +11,8 @@ export class AuthToken
 	constructor(value: TAuthTokenValue) {
 		super(value);
 	}
+
+	public setAccessToken(accessToken: string | null): void {
+		this.value.accessToken = accessToken;
+	}
 }

@@ -1,3 +1,3 @@
 export type TAuthTokenDTO = {
-	accessToken: string;
+	accessToken: string | null;
 };

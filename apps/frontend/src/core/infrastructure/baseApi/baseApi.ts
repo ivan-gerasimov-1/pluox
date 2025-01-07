@@ -9,7 +9,7 @@ export class BaseApi implements IBaseApi {
 	) {}
 
 	private get authorizationHeader(): string {
-		let authToken = this.sessionService.authToken ?? '';
+		let authToken = this.sessionService.accessToken ?? '';
 
 		return `Bearer ${authToken}`;
 	}

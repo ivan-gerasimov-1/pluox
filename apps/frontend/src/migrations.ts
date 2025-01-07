@@ -108,20 +108,18 @@ function moveClientIdToSession(): void {
 
 /**
  * №4. Move authToken to Session
+ * @deprecated
  */
 function moveAuthTokenToSession(): void {
-	let authDataSource = new LocalStorageDataSource<string>('token');
-	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
-
-	if (!sessionDataSource.isEmpty()) {
-		let authToken = authDataSource.read();
-
-		sessionDataSource.update({
-			authToken,
-		});
-	}
-
-	authDataSource.clear();
+	// let authDataSource = new LocalStorageDataSource<string>('token');
+	// let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
+	// if (!sessionDataSource.isEmpty()) {
+	// 	let authToken = authDataSource.read();
+	// 	sessionDataSource.update({
+	// 		authToken,
+	// 	});
+	// }
+	// authDataSource.clear();
 }
 
 /**

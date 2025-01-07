@@ -1,5 +1,6 @@
 import type { Id } from '@root/core/domain/types';
 import { ValueObject } from '@root/core/domain/valueObject/valueObject';
+import type { IAuthToken } from '@root/core/modules/identity/domain/authToken/types';
 import type { IClientId } from '@root/core/modules/identity/domain/clientId/types';
 import type {
 	ISession,
@@ -7,7 +8,7 @@ import type {
 } from '@root/core/modules/identity/domain/session/types';
 
 export class Session extends ValueObject<TSessionValue> implements ISession {
-	constructor(clientId: IClientId, userId: Id, authToken: string | null) {
+	constructor(clientId: IClientId, userId: Id, authToken: IAuthToken | null) {
 		super({
 			clientId,
 			userId,
@@ -23,12 +24,12 @@ export class Session extends ValueObject<TSessionValue> implements ISession {
 		return this.value.userId;
 	}
 
-	public get authToken(): string | null {
+	public get authToken(): IAuthToken | null {
 		return this.value.authToken;
 	}
 
-	public setAuthToken(authToken: string | null): void {
-		this.value.authToken = authToken;
+	public setAccessToken(accessToken: string | null): void {
+		this.value.authToken?.setAccessToken(accessToken);
 	}
 
 	public override equals(other: ISession): boolean {
