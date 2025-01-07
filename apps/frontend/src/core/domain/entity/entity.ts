@@ -7,7 +7,7 @@ export abstract class Entity implements IEntity {
 	readonly #id: Id;
 
 	readonly #createdAt: TISODateString;
-	readonly #modifiedAt: TISODateString;
+	#modifiedAt: TISODateString;
 
 	constructor(id: Id, createdAt: TISODateString, modifiedAt?: TISODateString) {
 		this.#id = id;
@@ -26,5 +26,9 @@ export abstract class Entity implements IEntity {
 
 	public get modifiedAt(): TISODateString {
 		return this.#modifiedAt;
+	}
+
+	protected touch(): void {
+		this.#modifiedAt = new Date().toISOString();
 	}
 }
