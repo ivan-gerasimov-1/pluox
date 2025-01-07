@@ -6,7 +6,7 @@ import type {
 } from '@root/core/modules/identity/domain/authToken/types';
 
 export class AuthTokenFactory implements IAuthTokenFactory {
-	public create(value: TAuthTokenDTO): IAuthToken {
-		return new AuthToken(value);
+	public create(authTokenDTO: TAuthTokenDTO): IAuthToken {
+		return new AuthToken(authTokenDTO);
 	}
 }

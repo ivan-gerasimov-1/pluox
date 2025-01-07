@@ -1,1 +1,3 @@
-export type TAuthTokenDTO = string;
+export type TAuthTokenDTO = {
+	accessToken: string;
+};
