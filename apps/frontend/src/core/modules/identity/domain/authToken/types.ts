@@ -3,10 +3,12 @@ import type { TAuthTokenDTO } from '@root/core/modules/identity/application/dto/
 
 export type TAuthTokenValue = {
 	accessToken: string | null;
+	userId: string | null;
 };
 
 export interface IAuthToken extends IValueObject<TAuthTokenValue> {
 	setAccessToken(accessToken: string | null): void;
+	setUserId(userId: string | null): void;
 }
 
 export interface IAuthTokenFactory {

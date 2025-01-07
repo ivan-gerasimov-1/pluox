@@ -7,6 +7,6 @@ import type {
 
 export class AuthTokenFactory implements IAuthTokenFactory {
 	public create(authTokenDTO: TAuthTokenDTO): IAuthToken {
-		return new AuthToken(authTokenDTO);
+		return new AuthToken(authTokenDTO.userId, authTokenDTO.accessToken);
 	}
 }
