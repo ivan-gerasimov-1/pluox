@@ -1,9 +1,12 @@
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
+import type { Id } from '@root/core/domain/types';
 import type {
 	TUserCreateDTO,
 	TUserDTO,
+	TUserUpdateDTO,
 } from '@root/core/modules/user/application/dto/userDTO';
+import { UserNotFoundError } from '@root/core/modules/user/application/userService/errors';
 import type { IUserService } from '@root/core/modules/user/application/userService/types';
 import type { IUserRepository } from '@root/core/modules/user/domain/userRepository/types';
 import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMapper/types';
@@ -32,6 +35,22 @@ export class UserService implements IUserService {
 		let newUser = this.userRepository.save(user);
 
 		return this.userMapper.toDTO(newUser);
+	}
+
+	public updateUser(id: Id, userUpdateDTO: TUserUpdateDTO): TUserDTO {
+		let user = this.userRepository.findById(id);
+
+		if (!user) {
+			throw new UserNotFoundError();
+		}
+
+		if (userUpdateDTO.name) {
+			user.name = userUpdateDTO.name;
+		}
+
+		let updatedUser = this.userRepository.save(user);
+
+		return this.userMapper.toDTO(updatedUser);
 	}
 
 	public getUserById(id: string): TUserDTO | null {
