@@ -37,4 +37,10 @@ export class User extends Entity implements IUser {
 	public get name(): string {
 		return this.#name;
 	}
+
+	public set name(email: string) {
+		this.#name = email;
+
+		this.touch();
+	}
 }
