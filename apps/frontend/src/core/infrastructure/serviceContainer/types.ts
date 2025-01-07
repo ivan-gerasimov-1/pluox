@@ -49,6 +49,7 @@ import type { IUserRepository } from '@root/core/modules/user/domain/userReposit
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
 import type { ISessionFactory } from '@root/core/modules/identity/domain/session/types';
+import type { ISyncService } from '@root/core/modules/sync/application/syncService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -140,6 +141,8 @@ export enum EServiceToken {
 	MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE = 'MonthlyExpensesByCategoryUseCase',
 	GROUP_EXPENSE_BY_DATE_USE_CASE = 'GroupExpensesByDateUseCase',
 	DAILY_AMOUNT_USE_CASE = 'DailyAmountUseCase',
+
+	SYNC_SERVICE = 'SyncService',
 }
 
 export interface IServiceMap {
@@ -204,4 +207,6 @@ export interface IServiceMap {
 	[EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE]: IMonthlyExpensesByCategoryUseCase;
 	[EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE]: IGroupExpenseByDateUseCase;
 	[EServiceToken.DAILY_AMOUNT_USE_CASE]: IDailyAmountUseCase;
+
+	[EServiceToken.SYNC_SERVICE]: ISyncService;
 }

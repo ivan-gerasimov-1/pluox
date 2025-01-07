@@ -57,6 +57,7 @@ import { UserRepository } from '@root/core/modules/user/infrastructure/userRepos
 import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
 import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
 import { SessionFactory } from '@root/core/modules/identity/domain/session/sessionFactory';
+import { SyncService } from '@root/core/modules/sync/application/syncService/syncService';
 
 let globalContainer: IContainer;
 
@@ -392,6 +393,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
 			},
 		)
+		.register({
+			token: EServiceToken.SYNC_SERVICE,
+			useClass: SyncService,
+		})
 		.validate();
 
 	return container;
