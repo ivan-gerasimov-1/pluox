@@ -119,9 +119,8 @@ export enum EServiceToken {
 
 	LAUNCH_CONTROL = 'LaunchControl',
 
-	/** @deprecated */
-	AUTH_DATASOURCE = 'AuthDataSource',
 	AUTH_SERVICE = 'AuthService',
+	AUTH_TOKEN_FACTORY = 'AuthTokenFactory',
 
 	BASE_API = 'BaseApi',
 	AUTH_API = 'AuthApi',
