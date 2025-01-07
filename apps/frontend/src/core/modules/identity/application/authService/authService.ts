@@ -1,12 +1,12 @@
-import { UserNotFoundError } from '@root/core/modules/identity/application/authService/errors';
+import { InvalidCredentialsError } from '@root/core/modules/identity/application/authService/errors';
 import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
-import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
-import type { IUserService } from '@root/core/modules/user/application/userService/types';
-import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
 import type {
-	TSignUpResponseDTO,
 	TLogInResponseDTO,
+	TSignUpResponseDTO,
 } from '@root/core/modules/identity/application/dto/authDTO';
+import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
+import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
+import type { IUserService } from '@root/core/modules/user/application/userService/types';
 
 /**
  * @todo
@@ -41,7 +41,7 @@ export class AuthService implements IAuthSerivce {
 		const result = await this.authApi.logIn(email, password);
 
 		if (!result.id || !result.email) {
-			throw new UserNotFoundError();
+			throw new InvalidCredentialsError();
 		}
 
 		this.userService.createUser({

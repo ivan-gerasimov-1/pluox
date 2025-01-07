@@ -4,9 +4,3 @@ export abstract class IdentityError extends Error {
 		this.name = this.constructor.name;
 	}
 }
-
-export class InvalidCredentialsError extends IdentityError {
-	constructor() {
-		super('Invalid credentials');
-	}
-}
