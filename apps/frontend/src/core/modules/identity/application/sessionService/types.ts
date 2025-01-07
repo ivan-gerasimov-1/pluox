@@ -12,4 +12,14 @@ export interface ISessionService {
 
 	setAccessToken(accessToken: string): void;
 	removeAccessToken(): void;
+
+	/**
+	 * @todo
+	 * Implement authentication in terms of Session — on successfull login
+	 * SessionService creates new AuthToken (userId and accessToken pair),
+	 * on logout SessionService removes AuthToken. If accessToken is expired
+	 * SessionService removes AuthToken
+	 */
+	// authenticate(): void;
+	// deauthenticate(): void;
 }
