@@ -12,6 +12,12 @@ import {
 	updateAppConfig,
 	QUERY_APP_CONFIG,
 } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+import {
+	getUser,
+	QUERY_USER,
+	updateUser,
+} from '@root/presentation/web-ui/modules/settings/settings.query';
+import { TUserUpdateDTO } from '@root/core/modules/user/application/dto/userDTO';
 import { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
@@ -35,7 +41,6 @@ import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';
 
 import styles from './settings.module.css';
-
 /**
  * @todo
  * 1. Don’t refetch *appConfig* on mount
@@ -50,6 +55,28 @@ export function SettingsScreen() {
 	let navigation = useNavigation();
 
 	let queryClient = useQueryClient();
+
+	let {
+		data: user = {
+			id: '',
+			name: '',
+		},
+	} = useQuery({
+		queryKey: [QUERY_USER],
+		queryFn: getUser,
+		// refetchOnMount: false,
+	});
+
+	let { mutate: mutateUserName } = useMutation({
+		mutationFn: async (userUpdateDTO: TUserUpdateDTO) => {
+			updateUser(user.id, userUpdateDTO);
+		},
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: [QUERY_USER],
+			});
+		},
+	});
 
 	let {
 		data: appConfig = {
@@ -82,6 +109,11 @@ export function SettingsScreen() {
 		},
 	});
 
+	let [editUserName, setEditUserName] = useState({
+		isOpen: false,
+		userName: user.name,
+	});
+
 	let [editBudgetForm, setEditBudgetForm] = useState({
 		isOpen: false,
 		budget: appConfig.budget,
@@ -104,13 +136,16 @@ export function SettingsScreen() {
 									{intl.translate('userName')}
 								</span>
 
-								<span className={styles.fieldValue}>—</span>
+								<span className={styles.fieldValue}>{user.name}</span>
 							</div>
 
 							<IconButton
 								iconName={EIconName.Edit}
 								onClick={() => {
-									window.alert('Not Implemented');
+									setEditUserName({
+										isOpen: true,
+										userName: user.name,
+									});
 								}}
 							/>
 						</div>
@@ -308,6 +343,57 @@ export function SettingsScreen() {
 				</CardContainer>
 			</Screen>
 
+			{/* User name */}
+			<ActionSheet
+				onClose={() =>
+					setEditUserName(() => ({
+						isOpen: false,
+						userName: user.name,
+					}))
+				}
+				isOpen={editUserName.isOpen}
+				height="small"
+			>
+				<div className={styles.budgetContainer}>
+					<input
+						type="text"
+						className={styles.budgetInput}
+						value={editUserName.userName}
+						onChange={(event) => {
+							let userName = event.target.value;
+
+							setEditUserName((prevState) => ({
+								...prevState,
+								userName,
+							}));
+						}}
+					/>
+				</div>
+
+				<Button
+					style={{
+						marginTop: '20px',
+					}}
+					onClick={() => {
+						mutateUserName({
+							name: editUserName.userName,
+						});
+
+						setEditUserName((prevState) => {
+							return {
+								...prevState,
+								isOpen: false,
+							};
+						});
+					}}
+					size="m"
+					isWide
+				>
+					{intl.translate('save')}
+				</Button>
+			</ActionSheet>
+
+			{/* Budget  */}
 			<ActionSheet
 				onClose={() =>
 					setEditBudgetForm(() => ({
