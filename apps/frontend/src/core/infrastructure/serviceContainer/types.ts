@@ -50,6 +50,7 @@ import type { ISessionService } from '@root/core/modules/identity/application/se
 import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
 import type { ISessionFactory } from '@root/core/modules/identity/domain/session/types';
 import type { ISyncService } from '@root/core/modules/sync/application/syncService/types';
+import type { IAuthTokenFactory } from '@root/core/modules/identity/domain/authToken/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -186,9 +187,11 @@ export interface IServiceMap {
 	[EServiceToken.LAUNCH_CONTROL]: ILauchControl;
 
 	[EServiceToken.BASE_API]: IBaseApi;
-	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.EXPENSE_API]: IExpenseApi;
+
+	[EServiceToken.AUTH_API]: IAuthApi;
 	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
+	[EServiceToken.AUTH_TOKEN_FACTORY]: IAuthTokenFactory;
 
 	[EServiceToken.USER_SERVICE]: IUserService;
 	[EServiceToken.USER_DATASOURCE]: IUserDataSource;
