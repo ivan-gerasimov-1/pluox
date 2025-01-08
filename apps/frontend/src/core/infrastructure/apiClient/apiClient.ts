@@ -1,8 +1,8 @@
 import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
-import type { IBaseApi } from '@core/infrastructure/baseApi/types';
+import type { IApiClient } from '@root/core/infrastructure/apiClient/types';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 
-export class BaseApi implements IBaseApi {
+export class ApiClient implements IApiClient {
 	constructor(
 		private readonly environment: IEnvironment,
 		private readonly sessionService: ISessionService,

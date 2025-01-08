@@ -1,8 +1,8 @@
 import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
-import type { IBaseApi } from '@core/infrastructure/baseApi/types';
+import type { IApiClient } from '@root/core/infrastructure/apiClient/types';
 
 export class AuthApi implements IAuthApi {
-	constructor(private readonly api: IBaseApi) {}
+	constructor(private readonly api: IApiClient) {}
 
 	public async signUp(
 		email: string,

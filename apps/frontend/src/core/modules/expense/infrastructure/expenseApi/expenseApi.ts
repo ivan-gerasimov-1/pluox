@@ -1,10 +1,10 @@
-import type { IBaseApi } from '@core/infrastructure/baseApi/types';
+import type { IApiClient } from '@root/core/infrastructure/apiClient/types';
 import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
 
 import type { Id } from '@domain/types';
 
 export class ExpenseApi implements IExpenseApi {
-	constructor(private readonly api: IBaseApi) {}
+	constructor(private readonly api: IApiClient) {}
 
 	public async create(payload: Record<string, unknown>): Promise<{
 		id: Id;

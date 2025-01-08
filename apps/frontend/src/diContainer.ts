@@ -41,7 +41,7 @@ import { ExpenseService } from '@root/core/modules/expense/application/expenseSe
 import { GroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
-import { BaseApi } from '@root/core/infrastructure/baseApi/baseApi';
+import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 import { DailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
@@ -138,8 +138,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				deps: [EServiceToken.ID_GENERATOR_FACTORY],
 			},
 			{
-				token: EServiceToken.BASE_API,
-				useClass: BaseApi,
+				token: EServiceToken.API_CLIENT,
+				useClass: ApiClient,
 				deps: [EServiceToken.ENVIRONMENT, EServiceToken.SESSION_SERVICE],
 			},
 			{
@@ -198,7 +198,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.AUTH_API,
 				useClass: AuthApi,
-				deps: [EServiceToken.BASE_API],
+				deps: [EServiceToken.API_CLIENT],
 			},
 			{
 				token: EServiceToken.AUTH_SERVICE,
@@ -291,7 +291,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_API,
 				useClass: ExpenseApi,
-				deps: [EServiceToken.BASE_API],
+				deps: [EServiceToken.API_CLIENT],
 			},
 			{
 				token: EServiceToken.EXPENSE_CREATE_USE_CASE,

@@ -1,4 +1,4 @@
-export interface IBaseApi {
+export interface IApiClient {
 	request<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
