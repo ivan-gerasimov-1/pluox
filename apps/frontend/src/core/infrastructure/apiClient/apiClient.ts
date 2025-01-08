@@ -1,24 +1,20 @@
-import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
 import {
+	EHttpHeader,
 	EHttpMethod,
 	type IApiClient,
+	type IApiClientConfigProvider,
+	type THttpHeaders,
 } from '@root/core/infrastructure/apiClient/types';
-import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 
 export class ApiClient implements IApiClient {
-	constructor(
-		private readonly environment: IEnvironment,
-		private readonly sessionService: ISessionService,
-	) {}
+	constructor(private readonly configProvider: IApiClientConfigProvider) {}
 
 	private get authorizationHeader(): string {
-		let authToken = this.sessionService.accessToken ?? '';
-
-		return `Bearer ${authToken}`;
+		return this.configProvider.authorizationHeader;
 	}
 
 	private get baseUrl(): string {
-		return this.environment.apiUrl;
+		return this.configProvider.baseUrl;
 	}
 
 	public async post<TPayload, TResponse>(
@@ -39,13 +35,11 @@ export class ApiClient implements IApiClient {
 		},
 	): Promise<TResponse> {
 		let body = JSON.stringify(options.payload ?? {});
+		let headers = this.createHeaders();
 
-		const responseRaw = await fetch(`${this.baseUrl}${path}`, {
+		let responseRaw = await fetch(`${this.baseUrl}${path}`, {
 			method: options.method,
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: this.authorizationHeader,
-			},
+			headers,
 			body,
 		});
 
@@ -56,5 +50,17 @@ export class ApiClient implements IApiClient {
 		}
 
 		return response;
+	}
+
+	private createHeaders(): THttpHeaders {
+		let headers: THttpHeaders = {
+			[EHttpHeader.CONTENT_TYPE]: 'application/json',
+		};
+
+		if (this.authorizationHeader) {
+			headers[EHttpHeader.AUTHORIZATION] = this.authorizationHeader;
+		}
+
+		return headers;
 	}
 }

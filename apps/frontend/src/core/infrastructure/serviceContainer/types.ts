@@ -3,7 +3,10 @@ import type { IAppConfigService } from '@root/core/modules/settings/application/
 import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
 import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
 import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
-import type { IApiClient } from '@root/core/infrastructure/apiClient/types';
+import type {
+	IApiClient,
+	IApiClientConfigProvider,
+} from '@root/core/infrastructure/apiClient/types';
 import type {
 	IClientId,
 	IClientIdFactory,
@@ -124,6 +127,7 @@ export enum EServiceToken {
 	AUTH_TOKEN_FACTORY = 'AuthTokenFactory',
 
 	API_CLIENT = 'ApiClient',
+	API_CLIENT_CONFIG_PROVIDER = 'ApiClientConfigProvider',
 
 	AUTH_API = 'AuthApi',
 	EXPENSE_API = 'ExpensesApi',
@@ -188,6 +192,7 @@ export interface IServiceMap {
 	[EServiceToken.LAUNCH_CONTROL]: ILauchControl;
 
 	[EServiceToken.API_CLIENT]: IApiClient;
+	[EServiceToken.API_CLIENT_CONFIG_PROVIDER]: IApiClientConfigProvider;
 
 	[EServiceToken.EXPENSE_API]: IExpenseApi;
 

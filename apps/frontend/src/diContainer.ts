@@ -59,6 +59,7 @@ import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastruc
 import { SessionFactory } from '@root/core/modules/identity/domain/session/sessionFactory';
 import { SyncService } from '@root/core/modules/sync/application/syncService/syncService';
 import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
+import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
 
 let globalContainer: IContainer;
 
@@ -137,11 +138,18 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				},
 				deps: [EServiceToken.ID_GENERATOR_FACTORY],
 			},
+
 			{
 				token: EServiceToken.API_CLIENT,
 				useClass: ApiClient,
+				deps: [EServiceToken.API_CLIENT_CONFIG_PROVIDER],
+			},
+			{
+				token: EServiceToken.API_CLIENT_CONFIG_PROVIDER,
+				useClass: ApiClientConfigProvider,
 				deps: [EServiceToken.ENVIRONMENT, EServiceToken.SESSION_SERVICE],
 			},
+
 			{
 				token: EServiceToken.TEMPORAL,
 				useClass: Temporal,
