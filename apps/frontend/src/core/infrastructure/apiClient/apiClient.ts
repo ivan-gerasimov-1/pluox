@@ -1,5 +1,8 @@
 import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
-import type { IApiClient } from '@root/core/infrastructure/apiClient/types';
+import {
+	EHttpMethod,
+	type IApiClient,
+} from '@root/core/infrastructure/apiClient/types';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 
 export class ApiClient implements IApiClient {
@@ -23,7 +26,7 @@ export class ApiClient implements IApiClient {
 		payload?: TPayload,
 	): Promise<TResponse> {
 		const responseRaw = await fetch(`${this.baseUrl}${path}`, {
-			method: 'POST',
+			method: EHttpMethod.POST,
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: this.authorizationHeader,
