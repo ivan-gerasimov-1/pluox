@@ -61,7 +61,7 @@
 
 .expenseInMainCurrency {
 	line-height: 1;
-	font-size: var(--fs-300);
+	font-size: var(--fs-200);
 	font-weight: var(--fw-200);
 }
 
@@ -75,7 +75,7 @@
 
 .dotFilledSpace {
 	width: 100%;
-	height: var(--fs-400);
+	height: var(--fs-300);
 
 	margin-right: 5px;
 
