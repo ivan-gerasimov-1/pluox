@@ -1,5 +1,5 @@
 export interface IApiClient {
-	request<TPayload, TResponse>(
+	post<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
 	): Promise<TResponse>;

@@ -21,17 +21,32 @@ export class ApiClient implements IApiClient {
 		return this.environment.apiUrl;
 	}
 
-	public async request<TPayload, TResponse>(
+	public async post<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
 	): Promise<TResponse> {
-		const responseRaw = await fetch(`${this.baseUrl}${path}`, {
+		return this.request(path, {
 			method: EHttpMethod.POST,
+			payload,
+		});
+	}
+
+	private async request<TPayload, TResponse>(
+		path: string,
+		options: {
+			method: EHttpMethod;
+			payload?: TPayload;
+		},
+	): Promise<TResponse> {
+		let body = JSON.stringify(options.payload ?? {});
+
+		const responseRaw = await fetch(`${this.baseUrl}${path}`, {
+			method: options.method,
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: this.authorizationHeader,
 			},
-			body: JSON.stringify(payload),
+			body,
 		});
 
 		let response = await responseRaw.json();

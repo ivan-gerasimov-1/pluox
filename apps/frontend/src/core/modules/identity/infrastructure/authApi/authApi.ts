@@ -2,7 +2,7 @@ import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authAp
 import type { IApiClient } from '@root/core/infrastructure/apiClient/types';
 
 export class AuthApi implements IAuthApi {
-	constructor(private readonly api: IApiClient) {}
+	constructor(private readonly apiClient: IApiClient) {}
 
 	public async signUp(
 		email: string,
@@ -10,7 +10,7 @@ export class AuthApi implements IAuthApi {
 	): Promise<{
 		email: string;
 	}> {
-		const response = await this.api.request<
+		const response = await this.apiClient.post<
 			{
 				email: string;
 				password: string;
@@ -39,7 +39,7 @@ export class AuthApi implements IAuthApi {
 		modifiedAt: string;
 		token: string;
 	}> {
-		const response = await this.api.request<
+		const response = await this.apiClient.post<
 			{
 				email: string;
 				password: string;
