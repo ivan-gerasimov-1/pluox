@@ -34,10 +34,10 @@
 .pinch {
 	display: block;
 
-	width: 30px;
-	height: 7px;
+	width: 10%;
+	height: 5px;
 
-	border-radius: 3px;
+	border-radius: var(--br-100);
 
 	background-color: var(--grey-500);
 }
