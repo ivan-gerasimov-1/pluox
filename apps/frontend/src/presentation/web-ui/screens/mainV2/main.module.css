@@ -56,3 +56,13 @@
 
 	overflow: auto;
 }
+
+.dotFilledSpace {
+	width: 100%;
+	height: var(--fs-200);
+
+	margin-inline: 5px;
+
+	background-size: 10px 30px;
+	background-image: radial-gradient(circle, var(--grey-500) 1px, transparent 0);
+}

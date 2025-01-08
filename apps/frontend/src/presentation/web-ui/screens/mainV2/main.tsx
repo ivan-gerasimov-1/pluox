@@ -149,15 +149,28 @@ export function MainScreen() {
 										display: 'flex',
 										justifyContent: 'space-between',
 										marginBlockEnd: '10px',
+										alignItems: 'flex-end',
 									}}
 								>
-									<div>{categoryService.getCategoryIcon(id)}</div>
+									<span
+										style={{
+											lineHeight: 1,
+										}}
+									>
+										{categoryService.getCategoryIcon(id)}
+									</span>
 
-									<div>
+									<span className={styles.dotFilledSpace}></span>
+
+									<span
+										style={{
+											lineHeight: 1,
+										}}
+									>
 										{intlService.formatCurrency(total, {
 											hideDecimal: true,
 										})}
-									</div>
+									</span>
 								</li>
 							))}
 						</ul>
