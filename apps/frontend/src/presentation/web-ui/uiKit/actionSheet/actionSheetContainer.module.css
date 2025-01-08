@@ -7,9 +7,6 @@
 	bottom: 0;
 	left: 0;
 
-	padding-top: 0.75rem;
-	padding-bottom: 1.5rem;
-
 	background-color: var(--white-200);
 	box-shadow: 0 -10px 15px -5px var(--grey-350);
 
