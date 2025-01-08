@@ -75,3 +75,8 @@
 	--action-sheet-start: 85%;
 	--action-sheet-end: 10%;
 }
+
+body {
+	color: var(--fc-100);
+	background-color: var(--white-100);
+}
