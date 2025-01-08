@@ -4,11 +4,13 @@
 }
 
 .title {
+	--fs-title: calc(var(--fs-400) * 2);
+
 	display: flex;
 	justify-content: space-between;
 
 	font-weight: 700;
-	font-size: 44px;
+	font-size: var(--fs-title);
 
 	color: var(--fc-100);
 
@@ -39,7 +41,6 @@
 	font-weight: var(--fw-300);
 	font-size: var(--fs-100);
 
-	line-height: 17px;
 	letter-spacing: -0.03em;
 
 	color: var(--fc-100);
