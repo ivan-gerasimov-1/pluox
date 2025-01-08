@@ -20,10 +20,14 @@ export class ApiClient implements IApiClient {
 	public async post<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
+		options?: {
+			abortSignal?: AbortSignal;
+		},
 	): Promise<TResponse> {
 		return this.request(path, {
 			method: EHttpMethod.POST,
 			payload,
+			abortSignal: options?.abortSignal,
 		});
 	}
 
@@ -32,6 +36,7 @@ export class ApiClient implements IApiClient {
 		options: {
 			method: EHttpMethod;
 			payload?: TPayload;
+			abortSignal?: AbortSignal;
 		},
 	): Promise<TResponse> {
 		let body = JSON.stringify(options.payload ?? {});
@@ -41,6 +46,7 @@ export class ApiClient implements IApiClient {
 			method: options.method,
 			headers,
 			body,
+			signal: options.abortSignal,
 		});
 
 		let response = await responseRaw.json();

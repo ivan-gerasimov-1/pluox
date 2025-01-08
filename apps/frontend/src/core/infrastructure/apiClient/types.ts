@@ -2,6 +2,9 @@ export interface IApiClient {
 	post<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
+		options?: {
+			abortSignal?: AbortSignal;
+		},
 	): Promise<TResponse>;
 }
 
