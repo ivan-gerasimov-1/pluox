@@ -25,9 +25,6 @@
 	/* Red color */
 	--red-100: #ef5350;
 
-	/* Green color */
-	--green-100: #43a047;
-
 	/* Font size */
 	--fs-90: calc(var(--fs-100) - 2px);
 	--fs-100: 14px;
