@@ -1,5 +1,5 @@
 import type { Id } from '@root/core/domain/types';
-import type { TMonth } from '@root/core/domain/temporal/types';
+import type { TMonth, TYear } from '@root/core/domain/temporal/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseDTO,
@@ -13,14 +13,8 @@ export interface IExpenseService {
 	deleteExpense(id: Id): IExpenseService;
 	updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService;
 
-	/**
-	 * @todo Add year to the class interface
-	 */
-	getTotalByYear(): number;
-	/**
-	 * @todo Add year to the class interface
-	 */
-	getTotalByMonth(month: TMonth): number;
+	getTotalByYear(year?: TYear): number;
+	getTotalByMonth(month: TMonth, year?: TYear): number;
 	getTotalByDay(): number;
 
 	getMonthlyExpensesByCategory(month: TMonth): TMonthlyExpensesByCategory[];

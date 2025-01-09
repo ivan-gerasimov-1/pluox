@@ -10,18 +10,17 @@ import type {
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/createExpenseUseCase';
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
-import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
 import type {
 	IMonthlyExpensesByCategoryUseCase,
 	TMonthlyExpensesByCategory,
 } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import type { TYear, TMonth } from '@root/core/domain/temporal/types';
-import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import type {
 	IExpenseGroupingService,
 	TExpenseGroupByDate,
 } from '@root/core/modules/expense/application/expenseGroupingService/types';
+import type { IExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/types';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
@@ -31,10 +30,9 @@ export class ExpenseService implements IExpenseService {
 		private readonly createExpenseUseCase: ICreateExpenseUseCase,
 		private readonly deleteExpenseUseCase: IDeleteExpenseUseCase,
 		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
-		private readonly totalAmountUseCase: ITotalAmountUseCase,
 		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
-		private readonly dailyAmountUseCase: IDailyAmountUseCase,
 		private readonly expenseGroupingService: IExpenseGroupingService,
+		private readonly expenseAmountService: IExpenseAmountService,
 	) {}
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
@@ -68,29 +66,18 @@ export class ExpenseService implements IExpenseService {
 	}
 
 	public getTotalByYear(year: TYear = new Date().getFullYear()): number {
-		return this.totalAmountUseCase.run(
-			{
-				year,
-			},
-			this.appConfig.currency,
-		);
+		return this.expenseAmountService.getYearlyAmount(year);
 	}
 
 	public getTotalByMonth(
 		month: TMonth,
 		year: TYear = new Date().getFullYear(),
 	): number {
-		return this.totalAmountUseCase.run(
-			{
-				month,
-				year,
-			},
-			this.appConfig.currency,
-		);
+		return this.expenseAmountService.getMonthlyAmount(month, year);
 	}
 
 	public getTotalByDay(): number {
-		return this.dailyAmountUseCase.execute();
+		return this.expenseAmountService.getDailyAmount();
 	}
 
 	public getMonthlyExpensesByCategory(
