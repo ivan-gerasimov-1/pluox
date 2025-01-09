@@ -9,8 +9,11 @@ import type { TMonthlyExpensesByCategory } from '@root/core/modules/expense/doma
 import type { TExpenseGroupByDate } from '@root/core/modules/expense/application/expenseGroupingService/types';
 
 export interface IExpenseService {
+	/** @deprecated */
 	createExpense(payload: TExpenseCreateDTO): IExpenseService;
+	/** @deprecated */
 	deleteExpense(id: Id): IExpenseService;
+	/** @deprecated */
 	updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService;
 
 	getTotalByYear(year?: TYear): number;

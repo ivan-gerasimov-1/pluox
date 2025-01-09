@@ -35,6 +35,7 @@ export class ExpenseService implements IExpenseService {
 		private readonly expenseAmountService: IExpenseAmountService,
 	) {}
 
+	/** @deprecated */
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
 		let expense = this.createExpenseUseCase.execute(payload);
 
@@ -47,12 +48,14 @@ export class ExpenseService implements IExpenseService {
 		return this;
 	}
 
+	/** @deprecated */
 	public updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService {
 		this.updateExpenseUseCase.execute(id, payload);
 
 		return this;
 	}
 
+	/** @deprecated */
 	public deleteExpense(id: Id): IExpenseService {
 		let expense = this.expenseRepository.findById(id);
 
