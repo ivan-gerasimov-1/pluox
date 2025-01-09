@@ -41,6 +41,11 @@ export class ExpenseAmountService implements IExpenseAmountService {
 		return this.getAmount(startOfYear, endOfYear);
 	}
 
+	/**
+	 * @todo
+	 * 1. Add year
+	 * 2. Move grouping by category to ExpenseGroupingService
+	 */
 	public getMonthlyAmountByCategory(month: TMonth): TMonthlyAmountByCategory[] {
 		let currency = this.appConfig.currency;
 
