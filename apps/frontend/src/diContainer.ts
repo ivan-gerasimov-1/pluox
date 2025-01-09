@@ -348,6 +348,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				],
 			},
 			{
+				/** @deprecated */
 				token: EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE,
 				useClass: GroupExpenseByDateUseCase,
 			},

@@ -144,6 +144,7 @@ export enum EServiceToken {
 	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
 	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
 	MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE = 'MonthlyExpensesByCategoryUseCase',
+	/** @deprecated */
 	GROUP_EXPENSE_BY_DATE_USE_CASE = 'GroupExpensesByDateUseCase',
 	DAILY_AMOUNT_USE_CASE = 'DailyAmountUseCase',
 
@@ -214,6 +215,7 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
 	[EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE]: IMonthlyExpensesByCategoryUseCase;
+	/** @deprecated */
 	[EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE]: IGroupExpenseByDateUseCase;
 	[EServiceToken.DAILY_AMOUNT_USE_CASE]: IDailyAmountUseCase;
 
