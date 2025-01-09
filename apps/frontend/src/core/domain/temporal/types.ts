@@ -11,8 +11,10 @@ export type TDateParts = {
 export interface ITemporal {
 	getMonth(month?: TMonth): string;
 	getCurrentMonth(): TMonth;
-	getStartOfMonth(month?: TMonth): TISODateString;
-	getEndOfMonth(month?: TMonth): TISODateString;
+	getStartOfYear(year?: TYear): TISODateString;
+	getEndOfYear(year?: TYear): TISODateString;
+	getStartOfMonth(month?: TMonth, year?: TYear): TISODateString;
+	getEndOfMonth(month?: TMonth, year?: TYear): TISODateString;
 	getStartOfDay(): TISODateString;
 	getEndOfDay(): TISODateString;
 	getTimezone(): string;

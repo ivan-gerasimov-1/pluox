@@ -8,6 +8,7 @@ import type {
 	ITemporal,
 	TISODateString,
 	TMonth,
+	TYear,
 } from '@root/core/domain/temporal/types';
 import { monthGuard } from '@root/core/infrastructure/temporal/typeGuards';
 import { InvalidMonthError } from '@root/core/infrastructure/temporal/errors';
@@ -50,19 +51,37 @@ export class Temporal implements ITemporal {
 		return month;
 	}
 
-	public getStartOfMonth(month?: TMonth): TISODateString {
+	public getStartOfMonth(month?: TMonth, year?: TYear): TISODateString {
 		return this.#dateFn({
 			month,
+			year,
 		})
 			.startOf('month')
 			.toISOString();
 	}
 
-	public getEndOfMonth(month?: TMonth): TISODateString {
+	public getEndOfMonth(month?: TMonth, year?: TYear): TISODateString {
 		return this.#dateFn({
 			month,
+			year,
 		})
 			.endOf('month')
+			.toISOString();
+	}
+
+	public getStartOfYear(year?: TYear): TISODateString {
+		return this.#dateFn({
+			year,
+		})
+			.startOf('year')
+			.toISOString();
+	}
+
+	public getEndOfYear(year?: TYear): TISODateString {
+		return this.#dateFn({
+			year,
+		})
+			.endOf('year')
 			.toISOString();
 	}
 
