@@ -29,7 +29,6 @@ import { UserDataSource } from '@root/core/modules/user/infrastructure/userDataS
 import { AuthService } from '@root/core/modules/identity/application/authService/authService';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
-import { TotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';
 import { CreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/createExpenseUseCase';
 import { UpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
@@ -42,7 +41,6 @@ import { CategoryRepository } from '@root/core/modules/category/infrastructure/c
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
 import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
-import { DailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
 import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
 import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
@@ -328,24 +326,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CURRENCY_RATE_SERVICE,
 					EServiceToken.TEMPORAL,
-				],
-			},
-			{
-				token: EServiceToken.TOTAL_AMOUNT_USE_CASE,
-				useClass: TotalAmountUseCase,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CURRENCY_RATE_SERVICE,
-				],
-			},
-			{
-				token: EServiceToken.DAILY_AMOUNT_USE_CASE,
-				useClass: DailyAmountUseCase,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.TEMPORAL,
-					EServiceToken.CURRENCY_RATE_SERVICE,
-					EServiceToken.APP_CONFIG,
 				],
 			},
 			{

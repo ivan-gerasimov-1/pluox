@@ -19,7 +19,6 @@ import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expe
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
 import type { IUserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/types';
-import type { ITotalAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/totalAmountUseCase/totalAmountUseCase';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type {
 	IEnvironment,
@@ -38,7 +37,6 @@ import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
 import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
@@ -142,12 +140,10 @@ export enum EServiceToken {
 
 	TEMPORAL = 'Temporal',
 
-	TOTAL_AMOUNT_USE_CASE = 'TotalAmountUseCase',
 	EXPENSE_CREATE_USE_CASE = 'ExpenseCreateUseCase',
 	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
 	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
 	MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE = 'MonthlyExpensesByCategoryUseCase',
-	DAILY_AMOUNT_USE_CASE = 'DailyAmountUseCase',
 
 	SYNC_SERVICE = 'SyncService',
 }
@@ -212,14 +208,12 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_RATE_DATASOURCE]: ICurrencyRateDataSource;
 	[EServiceToken.CURRENCY_RATE_SERVICE]: ICurrencyRateService;
 
-	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;
 	[EServiceToken.TEMPORAL]: ITemporal;
 
 	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
 	[EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE]: IMonthlyExpensesByCategoryUseCase;
-	[EServiceToken.DAILY_AMOUNT_USE_CASE]: IDailyAmountUseCase;
 
 	[EServiceToken.SYNC_SERVICE]: ISyncService;
 }
