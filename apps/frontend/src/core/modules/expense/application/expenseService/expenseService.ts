@@ -1,12 +1,9 @@
-import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { Id } from '@root/core/domain/types';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 import type {
 	TExpenseDTO,
 	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
-import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
 import type {
 	IMonthlyExpensesByCategoryUseCase,
@@ -21,9 +18,6 @@ import type { IExpenseAmountService } from '@root/core/modules/expense/applicati
 
 export class ExpenseService implements IExpenseService {
 	constructor(
-		private readonly expenseRepository: IExpenseRepository,
-		private readonly categoryService: ICategoryService,
-		private readonly deleteExpenseUseCase: IDeleteExpenseUseCase,
 		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
 		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
 		private readonly expenseGroupingService: IExpenseGroupingService,
@@ -33,19 +27,6 @@ export class ExpenseService implements IExpenseService {
 	/** @deprecated */
 	public updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService {
 		this.updateExpenseUseCase.execute(id, payload);
-
-		return this;
-	}
-
-	/** @deprecated */
-	public deleteExpense(id: Id): IExpenseService {
-		let expense = this.expenseRepository.findById(id);
-
-		this.deleteExpenseUseCase.execute(id);
-
-		if (expense?.category) {
-			this.categoryService.decreaseWeight(expense.category);
-		}
 
 		return this;
 	}

@@ -9,8 +9,6 @@ import type { TExpenseGroupByDate } from '@root/core/modules/expense/application
 
 export interface IExpenseService {
 	/** @deprecated */
-	deleteExpense(id: Id): IExpenseService;
-	/** @deprecated */
 	updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService;
 
 	getTotalByYear(year?: TYear): number;

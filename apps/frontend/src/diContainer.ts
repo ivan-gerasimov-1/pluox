@@ -318,7 +318,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_DELETE_USE_CASE,
 				useClass: DeleteExpenseUseCase,
-				deps: [EServiceToken.EXPENSE_REPOSITORY],
+				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.CATEGORY_SERVICE,
+				],
 			},
 			{
 				token: EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
@@ -334,9 +337,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.EXPENSE_SERVICE,
 				useClass: ExpenseService,
 				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORY_SERVICE,
-					EServiceToken.EXPENSE_DELETE_USE_CASE,
 					EServiceToken.EXPENSE_UPDATE_USE_CASE,
 					EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
 					EServiceToken.EXPENSE_GROUPING_SERVICE,

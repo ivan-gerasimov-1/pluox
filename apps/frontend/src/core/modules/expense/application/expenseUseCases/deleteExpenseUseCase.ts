@@ -1,14 +1,24 @@
-import type { IUseCase } from '@root/core/domain/types';
+import type { Id, IUseCase } from '@root/core/domain/types';
+import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export interface IDeleteExpenseUseCase extends IUseCase {
-	execute(id: string): void;
+	execute(id: Id): void;
 }
 
 export class DeleteExpenseUseCase implements IDeleteExpenseUseCase {
-	constructor(private readonly expenseRepository: IExpenseRepository) {}
+	constructor(
+		private readonly expenseRepository: IExpenseRepository,
+		private readonly categoryService: ICategoryService,
+	) {}
 
-	public execute(id: string): void {
+	public execute(id: Id): void {
+		let expense = this.expenseRepository.findById(id);
+
 		this.expenseRepository.remove(id);
+
+		if (expense?.category) {
+			this.categoryService.decreaseWeight(expense.category);
+		}
 	}
 }
