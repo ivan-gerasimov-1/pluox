@@ -60,6 +60,7 @@ import { SessionFactory } from '@root/core/modules/identity/domain/session/sessi
 import { SyncService } from '@root/core/modules/sync/application/syncService/syncService';
 import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
+import { ExpenseGroupingService } from '@root/core/modules/expense/domain/expenseGroupingService/expenseGroupingService';
 
 let globalContainer: IContainer;
 
@@ -367,6 +368,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE,
 					EServiceToken.DAILY_AMOUNT_USE_CASE,
 				],
+			},
+			{
+				token: EServiceToken.EXPENSE_GROUPING_SERVICE,
+				useClass: ExpenseGroupingService,
 			},
 		)
 		/**

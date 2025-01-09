@@ -54,6 +54,7 @@ import type { ISessionDataSource } from '@root/core/modules/identity/infrastruct
 import type { ISessionFactory } from '@root/core/modules/identity/domain/session/types';
 import type { ISyncService } from '@root/core/modules/sync/application/syncService/types';
 import type { IAuthTokenFactory } from '@root/core/modules/identity/domain/authToken/types';
+import type { IExpenseGroupingService } from '@root/core/modules/expense/domain/expenseGroupingService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -120,6 +121,7 @@ export enum EServiceToken {
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
 	EXPENSE_SERVICE = 'ExpenseService',
 	EXPENSE_MAPPER = 'ExpenseMapper',
+	EXPENSE_GROUPING_SERVICE = 'ExpenseGroupingService',
 
 	LAUNCH_CONTROL = 'LaunchControl',
 
@@ -183,6 +185,7 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
 	[EServiceToken.EXPENSE_SERVICE]: IExpenseService;
 	[EServiceToken.EXPENSE_MAPPER]: IExpenseMapper;
+	[EServiceToken.EXPENSE_GROUPING_SERVICE]: IExpenseGroupingService;
 
 	[EServiceToken.APP_CONFIG_DATASOURCE]: IAppConfigDataSource;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
@@ -211,6 +214,7 @@ export interface IServiceMap {
 
 	[EServiceToken.TOTAL_AMOUNT_USE_CASE]: ITotalAmountUseCase;
 	[EServiceToken.TEMPORAL]: ITemporal;
+
 	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
