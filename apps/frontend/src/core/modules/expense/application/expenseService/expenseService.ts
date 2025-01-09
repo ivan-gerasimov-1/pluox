@@ -16,12 +16,12 @@ import type {
 	IMonthlyExpensesByCategoryUseCase,
 	TMonthlyExpensesByCategory,
 } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
-import type {
-	IGroupExpenseByDateUseCase,
-	TExpenseGroupByDate,
-} from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import type { TYear, TMonth } from '@root/core/domain/temporal/types';
 import type { IDailyAmountUseCase } from '@root/core/modules/expense/domain/expenseUseCases/dailyAmountUseCase';
+import type {
+	IExpenseGroupingService,
+	TExpenseGroupByDate,
+} from '@root/core/modules/expense/application/expenseGroupingService/types';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
@@ -33,8 +33,8 @@ export class ExpenseService implements IExpenseService {
 		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
 		private readonly totalAmountUseCase: ITotalAmountUseCase,
 		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
-		private readonly groupExpenseByDateUseCase: IGroupExpenseByDateUseCase,
 		private readonly dailyAmountUseCase: IDailyAmountUseCase,
+		private readonly expenseGroupingService: IExpenseGroupingService,
 	) {}
 
 	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
@@ -100,6 +100,6 @@ export class ExpenseService implements IExpenseService {
 	}
 
 	public groupExpenseByDate(expenses: TExpenseDTO[]): TExpenseGroupByDate[] {
-		return this.groupExpenseByDateUseCase.execute(expenses);
+		return this.expenseGroupingService.groupByDay(expenses);
 	}
 }

@@ -1,26 +1,11 @@
-import type { IUseCase } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type {
+	IExpenseGroupingService,
+	TExpenseGroupByDate,
+} from '@root/core/modules/expense/application/expenseGroupingService/types';
 
-/** @deprecated */
-export type TExpenseGroupByDate = {
-	date: string;
-	items: TExpenseDTO[];
-};
-
-/** @deprecated */
-export interface IGroupExpenseByDateUseCase extends IUseCase {
-	execute(expenses: TExpenseDTO[]): TExpenseGroupByDate[];
-}
-
-/** @deprecated */
-export class GroupExpenseByDateUseCase implements IGroupExpenseByDateUseCase {
-	public execute(expenses: TExpenseDTO[]): TExpenseGroupByDate[] {
-		return this.groupExpensesByDate(expenses);
-	}
-
-	private groupExpensesByDate(
-		expenseList: TExpenseDTO[],
-	): TExpenseGroupByDate[] {
+export class ExpenseGroupingService implements IExpenseGroupingService {
+	public groupByDay(expenseList: TExpenseDTO[]): TExpenseGroupByDate[] {
 		let groups: Record<string, TExpenseGroupByDate> = {};
 
 		for (let expense of expenseList) {

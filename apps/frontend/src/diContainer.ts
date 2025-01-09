@@ -38,7 +38,6 @@ import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/exp
 import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
 import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
-import { GroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
 import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
@@ -60,7 +59,7 @@ import { SessionFactory } from '@root/core/modules/identity/domain/session/sessi
 import { SyncService } from '@root/core/modules/sync/application/syncService/syncService';
 import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
-import { ExpenseGroupingService } from '@root/core/modules/expense/domain/expenseGroupingService/expenseGroupingService';
+import { ExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
 
 let globalContainer: IContainer;
 
@@ -349,11 +348,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				],
 			},
 			{
-				/** @deprecated */
-				token: EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE,
-				useClass: GroupExpenseByDateUseCase,
-			},
-			{
 				token: EServiceToken.EXPENSE_SERVICE,
 				useClass: ExpenseService,
 				deps: [
@@ -365,8 +359,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.EXPENSE_UPDATE_USE_CASE,
 					EServiceToken.TOTAL_AMOUNT_USE_CASE,
 					EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
-					EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE,
 					EServiceToken.DAILY_AMOUNT_USE_CASE,
+					EServiceToken.EXPENSE_GROUPING_SERVICE,
 				],
 			},
 			{

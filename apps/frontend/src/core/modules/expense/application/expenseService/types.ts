@@ -5,8 +5,8 @@ import type {
 	TExpenseDTO,
 	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { TExpenseGroupByDate } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import type { TMonthlyExpensesByCategory } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
+import type { TExpenseGroupByDate } from '@root/core/modules/expense/application/expenseGroupingService/types';
 
 export interface IExpenseService {
 	createExpense(payload: TExpenseCreateDTO): IExpenseService;

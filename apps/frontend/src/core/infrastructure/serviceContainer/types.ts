@@ -35,7 +35,6 @@ import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expen
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 import type { ICategoryServiceFactory } from '@root/core/modules/category/application/categoryService/factory';
 import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
-import type { IGroupExpenseByDateUseCase } from '@root/core/modules/expense/domain/expenseUseCases/groupExpensesByDayUseCase';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
@@ -54,7 +53,7 @@ import type { ISessionDataSource } from '@root/core/modules/identity/infrastruct
 import type { ISessionFactory } from '@root/core/modules/identity/domain/session/types';
 import type { ISyncService } from '@root/core/modules/sync/application/syncService/types';
 import type { IAuthTokenFactory } from '@root/core/modules/identity/domain/authToken/types';
-import type { IExpenseGroupingService } from '@root/core/modules/expense/domain/expenseGroupingService/types';
+import type { IExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -146,8 +145,6 @@ export enum EServiceToken {
 	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
 	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
 	MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE = 'MonthlyExpensesByCategoryUseCase',
-	/** @deprecated */
-	GROUP_EXPENSE_BY_DATE_USE_CASE = 'GroupExpensesByDateUseCase',
 	DAILY_AMOUNT_USE_CASE = 'DailyAmountUseCase',
 
 	SYNC_SERVICE = 'SyncService',
@@ -219,8 +216,6 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
 	[EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE]: IMonthlyExpensesByCategoryUseCase;
-	/** @deprecated */
-	[EServiceToken.GROUP_EXPENSE_BY_DATE_USE_CASE]: IGroupExpenseByDateUseCase;
 	[EServiceToken.DAILY_AMOUNT_USE_CASE]: IDailyAmountUseCase;
 
 	[EServiceToken.SYNC_SERVICE]: ISyncService;
