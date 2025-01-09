@@ -5,13 +5,13 @@ import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
 
 export class Expense extends Entity implements IExpense {
-	readonly #userId: Id;
-	readonly #amount: number;
-	readonly #currency: ECurrency;
-	readonly #description: TDescription;
-	readonly #category: TCategory;
-	readonly #date: TISODateString;
-	readonly #timezone: string;
+	#userId: Id;
+	#amount: number;
+	#currency: ECurrency;
+	#description: TDescription;
+	#category: TCategory;
+	#date: TISODateString;
+	#timezone: string;
 
 	private constructor(
 		id: Id,
@@ -44,20 +44,50 @@ export class Expense extends Entity implements IExpense {
 		return this.#amount;
 	}
 
+	public set amount(amount: number) {
+		this.#amount = amount;
+
+		this.touch();
+	}
+
 	public get currency(): ECurrency {
 		return this.#currency;
+	}
+
+	public set currency(currency: ECurrency) {
+		this.#currency = currency;
+
+		this.touch();
 	}
 
 	public get category(): TCategory {
 		return this.#category;
 	}
 
+	public set category(category: TCategory) {
+		this.#category = category;
+
+		this.touch();
+	}
+
 	public get date(): TISODateString {
 		return this.#date;
 	}
 
+	public set date(date: TISODateString) {
+		this.#date = date;
+
+		this.touch();
+	}
+
 	public get description(): TDescription {
 		return this.#description;
+	}
+
+	public set description(description: TDescription) {
+		this.#description = description;
+
+		this.touch();
 	}
 
 	public get timezone(): string {

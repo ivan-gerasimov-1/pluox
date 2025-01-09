@@ -6,11 +6,12 @@ import type { ECurrency } from '@root/core/modules/currency/domain/types';
 export interface IExpense extends IEntity {
 	readonly userId: string;
 
-	readonly amount: number;
-	readonly currency: ECurrency;
+	amount: number;
+	currency: ECurrency;
 
-	readonly category: TCategory;
-	readonly description: TDescription;
-	readonly date: TISODateString;
+	category: TCategory;
+	description: TDescription;
+
+	date: TISODateString;
 	readonly timezone: string;
 }
