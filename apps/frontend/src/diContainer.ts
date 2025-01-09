@@ -35,7 +35,6 @@ import { UpdateExpenseUseCase } from '@root/core/modules/expense/application/exp
 import { DeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
 import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
 import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
-import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/application/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
 import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
@@ -328,20 +327,9 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				],
 			},
 			{
-				token: EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
-				useClass: MonthlyExpensesByCategoryUseCase,
-				deps: [
-					EServiceToken.APP_CONFIG,
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CURRENCY_RATE_SERVICE,
-					EServiceToken.TEMPORAL,
-				],
-			},
-			{
 				token: EServiceToken.EXPENSE_SERVICE,
 				useClass: ExpenseService,
 				deps: [
-					EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE,
 					EServiceToken.EXPENSE_GROUPING_SERVICE,
 					EServiceToken.EXPENSE_AMOUNT_SERVICE,
 				],

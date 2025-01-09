@@ -30,7 +30,6 @@ import type { ICreateExpenseUseCase } from '@root/core/modules/expense/applicati
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
-import type { IMonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/application/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 import type { ICategoryServiceFactory } from '@root/core/modules/category/application/categoryService/factory';
 import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
@@ -143,7 +142,6 @@ export enum EServiceToken {
 	EXPENSE_CREATE_USE_CASE = 'ExpenseCreateUseCase',
 	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
 	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
-	MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE = 'MonthlyExpensesByCategoryUseCase',
 
 	SYNC_SERVICE = 'SyncService',
 }
@@ -213,7 +211,6 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
-	[EServiceToken.MONTHLY_EXPENSES_BY_CATEGORY_USE_CASE]: IMonthlyExpensesByCategoryUseCase;
 
 	[EServiceToken.SYNC_SERVICE]: ISyncService;
 }
