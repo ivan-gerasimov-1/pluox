@@ -17,9 +17,11 @@ export const QUERY_EXPENSES_MONTHLY_AMOUNT =
 export const QUERY_EXPENSES_DAILY_AMOUNT = Symbol('dailyAmount').description;
 
 export function addOne(payload: TExpenseCreateDTO): void {
-	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
+	let createExpenseUseCase = resolveService(
+		EServiceToken.EXPENSE_CREATE_USE_CASE,
+	);
 
-	expenseService.createExpense(payload);
+	createExpenseUseCase.execute(payload);
 }
 
 export function updateOne(id: Id, payload: TExpenseUpdateDTO): void {

@@ -5,6 +5,8 @@ import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/d
 import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
+import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 
 export interface ICreateExpenseUseCase extends IUseCase {
 	execute(expense: TExpenseCreateDTO): IExpense;
@@ -12,12 +14,26 @@ export interface ICreateExpenseUseCase extends IUseCase {
 
 export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 	constructor(
+		private readonly expenseRepository: IExpenseRepository,
+		private readonly categoryService: ICategoryService,
 		private readonly sessionService: ISessionService,
 		private readonly idGenerator: IIdGenerator,
 		private readonly temporal: ITemporal,
 	) {}
 
 	public execute(payload: TExpenseCreateDTO): IExpense {
+		let expense = this.createExpense(payload);
+
+		this.expenseRepository.save(expense);
+
+		if (expense.category) {
+			this.categoryService.increaseWeight(expense.category);
+		}
+
+		return expense;
+	}
+
+	private createExpense(expenseCreateDTO: TExpenseCreateDTO): IExpense {
 		let id = this.idGenerator.getId();
 		let userId = this.sessionService.userId;
 		let currentDate = this.temporal.getISODateString();
@@ -26,14 +42,14 @@ export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 		let expense = Expense.create(
 			id,
 			userId,
-			payload.amount,
-			payload.currency,
-			payload.description,
-			payload.category,
+			expenseCreateDTO.amount,
+			expenseCreateDTO.currency,
+			expenseCreateDTO.description,
+			expenseCreateDTO.category,
 			timezone,
 			currentDate,
 			currentDate,
-			payload.date,
+			expenseCreateDTO.date,
 		);
 
 		return expense;

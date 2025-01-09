@@ -1,14 +1,11 @@
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { Id } from '@root/core/domain/types';
-import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
 import type {
-	TExpenseCreateDTO,
 	TExpenseDTO,
 	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
-import type { ICreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/createExpenseUseCase';
 import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
 import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
 import type {
@@ -24,29 +21,14 @@ import type { IExpenseAmountService } from '@root/core/modules/expense/applicati
 
 export class ExpenseService implements IExpenseService {
 	constructor(
-		private readonly appConfig: IAppConfig,
 		private readonly expenseRepository: IExpenseRepository,
 		private readonly categoryService: ICategoryService,
-		private readonly createExpenseUseCase: ICreateExpenseUseCase,
 		private readonly deleteExpenseUseCase: IDeleteExpenseUseCase,
 		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
 		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
 		private readonly expenseGroupingService: IExpenseGroupingService,
 		private readonly expenseAmountService: IExpenseAmountService,
 	) {}
-
-	/** @deprecated */
-	public createExpense(payload: TExpenseCreateDTO): IExpenseService {
-		let expense = this.createExpenseUseCase.execute(payload);
-
-		this.expenseRepository.save(expense);
-
-		if (expense.category) {
-			this.categoryService.increaseWeight(expense.category);
-		}
-
-		return this;
-	}
 
 	/** @deprecated */
 	public updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService {
