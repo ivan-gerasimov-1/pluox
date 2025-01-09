@@ -32,8 +32,9 @@ export class ExpenseService implements IExpenseService {
 
 	public getMonthlyExpensesByCategory(
 		month: TMonth,
+		year: TYear = new Date().getFullYear(),
 	): TMonthlyAmountByCategory[] {
-		return this.expenseAmountService.getMonthlyAmountByCategory(month);
+		return this.expenseAmountService.getMonthlyAmountByCategory(month, year);
 	}
 
 	public groupExpenseByDate(expenses: TExpenseDTO[]): TExpenseGroupByDate[] {

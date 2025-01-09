@@ -6,7 +6,10 @@ export interface IExpenseAmountService {
 	getMonthlyAmount(month?: TMonth, year?: TYear): number;
 	getYearlyAmount(year?: TYear): number;
 
-	getMonthlyAmountByCategory(month: TMonth): TMonthlyAmountByCategory[];
+	getMonthlyAmountByCategory(
+		month: TMonth,
+		year?: TYear,
+	): TMonthlyAmountByCategory[];
 }
 
 export type TMonthlyAmountByCategory = {

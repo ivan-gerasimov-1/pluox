@@ -46,7 +46,10 @@ export class ExpenseAmountService implements IExpenseAmountService {
 	 * 1. Add year
 	 * 2. Move grouping by category to ExpenseGroupingService
 	 */
-	public getMonthlyAmountByCategory(month: TMonth): TMonthlyAmountByCategory[] {
+	public getMonthlyAmountByCategory(
+		month: TMonth,
+		year?: TYear,
+	): TMonthlyAmountByCategory[] {
 		let currency = this.appConfig.currency;
 
 		let totalAmount = 0;
@@ -60,8 +63,8 @@ export class ExpenseAmountService implements IExpenseAmountService {
 			}
 		> = {};
 
-		let startDate = this.temporal.getStartOfMonth(month);
-		let endDate = this.temporal.getEndOfMonth(month);
+		let startDate = this.temporal.getStartOfMonth(month, year);
+		let endDate = this.temporal.getEndOfMonth(month, year);
 
 		let expenses = this.expenseRepository.findMany({
 			filter: {

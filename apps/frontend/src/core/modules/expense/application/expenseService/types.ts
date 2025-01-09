@@ -8,7 +8,10 @@ export interface IExpenseService {
 	getTotalByMonth(month: TMonth, year?: TYear): number;
 	getTotalByDay(): number;
 
-	getMonthlyExpensesByCategory(month: TMonth): TMonthlyAmountByCategory[];
+	getMonthlyExpensesByCategory(
+		month: TMonth,
+		year?: TYear,
+	): TMonthlyAmountByCategory[];
 
 	groupExpenseByDate(expenses: TExpenseDTO[]): TExpenseGroupByDate[];
 }
