@@ -5,6 +5,7 @@ import type {
 } from '@root/core/domain/temporal/types';
 import type { Id } from '@root/core/domain/types';
 import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type {
 	IExpenseAmountService,
 	TMonthlyAmountByCategory,
@@ -41,39 +42,15 @@ export class ExpenseAmountService implements IExpenseAmountService {
 		return this.getAmount(startOfYear, endOfYear);
 	}
 
-	/**
-	 * @todo
-	 * 1. Add year
-	 * 2. Move grouping by category to ExpenseGroupingService
-	 */
 	public getMonthlyAmountByCategory(
-		month: TMonth,
-		year?: TYear,
+		expenses: TExpenseDTO[],
 	): TMonthlyAmountByCategory[] {
 		let currency = this.appConfig.currency;
 
 		let totalAmount = 0;
+		let expensesByCategory: Record<Id, TMonthlyAmountByCategory> = {};
 
-		let expensesByCategory: Record<
-			Id,
-			{
-				id: Id;
-				total: number;
-				percentage: number;
-			}
-		> = {};
-
-		let startDate = this.temporal.getStartOfMonth(month, year);
-		let endDate = this.temporal.getEndOfMonth(month, year);
-
-		let expenses = this.expenseRepository.findMany({
-			filter: {
-				dateFrom: startDate,
-				dateTo: endDate,
-			},
-		});
-
-		for (let expense of expenses.items) {
+		for (let expense of expenses) {
 			let category = expense.category || '—';
 
 			if (!expensesByCategory[category]) {
@@ -84,15 +61,14 @@ export class ExpenseAmountService implements IExpenseAmountService {
 				};
 			}
 
-			expensesByCategory[category].total += this.currencyRatesService.convert(
+			let expenseAmount = this.currencyRatesService.convert(
 				expense.amount,
 				expense.currency,
 				currency,
 			);
-		}
 
-		for (let category in expensesByCategory) {
-			totalAmount += expensesByCategory[category].total;
+			expensesByCategory[category].total += expenseAmount;
+			totalAmount += expenseAmount;
 		}
 
 		for (let category in expensesByCategory) {
@@ -100,13 +76,15 @@ export class ExpenseAmountService implements IExpenseAmountService {
 				(expensesByCategory[category].total / totalAmount) * 100;
 		}
 
-		let result = Object.values(expensesByCategory);
-
-		return result.sort((a, b) => b.total - a.total);
+		// prettier-ignore
+		return Object //
+			.values(expensesByCategory)
+			.sort((a, b) => b.total - a.total);
 	}
 
 	private getAmount(startDate: string, endDate: string): number {
 		let total = 0;
+
 		let targetCurrency = this.appConfig.currency;
 		let expenses = this.expenseRepository.findMany({
 			filter: {

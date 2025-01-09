@@ -25,7 +25,7 @@ export function ExpensesByCategory(props: TExpensesByCategory) {
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 
-	let expenses = expenseService.getMonthlyExpensesByCategory(props.month);
+	let expenses = expenseService.getMonthlyTotalByCategory(props.month);
 	let expensesToRender = showAll ? expenses : expenses.slice(0, 3);
 	let showMoreButton = expenses.length >= 4;
 

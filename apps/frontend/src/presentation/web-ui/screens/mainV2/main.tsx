@@ -1,49 +1,38 @@
+import { useQuery } from '@tanstack/react-query';
+
+import { cls } from '@root/presentation/web-ui/utils/classnames';
+
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-import { MoneySpentMonth } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/MoneySpentMonth';
-import { MoneySpentYear } from '@root/presentation/web-ui/modules/expenses/MoneySpentYear/MoneySpentYear';
-import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
+import {
+	getBudget,
+	QUERY_APP_CONFIG_BUDGET,
+} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+import {
+	getDailyAmount,
+	getMonthlyAmount,
+	QUERY_EXPENSES_DAILY_AMOUNT,
+	QUERY_EXPENSES_MONTHLY_AMOUNT,
+} from '@root/presentation/web-ui/modules/expenses/expenses.query';
 
+import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionSheet';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
-import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
-import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 
 import styles from './main.module.css';
-import { useQuery } from '@tanstack/react-query';
-import {
-	getBudget,
-	getMonth,
-	QUERY_APP_CONFIG_BUDGET,
-	QUERY_APP_CONFIG_MONTH,
-} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
-import {
-	QUERY_EXPENSES_DAILY_AMOUNT,
-	QUERY_EXPENSES_MONTHLY_AMOUNT,
-	getDailyAmount,
-	getMonthlyAmount,
-} from '@root/presentation/web-ui/modules/expenses/expenses.query';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { TMonth } from '@root/core/domain/temporal/types';
-import { ECurrency } from '@root/core/modules/currency/domain/types';
 
-function useCurrentMonth(): TMonth {
+function useMonthlyAmount(): number {
+	let temporal = useService(EServiceToken.TEMPORAL);
+
+	let currentMonth = temporal.getCurrentMonth();
+
 	let { data } = useQuery({
-		queryKey: [QUERY_APP_CONFIG_MONTH],
-		queryFn: getMonth,
-	});
-
-	return data as TMonth;
-}
-
-function useMonthlyAmount(month: TMonth): number {
-	let { data } = useQuery({
-		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, month],
-		queryFn: () => getMonthlyAmount(month),
+		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, currentMonth],
+		queryFn: () => getMonthlyAmount(currentMonth),
 		refetchOnMount: false,
 	});
 
@@ -68,24 +57,26 @@ function useDailyAmount(): number {
 	return data ?? 0;
 }
 
-function useCategories(month: TMonth) {
+function useCategories() {
+	let temporal = useService(EServiceToken.TEMPORAL);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 
-	return expenseService.getMonthlyExpensesByCategory(month);
+	let currentMonth = temporal.getCurrentMonth();
+
+	return expenseService.getMonthlyTotalByCategory(currentMonth);
 }
 
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
-	let currentMonth = useCurrentMonth();
-	let monthlyTotal = useMonthlyAmount(currentMonth);
+	let categories = useCategories();
+
+	let monthlyTotal = useMonthlyAmount();
 	let dailyTotal = useDailyAmount();
 	let budget = useBudget();
 
 	let leftover = budget - monthlyTotal;
-
-	let categories = useCategories(currentMonth);
 
 	return (
 		<>

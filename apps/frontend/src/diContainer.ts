@@ -330,6 +330,8 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.EXPENSE_SERVICE,
 				useClass: ExpenseService,
 				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.TEMPORAL,
 					EServiceToken.EXPENSE_GROUPING_SERVICE,
 					EServiceToken.EXPENSE_AMOUNT_SERVICE,
 				],

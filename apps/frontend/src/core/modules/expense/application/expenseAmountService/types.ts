@@ -1,5 +1,6 @@
 import type { TMonth, TYear } from '@root/core/domain/temporal/types';
 import type { Id } from '@root/core/domain/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 export interface IExpenseAmountService {
 	getDailyAmount(): number;
@@ -7,8 +8,7 @@ export interface IExpenseAmountService {
 	getYearlyAmount(year?: TYear): number;
 
 	getMonthlyAmountByCategory(
-		month: TMonth,
-		year?: TYear,
+		expenses: TExpenseDTO[],
 	): TMonthlyAmountByCategory[];
 }
 
