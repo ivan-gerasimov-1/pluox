@@ -1,6 +1,8 @@
+import type { TCategory } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type {
 	IExpenseGroupingService,
+	TExpenseGroupByCategory,
 	TExpenseGroupByDate,
 } from '@root/core/modules/expense/application/expenseGroupingService/types';
 
@@ -44,5 +46,26 @@ export class ExpenseGroupingService implements IExpenseGroupingService {
 
 				return state;
 			}, [] as TExpenseGroupByDate[]);
+	}
+
+	public groupByCategory(
+		expenseList: TExpenseDTO[],
+	): TExpenseGroupByCategory[] {
+		let result: Record<TCategory, TExpenseGroupByCategory> = {};
+
+		for (let expense of expenseList) {
+			let category = expense.category ?? '—';
+
+			if (!result[category]) {
+				result[category] = {
+					category,
+					items: [],
+				};
+			}
+
+			result[category].items.push(expense);
+		}
+
+		return Object.values(result);
 	}
 }
