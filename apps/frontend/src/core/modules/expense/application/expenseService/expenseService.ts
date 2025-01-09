@@ -9,7 +9,7 @@ import type { IExpenseService } from '@root/core/modules/expense/application/exp
 import type {
 	IMonthlyExpensesByCategoryUseCase,
 	TMonthlyExpensesByCategory,
-} from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
+} from '@root/core/modules/expense/application/expenseUseCases/monthlyExpensesByCategoryUseCase';
 
 export class ExpenseService implements IExpenseService {
 	constructor(

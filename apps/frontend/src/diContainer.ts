@@ -35,7 +35,7 @@ import { UpdateExpenseUseCase } from '@root/core/modules/expense/application/exp
 import { DeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
 import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
 import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
-import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
+import { MonthlyExpensesByCategoryUseCase } from '@root/core/modules/expense/application/expenseUseCases/monthlyExpensesByCategoryUseCase';
 import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
 import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
 import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
