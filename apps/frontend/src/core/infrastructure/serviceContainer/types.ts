@@ -54,6 +54,7 @@ import type { ISessionFactory } from '@root/core/modules/identity/domain/session
 import type { ISyncService } from '@root/core/modules/sync/application/syncService/types';
 import type { IAuthTokenFactory } from '@root/core/modules/identity/domain/authToken/types';
 import type { IExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/types';
+import type { IExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -121,6 +122,7 @@ export enum EServiceToken {
 	EXPENSE_SERVICE = 'ExpenseService',
 	EXPENSE_MAPPER = 'ExpenseMapper',
 	EXPENSE_GROUPING_SERVICE = 'ExpenseGroupingService',
+	EXPENSE_AMOUNT_SERVICE = 'ExpenseAmountService',
 
 	LAUNCH_CONTROL = 'LaunchControl',
 
@@ -183,6 +185,7 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_SERVICE]: IExpenseService;
 	[EServiceToken.EXPENSE_MAPPER]: IExpenseMapper;
 	[EServiceToken.EXPENSE_GROUPING_SERVICE]: IExpenseGroupingService;
+	[EServiceToken.EXPENSE_AMOUNT_SERVICE]: IExpenseAmountService;
 
 	[EServiceToken.APP_CONFIG_DATASOURCE]: IAppConfigDataSource;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;

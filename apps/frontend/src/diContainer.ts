@@ -60,6 +60,7 @@ import { SyncService } from '@root/core/modules/sync/application/syncService/syn
 import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
 import { ExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
+import { ExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/expenseAmountService';
 
 let globalContainer: IContainer;
 
@@ -366,6 +367,16 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_GROUPING_SERVICE,
 				useClass: ExpenseGroupingService,
+			},
+			{
+				token: EServiceToken.EXPENSE_AMOUNT_SERVICE,
+				useClass: ExpenseAmountService,
+				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.TEMPORAL,
+					EServiceToken.CURRENCY_RATE_SERVICE,
+					EServiceToken.APP_CONFIG,
+				],
 			},
 		)
 		/**
