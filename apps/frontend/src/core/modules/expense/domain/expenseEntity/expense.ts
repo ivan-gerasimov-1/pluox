@@ -9,7 +9,7 @@ export class Expense extends Entity implements IExpense {
 	#amount: number;
 	#currency: ECurrency;
 	#description: TDescription;
-	#category: TCategory;
+	#category: TCategory | null;
 	#date: TISODateString;
 	#timezone: string;
 
@@ -19,7 +19,7 @@ export class Expense extends Entity implements IExpense {
 		amount: number,
 		currency: ECurrency,
 		description: TDescription,
-		category: TCategory,
+		category: TCategory | null,
 		timezone: string,
 		createdAt: TISODateString,
 		modifiedAt?: TISODateString,
@@ -60,7 +60,7 @@ export class Expense extends Entity implements IExpense {
 		this.touch();
 	}
 
-	public get category(): TCategory {
+	public get category(): TCategory | null {
 		return this.#category;
 	}
 
@@ -100,7 +100,7 @@ export class Expense extends Entity implements IExpense {
 		amount: number,
 		currency: ECurrency,
 		description: TDescription,
-		category: TCategory = null,
+		category: TCategory | null,
 		timezone: string,
 		createdAt: TISODateString,
 		modifiedAt?: TISODateString,

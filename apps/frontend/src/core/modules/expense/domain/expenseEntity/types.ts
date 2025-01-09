@@ -9,7 +9,7 @@ export interface IExpense extends IEntity {
 	amount: number;
 	currency: ECurrency;
 
-	category: TCategory;
+	category: TCategory | null;
 	description: TDescription;
 
 	date: TISODateString;

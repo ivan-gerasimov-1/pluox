@@ -48,8 +48,8 @@ export class UpdateExpenseUseCase implements IUpdateExpenseUseCase {
 	}
 
 	private updateCategoryWeights(
-		prevCategory: TCategory,
-		newCategory: TCategory,
+		prevCategory: TCategory | null,
+		newCategory: TCategory | null,
 	): void {
 		if (prevCategory) {
 			this.categoryService.decreaseWeight(prevCategory);

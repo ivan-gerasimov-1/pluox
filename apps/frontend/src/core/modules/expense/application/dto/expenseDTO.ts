@@ -12,7 +12,7 @@ export type TExpenseDTO = {
 	amount: number;
 	currency: ECurrency;
 	description: TDescription;
-	category: TCategory;
+	category: TCategory | null;
 	date: TISODateString;
 	createdAt: TISODateString;
 	modifiedAt: TISODateString;

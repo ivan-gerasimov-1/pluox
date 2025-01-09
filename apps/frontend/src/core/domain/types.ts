@@ -1,5 +1,5 @@
 export type Id = string;
-export type TCategory = string | null;
+export type TCategory = string;
 export type TDescription = string | undefined;
 
 export interface IUseCase {

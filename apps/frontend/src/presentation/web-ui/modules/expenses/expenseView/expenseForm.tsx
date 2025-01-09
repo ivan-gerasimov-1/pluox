@@ -18,14 +18,14 @@ export type TExpenseFormProps = {
 		amount: number;
 		currency: ECurrency;
 		description: TDescription;
-		category: TCategory;
+		category: TCategory | null;
 		date: TISODateString;
 	}): void;
 
 	amount: number;
 	currency: ECurrency;
 	description: TDescription;
-	category: TCategory;
+	category: TCategory | null;
 	date: TISODateString;
 };
 
@@ -186,7 +186,7 @@ type TExpenseFormReducerState = {
 	amount: number;
 	currency: ECurrency;
 	description: TDescription;
-	category: TCategory;
+	category: TCategory | null;
 	date: TISODateString;
 };
 
