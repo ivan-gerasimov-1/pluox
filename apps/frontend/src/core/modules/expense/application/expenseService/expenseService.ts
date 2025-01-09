@@ -1,36 +1,22 @@
-import type { Id } from '@root/core/domain/types';
-import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
-import type {
-	TExpenseDTO,
-	TExpenseUpdateDTO,
-} from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
-import type {
-	IMonthlyExpensesByCategoryUseCase,
-	TMonthlyExpensesByCategory,
-} from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
-import type { TYear, TMonth } from '@root/core/domain/temporal/types';
+import type { TMonth, TYear } from '@root/core/domain/temporal/types';
+import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { IExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/types';
 import type {
 	IExpenseGroupingService,
 	TExpenseGroupByDate,
 } from '@root/core/modules/expense/application/expenseGroupingService/types';
-import type { IExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/types';
+import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
+import type {
+	IMonthlyExpensesByCategoryUseCase,
+	TMonthlyExpensesByCategory,
+} from '@root/core/modules/expense/domain/expenseUseCases/monthlyExpensesByCategoryUseCase';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
-		private readonly updateExpenseUseCase: IUpdateExpenseUseCase,
 		private readonly monthlyExpensesByCategoryUseCase: IMonthlyExpensesByCategoryUseCase,
 		private readonly expenseGroupingService: IExpenseGroupingService,
 		private readonly expenseAmountService: IExpenseAmountService,
 	) {}
-
-	/** @deprecated */
-	public updateExpense(id: Id, payload: TExpenseUpdateDTO): IExpenseService {
-		this.updateExpenseUseCase.execute(id, payload);
-
-		return this;
-	}
-
 	public getTotalByYear(year: TYear = new Date().getFullYear()): number {
 		return this.expenseAmountService.getYearlyAmount(year);
 	}
