@@ -314,6 +314,10 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_UPDATE_USE_CASE,
 				useClass: UpdateExpenseUseCase,
+				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.CATEGORY_SERVICE,
+				],
 			},
 			{
 				token: EServiceToken.EXPENSE_DELETE_USE_CASE,
