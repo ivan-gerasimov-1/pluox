@@ -4,7 +4,6 @@ import type { ICategoryService } from '@root/core/modules/category/application/c
 import type { ICategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
-import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export interface ICategoryServiceFactory {
@@ -17,17 +16,13 @@ export interface ICategoryServiceFactory {
 export class CategoryServiceFactory {
 	constructor(
 		private readonly categoryRepository: ICategoryRepository,
-		private readonly categoryMapper: ICategoryMapper,
 		private readonly temporal: ITemporal,
 		private readonly expenseRepository: IExpenseRepository,
 		private readonly categoryUseCase: ICategoryUseCase,
 	) {}
 
 	public create(): ICategoryService {
-		let categoryService = new CategoryService(
-			this.categoryRepository,
-			this.categoryMapper,
-		);
+		let categoryService = new CategoryService(this.categoryRepository);
 
 		let weight = 1;
 		let currentDate = this.temporal.getISODateString();

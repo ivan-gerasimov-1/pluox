@@ -396,7 +396,6 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: CategoryServiceFactory,
 				deps: [
 					EServiceToken.CATEGORY_REPOSITORY,
-					EServiceToken.CATEGORY_MAPPER,
 					EServiceToken.TEMPORAL,
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.CATEGORY_USE_CASE,
