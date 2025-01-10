@@ -64,6 +64,11 @@ import type {
 	ICategoryWeightUseCase,
 } from '@root/core/modules/category/application/categoryUseCase/types';
 import type { ICategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/types';
+import type { IVenueQueryService } from '@root/core/modules/venue/application/venueQueryService/types';
+import type { IVenueUseCase } from '@root/core/modules/venue/application/venueUseCase/types';
+import type { IVenueRepository } from '@root/core/modules/venue/domain/venueRepository/types';
+import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/types';
+import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -141,6 +146,12 @@ export enum EServiceToken {
 	EXPENSE_QUERY_SERVICE = 'ExpenseQueryService',
 	EXPENSE_USE_CASE = 'ExpenseUseCase',
 
+	VENUE_REPOSITORY = 'VenueRepository',
+	VENUE_DATASOURCE = 'VenueDataSource',
+	VENUE_MAPPER = 'VenueMapper',
+	VENUE_QUERY_SERVICE = 'VenueQueryService',
+	VENUE_USE_CASE = 'VenueUseCase',
+
 	LAUNCH_CONTROL = 'LaunchControl',
 
 	AUTH_SERVICE = 'AuthService',
@@ -211,6 +222,12 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
 	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
 	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
+
+	[EServiceToken.VENUE_REPOSITORY]: IVenueRepository;
+	[EServiceToken.VENUE_DATASOURCE]: IVenueDataSource;
+	[EServiceToken.VENUE_MAPPER]: IVenueMapper;
+	[EServiceToken.VENUE_QUERY_SERVICE]: IVenueQueryService;
+	[EServiceToken.VENUE_USE_CASE]: IVenueUseCase;
 
 	[EServiceToken.APP_CONFIG_DATASOURCE]: IAppConfigDataSource;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;

@@ -66,6 +66,11 @@ import { CategoryDeleteUseCase } from '@root/core/modules/category/application/c
 import { CategoryUpdateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
 import { CategoryWeightUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryWeightUseCase';
 import { CategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/categoryQueryService';
+import { VenueLocalStorageDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSource';
+import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
+import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
+import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
+import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
 
 let globalContainer: IContainer;
 
@@ -448,6 +453,29 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.CATEGORY_REPOSITORY,
 					EServiceToken.CATEGORY_MAPPER,
 				],
+			},
+		)
+		/** Venue */
+		.register(
+			{
+				token: EServiceToken.VENUE_REPOSITORY,
+				useClass: VenueRepository,
+			},
+			{
+				token: EServiceToken.VENUE_DATASOURCE,
+				useClass: VenueLocalStorageDataSource,
+			},
+			{
+				token: EServiceToken.VENUE_MAPPER,
+				useClass: VenueMapper,
+			},
+			{
+				token: EServiceToken.VENUE_QUERY_SERVICE,
+				useClass: VenueQueryService,
+			},
+			{
+				token: EServiceToken.VENUE_USE_CASE,
+				useClass: VenueUseCase,
 			},
 		)
 		.register({
