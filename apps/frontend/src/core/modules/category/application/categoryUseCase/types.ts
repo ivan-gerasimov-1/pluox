@@ -6,7 +6,7 @@ import type {
 
 export interface ICategoryUseCase {
 	create(categoryCreateDTO: TCategoryCreateDTO): void;
-	update(categoryUpdateDTO: TCategoryUpdateDTO): void;
+	update(id: Id, categoryUpdateDTO: TCategoryUpdateDTO): void;
 	delete(id: Id): void;
 }
 

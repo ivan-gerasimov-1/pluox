@@ -21,8 +21,8 @@ export class CategoryUseCase implements ICategoryUseCase {
 		this.categoryCreateUseCase.execute(categoryCreateDTO);
 	}
 
-	public update(categoryUpdateDTO: TCategoryUpdateDTO): void {
-		this.categoryUpdateUseCase.execute(categoryUpdateDTO);
+	public update(id: Id, categoryUpdateDTO: TCategoryUpdateDTO): void {
+		this.categoryUpdateUseCase.execute(id, categoryUpdateDTO);
 	}
 
 	public delete(id: Id): void {
