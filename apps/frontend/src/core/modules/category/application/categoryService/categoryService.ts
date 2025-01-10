@@ -12,6 +12,7 @@ export class CategoryService implements ICategoryService {
 		private readonly categoryMapper: ICategoryMapper,
 	) {}
 
+	/** @deprecated */
 	public findAll(params?: { useWeights?: boolean }): TCategoryDTO[] {
 		let result = this.categoryRepository.findMany({
 			orderByWeight: params?.useWeights,
@@ -20,6 +21,7 @@ export class CategoryService implements ICategoryService {
 		return result.items;
 	}
 
+	/** @deprecated */
 	public findById(id: Id): ICategory {
 		let category = this.categoryRepository.findById(id);
 
