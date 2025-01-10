@@ -19,6 +19,7 @@ export function runMigrations() {
 	migrateExpenseInStorageToNewFormatAndStorageId();
 	addUserIdToExpense();
 	renameCommentOfExpenseDTOToDescription();
+	addVenueIdToExpense();
 }
 
 /**
@@ -193,4 +194,11 @@ export function renameCommentOfExpenseDTOToDescription(): void {
 
 	expenseDataSource.clear();
 	expenseDataSource.create(expenses);
+}
+
+/**
+ * №8. Add venueId to expense
+ */
+export function addVenueIdToExpense(): void {
+	/** @todo Add implementation */
 }
