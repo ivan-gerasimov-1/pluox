@@ -25,9 +25,6 @@ import type {
 	TProcessEnv,
 } from '@root/core/modules/settings/infrastructure/environment/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
-import type { ICreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/createExpenseUseCase';
-import type { IDeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
@@ -53,6 +50,12 @@ import type { IAuthTokenFactory } from '@root/core/modules/identity/domain/authT
 import type { IExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/types';
 import type { IExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/types';
 import type { IExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/types';
+import type {
+	ICreateExpenseUseCase,
+	IDeleteExpenseUseCase,
+	IExpenseUseCase,
+	IUpdateExpenseUseCase,
+} from '@root/core/modules/expense/application/expenseUseCases/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -122,6 +125,7 @@ export enum EServiceToken {
 	EXPENSE_GROUPING_SERVICE = 'ExpenseGroupingService',
 	EXPENSE_AMOUNT_SERVICE = 'ExpenseAmountService',
 	EXPENSE_QUERY_SERVICE = 'ExpenseQueryService',
+	EXPENSE_USE_CASE = 'ExpenseUseCase',
 
 	LAUNCH_CONTROL = 'LaunchControl',
 
@@ -183,6 +187,10 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_GROUPING_SERVICE]: IExpenseGroupingService;
 	[EServiceToken.EXPENSE_AMOUNT_SERVICE]: IExpenseAmountService;
 	[EServiceToken.EXPENSE_QUERY_SERVICE]: IExpenseQueryService;
+	[EServiceToken.EXPENSE_USE_CASE]: IExpenseUseCase;
+	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
+	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
+	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
 
 	[EServiceToken.APP_CONFIG_DATASOURCE]: IAppConfigDataSource;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
@@ -210,10 +218,6 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_RATE_SERVICE]: ICurrencyRateService;
 
 	[EServiceToken.TEMPORAL]: ITemporal;
-
-	[EServiceToken.EXPENSE_CREATE_USE_CASE]: ICreateExpenseUseCase;
-	[EServiceToken.EXPENSE_UPDATE_USE_CASE]: IUpdateExpenseUseCase;
-	[EServiceToken.EXPENSE_DELETE_USE_CASE]: IDeleteExpenseUseCase;
 
 	[EServiceToken.SYNC_SERVICE]: ISyncService;
 }

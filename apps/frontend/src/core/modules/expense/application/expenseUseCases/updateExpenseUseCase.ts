@@ -1,11 +1,8 @@
-import type { Id, IUseCase, TCategory } from '@root/core/domain/types';
+import type { Id, TCategory } from '@root/core/domain/types';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { TExpenseUpdateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
-
-export interface IUpdateExpenseUseCase extends IUseCase {
-	execute(id: Id, expense: TExpenseUpdateDTO): void;
-}
 
 /**
  * @todo

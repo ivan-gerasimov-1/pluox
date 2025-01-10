@@ -59,6 +59,7 @@ import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/con
 import { ExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
 import { ExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/expenseAmountService';
 import { ExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/expenseQueryService';
+import { ExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/expenseUseCase';
 
 let globalContainer: IContainer;
 
@@ -352,6 +353,15 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.EXPENSE_MAPPER,
 					EServiceToken.TEMPORAL,
+				],
+			},
+			{
+				token: EServiceToken.EXPENSE_USE_CASE,
+				useClass: ExpenseUseCase,
+				deps: [
+					EServiceToken.EXPENSE_CREATE_USE_CASE,
+					EServiceToken.EXPENSE_UPDATE_USE_CASE,
+					EServiceToken.EXPENSE_DELETE_USE_CASE,
 				],
 			},
 		)

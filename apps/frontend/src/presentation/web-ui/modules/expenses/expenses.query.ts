@@ -17,27 +17,21 @@ export const QUERY_EXPENSES_MONTHLY_AMOUNT =
 export const QUERY_EXPENSES_DAILY_AMOUNT = Symbol('dailyAmount').description;
 
 export function addOne(payload: TExpenseCreateDTO): void {
-	let createExpenseUseCase = resolveService(
-		EServiceToken.EXPENSE_CREATE_USE_CASE,
-	);
+	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);
 
-	createExpenseUseCase.execute(payload);
+	expenseUseCase.create(payload);
 }
 
 export function updateOne(id: Id, payload: TExpenseUpdateDTO): void {
-	let updateExpenseUseCase = resolveService(
-		EServiceToken.EXPENSE_UPDATE_USE_CASE,
-	);
+	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);
 
-	updateExpenseUseCase.execute(id, payload);
+	expenseUseCase.update(id, payload);
 }
 
 export function deleteOne(id: Id): void {
-	let deleteExpenseUseCase = resolveService(
-		EServiceToken.EXPENSE_DELETE_USE_CASE,
-	);
+	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);
 
-	deleteExpenseUseCase.execute(id);
+	expenseUseCase.delete(id);
 }
 
 export function getOne(id: Id): TExpenseDTO | null {
