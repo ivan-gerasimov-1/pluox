@@ -153,21 +153,26 @@ export function SettingsScreen() {
 						<div className={styles.field}>
 							<div className={styles.fieldData}>
 								<span className={styles.fieldLabel}>
-									{intl.translate('userEmail')}
+									{intl.translate('userAccount')}
 								</span>
 
 								<span className={styles.fieldValue}>—</span>
 							</div>
 
-							<IconButton
-								iconName={EIconName.Edit}
-								onClick={() => {
-									window.alert('Not Implemented');
-								}}
-							/>
+							<div className={styles.fieldAction}>
+								<Button
+									size="s"
+									onClick={() => {
+										navigation.loginPage();
+									}}
+								>
+									{intl.translate('loginButton')}
+								</Button>
+							</div>
 						</div>
 
-						<Separator />
+						{/* Temporarily disabled */}
+						{/* <Separator />
 
 						<div className={cls(styles.field, styles.sectionActionsContainer)}>
 							<div style={{ width: '100%' }} />
@@ -186,7 +191,7 @@ export function SettingsScreen() {
 							>
 								{intl.translate('exitButton')}
 							</Button>
-						</div>
+						</div> */}
 					</Card>
 
 					<Card>

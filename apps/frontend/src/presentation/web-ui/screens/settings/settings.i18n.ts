@@ -5,8 +5,9 @@ export const settingsI18n = {
 		screenTitle: 'Настройки',
 		userSectionTitle: 'Пользователь',
 		userName: 'Имя',
-		userEmail: 'Почта',
 
+		userAccount: 'Аккаунт',
+		loginButton: 'Войти',
 		exitButton: 'Выйти',
 		exitConfirmation: 'Вы уверены, что хотите выйти?',
 
@@ -31,8 +32,9 @@ export const settingsI18n = {
 		screenTitle: 'Settings',
 		userSectionTitle: 'User',
 		userName: 'Name',
-		userEmail: 'Email',
 
+		userAccount: 'Account',
+		loginButton: 'Log in',
 		exitButton: 'Exit',
 		exitConfirmation: 'Are you sure?',
 

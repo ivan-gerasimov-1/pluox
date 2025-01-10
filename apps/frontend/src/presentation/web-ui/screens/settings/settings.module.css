@@ -35,6 +35,10 @@
 	font-size: var(--fs-100);
 }
 
+.fieldAction {
+	margin: 5px;
+}
+
 .sectionActionsContainer {
 	display: flex;
 }
