@@ -63,6 +63,7 @@ import type {
 	ICategoryUseCase,
 	ICategoryWeightUseCase,
 } from '@root/core/modules/category/application/categoryUseCase/types';
+import type { ICategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -129,6 +130,7 @@ export enum EServiceToken {
 	CATEGORY_UPDATE_USE_CASE = 'CategoryUpdateUseCase',
 	CATEGORY_DELETE_USE_CASE = 'CategoryDeleteUseCase',
 	CATEGORY_WEIGHT_USE_CASE = 'CategoryWeightUseCase',
+	CATEGORY_QUERY_SERVICE = 'CategoryQueryService',
 
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
@@ -196,6 +198,7 @@ export interface IServiceMap {
 	[EServiceToken.CATEGORY_UPDATE_USE_CASE]: ICategoryUpdateUseCase;
 	[EServiceToken.CATEGORY_DELETE_USE_CASE]: ICategoryDeleteUseCase;
 	[EServiceToken.CATEGORY_WEIGHT_USE_CASE]: ICategoryWeightUseCase;
+	[EServiceToken.CATEGORY_QUERY_SERVICE]: ICategoryQueryService;
 
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;
