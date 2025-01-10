@@ -10,10 +10,10 @@ type TCategoryPillsProps = {
 };
 
 export function CategoryPills(props: TCategoryPillsProps) {
-	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
+	let categoryQueryService = useService(EServiceToken.CATEGORY_QUERY_SERVICE);
 	let categories = useMemo(
 		() =>
-			categoryService.findAll({
+			categoryQueryService.getAll({
 				useWeights: true,
 			}),
 		[],
