@@ -1,61 +1,50 @@
-import type {
-	ITemporal,
-	TMonth,
-	TYear,
-} from '@root/core/domain/temporal/types';
+import type { TMonth, TYear } from '@root/core/domain/temporal/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type {
 	IExpenseAmountService,
-	TMonthlyAmountByCategory,
+	TAmountByCategory,
 } from '@root/core/modules/expense/application/expenseAmountService/types';
 import type {
 	IExpenseGroupingService,
 	TExpenseGroupByDate,
 } from '@root/core/modules/expense/application/expenseGroupingService/types';
+import type { IExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/types';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
-import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export class ExpenseService implements IExpenseService {
 	constructor(
-		private readonly expenseRepository: IExpenseRepository,
-		private readonly temporal: ITemporal,
 		private readonly expenseGroupingService: IExpenseGroupingService,
 		private readonly expenseAmountService: IExpenseAmountService,
+		private readonly expenseQueryService: IExpenseQueryService,
 	) {}
 	public getTotalByYear(year: TYear = new Date().getFullYear()): number {
-		return this.expenseAmountService.getYearlyAmount(year);
+		let epxenses = this.expenseQueryService.getYearlyExpenses(year);
+
+		return this.expenseAmountService.calculateAmount(epxenses);
 	}
 
 	public getTotalByMonth(
 		month: TMonth,
 		year: TYear = new Date().getFullYear(),
 	): number {
-		return this.expenseAmountService.getMonthlyAmount(month, year);
+		let expenses = this.expenseQueryService.getMonthlyExpenses(month, year);
+
+		return this.expenseAmountService.calculateAmount(expenses);
 	}
 
 	public getTotalByDay(): number {
-		return this.expenseAmountService.getDailyAmount();
+		let epxenses = this.expenseQueryService.getDailyExpenses();
+
+		return this.expenseAmountService.calculateAmount(epxenses);
 	}
 
 	public getMonthlyTotalByCategory(
 		month: TMonth,
 		year: TYear = new Date().getFullYear(),
-	): TMonthlyAmountByCategory[] {
-		let startOfMonth = this.temporal.getStartOfMonth(month, year);
-		let endOfMonth = this.temporal.getEndOfMonth(month, year);
+	): TAmountByCategory[] {
+		let expenses = this.expenseQueryService.getMonthlyExpenses(month, year);
 
-		let expenses = this.expenseRepository.findMany({
-			filter: {
-				dateFrom: startOfMonth,
-				dateTo: endOfMonth,
-			},
-		});
-
-		if (expenses.total === 0) {
-			return [];
-		}
-
-		return this.expenseAmountService.getMonthlyAmountByCategory(expenses.items);
+		return this.expenseAmountService.calculateAmountByCategory(expenses);
 	}
 
 	public groupExpenseByDate(expenses: TExpenseDTO[]): TExpenseGroupByDate[] {

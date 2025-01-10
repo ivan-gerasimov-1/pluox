@@ -331,10 +331,9 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				token: EServiceToken.EXPENSE_SERVICE,
 				useClass: ExpenseService,
 				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.TEMPORAL,
 					EServiceToken.EXPENSE_GROUPING_SERVICE,
 					EServiceToken.EXPENSE_AMOUNT_SERVICE,
+					EServiceToken.EXPENSE_QUERY_SERVICE,
 				],
 			},
 			{
@@ -344,12 +343,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_AMOUNT_SERVICE,
 				useClass: ExpenseAmountService,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.TEMPORAL,
-					EServiceToken.CURRENCY_RATE_SERVICE,
-					EServiceToken.APP_CONFIG,
-				],
+				deps: [EServiceToken.APP_CONFIG, EServiceToken.CURRENCY_RATE_SERVICE],
 			},
 			{
 				token: EServiceToken.EXPENSE_QUERY_SERVICE,
