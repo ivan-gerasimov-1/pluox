@@ -1,6 +1,7 @@
 import type { ITemporal } from '@root/core/domain/temporal/types';
 import { CategoryService } from '@root/core/modules/category/application/categoryService/categoryService';
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
+import type { ICategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
 import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
@@ -19,10 +20,11 @@ export class CategoryServiceFactory {
 		private readonly categoryMapper: ICategoryMapper,
 		private readonly temporal: ITemporal,
 		private readonly expenseRepository: IExpenseRepository,
+		private readonly categoryUseCase: ICategoryUseCase,
 	) {}
 
 	public create(): ICategoryService {
-		let categories = new CategoryService(
+		let categoryService = new CategoryService(
 			this.categoryRepository,
 			this.categoryMapper,
 		);
@@ -31,7 +33,7 @@ export class CategoryServiceFactory {
 		let currentDate = this.temporal.getISODateString();
 
 		for (let categoryTemplate of categoryTemplates) {
-			let category = this.categoryMapper.toEntity({
+			this.categoryUseCase.create({
 				id: categoryTemplate.id,
 				name: categoryTemplate.name,
 				icon: categoryTemplate.icon,
@@ -39,16 +41,14 @@ export class CategoryServiceFactory {
 				createdAt: currentDate,
 				modifiedAt: currentDate,
 			});
-
-			categories.create(category);
 		}
 
-		this.calculateWeights(categories);
+		this.calculateWeights(categoryService);
 
-		return categories;
+		return categoryService;
 	}
 
-	private calculateWeights(categories: ICategoryService) {
+	private calculateWeights(categoryService: ICategoryService) {
 		let expenses = this.expenseRepository.findMany();
 
 		for (let expense of expenses.items) {
@@ -56,7 +56,7 @@ export class CategoryServiceFactory {
 				continue;
 			}
 
-			categories.increaseWeight(expense.category);
+			categoryService.increaseWeight(expense.category);
 		}
 	}
 }

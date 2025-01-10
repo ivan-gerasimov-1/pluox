@@ -5,7 +5,7 @@ export type TCategoryCreateDTO = {
 	id: Id;
 	name: string;
 	icon: string;
-};
+} & Partial<Pick<TCategoryDTO, 'weight' | 'createdAt' | 'modifiedAt'>>;
 
 export type TCategoryDTO = {
 	id: Id;
@@ -15,3 +15,7 @@ export type TCategoryDTO = {
 	createdAt: TISODateString;
 	modifiedAt: TISODateString;
 };
+
+export type TCategoryUpdateDTO = Partial<
+	Pick<TCategoryCreateDTO, 'name' | 'icon' | 'weight'>
+>;

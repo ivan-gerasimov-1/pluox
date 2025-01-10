@@ -56,6 +56,12 @@ import type {
 	IExpenseUseCase,
 	IUpdateExpenseUseCase,
 } from '@root/core/modules/expense/application/expenseUseCases/types';
+import type {
+	ICategoryCreateUseCase,
+	ICategoryDeleteUseCase,
+	ICategoryUpdateUseCase,
+	ICategoryUseCase,
+} from '@root/core/modules/category/application/categoryUseCase/types';
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
@@ -117,6 +123,10 @@ export enum EServiceToken {
 	CATEGORY_REPOSITORY = 'CategoryRepository',
 	CATEGORY_DATASOURCE = 'CategoryDataSource',
 	CATEGORY_MAPPER = 'CategoryMapper',
+	CATEGORY_USE_CASE = 'CategoryUseCase',
+	CATEGORY_CREATE_USE_CASE = 'CategoryCreateUseCase',
+	CATEGORY_UPDATE_USE_CASE = 'CategoryUpdateUseCase',
+	CATEGORY_DELETE_USE_CASE = 'CategoryDeleteUseCase',
 
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
 	EXPENSE_DATASOURCE = 'ExpenseDataSource',
@@ -179,6 +189,10 @@ export interface IServiceMap {
 	[EServiceToken.CATEGORY_REPOSITORY]: ICategoryRepository;
 	[EServiceToken.CATEGORY_DATASOURCE]: ICategoryDataSource;
 	[EServiceToken.CATEGORY_MAPPER]: ICategoryMapper;
+	[EServiceToken.CATEGORY_USE_CASE]: ICategoryUseCase;
+	[EServiceToken.CATEGORY_CREATE_USE_CASE]: ICategoryCreateUseCase;
+	[EServiceToken.CATEGORY_UPDATE_USE_CASE]: ICategoryUpdateUseCase;
+	[EServiceToken.CATEGORY_DELETE_USE_CASE]: ICategoryDeleteUseCase;
 
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;
 	[EServiceToken.EXPENSE_DATASOURCE]: IExpenseDataSource;

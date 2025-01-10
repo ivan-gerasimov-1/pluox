@@ -12,12 +12,6 @@ export class CategoryService implements ICategoryService {
 		private readonly categoryMapper: ICategoryMapper,
 	) {}
 
-	public create(category: ICategory): ICategoryService {
-		this.categoryRepository.save(category);
-
-		return this;
-	}
-
 	public findAll(params?: { useWeights?: boolean }): TCategoryDTO[] {
 		let result = this.categoryRepository.findMany({
 			orderByWeight: params?.useWeights,
@@ -34,12 +28,6 @@ export class CategoryService implements ICategoryService {
 		}
 
 		return this.categoryMapper.toEntity(category);
-	}
-
-	public remove(id: Id): ICategoryService {
-		this.categoryRepository.remove(id);
-
-		return this;
 	}
 
 	public increaseWeight(id: Id) {

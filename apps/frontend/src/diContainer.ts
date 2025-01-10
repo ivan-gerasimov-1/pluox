@@ -60,6 +60,10 @@ import { ExpenseGroupingService } from '@root/core/modules/expense/application/e
 import { ExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/expenseAmountService';
 import { ExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/expenseQueryService';
 import { ExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/expenseUseCase';
+import { CategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUseCase';
+import { CategoryCreateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryCreateUseCase';
+import { CategoryDeleteUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryDeleteUseCase';
+import { CategoryUpdateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
 
 let globalContainer: IContainer;
 
@@ -393,6 +397,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.CATEGORY_MAPPER,
 					EServiceToken.TEMPORAL,
 					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.CATEGORY_USE_CASE,
 				],
 			},
 			{
@@ -401,6 +406,29 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					return categoryServiceFactory.create();
 				},
 				deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
+			},
+			{
+				token: EServiceToken.CATEGORY_USE_CASE,
+				useClass: CategoryUseCase,
+				deps: [EServiceToken.CATEGORY_CREATE_USE_CASE],
+			},
+			{
+				token: EServiceToken.CATEGORY_CREATE_USE_CASE,
+				useClass: CategoryCreateUseCase,
+				deps: [
+					EServiceToken.ID_GENERATOR,
+					EServiceToken.TEMPORAL,
+					EServiceToken.CATEGORY_MAPPER,
+					EServiceToken.CATEGORY_REPOSITORY,
+				],
+			},
+			{
+				token: EServiceToken.CATEGORY_UPDATE_USE_CASE,
+				useClass: CategoryUpdateUseCase,
+			},
+			{
+				token: EServiceToken.CATEGORY_DELETE_USE_CASE,
+				useClass: CategoryDeleteUseCase,
 			},
 		)
 		.register({
