@@ -58,6 +58,7 @@ import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/a
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
 import { ExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
 import { ExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/expenseAmountService';
+import { ExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/expenseQueryService';
 
 let globalContainer: IContainer;
 
@@ -349,6 +350,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 					EServiceToken.CURRENCY_RATE_SERVICE,
 					EServiceToken.APP_CONFIG,
 				],
+			},
+			{
+				token: EServiceToken.EXPENSE_QUERY_SERVICE,
+				useClass: ExpenseQueryService,
+				deps: [EServiceToken.EXPENSE_REPOSITORY, EServiceToken.TEMPORAL],
 			},
 		)
 		/**
