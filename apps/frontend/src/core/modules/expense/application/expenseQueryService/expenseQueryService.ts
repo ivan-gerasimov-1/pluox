@@ -3,6 +3,7 @@ import type {
 	TMonth,
 	TYear,
 } from '@root/core/domain/temporal/types';
+import type { Id } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
@@ -14,6 +15,16 @@ export class ExpenseQueryService implements IExpenseQueryService {
 		private readonly expenseMapper: IExpenseMapper,
 		private readonly temporal: ITemporal,
 	) {}
+
+	public getExpenseById(id: Id): TExpenseDTO | null {
+		const expense = this.expenseRepository.findById(id);
+
+		if (!expense) {
+			return null;
+		}
+
+		return this.expenseMapper.toDTO(expense);
+	}
 
 	public getDailyExpenses(): TExpenseDTO[] {
 		const startOfDay = this.temporal.getStartOfDay();
