@@ -41,11 +41,9 @@ export function deleteOne(id: Id): void {
 }
 
 export function getOne(id: Id): TExpenseDTO | null {
-	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
-	let expenseMapper = resolveService(EServiceToken.EXPENSE_MAPPER);
-	let expense = expenseRepository.findById(id);
+	let expenseQueryService = resolveService(EServiceToken.EXPENSE_QUERY_SERVICE);
 
-	return expense ? expenseMapper.toDTO(expense) : null;
+	return expenseQueryService.getExpenseById(id);
 }
 
 export function getList(query?: {
