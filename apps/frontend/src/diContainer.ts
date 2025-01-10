@@ -354,7 +354,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.EXPENSE_QUERY_SERVICE,
 				useClass: ExpenseQueryService,
-				deps: [EServiceToken.EXPENSE_REPOSITORY, EServiceToken.TEMPORAL],
+				deps: [
+					EServiceToken.EXPENSE_REPOSITORY,
+					EServiceToken.EXPENSE_MAPPER,
+					EServiceToken.TEMPORAL,
+				],
 			},
 		)
 		/**

@@ -6,10 +6,12 @@ import type {
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
 
 export class ExpenseQueryService implements IExpenseQueryService {
 	constructor(
 		private readonly expenseRepository: IExpenseRepository,
+		private readonly expenseMapper: IExpenseMapper,
 		private readonly temporal: ITemporal,
 	) {}
 
@@ -24,7 +26,7 @@ export class ExpenseQueryService implements IExpenseQueryService {
 			},
 		});
 
-		return result.items;
+		return result.items.map(this.expenseMapper.toDTO);
 	}
 
 	public getMonthlyExpenses(
@@ -41,7 +43,7 @@ export class ExpenseQueryService implements IExpenseQueryService {
 			},
 		});
 
-		return result.items;
+		return result.items.map(this.expenseMapper.toDTO);
 	}
 
 	public getYearlyExpenses(
@@ -57,6 +59,6 @@ export class ExpenseQueryService implements IExpenseQueryService {
 			},
 		});
 
-		return result.items;
+		return result.items.map(this.expenseMapper.toDTO);
 	}
 }
