@@ -30,6 +30,7 @@ export class CategoryService implements ICategoryService {
 		return this.categoryMapper.toEntity(category);
 	}
 
+	/** @deprecated */
 	public increaseWeight(id: Id) {
 		let category = this.findById(id);
 
@@ -40,6 +41,7 @@ export class CategoryService implements ICategoryService {
 		return this;
 	}
 
+	/** @deprecated */
 	public decreaseWeight(id: Id) {
 		let category = this.findById(id);
 

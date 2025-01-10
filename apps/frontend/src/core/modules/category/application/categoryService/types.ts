@@ -4,7 +4,9 @@ import type { TCategoryDTO } from '@root/core/modules/category/application/dto/c
 export interface ICategoryService {
 	findAll(params?: { useWeights?: boolean }): TCategoryDTO[];
 
+	/** @deprecated */
 	increaseWeight(id: Id): ICategoryService;
+	/** @deprecated */
 	decreaseWeight(id: Id): ICategoryService;
 
 	getCategoryIcon(categoryId: string | null): string;

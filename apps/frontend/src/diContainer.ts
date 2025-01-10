@@ -64,6 +64,7 @@ import { CategoryUseCase } from '@root/core/modules/category/application/categor
 import { CategoryCreateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryCreateUseCase';
 import { CategoryDeleteUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryDeleteUseCase';
 import { CategoryUpdateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
+import { CategoryWeightUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryWeightUseCase';
 
 let globalContainer: IContainer;
 
@@ -410,7 +411,12 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CATEGORY_USE_CASE,
 				useClass: CategoryUseCase,
-				deps: [EServiceToken.CATEGORY_CREATE_USE_CASE],
+				deps: [
+					EServiceToken.CATEGORY_CREATE_USE_CASE,
+					EServiceToken.CATEGORY_UPDATE_USE_CASE,
+					EServiceToken.CATEGORY_DELETE_USE_CASE,
+					EServiceToken.CATEGORY_WEIGHT_USE_CASE,
+				],
 			},
 			{
 				token: EServiceToken.CATEGORY_CREATE_USE_CASE,
@@ -429,6 +435,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CATEGORY_DELETE_USE_CASE,
 				useClass: CategoryDeleteUseCase,
+			},
+			{
+				token: EServiceToken.CATEGORY_WEIGHT_USE_CASE,
+				useClass: CategoryWeightUseCase,
+				deps: [EServiceToken.CATEGORY_REPOSITORY],
 			},
 		)
 		.register({

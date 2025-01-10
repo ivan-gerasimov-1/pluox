@@ -4,6 +4,7 @@ import type {
 	ICategoryDeleteUseCase,
 	ICategoryUpdateUseCase,
 	ICategoryUseCase,
+	ICategoryWeightUseCase,
 } from '@root/core/modules/category/application/categoryUseCase/types';
 import type {
 	TCategoryCreateDTO,
@@ -13,8 +14,9 @@ import type {
 export class CategoryUseCase implements ICategoryUseCase {
 	constructor(
 		private readonly categoryCreateUseCase: ICategoryCreateUseCase,
-		private readonly categoryDeleteUseCase: ICategoryDeleteUseCase,
 		private readonly categoryUpdateUseCase: ICategoryUpdateUseCase,
+		private readonly categoryDeleteUseCase: ICategoryDeleteUseCase,
+		private readonly categoryWeightUseCase: ICategoryWeightUseCase,
 	) {}
 
 	public create(categoryCreateDTO: TCategoryCreateDTO): void {
@@ -27,5 +29,13 @@ export class CategoryUseCase implements ICategoryUseCase {
 
 	public delete(id: Id): void {
 		this.categoryDeleteUseCase.execute(id);
+	}
+
+	public increaseWeight(id: Id): void {
+		this.categoryWeightUseCase.execute(id, 'increase');
+	}
+
+	public decreaseWeight(id: Id): void {
+		this.categoryWeightUseCase.execute(id, 'decrease');
 	}
 }
