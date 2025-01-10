@@ -30,28 +30,6 @@ export class CategoryService implements ICategoryService {
 		return this.categoryMapper.toEntity(category);
 	}
 
-	/** @deprecated */
-	public increaseWeight(id: Id) {
-		let category = this.findById(id);
-
-		category.increaseWeight();
-
-		this.categoryRepository.save(category);
-
-		return this;
-	}
-
-	/** @deprecated */
-	public decreaseWeight(id: Id) {
-		let category = this.findById(id);
-
-		category.decreaseWeight();
-
-		this.categoryRepository.save(category);
-
-		return this;
-	}
-
 	public getCategoryIcon(categoryId: Id | null): string {
 		return this.getCategoryProperty(categoryId, 'icon', '?');
 	}

@@ -43,12 +43,12 @@ export class CategoryServiceFactory {
 			});
 		}
 
-		this.calculateWeights(categoryService);
+		this.calculateWeights();
 
 		return categoryService;
 	}
 
-	private calculateWeights(categoryService: ICategoryService) {
+	private calculateWeights() {
 		let expenses = this.expenseRepository.findMany();
 
 		for (let expense of expenses.items) {
@@ -56,7 +56,7 @@ export class CategoryServiceFactory {
 				continue;
 			}
 
-			categoryService.increaseWeight(expense.category);
+			this.categoryUseCase.increaseWeight(expense.category);
 		}
 	}
 }

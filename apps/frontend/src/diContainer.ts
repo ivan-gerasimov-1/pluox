@@ -311,7 +311,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: CreateExpenseUseCase,
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORY_SERVICE,
+					EServiceToken.CATEGORY_USE_CASE,
 					EServiceToken.SESSION_SERVICE,
 					EServiceToken.ID_GENERATOR,
 					EServiceToken.TEMPORAL,
@@ -322,7 +322,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: UpdateExpenseUseCase,
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORY_SERVICE,
+					EServiceToken.CATEGORY_USE_CASE,
 				],
 			},
 			{
@@ -330,7 +330,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 				useClass: DeleteExpenseUseCase,
 				deps: [
 					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORY_SERVICE,
+					EServiceToken.CATEGORY_USE_CASE,
 				],
 			},
 			{

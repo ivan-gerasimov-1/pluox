@@ -1,6 +1,6 @@
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
+import type { ICategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/types';
 import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
@@ -11,7 +11,7 @@ import type { ISessionService } from '@root/core/modules/identity/application/se
 export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 	constructor(
 		private readonly expenseRepository: IExpenseRepository,
-		private readonly categoryService: ICategoryService,
+		private readonly categoryUseCase: ICategoryUseCase,
 		private readonly sessionService: ISessionService,
 		private readonly idGenerator: IIdGenerator,
 		private readonly temporal: ITemporal,
@@ -23,7 +23,7 @@ export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 		this.expenseRepository.save(expense);
 
 		if (expense.category) {
-			this.categoryService.increaseWeight(expense.category);
+			this.categoryUseCase.increaseWeight(expense.category);
 		}
 
 		return expense;
