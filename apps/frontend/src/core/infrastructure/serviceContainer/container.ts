@@ -38,6 +38,26 @@ export class Container implements IContainer {
 		this.isSealed = true;
 	}
 
+	public createInstance<T>(provider: IServiceProvider<T>): T {
+		if (provider.useValue) {
+			return provider.useValue as T;
+		}
+
+		if (provider.useFactory) {
+			let deps = (provider.deps || []).map((dep) => this.get(dep));
+			return provider.useFactory(...deps) as T;
+		}
+
+		if (provider.useClass) {
+			let deps = (provider.deps || []).map((dep) => this.get(dep));
+			return new provider.useClass(...deps) as T;
+		}
+
+		throw new Error(
+			`Invalid provider configuration for ${provider.token.toString()}`,
+		);
+	}
+
 	public get<T extends TServiceToken = TServiceToken>(
 		token: T,
 	): IServiceMap[T] {
@@ -94,26 +114,6 @@ export class Container implements IContainer {
 	 */
 	public disposeAll(): void {
 		this.instances.clear();
-	}
-
-	private createInstance<T>(provider: IServiceProvider<T>): T {
-		if (provider.useValue) {
-			return provider.useValue as T;
-		}
-
-		if (provider.useFactory) {
-			let deps = (provider.deps || []).map((dep) => this.get(dep));
-			return provider.useFactory(...deps) as T;
-		}
-
-		if (provider.useClass) {
-			let deps = (provider.deps || []).map((dep) => this.get(dep));
-			return new provider.useClass(...deps) as T;
-		}
-
-		throw new Error(
-			`Invalid provider configuration for ${provider.token.toString()}`,
-		);
 	}
 }
 

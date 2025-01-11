@@ -75,6 +75,7 @@ export interface IContainer {
 
 	register(...providers: IServiceProvider[]): IContainer;
 	seal(): void;
+	createInstance<T>(provider: IServiceProvider<T>): T;
 	get<T extends TServiceToken = TServiceToken>(token: T): IServiceMap[T];
 	disposeInstance(token: TServiceToken): void;
 	disposeAll(): void;

@@ -22,6 +22,10 @@ export class ContainerDecorator implements IContainer {
 		this.decoratee.seal();
 	}
 
+	public createInstance<T>(provider: IServiceProvider<T>): T {
+		return this.decoratee.createInstance(provider);
+	}
+
 	public get<T extends TServiceToken = keyof IServiceMap>(
 		token: T,
 	): IServiceMap[T] {
