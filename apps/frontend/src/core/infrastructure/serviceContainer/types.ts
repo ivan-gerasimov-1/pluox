@@ -71,6 +71,8 @@ import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/v
 import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/types';
 
 export interface IContainer {
+	readonly providers: Map<TServiceToken, IServiceProvider>;
+
 	register(...providers: IServiceProvider[]): IContainer;
 	seal(): void;
 	get<T extends TServiceToken = TServiceToken>(token: T): IServiceMap[T];

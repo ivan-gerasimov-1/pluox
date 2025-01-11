@@ -6,7 +6,11 @@ import {
 } from '@root/core/infrastructure/serviceContainer/types';
 
 export class ContainerDecorator implements IContainer {
-	constructor(private readonly decoratee: IContainer) {}
+	constructor(protected readonly decoratee: IContainer) {}
+
+	public get providers(): Map<TServiceToken, IServiceProvider> {
+		return this.decoratee.providers;
+	}
 
 	public register(...providers: IServiceProvider[]): IContainer {
 		this.decoratee.register(...providers);

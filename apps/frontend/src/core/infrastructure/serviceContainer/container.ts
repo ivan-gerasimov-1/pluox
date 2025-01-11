@@ -7,11 +7,16 @@ import {
 } from '@root/core/infrastructure/serviceContainer/types';
 
 export class Container implements IContainer {
-	private readonly providers = new Map<TServiceToken, IServiceProvider>();
+	readonly #providers = new Map<TServiceToken, IServiceProvider>();
+
 	private readonly instances = new Map<TServiceToken, unknown>();
 	private readonly resolutionStack: TServiceToken[] = [];
 
 	private isSealed = false;
+
+	public get providers(): Map<TServiceToken, IServiceProvider> {
+		return this.#providers;
+	}
 
 	public register(...providers: IServiceProvider[]): IContainer {
 		if (this.isSealed) {
@@ -19,7 +24,7 @@ export class Container implements IContainer {
 		}
 
 		providers.forEach((provider) => {
-			this.providers.set(provider.token, provider);
+			this.#providers.set(provider.token, provider);
 		});
 
 		return this;
