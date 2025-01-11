@@ -10,27 +10,25 @@ import {
 } from '@root/core/infrastructure/serviceContainer/types';
 
 async function main(): Promise<void> {
-	let diContainer = await runCore();
+	let diContainer = createDIContainer({
+		isGlobal: true,
+		isDevelopment: process.env.NODE_ENV === 'development',
+	});
 
+	await runCore(diContainer);
 	await runUI(diContainer);
 }
 
 main();
 
-async function runCore(): Promise<IContainer> {
+async function runCore(container: IContainer): Promise<void> {
 	await runMockServiceWorker();
 
-	let diContainer = createDIContainer({
-		isGlobal: true,
-	});
-
-	let launchControl = diContainer.get(EServiceToken.LAUNCH_CONTROL);
+	let launchControl = container.get(EServiceToken.LAUNCH_CONTROL);
 
 	runMigrations();
 
 	await launchControl.start();
-
-	return diContainer;
 }
 
 async function runUI(diContainer: IContainer): Promise<void> {

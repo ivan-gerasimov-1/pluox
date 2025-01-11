@@ -9,7 +9,9 @@ export class ContainerDecorator implements IContainer {
 	constructor(private readonly decoratee: IContainer) {}
 
 	public register(...providers: ServiceProvider[]): IContainer {
-		return this.decoratee.register(...providers);
+		this.decoratee.register(...providers);
+
+		return this;
 	}
 
 	public seal(): void {
