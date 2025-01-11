@@ -196,7 +196,11 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.SESSION_FACTORY,
 				useClass: SessionFactory,
-				deps: [EServiceToken.CLIENT_ID_FACTORY, EServiceToken.USER_SERVICE],
+				deps: [
+					EServiceToken.CLIENT_ID_FACTORY,
+					EServiceToken.AUTH_TOKEN_FACTORY,
+					EServiceToken.USER_SERVICE,
+				],
 			},
 
 			/** ClientId */
@@ -440,6 +444,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			{
 				token: EServiceToken.CATEGORY_DELETE_USE_CASE,
 				useClass: CategoryDeleteUseCase,
+				deps: [EServiceToken.CATEGORY_REPOSITORY],
 			},
 			{
 				token: EServiceToken.CATEGORY_WEIGHT_USE_CASE,
