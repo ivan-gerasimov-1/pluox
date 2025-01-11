@@ -1,14 +1,14 @@
 import {
 	IContainer,
 	IServiceMap,
-	ServiceProvider,
+	IServiceProvider,
 	TServiceToken,
 } from '@root/core/infrastructure/serviceContainer/types';
 
 export class ContainerDecorator implements IContainer {
 	constructor(private readonly decoratee: IContainer) {}
 
-	public register(...providers: ServiceProvider[]): IContainer {
+	public register(...providers: IServiceProvider[]): IContainer {
 		this.decoratee.register(...providers);
 
 		return this;

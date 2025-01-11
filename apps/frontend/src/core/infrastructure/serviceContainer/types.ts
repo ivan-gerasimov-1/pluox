@@ -71,7 +71,7 @@ import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/v
 import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/types';
 
 export interface IContainer {
-	register(...providers: ServiceProvider[]): IContainer;
+	register(...providers: IServiceProvider[]): IContainer;
 	seal(): void;
 	get<T extends TServiceToken = TServiceToken>(token: T): IServiceMap[T];
 	disposeInstance(token: TServiceToken): void;
@@ -87,7 +87,7 @@ export const enum EServiceScope {
 	TRANSIENT = 'transient',
 }
 
-export interface ServiceProvider<T = unknown> {
+export interface IServiceProvider<T = unknown> {
 	token: TServiceToken;
 	useClass?: TServiceType<T>;
 	useFactory?: TFactoryFn<T>;

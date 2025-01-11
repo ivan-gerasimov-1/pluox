@@ -1,19 +1,19 @@
 import {
 	type IContainer,
 	type IServiceMap,
-	type ServiceProvider,
+	type IServiceProvider,
 	EServiceScope,
 	type TServiceToken,
 } from '@root/core/infrastructure/serviceContainer/types';
 
 export class Container implements IContainer {
-	private readonly providers = new Map<TServiceToken, ServiceProvider>();
+	private readonly providers = new Map<TServiceToken, IServiceProvider>();
 	private readonly instances = new Map<TServiceToken, unknown>();
 	private readonly resolutionStack: TServiceToken[] = [];
 
 	private isSealed = false;
 
-	public register(...providers: ServiceProvider[]): IContainer {
+	public register(...providers: IServiceProvider[]): IContainer {
 		if (this.isSealed) {
 			throw new ContainerSealedError();
 		}
@@ -95,7 +95,7 @@ export class Container implements IContainer {
 		this.instances.clear();
 	}
 
-	private createInstance<T>(provider: ServiceProvider<T>): T {
+	private createInstance<T>(provider: IServiceProvider<T>): T {
 		if (provider.useValue) {
 			return provider.useValue as T;
 		}
@@ -115,7 +115,7 @@ export class Container implements IContainer {
 		);
 	}
 
-	private validateProvider(provider: ServiceProvider): void {
+	private validateProvider(provider: IServiceProvider): void {
 		if (!provider.token) {
 			throw new Error('Provider must have a token');
 		}
