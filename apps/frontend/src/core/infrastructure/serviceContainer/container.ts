@@ -142,3 +142,30 @@ export class Container implements IContainer {
 		this.instances.clear();
 	}
 }
+
+function validateConstructor(
+	constructable: new (...args: any[]) => any,
+	...deps: any[]
+) {
+	const paramNames =
+		constructable
+			.toString()
+			.match(/constructor\s*\(([^)]*)\)/)?.[1]
+			?.split(',')
+			.map((param) => param.trim())
+			.filter(Boolean) ?? [];
+
+	let result = new constructable(...deps);
+
+	// if (paramNames.length !== deps.length) {
+	// 	throw new Error(
+	// 		`Invalid provider configuration for ${provider.token.toString()}`,
+	// 	);
+	// }
+
+	for (let paramName of paramNames) {
+		if (!result[paramName]) {
+			throw new Error('Invalid provider configuration: missing ' + paramName);
+		}
+	}
+}
