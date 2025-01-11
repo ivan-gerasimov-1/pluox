@@ -72,28 +72,28 @@ import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venue
 
 export interface IContainer {
 	register(...providers: ServiceProvider[]): IContainer;
-	validate(): void;
-	get<T extends ServiceToken = ServiceToken>(token: T): IServiceMap[T];
-	clear(token: ServiceToken): void;
-	clearAll(): void;
+	seal(): void;
+	get<T extends TServiceToken = TServiceToken>(token: T): IServiceMap[T];
+	disposeInstance(token: TServiceToken): void;
+	disposeAll(): void;
 }
 
-export type ServiceType<T> = new (...args: any[]) => T;
-export type ServiceToken = keyof IServiceMap;
-export type FactoryFn<T> = (...args: any[]) => T;
+export type TServiceType<T> = new (...args: any[]) => T;
+export type TServiceToken = keyof IServiceMap;
+export type TFactoryFn<T> = (...args: any[]) => T;
 
-export const enum ServiceScope {
+export const enum EServiceScope {
 	SINGLETON = 'singleton',
 	TRANSIENT = 'transient',
 }
 
 export interface ServiceProvider<T = unknown> {
-	token: ServiceToken;
-	useClass?: ServiceType<T>;
-	useFactory?: FactoryFn<T>;
+	token: TServiceToken;
+	useClass?: TServiceType<T>;
+	useFactory?: TFactoryFn<T>;
 	useValue?: T;
-	deps?: ServiceToken[];
-	scope?: ServiceScope;
+	deps?: TServiceToken[];
+	scope?: EServiceScope;
 }
 
 export enum EServiceToken {

@@ -1,23 +1,21 @@
 import {
+	type IContainer,
 	type IServiceMap,
 	type ServiceProvider,
-	type ServiceToken,
-	type IContainer,
-	ServiceScope,
+	EServiceScope,
+	type TServiceToken,
 } from '@root/core/infrastructure/serviceContainer/types';
 
 export class Container implements IContainer {
-	private readonly providers = new Map<ServiceToken, ServiceProvider>();
-	private readonly instances = new Map<ServiceToken, unknown>();
-	private readonly resolutionStack: ServiceToken[] = [];
+	private readonly providers = new Map<TServiceToken, ServiceProvider>();
+	private readonly instances = new Map<TServiceToken, unknown>();
+	private readonly resolutionStack: TServiceToken[] = [];
 
-	private isValidated = false;
+	private isSealed = false;
 
 	public register(...providers: ServiceProvider[]): IContainer {
-		if (this.isValidated) {
-			throw new Error(
-				'Container is already validated. Cannot register new providers.',
-			);
+		if (this.isSealed) {
+			throw new ContainerSealedError();
 		}
 
 		providers.forEach((provider) => {
@@ -27,8 +25,8 @@ export class Container implements IContainer {
 		return this;
 	}
 
-	public validate(): void {
-		if (this.isValidated) {
+	public seal(): void {
+		if (this.isSealed) {
 			return;
 		}
 
@@ -36,7 +34,85 @@ export class Container implements IContainer {
 			this.validateProvider(provider);
 		}
 
-		this.isValidated = true;
+		this.isSealed = true;
+	}
+
+	public get<T extends TServiceToken = TServiceToken>(
+		token: T,
+	): IServiceMap[T] {
+		if (!this.isSealed) {
+			throw new ContainerNotSealedError();
+		}
+
+		if (this.resolutionStack.includes(token)) {
+			throw new Error(
+				`Circular dependency detected: ${[...this.resolutionStack, token].join(
+					' -> ',
+				)}`,
+			);
+		}
+
+		const provider = this.providers.get(token);
+
+		if (!provider) {
+			throw new Error(`No provider registered for token: ${token.toString()}`);
+		}
+
+		const scope = provider.scope || EServiceScope.SINGLETON;
+
+		if (scope === EServiceScope.SINGLETON && this.instances.has(token)) {
+			return this.instances.get(token) as IServiceMap[T];
+		}
+
+		this.resolutionStack.push(token);
+
+		try {
+			const instance = this.createInstance(provider);
+
+			if (scope === EServiceScope.SINGLETON) {
+				this.instances.set(token, instance);
+			}
+
+			return instance as IServiceMap[T];
+		} finally {
+			this.resolutionStack.pop();
+		}
+	}
+
+	/**
+	 * @todo
+	 * 1. Call dispose on instance if exists
+	 */
+	public disposeInstance(token: TServiceToken): void {
+		this.instances.delete(token);
+	}
+
+	/**
+	 * @todo
+	 * 1. Call dispose on instance if exists
+	 */
+	public disposeAll(): void {
+		this.instances.clear();
+	}
+
+	private createInstance<T>(provider: ServiceProvider<T>): T {
+		if (provider.useValue) {
+			return provider.useValue as T;
+		}
+
+		if (provider.useFactory) {
+			let deps = (provider.deps || []).map((dep) => this.get(dep));
+			return provider.useFactory(...deps) as T;
+		}
+
+		if (provider.useClass) {
+			let deps = (provider.deps || []).map((dep) => this.get(dep));
+			return new provider.useClass(...deps) as T;
+		}
+
+		throw new Error(
+			`Invalid provider configuration for ${provider.token.toString()}`,
+		);
 	}
 
 	private validateProvider(provider: ServiceProvider): void {
@@ -72,100 +148,18 @@ export class Container implements IContainer {
 			});
 		}
 	}
+}
 
-	public get<T extends ServiceToken = ServiceToken>(token: T): IServiceMap[T] {
-		if (!this.isValidated) {
-			throw new Error(
-				'Container is not validated. Call validate() after registering all providers.',
-			);
-		}
-
-		if (this.resolutionStack.includes(token)) {
-			throw new Error(
-				`Circular dependency detected: ${[...this.resolutionStack, token].join(
-					' -> ',
-				)}`,
-			);
-		}
-
-		const provider = this.providers.get(token);
-		if (!provider) {
-			throw new Error(`No provider registered for token: ${token.toString()}`);
-		}
-
-		const scope = provider.scope || ServiceScope.SINGLETON;
-
-		if (scope === ServiceScope.SINGLETON && this.instances.has(token)) {
-			return this.instances.get(token) as IServiceMap[T];
-		}
-
-		this.resolutionStack.push(token);
-
-		try {
-			const instance = this.createInstance(provider);
-
-			if (scope === ServiceScope.SINGLETON) {
-				this.instances.set(token, instance);
-			}
-
-			return instance as IServiceMap[T];
-		} finally {
-			this.resolutionStack.pop();
-		}
-	}
-
-	private createInstance<T>(provider: ServiceProvider<T>): T {
-		if (provider.useValue) {
-			return provider.useValue as T;
-		}
-
-		if (provider.useFactory) {
-			const deps = (provider.deps || []).map((dep) => this.get(dep));
-			return provider.useFactory(...deps) as T;
-		}
-
-		if (provider.useClass) {
-			const deps = (provider.deps || []).map((dep) => this.get(dep));
-			return new provider.useClass(...deps) as T;
-		}
-
-		throw new Error(
-			`Invalid provider configuration for ${provider.token.toString()}`,
-		);
-	}
-
-	public clear(token: ServiceToken): void {
-		this.instances.delete(token);
-	}
-
-	public clearAll(): void {
-		this.instances.clear();
+export class ContainerSealedError extends Error {
+	constructor() {
+		super('Container is already sealed. Cannot register new providers.');
 	}
 }
 
-function validateConstructor(
-	constructable: new (...args: any[]) => any,
-	...deps: any[]
-) {
-	const paramNames =
-		constructable
-			.toString()
-			.match(/constructor\s*\(([^)]*)\)/)?.[1]
-			?.split(',')
-			.map((param) => param.trim())
-			.filter(Boolean) ?? [];
-
-	let result = new constructable(...deps);
-
-	// if (paramNames.length !== deps.length) {
-	// 	throw new Error(
-	// 		`Invalid provider configuration for ${provider.token.toString()}`,
-	// 	);
-	// }
-
-	for (let paramName of paramNames) {
-		if (!result[paramName]) {
-			throw new Error('Invalid provider configuration: missing ' + paramName);
-		}
+export class ContainerNotSealedError extends Error {
+	constructor() {
+		super(
+			'Container is not sealed. Call seal() after registering all providers.',
+		);
 	}
 }
