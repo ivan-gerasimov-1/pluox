@@ -22,7 +22,7 @@ export class MissingImplementationError extends Error {
 	}
 }
 
-export class MulitipleImplementationError extends Error {
+export class MultipleImplementationError extends Error {
 	constructor(providerToken: TServiceToken) {
 		super(
 			`Provider ${providerToken} can only have one of: useClass, useFactory, or useValue`,
