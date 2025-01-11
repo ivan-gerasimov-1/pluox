@@ -1,5 +1,5 @@
 import { Container } from '@root/core/infrastructure/serviceContainer/container';
-import { ContainerDecorator } from '@root/core/infrastructure/serviceContainer/containerDecorator/containerDecorator';
+import { ContainerValidationDecorator } from '@root/core/infrastructure/serviceContainer/containerDecorator/containerValidationDecorator';
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 
 export let globalContainer: IContainer;
@@ -11,7 +11,7 @@ export function containerFactory(options?: {
 	let container: IContainer = new Container();
 
 	if (options?.isDevelopment) {
-		container = new ContainerDecorator(container);
+		container = new ContainerValidationDecorator(container);
 	}
 
 	if (options?.isGlobal) {
