@@ -7,11 +7,7 @@ import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import { IntlService } from '@root/core/modules/intl/application/intlService/intlService';
 
-import { Container } from '@root/core/infrastructure/serviceContainer/container';
-import {
-	EServiceToken,
-	type IContainer,
-} from '@root/core/infrastructure/serviceContainer/types';
+import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
 import {
 	IdGeneratorFactory,
@@ -71,15 +67,13 @@ import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/
 import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
 import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
 import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
+import { containerFactory } from '@root/core/infrastructure/serviceContainer/containerFactory';
 
-let globalContainer: IContainer;
-
-export function createDIContainer(options?: { isGlobal?: boolean }) {
-	let container = new Container();
-
-	if (options?.isGlobal) {
-		globalContainer = container;
-	}
+export function createDIContainer(options?: {
+	isGlobal?: boolean;
+	isDevelopment?: boolean;
+}) {
+	let container = containerFactory(options);
 
 	container
 		/**
@@ -488,15 +482,7 @@ export function createDIContainer(options?: { isGlobal?: boolean }) {
 			token: EServiceToken.SYNC_SERVICE,
 			useClass: SyncService,
 		})
-		.validate();
+		.seal();
 
 	return container;
-}
-
-export function getGlobalContainer(): IContainer {
-	if (!globalContainer) {
-		throw new Error('GlobalContainer Not Initialized');
-	}
-
-	return globalContainer;
 }
