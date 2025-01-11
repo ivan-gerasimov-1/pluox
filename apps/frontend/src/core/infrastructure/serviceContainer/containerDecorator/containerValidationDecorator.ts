@@ -4,7 +4,7 @@ import {
 	MissingDependencyError,
 	MissingImplementationError,
 	MissingProviderTokenError,
-	MulitipleImplementationError,
+	MultipleImplementationError,
 	NotImplementedError,
 } from '@root/core/infrastructure/serviceContainer/containerDecorator/errors';
 import type { IServiceProvider } from '@root/core/infrastructure/serviceContainer/types';
@@ -12,6 +12,7 @@ import type { IServiceProvider } from '@root/core/infrastructure/serviceContaine
 /**
  * @todo
  * 1. Implement useFactory validation
+ * 2. Compare dependency name with param name
  */
 export class ContainerValidationDecorator extends ContainerDecorator {
 	public override seal(): void {
@@ -69,7 +70,7 @@ export class ContainerValidationDecorator extends ContainerDecorator {
 		}
 
 		if (implementationCount > 1) {
-			throw new MulitipleImplementationError(provider.token);
+			throw new MultipleImplementationError(provider.token);
 		}
 	}
 
@@ -89,6 +90,7 @@ export class ContainerValidationDecorator extends ContainerDecorator {
 		let deps = provider.deps ?? [];
 		let instance = new provider.useClass(...deps);
 
+		/** @todo №2 */
 		for (let paramName of paramNames) {
 			if (!(instance as any)[paramName]) {
 				throw new InvalidProviderConfigurationError(provider.token, paramName);
