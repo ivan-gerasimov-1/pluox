@@ -200,5 +200,22 @@ export function renameCommentOfExpenseDTOToDescription(): void {
  * №8. Add venueId to expense
  */
 export function addVenueIdToExpense(): void {
-	/** @todo Add implementation */
+	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
+
+	let expenses = expenseDataSource.read();
+
+	if (!expenses) {
+		return;
+	}
+
+	for (let expense of Object.values(expenses)) {
+		if (expense.venue) {
+			continue;
+		}
+
+		expense.venue = null;
+	}
+
+	expenseDataSource.clear();
+	expenseDataSource.create(expenses);
 }

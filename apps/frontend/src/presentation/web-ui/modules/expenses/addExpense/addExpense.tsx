@@ -58,6 +58,7 @@ export function AddExpense() {
 			currency={defaultCurrency}
 			description=""
 			category=""
+			venue=""
 			date={createDateViewValue()}
 		/>
 	);

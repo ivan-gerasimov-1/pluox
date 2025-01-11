@@ -3,14 +3,15 @@ import type { ITemporal } from '@root/core/domain/temporal/types';
 import type { ICategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { ICreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/types';
-import { Expense } from '@root/core/modules/expense/domain/expenseEntity/expense';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
 import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 
 export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 	constructor(
 		private readonly expenseRepository: IExpenseRepository,
+		private readonly expenseMapper: IExpenseMapper,
 		private readonly categoryUseCase: ICategoryUseCase,
 		private readonly sessionService: ISessionService,
 		private readonly idGenerator: IIdGenerator,
@@ -35,18 +36,19 @@ export class CreateExpenseUseCase implements ICreateExpenseUseCase {
 		let currentDate = this.temporal.getISODateString();
 		let timezone = this.temporal.getTimezone();
 
-		let expense = Expense.create(
+		let expense = this.expenseMapper.toEntity({
 			id,
 			userId,
-			expenseCreateDTO.amount,
-			expenseCreateDTO.currency,
-			expenseCreateDTO.description,
-			expenseCreateDTO.category,
+			amount: expenseCreateDTO.amount,
+			currency: expenseCreateDTO.currency,
+			description: expenseCreateDTO.description,
+			category: expenseCreateDTO.category,
+			venue: expenseCreateDTO.venue,
 			timezone,
-			currentDate,
-			currentDate,
-			expenseCreateDTO.date,
-		);
+			createdAt: currentDate,
+			modifiedAt: currentDate,
+			date: expenseCreateDTO.date ?? currentDate,
+		});
 
 		return expense;
 	}

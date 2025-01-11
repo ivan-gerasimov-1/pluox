@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { TCategory, TDescription } from '@domain/types';
+import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
@@ -19,6 +19,7 @@ export type TExpenseFormProps = {
 		currency: ECurrency;
 		description: TDescription;
 		category: TCategory | null;
+		venue: Id | null;
 		date: TISODateString;
 	}): void;
 
@@ -26,6 +27,7 @@ export type TExpenseFormProps = {
 	currency: ECurrency;
 	description: TDescription;
 	category: TCategory | null;
+	venue: Id | null;
 	date: TISODateString;
 };
 
@@ -36,6 +38,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 		currency: props.currency,
 		description: props.description,
 		category: props.category,
+		venue: props.venue,
 		date: props.date,
 	});
 
@@ -51,6 +54,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			currency: formState.currency,
 			description: formState.description,
 			category: formState.category || null,
+			venue: formState.venue || null,
 			date: convertDateToModelValue(formState.date),
 		});
 
@@ -187,6 +191,7 @@ type TExpenseFormReducerState = {
 	currency: ECurrency;
 	description: TDescription;
 	category: TCategory | null;
+	venue: Id | null;
 	date: TISODateString;
 };
 

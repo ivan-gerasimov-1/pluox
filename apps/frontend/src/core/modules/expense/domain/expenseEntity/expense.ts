@@ -10,16 +10,18 @@ export class Expense extends Entity implements IExpense {
 	#currency: ECurrency;
 	#description: TDescription;
 	#category: TCategory | null;
+	#venue: Id | null;
 	#date: TISODateString;
 	#timezone: string;
 
-	private constructor(
+	constructor(
 		id: Id,
 		userId: Id,
 		amount: number,
 		currency: ECurrency,
 		description: TDescription,
 		category: TCategory | null,
+		venue: Id | null,
 		timezone: string,
 		createdAt: TISODateString,
 		modifiedAt?: TISODateString,
@@ -32,6 +34,7 @@ export class Expense extends Entity implements IExpense {
 		this.#currency = currency;
 		this.#description = description;
 		this.#category = category;
+		this.#venue = venue;
 		this.#date = date ?? this.createdAt;
 		this.#timezone = timezone;
 	}
@@ -70,6 +73,16 @@ export class Expense extends Entity implements IExpense {
 		this.touch();
 	}
 
+	public get venue(): Id | null {
+		return this.#venue;
+	}
+
+	public set venue(venueId: Id) {
+		this.#venue = venueId;
+
+		this.touch();
+	}
+
 	public get date(): TISODateString {
 		return this.#date;
 	}
@@ -92,31 +105,5 @@ export class Expense extends Entity implements IExpense {
 
 	public get timezone(): string {
 		return this.#timezone;
-	}
-
-	public static create(
-		id: Id,
-		userId: Id,
-		amount: number,
-		currency: ECurrency,
-		description: TDescription,
-		category: TCategory | null,
-		timezone: string,
-		createdAt: TISODateString,
-		modifiedAt?: TISODateString,
-		date?: TISODateString,
-	): IExpense {
-		return new Expense(
-			id,
-			userId,
-			amount,
-			currency,
-			description,
-			category,
-			timezone,
-			createdAt,
-			modifiedAt,
-			date,
-		);
 	}
 }

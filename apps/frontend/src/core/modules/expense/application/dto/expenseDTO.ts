@@ -13,6 +13,7 @@ export type TExpenseDTO = {
 	currency: ECurrency;
 	description: TDescription;
 	category: TCategory | null;
+	venue: Id | null;
 	date: TISODateString;
 	createdAt: TISODateString;
 	modifiedAt: TISODateString;
@@ -21,10 +22,13 @@ export type TExpenseDTO = {
 
 export type TExpenseCreateDTO = Pick<
 	TExpenseDTO,
-	'amount' | 'currency' | 'description' | 'category'
+	'amount' | 'currency' | 'description' | 'category' | 'venue'
 > &
 	Partial<Pick<TExpenseDTO, 'date'>>;
 
 export type TExpenseUpdateDTO = Partial<
-	Pick<TExpenseDTO, 'amount' | 'currency' | 'description' | 'category' | 'date'>
+	Pick<
+		TExpenseDTO,
+		'amount' | 'currency' | 'description' | 'category' | 'date' | 'venue'
+	>
 >;

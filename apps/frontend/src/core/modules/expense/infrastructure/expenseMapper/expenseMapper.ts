@@ -12,6 +12,7 @@ export class ExpenseMapper implements IExpenseMapper {
 			currency: expense.currency,
 			description: expense.description,
 			category: expense.category,
+			venue: expense.venue,
 			date: expense.date,
 			createdAt: expense.createdAt,
 			modifiedAt: expense.modifiedAt,
@@ -20,13 +21,14 @@ export class ExpenseMapper implements IExpenseMapper {
 	}
 
 	public toEntity(expenseDTO: TExpenseDTO): IExpense {
-		return Expense.create(
+		return new Expense(
 			expenseDTO.id,
 			expenseDTO.userId,
 			expenseDTO.amount,
 			expenseDTO.currency,
 			expenseDTO.description,
 			expenseDTO.category,
+			expenseDTO.venue,
 			expenseDTO.timezone,
 			expenseDTO.createdAt,
 			expenseDTO.modifiedAt,
