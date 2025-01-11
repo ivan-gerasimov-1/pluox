@@ -15,6 +15,8 @@ export async function main(): Promise<void> {
 		isDevelopment: process.env.NODE_ENV === 'development',
 	});
 
+	runMigrations();
+
 	await runCore(diContainer);
 	await runUI(diContainer);
 }
@@ -23,8 +25,6 @@ async function runCore(container: IContainer): Promise<void> {
 	await runMockServiceWorker();
 
 	let launchControl = container.get(EServiceToken.LAUNCH_CONTROL);
-
-	runMigrations();
 
 	await launchControl.start();
 }
