@@ -2,7 +2,7 @@ export const enum EAppPath {
 	MAIN = '/',
 
 	EXPENSES = '/expenses',
-	EXPENSES_LIST_MONTHLY = '/list-monthly',
+	EXPENSES_LIST_MONTHLY = '/expenses/list-monthly',
 
 	VENUES = '/venues',
 	VENUES_CREATE = '/venues/new',
