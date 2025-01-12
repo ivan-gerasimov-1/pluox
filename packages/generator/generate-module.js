@@ -66,7 +66,7 @@ program
 					`${fileNamePrefix}UseCase`,
 					`${fileNamePrefix}UseCase.ts`,
 				),
-				useCase(name),
+				useCase(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -86,7 +86,7 @@ program
 					`${fileNamePrefix}QueryService`,
 					`${fileNamePrefix}QueryService.ts`,
 				),
-				queryService(name),
+				queryService(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -101,7 +101,7 @@ program
 					`${fileNamePrefix}Entity`,
 					`${fileNamePrefix}.ts`,
 				),
-				entity(name),
+				entity(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -111,7 +111,7 @@ program
 					`${fileNamePrefix}Repository`,
 					'types.ts',
 				),
-				repositoryTypes(name),
+				repositoryTypes(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -121,7 +121,7 @@ program
 					`${fileNamePrefix}DataSource`,
 					'types.ts',
 				),
-				dataSourceTypes(name),
+				dataSourceTypes(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -131,7 +131,7 @@ program
 					`${fileNamePrefix}DataSource`,
 					`${fileNamePrefix}DataSource.ts`,
 				),
-				dataSource(name),
+				dataSource(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -141,7 +141,7 @@ program
 					`${fileNamePrefix}Mapper`,
 					'types.ts',
 				),
-				mapperTypes(name),
+				mapperTypes(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -151,7 +151,7 @@ program
 					`${fileNamePrefix}Mapper`,
 					`${fileNamePrefix}Mapper.ts`,
 				),
-				mapper(name),
+				mapper(name, fileNamePrefix),
 			),
 
 			fs.writeFile(
@@ -161,7 +161,7 @@ program
 					`${fileNamePrefix}Repository`,
 					`${fileNamePrefix}Repository.ts`,
 				),
-				repository(name),
+				repository(name, fileNamePrefix),
 			),
 		]);
 
@@ -171,7 +171,10 @@ program
 program.parse();
 
 function entityDTO(name) {
-	return `export type T${name}DTO = {
+	return `import type { TISODateString } from '@root/core/domain/temporal/types';
+import type { Id } from '@root/core/domain/types';
+
+export type T${name}DTO = {
 	id: Id;
 	createdAt: TISODateString;
 	modifiedAt: TISODateString;
@@ -188,11 +191,13 @@ function queryServiceTypes(name) {
 `;
 }
 
-function queryService(name) {
-	return `export class ${name}QueryService implements I${name}QueryService {
-	constructor() {
-	}
-}`;
+function queryService(name, fileNamePrefix) {
+	return `import type { I${name}QueryService } from '@root/core/modules/${fileNamePrefix}/application/${fileNamePrefix}QueryService/types';
+
+export class ${name}QueryService implements I${name}QueryService {
+	constructor() {}
+}
+`;
 }
 
 function useCaseTypes(name) {
@@ -200,32 +205,42 @@ function useCaseTypes(name) {
 `;
 }
 
-function useCase(name) {
-	return `export class ${name}UseCase extends UseCase implements I${name}UseCase {
+function useCase(name, fileNamePrefix) {
+	return `import type { I${name}UseCase } from '@root/core/modules/${fileNamePrefix}/application/${fileNamePrefix}UseCase/types';
+
+export class ${name}UseCase implements I${name}UseCase {
 	constructor() {}
 }
 `;
 }
 
 function entityType(name) {
-	return `export interface I${name} extends IEntity {}`;
+	return `import type { IEntity } from '@root/core/domain/entity/types';
+
+export interface I${name} extends IEntity {}
+`;
 }
 
-function entity(name) {
-	return `export class ${name} extends Entity implements I${name} {
-	constructor(
-		id: Id,
-		createdAt: TISODateString,
-		modifiedAt?: TISODateString,
-	) {
+function entity(name, fileNamePrefix) {
+	return `import { Entity } from '@root/core/domain/entity/entity';
+import type { TISODateString } from '@root/core/domain/temporal/types';
+import type { Id } from '@root/core/domain/types';
+import type { I${name} } from '@root/core/modules/${fileNamePrefix}/domain/${fileNamePrefix}Entity/types';
+
+export class ${name} extends Entity implements I${name} {
+	constructor(id: Id, createdAt: TISODateString, modifiedAt?: TISODateString) {
 		super(id, createdAt, modifiedAt);
 	}
 }
 `;
 }
 
-function repositoryTypes(name) {
-	return `export interface I${name}Repository extends IRepository<I${name}, T${name}FindOptions> {}
+function repositoryTypes(name, fileNamePrefix) {
+	return `import type { IRepository } from '@root/core/domain/repository/types';
+import type { Id } from '@root/core/domain/types';
+import type { I${name} } from '@root/core/modules/${fileNamePrefix}/domain/${fileNamePrefix}Entity/types';
+
+export interface I${name}Repository extends IRepository<I${name}, T${name}FindOptions> {}
 
 export type T${name}FindOptions = {
 	id?: Id;
@@ -233,13 +248,20 @@ export type T${name}FindOptions = {
 `;
 }
 
-function dataSourceTypes(name) {
-	return `export interface I${name}DataSource<T${name}DTO> {}
+function dataSourceTypes(name, fileNamePrefix) {
+	return `import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
+import type { T${name}DTO } from '@root/core/modules/${fileNamePrefix}/application/dto/${fileNamePrefix}DTO';
+
+export interface I${name}DataSource extends IDataSource<T${name}DTO> {}
 `;
 }
 
 function dataSource(name, fileNamePrefix) {
-	return `export class ${name}LocalStorageDataSource extends LocalStorageDataSource<T${name}DTO> implements I${name}DataSource {
+	return `import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
+import type { T${name}DTO } from '@root/core/modules/${fileNamePrefix}/application/dto/${fileNamePrefix}DTO';
+import type { I${name}DataSource } from '@root/core/modules/${fileNamePrefix}/infrastructure/${fileNamePrefix}DataSource/types';
+
+export class ${name}LocalStorageDataSource extends LocalStorageDataSource<T${name}DTO> implements I${name}DataSource {
 
 	static readonly #STORAGE_ID = '${fileNamePrefix}s';
 
@@ -250,14 +272,22 @@ function dataSource(name, fileNamePrefix) {
 `;
 }
 
-function mapperTypes(name) {
-	return `export interface I${name}Mapper extends IMapper<T${name}DTO, I${name}> {}
+function mapperTypes(name, fileNamePrefix) {
+	return `import type { IMapper } from '@root/core/infrastructure/mapper/types';
+import type { T${name}DTO } from '@root/core/modules/${fileNamePrefix}/application/dto/${fileNamePrefix}DTO';
+import type { I${name} } from '@root/core/modules/${fileNamePrefix}/domain/${fileNamePrefix}Entity/types';
+
+export interface I${name}Mapper extends IMapper<T${name}DTO, I${name}> {}
 `;
 }
 
-function mapper(name) {
-	return `export class ${name}Mapper implements I${name}Mapper {
+function mapper(name, fileNamePrefix) {
+	return `import type { T${name}DTO } from '@root/core/modules/${fileNamePrefix}/application/dto/${fileNamePrefix}DTO';
+import { ${name} } from '@root/core/modules/${fileNamePrefix}/domain/${fileNamePrefix}Entity/${fileNamePrefix}';
+import type { I${name} } from '@root/core/modules/${fileNamePrefix}/domain/${fileNamePrefix}Entity/types';
+import type { I${name}Mapper } from '@root/core/modules/${fileNamePrefix}/infrastructure/${fileNamePrefix}Mapper/types';
 
+export class ${name}Mapper implements I${name}Mapper {
 	constructor() {}
 
 	public toDTO(entity: ${name}): T${name}DTO {
@@ -269,18 +299,25 @@ function mapper(name) {
 	}
 
 	public toEntity(dto: T${name}DTO): I${name} {
-		return new ${name}(
-			dto.id,
-			dto.createdAt,
-			dto.modifiedAt,
-		);
+		return new ${name}(dto.id, dto.createdAt, dto.modifiedAt);
 	}
 }
 `;
 }
 
-function repository(name) {
-	return `export class ${name}Repository implements I${name}Repository {
+function repository(name, fileNamePrefix) {
+	return `import type {
+	TFindManyOptions,
+	TFindManyResult,
+} from '@root/core/domain/repository/types';
+import type { Id } from '@root/core/domain/types';
+import type { I${name} } from '@root/core/modules/${fileNamePrefix}/domain/${fileNamePrefix}Entity/types';
+import type {
+	I${name}Repository,
+	T${name}FindOptions,
+} from '@root/core/modules/${fileNamePrefix}/domain/${fileNamePrefix}Repository/types';
+
+export class ${name}Repository implements I${name}Repository {
 	constructor() {}
 
 	public save(entity: I${name}): I${name} {
