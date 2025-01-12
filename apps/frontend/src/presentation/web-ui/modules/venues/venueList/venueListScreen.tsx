@@ -17,7 +17,7 @@ export function VenueListScreen() {
 			<ul>
 				{venueList.map((venue) => (
 					<li key={venue.id}>
-						<AppLink to={`${EAppPath.VENUES_EDIT}/${venue.id}`}>
+						<AppLink to={EAppPath.VENUES_EDIT.replace(':id', venue.id)}>
 							{venue.name}
 						</AppLink>
 					</li>
