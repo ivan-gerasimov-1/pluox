@@ -2,21 +2,25 @@ import { useParams } from 'react-router';
 
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
+import { useVenueQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
 
 export function EditVenueScreen() {
-	let { id } = useScreenParams();
+	let { venue } = useScreenParams();
 
 	return (
 		<Screen>
-			<Header title={'Edit Venue:' + id} />
+			<Header title={'Edit Venue:' + venue?.id} />
+
+			<div>{venue?.name}</div>
 		</Screen>
 	);
 }
 
 function useScreenParams() {
-	let params = useParams();
+	let { id } = useParams();
+	let venue = useVenueQuery(id!);
 
 	return {
-		id: params.id,
+		venue,
 	};
 }
