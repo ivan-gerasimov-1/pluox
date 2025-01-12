@@ -1,15 +1,13 @@
-import { createRoot, type Root } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import type { QueryClient } from '@tanstack/react-query';
 
-import { delay } from '@root/presentation/web-ui/utils/delay';
 import { App } from '@root/presentation/web-ui/components/app/app';
 import type { IRouter } from '@root/presentation/web-ui/router';
 import type { IUserInterface } from '@root/presentation/shared/types';
 
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
-
-interface IWindow extends Window {}
-interface IRoot extends Root {}
+import type { IRoot, IWindow } from '@root/presentation/web-ui/types';
+import type { IUILoader } from '@root/presentation/web-ui/uiLoader';
 
 interface IReactUIConstructorParams {
 	containerId: string;
@@ -21,6 +19,7 @@ export class ReactUI implements IUserInterface {
 
 	constructor(
 		private readonly window: IWindow,
+		private readonly loader: IUILoader,
 		private readonly queryClient: QueryClient,
 		private readonly router: IRouter,
 		private readonly diContainer: IContainer,
@@ -47,17 +46,7 @@ export class ReactUI implements IUserInterface {
 				queryClient={this.queryClient}
 				router={this.router}
 				diContainer={this.diContainer}
-				onRendered={async () => {
-					let $loader = this.window.document.getElementById('loader');
-
-					await delay(350);
-
-					$loader?.classList.add('hidden');
-
-					await delay(150);
-
-					$loader?.remove();
-				}}
+				onRendered={() => this.loader.hideAndRemove()}
 			/>,
 		);
 	}
