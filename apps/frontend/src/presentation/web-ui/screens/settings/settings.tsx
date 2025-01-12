@@ -3,6 +3,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
+import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
+import { EAppPath } from '@root/presentation/web-ui/appPath';
+
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
@@ -38,7 +41,6 @@ import { categoryTemplates } from '@root/core/modules/category/domain/categoryTe
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheetV2/actionSheet';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
-import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';
 
 import styles from './settings.module.css';
 /**
@@ -344,6 +346,12 @@ export function SettingsScreen() {
 								}}
 							/>
 						</div>
+					</Card>
+
+					<Card>
+						<h2 className={styles.sectionHeader}>Dev</h2>
+
+						<AppLink to={EAppPath.VENUES}>Venues</AppLink>
 					</Card>
 				</CardContainer>
 			</Screen>
