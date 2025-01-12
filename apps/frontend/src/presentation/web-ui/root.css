@@ -73,6 +73,12 @@
 }
 
 body {
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: transparent;
+
+	font-family: system-ui, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+		'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+
 	color: var(--fc-100);
 	background-color: var(--white-100);
 }
