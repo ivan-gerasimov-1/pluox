@@ -1,3 +1,3 @@
 import { main } from '@root/main';
 
-await main();
+await main(window);

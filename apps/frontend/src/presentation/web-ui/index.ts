@@ -6,8 +6,12 @@ import { ReactUI } from '@root/presentation/web-ui/reactUI';
 import { createAppRouter } from '@root/presentation/web-ui/router';
 import { UILoader } from '@root/presentation/web-ui/uiLoader';
 import { UIElement } from '@root/presentation/web-ui/uiElement';
+import type { IWindow } from '@root/presentation/web-ui/types';
 
-export function createUI(diContainer: IContainer): IUserInterface {
+export function createUI(
+	window: IWindow,
+	diContainer: IContainer,
+): IUserInterface {
 	let queryClient = new QueryClient();
 	let appRouter = createAppRouter();
 

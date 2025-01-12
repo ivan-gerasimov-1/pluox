@@ -8,8 +8,9 @@ import {
 	EServiceToken,
 	type IContainer,
 } from '@root/core/infrastructure/serviceContainer/types';
+import type { IWindow } from '@root/presentation/web-ui/types';
 
-export async function main(): Promise<void> {
+export async function main(window: IWindow): Promise<void> {
 	let diContainer = createDIContainer({
 		isGlobal: true,
 		isDevelopment: process.env.NODE_ENV === 'development',
@@ -18,7 +19,7 @@ export async function main(): Promise<void> {
 	runMigrations();
 
 	await runCore(diContainer);
-	await runUI(diContainer);
+	await runUI(window, diContainer);
 }
 
 async function runCore(container: IContainer): Promise<void> {
@@ -29,8 +30,8 @@ async function runCore(container: IContainer): Promise<void> {
 	await launchControl.start();
 }
 
-async function runUI(diContainer: IContainer): Promise<void> {
-	const ui = createUI(diContainer);
+async function runUI(window: IWindow, diContainer: IContainer): Promise<void> {
+	const ui = createUI(window, diContainer);
 
 	registerServiceWorker();
 
