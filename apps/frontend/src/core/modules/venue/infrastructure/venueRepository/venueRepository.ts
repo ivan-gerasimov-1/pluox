@@ -27,7 +27,12 @@ export class VenueRepository implements IVenueRepository {
 	public findMany(
 		options?: TFindManyOptions<TVenueFindOptions>,
 	): TFindManyResult<IVenue> {
-		throw new Error('Not Implemented');
+		let venues = this.venueDataSource.findMany(options);
+
+		return {
+			items: venues.items.map(this.venueMapper.toEntity),
+			total: venues.total,
+		};
 	}
 
 	public findOne(options: TVenueFindOptions): IVenue | null {
@@ -35,7 +40,13 @@ export class VenueRepository implements IVenueRepository {
 	}
 
 	public findById(id: Id): IVenue | null {
-		throw new Error('Not Implemented');
+		let venue = this.venueDataSource.findById(id);
+
+		if (venue === null) {
+			return null;
+		}
+
+		return this.venueMapper.toEntity(venue);
 	}
 
 	public remove(id: Id): IVenue | null {
