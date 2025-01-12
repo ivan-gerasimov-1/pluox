@@ -4,8 +4,8 @@ export class HTMLElementNotFoundError extends Error {
 	}
 }
 
-export class NotInitializedError extends Error {
+export class AppContainerNotInitializedError extends Error {
 	constructor() {
-		super('Not initialized');
+		super('App container not initialized');
 	}
 }

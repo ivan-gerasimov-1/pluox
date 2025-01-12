@@ -1,5 +1,4 @@
-import { HTMLElementNotFoundError } from '@root/presentation/web-ui/errors';
-import type { IDocument } from '@root/presentation/web-ui/types';
+import type { IUIElement } from '@root/presentation/web-ui/uiElement';
 import { delay } from '@root/presentation/web-ui/utils/delay';
 
 export interface IUILoader {
@@ -9,22 +8,7 @@ export interface IUILoader {
 }
 
 export class UILoader implements IUILoader {
-	readonly #element: HTMLElement;
-
-	constructor(
-		private readonly document: IDocument,
-		options: {
-			readonly containerId: string;
-		},
-	) {
-		let element = this.document.getElementById(options.containerId);
-
-		if (!element) {
-			throw new HTMLElementNotFoundError(options.containerId);
-		}
-
-		this.#element = element;
-	}
+	constructor(private readonly element: IUIElement) {}
 
 	public async hideAndRemove(): Promise<void> {
 		await this.delay(350);
@@ -37,11 +21,11 @@ export class UILoader implements IUILoader {
 	}
 
 	public hide(): void {
-		this.#element.classList.add('hidden');
+		this.element.addClass('hidden');
 	}
 
 	public remove(): void {
-		this.#element.remove();
+		this.element.dispose();
 	}
 
 	private async delay(timeoutMs: number): Promise<void> {

@@ -5,23 +5,26 @@ import type { IUserInterface } from '@root/presentation/shared/types';
 import { ReactUI } from '@root/presentation/web-ui/reactUI';
 import { createAppRouter } from '@root/presentation/web-ui/router';
 import { UILoader } from '@root/presentation/web-ui/uiLoader';
+import { UIElement } from '@root/presentation/web-ui/uiElement';
 
 export function createUI(diContainer: IContainer): IUserInterface {
 	let queryClient = new QueryClient();
 	let appRouter = createAppRouter();
-	let uiLoader = new UILoader(window.document, {
-		containerId: 'loader',
+
+	let appElement = new UIElement(window.document, {
+		id: 'saveeRoot',
 	});
+	let uiElement = new UIElement(window.document, {
+		id: 'loader',
+	});
+	let uiLoader = new UILoader(uiElement);
 
 	let ui: IUserInterface = new ReactUI(
-		window.document,
+		appElement,
 		uiLoader,
 		queryClient,
 		appRouter,
 		diContainer,
-		{
-			containerId: 'saveeRoot',
-		},
 	);
 
 	return ui;

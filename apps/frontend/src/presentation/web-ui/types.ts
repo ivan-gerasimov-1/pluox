@@ -4,3 +4,4 @@ export interface IRoot extends Root {}
 
 export interface IWindow extends Window {}
 export interface IDocument extends Document {}
+export interface IHTMLElement extends HTMLElement {}
