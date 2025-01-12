@@ -11,4 +11,12 @@ export class VenueLocalStorageDataSource
 	constructor() {
 		super(VenueLocalStorageDataSource.#STORAGE_ID);
 	}
+
+	public save(venueDTO: TVenueDTO): TVenueDTO {
+		this.update({
+			[venueDTO.id]: venueDTO,
+		});
+
+		return venueDTO;
+	}
 }

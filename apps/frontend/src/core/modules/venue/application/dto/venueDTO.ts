@@ -9,6 +9,9 @@ export type TVenueDTO = {
 	modifiedAt: TISODateString;
 };
 
-export type TVenueCreateDTO = {};
+export type TVenueCreateDTO = {
+	name: string;
+	categoryId: Id;
+};
 
 export type TVenueUpdateDTO = {};

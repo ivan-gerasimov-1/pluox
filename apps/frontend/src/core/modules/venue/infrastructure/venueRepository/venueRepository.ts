@@ -8,12 +8,20 @@ import type {
 	IVenueRepository,
 	TVenueFindOptions,
 } from '@root/core/modules/venue/domain/venueRepository/types';
+import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/types';
+import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/types';
 
 export class VenueRepository implements IVenueRepository {
-	constructor() {}
+	constructor(
+		private readonly venueDataSource: IVenueDataSource,
+		private readonly venueMapper: IVenueMapper,
+	) {}
 
 	public save(venue: IVenue): IVenue {
-		throw new Error('Not Implemented');
+		let venueDTO = this.venueMapper.toDTO(venue);
+		let createdVenueDTO = this.venueDataSource.save(venueDTO);
+
+		return this.venueMapper.toEntity(createdVenueDTO);
 	}
 
 	public findMany(

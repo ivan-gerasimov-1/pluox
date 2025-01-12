@@ -68,6 +68,7 @@ import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper
 import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
 import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
 import { containerFactory } from '@root/core/infrastructure/serviceContainer/containerFactory';
+import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
@@ -460,6 +461,7 @@ export function createDIContainer(options?: {
 			{
 				token: EServiceToken.VENUE_REPOSITORY,
 				useClass: VenueRepository,
+				deps: [EServiceToken.VENUE_DATASOURCE, EServiceToken.VENUE_MAPPER],
 			},
 			{
 				token: EServiceToken.VENUE_DATASOURCE,
@@ -477,6 +479,17 @@ export function createDIContainer(options?: {
 			{
 				token: EServiceToken.VENUE_USE_CASE,
 				useClass: VenueUseCase,
+				deps: [EServiceToken.VENUE_CREATE_USE_CASE],
+			},
+			{
+				token: EServiceToken.VENUE_CREATE_USE_CASE,
+				useClass: VenueCreateUseCase,
+				deps: [
+					EServiceToken.VENUE_REPOSITORY,
+					EServiceToken.VENUE_MAPPER,
+					EServiceToken.ID_GENERATOR,
+					EServiceToken.TEMPORAL,
+				],
 			},
 		)
 		.register({
