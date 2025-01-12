@@ -1,0 +1,15 @@
+{
+	"name": "@savee/generator",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {},
+	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
+	"license": "UNLICENSED",
+	"dependencies": {
+		"commander": "13.0.0"
+	},
+	"bin": {
+		"generate-module": "./generate-module.js"
+	}
+}

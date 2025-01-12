@@ -1,6 +1,7 @@
 .cache
 .DS_Store
 .env
+.generated/
 .vercel
 .windsurfrules
 *.sqlite
