@@ -14,7 +14,7 @@ export function createUI(diContainer: IContainer): IUserInterface {
 	});
 
 	let ui: IUserInterface = new ReactUI(
-		window,
+		window.document,
 		uiLoader,
 		queryClient,
 		appRouter,

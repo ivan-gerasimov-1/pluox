@@ -6,8 +6,12 @@ import type { IRouter } from '@root/presentation/web-ui/router';
 import type { IUserInterface } from '@root/presentation/shared/types';
 
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
-import type { IRoot, IWindow } from '@root/presentation/web-ui/types';
+import type { IDocument, IRoot } from '@root/presentation/web-ui/types';
 import type { IUILoader } from '@root/presentation/web-ui/uiLoader';
+import {
+	HTMLElementNotFoundError,
+	NotInitializedError,
+} from '@root/presentation/web-ui/errors';
 
 interface IReactUIConstructorParams {
 	containerId: string;
@@ -18,7 +22,7 @@ export class ReactUI implements IUserInterface {
 	#container?: IRoot;
 
 	constructor(
-		private readonly window: IWindow,
+		private readonly document: IDocument,
 		private readonly loader: IUILoader,
 		private readonly queryClient: QueryClient,
 		private readonly router: IRouter,
@@ -67,24 +71,12 @@ export class ReactUI implements IUserInterface {
 	 * @throws {HTMLElementNotFoundError}
 	 */
 	private getRootElement(id: string): HTMLElement {
-		const element = this.window.document.getElementById(id);
+		const element = this.document.getElementById(id);
 
 		if (element === null) {
-			throw new HTMLElementNotFoundError();
+			throw new HTMLElementNotFoundError(id);
 		}
 
 		return element;
-	}
-}
-
-class HTMLElementNotFoundError extends Error {
-	constructor() {
-		super('HTMLElement Not Found');
-	}
-}
-
-class NotInitializedError extends Error {
-	constructor() {
-		super('Not initialized');
 	}
 }

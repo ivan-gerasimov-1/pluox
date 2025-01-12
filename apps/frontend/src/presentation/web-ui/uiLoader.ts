@@ -1,4 +1,5 @@
-import { IDocument } from '@root/presentation/web-ui/types';
+import { HTMLElementNotFoundError } from '@root/presentation/web-ui/errors';
+import type { IDocument } from '@root/presentation/web-ui/types';
 import { delay } from '@root/presentation/web-ui/utils/delay';
 
 export interface IUILoader {
@@ -19,7 +20,7 @@ export class UILoader implements IUILoader {
 		let element = this.document.getElementById(options.containerId);
 
 		if (!element) {
-			throw new Error(`Element with id ${options.containerId} not found`);
+			throw new HTMLElementNotFoundError(options.containerId);
 		}
 
 		this.#element = element;
