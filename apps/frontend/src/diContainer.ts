@@ -472,6 +472,7 @@ export function createDIContainer(options?: {
 			{
 				token: EServiceToken.VENUE_QUERY_SERVICE,
 				useClass: VenueQueryService,
+				deps: [EServiceToken.VENUE_REPOSITORY, EServiceToken.VENUE_MAPPER],
 			},
 			{
 				token: EServiceToken.VENUE_USE_CASE,
