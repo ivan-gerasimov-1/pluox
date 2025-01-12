@@ -1,4 +1,4 @@
-import { IDocument, IWindow } from '@root/presentation/web-ui/types';
+import { IDocument } from '@root/presentation/web-ui/types';
 import { delay } from '@root/presentation/web-ui/utils/delay';
 
 export interface IUILoader {
