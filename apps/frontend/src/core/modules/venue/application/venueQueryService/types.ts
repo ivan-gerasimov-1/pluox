@@ -2,4 +2,5 @@ import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDT
 
 export interface IVenueQueryService {
 	getAll(): TVenueDTO[];
+	getById(id: string): TVenueDTO | null;
 }

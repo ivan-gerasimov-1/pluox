@@ -18,4 +18,10 @@ export class VenueQueryService implements IVenueQueryService {
 
 		return result.items.map((item) => this.venueMapper.toDTO(item));
 	}
+
+	public getById(id: string): TVenueDTO | null {
+		let result = this.venueRepository.findById(id);
+
+		return result ? this.venueMapper.toDTO(result) : null;
+	}
 }
