@@ -1,5 +1,8 @@
 import type { Id } from '@domain/types';
-import type { TFindManyResult } from '@root/core/domain/repository/types';
+import type {
+	TFindManyOptions,
+	TFindManyResult,
+} from '@root/core/domain/repository/types';
 import type {
 	IDataSource,
 	TDtoWithId,
@@ -77,18 +80,24 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
-		if (query?.id) {
-			return this.findById(query.id);
-		}
-
 		let data = this.read();
+
+		if (query?.id) {
+			return data[query.id] ?? null;
+		}
 
 		return Object.values(data)[0] ?? null;
 	}
 
-	public findMany(): TFindManyResult<TDto> {
+	public findMany(
+		options?: TFindManyOptions<TFindOptions>,
+	): TFindManyResult<TDto> {
 		let data = this.read();
 		let items = Object.values(data);
+
+		if (options?.limit) {
+			items = items.slice(0, options.limit);
+		}
 
 		return {
 			items,
@@ -99,29 +108,6 @@ export class LocalStorageCollectionDataSource<
 	public drop(): void {
 		this.#storage.removeItem(this.#id);
 	}
-
-	private findById(id: Id): TDto | null {
-		let data = this.read();
-
-		return data[id] ?? null;
-	}
-
-	// public create(payload: T): void {
-	// 	let isEmpty = this.isEmpty();
-
-	// 	if (!isEmpty) {
-	// 		throw new Error('Storage already exists');
-	// 	}
-
-	// 	this.#storage.setItem(this.#id, JSON.stringify(payload));
-	// }
-
-	// private isEmpty(): boolean {
-	// 	let rawData = this.readRaw();
-	// 	let isEmpty = rawData === null;
-
-	// 	return isEmpty;
-	// }
 
 	protected read(): Record<Id, TDto> {
 		const rawData = this.readRaw();
