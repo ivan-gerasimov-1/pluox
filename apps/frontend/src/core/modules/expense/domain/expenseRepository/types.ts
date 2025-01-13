@@ -3,7 +3,7 @@ import type { TISODateString } from '@root/core/domain/temporal/types';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 
 export interface IExpenseRepository
-	extends IRepository<IExpense, IExpenseFindOptions> {}
+	extends IRepository<IExpense, TExpenseFindOptions> {}
 
 /**
  * @todo
@@ -18,9 +18,9 @@ export interface IExpenseRepository
  *      order: SortOrder;
  *	  };
  */
-export interface IExpenseFindOptions {
+export type TExpenseFindOptions = {
 	filter?: {
 		dateFrom?: TISODateString;
 		dateTo?: TISODateString;
 	};
-}
+};

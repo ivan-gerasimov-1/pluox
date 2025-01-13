@@ -19,9 +19,10 @@ export class VenueRepository implements IVenueRepository {
 
 	public save(venue: IVenue): IVenue {
 		let venueDTO = this.venueMapper.toDTO(venue);
-		let createdVenueDTO = this.venueDataSource.save(venueDTO);
 
-		return this.venueMapper.toEntity(createdVenueDTO);
+		this.venueDataSource.upsert(venueDTO);
+
+		return venue;
 	}
 
 	public findMany(
@@ -36,7 +37,9 @@ export class VenueRepository implements IVenueRepository {
 	}
 
 	public findById(id: Id): IVenue | null {
-		let venue = this.venueDataSource.findById(id);
+		let venue = this.venueDataSource.findOne({
+			id,
+		});
 
 		if (venue === null) {
 			return null;
@@ -46,6 +49,14 @@ export class VenueRepository implements IVenueRepository {
 	}
 
 	public remove(id: Id): IVenue | null {
-		throw new Error('Not Implemented');
+		let venue = this.findById(id);
+
+		if (!venue) {
+			return null;
+		}
+
+		this.venueDataSource.remove(id);
+
+		return venue;
 	}
 }

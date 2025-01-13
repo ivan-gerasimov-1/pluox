@@ -1,7 +1,7 @@
 import type { Id } from '@root/core/domain/types';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type {
-	IExpenseFindOptions,
+	TExpenseFindOptions,
 	IExpenseRepository,
 } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
@@ -16,12 +16,12 @@ export class ExpenseRepository implements IExpenseRepository {
 	public save(expense: IExpense): IExpense {
 		let expenseDTO = this.expenseMapper.toDTO(expense);
 
-		let newExpenseDTO = this.dataSource.save(expenseDTO);
+		this.dataSource.upsert(expenseDTO);
 
-		return this.expenseMapper.toEntity(newExpenseDTO);
+		return expense;
 	}
 
-	public findMany(options?: IExpenseFindOptions) {
+	public findMany(options?: TExpenseFindOptions) {
 		let expenses = this.dataSource.findMany(options);
 
 		return {
@@ -31,7 +31,9 @@ export class ExpenseRepository implements IExpenseRepository {
 	}
 
 	public findById(id: Id): IExpense | null {
-		let expense = this.dataSource.findById(id);
+		let expense = this.dataSource.findOne({
+			id,
+		});
 
 		if (expense === null) {
 			return null;
@@ -41,11 +43,15 @@ export class ExpenseRepository implements IExpenseRepository {
 	}
 
 	public remove(id: Id): IExpense | null {
-		let expense = this.dataSource.remove(id);
+		let expense = this.dataSource.findOne({
+			id,
+		});
 
 		if (expense === null) {
 			return null;
 		}
+
+		this.dataSource.remove(id);
 
 		return this.expenseMapper.toEntity(expense);
 	}

@@ -25,7 +25,7 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 	}
 
 	public findByCode(code: ECurrency): TCurrencyRateDTO {
-		let rate = this.currencyRateDataSource.find(code);
+		let rate = this.currencyRateDataSource.findById(code);
 
 		return {
 			code,
@@ -34,9 +34,7 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 	}
 
 	public findRateByCode(code: ECurrency): number {
-		let currencyRateDTO = this.findByCode(code);
-
-		return currencyRateDTO.rate;
+		return this.currencyRateDataSource.findById(code);
 	}
 
 	public remove(id: Id): void {

@@ -12,7 +12,7 @@ export class AppConfigService implements IAppConfigService {
 	) {}
 
 	public initialize(): this {
-		let config = this.appConfigDataSource.read();
+		let config = this.appConfigDataSource.findOne();
 
 		if (config) {
 			this.updateAppConfig(config);

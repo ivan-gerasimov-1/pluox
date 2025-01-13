@@ -1,12 +1,15 @@
-import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
+import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
 
+import type {
+	TFindManyOptions,
+	TFindManyResult,
+} from '@root/core/domain/repository/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { Id } from '@domain/types';
+import type { TExpenseFindOptions } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
-import type { IExpenseFindOptions } from '@root/core/modules/expense/domain/expenseRepository/types';
 
 export class ExpenseDataSource
-	extends LocalStorageDataSource<Record<Id, TExpenseDTO>>
+	extends LocalStorageCollectionDataSource<TExpenseDTO, TExpenseFindOptions>
 	implements IExpenseDataSource
 {
 	static readonly #STORAGE_ID: string = 'expenses';
@@ -15,21 +18,10 @@ export class ExpenseDataSource
 		super(ExpenseDataSource.#STORAGE_ID);
 	}
 
-	public save(expense: TExpenseDTO): TExpenseDTO {
-		let expenses = this.getItems();
-
-		Reflect.set(expenses, expense.id, expense);
-
-		this.setItems(expenses);
-
-		return expense;
-	}
-
-	public findMany(options?: IExpenseFindOptions): {
-		items: TExpenseDTO[];
-		total: number;
-	} {
-		let expensesMap = this.getItems();
+	public findMany(
+		options?: TFindManyOptions<TExpenseFindOptions>,
+	): TFindManyResult<TExpenseDTO> {
+		let expensesMap = this.read();
 		let expenses = Object.values(expensesMap);
 
 		if (!options) {
@@ -64,66 +56,6 @@ export class ExpenseDataSource
 			items: filteredExpenses,
 			total: filteredExpenses.length,
 		};
-	}
-
-	findOne(query: unknown): TExpenseDTO {
-		throw new Error('Method not implemented.');
-	}
-
-	findById(id: Id): TExpenseDTO | null {
-		let expenses = this.getItems();
-		let expense = Reflect.get(expenses, id);
-
-		if (expense === undefined) {
-			return null;
-		}
-
-		return expense;
-	}
-
-	public remove(id: Id): TExpenseDTO | null {
-		let expenses = this.getItems();
-		let expense = Reflect.get(expenses, id);
-
-		if (expense === undefined) {
-			return null;
-		}
-
-		Reflect.deleteProperty(expenses, id);
-
-		this.setItems(expenses);
-
-		return expense;
-	}
-
-	private getItems(): Record<Id, TExpenseDTO> {
-		const expenses = this.read();
-
-		if (!expenses) {
-			return {};
-		}
-
-		return expenses;
-	}
-
-	/**
-	 * @todo
-	 * ✓ 1. Simplify structure
-	 * 2. Return to update
-	 *    Usage of update is not working on delete operations due to deep merge
-	 */
-	private setItems(expenses: Record<Id, TExpenseDTO>): IExpenseDataSource {
-		this.drop();
-
-		this.create(expenses);
-
-		// this.update({
-		// 	state: {
-		// 		operations: values,
-		// 	},
-		// });
-
-		return this;
 	}
 
 	private sortExpensesByISO8601Date(

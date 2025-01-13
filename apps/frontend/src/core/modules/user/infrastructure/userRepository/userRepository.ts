@@ -20,9 +20,9 @@ export class UserRepository implements IUserRepository {
 	public save(user: IUser): IUser {
 		let userDTO = this.mapper.toDTO(user);
 
-		let savedUserDTO = this.dataSource.save(userDTO);
+		this.dataSource.upsert(userDTO);
 
-		return this.mapper.toEntity(savedUserDTO);
+		return user;
 	}
 
 	public findMany(
@@ -37,7 +37,9 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public findById(id: Id): IUser | null {
-		let user = this.dataSource.findById(id);
+		let user = this.dataSource.findOne({
+			id,
+		});
 
 		return user ? this.mapper.toEntity(user) : null;
 	}

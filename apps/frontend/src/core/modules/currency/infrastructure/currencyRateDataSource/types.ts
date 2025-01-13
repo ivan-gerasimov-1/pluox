@@ -5,10 +5,8 @@ import type {
 } from '@root/core/modules/currency/domain/types';
 
 export interface ICurrencyRateDataSource extends IDataSource<TCurrencyRates> {
-	findAll(): TCurrencyRates;
-	find(currency: ECurrency): number;
-
-	save(rates: TCurrencyRates): void;
+	findById(currency: ECurrency): number;
 
 	exists(currency: ECurrency): boolean;
+	isEmpty(): boolean;
 }

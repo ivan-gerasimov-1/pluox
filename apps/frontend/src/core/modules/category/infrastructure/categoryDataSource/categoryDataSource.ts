@@ -1,27 +1,66 @@
+import {
+	TFindManyOptions,
+	TFindManyResult,
+} from '@root/core/domain/repository/types';
 import type { Id } from '@root/core/domain/types';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
+import type { ICategoryFindOptions } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 
 export class CategoryInMemoryDataSource implements ICategoryDataSource {
-	private readonly storage: Map<Id, TCategoryDTO>;
+	readonly #storage: Map<Id, TCategoryDTO>;
 
 	constructor() {
-		this.storage = new Map<Id, TCategoryDTO>();
+		this.#storage = new Map<Id, TCategoryDTO>();
 	}
 
-	save(categoryDto: TCategoryDTO): TCategoryDTO {
-		this.storage.set(categoryDto.id, categoryDto);
-
-		return categoryDto;
+	public upsert(categoryDTO: TCategoryDTO): void {
+		if (this.#storage.has(categoryDTO.id)) {
+			this.update(categoryDTO);
+		} else {
+			this.insert(categoryDTO);
+		}
 	}
 
-	findMany(options?: { orderByWeight?: boolean }): {
-		items: TCategoryDTO[];
-		total: number;
-	} {
+	public insert(categoryDTO: TCategoryDTO): TCategoryDTO {
+		this.#storage.set(categoryDTO.id, categoryDTO);
+
+		return categoryDTO;
+	}
+
+	public update(categoryDTO: { id: Id } & Partial<TCategoryDTO>): TCategoryDTO {
+		let category = this.#storage.get(categoryDTO.id);
+
+		if (!category) {
+			throw new Error(`Category with id ${categoryDTO.id} not found`);
+		}
+
+		this.#storage.set(categoryDTO.id, {
+			...category,
+			...categoryDTO,
+		});
+
+		return this.#storage.get(categoryDTO.id) as TCategoryDTO;
+	}
+
+	public drop(): void {
+		this.#storage.clear();
+	}
+
+	public findOne(query?: { id?: Id }): TCategoryDTO | null {
+		if (query?.id) {
+			return this.findById(query.id);
+		}
+
+		return null;
+	}
+
+	public findMany(
+		options?: TFindManyOptions<ICategoryFindOptions>,
+	): TFindManyResult<TCategoryDTO> {
 		let categories: TCategoryDTO[] = [];
 
-		for (let category of this.storage.values()) {
+		for (let category of this.#storage.values()) {
 			categories.push(category);
 		}
 
@@ -35,12 +74,8 @@ export class CategoryInMemoryDataSource implements ICategoryDataSource {
 		};
 	}
 
-	findOne(query: unknown): TCategoryDTO | null {
-		throw new Error('Not Implemented');
-	}
-
-	findById(id: Id): TCategoryDTO | null {
-		let category = this.storage.get(id);
+	private findById(id: Id): TCategoryDTO | null {
+		let category = this.#storage.get(id);
 
 		if (!category) {
 			return null;
@@ -49,14 +84,14 @@ export class CategoryInMemoryDataSource implements ICategoryDataSource {
 		return category;
 	}
 
-	remove(id: Id): TCategoryDTO | null {
-		let category = this.storage.get(id);
+	public remove(id: Id): TCategoryDTO | null {
+		let category = this.#storage.get(id);
 
 		if (!category) {
 			return null;
 		}
 
-		this.storage.delete(id);
+		this.#storage.delete(id);
 
 		return category;
 	}

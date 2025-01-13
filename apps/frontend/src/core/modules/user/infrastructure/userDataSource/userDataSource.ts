@@ -2,13 +2,13 @@ import type {
 	TFindManyOptions,
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
-import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
+import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
 import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 import type { TUserFindOptions } from '@root/core/modules/user/domain/userRepository/types';
 import type { IUserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/types';
 
 export class UserDataSource
-	extends LocalStorageDataSource<Record<string, TUserDTO>>
+	extends LocalStorageCollectionDataSource<TUserDTO, TUserFindOptions>
 	implements IUserDataSource
 {
 	static readonly #STORAGE_ID: string = 'user';
@@ -17,26 +17,10 @@ export class UserDataSource
 		super(UserDataSource.#STORAGE_ID);
 	}
 
-	public save(user: TUserDTO): TUserDTO {
-		this.update({
-			[user.id]: user,
-		});
-
-		return user;
-	}
-
-	public findMany(
+	public override findMany(
 		options?: TFindManyOptions<TUserFindOptions>,
 	): TFindManyResult<TUserDTO> {
 		let users = this.read();
-
-		if (users === null) {
-			return {
-				items: [],
-				total: 0,
-			};
-		}
-
 		let filteredUsers = Object.values(users);
 
 		if (options?.limit) {
@@ -47,15 +31,5 @@ export class UserDataSource
 			items: filteredUsers,
 			total: filteredUsers.length,
 		};
-	}
-
-	public findById(id: string): TUserDTO | null {
-		let users = this.read();
-
-		if (!users) {
-			return null;
-		}
-
-		return users[id] ?? null;
 	}
 }

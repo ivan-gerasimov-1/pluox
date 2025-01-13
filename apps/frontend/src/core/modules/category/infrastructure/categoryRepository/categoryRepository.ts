@@ -15,9 +15,10 @@ export class CategoryRepository implements ICategoryRepository {
 
 	public save(category: ICategory): ICategory {
 		let categoryDTO = this.mapper.toDTO(category);
-		let newCategoryDTO = this.dataSource.save(categoryDTO);
 
-		return this.mapper.toEntity(newCategoryDTO);
+		this.dataSource.upsert(categoryDTO);
+
+		return category;
 	}
 
 	public findMany(options?: ICategoryFindOptions) {
@@ -32,7 +33,9 @@ export class CategoryRepository implements ICategoryRepository {
 	}
 
 	public findById(id: Id): ICategory | null {
-		let category = this.dataSource.findById(id);
+		let category = this.dataSource.findOne({
+			id,
+		});
 
 		if (!category) {
 			return null;
@@ -42,11 +45,15 @@ export class CategoryRepository implements ICategoryRepository {
 	}
 
 	public remove(id: Id): ICategory | null {
-		let category = this.dataSource.remove(id);
+		let category = this.dataSource.findOne({
+			id,
+		});
 
 		if (!category) {
 			return null;
 		}
+
+		this.dataSource.remove(id);
 
 		return this.mapper.toEntity(category);
 	}

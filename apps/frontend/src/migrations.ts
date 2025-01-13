@@ -1,11 +1,12 @@
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
+import { LocalStorageObjectDataSource } from '@root/core/infrastructure/dataSource/localStorageObjectDataSource';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
-import { LocalStorageDataSource } from '@root/core/infrastructure/dataSource/dataSource';
+
 import type { Id } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 
 /**
  * @todo
@@ -28,7 +29,7 @@ export function runMigrations() {
  */
 export function addThaiBahtCurrencyToStoredAppConfig(): void {
 	let appConfigStorage = resolveService(EServiceToken.APP_CONFIG_DATASOURCE);
-	let appConfig = appConfigStorage.read();
+	let appConfig = appConfigStorage.findOne();
 
 	if (!appConfig) {
 		return;
@@ -46,22 +47,18 @@ export function addThaiBahtCurrencyToStoredAppConfig(): void {
  * №2. Convert user object to map
  */
 export function convertUserObjectToUserMap(): void {
-	let userDataSource = resolveService(EServiceToken.USER_DATASOURCE);
-	let user = userDataSource.read();
+	let userObjectDataSource = new LocalStorageObjectDataSource<TUserDTO>('user');
+	let userCollectionDataSource = resolveService(EServiceToken.USER_DATASOURCE);
+
+	let user = userObjectDataSource.findOne();
 
 	if (!user) {
 		return;
 	}
 
 	if (typeof user.id === 'string') {
-		let userId = user.id as string;
-
-		let userMap = {
-			[userId]: user as unknown as TUserDTO,
-		};
-
-		userDataSource.drop();
-		userDataSource.create(userMap);
+		userCollectionDataSource.insert(user);
+		userObjectDataSource.drop();
 	}
 }
 
@@ -76,24 +73,26 @@ export function convertUserObjectToUserMap(): void {
 function moveClientIdToSession(): void {
 	const CLIENT_ID_STORAGE_ID = 'clientId';
 
-	let clientIdDataSource = new LocalStorageDataSource<Id>(CLIENT_ID_STORAGE_ID);
+	let clientIdDataSource = new LocalStorageObjectDataSource<Id>(
+		CLIENT_ID_STORAGE_ID,
+	);
 
 	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
 	let userService = resolveService(EServiceToken.USER_SERVICE);
 
-	let clientId = clientIdDataSource.read();
+	let clientId = clientIdDataSource.findOne();
 
 	if (!clientId) {
 		return;
 	}
 
-	if (sessionDataSource.isEmpty()) {
+	if (sessionDataSource.findOne() === null) {
 		let user = userService.createUser({
 			email: '',
 			name: '',
 		});
 
-		sessionDataSource.create({
+		sessionDataSource.insert({
 			clientId,
 			userId: user.id,
 			authToken: null,
@@ -129,20 +128,22 @@ function moveAuthTokenToSession(): void {
 export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 	const OLD_EXPENSES_STORAGE_ID = 'store/$expenses';
 
-	let oldExpenseDataSource = new LocalStorageDataSource<{
+	let oldExpenseDataSource = new LocalStorageObjectDataSource<{
 		state: {
 			operations: Record<string, TExpenseDTO>;
 		};
 	}>(OLD_EXPENSES_STORAGE_ID);
 	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
 
-	let expenses = oldExpenseDataSource.read();
+	let expenses = oldExpenseDataSource.findOne();
 
 	if (!expenses) {
 		return;
 	}
 
-	expenseDataSource.create(expenses?.state.operations);
+	for (let expense of Object.values(expenses.state.operations)) {
+		expenseDataSource.insert(expense);
+	}
 
 	oldExpenseDataSource.drop();
 }
@@ -154,18 +155,18 @@ export function addUserIdToExpense(): void {
 	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
 	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
 
-	let sessionDTO = sessionDataSource.read();
-	let expenses = expenseDataSource.read();
+	let sessionDTO = sessionDataSource.findOne();
+	let expenses = expenseDataSource.findMany();
 
 	if (!sessionDTO || !expenses) {
 		return;
 	}
 
-	for (let expense of Object.values(expenses)) {
+	for (let expense of expenses.items) {
 		expense.userId = sessionDTO.userId;
-	}
 
-	expenseDataSource.update(expenses);
+		expenseDataSource.update(expense);
+	}
 }
 
 /**
@@ -174,13 +175,13 @@ export function addUserIdToExpense(): void {
 export function renameCommentOfExpenseDTOToDescription(): void {
 	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
 
-	let expenses = expenseDataSource.read();
+	let expenses = expenseDataSource.findMany();
 
 	if (!expenses) {
 		return;
 	}
 
-	for (let expense of Object.values(expenses)) {
+	for (let expense of expenses.items) {
 		if (expense.description !== undefined) {
 			continue;
 		}
@@ -190,10 +191,11 @@ export function renameCommentOfExpenseDTOToDescription(): void {
 			expense.comment ?? '';
 
 		Reflect.deleteProperty(expense, 'comment');
-	}
 
-	expenseDataSource.drop();
-	expenseDataSource.create(expenses);
+		expenseDataSource.insert(expense, {
+			replace: true,
+		});
+	}
 }
 
 /**
@@ -202,20 +204,20 @@ export function renameCommentOfExpenseDTOToDescription(): void {
 export function addVenueIdToExpense(): void {
 	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
 
-	let expenses = expenseDataSource.read();
+	let expenses = expenseDataSource.findMany();
 
 	if (!expenses) {
 		return;
 	}
 
-	for (let expense of Object.values(expenses)) {
-		if (expense.venue) {
+	for (let expense of expenses.items) {
+		if (expense.venue || expense.venue === null) {
 			continue;
 		}
 
 		expense.venue = null;
+		expenseDataSource.insert(expense, {
+			replace: true,
+		});
 	}
-
-	expenseDataSource.drop();
-	expenseDataSource.create(expenses);
 }
