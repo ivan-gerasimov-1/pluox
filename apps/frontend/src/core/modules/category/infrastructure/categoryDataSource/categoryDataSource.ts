@@ -11,7 +11,7 @@ export class CategoryInMemoryDataSource
 	extends InMemoryDataSource<TCategoryDTO, ICategoryFindOptions>
 	implements ICategoryDataSource
 {
-	public findMany(
+	public override findMany(
 		options?: TFindManyOptions<ICategoryFindOptions>,
 	): TFindManyResult<TCategoryDTO> {
 		let categories: TCategoryDTO[] = [...this.storage.values()];

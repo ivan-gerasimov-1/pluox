@@ -18,7 +18,7 @@ export class ExpenseDataSource
 		super(ExpenseDataSource.#STORAGE_ID);
 	}
 
-	public findMany(
+	public override findMany(
 		options?: TFindManyOptions<TExpenseFindOptions>,
 	): TFindManyResult<TExpenseDTO> {
 		let expensesMap = this.read();
