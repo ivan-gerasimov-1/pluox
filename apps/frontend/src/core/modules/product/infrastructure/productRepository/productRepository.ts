@@ -22,10 +22,6 @@ export class ProductRepository implements IProductRepository {
 		throw new Error('Not Implemented');
 	}
 
-	public findOne(options: TProductFindOptions): IProduct | null {
-		throw new Error('Not Implemented');
-	}
-
 	public findById(id: Id): IProduct | null {
 		throw new Error('Not Implemented');
 	}

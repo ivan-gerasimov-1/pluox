@@ -30,10 +30,6 @@ export class ExpenseRepository implements IExpenseRepository {
 		};
 	}
 
-	public findOne(options: IExpenseFindOptions): IExpense {
-		throw new Error('Not implemented');
-	}
-
 	public findById(id: Id): IExpense | null {
 		let expense = this.dataSource.findById(id);
 

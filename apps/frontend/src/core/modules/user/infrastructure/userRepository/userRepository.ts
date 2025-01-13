@@ -36,10 +36,6 @@ export class UserRepository implements IUserRepository {
 		};
 	}
 
-	public findOne(options: TUserFindOptions): IUser | null {
-		throw new Error('Not Implemented');
-	}
-
 	public findById(id: Id): IUser | null {
 		let user = this.dataSource.findById(id);
 

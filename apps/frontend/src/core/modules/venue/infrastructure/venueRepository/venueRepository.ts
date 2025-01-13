@@ -35,10 +35,6 @@ export class VenueRepository implements IVenueRepository {
 		};
 	}
 
-	public findOne(options: TVenueFindOptions): IVenue | null {
-		throw new Error('Not Implemented');
-	}
-
 	public findById(id: Id): IVenue | null {
 		let venue = this.venueDataSource.findById(id);
 

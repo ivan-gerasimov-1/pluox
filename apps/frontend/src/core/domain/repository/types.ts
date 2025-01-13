@@ -14,12 +14,7 @@ export interface IRepository<TEntity, TFindOptions> {
 	 * Finds multiple entities with pagination
 	 */
 	findMany(options?: TFindManyOptions<TFindOptions>): TFindManyResult<TEntity>;
-	/**
-	 * @description
-	 * Finds a single entity by query
-	 * @returns Entity or null if not found
-	 */
-	findOne(options: TFindOptions): TEntity | null;
+
 	/**
 	 * @description
 	 * Finds a single entity by id

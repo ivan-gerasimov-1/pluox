@@ -8,8 +8,6 @@ export interface ICurrencyRateRepository {
 	update(currency: TCurrencyRateDTO): TCurrencyRateDTO;
 
 	findAll(): TCurrencyFindManyResult;
-	/** @todo Not Implemented */
-	findOne(query: unknown): TCurrencyRateDTO;
 
 	/**
 	 * @throws {CategoryNotFoundError}

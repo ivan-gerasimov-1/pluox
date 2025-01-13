@@ -24,10 +24,6 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 		throw new NotImplementedError();
 	}
 
-	public findOne(): TCurrencyRateDTO {
-		throw new NotImplementedError();
-	}
-
 	public findByCode(code: ECurrency): TCurrencyRateDTO {
 		let rate = this.currencyRateDataSource.find(code);
 

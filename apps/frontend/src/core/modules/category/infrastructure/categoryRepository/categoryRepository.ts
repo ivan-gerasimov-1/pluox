@@ -31,10 +31,6 @@ export class CategoryRepository implements ICategoryRepository {
 		};
 	}
 
-	public findOne(): ICategory {
-		throw new Error('Not Implemented');
-	}
-
 	public findById(id: Id): ICategory | null {
 		let category = this.dataSource.findById(id);
 
