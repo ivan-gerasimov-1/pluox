@@ -60,7 +60,7 @@ export function convertUserObjectToUserMap(): void {
 			[userId]: user as unknown as TUserDTO,
 		};
 
-		userDataSource.clear();
+		userDataSource.drop();
 		userDataSource.create(userMap);
 	}
 }
@@ -104,7 +104,7 @@ function moveClientIdToSession(): void {
 		});
 	}
 
-	clientIdDataSource.clear();
+	clientIdDataSource.drop();
 }
 
 /**
@@ -144,7 +144,7 @@ export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 
 	expenseDataSource.create(expenses?.state.operations);
 
-	oldExpenseDataSource.clear();
+	oldExpenseDataSource.drop();
 }
 
 /**
@@ -192,7 +192,7 @@ export function renameCommentOfExpenseDTOToDescription(): void {
 		Reflect.deleteProperty(expense, 'comment');
 	}
 
-	expenseDataSource.clear();
+	expenseDataSource.drop();
 	expenseDataSource.create(expenses);
 }
 
@@ -216,6 +216,6 @@ export function addVenueIdToExpense(): void {
 		expense.venue = null;
 	}
 
-	expenseDataSource.clear();
+	expenseDataSource.drop();
 	expenseDataSource.create(expenses);
 }

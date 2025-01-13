@@ -113,7 +113,7 @@ export class ExpenseDataSource
 	 *    Usage of update is not working on delete operations due to deep merge
 	 */
 	private setItems(expenses: Record<Id, TExpenseDTO>): IExpenseDataSource {
-		this.clear();
+		this.drop();
 
 		this.create(expenses);
 
