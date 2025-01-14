@@ -1,4 +1,5 @@
 import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
+import { EXPENSE_STORAGE_ID } from '@root/core/modules/expense/infrastructure/expenseDataSource/constants';
 
 import type {
 	TFindManyOptions,
@@ -12,11 +13,9 @@ export class ExpenseDataSource
 	extends LocalStorageCollectionDataSource<TExpenseDTO, TExpenseFindOptions>
 	implements IExpenseDataSource
 {
-	static readonly #STORAGE_ID: string = 'expenses';
-
 	constructor() {
 		super(window.localStorage, {
-			id: ExpenseDataSource.#STORAGE_ID,
+			id: EXPENSE_STORAGE_ID,
 		});
 	}
 

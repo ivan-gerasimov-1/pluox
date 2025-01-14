@@ -1,20 +1,19 @@
 import { LocalStorageObjectDataSource } from '@root/core/infrastructure/dataSource/localStorageObjectDataSource';
+import { CURRENCY_RATE_STORAGE_ID } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/constants';
+import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
 import type {
 	ECurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
-import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateDataSource
 	extends LocalStorageObjectDataSource<TCurrencyRates>
 	implements ICurrencyRateDataSource
 {
-	static readonly #STORAGE_ID = 'currencyRates';
-
 	constructor() {
 		super(window.localStorage, {
-			id: CurrencyRateDataSource.#STORAGE_ID,
+			id: CURRENCY_RATE_STORAGE_ID,
 		});
 	}
 
