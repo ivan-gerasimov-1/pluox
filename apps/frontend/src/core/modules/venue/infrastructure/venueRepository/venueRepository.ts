@@ -1,4 +1,4 @@
-import { Repository } from '@root/core/domain/repository/repository';
+import { Repository } from '@root/core/infrastructure/repository/repository';
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 import type { IVenue } from '@root/core/modules/venue/domain/venueEntity/types';
 import type {

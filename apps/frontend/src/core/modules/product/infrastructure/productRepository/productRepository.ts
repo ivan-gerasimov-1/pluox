@@ -1,4 +1,4 @@
-import { Repository } from '@root/core/domain/repository/repository';
+import { Repository } from '@root/core/infrastructure/repository/repository';
 import type { TProductDTO } from '@root/core/modules/product/application/dto/productDTO';
 import type { IProduct } from '@root/core/modules/product/domain/productEntity/types';
 import type {

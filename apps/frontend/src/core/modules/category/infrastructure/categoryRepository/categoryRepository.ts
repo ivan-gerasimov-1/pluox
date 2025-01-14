@@ -1,4 +1,4 @@
-import { Repository } from '@root/core/domain/repository/repository';
+import { Repository } from '@root/core/infrastructure/repository/repository';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 import type {

@@ -1,4 +1,4 @@
-import { Repository } from '@root/core/domain/repository/repository';
+import { Repository } from '@root/core/infrastructure/repository/repository';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type {

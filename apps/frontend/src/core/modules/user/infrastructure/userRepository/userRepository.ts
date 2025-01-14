@@ -1,4 +1,4 @@
-import { Repository } from '@root/core/domain/repository/repository';
+import { Repository } from '@root/core/infrastructure/repository/repository';
 import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 import type { IUser } from '@root/core/modules/user/domain/userEntity/types';
 import type {
