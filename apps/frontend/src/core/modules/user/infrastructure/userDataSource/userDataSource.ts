@@ -1,7 +1,3 @@
-import type {
-	TFindManyOptions,
-	TFindManyResult,
-} from '@root/core/domain/repository/types';
 import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
 import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 import type { TUserFindOptions } from '@root/core/modules/user/domain/userRepository/types';
@@ -15,21 +11,5 @@ export class UserDataSource
 
 	constructor() {
 		super(UserDataSource.#STORAGE_ID);
-	}
-
-	public override findMany(
-		options?: TFindManyOptions<TUserFindOptions>,
-	): TFindManyResult<TUserDTO> {
-		let users = this.readFromStorage();
-		let filteredUsers = Object.values(users);
-
-		if (options?.limit) {
-			filteredUsers = filteredUsers.slice(0, options.limit);
-		}
-
-		return {
-			items: filteredUsers,
-			total: filteredUsers.length,
-		};
 	}
 }
