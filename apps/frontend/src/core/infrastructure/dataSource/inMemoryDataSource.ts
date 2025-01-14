@@ -19,12 +19,8 @@ export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 		this.#storage = new Map<Id, TDto>();
 	}
 
-	protected get storage(): Map<Id, TDto> {
-		return this.#storage;
-	}
-
 	public upsert(dto: TDto): void {
-		if (this.#storage.has(dto.id)) {
+		if (this.isItemInStorage(dto.id)) {
 			this.update(dto);
 		} else {
 			this.insert(dto);
@@ -32,39 +28,39 @@ export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 	}
 
 	public insert(createDTO: TDto): TDto {
-		if (this.#storage.has(createDTO.id)) {
+		if (this.isItemInStorage(createDTO.id)) {
 			throw new Error(`Category with id ${createDTO.id} already exists`);
 		}
 
-		this.#storage.set(createDTO.id, createDTO);
+		this.writeItemToStorage(createDTO);
 
 		return createDTO;
 	}
 
 	public update(updateDTO: { id: Id } & Partial<TDto>): TDto {
-		let dto = this.#storage.get(updateDTO.id);
+		let dto = this.readItemFromStorage(updateDTO.id);
 
 		if (!dto) {
 			throw new Error(`Category with id ${updateDTO.id} not found`);
 		}
 
-		this.#storage.set(updateDTO.id, deepMerge(dto, updateDTO));
+		this.writeItemToStorage(deepMerge(dto, updateDTO));
 
-		return this.#storage.get(updateDTO.id) as TDto;
+		return this.readItemFromStorage(updateDTO.id) as TDto;
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
 		if (query?.id) {
-			return this.#storage.get(query.id) ?? null;
+			return this.readItemFromStorage(query.id);
 		}
 
-		return [...this.#storage.values()][0] ?? null;
+		return this.readItemsFromStorage()[0] ?? null;
 	}
 
 	public findMany(
 		options?: TFindManyOptions<TFindOptions>,
 	): TFindManyResult<TDto> {
-		let items: TDto[] = [...this.#storage.values()];
+		let items: TDto[] = this.readItemsFromStorage();
 
 		if (options?.limit) {
 			items = items.slice(0, options.limit);
@@ -77,18 +73,42 @@ export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 	}
 
 	public remove(id: Id): TDto | null {
-		let category = this.#storage.get(id);
+		let category = this.readItemFromStorage(id);
 
 		if (!category) {
 			return null;
 		}
 
-		this.#storage.delete(id);
+		this.deleteItemFromStorage(id);
 
 		return category;
 	}
 
 	public drop(): void {
+		this.clearStorage();
+	}
+
+	protected readItemsFromStorage(): TDto[] {
+		return [...this.#storage.values()];
+	}
+
+	private isItemInStorage(id: Id): boolean {
+		return this.#storage.has(id);
+	}
+
+	private readItemFromStorage(id: Id): TDto | null {
+		return this.#storage.get(id) ?? null;
+	}
+
+	private writeItemToStorage(data: TDto): void {
+		this.#storage.set(data.id, data);
+	}
+
+	private deleteItemFromStorage(id: Id): void {
+		this.#storage.delete(id);
+	}
+
+	private clearStorage(): void {
 		this.#storage.clear();
 	}
 }

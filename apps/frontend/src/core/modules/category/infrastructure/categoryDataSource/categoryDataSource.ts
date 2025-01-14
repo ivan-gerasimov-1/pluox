@@ -14,7 +14,7 @@ export class CategoryInMemoryDataSource
 	public override findMany(
 		options?: TFindManyOptions<ICategoryFindOptions>,
 	): TFindManyResult<TCategoryDTO> {
-		let categories: TCategoryDTO[] = [...this.storage.values()];
+		let categories: TCategoryDTO[] = this.readItemsFromStorage();
 
 		if (options?.orderByWeight) {
 			categories = this.sortByWeight(categories);
