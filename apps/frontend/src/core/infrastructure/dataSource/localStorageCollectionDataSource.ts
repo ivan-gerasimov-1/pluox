@@ -9,6 +9,7 @@ import type {
 } from '@root/core/infrastructure/dataSource/types';
 
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
+import { parseSafeToObject } from '@root/core/infrastructure/dataSource/parseSafe';
 
 export class LocalStorageCollectionDataSource<
 	TDto extends TDtoWithId,
@@ -116,19 +117,11 @@ export class LocalStorageCollectionDataSource<
 			return {};
 		}
 
-		return this.parseSafe(rawData);
+		return parseSafeToObject(rawData);
 	}
 
 	private readRaw(): string | null {
 		return this.#storage.getItem(this.#id);
-	}
-
-	private parseSafe(payload: string): Record<Id, TDto> | {} {
-		try {
-			return JSON.parse(payload);
-		} catch {
-			return {};
-		}
 	}
 
 	private makeId(id: Id): Id {

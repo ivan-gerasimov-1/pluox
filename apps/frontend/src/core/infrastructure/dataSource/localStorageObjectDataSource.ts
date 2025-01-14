@@ -3,6 +3,7 @@ import type { TFindManyResult } from '@root/core/domain/repository/types';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
+import { parseSafeToNull } from '@root/core/infrastructure/dataSource/parseSafe';
 
 export class LocalStorageObjectDataSource<TDto extends {}>
 	implements IDataSource<TDto>
@@ -79,19 +80,11 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 			return null;
 		}
 
-		return this.parseSafe(rawData);
+		return parseSafeToNull<TDto>(rawData);
 	}
 
 	private readRaw(): string | null {
 		return this.#storage.getItem(this.#id);
-	}
-
-	private parseSafe(payload: string): TDto | null {
-		try {
-			return JSON.parse(payload);
-		} catch {
-			return null;
-		}
 	}
 
 	private makeId(id: Id): Id {
