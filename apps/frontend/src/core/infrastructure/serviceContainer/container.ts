@@ -1,8 +1,12 @@
 import {
+	ContainerNotSealedError,
+	ContainerSealedError,
+} from '@root/core/infrastructure/serviceContainer/errors';
+import {
+	EServiceScope,
 	type IContainer,
 	type IServiceMap,
 	type IServiceProvider,
-	EServiceScope,
 	type TServiceToken,
 } from '@root/core/infrastructure/serviceContainer/types';
 
@@ -114,19 +118,5 @@ export class Container implements IContainer {
 	 */
 	public disposeAll(): void {
 		this.instances.clear();
-	}
-}
-
-export class ContainerSealedError extends Error {
-	constructor() {
-		super('Container is already sealed. Cannot register new providers.');
-	}
-}
-
-export class ContainerNotSealedError extends Error {
-	constructor() {
-		super(
-			'Container is not sealed. Call seal() after registering all providers.',
-		);
 	}
 }
