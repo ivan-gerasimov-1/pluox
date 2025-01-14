@@ -31,9 +31,7 @@ export function createDIContainer(options?: {
 	isGlobal?: boolean;
 	isDevelopment?: boolean;
 }) {
-	let container = containerFactory(options);
-
-	return container
+	return containerFactory(options)
 		.registerModule(sharedModule)
 		.registerModule(bootstrapModule)
 		.registerModule(expenseModule)
