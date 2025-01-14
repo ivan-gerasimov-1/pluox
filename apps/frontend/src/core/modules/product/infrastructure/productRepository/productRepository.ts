@@ -1,32 +1,21 @@
-import type {
-	TFindManyOptions,
-	TFindManyResult,
-} from '@root/core/domain/repository/types';
-import type { Id } from '@root/core/domain/types';
+import { Repository } from '@root/core/domain/repository/repository';
+import type { TProductDTO } from '@root/core/modules/product/application/dto/productDTO';
 import type { IProduct } from '@root/core/modules/product/domain/productEntity/types';
 import type {
 	IProductRepository,
 	TProductFindOptions,
 } from '@root/core/modules/product/domain/productRepository/types';
+import { IProductDataSource } from '@root/core/modules/product/infrastructure/productDataSource/types';
+import { IProductMapper } from '@root/core/modules/product/infrastructure/productMapper/types';
 
-export class ProductRepository implements IProductRepository {
-	constructor() {}
-
-	public save(entity: IProduct): IProduct {
-		throw new Error('Not Implemented');
-	}
-
-	public findMany(
-		options: TFindManyOptions<TProductFindOptions>,
-	): TFindManyResult<IProduct> {
-		throw new Error('Not Implemented');
-	}
-
-	public findById(id: Id): IProduct | null {
-		throw new Error('Not Implemented');
-	}
-
-	public remove(id: Id): IProduct | null {
-		throw new Error('Not Implemented');
+export class ProductRepository
+	extends Repository<IProduct, TProductDTO, TProductFindOptions>
+	implements IProductRepository
+{
+	constructor(
+		private readonly productDataSource: IProductDataSource,
+		private readonly productMapper: IProductMapper,
+	) {
+		super(productDataSource, productMapper);
 	}
 }

@@ -2,8 +2,8 @@ import type { IRepository } from '@root/core/domain/repository/types';
 import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
 
 export interface ICategoryRepository
-	extends IRepository<ICategory, ICategoryFindOptions> {}
+	extends IRepository<ICategory, TCategoryFindOptions> {}
 
-export interface ICategoryFindOptions {
+export type TCategoryFindOptions = {
 	orderByWeight?: boolean;
-}
+};
