@@ -44,19 +44,6 @@ import { currencyRateDataSourceFactory } from '@root/core/modules/currency/infra
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
 
-import { ExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/expenseAmountService';
-import { ExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
-import { ExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/expenseQueryService';
-import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
-import { CreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/createExpenseUseCase';
-import { DeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
-import { ExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/expenseUseCase';
-import { UpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
-import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
-import { expenseDataSourceFactory } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSourceFactory';
-import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
-import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
-
 import { AuthService } from '@root/core/modules/identity/application/authService/authService';
 import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
 import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
@@ -84,450 +71,370 @@ import { venueDataSourceFactory } from '@root/core/modules/venue/infrastructure/
 import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
 import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
 
+import { expenseModule } from '@root/core/modules/expense/expense.module';
+
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
 	isDevelopment?: boolean;
 }) {
 	let container = containerFactory(options);
 
-	container
-		/**
-		 * @description Environment and configuration
-		 */
-		.register(
-			{
-				token: EServiceToken.GLOBAL,
-				useValue: window,
-			},
-			{
-				token: EServiceToken.LOCAL_STORAGE,
-				useFactory: (global: Window) => global.localStorage,
-				deps: [EServiceToken.GLOBAL],
-			},
-
-			{
-				token: EServiceToken.PROCESS_ENV,
-				useValue: process.env,
-			},
-			{
-				token: EServiceToken.ENVIRONMENT,
-				useClass: Environment,
-				deps: [EServiceToken.PROCESS_ENV],
-			},
-			{
-				token: EServiceToken.APP_CONFIG,
-				useFactory: () => {
-					return new AppConfig(ELocaleCode.RU_RU, ECurrency.USD);
+	return (
+		container
+			/**
+			 * @description Expenses
+			 */
+			.registerModule(expenseModule)
+			/**
+			 * @description Global objects
+			 */
+			.register(
+				{
+					token: EServiceToken.GLOBAL,
+					useValue: window,
 				},
-			},
-			{
-				token: EServiceToken.APP_CONFIG_DATASOURCE,
-				useFactory: (storage: Storage) => appConfigDataSourceFactory(storage),
-				deps: [EServiceToken.LOCAL_STORAGE],
-			},
-			{
-				token: EServiceToken.APP_CONFIG_SERVICE,
-				useClass: AppConfigService,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_DATASOURCE],
-			},
-		)
-		/**
-		 * @description Base services
-		 */
-		.register(
-			{
-				token: EServiceToken.NUMBER_PARSER,
-				useClass: NumberParser,
-				deps: [EServiceToken.APP_CONFIG],
-			},
-			{
-				token: EServiceToken.CURRENCY_FORMATTER,
-				useClass: CurrencyFormatter,
-			},
-			{
-				token: EServiceToken.DATE_FORMATTER,
-				useClass: DateFormatter,
-			},
-			{
-				token: EServiceToken.INTL_SERVICE,
-				useClass: IntlService,
-				deps: [
-					EServiceToken.APP_CONFIG,
-					EServiceToken.NUMBER_PARSER,
-					EServiceToken.CURRENCY_FORMATTER,
-					EServiceToken.DATE_FORMATTER,
-				],
-			},
-			{
-				token: EServiceToken.ID_GENERATOR_FACTORY,
-				useClass: IdGeneratorFactory,
-			},
-			{
-				token: EServiceToken.ID_GENERATOR,
-				useFactory: (idGeneratorFactory: IIdGeneratorFactory) => {
-					return idGeneratorFactory.create();
+				{
+					token: EServiceToken.LOCAL_STORAGE,
+					useFactory: (global: Window) => global.localStorage,
+					deps: [EServiceToken.GLOBAL],
 				},
-				deps: [EServiceToken.ID_GENERATOR_FACTORY],
-			},
-
-			{
-				token: EServiceToken.API_CLIENT,
-				useClass: ApiClient,
-				deps: [EServiceToken.API_CLIENT_CONFIG_PROVIDER],
-			},
-			{
-				token: EServiceToken.API_CLIENT_CONFIG_PROVIDER,
-				useClass: ApiClientConfigProvider,
-				deps: [EServiceToken.ENVIRONMENT, EServiceToken.SESSION_SERVICE],
-			},
-
-			{
-				token: EServiceToken.TEMPORAL,
-				useClass: Temporal,
-				deps: [EServiceToken.INTL_SERVICE],
-			},
-		)
-		/**
-		 * @description Authentication and user management
-		 */
-		.register(
-			/** Launch control */
-			{
-				token: EServiceToken.LAUNCH_CONTROL,
-				useClass: LaunchControl,
-				deps: [
-					EServiceToken.SESSION_SERVICE,
-					EServiceToken.APP_CONFIG_SERVICE,
-					EServiceToken.CURRENCY_RATE_API,
-					EServiceToken.CURRENCY_RATE_DATASOURCE,
-				],
-			},
-
-			/** Session */
-			{
-				token: EServiceToken.SESSION_DATASOURCE,
-				useFactory: (storage: Storage) => sessionDataSourceFactory(storage),
-				deps: [EServiceToken.LOCAL_STORAGE],
-			},
-			{
-				token: EServiceToken.SESSION_SERVICE,
-				useClass: SessionService,
-				deps: [EServiceToken.SESSION_DATASOURCE, EServiceToken.SESSION_FACTORY],
-			},
-			{
-				token: EServiceToken.SESSION_FACTORY,
-				useClass: SessionFactory,
-				deps: [
-					EServiceToken.CLIENT_ID_FACTORY,
-					EServiceToken.AUTH_TOKEN_FACTORY,
-					EServiceToken.USER_SERVICE,
-				],
-			},
-
-			/** ClientId */
-			{
-				token: EServiceToken.CLIENT_ID,
-				useFactory: (clientIdFactory: IClientIdFactory) => {
-					return clientIdFactory.create();
+				{
+					token: EServiceToken.PROCESS_ENV,
+					useValue: process.env,
 				},
-				deps: [EServiceToken.CLIENT_ID_FACTORY],
-			},
-			{
-				token: EServiceToken.CLIENT_ID_FACTORY,
-				useClass: ClientIdFactory,
-				deps: [EServiceToken.ID_GENERATOR],
-			},
-
-			/** Authentication */
-			{
-				token: EServiceToken.AUTH_API,
-				useClass: AuthApi,
-				deps: [EServiceToken.API_CLIENT],
-			},
-			{
-				token: EServiceToken.AUTH_SERVICE,
-				useClass: AuthService,
+				{
+					token: EServiceToken.ENVIRONMENT,
+					useClass: Environment,
+					deps: [EServiceToken.PROCESS_ENV],
+				},
+				{
+					token: EServiceToken.APP_CONFIG,
+					useFactory: () => {
+						return new AppConfig(ELocaleCode.RU_RU, ECurrency.USD);
+					},
+				},
+				{
+					token: EServiceToken.APP_CONFIG_DATASOURCE,
+					useFactory: (storage: Storage) => appConfigDataSourceFactory(storage),
+					deps: [EServiceToken.LOCAL_STORAGE],
+				},
+				{
+					token: EServiceToken.APP_CONFIG_SERVICE,
+					useClass: AppConfigService,
+					deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_DATASOURCE],
+				},
+			)
+			/**
+			 * @description Base services
+			 */
+			.register(
+				{
+					token: EServiceToken.NUMBER_PARSER,
+					useClass: NumberParser,
+					deps: [EServiceToken.APP_CONFIG],
+				},
+				{
+					token: EServiceToken.CURRENCY_FORMATTER,
+					useClass: CurrencyFormatter,
+				},
+				{
+					token: EServiceToken.DATE_FORMATTER,
+					useClass: DateFormatter,
+				},
+				{
+					token: EServiceToken.INTL_SERVICE,
+					useClass: IntlService,
+					deps: [
+						EServiceToken.APP_CONFIG,
+						EServiceToken.NUMBER_PARSER,
+						EServiceToken.CURRENCY_FORMATTER,
+						EServiceToken.DATE_FORMATTER,
+					],
+				},
+				{
+					token: EServiceToken.ID_GENERATOR_FACTORY,
+					useClass: IdGeneratorFactory,
+				},
+				{
+					token: EServiceToken.ID_GENERATOR,
+					useFactory: (idGeneratorFactory: IIdGeneratorFactory) => {
+						return idGeneratorFactory.create();
+					},
+					deps: [EServiceToken.ID_GENERATOR_FACTORY],
+				},
+				{
+					token: EServiceToken.API_CLIENT,
+					useClass: ApiClient,
+					deps: [EServiceToken.API_CLIENT_CONFIG_PROVIDER],
+				},
+				{
+					token: EServiceToken.API_CLIENT_CONFIG_PROVIDER,
+					useClass: ApiClientConfigProvider,
+					deps: [EServiceToken.ENVIRONMENT, EServiceToken.SESSION_SERVICE],
+				},
+				{
+					token: EServiceToken.TEMPORAL,
+					useClass: Temporal,
+					deps: [EServiceToken.INTL_SERVICE],
+				},
+			)
+			/**
+			 * @description Authentication and user management
+			 */
+			.register(
+				/** Launch control */
+				{
+					token: EServiceToken.LAUNCH_CONTROL,
+					useClass: LaunchControl,
+					deps: [
+						EServiceToken.SESSION_SERVICE,
+						EServiceToken.APP_CONFIG_SERVICE,
+						EServiceToken.CURRENCY_RATE_API,
+						EServiceToken.CURRENCY_RATE_DATASOURCE,
+					],
+				},
+				/** Session */
+				{
+					token: EServiceToken.SESSION_DATASOURCE,
+					useFactory: (storage: Storage) => sessionDataSourceFactory(storage),
+					deps: [EServiceToken.LOCAL_STORAGE],
+				},
+				{
+					token: EServiceToken.SESSION_SERVICE,
+					useClass: SessionService,
+					deps: [
+						EServiceToken.SESSION_DATASOURCE,
+						EServiceToken.SESSION_FACTORY,
+					],
+				},
+				{
+					token: EServiceToken.SESSION_FACTORY,
+					useClass: SessionFactory,
+					deps: [
+						EServiceToken.CLIENT_ID_FACTORY,
+						EServiceToken.AUTH_TOKEN_FACTORY,
+						EServiceToken.USER_SERVICE,
+					],
+				},
+				/** ClientId */
+				{
+					token: EServiceToken.CLIENT_ID,
+					useFactory: (clientIdFactory: IClientIdFactory) => {
+						return clientIdFactory.create();
+					},
+					deps: [EServiceToken.CLIENT_ID_FACTORY],
+				},
+				{
+					token: EServiceToken.CLIENT_ID_FACTORY,
+					useClass: ClientIdFactory,
+					deps: [EServiceToken.ID_GENERATOR],
+				},
+				/** Authentication */
+				{
+					token: EServiceToken.AUTH_API,
+					useClass: AuthApi,
+					deps: [EServiceToken.API_CLIENT],
+				},
+				{
+					token: EServiceToken.AUTH_SERVICE,
+					useClass: AuthService,
+					deps: [
+						EServiceToken.AUTH_API,
+						EServiceToken.USER_SERVICE,
+						EServiceToken.SESSION_SERVICE,
+					],
+				},
+				{
+					token: EServiceToken.AUTH_TOKEN_FACTORY,
+					useClass: AuthTokenFactory,
+				},
+				/** User */
+				{
+					token: EServiceToken.USER_DATASOURCE,
+					useFactory: (storage: Storage) => userDataSourceFactory(storage),
+					deps: [EServiceToken.LOCAL_STORAGE],
+				},
+				{
+					token: EServiceToken.USER_SERVICE,
+					useClass: UserService,
+					deps: [
+						EServiceToken.USER_REPOSITORY,
+						EServiceToken.USER_MAPPER,
+						EServiceToken.ID_GENERATOR,
+						EServiceToken.TEMPORAL,
+					],
+				},
+				{
+					token: EServiceToken.USER_MAPPER,
+					useClass: UserMapper,
+				},
+				{
+					token: EServiceToken.USER_REPOSITORY,
+					useClass: UserRepository,
+					deps: [EServiceToken.USER_DATASOURCE, EServiceToken.USER_MAPPER],
+				},
+			)
+			/**
+			 * @description Currency converter and exchange rates
+			 */
+			.register(
+				{
+					token: EServiceToken.CURRENCY_RATE_DATASOURCE,
+					useFactory: (storage: Storage) =>
+						currencyRateDataSourceFactory(storage),
+					deps: [EServiceToken.LOCAL_STORAGE],
+				},
+				{
+					token: EServiceToken.CURRENCY_RATE_SERVICE,
+					useClass: CurrencyRateService,
+					deps: [
+						EServiceToken.CURRENCY_RATE_REPOSITORY,
+						EServiceToken.CURRENCY_CONVERTER,
+					],
+				},
+				{
+					token: EServiceToken.CURRENCY_RATE_REPOSITORY,
+					useClass: CurrencyRateRepository,
+					deps: [EServiceToken.CURRENCY_RATE_DATASOURCE],
+				},
+				{
+					token: EServiceToken.CURRENCY_CONVERTER,
+					useClass: CurrencyConverter,
+					deps: [EServiceToken.CURRENCY_RATE_REPOSITORY],
+				},
+				{
+					token: EServiceToken.CURRENCY_RATE_API,
+					useClass: CurrencyRateAPI,
+					deps: [EServiceToken.ENVIRONMENT, EServiceToken.APP_CONFIG],
+				},
+			)
+			/**
+			 * @description Category
+			 */
+			.register(
+				{
+					token: EServiceToken.CATEGORY_DATASOURCE,
+					useClass: CategoryInMemoryDataSource,
+				},
+				{
+					token: EServiceToken.CATEGORY_REPOSITORY,
+					useClass: CategoryRepository,
+					deps: [
+						EServiceToken.CATEGORY_DATASOURCE,
+						EServiceToken.CATEGORY_MAPPER,
+					],
+				},
+				{
+					token: EServiceToken.CATEGORY_MAPPER,
+					useClass: CategoryMapper,
+				},
+				{
+					token: EServiceToken.CATEGORY_SERVICE_FACTORY,
+					useClass: CategoryServiceFactory,
+					deps: [
+						EServiceToken.CATEGORY_REPOSITORY,
+						EServiceToken.TEMPORAL,
+						EServiceToken.EXPENSE_REPOSITORY,
+						EServiceToken.CATEGORY_USE_CASE,
+					],
+				},
+				{
+					token: EServiceToken.CATEGORY_SERVICE,
+					useFactory: (categoryServiceFactory: ICategoryServiceFactory) => {
+						return categoryServiceFactory.create();
+					},
+					deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
+				},
+				{
+					token: EServiceToken.CATEGORY_USE_CASE,
+					useClass: CategoryUseCase,
+					deps: [
+						EServiceToken.CATEGORY_CREATE_USE_CASE,
+						EServiceToken.CATEGORY_UPDATE_USE_CASE,
+						EServiceToken.CATEGORY_DELETE_USE_CASE,
+						EServiceToken.CATEGORY_WEIGHT_USE_CASE,
+					],
+				},
+				{
+					token: EServiceToken.CATEGORY_CREATE_USE_CASE,
+					useClass: CategoryCreateUseCase,
+					deps: [
+						EServiceToken.ID_GENERATOR,
+						EServiceToken.TEMPORAL,
+						EServiceToken.CATEGORY_MAPPER,
+						EServiceToken.CATEGORY_REPOSITORY,
+					],
+				},
+				{
+					token: EServiceToken.CATEGORY_UPDATE_USE_CASE,
+					useClass: CategoryUpdateUseCase,
+				},
+				{
+					token: EServiceToken.CATEGORY_DELETE_USE_CASE,
+					useClass: CategoryDeleteUseCase,
+					deps: [EServiceToken.CATEGORY_REPOSITORY],
+				},
+				{
+					token: EServiceToken.CATEGORY_WEIGHT_USE_CASE,
+					useClass: CategoryWeightUseCase,
+					deps: [EServiceToken.CATEGORY_REPOSITORY],
+				},
+				{
+					token: EServiceToken.CATEGORY_QUERY_SERVICE,
+					useClass: CategoryQueryService,
+					deps: [
+						EServiceToken.CATEGORY_REPOSITORY,
+						EServiceToken.CATEGORY_MAPPER,
+					],
+				},
+			)
+			/** Venue */
+			.register(
+				{
+					token: EServiceToken.VENUE_REPOSITORY,
+					useClass: VenueRepository,
+					deps: [EServiceToken.VENUE_DATASOURCE, EServiceToken.VENUE_MAPPER],
+				},
+				{
+					token: EServiceToken.VENUE_DATASOURCE,
+					useFactory: (storage: Storage) => venueDataSourceFactory(storage),
+					deps: [EServiceToken.LOCAL_STORAGE],
+				},
+				{
+					token: EServiceToken.VENUE_MAPPER,
+					useClass: VenueMapper,
+				},
+				{
+					token: EServiceToken.VENUE_QUERY_SERVICE,
+					useClass: VenueQueryService,
+					deps: [EServiceToken.VENUE_REPOSITORY, EServiceToken.VENUE_MAPPER],
+				},
+				{
+					token: EServiceToken.VENUE_USE_CASE,
+					useClass: VenueUseCase,
+					deps: [EServiceToken.VENUE_CREATE_USE_CASE],
+				},
+				{
+					token: EServiceToken.VENUE_CREATE_USE_CASE,
+					useClass: VenueCreateUseCase,
+					deps: [
+						EServiceToken.VENUE_REPOSITORY,
+						EServiceToken.VENUE_MAPPER,
+						EServiceToken.ID_GENERATOR,
+						EServiceToken.TEMPORAL,
+					],
+				},
+			)
+			/** Sync */
+			.register({
+				token: EServiceToken.SYNC_SERVICE,
+				useClass: SyncService,
 				deps: [
-					EServiceToken.AUTH_API,
-					EServiceToken.USER_SERVICE,
-					EServiceToken.SESSION_SERVICE,
-				],
-			},
-			{
-				token: EServiceToken.AUTH_TOKEN_FACTORY,
-				useClass: AuthTokenFactory,
-			},
-
-			/** User */
-			{
-				token: EServiceToken.USER_DATASOURCE,
-				useFactory: (storage: Storage) => userDataSourceFactory(storage),
-				deps: [EServiceToken.LOCAL_STORAGE],
-			},
-			{
-				token: EServiceToken.USER_SERVICE,
-				useClass: UserService,
-				deps: [
-					EServiceToken.USER_REPOSITORY,
-					EServiceToken.USER_MAPPER,
-					EServiceToken.ID_GENERATOR,
-					EServiceToken.TEMPORAL,
-				],
-			},
-			{
-				token: EServiceToken.USER_MAPPER,
-				useClass: UserMapper,
-			},
-			{
-				token: EServiceToken.USER_REPOSITORY,
-				useClass: UserRepository,
-				deps: [EServiceToken.USER_DATASOURCE, EServiceToken.USER_MAPPER],
-			},
-		)
-		/**
-		 * @description Currency converter and exchange rates
-		 */
-		.register(
-			{
-				token: EServiceToken.CURRENCY_RATE_DATASOURCE,
-				useFactory: (storage: Storage) =>
-					currencyRateDataSourceFactory(storage),
-				deps: [EServiceToken.LOCAL_STORAGE],
-			},
-			{
-				token: EServiceToken.CURRENCY_RATE_SERVICE,
-				useClass: CurrencyRateService,
-				deps: [
-					EServiceToken.CURRENCY_RATE_REPOSITORY,
-					EServiceToken.CURRENCY_CONVERTER,
-				],
-			},
-			{
-				token: EServiceToken.CURRENCY_RATE_REPOSITORY,
-				useClass: CurrencyRateRepository,
-				deps: [EServiceToken.CURRENCY_RATE_DATASOURCE],
-			},
-			{
-				token: EServiceToken.CURRENCY_CONVERTER,
-				useClass: CurrencyConverter,
-				deps: [EServiceToken.CURRENCY_RATE_REPOSITORY],
-			},
-			{
-				token: EServiceToken.CURRENCY_RATE_API,
-				useClass: CurrencyRateAPI,
-				deps: [EServiceToken.ENVIRONMENT, EServiceToken.APP_CONFIG],
-			},
-		)
-		/**
-		 * @description Expenses
-		 */
-		.register(
-			{
-				token: EServiceToken.EXPENSE_MAPPER,
-				useClass: ExpenseMapper,
-			},
-			{
-				token: EServiceToken.EXPENSE_REPOSITORY,
-				useClass: ExpenseRepository,
-				deps: [EServiceToken.EXPENSE_DATASOURCE, EServiceToken.EXPENSE_MAPPER],
-			},
-			{
-				token: EServiceToken.EXPENSE_DATASOURCE,
-				useFactory: (storage: Storage) => expenseDataSourceFactory(storage),
-				deps: [EServiceToken.LOCAL_STORAGE],
-			},
-			{
-				token: EServiceToken.EXPENSE_API,
-				useClass: ExpenseApi,
-				deps: [EServiceToken.API_CLIENT],
-			},
-			{
-				token: EServiceToken.EXPENSE_CREATE_USE_CASE,
-				useClass: CreateExpenseUseCase,
-				deps: [
+					EServiceToken.EXPENSE_API,
 					EServiceToken.EXPENSE_REPOSITORY,
 					EServiceToken.EXPENSE_MAPPER,
-					EServiceToken.CATEGORY_USE_CASE,
-					EServiceToken.SESSION_SERVICE,
-					EServiceToken.ID_GENERATOR,
-					EServiceToken.TEMPORAL,
 				],
-			},
-			{
-				token: EServiceToken.EXPENSE_UPDATE_USE_CASE,
-				useClass: UpdateExpenseUseCase,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORY_USE_CASE,
-				],
-			},
-			{
-				token: EServiceToken.EXPENSE_DELETE_USE_CASE,
-				useClass: DeleteExpenseUseCase,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORY_USE_CASE,
-				],
-			},
-			{
-				token: EServiceToken.EXPENSE_SERVICE,
-				useClass: ExpenseService,
-				deps: [
-					EServiceToken.EXPENSE_GROUPING_SERVICE,
-					EServiceToken.EXPENSE_AMOUNT_SERVICE,
-					EServiceToken.EXPENSE_QUERY_SERVICE,
-				],
-			},
-			{
-				token: EServiceToken.EXPENSE_GROUPING_SERVICE,
-				useClass: ExpenseGroupingService,
-			},
-			{
-				token: EServiceToken.EXPENSE_AMOUNT_SERVICE,
-				useClass: ExpenseAmountService,
-				deps: [EServiceToken.APP_CONFIG, EServiceToken.CURRENCY_RATE_SERVICE],
-			},
-			{
-				token: EServiceToken.EXPENSE_QUERY_SERVICE,
-				useClass: ExpenseQueryService,
-				deps: [
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.EXPENSE_MAPPER,
-					EServiceToken.TEMPORAL,
-				],
-			},
-			{
-				token: EServiceToken.EXPENSE_USE_CASE,
-				useClass: ExpenseUseCase,
-				deps: [
-					EServiceToken.EXPENSE_CREATE_USE_CASE,
-					EServiceToken.EXPENSE_UPDATE_USE_CASE,
-					EServiceToken.EXPENSE_DELETE_USE_CASE,
-				],
-			},
-		)
-		/**
-		 * @description Category
-		 */
-		.register(
-			{
-				token: EServiceToken.CATEGORY_DATASOURCE,
-				useClass: CategoryInMemoryDataSource,
-			},
-			{
-				token: EServiceToken.CATEGORY_REPOSITORY,
-				useClass: CategoryRepository,
-				deps: [
-					EServiceToken.CATEGORY_DATASOURCE,
-					EServiceToken.CATEGORY_MAPPER,
-				],
-			},
-			{
-				token: EServiceToken.CATEGORY_MAPPER,
-				useClass: CategoryMapper,
-			},
-			{
-				token: EServiceToken.CATEGORY_SERVICE_FACTORY,
-				useClass: CategoryServiceFactory,
-				deps: [
-					EServiceToken.CATEGORY_REPOSITORY,
-					EServiceToken.TEMPORAL,
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.CATEGORY_USE_CASE,
-				],
-			},
-			{
-				token: EServiceToken.CATEGORY_SERVICE,
-				useFactory: (categoryServiceFactory: ICategoryServiceFactory) => {
-					return categoryServiceFactory.create();
-				},
-				deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
-			},
-			{
-				token: EServiceToken.CATEGORY_USE_CASE,
-				useClass: CategoryUseCase,
-				deps: [
-					EServiceToken.CATEGORY_CREATE_USE_CASE,
-					EServiceToken.CATEGORY_UPDATE_USE_CASE,
-					EServiceToken.CATEGORY_DELETE_USE_CASE,
-					EServiceToken.CATEGORY_WEIGHT_USE_CASE,
-				],
-			},
-			{
-				token: EServiceToken.CATEGORY_CREATE_USE_CASE,
-				useClass: CategoryCreateUseCase,
-				deps: [
-					EServiceToken.ID_GENERATOR,
-					EServiceToken.TEMPORAL,
-					EServiceToken.CATEGORY_MAPPER,
-					EServiceToken.CATEGORY_REPOSITORY,
-				],
-			},
-			{
-				token: EServiceToken.CATEGORY_UPDATE_USE_CASE,
-				useClass: CategoryUpdateUseCase,
-			},
-			{
-				token: EServiceToken.CATEGORY_DELETE_USE_CASE,
-				useClass: CategoryDeleteUseCase,
-				deps: [EServiceToken.CATEGORY_REPOSITORY],
-			},
-			{
-				token: EServiceToken.CATEGORY_WEIGHT_USE_CASE,
-				useClass: CategoryWeightUseCase,
-				deps: [EServiceToken.CATEGORY_REPOSITORY],
-			},
-			{
-				token: EServiceToken.CATEGORY_QUERY_SERVICE,
-				useClass: CategoryQueryService,
-				deps: [
-					EServiceToken.CATEGORY_REPOSITORY,
-					EServiceToken.CATEGORY_MAPPER,
-				],
-			},
-		)
-		/** Venue */
-		.register(
-			{
-				token: EServiceToken.VENUE_REPOSITORY,
-				useClass: VenueRepository,
-				deps: [EServiceToken.VENUE_DATASOURCE, EServiceToken.VENUE_MAPPER],
-			},
-			{
-				token: EServiceToken.VENUE_DATASOURCE,
-				useFactory: (storage: Storage) => venueDataSourceFactory(storage),
-				deps: [EServiceToken.LOCAL_STORAGE],
-			},
-			{
-				token: EServiceToken.VENUE_MAPPER,
-				useClass: VenueMapper,
-			},
-			{
-				token: EServiceToken.VENUE_QUERY_SERVICE,
-				useClass: VenueQueryService,
-				deps: [EServiceToken.VENUE_REPOSITORY, EServiceToken.VENUE_MAPPER],
-			},
-			{
-				token: EServiceToken.VENUE_USE_CASE,
-				useClass: VenueUseCase,
-				deps: [EServiceToken.VENUE_CREATE_USE_CASE],
-			},
-			{
-				token: EServiceToken.VENUE_CREATE_USE_CASE,
-				useClass: VenueCreateUseCase,
-				deps: [
-					EServiceToken.VENUE_REPOSITORY,
-					EServiceToken.VENUE_MAPPER,
-					EServiceToken.ID_GENERATOR,
-					EServiceToken.TEMPORAL,
-				],
-			},
-		)
-		.register({
-			token: EServiceToken.SYNC_SERVICE,
-			useClass: SyncService,
-		})
-		.seal();
-
-	return container;
+			})
+			.seal()
+	);
 }
