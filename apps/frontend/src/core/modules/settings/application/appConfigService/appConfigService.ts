@@ -16,6 +16,13 @@ export class AppConfigService implements IAppConfigService {
 
 		if (config) {
 			this.updateAppConfig(config);
+		} else {
+			this.appConfigDataSource.insert({
+				locale: this.appConfig.locale,
+				budget: this.appConfig.budget,
+				currency: this.appConfig.currency,
+				availabelCurrencies: this.appConfig.availableCurrencies,
+			});
 		}
 
 		return this;
