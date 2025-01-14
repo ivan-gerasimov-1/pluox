@@ -1,18 +1,12 @@
 import { Environment } from '@root/core/modules/settings/infrastructure/environment/environment';
 
 import { containerFactory } from '@root/core/infrastructure/serviceContainer/containerFactory';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-
-import { LaunchControl } from '@root/core/modules/bootstrap/application/launchControl/launchControl';
-
-import { SyncService } from '@root/core/modules/sync/application/syncService/syncService';
-
-import { IntlService } from '@root/core/modules/intl/application/intlService/intlService';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
+import {
+	EServiceToken,
+	type IModule,
+} from '@root/core/infrastructure/serviceContainer/types';
 
 import { Temporal } from '@root/core/infrastructure/temporal/temporal';
-import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
 
 import {
 	IdGeneratorFactory,
@@ -22,56 +16,16 @@ import {
 import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
 
-import { CategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/categoryQueryService';
-import {
-	CategoryServiceFactory,
-	type ICategoryServiceFactory,
-} from '@root/core/modules/category/application/categoryService/factory';
-import { CategoryCreateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryCreateUseCase';
-import { CategoryDeleteUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryDeleteUseCase';
-import { CategoryUpdateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
-import { CategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUseCase';
-import { CategoryWeightUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryWeightUseCase';
-import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
-import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
-import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
-
-import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
-import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
-import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
-import { currencyRateDataSourceFactory } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSourceFactory';
-import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
-import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
-
-import { AuthService } from '@root/core/modules/identity/application/authService/authService';
-import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
-import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
-
-import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
-import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
-
-import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
-import { SessionFactory } from '@root/core/modules/identity/domain/session/sessionFactory';
-import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
-
-import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
-import { AppConfig } from '@root/core/modules/settings/domain/appConfig/appConfig';
-import { appConfigDataSourceFactory } from '@root/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSourceFactory';
-
-import { UserService } from '@root/core/modules/user/application/userService/userService';
-import { userDataSourceFactory } from '@root/core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
-import { UserMapper } from '@root/core/modules/user/infrastructure/userMapper/userMapper';
-import { UserRepository } from '@root/core/modules/user/infrastructure/userRepository/userRepository';
-
-import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
-import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
-import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
-import { venueDataSourceFactory } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSourceFactory';
-import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
-import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
-
+import { bootstrapModule } from '@root/core/modules/bootstrap/bootstrap.module';
+import { categoryModule } from '@root/core/modules/category/category.module';
+import { currencyModule } from '@root/core/modules/currency/currency.module';
 import { expenseModule } from '@root/core/modules/expense/expense.module';
+import { identityModule } from '@root/core/modules/identity/identity.module';
+import { settingsModule } from '@root/core/modules/settings/settings.module';
+import { syncModule } from '@root/core/modules/sync/sync.module';
+import { userModule } from '@root/core/modules/user/user.module';
+import { venueModule } from '@root/core/modules/venue/venue.module';
+import { intlModule } from '@root/core/modules/intl/intl.module';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
@@ -79,365 +33,71 @@ export function createDIContainer(options?: {
 }) {
 	let container = containerFactory(options);
 
-	return (
-		container
-			/**
-			 * @description Global objects
-			 */
-			.register(
-				{
-					token: EServiceToken.GLOBAL,
-					useValue: window,
-				},
-				{
-					token: EServiceToken.LOCAL_STORAGE,
-					useFactory: (global: Window) => global.localStorage,
-					deps: [EServiceToken.GLOBAL],
-				},
-				{
-					token: EServiceToken.PROCESS_ENV,
-					useValue: process.env,
-				},
-				{
-					token: EServiceToken.ENVIRONMENT,
-					useClass: Environment,
-					deps: [EServiceToken.PROCESS_ENV],
-				},
-			)
-			/**
-			 * @description Expenses
-			 */
-			.registerModule(expenseModule)
-			/** @description App config */
-			.register(
-				{
-					token: EServiceToken.APP_CONFIG,
-					useFactory: () => {
-						return new AppConfig(ELocaleCode.RU_RU, ECurrency.USD);
-					},
-				},
-				{
-					token: EServiceToken.APP_CONFIG_DATASOURCE,
-					useFactory: (storage: Storage) => appConfigDataSourceFactory(storage),
-					deps: [EServiceToken.LOCAL_STORAGE],
-				},
-				{
-					token: EServiceToken.APP_CONFIG_SERVICE,
-					useClass: AppConfigService,
-					deps: [EServiceToken.APP_CONFIG, EServiceToken.APP_CONFIG_DATASOURCE],
-				},
-			)
-			/**
-			 * @description Base services
-			 */
-			.register(
-				{
-					token: EServiceToken.NUMBER_PARSER,
-					useClass: NumberParser,
-					deps: [EServiceToken.APP_CONFIG],
-				},
-				{
-					token: EServiceToken.CURRENCY_FORMATTER,
-					useClass: CurrencyFormatter,
-				},
-				{
-					token: EServiceToken.DATE_FORMATTER,
-					useClass: DateFormatter,
-				},
-				{
-					token: EServiceToken.INTL_SERVICE,
-					useClass: IntlService,
-					deps: [
-						EServiceToken.APP_CONFIG,
-						EServiceToken.NUMBER_PARSER,
-						EServiceToken.CURRENCY_FORMATTER,
-						EServiceToken.DATE_FORMATTER,
-					],
-				},
-				{
-					token: EServiceToken.ID_GENERATOR_FACTORY,
-					useClass: IdGeneratorFactory,
-				},
-				{
-					token: EServiceToken.ID_GENERATOR,
-					useFactory: (idGeneratorFactory: IIdGeneratorFactory) => {
-						return idGeneratorFactory.create();
-					},
-					deps: [EServiceToken.ID_GENERATOR_FACTORY],
-				},
-				{
-					token: EServiceToken.API_CLIENT,
-					useClass: ApiClient,
-					deps: [EServiceToken.API_CLIENT_CONFIG_PROVIDER],
-				},
-				{
-					token: EServiceToken.API_CLIENT_CONFIG_PROVIDER,
-					useClass: ApiClientConfigProvider,
-					deps: [EServiceToken.ENVIRONMENT, EServiceToken.SESSION_SERVICE],
-				},
-				{
-					token: EServiceToken.TEMPORAL,
-					useClass: Temporal,
-					deps: [EServiceToken.INTL_SERVICE],
-				},
-			)
-			/**
-			 * @description Authentication and user management
-			 */
-			.register(
-				/** Launch control */
-				{
-					token: EServiceToken.LAUNCH_CONTROL,
-					useClass: LaunchControl,
-					deps: [
-						EServiceToken.SESSION_SERVICE,
-						EServiceToken.APP_CONFIG_SERVICE,
-						EServiceToken.CURRENCY_RATE_API,
-						EServiceToken.CURRENCY_RATE_DATASOURCE,
-					],
-				},
-				/** Session */
-				{
-					token: EServiceToken.SESSION_DATASOURCE,
-					useFactory: (storage: Storage) => sessionDataSourceFactory(storage),
-					deps: [EServiceToken.LOCAL_STORAGE],
-				},
-				{
-					token: EServiceToken.SESSION_SERVICE,
-					useClass: SessionService,
-					deps: [
-						EServiceToken.SESSION_DATASOURCE,
-						EServiceToken.SESSION_FACTORY,
-					],
-				},
-				{
-					token: EServiceToken.SESSION_FACTORY,
-					useClass: SessionFactory,
-					deps: [
-						EServiceToken.CLIENT_ID_FACTORY,
-						EServiceToken.AUTH_TOKEN_FACTORY,
-						EServiceToken.USER_SERVICE,
-					],
-				},
-				/** ClientId */
-				{
-					token: EServiceToken.CLIENT_ID,
-					useFactory: (clientIdFactory: IClientIdFactory) => {
-						return clientIdFactory.create();
-					},
-					deps: [EServiceToken.CLIENT_ID_FACTORY],
-				},
-				{
-					token: EServiceToken.CLIENT_ID_FACTORY,
-					useClass: ClientIdFactory,
-					deps: [EServiceToken.ID_GENERATOR],
-				},
-				/** Authentication */
-				{
-					token: EServiceToken.AUTH_API,
-					useClass: AuthApi,
-					deps: [EServiceToken.API_CLIENT],
-				},
-				{
-					token: EServiceToken.AUTH_SERVICE,
-					useClass: AuthService,
-					deps: [
-						EServiceToken.AUTH_API,
-						EServiceToken.USER_SERVICE,
-						EServiceToken.SESSION_SERVICE,
-					],
-				},
-				{
-					token: EServiceToken.AUTH_TOKEN_FACTORY,
-					useClass: AuthTokenFactory,
-				},
-				/** User */
-				{
-					token: EServiceToken.USER_DATASOURCE,
-					useFactory: (storage: Storage) => userDataSourceFactory(storage),
-					deps: [EServiceToken.LOCAL_STORAGE],
-				},
-				{
-					token: EServiceToken.USER_SERVICE,
-					useClass: UserService,
-					deps: [
-						EServiceToken.USER_REPOSITORY,
-						EServiceToken.USER_MAPPER,
-						EServiceToken.ID_GENERATOR,
-						EServiceToken.TEMPORAL,
-					],
-				},
-				{
-					token: EServiceToken.USER_MAPPER,
-					useClass: UserMapper,
-				},
-				{
-					token: EServiceToken.USER_REPOSITORY,
-					useClass: UserRepository,
-					deps: [EServiceToken.USER_DATASOURCE, EServiceToken.USER_MAPPER],
-				},
-			)
-			/**
-			 * @description Currency converter and exchange rates
-			 */
-			.register(
-				{
-					token: EServiceToken.CURRENCY_RATE_DATASOURCE,
-					useFactory: (storage: Storage) =>
-						currencyRateDataSourceFactory(storage),
-					deps: [EServiceToken.LOCAL_STORAGE],
-				},
-				{
-					token: EServiceToken.CURRENCY_RATE_SERVICE,
-					useClass: CurrencyRateService,
-					deps: [
-						EServiceToken.CURRENCY_RATE_REPOSITORY,
-						EServiceToken.CURRENCY_CONVERTER,
-					],
-				},
-				{
-					token: EServiceToken.CURRENCY_RATE_REPOSITORY,
-					useClass: CurrencyRateRepository,
-					deps: [EServiceToken.CURRENCY_RATE_DATASOURCE],
-				},
-				{
-					token: EServiceToken.CURRENCY_CONVERTER,
-					useClass: CurrencyConverter,
-					deps: [EServiceToken.CURRENCY_RATE_REPOSITORY],
-				},
-				{
-					token: EServiceToken.CURRENCY_RATE_API,
-					useClass: CurrencyRateAPI,
-					deps: [EServiceToken.ENVIRONMENT, EServiceToken.APP_CONFIG],
-				},
-			)
-			/**
-			 * @description Category
-			 */
-			.register(
-				{
-					token: EServiceToken.CATEGORY_DATASOURCE,
-					useClass: CategoryInMemoryDataSource,
-				},
-				{
-					token: EServiceToken.CATEGORY_REPOSITORY,
-					useClass: CategoryRepository,
-					deps: [
-						EServiceToken.CATEGORY_DATASOURCE,
-						EServiceToken.CATEGORY_MAPPER,
-					],
-				},
-				{
-					token: EServiceToken.CATEGORY_MAPPER,
-					useClass: CategoryMapper,
-				},
-				{
-					token: EServiceToken.CATEGORY_SERVICE_FACTORY,
-					useClass: CategoryServiceFactory,
-					deps: [
-						EServiceToken.CATEGORY_REPOSITORY,
-						EServiceToken.TEMPORAL,
-						EServiceToken.EXPENSE_REPOSITORY,
-						EServiceToken.CATEGORY_USE_CASE,
-					],
-				},
-				{
-					token: EServiceToken.CATEGORY_SERVICE,
-					useFactory: (categoryServiceFactory: ICategoryServiceFactory) => {
-						return categoryServiceFactory.create();
-					},
-					deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
-				},
-				{
-					token: EServiceToken.CATEGORY_USE_CASE,
-					useClass: CategoryUseCase,
-					deps: [
-						EServiceToken.CATEGORY_CREATE_USE_CASE,
-						EServiceToken.CATEGORY_UPDATE_USE_CASE,
-						EServiceToken.CATEGORY_DELETE_USE_CASE,
-						EServiceToken.CATEGORY_WEIGHT_USE_CASE,
-					],
-				},
-				{
-					token: EServiceToken.CATEGORY_CREATE_USE_CASE,
-					useClass: CategoryCreateUseCase,
-					deps: [
-						EServiceToken.ID_GENERATOR,
-						EServiceToken.TEMPORAL,
-						EServiceToken.CATEGORY_MAPPER,
-						EServiceToken.CATEGORY_REPOSITORY,
-					],
-				},
-				{
-					token: EServiceToken.CATEGORY_UPDATE_USE_CASE,
-					useClass: CategoryUpdateUseCase,
-				},
-				{
-					token: EServiceToken.CATEGORY_DELETE_USE_CASE,
-					useClass: CategoryDeleteUseCase,
-					deps: [EServiceToken.CATEGORY_REPOSITORY],
-				},
-				{
-					token: EServiceToken.CATEGORY_WEIGHT_USE_CASE,
-					useClass: CategoryWeightUseCase,
-					deps: [EServiceToken.CATEGORY_REPOSITORY],
-				},
-				{
-					token: EServiceToken.CATEGORY_QUERY_SERVICE,
-					useClass: CategoryQueryService,
-					deps: [
-						EServiceToken.CATEGORY_REPOSITORY,
-						EServiceToken.CATEGORY_MAPPER,
-					],
-				},
-			)
-			/** Venue */
-			.register(
-				{
-					token: EServiceToken.VENUE_REPOSITORY,
-					useClass: VenueRepository,
-					deps: [EServiceToken.VENUE_DATASOURCE, EServiceToken.VENUE_MAPPER],
-				},
-				{
-					token: EServiceToken.VENUE_DATASOURCE,
-					useFactory: (storage: Storage) => venueDataSourceFactory(storage),
-					deps: [EServiceToken.LOCAL_STORAGE],
-				},
-				{
-					token: EServiceToken.VENUE_MAPPER,
-					useClass: VenueMapper,
-				},
-				{
-					token: EServiceToken.VENUE_QUERY_SERVICE,
-					useClass: VenueQueryService,
-					deps: [EServiceToken.VENUE_REPOSITORY, EServiceToken.VENUE_MAPPER],
-				},
-				{
-					token: EServiceToken.VENUE_USE_CASE,
-					useClass: VenueUseCase,
-					deps: [EServiceToken.VENUE_CREATE_USE_CASE],
-				},
-				{
-					token: EServiceToken.VENUE_CREATE_USE_CASE,
-					useClass: VenueCreateUseCase,
-					deps: [
-						EServiceToken.VENUE_REPOSITORY,
-						EServiceToken.VENUE_MAPPER,
-						EServiceToken.ID_GENERATOR,
-						EServiceToken.TEMPORAL,
-					],
-				},
-			)
-			/** Sync */
-			.register({
-				token: EServiceToken.SYNC_SERVICE,
-				useClass: SyncService,
-				deps: [
-					EServiceToken.EXPENSE_API,
-					EServiceToken.EXPENSE_REPOSITORY,
-					EServiceToken.EXPENSE_MAPPER,
-				],
-			})
-			.seal()
-	);
+	return container
+		.registerModule(sharedModule)
+		.registerModule(bootstrapModule)
+		.registerModule(expenseModule)
+		.registerModule(categoryModule)
+		.registerModule(venueModule)
+		.registerModule(syncModule)
+		.registerModule(currencyModule)
+		.registerModule(userModule)
+		.registerModule(settingsModule)
+		.registerModule(identityModule)
+		.registerModule(intlModule)
+		.seal();
 }
+
+const sharedModule: IModule = {
+	providers: [
+		{
+			token: EServiceToken.PROCESS_ENV,
+			useValue: process.env,
+		},
+
+		{
+			token: EServiceToken.ENVIRONMENT,
+			useClass: Environment,
+			deps: [EServiceToken.PROCESS_ENV],
+		},
+
+		{
+			token: EServiceToken.GLOBAL,
+			useValue: window,
+		},
+		{
+			token: EServiceToken.LOCAL_STORAGE,
+			useFactory: (global: Window) => global.localStorage,
+			deps: [EServiceToken.GLOBAL],
+		},
+
+		{
+			token: EServiceToken.ID_GENERATOR_FACTORY,
+			useClass: IdGeneratorFactory,
+		},
+		{
+			token: EServiceToken.ID_GENERATOR,
+			useFactory: (idGeneratorFactory: IIdGeneratorFactory) => {
+				return idGeneratorFactory.create();
+			},
+			deps: [EServiceToken.ID_GENERATOR_FACTORY],
+		},
+
+		{
+			token: EServiceToken.API_CLIENT,
+			useClass: ApiClient,
+			deps: [EServiceToken.API_CLIENT_CONFIG_PROVIDER],
+		},
+		{
+			token: EServiceToken.API_CLIENT_CONFIG_PROVIDER,
+			useClass: ApiClientConfigProvider,
+			deps: [EServiceToken.ENVIRONMENT, EServiceToken.SESSION_SERVICE],
+		},
+
+		{
+			token: EServiceToken.TEMPORAL,
+			useClass: Temporal,
+			deps: [EServiceToken.INTL_SERVICE],
+		},
+	],
+};
