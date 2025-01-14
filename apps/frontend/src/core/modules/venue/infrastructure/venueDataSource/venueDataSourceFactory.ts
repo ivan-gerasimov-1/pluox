@@ -7,6 +7,9 @@ const STORAGE_ID = 'venues';
 
 export function venueDataSourceFactory(): IVenueDataSource {
 	return new LocalStorageCollectionDataSource<TVenueDTO, TVenueFindOptions>(
-		STORAGE_ID,
+		window.localStorage,
+		{
+			id: STORAGE_ID,
+		},
 	);
 }

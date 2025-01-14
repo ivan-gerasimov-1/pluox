@@ -5,5 +5,7 @@ import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastru
 const STORAGE_ID = 'appConfig';
 
 export function appConfigDataSourceFactory(): IAppConfigDataSource {
-	return new LocalStorageObjectDataSource<TAppConfig>(STORAGE_ID);
+	return new LocalStorageObjectDataSource<TAppConfig>(window.localStorage, {
+		id: STORAGE_ID,
+	});
 }

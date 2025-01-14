@@ -47,7 +47,12 @@ export function addThaiBahtCurrencyToStoredAppConfig(): void {
  * №2. Convert user object to map
  */
 export function convertUserObjectToUserMap(): void {
-	let userObjectDataSource = new LocalStorageObjectDataSource<TUserDTO>('user');
+	let userObjectDataSource = new LocalStorageObjectDataSource<TUserDTO>(
+		window.localStorage,
+		{
+			id: 'user',
+		},
+	);
 	let userCollectionDataSource = resolveService(EServiceToken.USER_DATASOURCE);
 
 	let user = userObjectDataSource.findOne();
@@ -74,7 +79,10 @@ function moveClientIdToSession(): void {
 	const CLIENT_ID_STORAGE_ID = 'clientId';
 
 	let clientIdDataSource = new LocalStorageObjectDataSource<Id>(
-		CLIENT_ID_STORAGE_ID,
+		window.localStorage,
+		{
+			id: CLIENT_ID_STORAGE_ID,
+		},
 	);
 
 	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
@@ -132,7 +140,9 @@ export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 		state: {
 			operations: Record<string, TExpenseDTO>;
 		};
-	}>(OLD_EXPENSES_STORAGE_ID);
+	}>(window.localStorage, {
+		id: OLD_EXPENSES_STORAGE_ID,
+	});
 	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
 
 	let expenses = oldExpenseDataSource.findOne();

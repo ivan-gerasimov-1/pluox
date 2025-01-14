@@ -7,6 +7,9 @@ const STORAGE_ID = 'products';
 
 export function productDataSourceFactory(): IProductDataSource {
 	return new LocalStorageCollectionDataSource<TProductDTO, TProductFindOptions>(
-		STORAGE_ID,
+		window.localStorage,
+		{
+			id: STORAGE_ID,
+		},
 	);
 }

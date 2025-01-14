@@ -15,7 +15,9 @@ export class ExpenseDataSource
 	static readonly #STORAGE_ID: string = 'expenses';
 
 	constructor() {
-		super(ExpenseDataSource.#STORAGE_ID);
+		super(window.localStorage, {
+			id: ExpenseDataSource.#STORAGE_ID,
+		});
 	}
 
 	public override findMany(

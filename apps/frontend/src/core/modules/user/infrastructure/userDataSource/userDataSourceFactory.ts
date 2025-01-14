@@ -7,6 +7,9 @@ const STORAGE_ID = 'user';
 
 export function userDataSourceFactory(): IUserDataSource {
 	return new LocalStorageCollectionDataSource<TUserDTO, TUserFindOptions>(
-		STORAGE_ID,
+		window.localStorage,
+		{
+			id: STORAGE_ID,
+		},
 	);
 }

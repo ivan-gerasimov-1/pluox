@@ -19,18 +19,16 @@ export class LocalStorageCollectionDataSource<
 	/** @todo Move to Config */
 	static readonly #ID_PREFIX = '@savee';
 
-	/** @todo Move to DI */
-	readonly #storage = window.localStorage;
-
 	readonly #id: string;
 
 	constructor(
-		storageId: string,
-		private readonly options?: {
-			prefix: string;
+		private readonly storage: typeof window.localStorage,
+		options: {
+			id: Id;
+			prefix?: string;
 		},
 	) {
-		this.#id = this.makeId(storageId);
+		this.#id = this.makeId(options.id, options.prefix);
 	}
 
 	public upsert(dto: TDto): void {
@@ -77,7 +75,7 @@ export class LocalStorageCollectionDataSource<
 
 		Reflect.deleteProperty(data, id);
 
-		this.#storage.setItem(this.#id, JSON.stringify(data));
+		this.storage.setItem(this.#id, JSON.stringify(data));
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
@@ -111,7 +109,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	protected readDataFromStorage(): Record<Id, TDto> {
-		const rawData = this.#storage.getItem(this.#id);
+		const rawData = this.storage.getItem(this.#id);
 
 		if (rawData === null) {
 			return {};
@@ -121,16 +119,15 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	private writeDataToStorage<T>(data: T): void {
-		this.#storage.setItem(this.#id, JSON.stringify(data));
+		this.storage.setItem(this.#id, JSON.stringify(data));
 	}
 
 	private clearStorage(): void {
-		this.#storage.removeItem(this.#id);
+		this.storage.removeItem(this.#id);
 	}
 
-	private makeId(id: Id): Id {
-		let idPrefix =
-			this.options?.prefix ?? LocalStorageCollectionDataSource.#ID_PREFIX;
+	private makeId(id: Id, prefix?: string): Id {
+		let idPrefix = prefix ?? LocalStorageCollectionDataSource.#ID_PREFIX;
 
 		return `${idPrefix}/${id}`;
 	}

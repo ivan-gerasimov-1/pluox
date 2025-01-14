@@ -13,7 +13,9 @@ export class CurrencyRateDataSource
 	static readonly #STORAGE_ID = 'currencyRates';
 
 	constructor() {
-		super(CurrencyRateDataSource.#STORAGE_ID);
+		super(window.localStorage, {
+			id: CurrencyRateDataSource.#STORAGE_ID,
+		});
 	}
 
 	public findById(currency: ECurrency): number {

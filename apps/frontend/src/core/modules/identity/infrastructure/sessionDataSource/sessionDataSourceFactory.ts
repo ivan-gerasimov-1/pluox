@@ -5,5 +5,7 @@ import type { ISessionDataSource } from '@root/core/modules/identity/infrastruct
 const STORAGE_ID = 'session';
 
 export function sessionDataSourceFactory(): ISessionDataSource {
-	return new LocalStorageObjectDataSource<TSessionDTO>(STORAGE_ID);
+	return new LocalStorageObjectDataSource<TSessionDTO>(window.localStorage, {
+		id: STORAGE_ID,
+	});
 }
