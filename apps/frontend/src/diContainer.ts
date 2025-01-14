@@ -1,74 +1,88 @@
 import { Environment } from '@root/core/modules/settings/infrastructure/environment/environment';
 
-import { AppConfig } from '@root/core/modules/settings/domain/appConfig/appConfig';
-import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
-import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
-import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-import { IntlService } from '@root/core/modules/intl/application/intlService/intlService';
-
+import { containerFactory } from '@root/core/infrastructure/serviceContainer/containerFactory';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+
+import { LaunchControl } from '@root/core/modules/bootstrap/application/launchControl/launchControl';
+
+import { SyncService } from '@root/core/modules/sync/application/syncService/syncService';
+
+import { IntlService } from '@root/core/modules/intl/application/intlService/intlService';
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
+
+import { Temporal } from '@root/core/infrastructure/temporal/temporal';
+import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
+
 import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
+
+import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
+import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
+
+import { CategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/categoryQueryService';
 import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
 } from '@root/core/modules/category/application/categoryService/factory';
-import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
-import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
-import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
-import { AuthService } from '@root/core/modules/identity/application/authService/authService';
-import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
-import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
-import { Temporal } from '@root/core/infrastructure/temporal/temporal';
-import { CreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/createExpenseUseCase';
-import { UpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
-import { DeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
-import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
-import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
-import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
-import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
-import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
-import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
-import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
-import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
-import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
-import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
-import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
-import { UserService } from '@root/core/modules/user/application/userService/userService';
-import { LaunchControl } from '@root/core/modules/bootstrap/application/launchControl/launchControl';
-import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
-import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
-import { UserMapper } from '@root/core/modules/user/infrastructure/userMapper/userMapper';
-import { UserRepository } from '@root/core/modules/user/infrastructure/userRepository/userRepository';
-import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
-import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
-import { SessionFactory } from '@root/core/modules/identity/domain/session/sessionFactory';
-import { SyncService } from '@root/core/modules/sync/application/syncService/syncService';
-import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
-import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
-import { ExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
-import { ExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/expenseAmountService';
-import { ExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/expenseQueryService';
-import { ExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/expenseUseCase';
-import { CategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUseCase';
 import { CategoryCreateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryCreateUseCase';
 import { CategoryDeleteUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryDeleteUseCase';
 import { CategoryUpdateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
+import { CategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUseCase';
 import { CategoryWeightUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryWeightUseCase';
-import { CategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/categoryQueryService';
-import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
-import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
-import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
-import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
-import { containerFactory } from '@root/core/infrastructure/serviceContainer/containerFactory';
-import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
-import { userDataSourceFactory } from '@root/core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
-import { venueDataSourceFactory } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSourceFactory';
+import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
+import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
+import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
+
+import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
+import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
+import { ECurrency } from '@root/core/modules/currency/domain/types';
+import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
+import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
+import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
+import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
+
+import { ExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/expenseAmountService';
+import { ExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
+import { ExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/expenseQueryService';
+import { ExpenseService } from '@root/core/modules/expense/application/expenseService/expenseService';
+import { CreateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/createExpenseUseCase';
+import { DeleteExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
+import { ExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/expenseUseCase';
+import { UpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
+import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
+import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
+import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
+import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
+
+import { AuthService } from '@root/core/modules/identity/application/authService/authService';
+import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
+import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
+
+import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
+import type { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
+
+import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
+import { SessionFactory } from '@root/core/modules/identity/domain/session/sessionFactory';
+import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
+
+import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
+import { AppConfig } from '@root/core/modules/settings/domain/appConfig/appConfig';
 import { appConfigDataSourceFactory } from '@root/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSourceFactory';
+
+import { UserService } from '@root/core/modules/user/application/userService/userService';
+import { userDataSourceFactory } from '@root/core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
+import { UserMapper } from '@root/core/modules/user/infrastructure/userMapper/userMapper';
+import { UserRepository } from '@root/core/modules/user/infrastructure/userRepository/userRepository';
+
+import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
+import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
+import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
+import { venueDataSourceFactory } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSourceFactory';
+import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
+import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
