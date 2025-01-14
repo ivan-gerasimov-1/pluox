@@ -82,10 +82,6 @@ export function createDIContainer(options?: {
 	return (
 		container
 			/**
-			 * @description Expenses
-			 */
-			.registerModule(expenseModule)
-			/**
 			 * @description Global objects
 			 */
 			.register(
@@ -107,6 +103,13 @@ export function createDIContainer(options?: {
 					useClass: Environment,
 					deps: [EServiceToken.PROCESS_ENV],
 				},
+			)
+			/**
+			 * @description Expenses
+			 */
+			.registerModule(expenseModule)
+			/** @description App config */
+			.register(
 				{
 					token: EServiceToken.APP_CONFIG,
 					useFactory: () => {
