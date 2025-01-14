@@ -36,7 +36,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	public insert(dto: TDto): void {
-		let prevData = this.read();
+		let prevData = this.readFromStorage();
 
 		if (prevData) {
 			throw new Error(`Item already exists`);
@@ -46,7 +46,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	public update(dto: Partial<TDto>): void {
-		let prevData = this.read();
+		let prevData = this.readFromStorage();
 
 		if (!prevData) {
 			throw new Error(`Item not found`);
@@ -66,14 +66,14 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	public findOne(): TDto | null {
-		return this.read();
+		return this.readFromStorage();
 	}
 
 	public findMany(): TFindManyResult<TDto> {
 		throw new Error('Not allowed in LocalStorageObjectDataSource');
 	}
 
-	protected read(): TDto | null {
+	protected readFromStorage(): TDto | null {
 		const rawData = this.readRaw();
 
 		if (rawData === null) {

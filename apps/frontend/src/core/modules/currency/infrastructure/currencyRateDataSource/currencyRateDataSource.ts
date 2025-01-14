@@ -39,7 +39,7 @@ export class CurrencyRateDataSource
 	}
 
 	public isEmpty(): boolean {
-		let data = this.read();
+		let data = this.readFromStorage();
 
 		return data === null;
 	}

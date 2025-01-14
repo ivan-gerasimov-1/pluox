@@ -34,7 +34,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public upsert(dto: TDto): void {
-		let data = this.read();
+		let data = this.readFromStorage();
 
 		let targetItem = data[dto.id];
 
@@ -46,7 +46,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public insert(dto: TDto, options?: { replace?: boolean }): void {
-		let data = this.read();
+		let data = this.readFromStorage();
 		let id = dto.id;
 
 		if (data[id] && !options?.replace) {
@@ -59,7 +59,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public update(dto: TDtoWithId & Partial<TDto>): void {
-		let data = this.read();
+		let data = this.readFromStorage();
 		let id = dto.id;
 		let item = data[id];
 
@@ -73,7 +73,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public remove(id: Id): void {
-		let data = this.read();
+		let data = this.readFromStorage();
 
 		Reflect.deleteProperty(data, id);
 
@@ -81,7 +81,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
-		let data = this.read();
+		let data = this.readFromStorage();
 
 		if (query?.id) {
 			return data[query.id] ?? null;
@@ -93,7 +93,7 @@ export class LocalStorageCollectionDataSource<
 	public findMany(
 		options?: TFindManyOptions<TFindOptions>,
 	): TFindManyResult<TDto> {
-		let data = this.read();
+		let data = this.readFromStorage();
 		let items = Object.values(data);
 
 		if (options?.limit) {
@@ -110,7 +110,7 @@ export class LocalStorageCollectionDataSource<
 		this.#storage.removeItem(this.#id);
 	}
 
-	protected read(): Record<Id, TDto> {
+	protected readFromStorage(): Record<Id, TDto> {
 		const rawData = this.readRaw();
 
 		if (rawData === null) {

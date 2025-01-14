@@ -20,7 +20,7 @@ export class UserDataSource
 	public override findMany(
 		options?: TFindManyOptions<TUserFindOptions>,
 	): TFindManyResult<TUserDTO> {
-		let users = this.read();
+		let users = this.readFromStorage();
 		let filteredUsers = Object.values(users);
 
 		if (options?.limit) {
