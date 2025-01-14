@@ -3,13 +3,13 @@ import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 import type { TUserFindOptions } from '@root/core/modules/user/domain/userRepository/types';
 import type { IUserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/types';
 
-const STORAGE_ID = 'user';
+const USER_STORAGE_ID = 'user';
 
 export function userDataSourceFactory(): IUserDataSource {
 	return new LocalStorageCollectionDataSource<TUserDTO, TUserFindOptions>(
 		window.localStorage,
 		{
-			id: STORAGE_ID,
+			id: USER_STORAGE_ID,
 		},
 	);
 }

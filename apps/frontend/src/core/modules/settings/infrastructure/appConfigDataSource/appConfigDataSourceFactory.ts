@@ -2,10 +2,10 @@ import { LocalStorageObjectDataSource } from '@root/core/infrastructure/dataSour
 import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
 
-const STORAGE_ID = 'appConfig';
+const APP_CONFIG_STORAGE_ID = 'appConfig';
 
 export function appConfigDataSourceFactory(): IAppConfigDataSource {
 	return new LocalStorageObjectDataSource<TAppConfig>(window.localStorage, {
-		id: STORAGE_ID,
+		id: APP_CONFIG_STORAGE_ID,
 	});
 }
