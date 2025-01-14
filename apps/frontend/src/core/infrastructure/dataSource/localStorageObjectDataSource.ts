@@ -2,16 +2,14 @@ import type { Id } from '@domain/types';
 import type { TFindManyResult } from '@root/core/domain/repository/types';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 
+import { LOCAL_STORAGE_ID_PREFIX } from '@root/core/infrastructure/dataSource/constants';
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
 import { parseSafeToNull } from '@root/core/infrastructure/dataSource/parseSafe';
 
 export class LocalStorageObjectDataSource<TDto extends {}>
 	implements IDataSource<TDto>
 {
-	/** @todo Move to Config */
-	static readonly #ID_PREFIX = '@savee';
-
-	readonly #id: string;
+	readonly #id: Id;
 
 	constructor(
 		private readonly storage: typeof window.localStorage,
@@ -20,7 +18,10 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 			prefix?: string;
 		},
 	) {
-		this.#id = this.makeId(options.id, options.prefix);
+		this.#id = this.makeId(
+			options.id,
+			options.prefix ?? LOCAL_STORAGE_ID_PREFIX,
+		);
 	}
 
 	public upsert(dto: TDto): void {
@@ -89,9 +90,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 		this.storage.removeItem(this.#id);
 	}
 
-	private makeId(id: Id, prefix?: string): Id {
-		let idPrefix = prefix ?? LocalStorageObjectDataSource.#ID_PREFIX;
-
-		return `${idPrefix}/${id}`;
+	private makeId(id: Id, prefix: string): Id {
+		return `${prefix}/${id}`;
 	}
 }
