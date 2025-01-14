@@ -17,11 +17,9 @@ import {
 	CategoryServiceFactory,
 	type ICategoryServiceFactory,
 } from '@root/core/modules/category/application/categoryService/factory';
-import { AppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSource';
 import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
 import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
-import { UserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/userDataSource';
 import { AuthService } from '@root/core/modules/identity/application/authService/authService';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
@@ -62,13 +60,15 @@ import { CategoryDeleteUseCase } from '@root/core/modules/category/application/c
 import { CategoryUpdateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
 import { CategoryWeightUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryWeightUseCase';
 import { CategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/categoryQueryService';
-import { VenueLocalStorageDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSource';
 import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
 import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
 import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
 import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
 import { containerFactory } from '@root/core/infrastructure/serviceContainer/containerFactory';
 import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
+import { userDataSourceFactory } from '@root/core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
+import { venueDataSourceFactory } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSourceFactory';
+import { appConfigDataSourceFactory } from '@root/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSourceFactory';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
@@ -98,7 +98,7 @@ export function createDIContainer(options?: {
 			},
 			{
 				token: EServiceToken.APP_CONFIG_DATASOURCE,
-				useClass: AppConfigDataSource,
+				useFactory: appConfigDataSourceFactory,
 			},
 			{
 				token: EServiceToken.APP_CONFIG_SERVICE,
@@ -235,7 +235,7 @@ export function createDIContainer(options?: {
 			/** User */
 			{
 				token: EServiceToken.USER_DATASOURCE,
-				useClass: UserDataSource,
+				useFactory: userDataSourceFactory,
 			},
 			{
 				token: EServiceToken.USER_SERVICE,
@@ -465,7 +465,7 @@ export function createDIContainer(options?: {
 			},
 			{
 				token: EServiceToken.VENUE_DATASOURCE,
-				useClass: VenueLocalStorageDataSource,
+				useFactory: venueDataSourceFactory,
 			},
 			{
 				token: EServiceToken.VENUE_MAPPER,

@@ -3,13 +3,10 @@ import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDT
 import type { TVenueFindOptions } from '@root/core/modules/venue/domain/venueRepository/types';
 import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/types';
 
-export class VenueLocalStorageDataSource
-	extends LocalStorageCollectionDataSource<TVenueDTO, TVenueFindOptions>
-	implements IVenueDataSource
-{
-	static readonly #STORAGE_ID = 'venues';
+const STORAGE_ID = 'venues';
 
-	constructor() {
-		super(VenueLocalStorageDataSource.#STORAGE_ID);
-	}
+export function venueDataSourceFactory(): IVenueDataSource {
+	return new LocalStorageCollectionDataSource<TVenueDTO, TVenueFindOptions>(
+		STORAGE_ID,
+	);
 }
