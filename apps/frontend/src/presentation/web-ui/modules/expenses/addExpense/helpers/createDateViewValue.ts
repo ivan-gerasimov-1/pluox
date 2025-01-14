@@ -1,4 +1,4 @@
-import { TISODateString } from '@root/core/domain/temporal/types';
+import type { TISODateString } from '@root/core/domain/temporal/types';
 
 export function createDateViewValue(): TISODateString {
 	const date = new Date();

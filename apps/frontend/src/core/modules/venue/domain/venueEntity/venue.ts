@@ -1,7 +1,7 @@
 import { Entity } from '@root/core/domain/entity/entity';
-import { TISODateString } from '@root/core/domain/temporal/types';
-import { Id } from '@root/core/domain/types';
-import { IVenue } from '@root/core/modules/venue/domain/venueEntity/types';
+import type { TISODateString } from '@root/core/domain/temporal/types';
+import type { Id } from '@root/core/domain/types';
+import type { IVenue } from '@root/core/modules/venue/domain/venueEntity/types';
 
 export class Venue extends Entity implements IVenue {
 	#name: string;

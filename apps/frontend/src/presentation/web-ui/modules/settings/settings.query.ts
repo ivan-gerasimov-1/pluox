@@ -1,4 +1,4 @@
-import { Id } from '@root/core/domain/types';
+import type { Id } from '@root/core/domain/types';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import {
