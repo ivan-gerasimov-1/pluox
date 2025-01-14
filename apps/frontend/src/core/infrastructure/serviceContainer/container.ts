@@ -7,6 +7,7 @@ import {
 	type IContainer,
 	type IServiceMap,
 	type IServiceProvider,
+	type IModule,
 	type TServiceToken,
 } from '@root/core/infrastructure/serviceContainer/types';
 
@@ -15,6 +16,7 @@ export class Container implements IContainer {
 
 	private readonly instances = new Map<TServiceToken, unknown>();
 	private readonly resolutionStack: TServiceToken[] = [];
+	private readonly registeredModules = new Set<IModule>();
 
 	private isSealed = false;
 
@@ -34,12 +36,34 @@ export class Container implements IContainer {
 		return this;
 	}
 
-	public seal(): void {
+	public registerModule(module: IModule): IContainer {
 		if (this.isSealed) {
-			return;
+			throw new ContainerSealedError();
+		}
+
+		if (this.registeredModules.has(module)) {
+			return this;
+		}
+
+		module.imports?.forEach((importedModule) => {
+			this.registerModule(importedModule);
+		});
+
+		this.register(...module.providers);
+
+		this.registeredModules.add(module);
+
+		return this;
+	}
+
+	public seal(): IContainer {
+		if (this.isSealed) {
+			return this;
 		}
 
 		this.isSealed = true;
+
+		return this;
 	}
 
 	public createInstance<T>(provider: IServiceProvider<T>): T {

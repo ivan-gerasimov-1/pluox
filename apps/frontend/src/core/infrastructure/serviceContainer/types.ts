@@ -77,7 +77,8 @@ export interface IContainer {
 	readonly providers: Map<TServiceToken, IServiceProvider>;
 
 	register(...providers: IServiceProvider[]): IContainer;
-	seal(): void;
+	registerModule(module: IModule): IContainer;
+	seal(): IContainer;
 	createInstance<T>(provider: IServiceProvider<T>): T;
 	get<T extends TServiceToken = TServiceToken>(token: T): IServiceMap[T];
 	disposeInstance(token: TServiceToken): void;
@@ -100,6 +101,12 @@ export interface IServiceProvider<T = unknown> {
 	useValue?: T;
 	deps?: TServiceToken[];
 	scope?: EServiceScope;
+}
+
+export interface IModule {
+	imports?: Array<IModule>;
+	providers: Array<IServiceProvider>;
+	exports?: Array<IServiceProvider>;
 }
 
 export enum EServiceToken {

@@ -1,5 +1,6 @@
 import type {
 	IContainer,
+	IModule,
 	IServiceMap,
 	IServiceProvider,
 	TServiceToken,
@@ -18,8 +19,12 @@ export class ContainerDecorator implements IContainer {
 		return this;
 	}
 
-	public seal(): void {
-		this.decoratee.seal();
+	public registerModule(module: IModule): IContainer {
+		return this.decoratee.registerModule(module);
+	}
+
+	public seal(): IContainer {
+		return this.decoratee.seal();
 	}
 
 	public createInstance<T>(provider: IServiceProvider<T>): T {

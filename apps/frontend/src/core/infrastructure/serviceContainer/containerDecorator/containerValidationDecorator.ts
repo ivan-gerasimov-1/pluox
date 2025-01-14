@@ -7,7 +7,10 @@ import {
 	MultipleImplementationError,
 	NotImplementedError,
 } from '@root/core/infrastructure/serviceContainer/containerDecorator/errors';
-import type { IServiceProvider } from '@root/core/infrastructure/serviceContainer/types';
+import type {
+	IContainer,
+	IServiceProvider,
+} from '@root/core/infrastructure/serviceContainer/types';
 
 /**
  * @todo
@@ -15,10 +18,10 @@ import type { IServiceProvider } from '@root/core/infrastructure/serviceContaine
  * 2. Compare dependency name with param name
  */
 export class ContainerValidationDecorator extends ContainerDecorator {
-	public override seal(): void {
+	public override seal(): IContainer {
 		this.validate();
 
-		super.seal();
+		return super.seal();
 	}
 
 	private validate(): void {
