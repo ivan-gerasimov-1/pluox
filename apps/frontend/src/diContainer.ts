@@ -40,7 +40,7 @@ import { CurrencyConverter } from '@root/core/modules/currency/application/curre
 import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
-import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
+import { currencyRateDataSourceFactory } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSourceFactory';
 import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
 
@@ -53,7 +53,7 @@ import { DeleteExpenseUseCase } from '@root/core/modules/expense/application/exp
 import { ExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/expenseUseCase';
 import { UpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
 import { ExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/expenseApi';
-import { ExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
+import { expenseDataSourceFactory } from '@root/core/modules/expense/infrastructure/expenseDataSource/expenseDataSourceFactory';
 import { ExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/expenseMapper';
 import { ExpenseRepository } from '@root/core/modules/expense/infrastructure/expenseRepository/expenseRepository';
 
@@ -122,7 +122,8 @@ export function createDIContainer(options?: {
 			},
 			{
 				token: EServiceToken.APP_CONFIG_DATASOURCE,
-				useFactory: appConfigDataSourceFactory,
+				useFactory: (storage: Storage) => appConfigDataSourceFactory(storage),
+				deps: [EServiceToken.LOCAL_STORAGE],
 			},
 			{
 				token: EServiceToken.APP_CONFIG_SERVICE,
@@ -205,7 +206,8 @@ export function createDIContainer(options?: {
 			/** Session */
 			{
 				token: EServiceToken.SESSION_DATASOURCE,
-				useFactory: sessionDataSourceFactory,
+				useFactory: (storage: Storage) => sessionDataSourceFactory(storage),
+				deps: [EServiceToken.LOCAL_STORAGE],
 			},
 			{
 				token: EServiceToken.SESSION_SERVICE,
@@ -259,7 +261,8 @@ export function createDIContainer(options?: {
 			/** User */
 			{
 				token: EServiceToken.USER_DATASOURCE,
-				useFactory: userDataSourceFactory,
+				useFactory: (storage: Storage) => userDataSourceFactory(storage),
+				deps: [EServiceToken.LOCAL_STORAGE],
 			},
 			{
 				token: EServiceToken.USER_SERVICE,
@@ -287,7 +290,9 @@ export function createDIContainer(options?: {
 		.register(
 			{
 				token: EServiceToken.CURRENCY_RATE_DATASOURCE,
-				useClass: CurrencyRateDataSource,
+				useFactory: (storage: Storage) =>
+					currencyRateDataSourceFactory(storage),
+				deps: [EServiceToken.LOCAL_STORAGE],
 			},
 			{
 				token: EServiceToken.CURRENCY_RATE_SERVICE,
@@ -328,7 +333,8 @@ export function createDIContainer(options?: {
 			},
 			{
 				token: EServiceToken.EXPENSE_DATASOURCE,
-				useClass: ExpenseDataSource,
+				useFactory: (storage: Storage) => expenseDataSourceFactory(storage),
+				deps: [EServiceToken.LOCAL_STORAGE],
 			},
 			{
 				token: EServiceToken.EXPENSE_API,
@@ -489,7 +495,8 @@ export function createDIContainer(options?: {
 			},
 			{
 				token: EServiceToken.VENUE_DATASOURCE,
-				useFactory: venueDataSourceFactory,
+				useFactory: (storage: Storage) => venueDataSourceFactory(storage),
+				deps: [EServiceToken.LOCAL_STORAGE],
 			},
 			{
 				token: EServiceToken.VENUE_MAPPER,

@@ -4,8 +4,8 @@ import type { ISessionDataSource } from '@root/core/modules/identity/infrastruct
 
 const SESSION_STORAGE_ID = 'session';
 
-export function sessionDataSourceFactory(): ISessionDataSource {
-	return new LocalStorageObjectDataSource<TSessionDTO>(window.localStorage, {
+export function sessionDataSourceFactory(storage: Storage): ISessionDataSource {
+	return new LocalStorageObjectDataSource<TSessionDTO>(storage, {
 		id: SESSION_STORAGE_ID,
 	});
 }

@@ -5,9 +5,9 @@ import type { IUserDataSource } from '@root/core/modules/user/infrastructure/use
 
 const USER_STORAGE_ID = 'user';
 
-export function userDataSourceFactory(): IUserDataSource {
+export function userDataSourceFactory(storage: Storage): IUserDataSource {
 	return new LocalStorageCollectionDataSource<TUserDTO, TUserFindOptions>(
-		window.localStorage,
+		storage,
 		{
 			id: USER_STORAGE_ID,
 		},

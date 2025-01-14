@@ -5,9 +5,9 @@ import type { IProductDataSource } from '@root/core/modules/product/infrastructu
 
 const PRODUCT_STORAGE_ID = 'products';
 
-export function productDataSourceFactory(): IProductDataSource {
+export function productDataSourceFactory(storage: Storage): IProductDataSource {
 	return new LocalStorageCollectionDataSource<TProductDTO, TProductFindOptions>(
-		window.localStorage,
+		storage,
 		{
 			id: PRODUCT_STORAGE_ID,
 		},

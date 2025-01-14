@@ -1,5 +1,4 @@
 import { LocalStorageObjectDataSource } from '@root/core/infrastructure/dataSource/localStorageObjectDataSource';
-import { CURRENCY_RATE_STORAGE_ID } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/constants';
 import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
 import type {
 	ECurrency,
@@ -11,12 +10,6 @@ export class CurrencyRateDataSource
 	extends LocalStorageObjectDataSource<TCurrencyRates>
 	implements ICurrencyRateDataSource
 {
-	constructor() {
-		super(window.localStorage, {
-			id: CURRENCY_RATE_STORAGE_ID,
-		});
-	}
-
 	public findById(currency: ECurrency): number {
 		let rates = this.findOne();
 

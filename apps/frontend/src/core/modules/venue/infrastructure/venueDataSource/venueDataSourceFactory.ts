@@ -5,9 +5,9 @@ import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/v
 
 const VENUE_STORAGE_ID = 'venues';
 
-export function venueDataSourceFactory(): IVenueDataSource {
+export function venueDataSourceFactory(storage: Storage): IVenueDataSource {
 	return new LocalStorageCollectionDataSource<TVenueDTO, TVenueFindOptions>(
-		window.localStorage,
+		storage,
 		{
 			id: VENUE_STORAGE_ID,
 		},
