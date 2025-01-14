@@ -96,6 +96,16 @@ export function createDIContainer(options?: {
 		 */
 		.register(
 			{
+				token: EServiceToken.GLOBAL,
+				useValue: window,
+			},
+			{
+				token: EServiceToken.LOCAL_STORAGE,
+				useFactory: (global: Window) => global.localStorage,
+				deps: [EServiceToken.GLOBAL],
+			},
+
+			{
 				token: EServiceToken.PROCESS_ENV,
 				useValue: process.env,
 			},

@@ -103,6 +103,9 @@ export interface IServiceProvider<T = unknown> {
 }
 
 export enum EServiceToken {
+	GLOBAL = 'Global',
+	LOCAL_STORAGE = 'LocalStorage',
+
 	PROCESS_ENV = 'ProcessEnv',
 	ENVIRONMENT = 'Environment',
 
@@ -185,6 +188,9 @@ export enum EServiceToken {
 }
 
 export interface IServiceMap {
+	[EServiceToken.GLOBAL]: Window;
+	[EServiceToken.LOCAL_STORAGE]: Storage;
+
 	[EServiceToken.PROCESS_ENV]: TProcessEnv;
 	[EServiceToken.ENVIRONMENT]: IEnvironment;
 
