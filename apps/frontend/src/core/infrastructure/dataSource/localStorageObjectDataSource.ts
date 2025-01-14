@@ -26,7 +26,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	public upsert(dto: TDto): void {
-		let data = this.readRaw();
+		let data = this.readFromStorage();
 
 		if (data) {
 			this.update(dto);
@@ -42,7 +42,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 			throw new Error(`Item already exists`);
 		}
 
-		this.#storage.setItem(this.#id, JSON.stringify(dto));
+		this.writeToStorage(dto);
 	}
 
 	public update(dto: Partial<TDto>): void {
@@ -54,7 +54,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 
 		let data = deepMerge(prevData, dto);
 
-		this.#storage.setItem(this.#id, JSON.stringify(data));
+		this.writeToStorage(data);
 	}
 
 	public remove(id: Id): void {
@@ -62,7 +62,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	public drop(): void {
-		this.#storage.removeItem(this.#id);
+		this.clearStorage();
 	}
 
 	public findOne(): TDto | null {
@@ -74,7 +74,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	protected readFromStorage(): TDto | null {
-		const rawData = this.readRaw();
+		const rawData = this.#storage.getItem(this.#id);
 
 		if (rawData === null) {
 			return null;
@@ -83,8 +83,12 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 		return parseSafeToNull<TDto>(rawData);
 	}
 
-	private readRaw(): string | null {
-		return this.#storage.getItem(this.#id);
+	private writeToStorage<T>(data: T): void {
+		this.#storage.setItem(this.#id, JSON.stringify(data));
+	}
+
+	private clearStorage(): void {
+		this.#storage.removeItem(this.#id);
 	}
 
 	private makeId(id: Id): Id {

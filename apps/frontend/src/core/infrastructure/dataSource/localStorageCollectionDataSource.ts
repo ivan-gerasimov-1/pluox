@@ -34,7 +34,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public upsert(dto: TDto): void {
-		let data = this.readFromStorage();
+		let data = this.readDataFromStorage();
 
 		let targetItem = data[dto.id];
 
@@ -46,7 +46,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public insert(dto: TDto, options?: { replace?: boolean }): void {
-		let data = this.readFromStorage();
+		let data = this.readDataFromStorage();
 		let id = dto.id;
 
 		if (data[id] && !options?.replace) {
@@ -55,11 +55,11 @@ export class LocalStorageCollectionDataSource<
 
 		Reflect.set(data, id, dto);
 
-		this.#storage.setItem(this.#id, JSON.stringify(data));
+		this.writeDataToStorage(data);
 	}
 
 	public update(dto: TDtoWithId & Partial<TDto>): void {
-		let data = this.readFromStorage();
+		let data = this.readDataFromStorage();
 		let id = dto.id;
 		let item = data[id];
 
@@ -69,11 +69,11 @@ export class LocalStorageCollectionDataSource<
 
 		Reflect.set(data, id, deepMerge(item, dto));
 
-		this.#storage.setItem(this.#id, JSON.stringify(data));
+		this.writeDataToStorage(data);
 	}
 
 	public remove(id: Id): void {
-		let data = this.readFromStorage();
+		let data = this.readDataFromStorage();
 
 		Reflect.deleteProperty(data, id);
 
@@ -81,7 +81,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
-		let data = this.readFromStorage();
+		let data = this.readDataFromStorage();
 
 		if (query?.id) {
 			return data[query.id] ?? null;
@@ -93,7 +93,7 @@ export class LocalStorageCollectionDataSource<
 	public findMany(
 		options?: TFindManyOptions<TFindOptions>,
 	): TFindManyResult<TDto> {
-		let data = this.readFromStorage();
+		let data = this.readDataFromStorage();
 		let items = Object.values(data);
 
 		if (options?.limit) {
@@ -107,11 +107,11 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public drop(): void {
-		this.#storage.removeItem(this.#id);
+		this.clearStorage();
 	}
 
-	protected readFromStorage(): Record<Id, TDto> {
-		const rawData = this.readRaw();
+	protected readDataFromStorage(): Record<Id, TDto> {
+		const rawData = this.#storage.getItem(this.#id);
 
 		if (rawData === null) {
 			return {};
@@ -120,8 +120,12 @@ export class LocalStorageCollectionDataSource<
 		return parseSafeToObject(rawData);
 	}
 
-	private readRaw(): string | null {
-		return this.#storage.getItem(this.#id);
+	private writeDataToStorage<T>(data: T): void {
+		this.#storage.setItem(this.#id, JSON.stringify(data));
+	}
+
+	private clearStorage(): void {
+		this.#storage.removeItem(this.#id);
 	}
 
 	private makeId(id: Id): Id {
