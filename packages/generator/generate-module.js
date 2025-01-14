@@ -261,13 +261,14 @@ function dataSource(name, fileNamePrefix) {
 import type { T${name}DTO } from '@root/core/modules/${fileNamePrefix}/application/dto/${fileNamePrefix}DTO';
 import type { I${name}DataSource } from '@root/core/modules/${fileNamePrefix}/infrastructure/${fileNamePrefix}DataSource/types';
 
+const ${name}_STORAGE_ID = '${fileNamePrefix}s';
+
 export class ${name}LocalStorageDataSource extends LocalStorageDataSource<T${name}DTO> implements I${name}DataSource {
-
-	static readonly #STORAGE_ID = '${fileNamePrefix}s';
-
 	constructor() {
-		super(${name}LocalStorageDataSource.#STORAGE_ID);
-	}
+		super(window.localStorage, {
+			id: ${name}_STORAGE_ID
+		});
+	}\
 }
 `;
 }
