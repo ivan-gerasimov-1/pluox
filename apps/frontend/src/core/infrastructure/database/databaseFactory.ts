@@ -16,8 +16,8 @@ export class DatabaseFactory implements IDatabaseFactory {
 
 	public create(): IDatabase {
 		return new Database(this.storage, this.databaseCollectionFactory, {
-			namespace: this.environment.storageNamespace,
-			useCache: this.environment.storageCache,
+			namespace: this.environment.storage.namespace,
+			useCache: this.environment.storage.cache,
 		});
 	}
 }

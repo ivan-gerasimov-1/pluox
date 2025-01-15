@@ -19,6 +19,8 @@ export interface IEnvironment {
 		readonly apiUrl: string;
 		readonly apiKey: string;
 	};
-	readonly storageNamespace: string;
-	readonly storageCache: boolean;
+	readonly storage: {
+		readonly namespace: string;
+		readonly cache: boolean;
+	};
 }

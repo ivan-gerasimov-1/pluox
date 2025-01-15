@@ -18,8 +18,10 @@ export class Environment implements IEnvironment {
 		readonly apiUrl: string;
 		readonly apiKey: string;
 	};
-	readonly #storageNamespace: string;
-	readonly #storageCache: boolean;
+	readonly #storage: {
+		readonly namespace: string;
+		readonly cache: boolean;
+	};
 
 	constructor(private readonly processEnv: TProcessEnv) {
 		this.#isDevelopment = this.detectDevEnvironment(process.env.NODE_ENV);
@@ -27,8 +29,10 @@ export class Environment implements IEnvironment {
 		this.#openExchangeRates = this.getOpenExchangeRatesApi(
 			process.env.NODE_ENV,
 		);
-		this.#storageNamespace = this.getStorageNamespace();
-		this.#storageCache = this.getStorageCache();
+		this.#storage = {
+			namespace: this.getStorageNamespace(),
+			cache: this.getStorageCache(),
+		};
 	}
 
 	public get isDevelopment(): boolean {
@@ -46,12 +50,11 @@ export class Environment implements IEnvironment {
 		return this.#openExchangeRates;
 	}
 
-	public get storageNamespace(): string {
-		return this.#storageNamespace;
-	}
-
-	public get storageCache(): boolean {
-		return this.#storageCache;
+	public get storage(): {
+		namespace: string;
+		cache: boolean;
+	} {
+		return this.#storage;
 	}
 
 	private detectDevEnvironment(environment?: string | EEnvironment): boolean {
