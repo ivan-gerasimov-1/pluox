@@ -4,10 +4,6 @@ export interface IDatabase {
 	collection(collectionName: string): IDatabaseCollection;
 }
 
-export interface IDatabaseFactory {
-	create(): IDatabase;
-}
-
 export interface IDatabaseCollection {
 	has(id: string): boolean;
 

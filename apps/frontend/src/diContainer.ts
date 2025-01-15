@@ -14,8 +14,7 @@ import {
 } from '@core/infrastructure/idGenerator/factory';
 
 import { DatabaseCollectionFactory } from '@root/core/infrastructure/database/databaseCollectionFactory';
-import { DatabaseFactory } from '@root/core/infrastructure/database/databaseFactory';
-import type { IDatabaseFactory } from '@root/core/infrastructure/database/types';
+import { databaseFactory } from '@root/core/infrastructure/database/databaseFactory';
 
 import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
@@ -105,14 +104,7 @@ const sharedModule: IModule = {
 		/** Database */
 		{
 			token: EServiceToken.DATABASE,
-			useFactory: (databaseFactory: IDatabaseFactory) => {
-				return databaseFactory.create();
-			},
-			deps: [EServiceToken.DATABASE_FACTORY],
-		},
-		{
-			token: EServiceToken.DATABASE_FACTORY,
-			useClass: DatabaseFactory,
+			useFactory: databaseFactory,
 			deps: [
 				EServiceToken.LOCAL_STORAGE,
 				EServiceToken.DATABASE_COLLECTION_FACTORY,

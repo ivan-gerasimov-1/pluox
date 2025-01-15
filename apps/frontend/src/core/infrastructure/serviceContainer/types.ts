@@ -75,7 +75,6 @@ import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venue
 import type {
 	IDatabaseCollectionFactory,
 	IDatabase,
-	IDatabaseFactory,
 	IStorage,
 } from '@root/core/infrastructure/database/types';
 
@@ -123,7 +122,6 @@ export enum EServiceToken {
 	ENVIRONMENT = 'Environment',
 
 	DATABASE = 'Database',
-	DATABASE_FACTORY = 'DatabaseFactory',
 	DATABASE_COLLECTION_FACTORY = 'CustomCollectionFactory',
 
 	APP_CONFIG = 'AppConfig',
@@ -212,7 +210,6 @@ export interface IServiceMap {
 	[EServiceToken.ENVIRONMENT]: IEnvironment;
 
 	[EServiceToken.DATABASE]: IDatabase;
-	[EServiceToken.DATABASE_FACTORY]: IDatabaseFactory;
 	[EServiceToken.DATABASE_COLLECTION_FACTORY]: IDatabaseCollectionFactory;
 
 	[EServiceToken.INTL_SERVICE]: IIntlService;
