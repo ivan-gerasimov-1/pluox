@@ -1,3 +1,4 @@
+import type { IStorage } from '@root/core/infrastructure/database/types';
 import {
 	EServiceToken,
 	type IModule,
@@ -13,7 +14,7 @@ export const currencyModule: IModule = {
 	providers: [
 		{
 			token: EServiceToken.CURRENCY_RATE_DATASOURCE,
-			useFactory: (storage: Storage) => currencyRateDataSourceFactory(storage),
+			useFactory: (storage: IStorage) => currencyRateDataSourceFactory(storage),
 			deps: [EServiceToken.LOCAL_STORAGE],
 		},
 		{

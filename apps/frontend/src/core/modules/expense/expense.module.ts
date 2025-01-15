@@ -30,7 +30,7 @@ export const expenseModule: IModule = {
 		{
 			token: EServiceToken.EXPENSE_DATASOURCE,
 			useFactory: expenseDataSourceFactory,
-			deps: [EServiceToken.CUSTOM_STORAGE],
+			deps: [EServiceToken.DATABASE],
 		},
 		{
 			token: EServiceToken.EXPENSE_API,

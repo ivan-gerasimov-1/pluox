@@ -19,7 +19,7 @@ export const settingsModule: IModule = {
 		},
 		{
 			token: EServiceToken.APP_CONFIG_DATASOURCE,
-			useFactory: (storage: Storage) => appConfigDataSourceFactory(storage),
+			useFactory: appConfigDataSourceFactory,
 			deps: [EServiceToken.LOCAL_STORAGE],
 		},
 		{

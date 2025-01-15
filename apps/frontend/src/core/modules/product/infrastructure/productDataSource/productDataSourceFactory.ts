@@ -2,12 +2,12 @@ import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/data
 import type { TProductDTO } from '@root/core/modules/product/application/dto/productDTO';
 import type { TProductFindOptions } from '@root/core/modules/product/domain/productRepository/types';
 import type { IProductDataSource } from '@root/core/modules/product/infrastructure/productDataSource/types';
-import type { ICustomStorage } from '@root/core/infrastructure/customStorage/types';
+import type { IDatabase } from '@root/core/infrastructure/database/types';
 
 const PRODUCT_STORAGE_ID = 'products';
 
 export function productDataSourceFactory(
-	customStorage: ICustomStorage,
+	customStorage: IDatabase,
 ): IProductDataSource {
 	let collection = customStorage.collection(PRODUCT_STORAGE_ID);
 

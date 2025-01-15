@@ -13,7 +13,7 @@ export const userModule: IModule = {
 		{
 			token: EServiceToken.USER_DATASOURCE,
 			useFactory: userDataSourceFactory,
-			deps: [EServiceToken.CUSTOM_STORAGE],
+			deps: [EServiceToken.DATABASE],
 		},
 		{
 			token: EServiceToken.USER_SERVICE,

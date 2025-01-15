@@ -13,9 +13,9 @@ import {
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
 
-import { CustomCollectionFactory } from '@root/core/infrastructure/customStorage/customCollectionFactory';
-import { CustomStorageFactory } from '@root/core/infrastructure/customStorage/customStorageFactory';
-import type { ICustomStorageFactory } from '@root/core/infrastructure/customStorage/types';
+import { DatabaseCollectionFactory } from '@root/core/infrastructure/database/databaseCollectionFactory';
+import { DatabaseFactory } from '@root/core/infrastructure/database/databaseFactory';
+import type { IDatabaseFactory } from '@root/core/infrastructure/database/types';
 
 import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
@@ -102,26 +102,26 @@ const sharedModule: IModule = {
 			deps: [EServiceToken.INTL_SERVICE],
 		},
 
-		/** Custom storage */
+		/** Database */
 		{
-			token: EServiceToken.CUSTOM_STORAGE,
-			useFactory: (customStorageFactory: ICustomStorageFactory) => {
-				return customStorageFactory.create();
+			token: EServiceToken.DATABASE,
+			useFactory: (databaseFactory: IDatabaseFactory) => {
+				return databaseFactory.create();
 			},
-			deps: [EServiceToken.CUSTOM_STORAGE_FACTORY],
+			deps: [EServiceToken.DATABASE_FACTORY],
 		},
 		{
-			token: EServiceToken.CUSTOM_STORAGE_FACTORY,
-			useClass: CustomStorageFactory,
+			token: EServiceToken.DATABASE_FACTORY,
+			useClass: DatabaseFactory,
 			deps: [
 				EServiceToken.LOCAL_STORAGE,
-				EServiceToken.CUSTOM_COLLECTION_FACTORY,
+				EServiceToken.DATABASE_COLLECTION_FACTORY,
 				EServiceToken.ENVIRONMENT,
 			],
 		},
 		{
-			token: EServiceToken.CUSTOM_COLLECTION_FACTORY,
-			useClass: CustomCollectionFactory,
+			token: EServiceToken.DATABASE_COLLECTION_FACTORY,
+			useClass: DatabaseCollectionFactory,
 		},
 	],
 };

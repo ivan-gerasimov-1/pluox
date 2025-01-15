@@ -3,7 +3,7 @@ import type {
 	TFindManyOptions,
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
-import type { ICustomCollection } from '@root/core/infrastructure/customStorage/types';
+import type { IDatabaseCollection } from '@root/core/infrastructure/database/types';
 import type {
 	IDataSource,
 	TDtoWithId,
@@ -14,7 +14,7 @@ export class LocalStorageCollectionDataSource<
 	TFindOptions,
 > implements IDataSource<TDto, TFindOptions>
 {
-	constructor(private readonly collection: ICustomCollection) {}
+	constructor(private readonly collection: IDatabaseCollection) {}
 
 	public upsert(dto: TDto): void {
 		let hasItem = this.collection.has(dto.id);

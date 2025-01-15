@@ -1,13 +1,16 @@
-import type { ICustomCollection } from '@root/core/infrastructure/customStorage/types';
+import type {
+	IDatabaseCollection,
+	IStorage,
+} from '@root/core/infrastructure/database/types';
 
-import { deepMerge } from '@root/core/infrastructure/customStorage/deepMerge';
-import { parseSafeToObject } from '@root/core/infrastructure/customStorage/parseSafe';
+import { deepMerge } from '@root/core/infrastructure/database/deepMerge';
+import { parseSafeToObject } from '@root/core/infrastructure/database/parseSafe';
 
-export class CustomCollection implements ICustomCollection {
+export class DatabaseCollection implements IDatabaseCollection {
 	private readonly id: string;
 
 	constructor(
-		private readonly storage: Storage,
+		private readonly storage: IStorage,
 		options: {
 			id: string;
 		},
