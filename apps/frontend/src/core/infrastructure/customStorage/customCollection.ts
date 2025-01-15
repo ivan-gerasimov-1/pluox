@@ -1,6 +1,7 @@
 import { parseSafeToObject } from '@root/core/infrastructure/customStorage/parseSafe';
+import type { ICustomCollection } from '@root/core/infrastructure/customStorage/types';
 
-export class CustomCollection {
+export class CustomCollection implements ICustomCollection {
 	private readonly id: string;
 
 	constructor(

@@ -2,7 +2,7 @@ import type { Id } from '@domain/types';
 import type { TFindManyResult } from '@root/core/domain/repository/types';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 
-import { LOCAL_STORAGE_ID_PREFIX } from '@root/core/infrastructure/dataSource/constants';
+import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
 import { parseSafeToNull } from '@root/core/infrastructure/dataSource/parseSafe';
 
@@ -18,10 +18,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 			prefix?: string;
 		},
 	) {
-		this.#id = this.makeId(
-			options.id,
-			options.prefix ?? LOCAL_STORAGE_ID_PREFIX,
-		);
+		this.#id = this.makeId(options.id, options.prefix ?? STORAGE_NAMESPACE);
 	}
 
 	public upsert(dto: TDto): void {

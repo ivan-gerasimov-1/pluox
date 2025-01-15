@@ -1,12 +1,15 @@
-import { CustomCollection } from '@root/core/infrastructure/customStorage/customCollection';
-import { CustomCollectionFactory } from '@root/core/infrastructure/customStorage/customCollectionFactory';
+import type {
+	ICustomCollection,
+	ICustomCollectionFactory,
+	ICustomStorage,
+} from '@root/core/infrastructure/customStorage/types';
 
-export class CustomStorage {
-	readonly #collections: Map<string, CustomCollection>;
+export class CustomStorage implements ICustomStorage {
+	readonly #collections: Map<string, ICustomCollection>;
 
 	constructor(
 		private readonly storage: Storage,
-		private readonly customCollectionFactory: CustomCollectionFactory,
+		private readonly customCollectionFactory: ICustomCollectionFactory,
 		private readonly options: {
 			namespace: string;
 		},
@@ -14,7 +17,7 @@ export class CustomStorage {
 		this.#collections = new Map();
 	}
 
-	public collection(collectionName: string): CustomCollection {
+	public collection(collectionName: string): ICustomCollection {
 		let collectionId = this.makeId(collectionName, this.options.namespace);
 		let collection = this.#collections.get(collectionId);
 

@@ -1,3 +1,4 @@
+import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
 import {
 	type IEnvironment,
 	type TProcessEnv,
@@ -17,6 +18,7 @@ export class Environment implements IEnvironment {
 		readonly apiUrl: string;
 		readonly apiKey: string;
 	};
+	readonly #storageNamespace: string;
 
 	constructor(private readonly processEnv: TProcessEnv) {
 		this.#isDevelopment = this.detectDevEnvironment(process.env.NODE_ENV);
@@ -24,6 +26,7 @@ export class Environment implements IEnvironment {
 		this.#openExchangeRates = this.getOpenExchangeRatesApi(
 			process.env.NODE_ENV,
 		);
+		this.#storageNamespace = this.getStorageNamespace();
 	}
 
 	public get isDevelopment(): boolean {
@@ -39,6 +42,10 @@ export class Environment implements IEnvironment {
 		apiKey: string;
 	} {
 		return this.#openExchangeRates;
+	}
+
+	public get storageNamespace(): string {
+		return this.#storageNamespace;
 	}
 
 	private detectDevEnvironment(environment?: string | EEnvironment): boolean {
@@ -60,5 +67,9 @@ export class Environment implements IEnvironment {
 			apiUrl: process.env.APP_OPEN_EXCHANGE_RATES_API_URL as string,
 			apiKey: process.env.APP_OPEN_EXCHANGE_RATES_API_KEY as string,
 		};
+	}
+
+	private getStorageNamespace(): string {
+		return process.env.STORAGE_NAMESPACE ?? STORAGE_NAMESPACE;
 	}
 }

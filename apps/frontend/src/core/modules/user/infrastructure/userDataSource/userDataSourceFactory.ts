@@ -1,3 +1,4 @@
+import type { ICustomStorage } from '@root/core/infrastructure/customStorage/types';
 import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
 import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 import type { TUserFindOptions } from '@root/core/modules/user/domain/userRepository/types';
@@ -5,11 +6,12 @@ import type { IUserDataSource } from '@root/core/modules/user/infrastructure/use
 
 const USER_STORAGE_ID = 'user';
 
-export function userDataSourceFactory(storage: Storage): IUserDataSource {
+export function userDataSourceFactory(
+	customStorage: ICustomStorage,
+): IUserDataSource {
+	let collection = customStorage.collection(USER_STORAGE_ID);
+
 	return new LocalStorageCollectionDataSource<TUserDTO, TUserFindOptions>(
-		storage,
-		{
-			id: USER_STORAGE_ID,
-		},
+		collection,
 	);
 }

@@ -13,6 +13,10 @@ import {
 	type IIdGeneratorFactory,
 } from '@core/infrastructure/idGenerator/factory';
 
+import { CustomCollectionFactory } from '@root/core/infrastructure/customStorage/customCollectionFactory';
+import { CustomStorageFactory } from '@root/core/infrastructure/customStorage/customStorageFactory';
+import type { ICustomStorageFactory } from '@root/core/infrastructure/customStorage/types';
+
 import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
 import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
 
@@ -21,11 +25,11 @@ import { categoryModule } from '@root/core/modules/category/category.module';
 import { currencyModule } from '@root/core/modules/currency/currency.module';
 import { expenseModule } from '@root/core/modules/expense/expense.module';
 import { identityModule } from '@root/core/modules/identity/identity.module';
+import { intlModule } from '@root/core/modules/intl/intl.module';
 import { settingsModule } from '@root/core/modules/settings/settings.module';
 import { syncModule } from '@root/core/modules/sync/sync.module';
 import { userModule } from '@root/core/modules/user/user.module';
 import { venueModule } from '@root/core/modules/venue/venue.module';
-import { intlModule } from '@root/core/modules/intl/intl.module';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
@@ -96,6 +100,28 @@ const sharedModule: IModule = {
 			token: EServiceToken.TEMPORAL,
 			useClass: Temporal,
 			deps: [EServiceToken.INTL_SERVICE],
+		},
+
+		/** Custom storage */
+		{
+			token: EServiceToken.CUSTOM_STORAGE,
+			useFactory: (customStorageFactory: ICustomStorageFactory) => {
+				return customStorageFactory.create();
+			},
+			deps: [EServiceToken.CUSTOM_STORAGE_FACTORY],
+		},
+		{
+			token: EServiceToken.CUSTOM_STORAGE_FACTORY,
+			useClass: CustomStorageFactory,
+			deps: [
+				EServiceToken.LOCAL_STORAGE,
+				EServiceToken.CUSTOM_COLLECTION_FACTORY,
+				EServiceToken.ENVIRONMENT,
+			],
+		},
+		{
+			token: EServiceToken.CUSTOM_COLLECTION_FACTORY,
+			useClass: CustomCollectionFactory,
 		},
 	],
 };

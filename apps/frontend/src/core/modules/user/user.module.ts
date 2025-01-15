@@ -12,8 +12,8 @@ export const userModule: IModule = {
 	providers: [
 		{
 			token: EServiceToken.USER_DATASOURCE,
-			useFactory: (storage: Storage) => userDataSourceFactory(storage),
-			deps: [EServiceToken.LOCAL_STORAGE],
+			useFactory: userDataSourceFactory,
+			deps: [EServiceToken.CUSTOM_STORAGE],
 		},
 		{
 			token: EServiceToken.USER_SERVICE,

@@ -72,6 +72,11 @@ import type {
 import type { IVenueRepository } from '@root/core/modules/venue/domain/venueRepository/types';
 import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/types';
 import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/types';
+import type {
+	ICustomCollectionFactory,
+	ICustomStorage,
+	ICustomStorageFactory,
+} from '@root/core/infrastructure/customStorage/types';
 
 export interface IContainer {
 	readonly providers: Map<TServiceToken, IServiceProvider>;
@@ -115,6 +120,10 @@ export enum EServiceToken {
 
 	PROCESS_ENV = 'ProcessEnv',
 	ENVIRONMENT = 'Environment',
+
+	CUSTOM_STORAGE = 'CustomStorage',
+	CUSTOM_STORAGE_FACTORY = 'CustomStorageFactory',
+	CUSTOM_COLLECTION_FACTORY = 'CustomCollectionFactory',
 
 	APP_CONFIG = 'AppConfig',
 	APP_CONFIG_DATASOURCE = 'AppConfigDataSource',
@@ -200,6 +209,10 @@ export interface IServiceMap {
 
 	[EServiceToken.PROCESS_ENV]: TProcessEnv;
 	[EServiceToken.ENVIRONMENT]: IEnvironment;
+
+	[EServiceToken.CUSTOM_STORAGE]: ICustomStorage;
+	[EServiceToken.CUSTOM_STORAGE_FACTORY]: ICustomStorageFactory;
+	[EServiceToken.CUSTOM_COLLECTION_FACTORY]: ICustomCollectionFactory;
 
 	[EServiceToken.INTL_SERVICE]: IIntlService;
 	[EServiceToken.CURRENCY_CONVERTER]: ICurrencyConverter;

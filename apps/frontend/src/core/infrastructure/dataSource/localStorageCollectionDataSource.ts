@@ -3,37 +3,23 @@ import type {
 	TFindManyOptions,
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
+import type { ICustomCollection } from '@root/core/infrastructure/customStorage/types';
 import type {
 	IDataSource,
 	TDtoWithId,
 } from '@root/core/infrastructure/dataSource/types';
 
-import { LOCAL_STORAGE_ID_PREFIX } from '@root/core/infrastructure/dataSource/constants';
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
-import { parseSafeToObject } from '@root/core/infrastructure/dataSource/parseSafe';
 
 export class LocalStorageCollectionDataSource<
 	TDto extends TDtoWithId,
 	TFindOptions,
 > implements IDataSource<TDto, TFindOptions>
 {
-	readonly #id: Id;
-
-	constructor(
-		private readonly storage: typeof window.localStorage,
-		options: {
-			id: Id;
-			prefix?: string;
-		},
-	) {
-		this.#id = this.makeId(
-			options.id,
-			options.prefix ?? LOCAL_STORAGE_ID_PREFIX,
-		);
-	}
+	constructor(private readonly collection: ICustomCollection) {}
 
 	public upsert(dto: TDto): void {
-		let data = this.readDataFromStorage();
+		let data = this.collection.readData();
 
 		let targetItem = data[dto.id];
 
@@ -45,7 +31,7 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public insert(dto: TDto, options?: { replace?: boolean }): void {
-		let data = this.readDataFromStorage();
+		let data = this.collection.readData();
 		let id = dto.id;
 
 		if (data[id] && !options?.replace) {
@@ -54,11 +40,11 @@ export class LocalStorageCollectionDataSource<
 
 		Reflect.set(data, id, dto);
 
-		this.writeDataToStorage(data);
+		this.collection.writeData(data);
 	}
 
 	public update(dto: TDtoWithId & Partial<TDto>): void {
-		let data = this.readDataFromStorage();
+		let data = this.collection.readData();
 		let id = dto.id;
 		let item = data[id];
 
@@ -68,19 +54,19 @@ export class LocalStorageCollectionDataSource<
 
 		Reflect.set(data, id, deepMerge(item, dto));
 
-		this.writeDataToStorage(data);
+		this.collection.writeData(data);
 	}
 
 	public remove(id: Id): void {
-		let data = this.readDataFromStorage();
+		let data = this.collection.readData();
 
 		Reflect.deleteProperty(data, id);
 
-		this.storage.setItem(this.#id, JSON.stringify(data));
+		this.collection.writeData(data);
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
-		let data = this.readDataFromStorage();
+		let data: Record<Id, TDto> = this.collection.readData();
 
 		if (query?.id) {
 			return data[query.id] ?? null;
@@ -92,7 +78,7 @@ export class LocalStorageCollectionDataSource<
 	public findMany(
 		options?: TFindManyOptions<TFindOptions>,
 	): TFindManyResult<TDto> {
-		let data = this.readDataFromStorage();
+		let data: Record<Id, TDto> = this.collection.readData();
 		let items = Object.values(data);
 
 		if (options?.limit) {
@@ -106,28 +92,10 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public drop(): void {
-		this.clearStorage();
+		this.collection.clearData();
 	}
 
 	protected readDataFromStorage(): Record<Id, TDto> {
-		const rawData = this.storage.getItem(this.#id);
-
-		if (rawData === null) {
-			return {};
-		}
-
-		return parseSafeToObject(rawData);
-	}
-
-	private writeDataToStorage<T>(data: T): void {
-		this.storage.setItem(this.#id, JSON.stringify(data));
-	}
-
-	private clearStorage(): void {
-		this.storage.removeItem(this.#id);
-	}
-
-	private makeId(id: Id, prefix: string): Id {
-		return `${prefix}/${id}`;
+		return this.collection.readData();
 	}
 }

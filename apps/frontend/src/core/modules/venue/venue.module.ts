@@ -19,8 +19,8 @@ export const venueModule: IModule = {
 		},
 		{
 			token: EServiceToken.VENUE_DATASOURCE,
-			useFactory: (storage: Storage) => venueDataSourceFactory(storage),
-			deps: [EServiceToken.LOCAL_STORAGE],
+			useFactory: venueDataSourceFactory,
+			deps: [EServiceToken.CUSTOM_STORAGE],
 		},
 		{
 			token: EServiceToken.VENUE_MAPPER,

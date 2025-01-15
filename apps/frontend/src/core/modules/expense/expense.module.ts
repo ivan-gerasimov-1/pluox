@@ -29,8 +29,8 @@ export const expenseModule: IModule = {
 		},
 		{
 			token: EServiceToken.EXPENSE_DATASOURCE,
-			useFactory: (storage: Storage) => expenseDataSourceFactory(storage),
-			deps: [EServiceToken.LOCAL_STORAGE],
+			useFactory: expenseDataSourceFactory,
+			deps: [EServiceToken.CUSTOM_STORAGE],
 		},
 		{
 			token: EServiceToken.EXPENSE_API,
