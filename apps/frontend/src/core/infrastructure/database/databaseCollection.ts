@@ -49,7 +49,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 
 		this.writeData(data);
 
-		return item;
+		return payload;
 	}
 
 	public updateOne<T>(id: string, payload: Partial<T>): T | null {
