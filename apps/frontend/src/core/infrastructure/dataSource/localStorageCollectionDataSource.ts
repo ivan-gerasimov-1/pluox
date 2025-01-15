@@ -9,8 +9,6 @@ import type {
 	TDtoWithId,
 } from '@root/core/infrastructure/dataSource/types';
 
-import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
-
 export class LocalStorageCollectionDataSource<
 	TDto extends TDtoWithId,
 	TFindOptions,
@@ -19,11 +17,9 @@ export class LocalStorageCollectionDataSource<
 	constructor(private readonly collection: ICustomCollection) {}
 
 	public upsert(dto: TDto): void {
-		let data = this.collection.readData();
+		let hasItem = this.collection.has(dto.id);
 
-		let targetItem = data[dto.id];
-
-		if (targetItem) {
+		if (hasItem) {
 			this.update(dto);
 		} else {
 			this.insert(dto);
@@ -31,55 +27,43 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public insert(dto: TDto, options?: { replace?: boolean }): void {
-		let data = this.collection.readData();
-		let id = dto.id;
+		let hasItem = this.collection.has(dto.id);
 
-		if (data[id] && !options?.replace) {
-			throw new Error(`Item with id ${id} already exists`);
+		if (hasItem && !options?.replace) {
+			throw new Error(`Item with id ${dto.id} already exists`);
 		}
 
-		Reflect.set(data, id, dto);
-
-		this.collection.writeData(data);
+		this.collection.writeOne(dto);
 	}
 
 	public update(dto: TDtoWithId & Partial<TDto>): void {
-		let data = this.collection.readData();
-		let id = dto.id;
-		let item = data[id];
+		let hasItem = this.collection.has(dto.id);
 
-		if (!item) {
-			throw new Error(`Item with id ${id} not found`);
+		if (!hasItem) {
+			throw new Error(`Item with id ${dto.id} not found`);
 		}
 
-		Reflect.set(data, id, deepMerge(item, dto));
-
-		this.collection.writeData(data);
+		this.collection.updateOne(dto.id, dto);
 	}
 
 	public remove(id: Id): void {
-		let data = this.collection.readData();
-
-		Reflect.deleteProperty(data, id);
-
-		this.collection.writeData(data);
+		this.collection.removeOne(id);
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
-		let data: Record<Id, TDto> = this.collection.readData();
-
 		if (query?.id) {
-			return data[query.id] ?? null;
+			return this.collection.readOne(query.id);
 		}
 
-		return Object.values(data)[0] ?? null;
+		let items: TDto[] = this.collection.readAll();
+
+		return items[0] ?? null;
 	}
 
 	public findMany(
 		options?: TFindManyOptions<TFindOptions>,
 	): TFindManyResult<TDto> {
-		let data: Record<Id, TDto> = this.collection.readData();
-		let items = Object.values(data);
+		let items: TDto[] = this.collection.readAll();
 
 		if (options?.limit) {
 			items = items.slice(0, options.limit);
@@ -91,11 +75,11 @@ export class LocalStorageCollectionDataSource<
 		};
 	}
 
-	public drop(): void {
-		this.collection.clearData();
+	public findAll(): TDto[] {
+		return this.collection.readAll();
 	}
 
-	protected readDataFromStorage(): Record<Id, TDto> {
-		return this.collection.readData();
+	public clear(): void {
+		this.collection.drop();
 	}
 }

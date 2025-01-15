@@ -7,10 +7,6 @@ export interface ICustomStorageFactory {
 }
 
 export interface ICustomCollection {
-	readData(): any;
-	writeData(data: any): void;
-	clearData(): void;
-
 	has(id: string): boolean;
 
 	readOne<T>(id: string): T | null;
@@ -18,6 +14,8 @@ export interface ICustomCollection {
 	writeOne<T>(payload: T & { id: string }): T | null;
 	updateOne<T>(id: string, payload: Partial<T>): T | null;
 	removeOne<T>(id: string): T | null;
+
+	drop(): void;
 }
 
 export interface ICustomCollectionFactory {

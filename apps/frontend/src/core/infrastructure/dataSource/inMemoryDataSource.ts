@@ -72,6 +72,10 @@ export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 		};
 	}
 
+	public findAll(): TDto[] {
+		return this.readItemsFromStorage();
+	}
+
 	public remove(id: Id): TDto | null {
 		let category = this.readItemFromStorage(id);
 
@@ -84,7 +88,7 @@ export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 		return category;
 	}
 
-	public drop(): void {
+	public clear(): void {
 		this.clearStorage();
 	}
 

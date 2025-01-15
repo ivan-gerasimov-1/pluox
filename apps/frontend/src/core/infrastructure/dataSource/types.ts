@@ -20,8 +20,9 @@ export interface IDataSource<TDto, TFindOptions = never> {
 
 	findOne(query?: { id?: Id }): TDto | null;
 	findMany(options?: TFindManyOptions<TFindOptions>): TFindManyResult<TDto>;
+	findAll(): TDto[];
 
 	remove(id: Id): void;
 
-	drop(): void;
+	clear(): void;
 }

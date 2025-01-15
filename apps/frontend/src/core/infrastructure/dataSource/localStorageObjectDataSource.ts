@@ -57,7 +57,7 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 		throw new Error('Not allowed in LocalStorageObjectDataSource');
 	}
 
-	public drop(): void {
+	public clear(): void {
 		this.clearStorage();
 	}
 
@@ -66,6 +66,10 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	public findMany(): TFindManyResult<TDto> {
+		throw new Error('Not allowed in LocalStorageObjectDataSource');
+	}
+
+	public findAll(): TDto[] {
 		throw new Error('Not allowed in LocalStorageObjectDataSource');
 	}
 

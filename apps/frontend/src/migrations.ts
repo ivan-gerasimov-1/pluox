@@ -63,7 +63,7 @@ export function convertUserObjectToUserMap(): void {
 
 	if (typeof user.id === 'string') {
 		userCollectionDataSource.insert(user);
-		userObjectDataSource.drop();
+		userObjectDataSource.clear();
 	}
 }
 
@@ -111,7 +111,7 @@ function moveClientIdToSession(): void {
 		});
 	}
 
-	clientIdDataSource.drop();
+	clientIdDataSource.clear();
 }
 
 /**
@@ -155,7 +155,7 @@ export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 		expenseDataSource.insert(expense);
 	}
 
-	oldExpenseDataSource.drop();
+	oldExpenseDataSource.clear();
 }
 
 /**

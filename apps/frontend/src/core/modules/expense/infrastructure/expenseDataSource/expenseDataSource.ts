@@ -15,7 +15,7 @@ export class ExpenseDataSource
 	public override findMany(
 		options?: TFindManyOptions<TExpenseFindOptions>,
 	): TFindManyResult<TExpenseDTO> {
-		let expensesMap = this.readDataFromStorage();
+		let expensesMap = this.findAll();
 		let expenses = Object.values(expensesMap);
 
 		if (!options) {

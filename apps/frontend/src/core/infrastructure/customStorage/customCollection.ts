@@ -14,21 +14,6 @@ export class CustomCollection implements ICustomCollection {
 	) {
 		this.id = options.id;
 	}
-
-	public readData(): any {
-		const rawData = this.storage.getItem(this.id);
-
-		if (rawData === null) {
-			return {};
-		}
-
-		return parseSafeToObject(rawData);
-	}
-
-	public writeData<T>(data: T): void {
-		this.storage.setItem(this.id, JSON.stringify(data));
-	}
-
 	public has(id: string): boolean {
 		let data = this.readData();
 		let item = data[id];
@@ -93,7 +78,21 @@ export class CustomCollection implements ICustomCollection {
 		return item;
 	}
 
-	public clearData(): void {
+	public drop(): void {
 		this.storage.removeItem(this.id);
+	}
+
+	protected readData(): any {
+		const rawData = this.storage.getItem(this.id);
+
+		if (rawData === null) {
+			return {};
+		}
+
+		return parseSafeToObject(rawData);
+	}
+
+	protected writeData<T>(data: T): void {
+		this.storage.setItem(this.id, JSON.stringify(data));
 	}
 }
