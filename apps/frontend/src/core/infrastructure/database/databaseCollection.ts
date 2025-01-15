@@ -17,6 +17,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 	) {
 		this.id = options.id;
 	}
+
 	public has(id: string): boolean {
 		let data = this.readData();
 		let item = data[id];
