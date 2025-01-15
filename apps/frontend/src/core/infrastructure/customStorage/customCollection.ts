@@ -42,6 +42,12 @@ export class CustomCollection implements ICustomCollection {
 		return data[id] ?? null;
 	}
 
+	public readAll<T>(): T[] {
+		let data = this.readData();
+
+		return Object.values(data);
+	}
+
 	public writeOne<T>(payload: T & { id: string }): T | null {
 		let data = this.readData();
 		let item = data[payload.id];

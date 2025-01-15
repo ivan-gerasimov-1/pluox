@@ -14,6 +14,7 @@ export interface ICustomCollection {
 	has(id: string): boolean;
 
 	readOne<T>(id: string): T | null;
+	readAll<T>(): T[];
 	writeOne<T>(payload: T & { id: string }): T | null;
 	updateOne<T>(id: string, payload: Partial<T>): T | null;
 	removeOne<T>(id: string): T | null;
