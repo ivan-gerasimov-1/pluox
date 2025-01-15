@@ -1,4 +1,5 @@
 import { DatabaseCollection } from '@root/core/infrastructure/database/databaseCollection';
+import { DatabaseCollectionCacheDecorator } from '@root/core/infrastructure/database/databaseCollectionDecorator/databaseCollectionCache';
 import type {
 	IDatabaseCollectionFactory,
 	IDatabaseCollection,
@@ -10,10 +11,22 @@ export class DatabaseCollectionFactory implements IDatabaseCollectionFactory {
 		storage: IStorage,
 		options: {
 			id: string;
+			useCache: boolean;
 		},
 	): IDatabaseCollection {
-		return new DatabaseCollection(storage, {
-			id: options.id,
-		});
+		let databaseCollection: IDatabaseCollection = new DatabaseCollection(
+			storage,
+			{
+				id: options.id,
+			},
+		);
+
+		if (options.useCache) {
+			databaseCollection = new DatabaseCollectionCacheDecorator(
+				databaseCollection,
+			);
+		}
+
+		return databaseCollection;
 	}
 }

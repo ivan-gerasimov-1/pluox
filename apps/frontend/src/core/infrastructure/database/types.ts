@@ -25,6 +25,7 @@ export interface IDatabaseCollectionFactory {
 		storage: IStorage,
 		options: {
 			id: string;
+			useCache: boolean;
 		},
 	): IDatabaseCollection;
 }

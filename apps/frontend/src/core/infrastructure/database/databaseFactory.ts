@@ -10,13 +10,14 @@ import type { IEnvironment } from '@root/core/modules/settings/infrastructure/en
 export class DatabaseFactory implements IDatabaseFactory {
 	constructor(
 		private readonly storage: IStorage,
-		private readonly customCollectionFactory: IDatabaseCollectionFactory,
+		private readonly databaseCollectionFactory: IDatabaseCollectionFactory,
 		private readonly environment: IEnvironment,
 	) {}
 
 	public create(): IDatabase {
-		return new Database(this.storage, this.customCollectionFactory, {
+		return new Database(this.storage, this.databaseCollectionFactory, {
 			namespace: this.environment.storageNamespace,
+			useCache: this.environment.storageCache,
 		});
 	}
 }

@@ -10,9 +10,10 @@ export class Database implements IDatabase {
 
 	constructor(
 		private readonly storage: IStorage,
-		private readonly customCollectionFactory: IDatabaseCollectionFactory,
+		private readonly databaseCollectionFactory: IDatabaseCollectionFactory,
 		private readonly options: {
 			namespace: string;
+			useCache: boolean;
 		},
 	) {
 		this.#collections = new Map();
@@ -23,8 +24,9 @@ export class Database implements IDatabase {
 		let collection = this.#collections.get(collectionId);
 
 		if (!collection) {
-			collection = this.customCollectionFactory.create(this.storage, {
+			collection = this.databaseCollectionFactory.create(this.storage, {
 				id: collectionId,
+				useCache: this.options.useCache,
 			});
 
 			this.#collections.set(collectionId, collection);
