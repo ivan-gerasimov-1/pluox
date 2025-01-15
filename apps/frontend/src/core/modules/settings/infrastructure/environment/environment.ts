@@ -19,6 +19,7 @@ export class Environment implements IEnvironment {
 		readonly apiKey: string;
 	};
 	readonly #storageNamespace: string;
+	readonly #storageCache: boolean;
 
 	constructor(private readonly processEnv: TProcessEnv) {
 		this.#isDevelopment = this.detectDevEnvironment(process.env.NODE_ENV);
@@ -27,6 +28,7 @@ export class Environment implements IEnvironment {
 			process.env.NODE_ENV,
 		);
 		this.#storageNamespace = this.getStorageNamespace();
+		this.#storageCache = this.getStorageCache();
 	}
 
 	public get isDevelopment(): boolean {
@@ -46,6 +48,10 @@ export class Environment implements IEnvironment {
 
 	public get storageNamespace(): string {
 		return this.#storageNamespace;
+	}
+
+	public get storageCache(): boolean {
+		return this.#storageCache;
 	}
 
 	private detectDevEnvironment(environment?: string | EEnvironment): boolean {
@@ -71,5 +77,9 @@ export class Environment implements IEnvironment {
 
 	private getStorageNamespace(): string {
 		return process.env.STORAGE_NAMESPACE ?? STORAGE_NAMESPACE;
+	}
+
+	private getStorageCache(): boolean {
+		return true;
 	}
 }
