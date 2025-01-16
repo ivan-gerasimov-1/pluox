@@ -20,7 +20,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 
 	public has(id: string): boolean {
 		let data = this.readData();
-		let item = data[id];
+		let item = Reflect.get(data, id);
 
 		return Boolean(item);
 	}
@@ -28,7 +28,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 	public readOne<T>(id: string): T | null {
 		let data = this.readData();
 
-		return data[id] ?? null;
+		return Reflect.get(data, id) ?? null;
 	}
 
 	public readAll<T>(): T[] {
@@ -39,7 +39,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 
 	public writeOne<T>(payload: T & { id: string }): T | null {
 		let data = this.readData();
-		let item = data[payload.id];
+		let item = Reflect.get(data, payload.id);
 
 		if (item) {
 			return null;
@@ -54,7 +54,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 
 	public updateOne<T>(id: string, payload: Partial<T>): T | null {
 		let data = this.readData();
-		let item = data[id];
+		let item = Reflect.get(data, id);
 
 		if (item === null) {
 			return null;
@@ -69,7 +69,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 
 	public removeOne<T>(id: string): T | null {
 		let data = this.readData();
-		let item = data[id];
+		let item = Reflect.get(data, id);
 
 		if (!item) {
 			return null;
