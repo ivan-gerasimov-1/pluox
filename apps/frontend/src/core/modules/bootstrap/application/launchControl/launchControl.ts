@@ -17,11 +17,16 @@ export class LaunchControl implements ILauchControl {
 
 	public async start(): Promise<void> {
 		this.getAppConfig();
-		this.initializeCategories();
 
 		await this.getCurrencyRates();
 
 		this.sessionService.start();
+
+		/**
+		 * @description
+		 * Categories must be initialized after session due to use of userId
+		 */
+		this.initializeCategories();
 	}
 
 	private getAppConfig(): void {

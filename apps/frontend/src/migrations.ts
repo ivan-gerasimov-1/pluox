@@ -21,6 +21,7 @@ export function runMigrations() {
 	addUserIdToExpense();
 	renameCommentOfExpenseDTOToDescription();
 	addVenueIdToExpense();
+	addUserIdToCategories();
 }
 
 /**
@@ -229,5 +230,26 @@ export function addVenueIdToExpense(): void {
 		expenseDataSource.insert(expense, {
 			replace: true,
 		});
+	}
+}
+
+/**
+ * №9. Add userId to categories
+ */
+export function addUserIdToCategories(): void {
+	let categoryDataSource = resolveService(EServiceToken.CATEGORY_DATASOURCE);
+	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
+
+	let sessionDTO = sessionDataSource.findOne();
+	let categories = categoryDataSource.findMany();
+
+	if (!sessionDTO || categories.total === 0) {
+		return;
+	}
+
+	for (let category of categories.items) {
+		category.userId = sessionDTO.userId;
+
+		categoryDataSource.update(category);
 	}
 }

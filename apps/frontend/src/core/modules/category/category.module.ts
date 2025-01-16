@@ -56,6 +56,7 @@ export const categoryModule: IModule = {
 				EServiceToken.EXPENSE_REPOSITORY,
 				EServiceToken.TEMPORAL,
 				EServiceToken.ID_GENERATOR,
+				EServiceToken.SESSION_SERVICE,
 			],
 		},
 		{

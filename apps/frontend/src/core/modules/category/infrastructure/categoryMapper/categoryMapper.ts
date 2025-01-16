@@ -7,6 +7,7 @@ export class CategoryMapper implements ICategoryMapper {
 	public toDTO(category: ICategory): TCategoryDTO {
 		return {
 			id: category.id,
+			userId: category.userId,
 			name: category.name,
 			icon: category.icon,
 			weight: category.weight,
@@ -18,6 +19,7 @@ export class CategoryMapper implements ICategoryMapper {
 	public toEntity(categoryDTO: TCategoryDTO): ICategory {
 		return Category.create(
 			categoryDTO.id,
+			categoryDTO.userId,
 			categoryDTO.name,
 			categoryDTO.icon,
 			categoryDTO.weight,

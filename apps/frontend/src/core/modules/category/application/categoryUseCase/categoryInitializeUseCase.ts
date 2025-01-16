@@ -8,6 +8,7 @@ import type { ICategoryRepository } from '@root/core/modules/category/domain/cat
 import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
+import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
 
 export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 	constructor(
@@ -16,6 +17,7 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 		private readonly expenseRepository: IExpenseRepository,
 		private readonly temporal: ITemporal,
 		private readonly idGenerator: IIdGenerator,
+		private readonly sessionService: ISessionService,
 	) {}
 
 	public execute(): void {
@@ -30,6 +32,14 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 		}
 
 		let newCategories = new Map<Id, ICategory>();
+		/**
+		 * @description
+		 * This is only required to migrate already existing expenses, seems
+		 * like not possible on production, could be deleted upon release.
+		 *
+		 * @todo
+		 * 1. Clean up
+		 */
 		let templateIdToCategoryId = new Map<Id, Id>();
 		let expenses = this.expenseRepository.findMany();
 
@@ -38,8 +48,10 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 
 		for (let categoryTemplate of categoryTemplates) {
 			let id = this.idGenerator.getId();
+			let userId = this.sessionService.userId;
 			let category = this.categoryMapper.toEntity({
 				id,
+				userId,
 				name: categoryTemplate.name,
 				icon: categoryTemplate.icon,
 				weight,
@@ -56,6 +68,7 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 				continue;
 			}
 
+			/** @todo №1 */
 			expense.category =
 				templateIdToCategoryId.get(expense.category) ?? expense.category;
 

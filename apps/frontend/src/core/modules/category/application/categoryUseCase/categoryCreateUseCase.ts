@@ -19,6 +19,7 @@ export class CategoryCreateUseCase implements ICategoryCreateUseCase {
 
 	public createFromDTO(categoryCreateDTO: TCategoryCreateDTO): void {
 		let id = categoryCreateDTO.id ?? this.idGenerator.getId();
+		let userId = categoryCreateDTO.userId;
 		let weight = categoryCreateDTO.weight ?? 1;
 		let createdAt =
 			categoryCreateDTO.createdAt ?? this.temporal.getISODateString();
@@ -26,6 +27,7 @@ export class CategoryCreateUseCase implements ICategoryCreateUseCase {
 
 		let category = this.categoryMapper.toEntity({
 			id,
+			userId,
 			name: categoryCreateDTO.name,
 			icon: categoryCreateDTO.icon,
 			weight,
