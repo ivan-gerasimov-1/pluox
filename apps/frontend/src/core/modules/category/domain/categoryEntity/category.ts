@@ -4,7 +4,6 @@ import { Entity } from '@root/core/domain/entity/entity';
 import type { TISODateString } from '@root/core/domain/temporal/types';
 
 export class Category extends Entity implements ICategory {
-	#id: Id;
 	#userId: Id;
 	#name: string;
 	#icon: string;
@@ -21,7 +20,6 @@ export class Category extends Entity implements ICategory {
 	) {
 		super(id, createdAt, modifiedAt);
 
-		this.#id = id;
 		this.#userId = userId;
 		this.#name = name;
 		this.#icon = icon;
@@ -38,10 +36,6 @@ export class Category extends Entity implements ICategory {
 		modifiedAt?: TISODateString,
 	): ICategory {
 		return new Category(id, userId, name, icon, weight, createdAt, modifiedAt);
-	}
-
-	public get id(): string {
-		return this.#id;
 	}
 
 	public get userId(): string {
