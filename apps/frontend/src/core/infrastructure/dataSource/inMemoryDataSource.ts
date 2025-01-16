@@ -10,6 +10,7 @@ import type {
 	TDtoWithId,
 } from '@root/core/infrastructure/dataSource/types';
 
+/** @deprecated */
 export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 	implements IDataSource<TDto, TFindOptions>
 {
