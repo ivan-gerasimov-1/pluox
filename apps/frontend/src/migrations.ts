@@ -4,6 +4,8 @@ import { LocalStorageObjectDataSource } from '@root/core/infrastructure/dataSour
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
+import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
+
 import type { Id } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
@@ -52,6 +54,7 @@ export function convertUserObjectToUserMap(): void {
 		window.localStorage,
 		{
 			id: 'user',
+			namespace: STORAGE_NAMESPACE,
 		},
 	);
 	let userCollectionDataSource = resolveService(EServiceToken.USER_DATASOURCE);
@@ -83,6 +86,7 @@ function moveClientIdToSession(): void {
 		window.localStorage,
 		{
 			id: CLIENT_ID_STORAGE_ID,
+			namespace: STORAGE_NAMESPACE,
 		},
 	);
 
@@ -143,6 +147,7 @@ export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 		};
 	}>(window.localStorage, {
 		id: OLD_EXPENSES_STORAGE_ID,
+		namespace: STORAGE_NAMESPACE,
 	});
 	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
 

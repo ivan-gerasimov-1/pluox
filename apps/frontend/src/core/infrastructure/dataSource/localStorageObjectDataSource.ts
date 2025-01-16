@@ -1,28 +1,28 @@
 import type { Id } from '@domain/types';
 import type { TFindManyResult } from '@root/core/domain/repository/types';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
+import type { IStorage } from '@root/core/infrastructure/database/types';
 
-import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
 import { parseSafeToNull } from '@root/core/infrastructure/dataSource/parseSafe';
 
 export class LocalStorageObjectDataSource<TDto extends {}>
 	implements IDataSource<TDto>
 {
-	readonly #id: Id;
+	private readonly id: Id;
 
 	constructor(
-		private readonly storage: typeof window.localStorage,
+		private readonly storage: IStorage,
 		options: {
 			id: Id;
-			prefix?: string;
+			namespace: string;
 		},
 	) {
-		this.#id = this.makeId(options.id, options.prefix ?? STORAGE_NAMESPACE);
+		this.id = this.makeId(options.id, options.namespace);
 	}
 
 	public upsert(dto: TDto): void {
-		let data = this.readFromStorage();
+		let data = this.readData();
 
 		if (data) {
 			this.update(dto);
@@ -32,17 +32,17 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 	}
 
 	public insert(dto: TDto): void {
-		let prevData = this.readFromStorage();
+		let prevData = this.readData();
 
 		if (prevData) {
 			throw new Error(`Item already exists`);
 		}
 
-		this.writeToStorage(dto);
+		this.writeData(dto);
 	}
 
 	public update(dto: Partial<TDto>): void {
-		let prevData = this.readFromStorage();
+		let prevData = this.readData();
 
 		if (!prevData) {
 			throw new Error(`Item not found`);
@@ -50,31 +50,38 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 
 		let data = deepMerge(prevData, dto);
 
-		this.writeToStorage(data);
+		this.writeData(data);
 	}
 
 	public remove(id: Id): void {
-		throw new Error('Not allowed in LocalStorageObjectDataSource');
-	}
-
-	public clear(): void {
-		this.clearStorage();
+		this.clear();
 	}
 
 	public findOne(): TDto | null {
-		return this.readFromStorage();
+		return this.readData();
 	}
 
 	public findMany(): TFindManyResult<TDto> {
-		throw new Error('Not allowed in LocalStorageObjectDataSource');
+		let data = this.readData();
+
+		return {
+			items: data ? [data] : [],
+			total: data ? 1 : 0,
+		};
 	}
 
 	public findAll(): TDto[] {
-		throw new Error('Not allowed in LocalStorageObjectDataSource');
+		let data = this.readData();
+
+		return data ? [data] : [];
 	}
 
-	protected readFromStorage(): TDto | null {
-		const rawData = this.storage.getItem(this.#id);
+	public clear(): void {
+		this.clearData();
+	}
+
+	protected readData(): TDto | null {
+		const rawData = this.storage.getItem(this.id);
 
 		if (rawData === null) {
 			return null;
@@ -83,12 +90,12 @@ export class LocalStorageObjectDataSource<TDto extends {}>
 		return parseSafeToNull<TDto>(rawData);
 	}
 
-	private writeToStorage<T>(data: T): void {
-		this.storage.setItem(this.#id, JSON.stringify(data));
+	private writeData<T>(data: T): void {
+		this.storage.setItem(this.id, JSON.stringify(data));
 	}
 
-	private clearStorage(): void {
-		this.storage.removeItem(this.#id);
+	private clearData(): void {
+		this.storage.removeItem(this.id);
 	}
 
 	private makeId(id: Id, prefix: string): Id {
