@@ -26,18 +26,6 @@ export class Category extends Entity implements ICategory {
 		this.#weight = weight;
 	}
 
-	public static create(
-		id: Id,
-		userId: Id,
-		name: string,
-		icon: string,
-		weight: number,
-		createdAt: TISODateString,
-		modifiedAt?: TISODateString,
-	): ICategory {
-		return new Category(id, userId, name, icon, weight, createdAt, modifiedAt);
-	}
-
 	public get userId(): string {
 		return this.#userId;
 	}

@@ -17,7 +17,7 @@ export class CategoryMapper implements ICategoryMapper {
 	}
 
 	public toEntity(categoryDTO: TCategoryDTO): ICategory {
-		return Category.create(
+		return new Category(
 			categoryDTO.id,
 			categoryDTO.userId,
 			categoryDTO.name,
