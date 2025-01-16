@@ -59,6 +59,7 @@ import type {
 import type {
 	ICategoryCreateUseCase,
 	ICategoryDeleteUseCase,
+	ICategoryInitializeUseCase,
 	ICategoryUpdateUseCase,
 	ICategoryUseCase,
 	ICategoryWeightUseCase,
@@ -159,6 +160,7 @@ export enum EServiceToken {
 	CATEGORY_UPDATE_USE_CASE = 'CategoryUpdateUseCase',
 	CATEGORY_DELETE_USE_CASE = 'CategoryDeleteUseCase',
 	CATEGORY_WEIGHT_USE_CASE = 'CategoryWeightUseCase',
+	CATEGORY_INITIALIZE_USE_CASE = 'CategoryInitializeUseCase',
 	CATEGORY_QUERY_SERVICE = 'CategoryQueryService',
 
 	EXPENSE_REPOSITORY = 'ExpenseRepository',
@@ -240,6 +242,7 @@ export interface IServiceMap {
 	[EServiceToken.CATEGORY_UPDATE_USE_CASE]: ICategoryUpdateUseCase;
 	[EServiceToken.CATEGORY_DELETE_USE_CASE]: ICategoryDeleteUseCase;
 	[EServiceToken.CATEGORY_WEIGHT_USE_CASE]: ICategoryWeightUseCase;
+	[EServiceToken.CATEGORY_INITIALIZE_USE_CASE]: ICategoryInitializeUseCase;
 	[EServiceToken.CATEGORY_QUERY_SERVICE]: ICategoryQueryService;
 
 	[EServiceToken.EXPENSE_REPOSITORY]: IExpenseRepository;

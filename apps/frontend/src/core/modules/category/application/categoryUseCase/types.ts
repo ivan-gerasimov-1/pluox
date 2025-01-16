@@ -5,6 +5,7 @@ import type {
 } from '@root/core/modules/category/application/dto/categoryDTO';
 
 export interface ICategoryUseCase {
+	initialize(): void;
 	create(categoryCreateDTO: TCategoryCreateDTO): void;
 	update(id: Id, categoryUpdateDTO: TCategoryUpdateDTO): void;
 	delete(id: Id): void;
@@ -29,3 +30,7 @@ export interface ICategoryWeightUseCase extends IUseCase {
 }
 
 export type TCategoryWeightChangeCommand = 'increase' | 'decrease';
+
+export interface ICategoryInitializeUseCase extends IUseCase {
+	execute(): void;
+}

@@ -2,6 +2,7 @@ import type { Id } from '@root/core/domain/types';
 import type {
 	ICategoryCreateUseCase,
 	ICategoryDeleteUseCase,
+	ICategoryInitializeUseCase,
 	ICategoryUpdateUseCase,
 	ICategoryUseCase,
 	ICategoryWeightUseCase,
@@ -13,11 +14,16 @@ import type {
 
 export class CategoryUseCase implements ICategoryUseCase {
 	constructor(
+		private readonly categoryInitializeUseCase: ICategoryInitializeUseCase,
 		private readonly categoryCreateUseCase: ICategoryCreateUseCase,
 		private readonly categoryUpdateUseCase: ICategoryUpdateUseCase,
 		private readonly categoryDeleteUseCase: ICategoryDeleteUseCase,
 		private readonly categoryWeightUseCase: ICategoryWeightUseCase,
 	) {}
+
+	public initialize(): void {
+		this.categoryInitializeUseCase.execute();
+	}
 
 	public create(categoryCreateDTO: TCategoryCreateDTO): void {
 		this.categoryCreateUseCase.execute(categoryCreateDTO);
