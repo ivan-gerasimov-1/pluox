@@ -7,6 +7,7 @@ import type { ICategory } from '@root/core/modules/category/domain/categoryEntit
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 
 export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 	constructor(
@@ -14,6 +15,7 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 		private readonly categoryMapper: ICategoryMapper,
 		private readonly expenseRepository: IExpenseRepository,
 		private readonly temporal: ITemporal,
+		private readonly idGenerator: IIdGenerator,
 	) {}
 
 	public execute(): void {
@@ -28,14 +30,16 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 		}
 
 		let newCategories = new Map<Id, ICategory>();
+		let templateIdToCategoryId = new Map<Id, Id>();
 		let expenses = this.expenseRepository.findMany();
 
 		let weight = 1;
 		let currentDate = this.temporal.getISODateString();
 
 		for (let categoryTemplate of categoryTemplates) {
+			let id = this.idGenerator.getId();
 			let category = this.categoryMapper.toEntity({
-				id: categoryTemplate.id,
+				id,
 				name: categoryTemplate.name,
 				icon: categoryTemplate.icon,
 				weight,
@@ -43,6 +47,7 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 				modifiedAt: currentDate,
 			});
 
+			templateIdToCategoryId.set(categoryTemplate.id, id);
 			newCategories.set(category.id, category);
 		}
 
@@ -50,6 +55,11 @@ export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 			if (!expense.category) {
 				continue;
 			}
+
+			expense.category =
+				templateIdToCategoryId.get(expense.category) ?? expense.category;
+
+			this.expenseRepository.save(expense);
 
 			// prettier-ignore
 			newCategories //
