@@ -4,17 +4,14 @@ import {
 } from '@root/core/infrastructure/serviceContainer/types';
 
 import { CategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/categoryQueryService';
-import {
-	CategoryServiceFactory,
-	ICategoryServiceFactory,
-} from '@root/core/modules/category/application/categoryService/factory';
+import { CategoryService } from '@root/core/modules/category/application/categoryService/categoryService';
 import { CategoryCreateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryCreateUseCase';
 import { CategoryDeleteUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryDeleteUseCase';
 import { CategoryInitializeUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryInitializeUseCase';
 import { CategoryUpdateUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
 import { CategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryUseCase';
 import { CategoryWeightUseCase } from '@root/core/modules/category/application/categoryUseCase/categoryWeightUseCase';
-import { CategoryInMemoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSource';
+import { categoryDataSourceFactory } from '@root/core/modules/category/infrastructure/categoryDataSource/categoryDataSourceFactory';
 import { CategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/categoryMapper';
 import { CategoryRepository } from '@root/core/modules/category/infrastructure/categoryRepository/categoryRepository';
 
@@ -22,7 +19,8 @@ export const categoryModule: IModule = {
 	providers: [
 		{
 			token: EServiceToken.CATEGORY_DATASOURCE,
-			useClass: CategoryInMemoryDataSource,
+			useFactory: categoryDataSourceFactory,
+			deps: [EServiceToken.DATABASE],
 		},
 		{
 			token: EServiceToken.CATEGORY_REPOSITORY,
@@ -34,21 +32,9 @@ export const categoryModule: IModule = {
 			useClass: CategoryMapper,
 		},
 		{
-			token: EServiceToken.CATEGORY_SERVICE_FACTORY,
-			useClass: CategoryServiceFactory,
-			deps: [
-				EServiceToken.CATEGORY_REPOSITORY,
-				EServiceToken.TEMPORAL,
-				EServiceToken.EXPENSE_REPOSITORY,
-				EServiceToken.CATEGORY_USE_CASE,
-			],
-		},
-		{
 			token: EServiceToken.CATEGORY_SERVICE,
-			useFactory: (categoryServiceFactory: ICategoryServiceFactory) => {
-				return categoryServiceFactory.create();
-			},
-			deps: [EServiceToken.CATEGORY_SERVICE_FACTORY],
+			useClass: CategoryService,
+			deps: [EServiceToken.CATEGORY_REPOSITORY],
 		},
 		{
 			token: EServiceToken.CATEGORY_USE_CASE,

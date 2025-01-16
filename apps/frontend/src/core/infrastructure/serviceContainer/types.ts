@@ -28,7 +28,6 @@ import type { ITemporal } from '@root/core/domain/temporal/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
-import type { ICategoryServiceFactory } from '@root/core/modules/category/application/categoryService/factory';
 import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
@@ -150,7 +149,6 @@ export enum EServiceToken {
 	CLIENT_ID = 'ClientId',
 	CLIENT_ID_FACTORY = 'ClientIdFactory',
 
-	CATEGORY_SERVICE_FACTORY = 'CategoryServiceFactory',
 	CATEGORY_SERVICE = 'CategoryService',
 	CATEGORY_REPOSITORY = 'CategoryRepository',
 	CATEGORY_DATASOURCE = 'CategoryDataSource',
@@ -232,7 +230,6 @@ export interface IServiceMap {
 	[EServiceToken.CLIENT_ID]: IClientId;
 	[EServiceToken.CLIENT_ID_FACTORY]: IClientIdFactory;
 
-	[EServiceToken.CATEGORY_SERVICE_FACTORY]: () => ICategoryServiceFactory;
 	[EServiceToken.CATEGORY_SERVICE]: ICategoryService;
 	[EServiceToken.CATEGORY_REPOSITORY]: ICategoryRepository;
 	[EServiceToken.CATEGORY_DATASOURCE]: ICategoryDataSource;

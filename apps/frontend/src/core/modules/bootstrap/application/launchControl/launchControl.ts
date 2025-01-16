@@ -1,4 +1,5 @@
 import type { ILauchControl } from '@root/core/modules/bootstrap/application/launchControl/types';
+import type { ICategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
@@ -11,10 +12,12 @@ export class LaunchControl implements ILauchControl {
 		private readonly appConfigService: IAppConfigService,
 		private readonly currencyRateAPI: ICurrencyRateAPI,
 		private readonly currencyRateDataSource: ICurrencyRateDataSource,
+		private readonly categoryUseCase: ICategoryUseCase,
 	) {}
 
 	public async start(): Promise<void> {
 		this.getAppConfig();
+		this.initializeCategories();
 
 		await this.getCurrencyRates();
 
@@ -37,5 +40,9 @@ export class LaunchControl implements ILauchControl {
 		let currencyRates = await this.currencyRateAPI.get();
 
 		this.currencyRateDataSource.upsert(currencyRates);
+	}
+
+	private initializeCategories(): void {
+		this.categoryUseCase.initialize();
 	}
 }

@@ -15,6 +15,7 @@ export const bootstrapModule: IModule = {
 				EServiceToken.APP_CONFIG_SERVICE,
 				EServiceToken.CURRENCY_RATE_API,
 				EServiceToken.CURRENCY_RATE_DATASOURCE,
+				EServiceToken.CATEGORY_USE_CASE,
 			],
 		},
 	],

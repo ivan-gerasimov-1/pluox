@@ -2,19 +2,19 @@ import type {
 	TFindManyOptions,
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
-import { InMemoryDataSource } from '@root/core/infrastructure/dataSource/inMemoryDataSource';
+import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { TCategoryFindOptions } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 
-export class CategoryInMemoryDataSource
-	extends InMemoryDataSource<TCategoryDTO, TCategoryFindOptions>
+export class CategoryDataSource
+	extends LocalStorageCollectionDataSource<TCategoryDTO, TCategoryFindOptions>
 	implements ICategoryDataSource
 {
 	public override findMany(
 		options?: TFindManyOptions<TCategoryFindOptions>,
 	): TFindManyResult<TCategoryDTO> {
-		let categories: TCategoryDTO[] = this.readItemsFromStorage();
+		let categories: TCategoryDTO[] = this.findAll();
 
 		if (options?.orderByWeight) {
 			categories = this.sortByWeight(categories);
