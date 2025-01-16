@@ -13,7 +13,7 @@ export interface IDatabaseCollection {
 	updateOne<T>(id: string, payload: Partial<T>): T | null;
 	removeOne<T>(id: string): T | null;
 
-	drop(): void;
+	clear(): void;
 }
 
 export interface IDatabaseCollectionFactory {

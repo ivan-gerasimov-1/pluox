@@ -82,7 +82,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 		return item;
 	}
 
-	public drop(): void {
+	public clear(): void {
 		this.storage.removeItem(this.id);
 	}
 

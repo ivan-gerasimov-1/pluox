@@ -83,8 +83,8 @@ export class DatabaseCollectionCacheDecorator
 		return result;
 	}
 
-	public drop(): void {
-		this.decoratee.drop();
+	public clear(): void {
+		this.decoratee.clear();
 
 		this.clearCache();
 	}

@@ -27,7 +27,7 @@ export class DatabaseCollectionDecorator implements IDatabaseCollection {
 		return this.decoratee.removeOne(id);
 	}
 
-	public drop(): void {
-		this.decoratee.drop();
+	public clear(): void {
+		this.decoratee.clear();
 	}
 }

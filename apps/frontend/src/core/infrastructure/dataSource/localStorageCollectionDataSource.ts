@@ -80,6 +80,6 @@ export class LocalStorageCollectionDataSource<
 	}
 
 	public clear(): void {
-		this.collection.drop();
+		this.collection.clear();
 	}
 }
