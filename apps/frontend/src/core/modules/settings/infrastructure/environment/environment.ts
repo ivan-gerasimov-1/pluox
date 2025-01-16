@@ -29,10 +29,7 @@ export class Environment implements IEnvironment {
 		this.#openExchangeRates = this.getOpenExchangeRatesApi(
 			process.env.NODE_ENV,
 		);
-		this.#storage = {
-			namespace: this.getStorageNamespace(),
-			cache: this.getStorageCache(),
-		};
+		this.#storage = this.getStorage();
 	}
 
 	public get isDevelopment(): boolean {
@@ -78,11 +75,10 @@ export class Environment implements IEnvironment {
 		};
 	}
 
-	private getStorageNamespace(): string {
-		return process.env.STORAGE_NAMESPACE ?? STORAGE_NAMESPACE;
-	}
-
-	private getStorageCache(): boolean {
-		return true;
+	private getStorage() {
+		return {
+			namespace: process.env.STORAGE_NAMESPACE ?? STORAGE_NAMESPACE,
+			cache: true,
+		};
 	}
 }
