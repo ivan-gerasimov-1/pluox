@@ -1,4 +1,4 @@
-import { Database } from '@root/core/infrastructure/database/databaseStorage';
+import { Database } from '@root/core/infrastructure/database/database';
 import type {
 	IDatabaseCollectionFactory,
 	IDatabase,
