@@ -6,9 +6,7 @@ import type { IStorage } from '@root/core/infrastructure/database/types';
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
 import { parseSafeToNull } from '@root/core/infrastructure/dataSource/parseSafe';
 
-export class LocalStorageObjectDataSource<TDto extends {}>
-	implements IDataSource<TDto>
-{
+export class ObjectDataSource<TDto extends {}> implements IDataSource<TDto> {
 	private readonly id: Id;
 
 	constructor(

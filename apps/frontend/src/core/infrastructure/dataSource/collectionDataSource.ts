@@ -9,10 +9,8 @@ import type {
 	TDtoWithId,
 } from '@root/core/infrastructure/dataSource/types';
 
-export class LocalStorageCollectionDataSource<
-	TDto extends TDtoWithId,
-	TFindOptions,
-> implements IDataSource<TDto, TFindOptions>
+export class CollectionDataSource<TDto extends TDtoWithId, TFindOptions>
+	implements IDataSource<TDto, TFindOptions>
 {
 	constructor(private readonly collection: IDatabaseCollection) {}
 

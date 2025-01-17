@@ -1,4 +1,4 @@
-import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
+import { CollectionDataSource } from '@root/core/infrastructure/dataSource/collectionDataSource';
 
 import type {
 	TFindManyOptions,
@@ -9,7 +9,7 @@ import type { TExpenseFindOptions } from '@root/core/modules/expense/domain/expe
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 
 export class ExpenseDataSource
-	extends LocalStorageCollectionDataSource<TExpenseDTO, TExpenseFindOptions>
+	extends CollectionDataSource<TExpenseDTO, TExpenseFindOptions>
 	implements IExpenseDataSource
 {
 	public override findMany(

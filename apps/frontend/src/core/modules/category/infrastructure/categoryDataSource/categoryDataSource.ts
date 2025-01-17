@@ -2,13 +2,13 @@ import type {
 	TFindManyOptions,
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
-import { LocalStorageCollectionDataSource } from '@root/core/infrastructure/dataSource/localStorageCollectionDataSource';
+import { CollectionDataSource } from '@root/core/infrastructure/dataSource/collectionDataSource';
 import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 import type { TCategoryFindOptions } from '@root/core/modules/category/domain/categoryRepository/types';
 import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
 
 export class CategoryDataSource
-	extends LocalStorageCollectionDataSource<TCategoryDTO, TCategoryFindOptions>
+	extends CollectionDataSource<TCategoryDTO, TCategoryFindOptions>
 	implements ICategoryDataSource
 {
 	public override findMany(

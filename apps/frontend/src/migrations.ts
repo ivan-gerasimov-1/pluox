@@ -1,6 +1,6 @@
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
-import { LocalStorageObjectDataSource } from '@root/core/infrastructure/dataSource/localStorageObjectDataSource';
+import { ObjectDataSource } from '@root/core/infrastructure/dataSource/objectDataSource';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
@@ -50,7 +50,7 @@ export function addThaiBahtCurrencyToStoredAppConfig(): void {
  * №2. Convert user object to map
  */
 export function convertUserObjectToUserMap(): void {
-	let userObjectDataSource = new LocalStorageObjectDataSource<TUserDTO>(
+	let userObjectDataSource = new ObjectDataSource<TUserDTO>(
 		window.localStorage,
 		{
 			id: 'user',
@@ -82,13 +82,10 @@ export function convertUserObjectToUserMap(): void {
 function moveClientIdToSession(): void {
 	const CLIENT_ID_STORAGE_ID = 'clientId';
 
-	let clientIdDataSource = new LocalStorageObjectDataSource<Id>(
-		window.localStorage,
-		{
-			id: CLIENT_ID_STORAGE_ID,
-			namespace: STORAGE_NAMESPACE,
-		},
-	);
+	let clientIdDataSource = new ObjectDataSource<Id>(window.localStorage, {
+		id: CLIENT_ID_STORAGE_ID,
+		namespace: STORAGE_NAMESPACE,
+	});
 
 	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
 	let userService = resolveService(EServiceToken.USER_SERVICE);
@@ -141,7 +138,7 @@ function moveAuthTokenToSession(): void {
 export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 	const OLD_EXPENSES_STORAGE_ID = 'store/$expenses';
 
-	let oldExpenseDataSource = new LocalStorageObjectDataSource<{
+	let oldExpenseDataSource = new ObjectDataSource<{
 		state: {
 			operations: Record<string, TExpenseDTO>;
 		};

@@ -1,4 +1,3 @@
-import type { IStorage } from '@root/core/infrastructure/database/types';
 import {
 	EServiceToken,
 	type IModule,
@@ -18,7 +17,7 @@ export const identityModule: IModule = {
 		/** Session */
 		{
 			token: EServiceToken.SESSION_DATASOURCE,
-			useFactory: (storage: IStorage) => sessionDataSourceFactory(storage),
+			useFactory: sessionDataSourceFactory,
 			deps: [EServiceToken.LOCAL_STORAGE],
 		},
 		{

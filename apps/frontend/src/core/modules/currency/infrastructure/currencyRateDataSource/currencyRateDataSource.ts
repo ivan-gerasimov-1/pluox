@@ -1,4 +1,4 @@
-import { LocalStorageObjectDataSource } from '@root/core/infrastructure/dataSource/localStorageObjectDataSource';
+import { ObjectDataSource } from '@root/core/infrastructure/dataSource/objectDataSource';
 import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
 import type {
 	ECurrency,
@@ -7,7 +7,7 @@ import type {
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateDataSource
-	extends LocalStorageObjectDataSource<TCurrencyRates>
+	extends ObjectDataSource<TCurrencyRates>
 	implements ICurrencyRateDataSource
 {
 	public findById(currency: ECurrency): number {
