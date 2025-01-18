@@ -32,8 +32,6 @@ export function migrateObjectToDataField(): void {
 			'null',
 	);
 
-	console.log({ appConfig, session, currencyRate });
-
 	if (appConfig && !appConfig.data) {
 		localStorage.removeItem(`${STORAGE_NAMESPACE}/${APP_CONFIG_STORAGE_ID}`);
 
