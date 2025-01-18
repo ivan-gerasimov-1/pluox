@@ -1,17 +1,10 @@
-import {
-	ECurrency,
-	type TCurrencyRates,
-} from '@root/core/modules/currency/domain/types';
+import { type TCurrencyRates } from '@root/core/modules/currency/domain/types';
 
 import { ObjectDataSource } from '@root/core/infrastructure/dataSource/objectDataSource';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
-
-import type { Id } from '@root/core/domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
 
 import { CURRENCY_RATE_STORAGE_ID } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/constants';
 import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
