@@ -4,6 +4,10 @@ import type {
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
 import type { IDatabaseCollection } from '@root/core/infrastructure/database/types';
+import {
+	DuplicateItemError,
+	ItemNotFoundError,
+} from '@root/core/infrastructure/dataSource/errors';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 
 export class DataSource<TDto, TFindOptions = {}>
@@ -25,7 +29,7 @@ export class DataSource<TDto, TFindOptions = {}>
 		let hasItem = this.collection.has(id);
 
 		if (hasItem && !options?.replace) {
-			throw new Error(`Item with id "${id}" already exists`);
+			throw new DuplicateItemError(id);
 		}
 
 		this.collection.writeOne(id, dto);
@@ -35,7 +39,7 @@ export class DataSource<TDto, TFindOptions = {}>
 		let hasItem = this.collection.has(id);
 
 		if (!hasItem) {
-			throw new Error(`Item with id ${id} not found`);
+			throw new ItemNotFoundError(id);
 		}
 
 		this.collection.updateOne(id, dto);
