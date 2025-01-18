@@ -30,7 +30,9 @@ export class DatabaseCollectionCacheDecorator
 
 		let result = this.decoratee.readOne<T>(id);
 
-		this.writeCache(id, result);
+		if (result !== null) {
+			this.writeCache(id, result);
+		}
 
 		return result;
 	}
