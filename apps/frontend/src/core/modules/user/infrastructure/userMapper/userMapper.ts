@@ -9,6 +9,7 @@ export class UserMapper implements IUserMapper {
 			id: user.id,
 			email: user.email,
 			name: user.name,
+			locale: user.locale,
 			createdAt: user.createdAt,
 			modifiedAt: user.modifiedAt,
 		};
@@ -19,6 +20,7 @@ export class UserMapper implements IUserMapper {
 			userDTO.id,
 			userDTO.email,
 			userDTO.name,
+			userDTO.locale,
 			userDTO.createdAt,
 			userDTO.modifiedAt,
 		);

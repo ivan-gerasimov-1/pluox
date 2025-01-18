@@ -1,6 +1,7 @@
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
 import type { Id } from '@root/core/domain/types';
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import type {
 	TUserCreateDTO,
 	TUserDTO,
@@ -21,6 +22,7 @@ export class UserService implements IUserService {
 
 	public createUser(userCreateDTO: TUserCreateDTO): TUserDTO {
 		let id = userCreateDTO.id ?? this.idGenerator.getId();
+		let locale = userCreateDTO.locale ?? ELocaleCode.RU_RU;
 		let createdAt = userCreateDTO.createdAt ?? this.temporal.getISODateString();
 		let modifiedAt = userCreateDTO.modifiedAt ?? createdAt;
 
@@ -28,6 +30,7 @@ export class UserService implements IUserService {
 			id,
 			email: userCreateDTO.email,
 			name: userCreateDTO.name,
+			locale,
 			createdAt,
 			modifiedAt,
 		});
@@ -46,6 +49,10 @@ export class UserService implements IUserService {
 
 		if (userUpdateDTO.name) {
 			user.name = userUpdateDTO.name;
+		}
+
+		if (userUpdateDTO.locale) {
+			user.locale = userUpdateDTO.locale;
 		}
 
 		let updatedUser = this.userRepository.save(user);

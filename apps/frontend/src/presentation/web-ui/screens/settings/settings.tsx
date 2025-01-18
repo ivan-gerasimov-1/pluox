@@ -51,7 +51,6 @@ import styles from './settings.module.css';
  *    *queryKey* contains *QUERY_APP_CONFIG_BUDGET*
  */
 export function SettingsScreen() {
-	let authService = useService(EServiceToken.AUTH_SERVICE);
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let intl = useIntl(settingsI18n);
 	let navigation = useNavigation();
@@ -62,6 +61,7 @@ export function SettingsScreen() {
 		data: user = {
 			id: '',
 			name: '',
+			locale: ELocaleCode.RU_RU,
 		},
 	} = useQuery({
 		queryKey: [QUERY_USER],
@@ -69,7 +69,7 @@ export function SettingsScreen() {
 		// refetchOnMount: false,
 	});
 
-	let { mutate: mutateUserName } = useMutation({
+	let { mutate: mutateUser } = useMutation({
 		mutationFn: async (userUpdateDTO: TUserUpdateDTO) => {
 			updateUser(user.id, userUpdateDTO);
 		},
@@ -219,6 +219,10 @@ export function SettingsScreen() {
 								value={appConfig.locale}
 								onChange={(locale) => {
 									mutateAppConfig({
+										locale,
+									});
+
+									mutateUser({
 										locale,
 									});
 								}}
@@ -388,7 +392,7 @@ export function SettingsScreen() {
 						marginTop: '20px',
 					}}
 					onClick={() => {
-						mutateUserName({
+						mutateUser({
 							name: editUserName.userName,
 						});
 
