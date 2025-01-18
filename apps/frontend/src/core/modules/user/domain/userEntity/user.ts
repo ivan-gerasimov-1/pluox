@@ -20,16 +20,6 @@ export class User extends Entity implements IUser {
 		this.#name = name;
 	}
 
-	public static create(
-		id: Id,
-		email: string,
-		name: string,
-		createdAt: TISODateString,
-		modifiedAt?: TISODateString,
-	): IUser {
-		return new User(id, email, name, createdAt, modifiedAt);
-	}
-
 	public get email(): string {
 		return this.#email;
 	}
