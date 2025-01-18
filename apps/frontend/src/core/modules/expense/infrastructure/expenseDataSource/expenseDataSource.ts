@@ -1,4 +1,4 @@
-import { CollectionDataSource } from '@root/core/infrastructure/dataSource/collectionDataSource';
+import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
 
 import type {
 	TFindManyOptions,
@@ -9,7 +9,7 @@ import type { TExpenseFindOptions } from '@root/core/modules/expense/domain/expe
 import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
 
 export class ExpenseDataSource
-	extends CollectionDataSource<TExpenseDTO, TExpenseFindOptions>
+	extends DataSource<TExpenseDTO, TExpenseFindOptions>
 	implements IExpenseDataSource
 {
 	public override findMany(

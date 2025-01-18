@@ -1,4 +1,4 @@
-import { CollectionDataSource } from '@root/core/infrastructure/dataSource/collectionDataSource';
+import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type {
 	ECurrency,
 	TCurrencyRates,
@@ -7,7 +7,7 @@ import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infr
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateDataSource
-	extends CollectionDataSource<TCurrencyRates>
+	extends DataSource<TCurrencyRates>
 	implements ICurrencyRateDataSource
 {
 	public findById(currency: ECurrency): number {

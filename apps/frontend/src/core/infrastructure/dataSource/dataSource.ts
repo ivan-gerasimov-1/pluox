@@ -6,7 +6,7 @@ import type {
 import type { IDatabaseCollection } from '@root/core/infrastructure/database/types';
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 
-export class CollectionDataSource<TDto, TFindOptions = {}>
+export class DataSource<TDto, TFindOptions = {}>
 	implements IDataSource<TDto, TFindOptions>
 {
 	constructor(private readonly collection: IDatabaseCollection) {}

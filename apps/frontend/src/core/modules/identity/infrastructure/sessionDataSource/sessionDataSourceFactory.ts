@@ -1,5 +1,5 @@
 import type { IDatabase } from '@root/core/infrastructure/database/types';
-import { CollectionDataSource } from '@root/core/infrastructure/dataSource/collectionDataSource';
+import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
 import { SESSION_STORAGE_ID } from '@root/core/modules/identity/infrastructure/sessionDataSource/constants';
 import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
@@ -9,5 +9,5 @@ export function sessionDataSourceFactory(
 ): ISessionDataSource {
 	let collection = database.collection(SESSION_STORAGE_ID);
 
-	return new CollectionDataSource<TSessionDTO>(collection);
+	return new DataSource<TSessionDTO>(collection);
 }
