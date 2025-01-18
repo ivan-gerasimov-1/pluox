@@ -18,7 +18,7 @@ export const identityModule: IModule = {
 		{
 			token: EServiceToken.SESSION_DATASOURCE,
 			useFactory: sessionDataSourceFactory,
-			deps: [EServiceToken.LOCAL_STORAGE],
+			deps: [EServiceToken.DATABASE],
 		},
 		{
 			token: EServiceToken.SESSION_SERVICE,

@@ -6,7 +6,7 @@ import type { IStorage } from '@root/core/infrastructure/database/types';
 import { deepMerge } from '@root/core/infrastructure/dataSource/deepMerge';
 import { parseSafeToNull } from '@root/core/infrastructure/dataSource/parseSafe';
 
-export class ObjectDataSource<TDto extends {}> implements IDataSource<TDto> {
+export class ObjectDataSource<TDto> implements IDataSource<TDto, {}> {
 	private readonly id: Id;
 
 	constructor(
@@ -19,17 +19,17 @@ export class ObjectDataSource<TDto extends {}> implements IDataSource<TDto> {
 		this.id = this.makeId(options.id, options.namespace);
 	}
 
-	public upsert(dto: TDto): void {
+	public upsert(id: Id, dto: TDto): void {
 		let data = this.readData();
 
 		if (data) {
-			this.update(dto);
+			this.update(id, dto);
 		} else {
-			this.insert(dto);
+			this.insert(id, dto);
 		}
 	}
 
-	public insert(dto: TDto): void {
+	public insert(id: Id, dto: TDto): void {
 		let prevData = this.readData();
 
 		if (prevData) {
@@ -39,7 +39,7 @@ export class ObjectDataSource<TDto extends {}> implements IDataSource<TDto> {
 		this.writeData(dto);
 	}
 
-	public update(dto: Partial<TDto>): void {
+	public update(id: Id, dto: Partial<TDto>): void {
 		let prevData = this.readData();
 
 		if (!prevData) {

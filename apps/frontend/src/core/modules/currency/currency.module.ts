@@ -14,8 +14,8 @@ export const currencyModule: IModule = {
 	providers: [
 		{
 			token: EServiceToken.CURRENCY_RATE_DATASOURCE,
-			useFactory: (storage: IStorage) => currencyRateDataSourceFactory(storage),
-			deps: [EServiceToken.LOCAL_STORAGE],
+			useFactory: currencyRateDataSourceFactory,
+			deps: [EServiceToken.DATABASE],
 		},
 		{
 			token: EServiceToken.CURRENCY_RATE_SERVICE,

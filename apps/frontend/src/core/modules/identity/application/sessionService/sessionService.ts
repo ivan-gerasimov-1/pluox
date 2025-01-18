@@ -37,7 +37,9 @@ export class SessionService implements ISessionService {
 	}
 
 	public start(): void {
-		let sessionDTO = this.sessionDataSource.findOne();
+		let sessionDTO = this.sessionDataSource.findOne({
+			id: 'data',
+		});
 
 		this.#session = sessionDTO
 			? this.sessionFactory.create(sessionDTO)
@@ -47,7 +49,7 @@ export class SessionService implements ISessionService {
 	public setAccessToken(accessToken: string | null): void {
 		this.session.setAccessToken(accessToken);
 
-		this.sessionDataSource.update({
+		this.sessionDataSource.update('data', {
 			authToken: this.session.authToken?.getValue() ?? null,
 		});
 	}
@@ -59,7 +61,7 @@ export class SessionService implements ISessionService {
 	private createNewSession(): ISession {
 		let session = this.sessionFactory.create();
 
-		this.sessionDataSource.insert({
+		this.sessionDataSource.insert('data', {
 			clientId: session.clientId.getValue(),
 			userId: session.userId,
 			authToken: session.authToken?.getValue() ?? null,

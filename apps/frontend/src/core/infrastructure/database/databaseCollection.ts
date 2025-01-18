@@ -37,15 +37,15 @@ export class DatabaseCollection implements IDatabaseCollection {
 		return Object.values(data);
 	}
 
-	public writeOne<T>(payload: T & { id: string }): T | null {
+	public writeOne<T>(id: string, payload: T): T | null {
 		let data = this.readData();
-		let item = Reflect.get(data, payload.id);
+		let item = Reflect.get(data, id);
 
 		if (item) {
 			return null;
 		}
 
-		Reflect.set(data, payload.id, payload);
+		Reflect.set(data, id, payload);
 
 		this.writeData(data);
 

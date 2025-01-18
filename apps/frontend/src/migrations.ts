@@ -1,4 +1,7 @@
-import { ECurrency } from '@root/core/modules/currency/domain/types';
+import {
+	ECurrency,
+	type TCurrencyRates,
+} from '@root/core/modules/currency/domain/types';
 
 import { ObjectDataSource } from '@root/core/infrastructure/dataSource/objectDataSource';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
@@ -9,6 +12,12 @@ import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/en
 import type { Id } from '@root/core/domain/types';
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import type { TUserDTO } from '@root/core/modules/user/application/dto/userDTO';
+
+import { CURRENCY_RATE_STORAGE_ID } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/constants';
+import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
+import { SESSION_STORAGE_ID } from '@root/core/modules/identity/infrastructure/sessionDataSource/constants';
+import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
+import { APP_CONFIG_STORAGE_ID } from '@root/core/modules/settings/infrastructure/appConfigDataSource/constants';
 
 /**
  * @todo
@@ -24,6 +33,7 @@ export function runMigrations() {
 	renameCommentOfExpenseDTOToDescription();
 	addVenueIdToExpense();
 	addUserIdToCategories();
+	migrateObjectToDataField();
 }
 
 /**
@@ -32,7 +42,9 @@ export function runMigrations() {
  */
 export function addThaiBahtCurrencyToStoredAppConfig(): void {
 	let appConfigStorage = resolveService(EServiceToken.APP_CONFIG_DATASOURCE);
-	let appConfig = appConfigStorage.findOne();
+	let appConfig = appConfigStorage.findOne({
+		id: 'data',
+	});
 
 	if (!appConfig) {
 		return;
@@ -43,7 +55,7 @@ export function addThaiBahtCurrencyToStoredAppConfig(): void {
 	}
 
 	appConfig.availabelCurrencies.push(ECurrency.THB);
-	appConfigStorage.update(appConfig);
+	appConfigStorage.update('data', appConfig);
 }
 
 /**
@@ -66,7 +78,7 @@ export function convertUserObjectToUserMap(): void {
 	}
 
 	if (typeof user.id === 'string') {
-		userCollectionDataSource.insert(user);
+		userCollectionDataSource.insert(user.id, user);
 		userObjectDataSource.clear();
 	}
 }
@@ -102,13 +114,13 @@ function moveClientIdToSession(): void {
 			name: '',
 		});
 
-		sessionDataSource.insert({
+		sessionDataSource.insert('data', {
 			clientId,
 			userId: user.id,
 			authToken: null,
 		});
 	} else {
-		sessionDataSource.update({
+		sessionDataSource.update('data', {
 			clientId,
 		});
 	}
@@ -155,7 +167,7 @@ export function migrateExpenseInStorageToNewFormatAndStorageId(): void {
 	}
 
 	for (let expense of Object.values(expenses.state.operations)) {
-		expenseDataSource.insert(expense);
+		expenseDataSource.insert(expense.id, expense);
 	}
 
 	oldExpenseDataSource.clear();
@@ -168,7 +180,9 @@ export function addUserIdToExpense(): void {
 	let expenseDataSource = resolveService(EServiceToken.EXPENSE_DATASOURCE);
 	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
 
-	let sessionDTO = sessionDataSource.findOne();
+	let sessionDTO = sessionDataSource.findOne({
+		id: 'data',
+	});
 	let expenses = expenseDataSource.findMany();
 
 	if (!sessionDTO || !expenses) {
@@ -178,7 +192,7 @@ export function addUserIdToExpense(): void {
 	for (let expense of expenses.items) {
 		expense.userId = sessionDTO.userId;
 
-		expenseDataSource.update(expense);
+		expenseDataSource.update(expense.id, expense);
 	}
 }
 
@@ -205,7 +219,7 @@ export function renameCommentOfExpenseDTOToDescription(): void {
 
 		Reflect.deleteProperty(expense, 'comment');
 
-		expenseDataSource.insert(expense, {
+		expenseDataSource.insert(expense.id, expense, {
 			replace: true,
 		});
 	}
@@ -229,7 +243,7 @@ export function addVenueIdToExpense(): void {
 		}
 
 		expense.venue = null;
-		expenseDataSource.insert(expense, {
+		expenseDataSource.insert(expense.id, expense, {
 			replace: true,
 		});
 	}
@@ -242,7 +256,9 @@ export function addUserIdToCategories(): void {
 	let categoryDataSource = resolveService(EServiceToken.CATEGORY_DATASOURCE);
 	let sessionDataSource = resolveService(EServiceToken.SESSION_DATASOURCE);
 
-	let sessionDTO = sessionDataSource.findOne();
+	let sessionDTO = sessionDataSource.findOne({
+		id: 'data',
+	});
 	let categories = categoryDataSource.findMany();
 
 	if (!sessionDTO || categories.total === 0) {
@@ -252,6 +268,78 @@ export function addUserIdToCategories(): void {
 	for (let category of categories.items) {
 		category.userId = sessionDTO.userId;
 
-		categoryDataSource.update(category);
+		categoryDataSource.update(category.id, category);
+	}
+}
+
+/**
+ * №10. Migrate object storage to data field
+ */
+export function migrateObjectToDataField(): void {
+	let appConfigDataSource = new ObjectDataSource<TAppConfig>(
+		window.localStorage,
+		{
+			id: APP_CONFIG_STORAGE_ID,
+			namespace: STORAGE_NAMESPACE,
+		},
+	);
+
+	let sessionDataSource = new ObjectDataSource<TSessionDTO>(
+		window.localStorage,
+		{
+			id: SESSION_STORAGE_ID,
+			namespace: STORAGE_NAMESPACE,
+		},
+	);
+
+	let currencyRateDataSource = new ObjectDataSource<TCurrencyRates>(
+		window.localStorage,
+		{
+			id: CURRENCY_RATE_STORAGE_ID,
+			namespace: STORAGE_NAMESPACE,
+		},
+	);
+
+	let appConfig = appConfigDataSource.findOne();
+	let session = sessionDataSource.findOne();
+	let currencyRate = currencyRateDataSource.findOne();
+
+	if (
+		appConfig &&
+		!(
+			// @ts-expect-error
+			appConfig.data
+		)
+	) {
+		appConfigDataSource.clear();
+
+		resolveService(EServiceToken.APP_CONFIG_DATASOURCE) //
+			.insert('data', appConfig);
+	}
+
+	if (
+		session &&
+		!(
+			// @ts-expect-error
+			session.data
+		)
+	) {
+		sessionDataSource.clear();
+
+		resolveService(EServiceToken.SESSION_DATASOURCE) //
+			.insert('data', session);
+	}
+
+	if (
+		currencyRate &&
+		!(
+			// @ts-expect-error
+			currencyRate.data
+		)
+	) {
+		currencyRateDataSource.clear();
+
+		resolveService(EServiceToken.CURRENCY_RATE_DATASOURCE) //
+			.insert('data', currencyRate);
 	}
 }

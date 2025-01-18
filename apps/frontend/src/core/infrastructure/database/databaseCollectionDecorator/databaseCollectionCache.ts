@@ -5,6 +5,8 @@ export class DatabaseCollectionCacheDecorator
 	extends DatabaseCollectionDecorator
 	implements IDatabaseCollection
 {
+	private readonly DEFAULT_ID = 'data';
+
 	private isCacheComplete: boolean;
 	private cache: Map<string, any>;
 
@@ -37,7 +39,7 @@ export class DatabaseCollectionCacheDecorator
 		return result;
 	}
 
-	public readAll<T extends { id: string }>(): T[] {
+	public readAll<T>(): T[] {
 		if (this.isCacheComplete) {
 			return this.readCache();
 		}
@@ -45,7 +47,9 @@ export class DatabaseCollectionCacheDecorator
 		let result = this.decoratee.readAll<T>();
 
 		for (let item of result) {
-			this.writeCache(item.id, item);
+			let id = this.getItemId(item);
+
+			this.writeCache(id, item);
 		}
 
 		this.isCacheComplete = true;
@@ -53,13 +57,13 @@ export class DatabaseCollectionCacheDecorator
 		return result;
 	}
 
-	public writeOne<T>(payload: T & { id: string }): T | null {
-		let result = this.decoratee.writeOne<T>(payload);
+	public writeOne<T>(id: string, payload: T): T | null {
+		let result = this.decoratee.writeOne(id, payload);
 
 		if (result === null) {
-			this.clearCache(payload.id);
+			this.clearCache(id);
 		} else {
-			this.writeCache(payload.id, result);
+			this.writeCache(id, result);
 		}
 
 		return result;
@@ -120,5 +124,25 @@ export class DatabaseCollectionCacheDecorator
 
 		this.cache.clear();
 		this.isCacheComplete = false;
+	}
+
+	private getItemId<T>(item: T): string {
+		if (this.hasId(item)) {
+			return item.id;
+		}
+
+		return this.DEFAULT_ID;
+	}
+
+	private hasId<T>(item: T): item is T & { id: string } {
+		if (typeof item !== 'object') {
+			return false;
+		}
+
+		if (item === null) {
+			return false;
+		}
+
+		return Reflect.has(item, 'id');
 	}
 }

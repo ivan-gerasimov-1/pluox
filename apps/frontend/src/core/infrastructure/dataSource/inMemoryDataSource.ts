@@ -5,13 +5,10 @@ import type {
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
 import type { Id } from '@root/core/domain/types';
-import type {
-	IDataSource,
-	TDtoWithId,
-} from '@root/core/infrastructure/dataSource/types';
+import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 
 /** @deprecated */
-export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
+export class InMemoryDataSource<TDto, TFindOptions>
 	implements IDataSource<TDto, TFindOptions>
 {
 	readonly #storage: Map<Id, TDto>;
@@ -20,34 +17,34 @@ export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 		this.#storage = new Map<Id, TDto>();
 	}
 
-	public upsert(dto: TDto): void {
-		if (this.isItemInStorage(dto.id)) {
-			this.update(dto);
+	public upsert(id: Id, dto: TDto): void {
+		if (this.isItemInStorage(id)) {
+			this.update(id, dto);
 		} else {
-			this.insert(dto);
+			this.insert(id, dto);
 		}
 	}
 
-	public insert(createDTO: TDto): TDto {
-		if (this.isItemInStorage(createDTO.id)) {
-			throw new Error(`Category with id ${createDTO.id} already exists`);
+	public insert(id: Id, createDTO: TDto): TDto {
+		if (this.isItemInStorage(id)) {
+			throw new Error(`Category with id ${id} already exists`);
 		}
 
-		this.writeItemToStorage(createDTO);
+		this.writeItemToStorage(id, createDTO);
 
 		return createDTO;
 	}
 
-	public update(updateDTO: { id: Id } & Partial<TDto>): TDto {
-		let dto = this.readItemFromStorage(updateDTO.id);
+	public update(id: Id, updateDTO: Partial<TDto>): TDto {
+		let dto = this.readItemFromStorage(id);
 
 		if (!dto) {
-			throw new Error(`Category with id ${updateDTO.id} not found`);
+			throw new Error(`Category with id ${id} not found`);
 		}
 
-		this.writeItemToStorage(deepMerge(dto, updateDTO));
+		this.writeItemToStorage(id, deepMerge(dto, updateDTO));
 
-		return this.readItemFromStorage(updateDTO.id) as TDto;
+		return this.readItemFromStorage(id) as TDto;
 	}
 
 	public findOne(query?: { id?: Id }): TDto | null {
@@ -105,8 +102,8 @@ export class InMemoryDataSource<TDto extends TDtoWithId, TFindOptions>
 		return this.#storage.get(id) ?? null;
 	}
 
-	private writeItemToStorage(data: TDto): void {
-		this.#storage.set(data.id, data);
+	private writeItemToStorage(id: Id, data: TDto): void {
+		this.#storage.set(id, data);
 	}
 
 	private deleteItemFromStorage(id: Id): void {

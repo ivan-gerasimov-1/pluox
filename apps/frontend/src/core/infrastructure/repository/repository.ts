@@ -21,7 +21,7 @@ export class Repository<
 	public save(entity: TEntity): TEntity {
 		let entityDTO = this.mapper.toDTO(entity);
 
-		this.dataSource.upsert(entityDTO);
+		this.dataSource.upsert(entityDTO.id, entityDTO);
 
 		return entity;
 	}

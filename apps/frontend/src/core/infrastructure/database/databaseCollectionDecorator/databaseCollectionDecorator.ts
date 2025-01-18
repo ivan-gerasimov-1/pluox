@@ -11,12 +11,12 @@ export class DatabaseCollectionDecorator implements IDatabaseCollection {
 		return this.decoratee.readOne(id);
 	}
 
-	public readAll<T extends { id: string }>(): T[] {
+	public readAll<T>(): T[] {
 		return this.decoratee.readAll();
 	}
 
-	public writeOne<T>(payload: T & { id: string }): T | null {
-		return this.decoratee.writeOne(payload);
+	public writeOne<T>(id: string, payload: T): T | null {
+		return this.decoratee.writeOne(id, payload);
 	}
 
 	public updateOne<T>(id: string, payload: Partial<T>): T | null {

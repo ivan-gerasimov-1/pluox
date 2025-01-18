@@ -12,12 +12,14 @@ export class AppConfigService implements IAppConfigService {
 	) {}
 
 	public initialize(): this {
-		let config = this.appConfigDataSource.findOne();
+		let config = this.appConfigDataSource.findOne({
+			id: 'data',
+		});
 
 		if (config) {
 			this.updateAppConfig(config);
 		} else {
-			this.appConfigDataSource.insert({
+			this.appConfigDataSource.insert('data', {
 				locale: this.appConfig.locale,
 				budget: this.appConfig.budget,
 				currency: this.appConfig.currency,
@@ -38,7 +40,7 @@ export class AppConfigService implements IAppConfigService {
 			availabelCurrencies: this.appConfig.availableCurrencies,
 		};
 
-		this.appConfigDataSource.update(nextConfig);
+		this.appConfigDataSource.update('data', nextConfig);
 
 		return nextConfig;
 	}

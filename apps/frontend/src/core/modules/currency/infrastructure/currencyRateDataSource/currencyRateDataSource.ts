@@ -1,17 +1,19 @@
-import { ObjectDataSource } from '@root/core/infrastructure/dataSource/objectDataSource';
-import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
+import { CollectionDataSource } from '@root/core/infrastructure/dataSource/collectionDataSource';
 import type {
 	ECurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
+import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateDataSource
-	extends ObjectDataSource<TCurrencyRates>
+	extends CollectionDataSource<TCurrencyRates>
 	implements ICurrencyRateDataSource
 {
 	public findById(currency: ECurrency): number {
-		let rates = this.findOne();
+		let rates = this.findOne({
+			id: 'data',
+		});
 
 		if (!rates) {
 			throw new CurrencyRatesNotAvailableError();
@@ -33,7 +35,9 @@ export class CurrencyRateDataSource
 	}
 
 	public isEmpty(): boolean {
-		let data = this.readData();
+		let data = this.findOne({
+			id: 'data',
+		});
 
 		return data === null;
 	}

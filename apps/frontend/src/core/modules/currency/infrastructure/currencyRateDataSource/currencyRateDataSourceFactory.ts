@@ -1,14 +1,12 @@
-import type { IStorage } from '@root/core/infrastructure/database/types';
+import type { IDatabase } from '@root/core/infrastructure/database/types';
 import { CURRENCY_RATE_STORAGE_ID } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/constants';
 import { CurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSource';
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
-import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
 
 export function currencyRateDataSourceFactory(
-	storage: IStorage,
+	database: IDatabase,
 ): ICurrencyRateDataSource {
-	return new CurrencyRateDataSource(storage, {
-		id: CURRENCY_RATE_STORAGE_ID,
-		namespace: STORAGE_NAMESPACE,
-	});
+	let collection = database.collection(CURRENCY_RATE_STORAGE_ID);
+
+	return new CurrencyRateDataSource(collection);
 }

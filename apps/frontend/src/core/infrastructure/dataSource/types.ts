@@ -4,19 +4,16 @@ import type {
 } from '@root/core/domain/repository/types';
 import type { Id } from '@root/core/domain/types';
 
-export type TDtoWithId = {
-	id: Id;
-};
-
-export interface IDataSource<TDto, TFindOptions = never> {
-	upsert(dto: TDto): void;
+export interface IDataSource<TDto, TFindOptions = {}> {
+	upsert(id: Id, dto: TDto): void;
 	insert(
+		id: Id,
 		dto: TDto,
 		options?: {
 			replace?: boolean;
 		},
 	): void;
-	update(dto: Partial<TDto>): void;
+	update(id: Id, dto: Partial<TDto>): void;
 
 	findOne(query?: { id?: Id }): TDto | null;
 	findMany(options?: TFindManyOptions<TFindOptions>): TFindManyResult<TDto>;

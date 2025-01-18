@@ -44,7 +44,7 @@ export class LaunchControl implements ILauchControl {
 
 		let currencyRates = await this.currencyRateAPI.get();
 
-		this.currencyRateDataSource.upsert(currencyRates);
+		this.currencyRateDataSource.upsert('data', currencyRates);
 	}
 
 	private initializeCategories(): void {

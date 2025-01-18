@@ -1,16 +1,13 @@
-import type { IStorage } from '@root/core/infrastructure/database/types';
-import { ObjectDataSource } from '@root/core/infrastructure/dataSource/objectDataSource';
+import type { IDatabase } from '@root/core/infrastructure/database/types';
+import { CollectionDataSource } from '@root/core/infrastructure/dataSource/collectionDataSource';
 import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
+import { APP_CONFIG_STORAGE_ID } from '@root/core/modules/settings/infrastructure/appConfigDataSource/constants';
 import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
-import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
-
-const APP_CONFIG_STORAGE_ID = 'appConfig';
 
 export function appConfigDataSourceFactory(
-	storage: IStorage,
+	database: IDatabase,
 ): IAppConfigDataSource {
-	return new ObjectDataSource<TAppConfig>(storage, {
-		id: APP_CONFIG_STORAGE_ID,
-		namespace: STORAGE_NAMESPACE,
-	});
+	let collection = database.collection(APP_CONFIG_STORAGE_ID);
+
+	return new CollectionDataSource<TAppConfig>(collection);
 }

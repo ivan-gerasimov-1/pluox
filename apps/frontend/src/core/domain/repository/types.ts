@@ -30,7 +30,7 @@ export interface IRepository<TEntity, TFindOptions> {
 	remove(id: Id): TEntity | null;
 }
 
-export type TFindManyOptions<T> = T & {
+export type TFindManyOptions<T = {}> = T & {
 	limit?: number;
 };
 
