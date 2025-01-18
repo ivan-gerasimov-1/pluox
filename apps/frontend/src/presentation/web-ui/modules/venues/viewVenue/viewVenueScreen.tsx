@@ -8,7 +8,11 @@ export function ViewVenueScreen() {
 
 	return (
 		<Screen>
-			<Header title={`Venue: ${screenParams.id}`} />
+			<Header title="Venue" />
+
+			<div>
+				<div>{screenParams.id}</div>
+			</div>
 		</Screen>
 	);
 }

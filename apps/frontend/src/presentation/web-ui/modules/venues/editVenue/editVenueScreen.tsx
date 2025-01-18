@@ -9,9 +9,14 @@ export function EditVenueScreen() {
 
 	return (
 		<Screen>
-			<Header title={'Edit Venue:' + venue?.id} />
+			<Header title="Venue" />
 
-			<div>{venue?.name}</div>
+			<div>
+				<b>ID</b> {venue?.id}
+			</div>
+			<div>
+				<b>Название</b> {venue?.name}
+			</div>
 		</Screen>
 	);
 }
