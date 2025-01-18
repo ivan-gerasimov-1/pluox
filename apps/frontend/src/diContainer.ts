@@ -29,6 +29,7 @@ import { settingsModule } from '@root/core/modules/settings/settings.module';
 import { syncModule } from '@root/core/modules/sync/sync.module';
 import { userModule } from '@root/core/modules/user/user.module';
 import { venueModule } from '@root/core/modules/venue/venue.module';
+import { productModule } from '@root/core/modules/product/product.module';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
@@ -46,6 +47,7 @@ export function createDIContainer(options?: {
 		.registerModule(settingsModule)
 		.registerModule(identityModule)
 		.registerModule(intlModule)
+		.registerModule(productModule)
 		.seal();
 }
 
