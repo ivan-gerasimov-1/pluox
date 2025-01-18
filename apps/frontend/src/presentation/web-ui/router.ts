@@ -7,7 +7,7 @@ import { NotFoundErrorScreen } from '@root/presentation/web-ui/screens/error/scr
 import { ExpenseListScreen } from '@root/presentation/web-ui/screens/expenseList/expenseList';
 import { ExpenseListMonthlyScreen } from '@root/presentation/web-ui/screens/expenseListMonthly/expenseListMonthly';
 
-import { MainScreen } from '@root/presentation/web-ui/screens/mainV2/main';
+import { MainScreen } from '@root/presentation/web-ui/screens/main/main';
 
 import { SettingsScreen } from '@root/presentation/web-ui/screens/settings/settings';
 
