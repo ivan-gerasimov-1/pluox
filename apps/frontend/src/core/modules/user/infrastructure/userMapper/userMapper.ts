@@ -15,7 +15,7 @@ export class UserMapper implements IUserMapper {
 	}
 
 	public toEntity(userDTO: TUserDTO): IUser {
-		return User.create(
+		return new User(
 			userDTO.id,
 			userDTO.email,
 			userDTO.name,
