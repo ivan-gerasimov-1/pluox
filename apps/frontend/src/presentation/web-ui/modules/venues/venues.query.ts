@@ -12,7 +12,6 @@ export const VENUE_QUERY_BY_ID = Symbol('venueQueryById').description;
 function createVenueQuery(type: 'list'): () => [];
 function createVenueQuery(type: 'oneById'): (id: Id) => [];
 function createVenueQuery(type: 'list' | 'oneById') {
-	console.log(type);
 	switch (type) {
 		case 'list':
 			return () => [VENUE_QUERY_LIST];
