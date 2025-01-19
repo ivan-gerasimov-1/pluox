@@ -1,4 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+	useMutation,
+	useQueryClient,
+	useSuspenseQuery,
+} from '@tanstack/react-query';
 
 import type { Id } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
@@ -35,19 +39,23 @@ export function ExpenseList(props: TExpenseListProps) {
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let queryClient = useQueryClient();
 
-	let { data: expenseGroups = [] } = useQuery({
+	/**
+	 * @todo
+	 * 1. Experimental usage of useSuspenseQuery
+	 */
+	let expenseListQuery = useSuspenseQuery({
 		queryKey: [EXPENSES_QUERY_LIST, props.dateFrom, props.dateTo],
 		queryFn: ({ queryKey }) => {
-			let [, dateFrom, dateTo] = queryKey as [string, string, string];
+			let [, dateFrom, dateTo] = queryKey;
 
 			let expenseList = getList({
 				dateFrom,
 				dateTo,
 			});
-			let expenseGroups = expenseService.groupExpenseByDate(expenseList);
 
-			return expenseGroups;
+			return expenseService.groupExpenseByDate(expenseList);
 		},
+		// placeholderData: [],
 		refetchOnMount: false,
 	});
 
@@ -82,7 +90,7 @@ export function ExpenseList(props: TExpenseListProps) {
 		},
 	});
 
-	return expenseGroups.map((group) => {
+	return expenseListQuery.data.map((group) => {
 		let expenseList = group.items;
 
 		return (
