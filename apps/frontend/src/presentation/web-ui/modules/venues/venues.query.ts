@@ -6,33 +6,45 @@ import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types'
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 import type { Id } from '@root/core/domain/types';
 
-export const QUERY_VENUES_LIST = Symbol('venueList').description;
+export const VENUE_QUERY_LIST = Symbol('venueQueryList').description;
+export const VENUE_QUERY_BY_ID = Symbol('venueQueryById').description;
 
-export function getVenueList() {
-	let venueQueryService = resolveService(EServiceToken.VENUE_QUERY_SERVICE);
-
-	return venueQueryService.getAll();
-}
-
-export function getVenueById(id: Id) {
-	let venueQueryService = resolveService(EServiceToken.VENUE_QUERY_SERVICE);
-
-	return venueQueryService.getById(id);
+function createVenueQuery(type: 'list'): () => [];
+function createVenueQuery(type: 'oneById'): (id: Id) => [];
+function createVenueQuery(type: 'list' | 'oneById') {
+	console.log(type);
+	switch (type) {
+		case 'list':
+			return () => [VENUE_QUERY_LIST];
+		case 'oneById':
+			return (id: Id) => [VENUE_QUERY_BY_ID, id];
+		default:
+			let invalidType: never = type;
+			throw new Error(`Unknown venue querytype: ${invalidType}`);
+	}
 }
 
 export function useVenueListQuery(): TVenueDTO[] {
+	let venueQueryService = resolveService(EServiceToken.VENUE_QUERY_SERVICE);
+
 	let { data } = useQuery({
-		queryKey: [QUERY_VENUES_LIST],
-		queryFn: getVenueList,
+		queryKey: createVenueQuery('list')(),
+		queryFn: () => {
+			return venueQueryService.getAll();
+		},
 	});
 
 	return data ?? [];
 }
 
-export function useVenueQuery(id: Id): TVenueDTO | null {
+export function useVenueByIdQuery(id: Id): TVenueDTO | null {
+	let venueQueryService = resolveService(EServiceToken.VENUE_QUERY_SERVICE);
+
 	let { data } = useQuery({
-		queryKey: [QUERY_VENUES_LIST, 'id'],
-		queryFn: () => getVenueById(id),
+		queryKey: createVenueQuery('oneById')(id),
+		queryFn: () => {
+			return venueQueryService.getById(id);
+		},
 	});
 
 	return data ?? null;

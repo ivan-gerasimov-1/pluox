@@ -2,7 +2,7 @@ import { useParams } from 'react-router';
 
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
-import { useVenueQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
+import { useVenueByIdQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
 
 export function EditVenueScreen() {
 	let { venue } = useScreenParams();
@@ -23,7 +23,7 @@ export function EditVenueScreen() {
 
 function useScreenParams() {
 	let { id } = useParams();
-	let venue = useVenueQuery(id!);
+	let venue = useVenueByIdQuery(id!);
 
 	return {
 		venue,
