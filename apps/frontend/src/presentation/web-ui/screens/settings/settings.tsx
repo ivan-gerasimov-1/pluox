@@ -13,11 +13,11 @@ import { getLanguageNameByLocale } from '@root/core/modules/intl/application/hel
 import {
 	getAppConfig,
 	updateAppConfig,
-	QUERY_APP_CONFIG,
+	APP_CONFIG_QUERY,
 } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
 import {
 	getUser,
-	QUERY_USER,
+	USER_QUERY_BY_ID,
 	updateUser,
 } from '@root/presentation/web-ui/modules/settings/settings.query';
 import { TUserUpdateDTO } from '@root/core/modules/user/application/dto/userDTO';
@@ -64,7 +64,7 @@ export function SettingsScreen() {
 			locale: ELocaleCode.RU_RU,
 		},
 	} = useQuery({
-		queryKey: [QUERY_USER],
+		queryKey: [USER_QUERY_BY_ID],
 		queryFn: getUser,
 		// refetchOnMount: false,
 	});
@@ -75,7 +75,7 @@ export function SettingsScreen() {
 		},
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: [QUERY_USER],
+				queryKey: [USER_QUERY_BY_ID],
 			});
 		},
 	});
@@ -88,7 +88,7 @@ export function SettingsScreen() {
 			availabelCurrencies: [ECurrency.USD, ECurrency.EUR],
 		},
 	} = useQuery({
-		queryKey: [QUERY_APP_CONFIG],
+		queryKey: [APP_CONFIG_QUERY],
 		queryFn: getAppConfig,
 		// refetchOnMount: false,
 	});
@@ -98,7 +98,7 @@ export function SettingsScreen() {
 			updateAppConfig(payload);
 		},
 		onSuccess: async (data, variables) => {
-			let queryKey = [QUERY_APP_CONFIG];
+			let queryKey = [APP_CONFIG_QUERY];
 
 			/** @todo #1 */
 			// if (variables.budget !== undefined) {

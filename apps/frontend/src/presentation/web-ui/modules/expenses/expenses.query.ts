@@ -10,11 +10,10 @@ import { resolveService } from '@root/core/infrastructure/serviceContainer/resol
 
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
-export const QUERY_EXPENSES_LIST = Symbol('expenseList').description;
-export const QUERY_EXPENSES_TOTAL_AMOUNT = Symbol('totalAmount').description;
-export const QUERY_EXPENSES_MONTHLY_AMOUNT =
-	Symbol('monthlyAmount').description;
-export const QUERY_EXPENSES_DAILY_AMOUNT = Symbol('dailyAmount').description;
+export const EXPENSES_QUERY_LIST = 'expenseQueryList';
+export const EXPENSES_QUERY_TOTAL_AMOUNT = 'expenseQueryTotalAmount';
+export const EXPENSES_QUERY_MONTHLY_AMOUNT = 'expenseQueryMonthlyAmount';
+export const EXPENSES_QUERY_DAILY_AMOUNT = 'expenseQueryDailyAmount';
 
 export function addOne(payload: TExpenseCreateDTO): void {
 	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);

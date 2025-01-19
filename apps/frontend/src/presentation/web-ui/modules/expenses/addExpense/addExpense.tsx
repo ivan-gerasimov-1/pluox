@@ -5,10 +5,10 @@ import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/
 import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/expenseView/expenseForm';
 import {
 	addOne,
-	QUERY_EXPENSES_DAILY_AMOUNT,
-	QUERY_EXPENSES_LIST,
-	QUERY_EXPENSES_MONTHLY_AMOUNT,
-	QUERY_EXPENSES_TOTAL_AMOUNT,
+	EXPENSES_QUERY_DAILY_AMOUNT,
+	EXPENSES_QUERY_LIST,
+	EXPENSES_QUERY_MONTHLY_AMOUNT,
+	EXPENSES_QUERY_TOTAL_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
@@ -20,7 +20,7 @@ export function AddExpense() {
 		onSuccess: async () => {
 			await Promise.all([
 				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_TOTAL_AMOUNT],
+					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
 					/**
 					 * @description
 					 * For now we could use this approach, alternative is to
@@ -33,15 +33,15 @@ export function AddExpense() {
 					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT],
+					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
 					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_LIST],
+					queryKey: [EXPENSES_QUERY_LIST],
 					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_DAILY_AMOUNT],
+					queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
 					refetchType: 'all',
 				}),
 			]);

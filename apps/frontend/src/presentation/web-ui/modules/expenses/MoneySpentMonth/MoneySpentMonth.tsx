@@ -6,10 +6,10 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import {
 	getMonthlyAmount,
-	QUERY_EXPENSES_MONTHLY_AMOUNT,
+	EXPENSES_QUERY_MONTHLY_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import {
-	QUERY_APP_CONFIG_BUDGET,
+	APP_CONFIG_QUERY_BUDGET,
 	getBudget,
 } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
 import { ExpensesByCategory } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
@@ -30,13 +30,13 @@ export function MoneySpentMonth(props: TMoneySpentMonthProps) {
 	let temporal = useService(EServiceToken.TEMPORAL);
 
 	let total = useQuery({
-		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, props.month],
+		queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT, props.month],
 		queryFn: () => getMonthlyAmount(props.month),
 		refetchOnMount: false,
 	});
 
 	let { data: budget } = useQuery({
-		queryKey: [QUERY_APP_CONFIG_BUDGET],
+		queryKey: [APP_CONFIG_QUERY_BUDGET],
 		queryFn: getBudget,
 		/** @todo #1 */
 		// refetchOnMount: false,

@@ -7,13 +7,13 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import {
 	getBudget,
-	QUERY_APP_CONFIG_BUDGET,
+	APP_CONFIG_QUERY_BUDGET,
 } from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
 import {
 	getDailyAmount,
 	getMonthlyAmount,
-	QUERY_EXPENSES_DAILY_AMOUNT,
-	QUERY_EXPENSES_MONTHLY_AMOUNT,
+	EXPENSES_QUERY_DAILY_AMOUNT,
+	EXPENSES_QUERY_MONTHLY_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 
 import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
@@ -31,7 +31,7 @@ function useMonthlyAmount(): number {
 	let currentMonth = temporal.getCurrentMonth();
 
 	let { data } = useQuery({
-		queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT, currentMonth],
+		queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT, currentMonth],
 		queryFn: () => getMonthlyAmount(currentMonth),
 		refetchOnMount: false,
 	});
@@ -41,7 +41,7 @@ function useMonthlyAmount(): number {
 
 function useBudget(): number {
 	let { data } = useQuery({
-		queryKey: [QUERY_APP_CONFIG_BUDGET],
+		queryKey: [APP_CONFIG_QUERY_BUDGET],
 		queryFn: getBudget,
 	});
 
@@ -50,7 +50,7 @@ function useBudget(): number {
 
 function useDailyAmount(): number {
 	let { data } = useQuery({
-		queryKey: [QUERY_EXPENSES_DAILY_AMOUNT],
+		queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
 		queryFn: getDailyAmount,
 	});
 

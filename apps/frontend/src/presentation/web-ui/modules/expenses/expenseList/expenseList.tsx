@@ -16,9 +16,9 @@ import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categ
 import {
 	deleteOne,
 	getList,
-	QUERY_EXPENSES_LIST,
-	QUERY_EXPENSES_MONTHLY_AMOUNT,
-	QUERY_EXPENSES_TOTAL_AMOUNT,
+	EXPENSES_QUERY_LIST,
+	EXPENSES_QUERY_MONTHLY_AMOUNT,
+	EXPENSES_QUERY_TOTAL_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
@@ -36,7 +36,7 @@ export function ExpenseList(props: TExpenseListProps) {
 	let queryClient = useQueryClient();
 
 	let { data: expenseGroups = [] } = useQuery({
-		queryKey: [QUERY_EXPENSES_LIST, props.dateFrom, props.dateTo],
+		queryKey: [EXPENSES_QUERY_LIST, props.dateFrom, props.dateTo],
 		queryFn: ({ queryKey }) => {
 			let [, dateFrom, dateTo] = queryKey as [string, string, string];
 
@@ -58,7 +58,7 @@ export function ExpenseList(props: TExpenseListProps) {
 		onSuccess: async () => {
 			await Promise.all([
 				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_TOTAL_AMOUNT],
+					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
 					/**
 					 * @description
 					 * For now we could use this approach, alternative is to
@@ -71,11 +71,11 @@ export function ExpenseList(props: TExpenseListProps) {
 					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_MONTHLY_AMOUNT],
+					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
 					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
-					queryKey: [QUERY_EXPENSES_LIST],
+					queryKey: [EXPENSES_QUERY_LIST],
 					refetchType: 'all',
 				}),
 			]);

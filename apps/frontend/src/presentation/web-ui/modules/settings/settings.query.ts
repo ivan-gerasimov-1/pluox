@@ -6,7 +6,7 @@ import {
 	TUserUpdateDTO,
 } from '@root/core/modules/user/application/dto/userDTO';
 
-export const QUERY_USER = Symbol('user').description;
+export const USER_QUERY_BY_ID = 'userQueryById';
 
 export function getUser(): TUserDTO | undefined {
 	let sessionService = resolveService(EServiceToken.SESSION_SERVICE);

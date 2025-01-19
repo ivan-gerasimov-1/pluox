@@ -3,9 +3,9 @@ import { resolveService } from '@root/core/infrastructure/serviceContainer/resol
 import type { TMonth } from '@root/core/domain/temporal/types';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
-export const QUERY_APP_CONFIG = Symbol('appConfig').description;
-export const QUERY_APP_CONFIG_BUDGET = Symbol('appConfigBudget').description;
-export const QUERY_APP_CONFIG_MONTH = Symbol('appConfigMonth').description;
+export const APP_CONFIG_QUERY = 'appConfigQuery';
+export const APP_CONFIG_QUERY_BUDGET = 'appConfigQueryBudget';
+export const APP_CONFIG_QUERY_MONTH = 'appConfigQueryMonth';
 
 export function getAppConfig(): TAppConfig {
 	let appConfig = resolveService(EServiceToken.APP_CONFIG);
