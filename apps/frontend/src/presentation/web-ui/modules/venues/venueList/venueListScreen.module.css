@@ -18,12 +18,14 @@
 	margin-block: 5px;
 
 	padding-inline: 20px;
-	padding-block: 15px;
+	padding-block: 25px;
 
 	border: var(--border-100);
 	border-radius: var(--br-90);
 
-	border-color: transparent;
+	border-color: var(--grey-300);
+
+	background-color: var(--grey-100);
 
 	transition:
 		border-color var(--transition-200),
@@ -31,6 +33,9 @@
 
 	&:hover {
 		border-color: var(--fc-100);
-		background-color: var(--grey-100);
 	}
+}
+
+.newVenueButton {
+	width: 100%;
 }
