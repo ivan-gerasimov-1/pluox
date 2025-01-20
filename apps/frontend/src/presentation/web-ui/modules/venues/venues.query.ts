@@ -1,10 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
+import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+
 import type { Id } from '@root/core/domain/types';
+import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
 export const VENUE_QUERY_LIST = 'venueQueryList';
 export const VENUE_QUERY_BY_ID = 'venueQueryById';
@@ -36,7 +38,7 @@ export function useVenueListQuery(): TVenueDTO[] {
 	return data ?? [];
 }
 
-export function useVenueByIdQuery(id: Id): TVenueDTO | null {
+export function useVenueQueryById(id: Id): TVenueDTO | null {
 	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 
 	let { data } = useQuery({
@@ -47,4 +49,20 @@ export function useVenueByIdQuery(id: Id): TVenueDTO | null {
 	});
 
 	return data ?? null;
+}
+
+export function useVenueRemoveMutation() {
+	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
+	let navigation = useNavigation();
+
+	let result = useMutation({
+		mutationFn: async (id: Id) => {
+			return venueUseCase.remove(id);
+		},
+		onSuccess: () => {
+			navigation.venueListPage();
+		},
+	});
+
+	return result;
 }
