@@ -16,7 +16,7 @@ export function VenueListScreen() {
 			<Header title="Venues" />
 
 			<AppLink to={EAppPath.VENUES_CREATE}>
-				<Button className={styles.newVenueButton} onClick={() => {}} size="l">
+				<Button onClick={() => {}} size="m" isWide>
 					New
 				</Button>
 			</AppLink>
