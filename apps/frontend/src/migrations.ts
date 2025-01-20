@@ -4,10 +4,61 @@ import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
 /**
  * @todo
- * 1. Add list of applied migrations and skip them on sequential run
+ * 1. Handle migration failures
  */
 export function runMigrations() {
-	addLocaleToUser();
+	let persistedMigrations = JSON.parse(
+		window.localStorage.getItem('@savee/migrations') ?? '{}',
+	);
+	let migrations = registerMigrations(addLocaleToUser);
+
+	for (let [id, migrationFn] of migrations) {
+		if (persistedMigrations[id]?.success) {
+			continue;
+		}
+
+		migrationFn();
+
+		let migrationDTO = createMigrationDTO({
+			id,
+			success: true,
+		});
+
+		persistedMigrations[migrationDTO.id] = migrationDTO;
+	}
+
+	window.localStorage.setItem(
+		'@savee/migrations',
+		JSON.stringify(persistedMigrations),
+	);
+}
+
+function registerMigrations(
+	...migrationFns: (() => void)[]
+): Map<string, Function> {
+	let migrations = new Map<string, Function>();
+
+	for (let migrationFn of migrationFns) {
+		migrations.set(migrationFn.name, migrationFn);
+	}
+
+	return migrations;
+}
+
+function createMigrationDTO(createDTO: {
+	id: string;
+	success: boolean;
+	createdAt?: string;
+}): {
+	id: string;
+	success: boolean;
+	createdAt: string;
+} {
+	return {
+		id: createDTO.id,
+		success: createDTO.success,
+		createdAt: createDTO.createdAt ?? new Date().toISOString(),
+	};
 }
 
 export function addLocaleToUser(): void {
