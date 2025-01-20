@@ -25,14 +25,23 @@ function createVenueQuery(type: 'list' | 'oneById') {
 	}
 }
 
-export function useVenueListQuery(): TVenueDTO[] {
+export function useVenueListQuery(): (TVenueDTO & {
+	categoryName: string;
+})[] {
 	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
 	let { data } = useQuery({
 		queryKey: createVenueQuery('list')(),
 		queryFn: () => {
-			return venueQueryService.getAll();
+			let venues = venueQueryService.getAll();
+
+			return venues.map((venue) => ({
+				...venue,
+				categoryName: categoryService.getCategoryName(venue.categoryId),
+			}));
 		},
+		refetchOnMount: false,
 	});
 
 	return data ?? [];
