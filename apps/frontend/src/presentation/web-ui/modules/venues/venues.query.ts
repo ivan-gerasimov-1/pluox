@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
@@ -24,7 +24,7 @@ function createVenueQuery(type: 'list' | 'oneById') {
 }
 
 export function useVenueListQuery(): TVenueDTO[] {
-	let venueQueryService = resolveService(EServiceToken.VENUE_QUERY_SERVICE);
+	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 
 	let { data } = useQuery({
 		queryKey: createVenueQuery('list')(),
@@ -37,7 +37,7 @@ export function useVenueListQuery(): TVenueDTO[] {
 }
 
 export function useVenueByIdQuery(id: Id): TVenueDTO | null {
-	let venueQueryService = resolveService(EServiceToken.VENUE_QUERY_SERVICE);
+	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 
 	let { data } = useQuery({
 		queryKey: createVenueQuery('oneById')(id),
