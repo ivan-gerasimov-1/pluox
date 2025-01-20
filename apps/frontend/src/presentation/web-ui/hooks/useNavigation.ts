@@ -5,6 +5,8 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 interface INavigation {
 	mainPage(): void;
 	loginPage(): void;
+
+	venueListPage(): void;
 }
 
 export function useNavigation(): INavigation {
@@ -22,8 +24,15 @@ export function useNavigation(): INavigation {
 		});
 	}
 
+	function goToVenueListPage() {
+		navigate(EAppPath.VENUES, {
+			replace: true,
+		});
+	}
+
 	return {
 		mainPage: goToMainPage,
 		loginPage: goToLoginPage,
+		venueListPage: goToVenueListPage,
 	};
 }
