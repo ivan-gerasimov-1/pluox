@@ -47,13 +47,27 @@ export function useVenueListQuery(): (TVenueDTO & {
 	return data ?? [];
 }
 
-export function useVenueQueryById(id: Id): TVenueDTO | null {
+export function useVenueQueryById(
+	id: Id,
+): (TVenueDTO & { categoryName: string }) | null {
 	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
 	let { data } = useQuery({
 		queryKey: createVenueQuery('oneById')(id),
 		queryFn: () => {
-			return venueQueryService.getById(id);
+			let venue = venueQueryService.getById(id);
+
+			if (!venue) {
+				return null;
+			}
+
+			let categoryName = categoryService.getCategoryName(venue.categoryId);
+
+			return {
+				...venue,
+				categoryName,
+			};
 		},
 		refetchOnMount: false,
 	});
