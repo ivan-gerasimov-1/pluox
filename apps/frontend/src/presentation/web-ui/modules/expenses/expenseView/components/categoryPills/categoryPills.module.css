@@ -35,7 +35,7 @@
 		background-color var(--transition-100);
 
 	&[aria-pressed='true'] {
-		background-color: var(--grey-200);
+		background-color: var(--grey-100);
 		border-color: var(--bc-900);
 	}
 }
