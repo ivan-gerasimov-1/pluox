@@ -37,6 +37,7 @@ export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let currencyRatesService = useService(EServiceToken.CURRENCY_RATE_SERVICE);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
+	let vanueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 	let queryClient = useQueryClient();
 
 	/**
@@ -51,6 +52,14 @@ export function ExpenseList(props: TExpenseListProps) {
 			let expenseList = getList({
 				dateFrom,
 				dateTo,
+			}).map((expense) => {
+				if (expense.venue) {
+					let venue = vanueQueryService.getById(expense.venue);
+
+					expense.venue = venue?.name ?? null;
+				}
+
+				return expense;
 			});
 
 			return expenseService.groupExpenseByDate(expenseList);
@@ -147,8 +156,12 @@ export function ExpenseList(props: TExpenseListProps) {
 										</span>
 									</div>
 
-									{item.description && (
-										<div className={styles.description}>{item.description}</div>
+									{(item.description || item.venue) && (
+										<div className={styles.description}>
+											{item.venue && <span>⚲ {item.venue}</span>}
+											{item.venue && item.description && <span> | </span>}
+											{item.description}
+										</div>
 									)}
 								</div>
 							</SwipeableListItem>
