@@ -28,7 +28,7 @@ export function VenueListScreen() {
 							className={styles.venueLink}
 							to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}
 						>
-							{venue.name}
+							{venue.name} ({venue.categoryName})
 						</AppLink>
 					</li>
 				))}
