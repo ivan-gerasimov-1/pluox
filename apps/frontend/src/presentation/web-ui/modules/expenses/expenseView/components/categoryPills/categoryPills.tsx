@@ -6,6 +6,8 @@ import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContaine
 import styles from './categoryPills.module.css';
 
 type TCategoryPillsProps = {
+	value?: string | null;
+
 	onSelect(categoryId?: string): void;
 };
 
@@ -28,7 +30,7 @@ export function CategoryPills(props: TCategoryPillsProps) {
 						id={category.id}
 						type="button"
 						className={styles.pill}
-						aria-pressed="false"
+						aria-pressed={category.id === props.value}
 						onClick={(event) => {
 							let target = event.currentTarget;
 							let isPressed = target.getAttribute('aria-pressed') === 'true';
