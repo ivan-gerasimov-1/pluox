@@ -32,30 +32,30 @@
 
 	&:hover,
 	&:focus {
+		box-shadow: 0 0 0 2px var(--white-100) inset;
 		color: var(--white-100);
 		background-color: var(--red-100);
 	}
 
 	&:active {
-		box-shadow: 0 0 0 2px var(--grey-350) inset;
+		box-shadow: 0 0 0 4px var(--white-100) inset;
 	}
 }
 
 .none {
-	color: inherit;
-	background-color: var(--white-100);
-
 	border: var(--border-100);
 	border-color: var(--bc-950);
 
+	color: var(--white-100);
+	background-color: var(--black-200);
+
 	&:hover,
 	&:focus {
-		color: var(--white-100);
-		background-color: var(--black-200);
+		box-shadow: 0 0 0 2px var(--white-100) inset;
 	}
 
 	&:active {
-		box-shadow: 0 0 0 2px var(--grey-350) inset;
+		box-shadow: 0 0 0 4px var(--white-100) inset;
 	}
 }
 
