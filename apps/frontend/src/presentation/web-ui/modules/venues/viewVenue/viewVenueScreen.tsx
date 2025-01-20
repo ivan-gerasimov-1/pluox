@@ -1,6 +1,9 @@
 import { useParams } from 'react-router';
 
-import { useVenueByIdQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
+import {
+	useVenueRemoveMutation,
+	useVenueQueryById,
+} from '@root/presentation/web-ui/modules/venues/venues.query';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
@@ -8,6 +11,8 @@ import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
 export function VenueViewScreen() {
 	let { venue } = useScreenLoader();
+
+	let venueRemoveMutation = useVenueRemoveMutation();
 
 	if (!venue) {
 		return (
@@ -25,7 +30,9 @@ export function VenueViewScreen() {
 
 			<div>
 				<div>
-					<b>ID:</b> {venue.id}
+					<pre>
+						<b>ID:</b> {venue.id}
+					</pre>
 				</div>
 
 				<br />
@@ -42,7 +49,14 @@ export function VenueViewScreen() {
 			</div>
 
 			<div>
-				<Button onClick={() => {}} size="m" color="red" isWide>
+				<Button
+					onClick={() => {
+						venueRemoveMutation.mutate(venue.id);
+					}}
+					size="m"
+					color="red"
+					isWide
+				>
 					Удалить
 				</Button>
 			</div>
@@ -50,18 +64,8 @@ export function VenueViewScreen() {
 	);
 }
 
-function useScreenParams(): {
-	id: string | null;
-} {
-	let { id } = useParams();
-
-	return {
-		id: id ?? null,
-	};
-}
-
 function useScreenLoader() {
-	let { id } = useScreenParams();
+	let { id } = useParams();
 
 	if (!id) {
 		return {
@@ -69,7 +73,7 @@ function useScreenLoader() {
 		};
 	}
 
-	let venue = useVenueByIdQuery(id);
+	let venue = useVenueQueryById(id);
 
 	return {
 		venue,
