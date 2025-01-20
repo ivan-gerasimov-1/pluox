@@ -6,8 +6,8 @@ import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types'
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 import type { Id } from '@root/core/domain/types';
 
-export const VENUE_QUERY_LIST = Symbol('venueQueryList').description;
-export const VENUE_QUERY_BY_ID = Symbol('venueQueryById').description;
+export const VENUE_QUERY_LIST = 'venueQueryList';
+export const VENUE_QUERY_BY_ID = 'venueQueryById';
 
 function createVenueQuery(type: 'list'): () => [];
 function createVenueQuery(type: 'oneById'): (id: Id) => [];
