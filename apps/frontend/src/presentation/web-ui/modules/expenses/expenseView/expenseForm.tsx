@@ -1,15 +1,16 @@
 import { useReducer } from 'react';
 
-import { ECurrency } from '@root/core/modules/currency/domain/types';
 import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
+import { ECurrency } from '@root/core/modules/currency/domain/types';
 
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { AmountInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/amountInput/amountInput';
 import { CategoryPills } from '@root/presentation/web-ui/modules/expenses/expenseView/components/categoryPills/categoryPills';
 import { DescriptionInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/commentInput/descriptionInput';
 import { DateInput } from '@root/presentation/web-ui/modules/expenses/expenseView/components/dateInput/dateInput';
+import { VenuePills } from '@root/presentation/web-ui/modules/expenses/expenseView/components/venuePills/venuePills';
 import { expenseFormI18n } from '@root/presentation/web-ui/modules/expenses/expenseView/expenseForm.i18n';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 
 import styles from './expenseForm.module.css';
 
@@ -132,7 +133,20 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			</div> */}
 
 			<div className={styles.formGroup}>
+				<VenuePills
+					onSelect={(payload?: { venueId: string; categoryId: string }) => {
+						dispatch({
+							type: EExpenseFormReducerAction.SET_VENUE,
+							venue: payload?.venueId,
+							category: payload?.categoryId,
+						});
+					}}
+				/>
+			</div>
+
+			<div className={styles.formGroup}>
 				<CategoryPills
+					value={formState.category}
 					onSelect={(id?: string) => {
 						dispatch({
 							type: EExpenseFormReducerAction.SET_CATEGORY,
@@ -179,6 +193,7 @@ export const enum EExpenseFormReducerAction {
 	SET_DESCRIPTION = 'setDescription',
 	SET_DATE = 'setDate',
 	SET_CATEGORY = 'setCategory',
+	SET_VENUE = 'setVenue',
 	RESET = 'reset',
 }
 
@@ -240,6 +255,16 @@ function expenseFormReducer(
 
 			return {
 				...state,
+				category,
+			};
+		}
+		case EExpenseFormReducerAction.SET_VENUE: {
+			let venue = action.venue as string;
+			let category = action.category as string;
+
+			return {
+				...state,
+				venue,
 				category,
 			};
 		}
