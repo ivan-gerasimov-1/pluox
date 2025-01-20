@@ -3,7 +3,7 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { CreateVenueScreen } from '@root/presentation/web-ui/modules/venues/createVenue/createVenueScreen';
 import { EditVenueScreen } from '@root/presentation/web-ui/modules/venues/editVenue/editVenueScreen';
 import { VenueListScreen } from '@root/presentation/web-ui/modules/venues/venueList/venueListScreen';
-import { ViewVenueScreen } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen';
+import { VenueViewScreen } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen';
 
 export const venueRoutes = [
 	{
@@ -16,7 +16,7 @@ export const venueRoutes = [
 	},
 	{
 		path: EAppPath.VENUES_VIEW,
-		Component: ViewVenueScreen,
+		Component: VenueViewScreen,
 	},
 	{
 		path: EAppPath.VENUES_EDIT,

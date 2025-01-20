@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
-export function ViewVenueScreen() {
+export function VenueViewScreen() {
 	let screenParams = useScreenParams();
 
 	return (
@@ -17,8 +17,14 @@ export function ViewVenueScreen() {
 	);
 }
 
-function useScreenParams() {
+function useScreenParams(): {
+	id: string;
+} {
 	let { id } = useParams();
+
+	if (!id) {
+		throw new Error('Venue identifier is not specified');
+	}
 
 	return {
 		id,
