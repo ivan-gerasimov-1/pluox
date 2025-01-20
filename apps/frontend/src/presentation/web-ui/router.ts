@@ -14,10 +14,7 @@ import { SettingsScreen } from '@root/presentation/web-ui/screens/settings/setti
 import { SignInScreen } from '@root/presentation/web-ui/screens/signIn/SignIn';
 import { SignUpScreen } from '@root/presentation/web-ui/screens/signUp/SignUp';
 
-import { CreateVenueScreen } from '@root/presentation/web-ui/modules/venues/createVenue/createVenueScreen';
-import { EditVenueScreen } from '@root/presentation/web-ui/modules/venues/editVenue/editVenueScreen';
-import { VenueListScreen } from '@root/presentation/web-ui/modules/venues/venueList/venueListScreen';
-import { ViewVenueScreen } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen';
+import { venueRoutes } from '@root/presentation/web-ui/modules/venues/venues.module';
 
 type TRouter = ReturnType<typeof createRouter>;
 export interface IRouter extends TRouter {}
@@ -44,25 +41,6 @@ const EXPENSE_ROUTES = [
 	},
 ];
 
-const VENUE_ROUTES = [
-	{
-		path: EAppPath.VENUES,
-		Component: VenueListScreen,
-	},
-	{
-		path: EAppPath.VENUES_CREATE,
-		Component: CreateVenueScreen,
-	},
-	{
-		path: EAppPath.VENUES_VIEW,
-		Component: ViewVenueScreen,
-	},
-	{
-		path: EAppPath.VENUES_EDIT,
-		Component: EditVenueScreen,
-	},
-];
-
 const MAIN_ROUTES = [
 	{
 		path: EAppPath.MAIN,
@@ -84,7 +62,7 @@ export function createAppRouter(): IRouter {
 	return createRouter([
 		...AUTHENTICATION_ROUTES,
 		...EXPENSE_ROUTES,
-		...VENUE_ROUTES,
+		...venueRoutes,
 		...MAIN_ROUTES,
 
 		NOT_FOUND_ROUTE,
