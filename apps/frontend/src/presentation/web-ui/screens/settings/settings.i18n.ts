@@ -26,6 +26,8 @@ export const settingsI18n = {
 		/** @deprecated */
 		categoriesLabel: 'Категории',
 
+		venuesSectionTitle: 'Места',
+
 		save: 'Сохранить',
 	},
 	[ELocaleCode.EN_US]: {
@@ -52,6 +54,8 @@ export const settingsI18n = {
 		categoriesSectionTitle: 'Categories',
 		/** @deprecated */
 		categoriesLabel: 'Categories',
+
+		venuesSectionTitle: 'Venues',
 
 		save: 'Save',
 	},

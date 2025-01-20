@@ -20,8 +20,9 @@ import {
 	USER_QUERY_BY_ID,
 	updateUser,
 } from '@root/presentation/web-ui/modules/settings/settings.query';
-import { TUserUpdateDTO } from '@root/core/modules/user/application/dto/userDTO';
-import { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
+import { useVenueListQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
+import type { TUserUpdateDTO } from '@root/core/modules/user/application/dto/userDTO';
+import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
@@ -68,6 +69,8 @@ export function SettingsScreen() {
 		queryFn: getUser,
 		// refetchOnMount: false,
 	});
+
+	let venueListQuery = useVenueListQuery();
 
 	let { mutate: mutateUser } = useMutation({
 		mutationFn: async (userUpdateDTO: TUserUpdateDTO) => {
@@ -353,9 +356,30 @@ export function SettingsScreen() {
 					</Card>
 
 					<Card>
-						<h2 className={styles.sectionHeader}>Dev</h2>
+						<h2 className={styles.sectionHeader}>
+							{intl.translate('venuesSectionTitle')}
+						</h2>
 
-						<AppLink to={EAppPath.VENUES}>Venues</AppLink>
+						<div className={styles.field}>
+							<div className={styles.fieldData}>
+								<div className={cls(styles.fieldValue, styles.pillsContainer)}>
+									{venueListQuery.map((venue) => {
+										return (
+											<span key={venue.id} className={styles.pill}>
+												{venue.name}
+											</span>
+										);
+									})}
+								</div>
+							</div>
+
+							<IconButton
+								iconName={EIconName.Settings}
+								onClick={() => {
+									navigation.venueListPage();
+								}}
+							/>
+						</div>
 					</Card>
 				</CardContainer>
 			</Screen>
