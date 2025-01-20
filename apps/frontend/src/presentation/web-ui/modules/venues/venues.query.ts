@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -53,13 +53,25 @@ export function useVenueQueryById(id: Id): TVenueDTO | null {
 
 export function useVenueRemoveMutation() {
 	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
+	let queryClient = useQueryClient();
 	let navigation = useNavigation();
 
 	let result = useMutation({
 		mutationFn: async (id: Id) => {
 			return venueUseCase.remove(id);
 		},
-		onSuccess: () => {
+		onSuccess: async (_, id) => {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: createVenueQuery('list')(),
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: createVenueQuery('oneById')(id),
+					refetchType: 'all',
+				}),
+			]);
+
 			navigation.venueListPage();
 		},
 	});
