@@ -1,6 +1,6 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
@@ -15,7 +15,7 @@ import styles from './logInForm.module.css';
 
 export function useLoginForm() {
 	let authService = useService(EServiceToken.AUTH_SERVICE);
-	let navigation = useNavigation();
+	let navigation = useAppNavigation();
 
 	let { pending, setPending } = usePending();
 

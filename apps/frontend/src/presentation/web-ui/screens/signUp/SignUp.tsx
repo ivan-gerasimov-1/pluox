@@ -1,6 +1,6 @@
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { usePending } from '@root/presentation/web-ui/hooks/usePending';
 
 import { delay } from '@root/presentation/web-ui/utils/delay';
@@ -10,7 +10,7 @@ import styles from './signUp.module.css';
 export function SignUpScreen() {
 	let authService = useService(EServiceToken.AUTH_SERVICE);
 
-	const navigation = useNavigation();
+	const navigation = useAppNavigation();
 	const { pending, setPending } = usePending();
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {

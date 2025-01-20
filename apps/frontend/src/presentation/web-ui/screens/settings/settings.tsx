@@ -25,7 +25,7 @@ import type { TUserUpdateDTO } from '@root/core/modules/user/application/dto/use
 import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { useNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
@@ -54,7 +54,7 @@ import styles from './settings.module.css';
 export function SettingsScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let intl = useIntl(settingsI18n);
-	let navigation = useNavigation();
+	let navigation = useAppNavigation();
 
 	let queryClient = useQueryClient();
 

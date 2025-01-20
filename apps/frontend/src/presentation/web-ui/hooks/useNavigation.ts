@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
-interface INavigation {
+interface IAppNavigation {
 	to: (path: string, options?: { replace?: boolean }) => void;
 
 	mainPage(): void;
@@ -11,7 +11,7 @@ interface INavigation {
 	venueListPage(): void;
 }
 
-export function useNavigation(): INavigation {
+export function useAppNavigation(): IAppNavigation {
 	const navigate = useNavigate();
 
 	function goToMainPage() {
