@@ -46,6 +46,7 @@ export function useVenueQueryById(id: Id): TVenueDTO | null {
 		queryFn: () => {
 			return venueQueryService.getById(id);
 		},
+		refetchOnMount: false,
 	});
 
 	return data ?? null;
