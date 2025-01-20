@@ -44,7 +44,7 @@ export function VenueViewScreen() {
 				<br />
 
 				<div>
-					<b>Категория:</b> {venue.categoryId}
+					<b>Категории:</b> {venue.categoryName}
 				</div>
 			</div>
 
