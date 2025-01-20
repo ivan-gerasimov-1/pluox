@@ -25,9 +25,7 @@ export function useNavigation(): INavigation {
 	}
 
 	function goToVenueListPage() {
-		navigate(EAppPath.VENUES, {
-			replace: true,
-		});
+		navigate(EAppPath.VENUES);
 	}
 
 	return {
