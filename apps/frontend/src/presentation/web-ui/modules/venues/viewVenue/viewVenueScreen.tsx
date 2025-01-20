@@ -1,5 +1,8 @@
 import { useParams } from 'react-router';
 
+import { EAppPath } from '@root/presentation/web-ui/appPath';
+import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+
 import {
 	useVenueRemoveMutation,
 	useVenueQueryById,
@@ -9,7 +12,10 @@ import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
+import styles from './viewVenueScreen.module.css';
+
 export function VenueViewScreen() {
+	let navigation = useAppNavigation();
 	let { venue } = useScreenLoader();
 
 	let venueRemoveMutation = useVenueRemoveMutation();
@@ -48,7 +54,17 @@ export function VenueViewScreen() {
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.actionsContainer}>
+				<Button
+					onClick={() => {
+						navigation.to(EAppPath.VENUES_EDIT.replace(':id', venue.id));
+					}}
+					size="m"
+					isWide
+				>
+					Редактировать
+				</Button>
+
 				<Button
 					onClick={() => {
 						venueRemoveMutation.mutate(venue.id);
