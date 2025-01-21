@@ -6,15 +6,15 @@ import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types'
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import {
-	getBudget,
-	APP_CONFIG_QUERY_BUDGET,
-} from '@root/presentation/web-ui/modules/settings/appConfig.query';
-import {
-	getDailyAmount,
-	getMonthlyAmount,
 	EXPENSES_QUERY_DAILY_AMOUNT,
 	EXPENSES_QUERY_MONTHLY_AMOUNT,
+	getDailyAmount,
+	getMonthlyAmount,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
+import {
+	APP_CONFIG_QUERY_BUDGET,
+	getBudget,
+} from '@root/presentation/web-ui/modules/settings/appConfig.query';
 
 import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -167,20 +167,6 @@ export function MainScreen() {
 						</ul>
 					</div>
 				</div>
-
-				{/* <CardContainer>
-					<AppLink to={EAppPath.EXPENSES}>
-						<Card touchable>
-							<MoneySpentMonth month={currentMonth ?? 0} />
-						</Card>
-					</AppLink>
-
-					<AppLink to={EAppPath.EXPENSES_LIST_MONTHLY}>
-						<Card touchable>
-							<MoneySpentYear />
-						</Card>
-					</AppLink>
-				</CardContainer> */}
 			</Screen>
 
 			<ActionSheet>

@@ -5,7 +5,6 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { NotFoundErrorScreen } from '@root/presentation/web-ui/screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
 
 import { ExpenseListScreen } from '@root/presentation/web-ui/screens/expenseList/expenseList';
-import { ExpenseListMonthlyScreen } from '@root/presentation/web-ui/screens/expenseListMonthly/expenseListMonthly';
 
 import { MainScreen } from '@root/presentation/web-ui/screens/main/main';
 
@@ -34,10 +33,6 @@ const EXPENSE_ROUTES = [
 	{
 		path: EAppPath.EXPENSES,
 		Component: ExpenseListScreen,
-	},
-	{
-		path: EAppPath.EXPENSES_LIST_MONTHLY,
-		Component: ExpenseListMonthlyScreen,
 	},
 ];
 
