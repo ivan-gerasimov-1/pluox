@@ -32,7 +32,7 @@ export function CreateVenueScreen() {
 	});
 
 	return (
-		<Screen>
+		<Screen hasNavbar>
 			<Header title="Create Venue" />
 
 			<ScreenBody>

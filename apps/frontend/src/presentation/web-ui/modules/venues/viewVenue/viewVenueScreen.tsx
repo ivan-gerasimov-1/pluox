@@ -23,7 +23,7 @@ export function VenueViewScreen() {
 
 	if (!venue) {
 		return (
-			<Screen>
+			<Screen hasNavbar>
 				<Header title="Venue" />
 
 				<div>Место не найдено</div>
@@ -32,7 +32,7 @@ export function VenueViewScreen() {
 	}
 
 	return (
-		<Screen>
+		<Screen hasNavbar>
 			<Header title="Venue" />
 
 			<ScreenBody>

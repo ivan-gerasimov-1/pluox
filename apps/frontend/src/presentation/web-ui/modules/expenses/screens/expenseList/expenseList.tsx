@@ -17,7 +17,7 @@ export function ExpenseListScreen() {
 	let screenData = useScreenLoader();
 
 	return (
-		<Screen>
+		<Screen hasNavbar>
 			<Header title={intl.translate('title')} />
 
 			<ScreenBody>

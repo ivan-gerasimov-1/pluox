@@ -1,11 +1,3 @@
-import { useMatch, useNavigate } from 'react-router';
-
-import { EAppPath } from '@root/presentation/web-ui/appPath';
-
-import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
-import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
-import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-
 import styles from './header.module.css';
 
 export type THeaderProps = {
@@ -13,36 +5,9 @@ export type THeaderProps = {
 };
 
 export function Header(props: THeaderProps) {
-	let isMain = useMatch(EAppPath.MAIN);
-	let navigate = useNavigate();
-
 	return (
 		<div className={styles.container}>
-			<div
-				style={{
-					display: 'flex',
-				}}
-			>
-				{!Boolean(isMain) && (
-					<div
-						style={{
-							marginLeft: '-10px',
-						}}
-					>
-						<IconButton
-							onClick={() => navigate(-1)}
-							iconName={Icon.IconName.ArrowBack}
-							iconSize={Icon.Size.SMALL}
-						/>
-					</div>
-				)}
-
-				{props.title && <h1 className={styles.title}>{props.title}</h1>}
-			</div>
-
-			<AppLink to={EAppPath.SETTINGS}>
-				<Icon name={Icon.IconName.User} size={Icon.Size.LARGE} />
-			</AppLink>
+			<h1 className={styles.title}>{props.title}</h1>
 		</div>
 	);
 }

@@ -12,6 +12,10 @@
 	backdrop-filter: blur(4px);
 	background-color: var(--white-100_op75);
 
+	border-right: var(--border-80);
+	border-bottom: var(--border-80);
+	border-left: var(--border-80);
+
 	border-end-end-radius: var(--br-90);
 	border-end-start-radius: var(--br-90);
 
@@ -19,8 +23,7 @@
 }
 
 .title {
-	padding-block: 7.25px;
-	font-size: var(--fs-300);
+	font-size: var(--fs-200);
 	letter-spacing: -0.375px;
 
 	text-transform: capitalize;

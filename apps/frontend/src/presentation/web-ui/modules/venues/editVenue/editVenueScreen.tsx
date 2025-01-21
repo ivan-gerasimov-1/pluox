@@ -11,7 +11,7 @@ export function EditVenueScreen() {
 
 	if (!venue) {
 		return (
-			<Screen>
+			<Screen hasNavbar>
 				<Header title="Venue" />
 
 				<ScreenBody>
@@ -22,7 +22,7 @@ export function EditVenueScreen() {
 	}
 
 	return (
-		<Screen>
+		<Screen hasNavbar>
 			<Header title="Venue" />
 
 			<div>

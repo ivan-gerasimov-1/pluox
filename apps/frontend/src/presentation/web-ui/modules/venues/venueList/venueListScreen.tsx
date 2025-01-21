@@ -13,7 +13,7 @@ export function VenueListScreen() {
 	let venueList = useVenueListQuery();
 
 	return (
-		<Screen>
+		<Screen hasNavbar>
 			<Header title="Venues" />
 
 			<ScreenBody>

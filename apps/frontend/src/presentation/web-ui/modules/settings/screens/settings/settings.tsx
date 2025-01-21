@@ -124,7 +124,7 @@ export function SettingsScreen() {
 
 	return (
 		<>
-			<Screen>
+			<Screen hasNavbar>
 				<Header title={intl.translate('screenTitle')} />
 
 				<ScreenBody>
