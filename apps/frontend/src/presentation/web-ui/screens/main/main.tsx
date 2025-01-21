@@ -16,7 +16,7 @@ import {
 	getBudget,
 } from '@root/presentation/web-ui/modules/settings/appConfig.query';
 
-import { AddExpense } from '@root/presentation/web-ui/modules/expenses/addExpense/addExpense';
+import { ExpenseNew } from '@root/presentation/web-ui/modules/expenses/expenseNew/addExpense';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionSheet';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
@@ -170,7 +170,7 @@ export function MainScreen() {
 			</Screen>
 
 			<ActionSheet>
-				<AddExpense />
+				<ExpenseNew />
 			</ActionSheet>
 		</>
 	);

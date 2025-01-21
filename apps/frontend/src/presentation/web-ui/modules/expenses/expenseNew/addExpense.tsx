@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/addExpense/helpers/createDateViewValue';
+import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/expenseNew/helpers/createDateViewValue';
 import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/expenseForm/expenseForm';
 import {
 	addOne,
@@ -12,7 +12,7 @@ import {
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
-export function AddExpense() {
+export function ExpenseNew() {
 	let queryClient = useQueryClient();
 
 	let addExpense = useMutation({
