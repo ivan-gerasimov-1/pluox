@@ -4,11 +4,11 @@ import { SignUpScreen } from '@root/presentation/web-ui/modules/authentication/s
 
 export const authenticationRoutes = [
 	{
-		path: EAppPath.SIGNUP,
+		path: EAppPath.SIGN_UP,
 		Component: SignUpScreen,
 	},
 	{
-		path: EAppPath.SIGNIN,
+		path: EAppPath.LOG_IN,
 		Component: LogInScreen,
 	},
 ];

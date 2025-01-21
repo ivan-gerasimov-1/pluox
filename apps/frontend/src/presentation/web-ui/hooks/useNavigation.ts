@@ -21,7 +21,7 @@ export function useAppNavigation(): IAppNavigation {
 	}
 
 	function goToLoginPage() {
-		navigate(EAppPath.SIGNIN, {
+		navigate(EAppPath.LOG_IN, {
 			replace: true,
 		});
 	}
