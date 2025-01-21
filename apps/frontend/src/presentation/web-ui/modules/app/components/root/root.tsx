@@ -9,7 +9,6 @@ import { IRouter } from '@root/presentation/web-ui/router';
 
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 import { ContainerProvider } from '@root/presentation/web-ui/modules/serviceContainer/provider';
-
 import '@root/presentation/web-ui/modules/app/components/root/root.css';
 
 type IRootProps = {

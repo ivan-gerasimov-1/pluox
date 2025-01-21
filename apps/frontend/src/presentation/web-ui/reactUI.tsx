@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 
 import type { QueryClient } from '@tanstack/react-query';
 
-import { Root } from '@root/presentation/web-ui/modules/app/components /root/root';
+import { Root } from '@root/presentation/web-ui/modules/app/components/root/root';
 import { AppContainerNotInitializedError } from '@root/presentation/web-ui/errors';
 
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
