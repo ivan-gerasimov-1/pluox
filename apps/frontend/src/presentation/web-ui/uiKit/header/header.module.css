@@ -1,8 +1,6 @@
 .container {
 	position: sticky;
-	top: 3px;
-
-	padding-inline: 10px;
+	top: 5px;
 
 	display: flex;
 	justify-content: space-between;
@@ -10,9 +8,11 @@
 
 	min-height: 36px;
 
-	background-color: var(--white-200);
+	backdrop-filter: blur(6px);
+
 	border-radius: var(--br-100);
-	border: var(--border-100);
+
+	z-index: 1;
 }
 
 .title {
