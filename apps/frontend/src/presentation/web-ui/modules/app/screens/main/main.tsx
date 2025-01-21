@@ -68,6 +68,7 @@ function useCategories() {
 
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let temporal = useService(EServiceToken.TEMPORAL);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
 	let categories = useCategories();
@@ -78,10 +79,14 @@ export function MainScreen() {
 
 	let leftover = budget - monthlyTotal;
 
+	let today = temporal.format({
+		format: 'MMMM, YYYY',
+	});
+
 	return (
 		<>
 			<Screen className={styles.screenWithBottomSpace}>
-				<Header title="Savee" />
+				<Header title={today} />
 
 				<AppLink to={EAppPath.EXPENSES}>
 					<div className={styles.title}>
