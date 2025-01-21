@@ -57,6 +57,7 @@
 	--bc-950: var(--black-200);
 
 	/** Border */
+	--border-80: 1px solid var(--bc-80);
 	--border-90: 1px solid var(--bc-90);
 	--border-100: 1px solid var(--bc-100);
 
