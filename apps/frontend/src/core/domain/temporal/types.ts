@@ -9,6 +9,8 @@ export type TDateParts = {
 };
 
 export interface ITemporal {
+	format(options: { date?: TISODateString; format: string }): string;
+
 	getMonth(month?: TMonth): string;
 	getCurrentMonth(): TMonth;
 	getStartOfYear(year?: TYear): TISODateString;

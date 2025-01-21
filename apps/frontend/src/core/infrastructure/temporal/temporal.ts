@@ -26,9 +26,16 @@ export class Temporal implements ITemporal {
 	readonly #dateFn = dayjs;
 
 	constructor(private readonly intl: IIntlService) {
+		dayjs.Dayjs;
 		dayjs.extend(utc);
 		dayjs.extend(timezone);
 		dayjs.extend(objectSupport);
+	}
+
+	public format(options: { date?: TISODateString; format: string }): string {
+		return this.#dateFn(options.date) //
+			.locale(this.intl.locale)
+			.format(options.format);
 	}
 
 	public getMonth(month?: TMonth): string {
