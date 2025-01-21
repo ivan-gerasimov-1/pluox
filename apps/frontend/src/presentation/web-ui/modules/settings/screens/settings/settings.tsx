@@ -33,7 +33,7 @@ import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
-import { settingsI18n } from '@root/presentation/web-ui/screens/settings/settings.i18n';
+import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 
 import { IconSelect } from '@root/presentation/web-ui/uiKit/iconSelect/iconSelect';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
