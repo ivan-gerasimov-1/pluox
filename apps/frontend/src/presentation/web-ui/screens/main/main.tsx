@@ -8,7 +8,7 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import {
 	getBudget,
 	APP_CONFIG_QUERY_BUDGET,
-} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+} from '@root/presentation/web-ui/modules/settings/appConfig.query';
 import {
 	getDailyAmount,
 	getMonthlyAmount,

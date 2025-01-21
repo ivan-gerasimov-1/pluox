@@ -11,7 +11,7 @@ import {
 import {
 	APP_CONFIG_QUERY_BUDGET,
 	getBudget,
-} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+} from '@root/presentation/web-ui/modules/settings/appConfig.query';
 import { ExpensesByCategory } from '@root/presentation/web-ui/modules/expenses/MoneySpentMonth/components/expensesByCategory/ExpensesByCategory';
 import { MoneyCard } from '@root/presentation/web-ui/modules/expenses/moneyCard/moneyCard';
 import { Separator } from '@root/presentation/web-ui/uiKit/separator/separator';

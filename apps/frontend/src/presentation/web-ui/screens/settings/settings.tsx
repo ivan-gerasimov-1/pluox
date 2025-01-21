@@ -14,7 +14,7 @@ import {
 	getAppConfig,
 	updateAppConfig,
 	APP_CONFIG_QUERY,
-} from '@root/presentation/web-ui/modules/appConfig/appConfig.query';
+} from '@root/presentation/web-ui/modules/settings/appConfig.query';
 import {
 	getUser,
 	USER_QUERY_BY_ID,
