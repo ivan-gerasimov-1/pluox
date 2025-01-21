@@ -10,9 +10,9 @@ import { IRouter } from '@root/presentation/web-ui/router';
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 import { ContainerProvider } from '@root/presentation/web-ui/modules/serviceContainer/provider';
 
-import '@root/presentation/web-ui/root.css';
+import '@root/presentation/web-ui/modules/app/components/root/root.css';
 
-type IAppProps = {
+type IRootProps = {
 	queryClient: QueryClient;
 	router: IRouter;
 	diContainer: IContainer;
@@ -20,7 +20,7 @@ type IAppProps = {
 	onRendered?(): void;
 };
 
-export function App(props: IAppProps) {
+export function Root(props: IRootProps) {
 	useEffectOnce(() => {
 		if (!props.onRendered) {
 			return;

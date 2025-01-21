@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 
 import type { QueryClient } from '@tanstack/react-query';
 
-import { App } from '@root/presentation/web-ui/components/app/app';
+import { Root } from '@root/presentation/web-ui/modules/app/components /root/root';
 import { AppContainerNotInitializedError } from '@root/presentation/web-ui/errors';
 
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
@@ -37,7 +37,7 @@ export class ReactUI implements IUserInterface {
 		}
 
 		this.appContainer.render(
-			<App
+			<Root
 				queryClient={this.queryClient}
 				router={this.router}
 				diContainer={this.diContainer}
