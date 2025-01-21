@@ -9,7 +9,7 @@ import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButto
 import styles from './header.module.css';
 
 export type THeaderProps = {
-	title?: string;
+	title: string;
 };
 
 export function Header(props: THeaderProps) {
@@ -18,17 +18,27 @@ export function Header(props: THeaderProps) {
 
 	return (
 		<div className={styles.container}>
-			{Boolean(isMain) ? (
-				<div className={styles.buttonPlaceholder} />
-			) : (
-				<IconButton
-					onClick={() => navigate(-1)}
-					iconName={Icon.IconName.ArrowBack}
-					iconSize={Icon.Size.LARGE}
-				/>
-			)}
+			<div
+				style={{
+					display: 'flex',
+				}}
+			>
+				{!Boolean(isMain) && (
+					<div
+						style={{
+							marginLeft: '-10px',
+						}}
+					>
+						<IconButton
+							onClick={() => navigate(-1)}
+							iconName={Icon.IconName.ArrowBack}
+							iconSize={Icon.Size.SMALL}
+						/>
+					</div>
+				)}
 
-			{props.title && <h1 className={styles.title}>{props.title}</h1>}
+				{props.title && <h1 className={styles.title}>{props.title}</h1>}
+			</div>
 
 			<AppLink to={EAppPath.SETTINGS}>
 				<Icon name={Icon.IconName.User} size={Icon.Size.LARGE} />

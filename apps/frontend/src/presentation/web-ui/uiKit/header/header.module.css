@@ -1,14 +1,26 @@
 .container {
+	position: sticky;
+	top: 3px;
+
+	padding-inline: 10px;
+
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 
-	min-height: 52px;
+	min-height: 36px;
+
+	background-color: var(--white-200);
+	border-radius: var(--br-100);
+	border: var(--border-100);
 }
 
 .title {
+	padding-block: 7.25px;
 	font-size: var(--fs-300);
 	letter-spacing: -0.375px;
+
+	text-transform: capitalize;
 }
 
 .buttonPlaceholder {
