@@ -9,6 +9,7 @@
 
 	/* White color */
 	--white-100: #fafafa;
+	--white-100_op75: rgb(250, 250, 250, 0.75);
 	--white-200: #fff;
 	--black-100: #333;
 	--black-200: #252525;
