@@ -1,4 +1,4 @@
-import { getAllowedSymbols } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/amountInput/constants';
+import { getAllowedSymbols } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/constants';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 

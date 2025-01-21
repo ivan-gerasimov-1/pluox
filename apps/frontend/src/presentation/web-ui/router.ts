@@ -4,8 +4,6 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import { NotFoundErrorScreen } from '@root/presentation/web-ui/screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
 
-import { ExpenseListScreen } from '@root/presentation/web-ui/screens/expenseList/expenseList';
-
 import { MainScreen } from '@root/presentation/web-ui/screens/main/main';
 
 import { SettingsScreen } from '@root/presentation/web-ui/screens/settings/settings';
@@ -13,6 +11,7 @@ import { SettingsScreen } from '@root/presentation/web-ui/screens/settings/setti
 import { SignInScreen } from '@root/presentation/web-ui/screens/signIn/SignIn';
 import { SignUpScreen } from '@root/presentation/web-ui/screens/signUp/SignUp';
 
+import { expenseRoutes } from '@root/presentation/web-ui/modules/expenses/expenses.module';
 import { venueRoutes } from '@root/presentation/web-ui/modules/venues/venues.module';
 
 type TRouter = ReturnType<typeof createRouter>;
@@ -26,13 +25,6 @@ const AUTHENTICATION_ROUTES = [
 	{
 		path: EAppPath.SIGNIN,
 		Component: SignInScreen,
-	},
-];
-
-const EXPENSE_ROUTES = [
-	{
-		path: EAppPath.EXPENSES,
-		Component: ExpenseListScreen,
 	},
 ];
 
@@ -56,7 +48,7 @@ const NOT_FOUND_ROUTE = {
 export function createAppRouter(): IRouter {
 	return createRouter([
 		...AUTHENTICATION_ROUTES,
-		...EXPENSE_ROUTES,
+		...expenseRoutes,
 		...venueRoutes,
 		...MAIN_ROUTES,
 

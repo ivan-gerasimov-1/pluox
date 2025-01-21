@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/expenseNew/helpers/createDateViewValue';
-import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/expenseForm/expenseForm';
+import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
+import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
 import {
 	addOne,
 	EXPENSES_QUERY_DAILY_AMOUNT,

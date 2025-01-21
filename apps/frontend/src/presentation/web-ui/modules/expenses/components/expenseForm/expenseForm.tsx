@@ -4,12 +4,12 @@ import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
 import { ECurrency } from '@root/core/modules/currency/domain/types';
 
-import { AmountInput } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/amountInput/amountInput';
-import { CategoryPills } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/categoryPills/categoryPills';
-import { DescriptionInput } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/commentInput/descriptionInput';
-import { DateInput } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/dateInput/dateInput';
-import { VenuePills } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/venuePills/venuePills';
-import { expenseFormI18n } from '@root/presentation/web-ui/modules/expenses/expenseForm/expenseForm.i18n';
+import { AmountInput } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/amountInput';
+import { CategoryPills } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/categoryPills/categoryPills';
+import { DescriptionInput } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/commentInput/descriptionInput';
+import { DateInput } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/dateInput/dateInput';
+import { VenuePills } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/venuePills/venuePills';
+import { expenseFormI18n } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm.i18n';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 
 import styles from './expenseForm.module.css';

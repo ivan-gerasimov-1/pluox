@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {
 	validateKey,
 	validateNumber,
-} from '@root/presentation/web-ui/modules/expenses/expenseForm/components/amountInput/helpers';
+} from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/helpers';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 

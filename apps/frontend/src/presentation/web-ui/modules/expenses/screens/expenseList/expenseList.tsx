@@ -3,10 +3,10 @@ import { useSearchParams } from 'react-router';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
-import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/expenseList/expenseList';
+import { ExpenseList } from '@root/presentation/web-ui/modules/expenses/components/expenseList/expenseList';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 
-import { expenseListI18n } from '@root/presentation/web-ui/screens/expenseList/expenseList.i18n';
+import { expenseListI18n } from '@root/presentation/web-ui/modules/expenses/screens/expenseList/expenseList.i18n';
 
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
