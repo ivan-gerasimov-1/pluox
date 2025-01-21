@@ -8,7 +8,8 @@
 
 	min-height: 36px;
 
-	backdrop-filter: blur(6px);
+	backdrop-filter: blur(4px);
+	background-color: var(--white-100_op75);
 
 	border-radius: var(--br-100);
 
