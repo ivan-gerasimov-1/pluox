@@ -1,17 +1,19 @@
 .container {
 	position: sticky;
-	top: 5px;
+	top: 0;
 
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 
-	min-height: 36px;
+	padding-inline: 15px;
+	padding-block: 10px;
 
 	backdrop-filter: blur(4px);
 	background-color: var(--white-100_op75);
 
-	border-radius: var(--br-100);
+	border-end-end-radius: var(--br-90);
+	border-end-start-radius: var(--br-90);
 
 	z-index: 1;
 }

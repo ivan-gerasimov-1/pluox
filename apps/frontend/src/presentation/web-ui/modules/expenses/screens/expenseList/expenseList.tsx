@@ -10,6 +10,7 @@ import { expenseListI18n } from '@root/presentation/web-ui/modules/expenses/scre
 
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
+import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 export function ExpenseListScreen() {
 	let intl = useIntl(expenseListI18n);
@@ -19,7 +20,12 @@ export function ExpenseListScreen() {
 		<Screen>
 			<Header title={intl.translate('title')} />
 
-			<ExpenseList dateFrom={screenData.dateFrom} dateTo={screenData.dateTo} />
+			<ScreenBody>
+				<ExpenseList
+					dateFrom={screenData.dateFrom}
+					dateTo={screenData.dateTo}
+				/>
+			</ScreenBody>
 		</Screen>
 	);
 }

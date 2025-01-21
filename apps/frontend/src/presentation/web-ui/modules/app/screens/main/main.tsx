@@ -24,6 +24,7 @@ import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
 import styles from './main.module.css';
+import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 function useMonthlyAmount(): number {
 	let temporal = useService(EServiceToken.TEMPORAL);
@@ -88,90 +89,92 @@ export function MainScreen() {
 			<Screen className={styles.screenWithBottomSpace}>
 				<Header title={today} />
 
-				<AppLink to={EAppPath.EXPENSES}>
-					<div className={styles.title}>
-						<span>
-							{intlService.formatCurrency(monthlyTotal, {
-								hideDecimal: true,
-							})}
-						</span>
-					</div>
-				</AppLink>
-
-				<div className={styles.cardContainer}>
-					<div className={cls(styles.card, styles.todayCard)}>
-						<div>Сегодня</div>
-
-						<div
-							style={{
-								marginBlockStart: '5px',
-								fontWeight: 'var(--fw-200)',
-							}}
-						>
-							{intlService.formatCurrency(dailyTotal, {
-								hideDecimal: true,
-							})}
+				<ScreenBody>
+					<AppLink to={EAppPath.EXPENSES}>
+						<div className={styles.title}>
+							<span>
+								{intlService.formatCurrency(monthlyTotal, {
+									hideDecimal: true,
+								})}
+							</span>
 						</div>
-					</div>
-					<div className={cls(styles.card)}>
-						<div>Остаток</div>
+					</AppLink>
 
-						<div
-							style={{
-								marginBlockStart: '5px',
-								fontWeight: 'var(--fw-200)',
-							}}
-						>
-							{intlService.formatCurrency(leftover, {
-								hideDecimal: true,
-							})}
+					<div className={styles.cardContainer}>
+						<div className={cls(styles.card, styles.todayCard)}>
+							<div>Сегодня</div>
+
+							<div
+								style={{
+									marginBlockStart: '5px',
+									fontWeight: 'var(--fw-200)',
+								}}
+							>
+								{intlService.formatCurrency(dailyTotal, {
+									hideDecimal: true,
+								})}
+							</div>
 						</div>
-					</div>
-					<div className={cls(styles.card, styles.categoryCard)}>
-						<div>Категории</div>
+						<div className={cls(styles.card)}>
+							<div>Остаток</div>
 
-						<ul
-							style={{
-								width: '100%',
-								padding: 0,
-								listStyle: 'none',
-								fontWeight: 'var(--fw-200)',
-							}}
-						>
-							{categories.map(({ id, total }) => (
-								<li
-									key={id}
-									style={{
-										display: 'flex',
-										justifyContent: 'space-between',
-										marginBlockEnd: '10px',
-										alignItems: 'flex-end',
-									}}
-								>
-									<span
+							<div
+								style={{
+									marginBlockStart: '5px',
+									fontWeight: 'var(--fw-200)',
+								}}
+							>
+								{intlService.formatCurrency(leftover, {
+									hideDecimal: true,
+								})}
+							</div>
+						</div>
+						<div className={cls(styles.card, styles.categoryCard)}>
+							<div>Категории</div>
+
+							<ul
+								style={{
+									width: '100%',
+									padding: 0,
+									listStyle: 'none',
+									fontWeight: 'var(--fw-200)',
+								}}
+							>
+								{categories.map(({ id, total }) => (
+									<li
+										key={id}
 										style={{
-											lineHeight: 1,
+											display: 'flex',
+											justifyContent: 'space-between',
+											marginBlockEnd: '10px',
+											alignItems: 'flex-end',
 										}}
 									>
-										{categoryService.getCategoryIcon(id)}
-									</span>
+										<span
+											style={{
+												lineHeight: 1,
+											}}
+										>
+											{categoryService.getCategoryIcon(id)}
+										</span>
 
-									<span className={styles.dotFilledSpace}></span>
+										<span className={styles.dotFilledSpace}></span>
 
-									<span
-										style={{
-											lineHeight: 1,
-										}}
-									>
-										{intlService.formatCurrency(total, {
-											hideDecimal: true,
-										})}
-									</span>
-								</li>
-							))}
-						</ul>
+										<span
+											style={{
+												lineHeight: 1,
+											}}
+										>
+											{intlService.formatCurrency(total, {
+												hideDecimal: true,
+											})}
+										</span>
+									</li>
+								))}
+							</ul>
+						</div>
 					</div>
-				</div>
+				</ScreenBody>
 			</Screen>
 
 			<ActionSheet>

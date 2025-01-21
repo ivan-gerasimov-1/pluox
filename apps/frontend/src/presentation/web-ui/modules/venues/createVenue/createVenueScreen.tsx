@@ -5,6 +5,7 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
+import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 type TVenueFormData = {
 	venueName: string;
@@ -34,43 +35,45 @@ export function CreateVenueScreen() {
 		<Screen>
 			<Header title="Create Venue" />
 
-			<form onSubmit={onSubmit}>
-				<div>
-					<input
-						type="text"
-						{...register('venueName', {
-							required: 'Обязательно',
-						})}
-					/>
-					{errors.venueName && (
-						<div
-							style={{
-								color: 'red',
-							}}
-						>
-							{errors.venueName.message}
-						</div>
-					)}
-				</div>
+			<ScreenBody>
+				<form onSubmit={onSubmit}>
+					<div>
+						<input
+							type="text"
+							{...register('venueName', {
+								required: 'Обязательно',
+							})}
+						/>
+						{errors.venueName && (
+							<div
+								style={{
+									color: 'red',
+								}}
+							>
+								{errors.venueName.message}
+							</div>
+						)}
+					</div>
 
-				<br />
+					<br />
 
-				<div>
-					<select {...register('category')}>
-						{categories.map((category) => (
-							<option key={category.id} value={category.id}>
-								{category.name}
-							</option>
-						))}
-					</select>
-				</div>
+					<div>
+						<select {...register('category')}>
+							{categories.map((category) => (
+								<option key={category.id} value={category.id}>
+									{category.name}
+								</option>
+							))}
+						</select>
+					</div>
 
-				<br />
+					<br />
 
-				<div>
-					<button type="submit">Добавить</button>
-				</div>
-			</form>
+					<div>
+						<button type="submit">Добавить</button>
+					</div>
+				</form>
+			</ScreenBody>
 		</Screen>
 	);
 }
