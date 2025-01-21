@@ -13,21 +13,18 @@ import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
 export function ExpenseListScreen() {
 	let intl = useIntl(expenseListI18n);
-	let screenParams = useScreenParams();
+	let screenData = useScreenLoader();
 
 	return (
 		<Screen>
 			<Header title={intl.translate('title')} />
 
-			<ExpenseList
-				dateFrom={screenParams.dateFrom}
-				dateTo={screenParams.dateTo}
-			/>
+			<ExpenseList dateFrom={screenData.dateFrom} dateTo={screenData.dateTo} />
 		</Screen>
 	);
 }
 
-function useScreenParams() {
+function useScreenLoader() {
 	let temporal = useService(EServiceToken.TEMPORAL);
 	let [searchParams] = useSearchParams();
 
