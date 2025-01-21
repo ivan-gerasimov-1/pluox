@@ -1,4 +1,4 @@
-import { descriptionInputI18n } from '@root/presentation/web-ui/modules/expenses/expenseView/components/commentInput/descriptionInput.i18n';
+import { descriptionInputI18n } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/commentInput/descriptionInput.i18n';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 
 import type { TDescription } from '@domain/types';

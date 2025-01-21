@@ -3,7 +3,7 @@ import type { TCategory } from '@domain/types';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { categoryInputI18n } from '@root/presentation/web-ui/modules/expenses/expenseView/components/categoryInput/categoryInput.i18n';
+import { categoryInputI18n } from '@root/presentation/web-ui/modules/expenses/expenseForm/components/categoryInput/categoryInput.i18n';
 
 import styles from './categoryInput.module.css';
 
