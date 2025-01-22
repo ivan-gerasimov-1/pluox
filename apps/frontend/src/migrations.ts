@@ -10,7 +10,9 @@ export function runMigrations() {
 	let persistedMigrations = JSON.parse(
 		window.localStorage.getItem('@savee/migrations') ?? '{}',
 	);
-	let migrations = registerMigrations(addLocaleToUser);
+	let migrations = registerMigrations({
+		_addLocaleToUser_: addLocaleToUser,
+	});
 
 	for (let [id, migrationFn] of migrations) {
 		if (persistedMigrations[id]?.success) {
@@ -34,12 +36,12 @@ export function runMigrations() {
 }
 
 function registerMigrations(
-	...migrationFns: (() => void)[]
+	migrationFns: Record<string, () => void>,
 ): Map<string, Function> {
 	let migrations = new Map<string, Function>();
 
-	for (let migrationFn of migrationFns) {
-		migrations.set(migrationFn.name, migrationFn);
+	for (let [id, migrationFn] of Object.entries(migrationFns)) {
+		migrations.set(id, migrationFn);
 	}
 
 	return migrations;
