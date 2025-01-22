@@ -7,6 +7,7 @@ type TCurrencyInputProps = {
 	onChange(currency: ECurrency): void;
 };
 
+/** @deprecated */
 export function CurrencyInput(props: TCurrencyInputProps) {
 	function handleCurrencyChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const currency = event.target.value;
