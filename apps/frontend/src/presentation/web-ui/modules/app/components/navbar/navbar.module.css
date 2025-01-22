@@ -6,6 +6,7 @@
 	width: 100%;
 
 	padding-inline: 5px;
+	padding-block-end: env(safe-area-inset-bottom);
 
 	position: fixed;
 
