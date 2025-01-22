@@ -3,16 +3,24 @@ import { cls } from '@root/presentation/web-ui/utils/classnames';
 import styles from './button.module.css';
 
 export type TButtonProps = {
-	type?: 'button' | 'submit';
-
 	className?: string;
 	style?: React.CSSProperties;
+
 	color?: 'red' | 'none';
 	size?: 's' | 'm' | 'l';
 	isWide?: boolean;
+} & (
+	| {
+			type?: 'button';
 
-	onClick: () => void;
-};
+			onClick: () => void;
+	  }
+	| {
+			type: 'submit';
+
+			onClick?: () => void;
+	  }
+);
 
 /**
  * @todo
