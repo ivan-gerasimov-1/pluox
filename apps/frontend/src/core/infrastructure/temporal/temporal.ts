@@ -26,7 +26,6 @@ export class Temporal implements ITemporal {
 	readonly #dateFn = dayjs;
 
 	constructor(private readonly intl: IIntlService) {
-		dayjs.Dayjs;
 		dayjs.extend(utc);
 		dayjs.extend(timezone);
 		dayjs.extend(objectSupport);

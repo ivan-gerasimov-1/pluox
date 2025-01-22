@@ -37,8 +37,8 @@ export function runMigrations() {
 
 function registerMigrations(
 	migrationFns: Record<string, () => void>,
-): Map<string, Function> {
-	let migrations = new Map<string, Function>();
+): Map<string, () => void> {
+	let migrations = new Map<string, () => void>();
 
 	for (let [id, migrationFn] of Object.entries(migrationFns)) {
 		migrations.set(id, migrationFn);

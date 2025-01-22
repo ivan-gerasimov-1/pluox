@@ -86,14 +86,14 @@ export class DatabaseCollection implements IDatabaseCollection {
 		this.storage.removeItem(this.id);
 	}
 
-	protected readData(): any {
+	protected readData<T extends {}>(): T {
 		const rawData = this.storage.getItem(this.id);
 
 		if (rawData === null) {
-			return {};
+			return {} as T;
 		}
 
-		return parseSafeToObject(rawData);
+		return parseSafeToObject(rawData) as T;
 	}
 
 	protected writeData<T>(data: T): void {
