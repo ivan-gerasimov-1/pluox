@@ -8,6 +8,7 @@ import {
 	EXPENSES_QUERY_DAILY_AMOUNT,
 	EXPENSES_QUERY_LIST,
 	EXPENSES_QUERY_MONTHLY_AMOUNT,
+	EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY,
 	EXPENSES_QUERY_TOTAL_AMOUNT,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
@@ -42,6 +43,10 @@ export function ExpenseNew() {
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY],
 					refetchType: 'all',
 				}),
 			]);

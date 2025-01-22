@@ -14,6 +14,8 @@ export const EXPENSES_QUERY_LIST = 'expenseQueryList';
 export const EXPENSES_QUERY_TOTAL_AMOUNT = 'expenseQueryTotalAmount';
 export const EXPENSES_QUERY_MONTHLY_AMOUNT = 'expenseQueryMonthlyAmount';
 export const EXPENSES_QUERY_DAILY_AMOUNT = 'expenseQueryDailyAmount';
+export const EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY =
+	'expenseQueryMonthlyTotalByCategory';
 
 export function addOne(payload: TExpenseCreateDTO): void {
 	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);
