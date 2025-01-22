@@ -8,7 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { checker } from 'vite-plugin-checker';
-import { VitePWA } from 'vite-plugin-pwa';
+// import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
@@ -38,9 +38,9 @@ export default defineConfig(({ mode }) => {
 			enableBuild: true,
 		}),
 		tsconfigPaths(),
-		VitePWA({
-			registerType: 'autoUpdate',
-		}),
+		// VitePWA({
+		// 	registerType: 'autoUpdate',
+		// }),
 	];
 
 	if (env.BUNDLE_ANALYZER === 'on') {
