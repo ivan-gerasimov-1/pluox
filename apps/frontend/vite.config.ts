@@ -80,7 +80,12 @@ export default defineConfig(({ mode }) => {
 				localsConvention: 'camelCase',
 			},
 			postcss: {
-				plugins: [postcssNested(), postcssPresetEnv()],
+				plugins: [
+					postcssNested(),
+					postcssPresetEnv({
+						env: mode,
+					}),
+				],
 			},
 		},
 
