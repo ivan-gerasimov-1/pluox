@@ -24,6 +24,7 @@
 
 	line-height: 1;
 	font-size: var(--fs-90);
+	font-family: inherit;
 
 	color: var(--fc-100);
 	background-color: var(--white-200);
