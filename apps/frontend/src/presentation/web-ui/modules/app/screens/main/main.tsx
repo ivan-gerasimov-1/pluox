@@ -8,6 +8,7 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import {
 	EXPENSES_QUERY_DAILY_AMOUNT,
 	EXPENSES_QUERY_MONTHLY_AMOUNT,
+	EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY,
 	getDailyAmount,
 	getMonthlyAmount,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
@@ -22,67 +23,91 @@ import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionS
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
+import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 import styles from './main.module.css';
-import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 function useMonthlyAmount(): number {
 	let temporal = useService(EServiceToken.TEMPORAL);
 
 	let currentMonth = temporal.getCurrentMonth();
 
-	let { data } = useQuery({
+	let { data = 0 } = useQuery({
 		queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT, currentMonth],
 		queryFn: () => getMonthlyAmount(currentMonth),
 		refetchOnMount: false,
 	});
 
-	return data as number;
-}
-
-function useBudget(): number {
-	let { data } = useQuery({
-		queryKey: [APP_CONFIG_QUERY_BUDGET],
-		queryFn: getBudget,
-	});
-
-	return data as number;
+	return data;
 }
 
 function useDailyAmount(): number {
-	let { data } = useQuery({
+	let { data = 0 } = useQuery({
 		queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
 		queryFn: getDailyAmount,
+		refetchOnMount: false,
 	});
 
-	return data ?? 0;
+	return data;
 }
 
-function useCategories() {
+function useMonthlyTotalByCategory() {
 	let temporal = useService(EServiceToken.TEMPORAL);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 
 	let currentMonth = temporal.getCurrentMonth();
 
-	return expenseService.getMonthlyTotalByCategory(currentMonth);
+	let { data = [] } = useQuery({
+		queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY, currentMonth],
+		queryFn: () => {
+			console.log('useMonthlyTotalByCategory');
+			return expenseService.getMonthlyTotalByCategory(currentMonth);
+		},
+		refetchOnMount: false,
+	});
+
+	return data;
 }
 
-export function MainScreen() {
-	let intlService = useService(EServiceToken.INTL_SERVICE);
-	let temporal = useService(EServiceToken.TEMPORAL);
-	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
+function useBudget(): number {
+	let { data = 0 } = useQuery({
+		queryKey: [APP_CONFIG_QUERY_BUDGET],
+		queryFn: getBudget,
+	});
 
-	let categories = useCategories();
+	return data;
+}
+
+export function useScreenLoader() {
+	let temporal = useService(EServiceToken.TEMPORAL);
 
 	let monthlyTotal = useMonthlyAmount();
 	let dailyTotal = useDailyAmount();
 	let budget = useBudget();
+
+	let categories = useMonthlyTotalByCategory();
 
 	let leftover = budget - monthlyTotal;
 
 	let today = temporal.format({
 		format: 'MMMM, YYYY',
 	});
+
+	return {
+		categories,
+		monthlyTotal,
+		dailyTotal,
+		leftover,
+		today,
+	};
+}
+
+export function MainScreen() {
+	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
+
+	let { categories, monthlyTotal, dailyTotal, leftover, today } =
+		useScreenLoader();
 
 	return (
 		<>
