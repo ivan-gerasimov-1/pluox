@@ -5,8 +5,8 @@
 	height: 55px;
 	width: 100%;
 
-	padding-inline: 5px;
-	padding-block-end: env(safe-area-inset-bottom);
+	padding-inline: 15px;
+	padding-block-end: 15px;
 
 	position: fixed;
 
