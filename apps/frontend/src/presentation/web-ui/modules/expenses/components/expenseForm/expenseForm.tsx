@@ -11,6 +11,7 @@ import { DateInput } from '@root/presentation/web-ui/modules/expenses/components
 import { VenuePills } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/venuePills/venuePills';
 import { expenseFormI18n } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm.i18n';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 
 import styles from './expenseForm.module.css';
 
@@ -113,9 +114,9 @@ export function ExpenseForm(props: TExpenseFormProps) {
 					required
 				/>
 
-				<button type="submit" className={styles.submitButton}>
+				<Button type="submit" className={styles.submitButton}>
 					{intl.translate('submitButton')}
-				</button>
+				</Button>
 			</div>
 
 			{/* <br /> */}
