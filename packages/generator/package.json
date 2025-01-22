@@ -7,7 +7,7 @@
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"dependencies": {
-		"commander": "13.0.0"
+		"commander": "13.1.0"
 	},
 	"bin": {
 		"generate-module": "./generate-module.js"
