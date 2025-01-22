@@ -28,8 +28,8 @@
 	background-color: var(--grey-100);
 
 	transition:
-		border-color var(--transition-200),
-		background-color var(--transition-200);
+		border-color var(--transition-100),
+		background-color var(--transition-100);
 
 	&:hover {
 		border-color: var(--fc-100);

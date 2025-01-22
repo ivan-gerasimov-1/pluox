@@ -32,14 +32,14 @@
 	}
 
 	&:last-of-type {
-		border-right: 2px solid var(--bc-100);
+		border-right: var(--border-100);
 		border-top-right-radius: var(--br-90);
 		border-bottom-right-radius: var(--br-90);
 	}
 }
 
 .radioInputTitle {
-	transition: color var(--transition-200);
+	transition: color var(--transition-100);
 
 	color: var(--color-text);
 
@@ -62,7 +62,7 @@
 
 	background-color: var(--white-200);
 
-	transition: background-color var(--transition-200);
+	transition: background-color var(--transition-100);
 
 	appearance: none;
 	outline: none;

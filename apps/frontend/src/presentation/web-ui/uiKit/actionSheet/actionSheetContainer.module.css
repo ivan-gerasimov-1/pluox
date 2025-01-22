@@ -8,7 +8,7 @@
 	left: 0;
 
 	background-color: var(--white-200);
-	box-shadow: 0 -10px 15px -5px var(--grey-350);
+	box-shadow: var(--box-shadow-100_negative);
 
 	border-top-left-radius: var(--br-100);
 	border-top-right-radius: var(--br-100);

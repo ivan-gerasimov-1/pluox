@@ -16,7 +16,7 @@
 
 .enterActive {
 	backdrop-filter: blur(4px);
-	transition: backdrop-filter var(--transition-200);
+	transition: backdrop-filter var(--transition-100);
 }
 
 .exit {
@@ -25,5 +25,5 @@
 
 .exitActive {
 	backdrop-filter: blur(0px);
-	transition: backdrop-filter var(--transition-200);
+	transition: backdrop-filter var(--transition-100);
 }

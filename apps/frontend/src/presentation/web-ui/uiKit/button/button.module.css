@@ -43,8 +43,7 @@
 }
 
 .none {
-	border: var(--border-100);
-	border-color: var(--bc-950);
+	border: var(--border-900);
 
 	color: var(--white-100);
 	background-color: var(--black-200);

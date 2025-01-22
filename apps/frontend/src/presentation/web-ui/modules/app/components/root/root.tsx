@@ -32,7 +32,7 @@ export function Root(props: IRootProps) {
 		<StrictMode>
 			<ContainerProvider container={props.diContainer}>
 				<QueryClientProvider client={props.queryClient}>
-					<ReactQueryDevtools initialIsOpen={false} />
+					{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 					<RouterProvider router={props.router} />
 				</QueryClientProvider>
 			</ContainerProvider>

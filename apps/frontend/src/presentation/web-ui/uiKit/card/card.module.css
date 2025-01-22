@@ -6,7 +6,7 @@
 	border-radius: var(--br-100);
 
 	background-color: var(--white-200);
-	box-shadow: 0 10px 15px -5px var(--grey-350);
+	box-shadow: var(--box-shadow-100);
 }
 
 .noPadding {
@@ -19,6 +19,6 @@
 	&:hover,
 	&:focus,
 	&:active {
-		box-shadow: 0 15px 10px -5px var(--grey-100);
+		box-shadow: var(--box-shadow-90);
 	}
 }

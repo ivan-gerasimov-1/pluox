@@ -1,12 +1,6 @@
 @import './reset.css';
 
 :root {
-	/* navbar */
-	--navbar-height: 4rem;
-
-	/** body */
-	--body-padding-bottom: calc(var(--navbar-height) + 2rem);
-
 	/* White color */
 	--white-100: #fafafa;
 	--white-100_op75: rgb(250, 250, 250, 0.75);
@@ -48,27 +42,26 @@
 	--fw-300: 800;
 
 	/** Border color */
-	--bc-80: var(--grey-100);
 	--bc-90: var(--grey-200);
 	--bc-100: var(--grey-300);
-	--bc-200: var(--grey-500);
-	--bc-300: var(--grey-700);
-	--bc-900: var(--black-100);
-	--bc-950: var(--black-200);
+	--bc-900: var(--black-200);
+
+	/** Box shadow */
+	--box-shadow-90: 0 15px 10px -5px var(--grey-100);
+	--box-shadow-100_negative: 0 -10px 15px -5px var(--grey-350);
+	--box-shadow-100: 0 10px 15px -5px var(--grey-350);
 
 	/** Border */
-	--border-80: 1px solid var(--bc-80);
 	--border-90: 1px solid var(--bc-90);
 	--border-100: 1px solid var(--bc-100);
+	--border-900: 1px solid var(--bc-900);
 
 	/** Border radius */
 	--br-90: calc(var(--br-100) - 10px);
 	--br-100: 24px;
 
 	/* misc */
-	--transition-90: 0.1s ease-in-out;
-	--transition-100: 0.15s ease-in-out;
-	--transition-200: 0.25s ease-in-out;
+	--transition-100: 200ms ease-in-out;
 
 	/* ActionSheet */
 	--action-sheet-start: 85%;
