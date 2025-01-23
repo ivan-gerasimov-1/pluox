@@ -110,7 +110,7 @@ export default defineConfig(({ mode }) => {
 		},
 
 		build: {
-			target: 'es2021',
+			target: 'es2019',
 			sourcemap: true,
 			cssMinify: 'lightningcss',
 			modulePreload: {
