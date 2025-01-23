@@ -40,7 +40,8 @@ export default defineConfig(({ mode }) => {
 		}),
 		tsconfigPaths(),
 		legacy({
-			targets: ['iOS 12'],
+			modernTargets: '>1%, last 2 versions, not dead',
+			targets: '>0.3%, iOS >= 12, not dead',
 			additionalLegacyPolyfills: [
 				'@formatjs/intl-getcanonicallocales/polyfill',
 				'@formatjs/intl-locale/polyfill',
@@ -124,7 +125,6 @@ export default defineConfig(({ mode }) => {
 		},
 
 		build: {
-			target: 'es2021',
 			sourcemap: true,
 			cssMinify: 'lightningcss',
 			modulePreload: {
