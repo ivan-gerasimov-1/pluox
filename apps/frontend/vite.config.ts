@@ -123,6 +123,14 @@ export default defineConfig(({ mode }) => {
 						if (id.includes('node_modules')) {
 							return 'vendors';
 						}
+
+						if (id.includes('/core')) {
+							return 'core';
+						}
+
+						if (id.includes('/presentation')) {
+							return 'ui';
+						}
 					},
 				},
 			},
