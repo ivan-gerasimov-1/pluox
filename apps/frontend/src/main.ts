@@ -1,7 +1,3 @@
-import 'intl';
-import 'intl/locale-data/jsonp/en';
-import 'intl/locale-data/jsonp/ru';
-
 import { createDIContainer } from '@root/diContainer';
 import { createUI } from '@root/presentation/web-ui';
 import { runMigrations } from '@root/migrations';
