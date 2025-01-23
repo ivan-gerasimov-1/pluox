@@ -103,7 +103,7 @@ export function ExpenseList(props: TExpenseListProps) {
 		let expenseList = group.items;
 
 		return (
-			<div key={group.date}>
+			<div key={group.date} className={styles.groupContainer}>
 				<div className={styles.date}>{intlService.formatDate(group.date)}</div>
 
 				<SwipeableList className={styles.list}>
@@ -131,9 +131,7 @@ export function ExpenseList(props: TExpenseListProps) {
 								}
 								fullSwipe
 							>
-								<div className={styles.iconContainer}>
-									<CategoryIcon categoryId={item.category} />
-								</div>
+								<CategoryIcon categoryId={item.category} />
 
 								<div className={styles.info}>
 									<div className={styles.amount}>

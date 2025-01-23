@@ -3,9 +3,10 @@
 	justify-content: space-between;
 
 	width: 100%;
+	height: var(--navbar-height);
 
-	padding-inline: 15px;
-	padding-block-end: 15px;
+	padding-inline: var(--navbar-gap);
+	padding-block-end: var(--navbar-gap);
 
 	position: fixed;
 

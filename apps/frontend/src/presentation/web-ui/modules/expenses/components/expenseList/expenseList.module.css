@@ -1,21 +1,29 @@
+.groupContainer {
+	&:nth-child(n) {
+		margin-block-start: 30px;
+	}
+
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
 .list {
-	margin: 15px 0 0 0;
 	padding: 0 0 0 10px;
 
 	list-style-type: none;
-
 	font-family: monospace;
 
 	& > :nth-child(n) {
-		margin: 20px 0;
+		margin-block-start: 20px;
 	}
 
 	& > :first-child {
-		margin-top: 0;
+		margin-block-start: 20px;
 	}
 
 	& > :last-child {
-		margin-bottom: 0;
+		margin-block-end: 0;
 	}
 }
 
@@ -27,18 +35,14 @@
 
 .info {
 	display: flex;
-
 	flex-direction: column;
 	flex-grow: 1;
-}
 
-.buttonGroup {
-	display: flex;
+	margin-inline-start: 15px;
 }
 
 .actionButton {
 	display: flex;
-
 	align-items: center;
 
 	margin: 0;
@@ -52,7 +56,6 @@
 
 .amount {
 	display: flex;
-
 	justify-content: flex-start;
 	align-items: flex-end;
 }
@@ -82,7 +85,7 @@
 }
 
 .description {
-	margin-top: 10px;
+	margin-block-start: 10px;
 
 	font-size: var(--fs-90);
 
@@ -90,12 +93,6 @@
 }
 
 .date {
-	margin-block: 20px;
-
 	font-size: var(--fs-90);
 	font-weight: var(--fw-200);
-}
-
-.iconContainer {
-	margin-right: 15px;
 }

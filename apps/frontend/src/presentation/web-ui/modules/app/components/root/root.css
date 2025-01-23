@@ -90,6 +90,14 @@
 	/* ActionSheet */
 	--action-sheet-start: 85%;
 	--action-sheet-end: 10%;
+
+	/** Header */
+	--header-height: 40px;
+
+	/** Navbar */
+	--navbar-inner-height: 55px;
+	--navbar-gap: 15px;
+	--navbar-height: calc(var(--navbar-inner-height) + var(--navbar-gap));
 }
 
 body {

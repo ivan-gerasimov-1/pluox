@@ -13,15 +13,7 @@ type TScreenProps = {
 
 export function Screen(props: TScreenProps) {
 	return (
-		<div
-			className={cls(
-				styles.container,
-				{
-					[styles.withNavbar]: props.hasNavbar,
-				},
-				props.className,
-			)}
-		>
+		<div className={cls(styles.container, props.className)}>
 			{props.children}
 
 			{props.hasNavbar && <Navbar />}

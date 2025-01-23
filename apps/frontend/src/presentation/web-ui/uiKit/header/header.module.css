@@ -1,20 +1,23 @@
 .container {
-	position: sticky;
+	position: fixed;
 	top: 0;
+	right: 0;
+	left: 0;
 
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
+
+	height: var(--header-height);
 
 	padding-inline: 15px;
-	padding-block: 10px;
+	padding-block: 5px;
 
 	backdrop-filter: blur(4px);
 	background-color: var(--white-100_op75);
 
-	border-right: var(--border-90);
-	border-bottom: var(--border-90);
-	border-left: var(--border-90);
+	border-inline: var(--border-90);
+	border-block-end: var(--border-90);
 
 	border-end-end-radius: var(--br-90);
 	border-end-start-radius: var(--br-90);
