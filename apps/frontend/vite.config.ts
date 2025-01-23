@@ -41,6 +41,16 @@ export default defineConfig(({ mode }) => {
 		tsconfigPaths(),
 		legacy({
 			targets: ['iOS 12'],
+			additionalLegacyPolyfills: [
+				'@formatjs/intl-getcanonicallocales/polyfill',
+				'@formatjs/intl-locale/polyfill',
+				'@formatjs/intl-pluralrules/polyfill',
+				'@formatjs/intl-pluralrules/locale-data/en',
+				'@formatjs/intl-pluralrules/locale-data/ru',
+				'@formatjs/intl-numberformat/polyfill',
+				'@formatjs/intl-numberformat/locale-data/en',
+				'@formatjs/intl-numberformat/locale-data/ru',
+			],
 		}),
 		// VitePWA({
 		// 	registerType: 'autoUpdate',
