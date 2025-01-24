@@ -60,7 +60,6 @@ function useMonthlyTotalByCategory() {
 	let { data = [] } = useQuery({
 		queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY, currentMonth],
 		queryFn: () => {
-			console.log('useMonthlyTotalByCategory');
 			return expenseService.getMonthlyTotalByCategory(currentMonth);
 		},
 		refetchOnMount: false,
