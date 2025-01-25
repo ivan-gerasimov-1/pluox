@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import type { QueryClient } from '@tanstack/react-query';
@@ -37,12 +38,14 @@ export class ReactUI implements IUserInterface {
 		}
 
 		this.appContainer.render(
-			<Root
-				queryClient={this.queryClient}
-				router={this.router}
-				diContainer={this.diContainer}
-				onRendered={() => this.loader.hideAndRemove()}
-			/>,
+			<StrictMode>
+				<Root
+					queryClient={this.queryClient}
+					router={this.router}
+					diContainer={this.diContainer}
+					onRendered={() => this.loader.hideAndRemove()}
+				/>
+			</StrictMode>,
 		);
 	}
 

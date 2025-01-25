@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { RouterProvider } from 'react-router';
 
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -31,15 +30,13 @@ export function Root(props: IRootProps) {
 	});
 
 	return (
-		<StrictMode>
-			<ContainerProvider container={props.diContainer}>
-				<QueryClientProvider client={props.queryClient}>
-					{/* <ReactQueryDevtools initialIsOpen={false} /> */}
-					<ModalProvider>
-						<RouterProvider router={props.router} />
-					</ModalProvider>
-				</QueryClientProvider>
-			</ContainerProvider>
-		</StrictMode>
+		<ContainerProvider container={props.diContainer}>
+			<QueryClientProvider client={props.queryClient}>
+				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
+				<ModalProvider>
+					<RouterProvider router={props.router} />
+				</ModalProvider>
+			</QueryClientProvider>
+		</ContainerProvider>
 	);
 }
