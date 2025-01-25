@@ -1,0 +1,63 @@
+.modal {
+	--blur-size: 25px;
+
+	position: fixed;
+
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	margin: 50px;
+	padding: 15px 20px;
+
+	background-color: var(--white-100);
+
+	border: var(--border-100);
+	border-radius: var(--br-100);
+
+	will-change: filter, opacity;
+
+	z-index: 2;
+}
+
+.appear,
+.enter {
+	filter: blur(var(--blur-size));
+	opacity: 0;
+}
+
+.appearActive,
+.enterActive {
+	filter: blur(0);
+	opacity: 1;
+
+	transition:
+		filter var(--transition-100),
+		opacity var(--transition-100);
+}
+
+.appearDone,
+.enterDone {
+	filter: blur(0);
+	opacity: 1;
+}
+
+.exit {
+	filter: blur(0);
+	opacity: 1;
+}
+
+.exitActive {
+	filter: blur(var(--blur-size));
+	opacity: 0;
+
+	transition:
+		filter var(--transition-100),
+		opacity var(--transition-100);
+}
+
+.exitDone {
+	filter: blur(var(--blur-size));
+	opacity: 0;
+}

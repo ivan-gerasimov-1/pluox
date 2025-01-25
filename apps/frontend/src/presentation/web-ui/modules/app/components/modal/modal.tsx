@@ -1,21 +1,26 @@
 /**
  * @description Work In Progress
  */
+import { nanoid } from 'nanoid';
 import {
 	type default as React,
 	createContext,
 	useContext,
 	useMemo,
+	useRef,
 	useState,
 } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { createPortal } from 'react-dom';
 
-import { nanoid } from 'nanoid';
+import { Backdrop } from '@root/presentation/web-ui/modules/app/components/modal/backdrop/Backdrop';
+
+import styles from './modal.module.css';
 
 export const ModalContext = createContext<{
 	render: (
 		component: (...args: any) => React.ReactElement,
-		payload?: any,
+		props?: any,
 		options?: any,
 	) => {
 		id: string;
@@ -28,17 +33,33 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 
 	let modalApi = useMemo(
 		() => ({
-			render: (component: any, payload: any, options?: any) => {
+			render: (component: any, props: any, options?: any) => {
 				let id = nanoid();
 
-				console.log('render', id, payload, options);
-
 				let close = () => {
-					setModals((modals) => {
-						let { [id]: _, ...restModals } = modals;
+					requestAnimationFrame(() => {
+						setModals((modals) => {
+							let { [id]: targetModal } = modals;
 
-						return restModals;
+							return {
+								...modals,
+								[id]: {
+									...targetModal,
+									isMounted: false,
+								},
+							};
+						});
 					});
+
+					setTimeout(() => {
+						requestAnimationFrame(() => {
+							setModals((modals) => {
+								let { [id]: _, ...restModals } = modals;
+
+								return restModals;
+							});
+						});
+					}, 200);
 				};
 
 				setModals((modals) => ({
@@ -46,9 +67,10 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 					[id]: {
 						id,
 						component,
-						payload,
+						props,
 						options,
 						close,
+						isMounted: true,
 					},
 				}));
 
@@ -66,10 +88,9 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 			{props.children}
 
 			{Object.values(modals).map((modal) => {
-				console.log(modal);
 				return createPortal(
-					<Modal id={modal.id} close={modal.close}>
-						<modal.component {...modal.payload} close={modal.close} />
+					<Modal id={modal.id} close={modal.close} isMounted={modal.isMounted}>
+						<modal.component {...modal.props} close={modal.close} />
 					</Modal>,
 					document.body,
 				);
@@ -89,51 +110,31 @@ export function useModal() {
 }
 
 type TModalProps = {
-	id: string;
 	children: React.ReactNode;
+
+	id: string;
 	close: () => void;
+	isMounted: boolean;
 };
 
 export function Modal(props: TModalProps) {
+	let modalRef = useRef(null);
+
 	return (
 		<>
-			<div
-				style={{
-					position: 'fixed',
-					top: 0,
-					right: 0,
-					bottom: 0,
-					left: 0,
+			<Backdrop onClick={props.close} isVisible={props.isMounted} />
 
-					backgroundColor: 'var(--white-100_op75)',
-					backdropFilter: 'blur(6px)',
-
-					zIndex: 1,
-				}}
-				onClick={props.close}
-			/>
-
-			<div
-				id={props.id}
-				style={{
-					position: 'fixed',
-					top: 0,
-					right: 0,
-					bottom: 0,
-					left: 0,
-
-					margin: '50px',
-					padding: '15px 20px',
-
-					backgroundColor: 'var(--white-100)',
-
-					border: 'var(--border-100)',
-					borderRadius: 'var(--br-100)',
-					zIndex: 2,
-				}}
+			<CSSTransition
+				nodeRef={modalRef}
+				in={props.isMounted}
+				timeout={200}
+				classNames={styles}
+				appear
 			>
-				{props.children}
-			</div>
+				<div ref={modalRef} id={props.id} className={styles.modal}>
+					{props.children}
+				</div>
+			</CSSTransition>
 		</>
 	);
 }
