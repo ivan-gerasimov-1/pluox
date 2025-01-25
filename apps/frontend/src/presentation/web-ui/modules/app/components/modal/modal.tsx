@@ -90,7 +90,11 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 			{Object.values(modals).map((modal) => {
 				return createPortal(
 					<Modal id={modal.id} close={modal.close} isMounted={modal.isMounted}>
-						<modal.component {...modal.props} close={modal.close} />
+						<modal.component
+							id={modal.id}
+							close={modal.close}
+							{...modal.props}
+						/>
 					</Modal>,
 					document.body,
 				);
