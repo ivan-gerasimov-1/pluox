@@ -57,7 +57,8 @@
 		"vite-plugin-html": "3.2.2",
 		"vite-plugin-pwa": "0.21.1",
 		"vite-plugin-svgr": "4.3.0",
-		"vite-tsconfig-paths": "5.1.4"
+		"vite-tsconfig-paths": "5.1.4",
+		"wrangler": "3.105.1"
 	},
 	"msw": {
 		"workerDirectory": [
