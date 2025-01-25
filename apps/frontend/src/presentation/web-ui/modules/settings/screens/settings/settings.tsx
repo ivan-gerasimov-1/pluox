@@ -26,6 +26,8 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
+import { useModal } from '@root/presentation/web-ui/modules/app/components/modal/modal';
+
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
@@ -50,6 +52,7 @@ import styles from './settings.module.css';
  *    *queryKey* contains *QUERY_APP_CONFIG_BUDGET*
  */
 export function SettingsScreen() {
+	let modal = useModal();
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let intl = useIntl(settingsI18n);
 	let navigation = useAppNavigation();
@@ -391,6 +394,29 @@ export function SettingsScreen() {
 							</div>
 						</Card>
 					</CardContainer>
+
+					<Button
+						onClick={() => {
+							modal.render(function TestModal(props: {
+								id: string;
+								close: () => void;
+							}) {
+								console.log(props);
+								return (
+									<>
+										Modal: {props.id}
+										<br />
+										<br />
+										<Button onClick={props.close} isWide>
+											Close
+										</Button>
+									</>
+								);
+							});
+						}}
+					>
+						Open Modal
+					</Button>
 				</ScreenBody>
 			</Screen>
 
