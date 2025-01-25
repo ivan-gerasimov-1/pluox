@@ -17,6 +17,8 @@ import { Backdrop } from '@root/presentation/web-ui/modules/app/components/modal
 
 import styles from './modal.module.css';
 
+const TRANSITION_DURATION = 200;
+
 export const ModalContext = createContext<{
 	render: (
 		component: (...args: any) => React.ReactElement,
@@ -27,6 +29,16 @@ export const ModalContext = createContext<{
 		close: () => void;
 	};
 } | null>(null);
+
+export function useModal() {
+	let context = useContext(ModalContext);
+
+	if (!context) {
+		throw new Error('useModal must be used within ModalProvider');
+	}
+
+	return context;
+}
 
 export function ModalProvider(props: { children: React.ReactNode }) {
 	let [modals, setModals] = useState<Record<string, any>>({});
@@ -45,34 +57,37 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 								...modals,
 								[id]: {
 									...targetModal,
-									isMounted: false,
+									isExited: true,
 								},
 							};
 						});
 					});
-
-					setTimeout(() => {
-						requestAnimationFrame(() => {
-							setModals((modals) => {
-								let { [id]: _, ...restModals } = modals;
-
-								return restModals;
-							});
-						});
-					}, 200);
 				};
 
-				setModals((modals) => ({
-					...modals,
-					[id]: {
-						id,
-						component,
-						props,
-						options,
-						close,
-						isMounted: true,
-					},
-				}));
+				let unmount = () => {
+					requestAnimationFrame(() => {
+						setModals((modals) => {
+							let { [id]: _, ...restModals } = modals;
+
+							return restModals;
+						});
+					});
+				};
+
+				requestAnimationFrame(() => {
+					setModals((modals) => ({
+						...modals,
+						[id]: {
+							id,
+							component,
+							props,
+							options,
+							close,
+							unmount,
+							isExited: false,
+						},
+					}));
+				});
 
 				return {
 					id,
@@ -89,10 +104,16 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 
 			{Object.values(modals).map((modal) => {
 				return createPortal(
-					<Modal id={modal.id} close={modal.close} isMounted={modal.isMounted}>
+					<Modal
+						id={modal.id}
+						close={modal.close}
+						unmount={modal.unmount}
+						isExited={modal.isExited}
+					>
 						<modal.component
 							id={modal.id}
 							close={modal.close}
+							unmount={modal.unmount}
 							{...modal.props}
 						/>
 					</Modal>,
@@ -103,22 +124,13 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 	);
 }
 
-export function useModal() {
-	let context = useContext(ModalContext);
-
-	if (!context) {
-		throw new Error('useModal must be used within ModalProvider');
-	}
-
-	return context;
-}
-
 type TModalProps = {
 	children: React.ReactNode;
 
 	id: string;
 	close: () => void;
-	isMounted: boolean;
+	unmount: () => void;
+	isExited: boolean;
 };
 
 export function Modal(props: TModalProps) {
@@ -126,13 +138,14 @@ export function Modal(props: TModalProps) {
 
 	return (
 		<>
-			<Backdrop onClick={props.close} isVisible={props.isMounted} />
+			<Backdrop onClick={props.close} isVisible={!props.isExited} />
 
 			<CSSTransition
 				nodeRef={modalRef}
-				in={props.isMounted}
-				timeout={200}
+				in={!props.isExited}
+				timeout={TRANSITION_DURATION}
 				classNames={styles}
+				onExited={props.unmount}
 				appear
 			>
 				<div ref={modalRef} id={props.id} className={styles.modal}>
