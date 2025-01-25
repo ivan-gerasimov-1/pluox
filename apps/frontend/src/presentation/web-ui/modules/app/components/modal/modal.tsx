@@ -5,13 +5,15 @@ import { nanoid } from 'nanoid';
 import {
 	type default as React,
 	createContext,
+	createElement,
+	memo,
 	useContext,
 	useMemo,
 	useRef,
 	useState,
 } from 'react';
-import { CSSTransition } from 'react-transition-group';
 import { createPortal } from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 
 import { Backdrop } from '@root/presentation/web-ui/modules/app/components/modal/backdrop/Backdrop';
 
@@ -110,12 +112,12 @@ export function ModalProvider(props: { children: React.ReactNode }) {
 						unmount={modal.unmount}
 						isExited={modal.isExited}
 					>
-						<modal.component
-							id={modal.id}
-							close={modal.close}
-							unmount={modal.unmount}
-							{...modal.props}
-						/>
+						{createElement(memo(modal.component), {
+							id: modal.id,
+							close: modal.close,
+							unmount: modal.unmount,
+							...modal.props,
+						})}
 					</Modal>,
 					document.body,
 				);
