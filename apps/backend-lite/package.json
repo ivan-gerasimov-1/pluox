@@ -8,6 +8,10 @@
 		"start": "npm run start:dev",
 		"start:dev": "node --env-file=.env --experimental-transform-types --watch ./src/index.ts",
 		"start:prod": "node --env-file=.env --experimental-transform-types ./src/index.ts",
+		"___start___next___": "",
+		"start:next": "npm run start:dev:next",
+		"start:dev:next": "node --env-file=.env --experimental-transform-types --watch ./src/index.node.ts",
+		"start:prod:next": "node --env-file=.env --experimental-transform-types ./src/index.node.ts",
 		"___test___": "",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"___build___": "",
@@ -37,7 +41,9 @@
 	"license": "UNLICENSED",
 	"description": "Savee app backend (lite)",
 	"dependencies": {
-		"better-sqlite3": "11.8.1"
+		"@hono/node-server": "1.13.7",
+		"better-sqlite3": "11.8.1",
+		"hono": "4.6.18"
 	},
 	"devDependencies": {
 		"@types/better-sqlite3": "7.6.12",
