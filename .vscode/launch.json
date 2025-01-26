@@ -39,6 +39,24 @@
 			"cwd": "${workspaceFolder}/apps/backend-lite",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
+		},
+		{
+			"name": "API (Next)",
+			"command": "npm --workspace=@savee/backend-lite run start:next",
+			"request": "launch",
+			"type": "node-terminal",
+			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"sourceMaps": true,
+			"skipFiles": ["<node_internals>/**"]
+		},
+		{
+			"name": "API (Cloudflare)",
+			"command": "npm --workspace=@savee/backend-lite run start:cf",
+			"request": "launch",
+			"type": "node-terminal",
+			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"sourceMaps": true,
+			"skipFiles": ["<node_internals>/**"]
 		}
 	],
 	"compounds": [
