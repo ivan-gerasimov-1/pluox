@@ -16,12 +16,12 @@ env:
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'apps/backend-lite/**'
-      - '.github/workflows/backend-v2.yml'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'apps/backend-lite/**'
+  #     - '.github/workflows/backend-v2.yml'
   # pull_request:
   #   branches:
   #     - main
