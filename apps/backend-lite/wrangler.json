@@ -1,0 +1,7 @@
+{
+	"name": "savee-api-v3",
+	"main": "src/index.cloudflare.ts",
+	"compatibility_date": "2024-11-11",
+	"tsconfig": "./tsconfig.cloudflare.json",
+	"minify": true
+}

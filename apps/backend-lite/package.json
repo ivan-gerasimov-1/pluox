@@ -12,6 +12,10 @@
 		"start:next": "npm run start:dev:next",
 		"start:dev:next": "node --env-file=.env --experimental-transform-types --watch ./src/index.node.ts",
 		"start:prod:next": "node --env-file=.env --experimental-transform-types ./src/index.node.ts",
+		"___start___cloudflare___": "",
+		"start:cf": "npm run start:dev:cf",
+		"start:dev:cf": "wrangler dev",
+		"#NOT_IMPLEMENTED#start:prod:cf": "",
 		"___test___": "",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"___build___": "",
@@ -46,7 +50,9 @@
 		"hono": "4.6.18"
 	},
 	"devDependencies": {
+		"@cloudflare/workers-types": "4.20250124.3",
 		"@types/better-sqlite3": "7.6.12",
-		"@types/node": "22.10.10"
+		"@types/node": "22.10.10",
+		"wrangler": "3.105.1"
 	}
 }
