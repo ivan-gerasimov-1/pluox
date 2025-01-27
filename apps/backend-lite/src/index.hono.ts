@@ -113,11 +113,9 @@ app
 				),
 				AUTH_COOKIE_SECRET,
 				{
-					path: '/',
 					httpOnly: true,
 					secure: true,
 					sameSite: 'Lax',
-					domain: '.gerasimov.dev',
 				},
 			);
 
@@ -170,11 +168,9 @@ app
 				),
 				AUTH_COOKIE_SECRET,
 				{
-					path: '/',
 					httpOnly: true,
 					secure: true,
 					sameSite: 'Lax',
-					domain: '.gerasimov.dev',
 				},
 			);
 
