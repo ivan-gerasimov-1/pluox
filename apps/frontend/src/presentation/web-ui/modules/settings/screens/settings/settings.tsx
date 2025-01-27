@@ -425,10 +425,15 @@ export function SettingsScreen() {
 								close: () => void;
 							}) {
 								let apiClient = useService(EServiceToken.API_CLIENT);
-								let [isAuthenticated, setIsAuthenticated] = useState(false);
+								let [isAuthenticated, setIsAuthenticated] = useState<
+									boolean | null
+								>(null);
 								return (
 									<>
-										Is Authenticated: {isAuthenticated.toString()}
+										Is Authenticated:{' '}
+										{isAuthenticated === null
+											? '?'
+											: isAuthenticated.toString()}
 										<br />
 										<br />
 										<Button
