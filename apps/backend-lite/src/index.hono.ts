@@ -14,7 +14,6 @@ import { EResponseCode } from '#app/enums';
 import {
 	comparePasswordHash,
 	createPasswordHash,
-	generateId,
 } from '#app/modules/crypto/index';
 
 const app = new Hono<{
@@ -112,13 +111,6 @@ app
 					JWT_TOKEN_SECRET,
 				),
 				AUTH_COOKIE_SECRET,
-				{
-					path: '/',
-					httpOnly: true,
-					secure: true,
-					sameSite: 'Lax',
-					domain: '.gerasimov.dev',
-				},
 			);
 
 			return c.json({
@@ -169,13 +161,6 @@ app
 					JWT_TOKEN_SECRET,
 				),
 				AUTH_COOKIE_SECRET,
-				{
-					path: '/',
-					httpOnly: true,
-					secure: true,
-					sameSite: 'Lax',
-					domain: '.gerasimov.dev',
-				},
 			);
 
 			return c.json({
