@@ -162,6 +162,13 @@ app
 					JWT_TOKEN_SECRET,
 				),
 				AUTH_COOKIE_SECRET,
+				{
+					path: '/',
+					httpOnly: true,
+					secure: true,
+					sameSite: 'None',
+					domain: 'savee.gerasimov.dev',
+				},
 			);
 
 			return c.json({
