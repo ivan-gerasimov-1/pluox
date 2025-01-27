@@ -58,6 +58,7 @@ export class ApiClient implements IApiClient {
 			method: options.method,
 			headers,
 			body,
+			credentials: 'include',
 			signal: options.abortSignal,
 		});
 
