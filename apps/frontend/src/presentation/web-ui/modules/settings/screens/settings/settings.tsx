@@ -26,7 +26,7 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-import { useModal } from '@root/presentation/web-ui/modules/app/components/modal/modal';
+import { useModal } from '@root/presentation/web-ui/modules/app/components/modal/useModal';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
@@ -401,7 +401,6 @@ export function SettingsScreen() {
 								id: string;
 								close: () => void;
 							}) {
-								console.log(props);
 								return (
 									<>
 										Modal: {props.id}
