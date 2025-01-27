@@ -48,8 +48,10 @@
 	"description": "Savee app backend (lite)",
 	"dependencies": {
 		"@hono/node-server": "1.13.7",
+		"@hono/zod-validator": "0.4.2",
 		"better-sqlite3": "11.8.1",
-		"hono": "4.6.19"
+		"hono": "4.6.19",
+		"zod": "3.24.1"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "4.20250124.3",
