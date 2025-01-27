@@ -33,7 +33,12 @@ const AUTH_COOKIE_NAME = 'session';
 const AUTH_COOKIE_SECRET = 'cookie-not-a-secret';
 
 app
-	.use(cors()) //
+	.use(
+		cors({
+			origin: '*',
+			credentials: true,
+		}),
+	) //
 	.use(csrf())
 	.use(secureHeaders())
 	.post(
