@@ -167,7 +167,6 @@ app
 					httpOnly: true,
 					secure: true,
 					sameSite: 'None',
-					domain: 'gerasimov.dev',
 				},
 			);
 
