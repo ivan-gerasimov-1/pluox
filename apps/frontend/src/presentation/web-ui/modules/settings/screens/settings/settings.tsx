@@ -439,7 +439,7 @@ export function SettingsScreen() {
 										<Button
 											onClick={async () => {
 												try {
-													let response = await apiClient.post('/users/me');
+													let response = await apiClient.get('/users/me');
 													if (response) {
 														setIsAuthenticated(true);
 													}
