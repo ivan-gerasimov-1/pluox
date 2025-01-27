@@ -9,7 +9,7 @@ import {
 export class ApiClient implements IApiClient {
 	constructor(private readonly configProvider: IApiClientConfigProvider) {}
 
-	private get authorizationHeader(): string {
+	private get authorizationHeader(): string | null {
 		return this.configProvider.authorizationHeader;
 	}
 

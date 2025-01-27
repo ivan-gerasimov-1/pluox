@@ -12,8 +12,12 @@ export class ApiClientConfigProvider implements IApiClientConfigProvider {
 		return this.environment.apiUrl;
 	}
 
-	public get authorizationHeader(): string {
-		let authToken = this.sessionService.accessToken ?? '';
+	public get authorizationHeader(): string | null {
+		let authToken = this.sessionService.accessToken;
+
+		if (!authToken) {
+			return null;
+		}
 
 		return `Bearer ${authToken}`;
 	}

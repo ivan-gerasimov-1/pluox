@@ -16,7 +16,7 @@ export interface IApiClient {
 
 export interface IApiClientConfigProvider {
 	readonly baseUrl: string;
-	readonly authorizationHeader: string;
+	readonly authorizationHeader: string | null;
 }
 
 export type THttpHeaders = {
