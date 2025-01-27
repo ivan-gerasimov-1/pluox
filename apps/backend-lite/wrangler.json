@@ -9,7 +9,7 @@
 	"minify": true,
 	"d1_databases": [
 		{
-			"binding": "db",
+			"binding": "DB",
 			"database_id": "db0da424-580c-44c5-8c6a-244f0c8eb0d9",
 			"database_name": "savee"
 		}
