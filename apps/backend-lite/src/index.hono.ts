@@ -1,3 +1,5 @@
+import type { D1Database } from '@cloudflare/workers-types';
+
 import { Hono } from 'hono';
 import { deleteCookie, setSignedCookie } from 'hono/cookie';
 import { cors } from 'hono/cors';
@@ -5,10 +7,11 @@ import { csrf } from 'hono/csrf';
 import { jwt, sign, type JwtVariables } from 'hono/jwt';
 import { secureHeaders } from 'hono/secure-headers';
 
-type Variables = JwtVariables<{ id: string }>;
-
 const app = new Hono<{
-	Variables: Variables;
+	Variables: JwtVariables<{ id: string }>;
+	Bindings: {
+		DB: D1Database;
+	};
 }>();
 
 const JWT_TOKEN_SECRET = 'jwt-not-a-secret';
