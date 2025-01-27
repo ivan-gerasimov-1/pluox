@@ -167,7 +167,7 @@ app
 					httpOnly: true,
 					secure: true,
 					sameSite: 'None',
-					domain: 'https://savee.gerasimov.dev',
+					domain: 'gerasimov.dev',
 				},
 			);
 
