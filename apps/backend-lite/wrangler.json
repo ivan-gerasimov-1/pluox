@@ -4,6 +4,7 @@
 	"name": "savee-api-v3",
 	"main": "src/index.cloudflare.ts",
 	"compatibility_date": "2024-11-11",
+	"compatibility_flags": ["nodejs_compat"],
 	"tsconfig": "./tsconfig.cloudflare.json",
 	"minify": true,
 	"d1_databases": [
