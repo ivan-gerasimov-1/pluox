@@ -167,6 +167,7 @@ app
 					httpOnly: true,
 					secure: true,
 					sameSite: 'None',
+					partitioned: true,
 				},
 			);
 
