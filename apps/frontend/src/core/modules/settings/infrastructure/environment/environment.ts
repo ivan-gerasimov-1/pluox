@@ -65,7 +65,7 @@ export class Environment implements IEnvironment {
 
 		return window.location.hostname.includes('vercel.app')
 			? 'https://savee-api.gerasimov.dev'
-			: 'https://savee-api-v2.gerasimov.dev';
+			: 'https://savee-api-v3.lv48.workers.dev';
 	}
 
 	private getOpenExchangeRatesApi(env?: string | EEnvironment) {

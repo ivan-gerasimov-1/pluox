@@ -17,6 +17,18 @@ export class ApiClient implements IApiClient {
 		return this.configProvider.baseUrl;
 	}
 
+	public async get<TResponse>(
+		path: string,
+		options?: {
+			abortSignal?: AbortSignal;
+		},
+	): Promise<TResponse> {
+		return this.request(path, {
+			method: EHttpMethod.GET,
+			abortSignal: options?.abortSignal,
+		});
+	}
+
 	public async post<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
