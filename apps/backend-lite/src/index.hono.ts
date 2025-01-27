@@ -14,7 +14,6 @@ import { EResponseCode } from '#app/enums';
 import {
 	comparePasswordHash,
 	createPasswordHash,
-	generateId,
 } from '#app/modules/crypto/index';
 
 const app = new Hono<{
