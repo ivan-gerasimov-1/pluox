@@ -35,7 +35,7 @@ const AUTH_COOKIE_SECRET = 'cookie-not-a-secret';
 app
 	.use(
 		cors({
-			origin: ['http://localhost:3000', 'https://savee.gerasimov.dev'],
+			origin: ['https://savee.gerasimov.dev'],
 			credentials: true,
 		}),
 	) //
