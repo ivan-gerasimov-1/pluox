@@ -1,7 +1,17 @@
 {
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+
 	"name": "savee-api-v3",
 	"main": "src/index.cloudflare.ts",
 	"compatibility_date": "2024-11-11",
+	"compatibility_flags": ["nodejs_compat"],
 	"tsconfig": "./tsconfig.cloudflare.json",
-	"minify": true
+	"minify": true,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_id": "db0da424-580c-44c5-8c6a-244f0c8eb0d9",
+			"database_name": "savee"
+		}
+	]
 }
