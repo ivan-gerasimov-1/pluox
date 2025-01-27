@@ -112,6 +112,13 @@ app
 					JWT_TOKEN_SECRET,
 				),
 				AUTH_COOKIE_SECRET,
+				{
+					path: '/',
+					httpOnly: true,
+					secure: true,
+					sameSite: 'Lax',
+					domain: '.gerasimov.dev',
+				},
 			);
 
 			return c.json({
@@ -166,8 +173,8 @@ app
 					path: '/',
 					httpOnly: true,
 					secure: true,
-					sameSite: 'None',
-					partitioned: true,
+					sameSite: 'Lax',
+					domain: '.gerasimov.dev',
 				},
 			);
 
