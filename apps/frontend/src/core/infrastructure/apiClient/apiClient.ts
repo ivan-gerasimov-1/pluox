@@ -51,17 +51,20 @@ export class ApiClient implements IApiClient {
 			abortSignal?: AbortSignal;
 		},
 	): Promise<TResponse> {
-		let body = JSON.stringify(options.payload ?? {});
 		let headers = this.createHeaders();
 
-		let responseRaw = await fetch(`${this.baseUrl}${path}`, {
+		let requestInit: RequestInit = {
 			method: options.method,
 			headers,
-			body,
 			credentials: 'include',
 			signal: options.abortSignal,
-		});
+		};
 
+		if (options.method !== EHttpMethod.GET) {
+			requestInit.body = JSON.stringify(options.payload ?? {});
+		}
+
+		let responseRaw = await fetch(`${this.baseUrl}${path}`, requestInit);
 		let response = await responseRaw.json();
 
 		if (!responseRaw.ok) {
