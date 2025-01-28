@@ -9,7 +9,9 @@ import { IRouter } from '@root/presentation/web-ui/router';
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 import { ContainerProvider } from '@root/presentation/web-ui/modules/serviceContainer/provider';
 
-import { ModalProvider } from '@root/presentation/web-ui/modules/app/components/modal/modal';
+import { ModalProvider } from '@root/presentation/web-ui/modules/app/components/modal/modalProvider';
+import { ActionSheetProvider } from '@root/presentation/web-ui/modules/app/components/actionSheet/actionSheetProvider';
+
 import '@root/presentation/web-ui/modules/app/components/root/root.css';
 
 type IRootProps = {
@@ -34,7 +36,9 @@ export function Root(props: IRootProps) {
 			<QueryClientProvider client={props.queryClient}>
 				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 				<ModalProvider>
-					<RouterProvider router={props.router} />
+					<ActionSheetProvider>
+						<RouterProvider router={props.router} />
+					</ActionSheetProvider>
 				</ModalProvider>
 			</QueryClientProvider>
 		</ContainerProvider>

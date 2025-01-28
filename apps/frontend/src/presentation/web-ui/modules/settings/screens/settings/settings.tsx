@@ -26,7 +26,9 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-import { useModal } from '@root/presentation/web-ui/modules/app/components/modal/modal';
+import type { TActionsSheetProps } from '@root/presentation/web-ui/modules/app/components/actionSheet/types';
+import { useActionSheet } from '@root/presentation/web-ui/modules/app/components/actionSheet/useActionSheet';
+import { useModal } from '@root/presentation/web-ui/modules/app/components/modal/useModal';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
@@ -36,7 +38,6 @@ import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 
 import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
-import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheetV2/actionSheet';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
@@ -44,6 +45,7 @@ import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButto
 import { IconSelect } from '@root/presentation/web-ui/uiKit/iconSelect/iconSelect';
 
 import styles from './settings.module.css';
+
 /**
  * @todo
  * 1. Don’t refetch *appConfig* on mount
@@ -53,6 +55,7 @@ import styles from './settings.module.css';
  */
 export function SettingsScreen() {
 	let modal = useModal();
+	let actionSheet = useActionSheet();
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let intl = useIntl(settingsI18n);
 	let navigation = useAppNavigation();
@@ -115,16 +118,6 @@ export function SettingsScreen() {
 		},
 	});
 
-	let [editUserName, setEditUserName] = useState({
-		isOpen: false,
-		userName: user.name,
-	});
-
-	let [editBudgetForm, setEditBudgetForm] = useState({
-		isOpen: false,
-		budget: appConfig.budget,
-	});
-
 	return (
 		<>
 			<Screen hasNavbar>
@@ -149,10 +142,21 @@ export function SettingsScreen() {
 								<IconButton
 									iconName={EIconName.Edit}
 									onClick={() => {
-										setEditUserName({
-											isOpen: true,
-											userName: user.name,
-										});
+										let actionSheetApi = actionSheet.render(
+											// @ts-expect-error
+											UserNameEditActionSheet,
+											{
+												userName: user.name,
+
+												close: (payload: { userName: string }) => {
+													mutateUser({
+														name: payload.userName,
+													});
+
+													actionSheetApi.close();
+												},
+											},
+										);
 									}}
 								/>
 							</div>
@@ -327,10 +331,22 @@ export function SettingsScreen() {
 								<IconButton
 									iconName={EIconName.Edit}
 									onClick={() => {
-										setEditBudgetForm({
-											isOpen: true,
-											budget: appConfig.budget,
-										});
+										let actionSheetApi = actionSheet.render(
+											// @ts-expect-error
+											BudgetEditActionsSheet,
+											{
+												budget: appConfig.budget,
+												currency: appConfig.currency,
+
+												close: (payload: { budget: number }) => {
+													mutateAppConfig({
+														budget: payload.budget,
+													});
+
+													actionSheetApi.close();
+												},
+											},
+										);
 									}}
 								/>
 							</div>
@@ -401,7 +417,6 @@ export function SettingsScreen() {
 								id: string;
 								close: () => void;
 							}) {
-								console.log(props);
 								return (
 									<>
 										Modal: {props.id}
@@ -465,108 +480,91 @@ export function SettingsScreen() {
 					</Button>
 				</ScreenBody>
 			</Screen>
+		</>
+	);
+}
 
-			{/* User name */}
-			<ActionSheet
-				onClose={() =>
-					setEditUserName(() => ({
-						isOpen: false,
-						userName: user.name,
-					}))
-				}
-				isOpen={editUserName.isOpen}
-				height="small"
+export function UserNameEditActionSheet(
+	props: TActionsSheetProps<{
+		userName: string;
+	}>,
+) {
+	let intl = useIntl(settingsI18n);
+	let [userName, setUserName] = useState(props.userName);
+
+	return (
+		<>
+			<div className={styles.budgetContainer}>
+				<input
+					type="text"
+					className={styles.budgetInput}
+					value={userName}
+					onChange={(event) => {
+						let userName = event.target.value;
+
+						setUserName(userName);
+					}}
+				/>
+			</div>
+
+			<Button
+				style={{
+					marginTop: '20px',
+				}}
+				onClick={() => {
+					// @ts-expect-error
+					props.close({
+						userName,
+					});
+				}}
+				isWide
 			>
-				<div className={styles.budgetContainer}>
-					<input
-						type="text"
-						className={styles.budgetInput}
-						value={editUserName.userName}
-						onChange={(event) => {
-							let userName = event.target.value;
+				{intl.translate('save')}
+			</Button>
+		</>
+	);
+}
 
-							setEditUserName((prevState) => ({
-								...prevState,
-								userName,
-							}));
-						}}
-					/>
-				</div>
+export function BudgetEditActionsSheet(
+	props: TActionsSheetProps<{
+		budget: number;
+		currency: ECurrency;
+	}>,
+) {
+	let intl = useIntl(settingsI18n);
+	let [budget, setBudget] = useState(props.budget);
 
-				<Button
-					style={{
-						marginTop: '20px',
+	return (
+		<>
+			<div className={styles.budgetContainer}>
+				<span className={styles.budgetCurrency}>{props.currency}</span>
+
+				<input
+					type="number"
+					className={styles.budgetInput}
+					value={budget ?? 0}
+					onChange={(event) => {
+						let budget = Number.parseInt(event.target.value);
+
+						setBudget(budget);
 					}}
-					onClick={() => {
-						mutateUser({
-							name: editUserName.userName,
-						});
+				/>
+			</div>
 
-						setEditUserName((prevState) => {
-							return {
-								...prevState,
-								isOpen: false,
-							};
-						});
-					}}
-					size="m"
-					isWide
-				>
-					{intl.translate('save')}
-				</Button>
-			</ActionSheet>
-
-			{/* Budget  */}
-			<ActionSheet
-				onClose={() =>
-					setEditBudgetForm(() => ({
-						isOpen: false,
-						budget: appConfig.budget,
-					}))
-				}
-				isOpen={editBudgetForm.isOpen}
-				height="small"
+			<Button
+				style={{
+					marginTop: '20px',
+				}}
+				onClick={() => {
+					// @ts-expect-error
+					props.close({
+						budget,
+					});
+				}}
+				isWide
 			>
-				<div className={styles.budgetContainer}>
-					<span className={styles.budgetCurrency}>{appConfig.currency}</span>
-
-					<input
-						type="number"
-						className={styles.budgetInput}
-						value={editBudgetForm.budget ?? 0}
-						onChange={(event) => {
-							const budget = Number.parseInt(event.target.value);
-
-							setEditBudgetForm((prevState) => ({
-								...prevState,
-								budget,
-							}));
-						}}
-					/>
-				</div>
-
-				<Button
-					style={{
-						marginTop: '20px',
-					}}
-					onClick={() => {
-						mutateAppConfig({
-							budget: editBudgetForm.budget,
-						});
-
-						setEditBudgetForm((prevState) => {
-							return {
-								...prevState,
-								isOpen: false,
-							};
-						});
-					}}
-					size="m"
-					isWide
-				>
-					{intl.translate('save')}
-				</Button>
-			</ActionSheet>
+				{intl.translate('save')}
+			</Button>
 		</>
 	);
 }

@@ -1,10 +1,9 @@
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type default as React } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import { Backdrop } from '@root/presentation/web-ui/uiKit/actionSheetV2/components/backdrop/Backdrop';
+import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
 
 import styles from './actionSheet.module.css';
 import actionSheetContainerStyles from './actionSheetContainer.module.css';

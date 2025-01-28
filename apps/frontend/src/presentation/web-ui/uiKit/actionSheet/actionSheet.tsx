@@ -1,12 +1,12 @@
-import { useRef, useState } from 'react';
-import type React from 'react';
+import { useRef, useState, type default as React } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import { useActionSheetContainer } from '@root/presentation/web-ui/uiKit/actionSheet/hooks/useActionSheetContainer';
-import { Backdrop } from '@root/presentation/web-ui/uiKit/actionSheet/components/backdrop/Backdrop';
 import { useScrollLock } from '@root/presentation/web-ui/uiKit/hooks/useScrollLock';
+
+import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
 
 import styles from './actionSheet.module.css';
 import actionSheetContainerStyles from './actionSheetContainer.module.css';
