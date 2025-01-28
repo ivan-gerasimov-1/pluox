@@ -13,21 +13,21 @@
 .actionSheetContainer {
 	--blur-size: 25px;
 	--scale-factor: 0.875;
+	--translate-y: 150%;
 
 	position: fixed;
 
-	top: 0;
 	right: 0;
-	bottom: 0;
+	bottom: calc(var(--navbar-height) + 25px);
 	left: 0;
 
-	margin: calc(var(--header-height) + 15px) 15px
-		calc(var(--navbar-height) + 25px) 15px;
-	padding: 20px 25px;
+	margin: calc(var(--header-height) + 15px) 15px 0 15px;
+	padding: 30px 25px;
 
 	background-color: var(--white-100);
+	box-shadow: var(--box-shadow-100);
 
-	border: var(--border-100);
+	border: var(--border-90);
 	border-radius: var(--br-100);
 
 	will-change: filter, opacity, transform;
@@ -39,14 +39,14 @@
 .enter {
 	filter: blur(var(--blur-size));
 	opacity: 0;
-	transform: scale(var(--scale-factor));
+	transform: scale(var(--scale-factor)) translateY(var(--translate-y));
 }
 
 .appearActive,
 .enterActive {
 	filter: blur(0);
 	opacity: 1;
-	transform: scale(1);
+	transform: scale(1) translateY(0);
 
 	transition:
 		filter var(--transition-100),
@@ -58,19 +58,19 @@
 .enterDone {
 	filter: blur(0);
 	opacity: 1;
-	transform: scale(1);
+	transform: scale(1) translateY(0);
 }
 
 .exit {
 	filter: blur(0);
 	opacity: 1;
-	transform: scale(1);
+	transform: scale(1) translateY(0);
 }
 
 .exitActive {
 	filter: blur(var(--blur-size));
 	opacity: 0;
-	transform: scale(var(--scale-factor));
+	transform: scale(var(--scale-factor)) translateY(var(--translate-y));
 
 	transition:
 		filter var(--transition-100),
@@ -81,5 +81,5 @@
 .exitDone {
 	filter: blur(var(--blur-size));
 	opacity: 0;
-	transform: scale(var(--scale-factor));
+	transform: scale(var(--scale-factor)) translateY(var(--translate-y));
 }
