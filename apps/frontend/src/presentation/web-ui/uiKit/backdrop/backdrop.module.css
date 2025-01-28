@@ -1,0 +1,56 @@
+.backdrop {
+	--backdrop-blur: 6px;
+
+	position: fixed;
+
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	background-color: transparent;
+	backdrop-filter: blur(0);
+
+	will-change: backdrop-filter, background-color;
+}
+
+.appear,
+.enter {
+	background-color: transparent;
+	backdrop-filter: blur(0);
+}
+
+.appearActive,
+.enterActive {
+	background-color: var(--white-100_op75);
+	backdrop-filter: blur(var(--backdrop-blur));
+
+	transition:
+		backdrop-filter var(--transition-100),
+		background-color var(--transition-100);
+}
+
+.appearDone,
+.enterDone {
+	background-color: var(--white-100_op75);
+	backdrop-filter: blur(var(--backdrop-blur));
+}
+
+.exit {
+	background-color: var(--white-100_op75);
+	backdrop-filter: blur(var(--backdrop-blur));
+}
+
+.exitActive {
+	background-color: transparent;
+	backdrop-filter: blur(0);
+
+	transition:
+		backdrop-filter var(--transition-100),
+		background-color var(--transition-100);
+}
+
+.exitDone {
+	background-color: transparent;
+	backdrop-filter: blur(0);
+}
