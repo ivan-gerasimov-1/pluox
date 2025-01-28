@@ -1,0 +1,73 @@
+.actionSheetContainer {
+	--blur-size: 25px;
+	--scale-factor: 0.875;
+
+	position: fixed;
+
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	margin: calc(var(--header-height) + 15px) 15px
+		calc(var(--navbar-height) + 25px) 15px;
+	padding: 20px 25px;
+
+	background-color: var(--white-100);
+
+	border: var(--border-100);
+	border-radius: var(--br-100);
+
+	will-change: filter, opacity, transform;
+
+	z-index: 2;
+}
+
+.appear,
+.enter {
+	filter: blur(var(--blur-size));
+	opacity: 0;
+	transform: scale(var(--scale-factor));
+}
+
+.appearActive,
+.enterActive {
+	filter: blur(0);
+	opacity: 1;
+	transform: scale(1);
+
+	transition:
+		filter var(--transition-100),
+		opacity var(--transition-100),
+		transform var(--transition-100);
+}
+
+.appearDone,
+.enterDone {
+	filter: blur(0);
+	opacity: 1;
+	transform: scale(1);
+}
+
+.exit {
+	filter: blur(0);
+	opacity: 1;
+	transform: scale(1);
+}
+
+.exitActive {
+	filter: blur(var(--blur-size));
+	opacity: 0;
+	transform: scale(var(--scale-factor));
+
+	transition:
+		filter var(--transition-100),
+		opacity var(--transition-100),
+		transform var(--transition-100);
+}
+
+.exitDone {
+	filter: blur(var(--blur-size));
+	opacity: 0;
+	transform: scale(var(--scale-factor));
+}
