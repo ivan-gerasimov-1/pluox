@@ -517,7 +517,6 @@ export function UserNameEditActionSheet(
 						userName,
 					});
 				}}
-				size="m"
 				isWide
 			>
 				{intl.translate('save')}
@@ -562,7 +561,6 @@ export function BudgetEditActionsSheet(
 						budget,
 					});
 				}}
-				size="m"
 				isWide
 			>
 				{intl.translate('save')}
