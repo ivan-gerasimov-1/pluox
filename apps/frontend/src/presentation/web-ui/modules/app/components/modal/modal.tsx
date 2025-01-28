@@ -4,7 +4,7 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { Backdrop } from '@root/presentation/web-ui/modules/app/components/modal/backdrop/Backdrop';
+import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
 
 import styles from './modal.module.css';
 
