@@ -1,9 +1,10 @@
 /**
  * @description Work In Progress
  */
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import { useAppScale } from '@root/presentation/web-ui/modules/app/components/actionSheet/useAppScale';
 import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
 
 import styles from './actionSheet.module.css';
@@ -24,26 +25,7 @@ type TActionSheetProps = {
 export function ActionSheet(props: TActionSheetProps) {
 	let actionSheetRef = useRef(null);
 
-	useEffect(() => {
-		let appRoot = window.document.getElementById('saveeRoot');
-
-		requestAnimationFrame(() => {
-			if (props.isOpen) {
-				appRoot?.classList.add('savee-action-sheet-open');
-			} else {
-				appRoot?.classList.add('savee-action-sheet-before-close');
-			}
-		});
-
-		return () => {
-			requestAnimationFrame(() => {
-				appRoot?.classList.remove(
-					'savee-action-sheet-open',
-					'savee-action-sheet-before-close',
-				);
-			});
-		};
-	}, [props.isOpen]);
+	useAppScale(props.isOpen);
 
 	return (
 		<>
