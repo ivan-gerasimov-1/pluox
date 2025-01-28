@@ -35,6 +35,19 @@
 	z-index: 2;
 }
 
+.pinch {
+	display: block;
+
+	width: 10%;
+	height: 5px;
+
+	margin: -15px auto 25px auto;
+
+	border-radius: var(--br-100);
+
+	background-color: var(--grey-500);
+}
+
 .appear,
 .enter {
 	filter: blur(var(--blur-size));

@@ -44,6 +44,8 @@ export function ActionSheet(props: TActionSheetProps) {
 					id={props.id}
 					className={styles.actionSheetContainer}
 				>
+					<div className={styles.pinch} onClick={props.close} />
+
 					{props.children}
 				</div>
 			</CSSTransition>
