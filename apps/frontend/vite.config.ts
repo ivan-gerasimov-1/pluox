@@ -72,6 +72,7 @@ export default defineConfig(({ mode }) => {
 
 		define: {
 			'process.env.NODE_ENV': JSON.stringify(mode),
+			'process.env.APP_API_URL': JSON.stringify(appEnv.APP_API_URL),
 			'process.env.APP_OPEN_EXCHANGE_RATES_API_URL': JSON.stringify(
 				appEnv.APP_OPEN_EXCHANGE_RATES_API_URL,
 			),
@@ -113,8 +114,9 @@ export default defineConfig(({ mode }) => {
 			},
 			proxy: {
 				'/api': {
-					target: 'http://localhost:3001',
+					target: 'http://localhost:8787',
 					changeOrigin: true,
+					rewrite: (path) => path.replace(/^\/api/, ''),
 				},
 			},
 		},
