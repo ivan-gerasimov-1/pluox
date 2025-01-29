@@ -6,6 +6,8 @@ export const enum EEnvironment {
 export interface TProcessEnv {
 	NODE_ENV: string;
 
+	APP_API_URL: string;
+
 	APP_OPEN_EXCHANGE_RATES_API_URL: string;
 	APP_OPEN_EXCHANGE_RATES_API_KEY: string;
 
