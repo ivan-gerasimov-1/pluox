@@ -1,12 +1,6 @@
 import { http, HttpResponse, type StrictRequest } from 'msw';
 
 export const handlers = [
-	http.post('/api/expenses', () => {
-		return HttpResponse.json({
-			id: `EXP${Date.now()}`,
-		});
-	}),
-
 	http.post(
 		'/api/login',
 		async ({ request }: { request: StrictRequest<{ email: string }> }) => {
