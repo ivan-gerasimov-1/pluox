@@ -3,11 +3,6 @@ name: Backend V3 CI/CD
 env:
   NODE_VERSION: 22.9.0
 
-  # NPM_BUILD_CMD: --workspace=@savee/frontend run build
-
-  # ARTIFACTS_DIR: apps/frontend/build
-  # ARTIFACT_NAME: build
-
 on:
   workflow_dispatch:
   push:
@@ -18,40 +13,8 @@ on:
       - '.github/workflows/backend-v3.yml'
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-  #     - uses: actions/checkout@v4
-
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: ${{ env.NODE_VERSION }}
-  #         cache: npm
-
-  #     - name: Load secrets from 1Password
-  #       uses: 1Password/load-secrets-action@v2.0.0
-  #       with:
-  #         export-env: true
-  #       env:
-  #         OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-  #         ENV_FILE: 'op://Savee/savee_frontend_env/.env.production'
-
-  #     - name: Install dependencies and build the project
-  #       run: |
-  #         echo -e "$ENV_FILE" > apps/frontend/.env
-  #         npm ci
-  #         npm $NPM_BUILD_CMD
-
-  #     - name: Upload build artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: ${{ env.ARTIFACT_NAME }}
-  #         path: ${{ env.ARTIFACTS_DIR }}
-
   deploy:
     runs-on: ubuntu-22.04
-    # needs: build
 
     steps:
       - uses: actions/checkout@v4
@@ -64,21 +27,29 @@ jobs:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: 'op://Savee/Cloudflare Wrangler/Account ID'
           CLOUDFLARE_API_TOKEN: 'op://Savee/Cloudflare Wrangler/API Token'
+          ENV_FILE: 'op://Savee/savee-api-v3_cloudflare_env/.dev.vars.production'
+          JWT_TOKEN_SECRET: 'op://Savee/savee-api-v3_cloudflare_env/JWT_TOKEN_SECRET.production'
+          AUTH_COOKIE_SECRET: 'op://Savee/savee-api-v3_cloudflare_env/AUTH_COOKIE_SECRET.production'
 
       - name: Install dependencies
         run: |
           npm ci
 
-      # - name: Download build artifact
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: ${{ env.ARTIFACT_NAME }}
-      #     path: ${{ env.ARTIFACTS_DIR }}
+      - name: Create .dev.vars file
+        run: |
+          echo -e "$ENV_FILE" > apps/backend-lite/.dev.vars
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
+          wranglerVersion: '3.106.0'
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: 'apps/backend-lite'
+          secrets: |
+            JWT_TOKEN_SECRET
+            AUTH_COOKIE_SECRET
           command: deploy
+        env:
+          JWT_TOKEN_SECRET: ${{ env.JWT_TOKEN_SECRET }}
+          AUTH_COOKIE_SECRET: ${{ env.AUTH_COOKIE_SECRET }}
