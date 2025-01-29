@@ -23,13 +23,15 @@ const app = new Hono<{
 	}>;
 	Bindings: {
 		DB: D1Database;
+
+		/** Secrets */
+		JWT_TOKEN_SECRET: string;
+		AUTH_COOKIE_SECRET: string;
+
+		/** Variables */
+		AUTH_COOKIE_NAME: string;
 	};
 }>();
-
-const JWT_TOKEN_SECRET = 'jwt-not-a-secret';
-
-const AUTH_COOKIE_NAME = 'session';
-const AUTH_COOKIE_SECRET = 'cookie-not-a-secret';
 
 app
 	.use(
@@ -102,15 +104,15 @@ app
 
 			await setSignedCookie(
 				c,
-				AUTH_COOKIE_NAME,
+				c.env.AUTH_COOKIE_NAME,
 				await sign(
 					{
 						id: user.id,
 						email: user.email,
 					},
-					JWT_TOKEN_SECRET,
+					c.env.JWT_TOKEN_SECRET,
 				),
-				AUTH_COOKIE_SECRET,
+				c.env.AUTH_COOKIE_SECRET,
 				{
 					httpOnly: true,
 					secure: true,
@@ -157,15 +159,15 @@ app
 
 			await setSignedCookie(
 				c,
-				AUTH_COOKIE_NAME,
+				c.env.AUTH_COOKIE_NAME,
 				await sign(
 					{
 						id: user.id,
 						email: user.email,
 					},
-					JWT_TOKEN_SECRET,
+					c.env.JWT_TOKEN_SECRET,
 				),
-				AUTH_COOKIE_SECRET,
+				c.env.AUTH_COOKIE_SECRET,
 				{
 					httpOnly: true,
 					secure: true,
@@ -180,7 +182,7 @@ app
 		},
 	)
 	.post('/logout', async (c) => {
-		deleteCookie(c, AUTH_COOKIE_NAME);
+		deleteCookie(c, c.env.AUTH_COOKIE_NAME);
 
 		return c.json({
 			status: 'success',
@@ -188,10 +190,10 @@ app
 	})
 	.use('/users/*', (c, next) => {
 		const jwtMiddleware = jwt({
-			secret: JWT_TOKEN_SECRET,
+			secret: c.env.JWT_TOKEN_SECRET,
 			cookie: {
-				key: AUTH_COOKIE_NAME,
-				secret: AUTH_COOKIE_SECRET,
+				key: c.env.AUTH_COOKIE_NAME,
+				secret: c.env.AUTH_COOKIE_SECRET,
 			},
 		});
 		return jwtMiddleware(c, next);
