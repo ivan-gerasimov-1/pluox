@@ -82,6 +82,9 @@ export default defineConfig(({ mode }) => {
 
 			/** Development */
 			'process.env.DEV_REACT_SCAN': JSON.stringify(appEnv.DEV_REACT_SCAN),
+			'process.env.DEV_TANSTACK_QUERY_DEVTOOLS': JSON.stringify(
+				appEnv.DEV_TANSTACK_QUERY_DEVTOOLS,
+			),
 		},
 
 		optimizeDeps: {
