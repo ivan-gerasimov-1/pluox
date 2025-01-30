@@ -135,11 +135,11 @@ export function ExpenseForm(props: TExpenseFormProps) {
 
 			<div className={styles.formGroup}>
 				<VenuePills
-					onSelect={(payload?: { venueId: string; categoryId: string }) => {
+					onSelect={(payload: { venueId: string; categoryId: string }) => {
 						dispatch({
 							type: EExpenseFormReducerAction.SET_VENUE,
-							venue: payload?.venueId,
-							category: payload?.categoryId,
+							venue: payload.venueId,
+							category: payload.categoryId,
 						});
 					}}
 				/>
