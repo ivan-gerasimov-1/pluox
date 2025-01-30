@@ -1,11 +1,16 @@
 import { serve } from '@hono/node-server';
-import { default as app } from '#app/index.hono';
 
-const APP_PORT = 3000;
+import { app } from '#app/app';
 
-console.log(`Server is running on http://localhost:${APP_PORT}`);
-
-serve({
-	fetch: app.fetch,
-	port: APP_PORT,
-});
+serve(
+	{
+		fetch: app.fetch,
+		hostname: process.env.APP_HOST,
+		port: Number.parseInt(process.env.APP_PORT as string, 10),
+	},
+	(info) => {
+		console.log(
+			`Server is running on ${info.address}:${info.port} (${info.family})`,
+		);
+	},
+);

@@ -1,4 +1,3 @@
-// @ts-expect-error
 import SQLite from 'better-sqlite3';
 // import { DatabaseSync as SQLite } from 'node:sqlite';
 

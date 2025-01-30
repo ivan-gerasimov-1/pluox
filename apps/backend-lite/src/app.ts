@@ -1,6 +1,7 @@
 import type { D1Database } from '@cloudflare/workers-types';
 
 import { Hono } from 'hono';
+import { env } from 'hono/adapter';
 import { deleteCookie, setSignedCookie } from 'hono/cookie';
 import { cors } from 'hono/cors';
 import { csrf } from 'hono/csrf';
@@ -16,7 +17,7 @@ import {
 	createPasswordHash,
 } from '#app/modules/crypto/index';
 
-const app = new Hono<{
+export const app = new Hono<{
 	Variables: JwtVariables<{
 		id: string;
 		email: string;
@@ -59,9 +60,9 @@ app
 		async (c) => {
 			let payload = c.req.valid('json');
 
-			let existingUser = await c.env.DB.prepare(
-				'SELECT * FROM users WHERE email = ?',
-			)
+			let existingUser = await env(c)
+				.DB //
+				.prepare('SELECT * FROM users WHERE email = ?')
 				.bind(payload.email)
 				.first<{
 					id: string;
@@ -87,9 +88,11 @@ app
 				modifiedAt: payload.modifiedAt,
 			};
 
-			let result = await c.env.DB.prepare(
-				'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)',
-			)
+			let result = await env(c)
+				.DB //
+				.prepare(
+					'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)',
+				)
 				.bind(user.id, user.email, user.password)
 				.run();
 
@@ -104,15 +107,15 @@ app
 
 			await setSignedCookie(
 				c,
-				c.env.AUTH_COOKIE_NAME,
+				env(c).AUTH_COOKIE_NAME,
 				await sign(
 					{
 						id: user.id,
 						email: user.email,
 					},
-					c.env.JWT_TOKEN_SECRET,
+					env(c).JWT_TOKEN_SECRET,
 				),
-				c.env.AUTH_COOKIE_SECRET,
+				env(c).AUTH_COOKIE_SECRET,
 				{
 					httpOnly: true,
 					secure: true,
@@ -138,7 +141,9 @@ app
 		async (c) => {
 			let payload = c.req.valid('json');
 
-			let user = await c.env.DB.prepare('SELECT * FROM users WHERE email = ?')
+			let user = await env(c)
+				.DB //
+				.prepare('SELECT * FROM users WHERE email = ?')
 				.bind(payload.email)
 				.first<{
 					id: string;
@@ -159,15 +164,15 @@ app
 
 			await setSignedCookie(
 				c,
-				c.env.AUTH_COOKIE_NAME,
+				env(c).AUTH_COOKIE_NAME,
 				await sign(
 					{
 						id: user.id,
 						email: user.email,
 					},
-					c.env.JWT_TOKEN_SECRET,
+					env(c).JWT_TOKEN_SECRET,
 				),
-				c.env.AUTH_COOKIE_SECRET,
+				env(c).AUTH_COOKIE_SECRET,
 				{
 					httpOnly: true,
 					secure: true,
@@ -182,7 +187,7 @@ app
 		},
 	)
 	.post('/logout', async (c) => {
-		deleteCookie(c, c.env.AUTH_COOKIE_NAME);
+		deleteCookie(c, env(c).AUTH_COOKIE_NAME);
 
 		return c.json({
 			status: 'success',
@@ -190,10 +195,10 @@ app
 	})
 	.use('/users/*', (c, next) => {
 		const jwtMiddleware = jwt({
-			secret: c.env.JWT_TOKEN_SECRET,
+			secret: env(c).JWT_TOKEN_SECRET,
 			cookie: {
-				key: c.env.AUTH_COOKIE_NAME,
-				secret: c.env.AUTH_COOKIE_SECRET,
+				key: env(c).AUTH_COOKIE_NAME,
+				secret: env(c).AUTH_COOKIE_SECRET,
 			},
 		});
 		return jwtMiddleware(c, next);
@@ -206,5 +211,3 @@ app
 			email: jwtPayload.email,
 		});
 	});
-
-export default app;
