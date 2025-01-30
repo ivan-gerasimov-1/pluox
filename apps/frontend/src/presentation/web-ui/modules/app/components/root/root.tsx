@@ -34,7 +34,10 @@ export function Root(props: IRootProps) {
 	return (
 		<ContainerProvider container={props.diContainer}>
 			<QueryClientProvider client={props.queryClient}>
-				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
+				{process.env.DEV_TANSTACK_QUERY_DEVTOOLS === 'true' && (
+					<ReactQueryDevtools initialIsOpen={false} />
+				)}
+
 				<ModalProvider>
 					<ActionSheetProvider>
 						<RouterProvider router={props.router} />
