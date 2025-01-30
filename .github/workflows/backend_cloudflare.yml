@@ -1,4 +1,4 @@
-name: Backend V3 CI/CD
+name: Backend (Cloudflare)
 
 env:
   NODE_VERSION: 22.9.0
