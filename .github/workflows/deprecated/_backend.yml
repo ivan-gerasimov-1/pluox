@@ -1,4 +1,4 @@
-name: Backend CI/CD
+name: DEPRECATED_Backend CI/CD
 
 env:
   NODE_VERSION: 16.20.2

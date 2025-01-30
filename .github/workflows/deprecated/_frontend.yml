@@ -1,4 +1,4 @@
-name: Frontend CI/CD
+name: DEPRECATED_Frontend CI/CD
 
 env:
   NODE_VERSION: 22.9.0
