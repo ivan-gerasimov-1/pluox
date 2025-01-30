@@ -1,5 +1,5 @@
 # TODO: Find a way to parametrize "runs-on"
-name: Backend CI/CD V2
+name: DEPRECATED_Backend CI/CD V2
 
 env:
   NODE_VERSION: 22.9.0

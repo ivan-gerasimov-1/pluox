@@ -1,20 +1,42 @@
-name: Backend V3 CI/CD
+name: Backend (Cloudflare)
 
 env:
   NODE_VERSION: 22.9.0
 
+  NPM_LINT_CMD: --workspace=@savee/backend-lite run lint
+
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'apps/backend-lite/**'
+      - '.github/workflows/backend_cloudflare.yml'
   push:
     branches:
       - main
     paths:
       - 'apps/backend-lite/**'
-      - '.github/workflows/backend-v3.yml'
+      - '.github/workflows/backend_cloudflare.yml'
 
 jobs:
+  lint:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Lint
+        run: |
+          npm $NPM_LINT_CMD
+
   deploy:
     runs-on: ubuntu-22.04
+    needs: lint
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v4

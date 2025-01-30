@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
+		"lint": "eslint ./src",
 		"analyze": "npm run analyze:production",
 		"analyze:production": "BUNDLE_ANALYZER='on' vite build --mode production",
 		"build": "npm run build:production",
