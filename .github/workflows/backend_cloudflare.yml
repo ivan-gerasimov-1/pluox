@@ -5,6 +5,10 @@ env:
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'apps/backend-lite/**'
+      - '.github/workflows/backend_cloudflare.yml'
   push:
     branches:
       - main
