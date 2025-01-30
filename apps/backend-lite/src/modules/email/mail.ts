@@ -35,7 +35,7 @@ export class Mail {
 	}
 
 	#connect(): Promise<Socket> {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			let socket = this.#createConnection(
 				{
 					host: this.server.host,
