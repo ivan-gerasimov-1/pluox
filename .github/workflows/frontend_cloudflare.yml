@@ -4,6 +4,7 @@ env:
   NODE_VERSION: 22.9.0
 
   NPM_BUILD_CMD: --workspace=@savee/frontend run build
+  NPM_LINT_CMD: --workspace=@savee/frontend run lint
 
   ARTIFACTS_DIR: apps/frontend/build
   ARTIFACT_NAME: build
@@ -41,10 +42,15 @@ jobs:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           ENV_FILE: 'op://Savee/savee_frontend_env/.env.production'
 
-      - name: Install dependencies and build the project
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm $NPM_LINT_CMD
+
+      - name: Build
         run: |
           echo -e "$ENV_FILE" > apps/frontend/.env
-          npm ci
           npm $NPM_BUILD_CMD
 
       - name: Upload build artifact
