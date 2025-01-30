@@ -15,7 +15,7 @@ on:
       - main
     paths:
       - 'apps/frontend/**'
-      - '.github/workflows/frontend.yml'
+      - '.github/workflows/frontend_cloudflare.yml'
 
 jobs:
   build:

@@ -10,7 +10,7 @@ on:
       - main
     paths:
       - 'apps/backend-lite/**'
-      - '.github/workflows/backend-v3.yml'
+      - '.github/workflows/backend_cloudflare.yml'
 
 jobs:
   deploy:
