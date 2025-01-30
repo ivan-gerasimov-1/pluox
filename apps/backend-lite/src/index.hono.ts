@@ -16,7 +16,7 @@ import {
 	createPasswordHash,
 } from '#app/modules/crypto/index';
 
-const app = new Hono<{
+export const app = new Hono<{
 	Variables: JwtVariables<{
 		id: string;
 		email: string;
@@ -42,6 +42,9 @@ app
 	) //
 	.use(csrf())
 	.use(secureHeaders())
+	.get('/', (c) => {
+		return c.json({ message: 'Hello, World!' });
+	})
 	.post(
 		'/signup',
 		zValidator(
@@ -206,5 +209,3 @@ app
 			email: jwtPayload.email,
 		});
 	});
-
-export default app;

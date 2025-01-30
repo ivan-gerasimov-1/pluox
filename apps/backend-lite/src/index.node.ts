@@ -1,5 +1,5 @@
 import { serve } from '@hono/node-server';
-import { default as app } from '#app/index.hono';
+import { app } from '#app/index.hono';
 
 serve(
 	{
