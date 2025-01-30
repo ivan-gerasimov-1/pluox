@@ -1,5 +1,5 @@
 # TODO: Find a way to parametrize "runs-on"
-name: DEPRECATED_MongoDB CI/CD
+name: MongoDB CI/CD
 
 on:
   workflow_dispatch:
