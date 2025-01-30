@@ -1,3 +1,4 @@
+import { scan } from 'react-scan';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -35,6 +36,12 @@ export class ReactUI implements IUserInterface {
 	public async start(): Promise<void> {
 		if (!this.#appContainer) {
 			this.createAppContainer();
+		}
+
+		if (process.env.DEV_REACT_SCAN === 'true') {
+			scan({
+				enabled: true,
+			});
 		}
 
 		this.appContainer.render(
