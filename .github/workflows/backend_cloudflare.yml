@@ -32,6 +32,7 @@ jobs:
       - name: Lint
         run: |
           npm $NPM_LINT_CMD
+
   deploy:
     runs-on: ubuntu-22.04
     needs: lint
