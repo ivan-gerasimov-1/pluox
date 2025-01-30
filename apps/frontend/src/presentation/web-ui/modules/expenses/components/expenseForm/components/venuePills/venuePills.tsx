@@ -6,7 +6,7 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { PillsSelect } from '@root/presentation/web-ui/uiKit/pillsSelect/pillsSelect';
 
 type TVenuePillsProps = {
-	onSelect(payload?: { venueId: string; categoryId: string }): void;
+	onSelect(payload: { venueId?: string; categoryId?: string }): void;
 };
 
 export function VenuePills(props: TVenuePillsProps) {
@@ -17,13 +17,9 @@ export function VenuePills(props: TVenuePillsProps) {
 		<PillsSelect
 			items={venues}
 			onSelect={(payload) => {
-				if (!payload) {
-					return;
-				}
-
 				props.onSelect({
-					venueId: payload.id,
-					categoryId: payload.categoryId,
+					venueId: payload?.id,
+					categoryId: payload?.categoryId,
 				});
 			}}
 		/>
