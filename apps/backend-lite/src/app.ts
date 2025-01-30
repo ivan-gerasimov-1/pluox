@@ -43,9 +43,6 @@ app
 	) //
 	.use(csrf())
 	.use(secureHeaders())
-	.get('/', (c) => {
-		return c.json({ message: 'Hello, World!' });
-	})
 	.post(
 		'/signup',
 		zValidator(
