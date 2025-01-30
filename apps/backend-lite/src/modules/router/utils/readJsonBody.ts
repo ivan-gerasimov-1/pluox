@@ -16,7 +16,7 @@ export function readJsonBody<T>(request: TRequest): Promise<T> {
 				let parsedBody = JSON.parse(body);
 
 				resolve(parsedBody);
-			} catch (error) {
+			} catch {
 				reject({
 					code: EResponseCode.BAD_REQUEST,
 					message: 'Invalid JSON',
