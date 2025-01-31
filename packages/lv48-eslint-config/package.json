@@ -1,0 +1,16 @@
+{
+	"name": "@lv48/eslint-config",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"main": "index.js",
+	"dependencies": {
+		"@eslint/js": "9.19.0",
+		"eslint": "9.19.0",
+		"eslint-plugin-react": "7.37.4",
+		"globals": "14.0.0",
+		"jiti": "2.4.2",
+		"typescript": "5.7.3",
+		"typescript-eslint": "8.22.0"
+	}
+}
