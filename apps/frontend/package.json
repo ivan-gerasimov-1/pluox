@@ -45,7 +45,7 @@
 		"@vitejs/plugin-react": "4.3.4",
 		"eslint": "9.19.0",
 		"eslint-plugin-react": "7.37.4",
-		"globals": "15.14.0",
+		"globals": "14.0.0",
 		"lightningcss": "1.29.1",
 		"msw": "2.7.0",
 		"postcss-nested": "7.0.2",
