@@ -47,7 +47,7 @@ function runServiceWorkerUpdateRequest(): void {
 	let updateSW = registerSW({
 		onNeedRefresh() {
 			let isUpdateAccepted = window.confirm(
-				'New version is available. Do you want to install update?',
+				'New version of the app is available. Do you want to install update?',
 			);
 
 			if (isUpdateAccepted) {
