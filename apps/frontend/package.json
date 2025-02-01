@@ -10,7 +10,10 @@
 		"build:development": "vite build --mode development",
 		"build:production": "vite build --mode production",
 		"preview": "vite preview",
-		"start": "vite --mode development"
+		"start": "vite --mode development",
+		"__test__": "",
+		"test": "vitest run",
+		"test:start": "vitest"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
@@ -56,6 +59,7 @@
 		"vite-plugin-pwa": "0.21.1",
 		"vite-plugin-svgr": "4.3.0",
 		"vite-tsconfig-paths": "5.1.4",
+		"vitest": "3.0.4",
 		"wrangler": "3.107.2"
 	},
 	"msw": {
