@@ -9,7 +9,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { checker } from 'vite-plugin-checker';
-// import { VitePWA } from 'vite-plugin-pwa';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
@@ -53,9 +53,9 @@ export default defineConfig(({ mode }) => {
 				'@formatjs/intl-numberformat/locale-data/ru',
 			],
 		}),
-		// VitePWA({
-		// 	registerType: 'autoUpdate',
-		// }),
+		VitePWA({
+			manifest: false,
+		}),
 	];
 
 	if (env.BUNDLE_ANALYZER === 'on') {
