@@ -5,6 +5,7 @@ env:
 
   NPM_BUILD_CMD: --workspace=@savee/frontend run build
   NPM_LINT_CMD: --workspace=@savee/frontend run lint
+  NPM_TEST_CMD: --workspace=@savee/frontend run test
 
   ARTIFACTS_DIR: apps/frontend/build
   ARTIFACT_NAME: build
@@ -49,6 +50,10 @@ jobs:
       - name: Lint
         run: |
           npm $NPM_LINT_CMD
+
+      - name: Test
+        run: |
+          npm $NPM_TEST_CMD
 
       - name: Build
         run: |
