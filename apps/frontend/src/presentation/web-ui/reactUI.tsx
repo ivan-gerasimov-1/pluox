@@ -1,4 +1,3 @@
-import { scan } from 'react-scan';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -13,6 +12,7 @@ import type { IRouter } from '@root/presentation/web-ui/router';
 import type { IRoot } from '@root/presentation/web-ui/types';
 import type { IUIElement } from '@root/presentation/web-ui/uiElement';
 import type { IUILoader } from '@root/presentation/web-ui/uiLoader';
+import type { TDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
 
 export class ReactUI implements IUserInterface {
 	#appContainer?: IRoot;
@@ -22,6 +22,7 @@ export class ReactUI implements IUserInterface {
 		private readonly loader: IUILoader,
 		private readonly queryClient: QueryClient,
 		private readonly router: IRouter,
+		private readonly devtoolsConfig: TDevToolsConfig,
 		private readonly diContainer: IContainer,
 	) {}
 
@@ -38,18 +39,13 @@ export class ReactUI implements IUserInterface {
 			this.createAppContainer();
 		}
 
-		if (process.env.DEV_REACT_SCAN === 'true') {
-			scan({
-				enabled: true,
-			});
-		}
-
 		this.appContainer.render(
 			<StrictMode>
 				<Root
 					queryClient={this.queryClient}
 					router={this.router}
 					diContainer={this.diContainer}
+					devtoolsConfig={this.devtoolsConfig}
 					onRendered={() => this.loader.hideAndRemove()}
 				/>
 			</StrictMode>,

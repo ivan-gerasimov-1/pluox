@@ -31,7 +31,7 @@ async function runCore(container: IContainer): Promise<void> {
 }
 
 async function runUI(window: IWindow, diContainer: IContainer): Promise<void> {
-	const ui = createUI(window, diContainer);
+	const ui = await createUI(window, diContainer);
 
 	registerServiceWorker();
 
