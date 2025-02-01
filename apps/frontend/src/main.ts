@@ -1,3 +1,6 @@
+/// <reference types="vite-plugin-pwa/vanillajs" />
+import { registerSW } from 'virtual:pwa-register';
+
 import { createDIContainer } from '@root/diContainer';
 import { createUI } from '@root/presentation/web-ui';
 import { runMigrations } from '@root/migrations';
@@ -11,6 +14,8 @@ import {
 import type { IWindow } from '@root/presentation/web-ui/types';
 
 export async function main(window: IWindow): Promise<void> {
+	runServiceWorkerUpdateRequest();
+
 	let diContainer = createDIContainer({
 		isGlobal: true,
 		isDevelopment: process.env.NODE_ENV === 'development',
@@ -36,4 +41,18 @@ async function runUI(window: IWindow, diContainer: IContainer): Promise<void> {
 	registerServiceWorker();
 
 	await ui.start();
+}
+
+function runServiceWorkerUpdateRequest(): void {
+	let updateSW = registerSW({
+		onNeedRefresh() {
+			let isUpdateAccepted = window.confirm(
+				'New version is available. Do you want to install update?',
+			);
+
+			if (isUpdateAccepted) {
+				updateSW();
+			}
+		},
+	});
 }
