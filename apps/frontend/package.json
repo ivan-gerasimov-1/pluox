@@ -13,8 +13,9 @@
 		"start": "vite --mode development",
 		"__test__": "",
 		"test": "vitest run",
+		"test:coverage": "vitest run --coverage",
 		"test:start": "vitest",
-		"test:start:ui": "vitest --ui"
+		"test:start:ui": "vitest --ui --coverage"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
@@ -47,6 +48,7 @@
 		"@types/react-transition-group": "4.4.12",
 		"@vitejs/plugin-legacy": "6.0.0",
 		"@vitejs/plugin-react": "4.3.4",
+		"@vitest/coverage-v8": "3.0.4",
 		"@vitest/ui": "3.0.4",
 		"lightningcss": "1.29.1",
 		"msw": "2.7.0",

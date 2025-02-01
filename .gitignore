@@ -8,5 +8,6 @@
 .wrangler/
 *.sqlite
 build/
+coverage/
 dist/
 node_modules/
