@@ -1,4 +1,9 @@
-import { useReducer } from 'react';
+import {
+	type Control,
+	type UseFormSetValue,
+	Controller,
+	useForm,
+} from 'react-hook-form';
 
 import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
@@ -16,6 +21,13 @@ import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import styles from './expenseForm.module.css';
 
 export type TExpenseFormProps = {
+	amount: number;
+	currency: ECurrency;
+	description: TDescription;
+	category: TCategory | null;
+	venue: Id | null;
+	date: TISODateString;
+
 	onSubmit(payload: {
 		amount: number;
 		currency: ECurrency;
@@ -24,7 +36,9 @@ export type TExpenseFormProps = {
 		venue: Id | null;
 		date: TISODateString;
 	}): void;
+};
 
+type TExpenseFormState = {
 	amount: number;
 	currency: ECurrency;
 	description: TDescription;
@@ -35,62 +49,39 @@ export type TExpenseFormProps = {
 
 export function ExpenseForm(props: TExpenseFormProps) {
 	let intl = useIntl(expenseFormI18n);
-	let [formState, dispatch] = useReducer(expenseFormReducer, {
-		amount: props.amount,
-		currency: props.currency,
-		description: props.description,
-		category: props.category,
-		venue: props.venue,
-		date: props.date,
-	});
 
-	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-		event.preventDefault();
+	let { register, handleSubmit, control, reset, setValue, formState } =
+		useForm<TExpenseFormState>({
+			defaultValues: {
+				amount: props.amount,
+				currency: props.currency,
+				description: props.description,
+				category: props.category,
+				venue: props.venue,
+				date: props.date,
+			},
+		});
 
-		if (!formState.amount || formState.amount === 0) {
-			return;
-		}
-
+	let onSubmit = handleSubmit((formState: TExpenseFormState) => {
 		props.onSubmit({
 			amount: formState.amount,
 			currency: formState.currency,
 			description: formState.description,
 			category: formState.category || null,
 			venue: formState.venue || null,
-			date: convertDateToModelValue(formState.date),
+			date: new Date(formState.date).toISOString(),
 		});
 
-		resetFormState();
-	}
-
-	function resetFormState() {
-		dispatch({
-			type: EExpenseFormReducerAction.RESET,
-
-			amount: props.amount,
-			currency: props.currency,
-			description: props.description,
-			category: props.category,
-			date: props.date,
-		});
-	}
+		reset();
+	});
 
 	return (
-		<form name="expenseForm" onSubmit={handleSubmit}>
+		<form name="expenseForm" onSubmit={onSubmit}>
 			<div className={styles.formGroup}>
 				<select
-					name="newExpense_currencySelect"
-					id="newExpense_currencySelect"
+					id="currency"
 					className={styles.currencySelect}
-					value={formState.currency}
-					onChange={(event) => {
-						const currency = event.target.value as ECurrency;
-
-						dispatch({
-							type: EExpenseFormReducerAction.SET_CURRENCY,
-							currency,
-						});
-					}}
+					{...register('currency')}
 				>
 					{/* @todo Add a placeholder */}
 					{/* <option value="" disabled /> */}
@@ -103,187 +94,104 @@ export function ExpenseForm(props: TExpenseFormProps) {
 					})}
 				</select>
 
-				<AmountInput
-					value={formState.amount}
-					onChange={(amount: number) => {
-						dispatch({
-							type: EExpenseFormReducerAction.SET_AMOUNT,
-							amount,
-						});
-					}}
-					required
-				/>
+				<AmountInputController control={control} />
 
 				<Button type="submit" className={styles.submitButton}>
 					{intl.translate('submitButton')}
 				</Button>
 			</div>
 
-			{/* <br /> */}
-
-			{/* <div>
-				<CurrencyInput
-					value={formState.currency}
-					onChange={(currency: ECurrency) => {
-						dispatch({
-							type: EExpenseFormReducerAction.SET_CURRENCY,
-							currency,
-						});
-					}}
-				/>
-			</div> */}
-
 			<div className={styles.formGroup}>
-				<VenuePills
-					onSelect={(payload: { venueId: string; categoryId: string }) => {
-						dispatch({
-							type: EExpenseFormReducerAction.SET_VENUE,
-							venue: payload.venueId,
-							category: payload.categoryId,
-						});
-					}}
-				/>
+				<VenuePillsController control={control} setValue={setValue} />
 			</div>
 
 			<div className={styles.formGroup}>
-				<CategoryPills
-					value={formState.category}
-					onSelect={(id?: string) => {
-						dispatch({
-							type: EExpenseFormReducerAction.SET_CATEGORY,
-							category: id,
-						});
-					}}
-				/>
+				<CategoryPillsController control={control} />
 			</div>
 
 			<div className={styles.formGroup}>
-				<DateInput
-					initialValue={formState.date}
-					onChange={(date: string) => {
-						dispatch({
-							type: EExpenseFormReducerAction.SET_DATE,
-							date,
-						});
-					}}
-				/>
+				<DateInputController control={control} />
 			</div>
 
 			<div className={styles.formGroup}>
-				<DescriptionInput
-					value={formState.description}
-					onChange={(description: string) => {
-						dispatch({
-							type: EExpenseFormReducerAction.SET_DESCRIPTION,
-							description: description,
-						});
-					}}
-				/>
+				<DescriptionInputController control={control} />
 			</div>
 		</form>
 	);
 }
 
-function convertDateToModelValue(date: string): TISODateString {
-	return new Date(date).toISOString();
+export function AmountInputController(props: {
+	control: Control<TExpenseFormState>;
+}) {
+	return (
+		<Controller
+			name="amount"
+			control={props.control}
+			render={({ field }) => <AmountInput {...field} />}
+		/>
+	);
 }
 
-export const enum EExpenseFormReducerAction {
-	SET_AMOUNT = 'setAmount',
-	SET_CURRENCY = 'setCurrency',
-	SET_DESCRIPTION = 'setDescription',
-	SET_DATE = 'setDate',
-	SET_CATEGORY = 'setCategory',
-	SET_VENUE = 'setVenue',
-	RESET = 'reset',
+export function VenuePillsController(props: {
+	control: Control<TExpenseFormState>;
+	setValue: UseFormSetValue<TExpenseFormState>;
+}) {
+	return (
+		<Controller
+			name="venue"
+			control={props.control}
+			render={({ field, ...rest }) => {
+				return (
+					<VenuePills
+						{...field}
+						onSelect={(payload) => {
+							props.setValue('category', payload.categoryId ?? null);
+
+							field.onChange(payload.venueId);
+						}}
+					/>
+				);
+			}}
+		/>
+	);
 }
 
-type TExpenseFormReducerAction = Partial<TExpenseFormReducerState> & {
-	type: EExpenseFormReducerAction;
-};
+export function CategoryPillsController(props: {
+	control: Control<TExpenseFormState>;
+}) {
+	return (
+		<Controller
+			name="category"
+			control={props.control}
+			render={({ field }) => (
+				<CategoryPills {...field} onSelect={field.onChange} />
+			)}
+		/>
+	);
+}
 
-type TExpenseFormReducerState = {
-	amount: number;
-	currency: ECurrency;
-	description: TDescription;
-	category: TCategory | null;
-	venue: Id | null;
-	date: TISODateString;
-};
+export function DateInputController(props: {
+	control: Control<TExpenseFormState>;
+}) {
+	return (
+		<Controller
+			name="date"
+			control={props.control}
+			render={({ field }) => (
+				<DateInput {...field} initialValue={field.value} />
+			)}
+		/>
+	);
+}
 
-/**
- * @todo Get rid of "as"
- */
-function expenseFormReducer(
-	state: TExpenseFormReducerState,
-	action: TExpenseFormReducerAction & Partial<TExpenseFormReducerState>,
-) {
-	switch (action.type) {
-		case EExpenseFormReducerAction.SET_AMOUNT: {
-			let amount = action.amount as number;
-
-			return {
-				...state,
-				amount,
-			};
-		}
-		case EExpenseFormReducerAction.SET_CURRENCY: {
-			let currency = action.currency as ECurrency;
-
-			return {
-				...state,
-				currency,
-			};
-		}
-		case EExpenseFormReducerAction.SET_DESCRIPTION: {
-			let description = action.description as string;
-
-			return {
-				...state,
-				description,
-			};
-		}
-		case EExpenseFormReducerAction.SET_DATE: {
-			let date = action.date as string;
-
-			return {
-				...state,
-				date,
-			};
-		}
-		case EExpenseFormReducerAction.SET_CATEGORY: {
-			let category = action.category as string;
-
-			return {
-				...state,
-				category,
-			};
-		}
-		case EExpenseFormReducerAction.SET_VENUE: {
-			let venue = action.venue as string;
-			let category = action.category as string;
-
-			return {
-				...state,
-				venue,
-				category,
-			};
-		}
-		case EExpenseFormReducerAction.RESET: {
-			let amount = action.amount as number;
-			let currency = action.currency as ECurrency;
-			let description = action.description as string;
-			let date = action.date as string;
-			let category = action.category as string;
-
-			return {
-				...state,
-				amount,
-				currency,
-				description,
-				date,
-				category,
-			};
-		}
-	}
+export function DescriptionInputController(props: {
+	control: Control<TExpenseFormState>;
+}) {
+	return (
+		<Controller
+			name="description"
+			control={props.control}
+			render={({ field }) => <DescriptionInput {...field} />}
+		/>
+	);
 }
