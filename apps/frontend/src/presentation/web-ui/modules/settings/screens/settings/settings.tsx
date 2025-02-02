@@ -411,71 +411,8 @@ export function SettingsScreen() {
 						</Card>
 					</CardContainer>
 
-					<Button
-						onClick={() => {
-							modal.render(function TestModal(props: {
-								id: string;
-								close: () => void;
-							}) {
-								return (
-									<>
-										Modal: {props.id}
-										<br />
-										<br />
-										<Button onClick={props.close} isWide>
-											Close
-										</Button>
-									</>
-								);
-							});
-						}}
-					>
-						Open Modal
-					</Button>
-
-					<Button
-						onClick={() => {
-							modal.render(function TestModal(props: {
-								id: string;
-								close: () => void;
-							}) {
-								let apiClient = useService(EServiceToken.API_CLIENT);
-								let [isAuthenticated, setIsAuthenticated] = useState<
-									boolean | null
-								>(null);
-								return (
-									<>
-										Is Authenticated:{' '}
-										{isAuthenticated === null
-											? '?'
-											: isAuthenticated.toString()}
-										<br />
-										<br />
-										<Button
-											onClick={async () => {
-												try {
-													let response = await apiClient.get('/users/me');
-													if (response) {
-														setIsAuthenticated(true);
-													}
-												} catch {
-													setIsAuthenticated(false);
-												}
-											}}
-											isWide
-										>
-											Check
-										</Button>
-										<br />
-										<br />
-										<Button onClick={props.close} isWide>
-											Close
-										</Button>
-									</>
-								);
-							});
-						}}
-					>
+					<Button onClick={() => modal.render(TestModal)}>Open Modal</Button>
+					<Button onClick={() => modal.render(AuthTestModal)}>
 						Check Auth
 					</Button>
 				</ScreenBody>
@@ -564,6 +501,52 @@ export function BudgetEditActionsSheet(
 				isWide
 			>
 				{intl.translate('save')}
+			</Button>
+		</>
+	);
+}
+
+function TestModal(props: { id: string; close: () => void }) {
+	return (
+		<>
+			Modal: {props.id}
+			<br />
+			<br />
+			<Button onClick={props.close} isWide>
+				Close
+			</Button>
+		</>
+	);
+}
+
+function AuthTestModal(props: { id: string; close: () => void }) {
+	let apiClient = useService(EServiceToken.API_CLIENT);
+	let [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+	return (
+		<>
+			Is Authenticated:{' '}
+			{isAuthenticated === null ? '?' : isAuthenticated.toString()}
+			<br />
+			<br />
+			<Button
+				onClick={async () => {
+					try {
+						let response = await apiClient.get('/users/me');
+						if (response) {
+							setIsAuthenticated(true);
+						}
+					} catch {
+						setIsAuthenticated(false);
+					}
+				}}
+				isWide
+			>
+				Check
+			</Button>
+			<br />
+			<br />
+			<Button onClick={props.close} isWide>
+				Close
 			</Button>
 		</>
 	);
