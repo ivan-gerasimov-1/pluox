@@ -50,7 +50,7 @@ type TExpenseFormState = {
 export function ExpenseForm(props: TExpenseFormProps) {
 	let intl = useIntl(expenseFormI18n);
 
-	let { register, handleSubmit, control, reset, setValue, formState } =
+	let { register, handleSubmit, control, reset, setValue } =
 		useForm<TExpenseFormState>({
 			defaultValues: {
 				amount: props.amount,
@@ -140,7 +140,7 @@ export function VenuePillsController(props: {
 		<Controller
 			name="venue"
 			control={props.control}
-			render={({ field, ...rest }) => {
+			render={({ field }) => {
 				return (
 					<VenuePills
 						{...field}
