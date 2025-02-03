@@ -110,7 +110,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			</div>
 
 			<div className={styles.formGroup}>
-				<DateInputController control={control} />
+				<DateInput {...register('date')} />
 			</div>
 
 			<div className={styles.formGroup}>
@@ -165,20 +165,6 @@ export function CategoryPillsController(props: {
 			control={props.control}
 			render={({ field }) => (
 				<CategoryPills {...field} onSelect={field.onChange} />
-			)}
-		/>
-	);
-}
-
-export function DateInputController(props: {
-	control: Control<TExpenseFormState>;
-}) {
-	return (
-		<Controller
-			name="date"
-			control={props.control}
-			render={({ field }) => (
-				<DateInput {...field} initialValue={field.value} />
 			)}
 		/>
 	);
