@@ -7,5 +7,11 @@
 	"workspaces": [
 		"apps/*",
 		"packages/*"
-	]
+	],
+	"scripts": {
+		"dependencies:update": "ncu --deep -u -x globals,@lv48/eslint-config"
+	},
+	"devDependencies": {
+		"npm-check-updates": "17.1.14"
+	}
 }
