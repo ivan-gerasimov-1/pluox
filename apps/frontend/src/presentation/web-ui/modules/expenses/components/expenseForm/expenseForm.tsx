@@ -114,7 +114,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			</div>
 
 			<div className={styles.formGroup}>
-				<DescriptionInputController control={control} />
+				<DescriptionInput {...register('description')} />
 			</div>
 		</form>
 	);
@@ -166,18 +166,6 @@ export function CategoryPillsController(props: {
 			render={({ field }) => (
 				<CategoryPills {...field} onSelect={field.onChange} />
 			)}
-		/>
-	);
-}
-
-export function DescriptionInputController(props: {
-	control: Control<TExpenseFormState>;
-}) {
-	return (
-		<Controller
-			name="description"
-			control={props.control}
-			render={({ field }) => <DescriptionInput {...field} />}
 		/>
 	);
 }
