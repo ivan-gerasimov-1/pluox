@@ -9,12 +9,22 @@ import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContaine
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 import styles from './amountInput.module.css';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TAmountInputProps = {
+	id?: string;
+	name: string;
+
+	className?: string;
+
+	ref?: React.RefCallback<HTMLInputElement>;
+
 	value: number;
-	onChange(amount: number, rawAmount: string): void;
 	autoFocus?: boolean;
 	required?: boolean;
+
+	onChange(value: number): void;
+	onBlur(event: React.FocusEvent<HTMLInputElement, Element>): void;
 };
 
 export function AmountInput(props: TAmountInputProps) {
@@ -34,22 +44,24 @@ export function AmountInput(props: TAmountInputProps) {
 			return;
 		}
 
-		let value = toModelValue(rawValue);
-
 		setAmount(rawValue);
 
-		return props.onChange(value, rawValue);
+		let modelValue = toModelValue(rawValue);
+
+		return props.onChange(modelValue);
 	}
 
 	return (
 		<input
-			id="amount"
-			name="amount"
+			id={props.id || props.name}
+			name={props.name}
 			type="text"
 			inputMode="decimal"
-			className={styles.textInput}
+			className={cls(styles.textInput, props.className)}
+			ref={props.ref}
 			value={amount}
 			onChange={handleChange}
+			onBlur={props.onBlur}
 			onKeyDown={validateKey}
 			required={props.required}
 			autoFocus={props.autoFocus}

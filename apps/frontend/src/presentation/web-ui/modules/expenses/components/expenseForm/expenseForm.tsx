@@ -94,7 +94,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 					})}
 				</select>
 
-				<AmountInputController control={control} />
+				<AmountInputController control={control} setValue={setValue} />
 
 				<Button type="submit" className={styles.submitButton}>
 					{intl.translate('submitButton')}
@@ -120,14 +120,24 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	);
 }
 
-export function AmountInputController(props: {
+export function AmountInputController({
+	control,
+	setValue,
+}: {
 	control: Control<TExpenseFormState>;
+	setValue: UseFormSetValue<TExpenseFormState>;
 }) {
 	return (
 		<Controller
 			name="amount"
-			control={props.control}
-			render={({ field }) => <AmountInput {...field} />}
+			control={control}
+			render={({ field }) => (
+				<AmountInput
+					{...field}
+					onChange={(value: number) => setValue('amount', value)}
+					value={field.value}
+				/>
+			)}
 		/>
 	);
 }
