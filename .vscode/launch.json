@@ -57,6 +57,15 @@
 			"cwd": "${workspaceFolder}/apps/backend-lite",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
+		},
+		{
+			"command": "npm --workspace=@savee/landing run start",
+			"name": "Landing",
+			"request": "launch",
+			"type": "node-terminal",
+			"cwd": "${workspaceFolder}/apps/landing",
+			"sourceMaps": true,
+			"skipFiles": ["<node_internals>/**"]
 		}
 	],
 	"compounds": [

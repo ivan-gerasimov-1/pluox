@@ -1,0 +1,14 @@
+{
+	"name": "@savee/landing",
+	"type": "module",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"astro": "5.2.3"
+	}
+}
