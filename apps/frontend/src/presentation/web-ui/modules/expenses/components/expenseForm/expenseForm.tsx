@@ -50,7 +50,7 @@ type TExpenseFormState = {
 export function ExpenseForm(props: TExpenseFormProps) {
 	let intl = useIntl(expenseFormI18n);
 
-	let { register, handleSubmit, control, reset, setValue, formState } =
+	let { register, handleSubmit, control, reset, setValue } =
 		useForm<TExpenseFormState>({
 			defaultValues: {
 				amount: props.amount,
@@ -94,7 +94,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 					})}
 				</select>
 
-				<AmountInputController control={control} />
+				<AmountInputController control={control} setValue={setValue} />
 
 				<Button type="submit" className={styles.submitButton}>
 					{intl.translate('submitButton')}
@@ -110,24 +110,34 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			</div>
 
 			<div className={styles.formGroup}>
-				<DateInputController control={control} />
+				<DateInput {...register('date')} />
 			</div>
 
 			<div className={styles.formGroup}>
-				<DescriptionInputController control={control} />
+				<DescriptionInput {...register('description')} />
 			</div>
 		</form>
 	);
 }
 
-export function AmountInputController(props: {
+export function AmountInputController({
+	control,
+	setValue,
+}: {
 	control: Control<TExpenseFormState>;
+	setValue: UseFormSetValue<TExpenseFormState>;
 }) {
 	return (
 		<Controller
 			name="amount"
-			control={props.control}
-			render={({ field }) => <AmountInput {...field} />}
+			control={control}
+			render={({ field }) => (
+				<AmountInput
+					{...field}
+					onChange={(value: number) => setValue('amount', value)}
+					value={field.value}
+				/>
+			)}
 		/>
 	);
 }
@@ -140,7 +150,7 @@ export function VenuePillsController(props: {
 		<Controller
 			name="venue"
 			control={props.control}
-			render={({ field, ...rest }) => {
+			render={({ field }) => {
 				return (
 					<VenuePills
 						{...field}
@@ -166,32 +176,6 @@ export function CategoryPillsController(props: {
 			render={({ field }) => (
 				<CategoryPills {...field} onSelect={field.onChange} />
 			)}
-		/>
-	);
-}
-
-export function DateInputController(props: {
-	control: Control<TExpenseFormState>;
-}) {
-	return (
-		<Controller
-			name="date"
-			control={props.control}
-			render={({ field }) => (
-				<DateInput {...field} initialValue={field.value} />
-			)}
-		/>
-	);
-}
-
-export function DescriptionInputController(props: {
-	control: Control<TExpenseFormState>;
-}) {
-	return (
-		<Controller
-			name="description"
-			control={props.control}
-			render={({ field }) => <DescriptionInput {...field} />}
 		/>
 	);
 }
