@@ -26,6 +26,25 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 		return this.store.get(id);
 	}
 
+	public update(id: string, payload: Partial<Omit<T, 'id'>>) {
+		let item = this.store.get(id);
+
+		if (!item) {
+			return;
+		}
+
+		let newItem = {
+			...item,
+			...payload,
+		};
+
+		this.store.set(id, newItem);
+
+		this.updateShapshot();
+
+		return newItem;
+	}
+
 	public remove(id: string) {
 		let result = this.store.delete(id);
 
