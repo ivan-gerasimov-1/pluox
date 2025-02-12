@@ -1,13 +1,15 @@
 import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
+type TListener = () => void;
+
 export class DialogObserver implements IDisposable {
-	private readonly listeners: Set<() => void>;
+	private readonly listeners: Set<TListener>;
 
 	constructor() {
 		this.listeners = new Set();
 	}
 
-	public subscribe(listener: () => void) {
+	public subscribe(listener: TListener) {
 		if (!this.listeners.has(listener)) {
 			this.listeners.add(listener);
 		}
