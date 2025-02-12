@@ -4,7 +4,9 @@ import type { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core
 import type { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
 import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
 
-export class DialogClient {
+import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+
+export class DialogClient implements IDisposable {
 	constructor(
 		private readonly store: DialogStore<TDialog>,
 		private readonly observer: DialogObserver,
