@@ -21,7 +21,7 @@ export class DialogClient implements IDialogClient {
 			component,
 			props,
 
-			isOpen: true,
+			status: 'initial',
 
 			close: () => this.close(id),
 			unmount: () => this.remove(id),
@@ -45,12 +45,12 @@ export class DialogClient implements IDialogClient {
 	public open(id: string) {
 		let item = this.store.read(id);
 
-		if (!item || item?.isOpen) {
+		if (!item || item?.status === 'open') {
 			return;
 		}
 
 		this.store.update(item.id, {
-			isOpen: true,
+			status: 'open',
 		});
 
 		this.notify();
@@ -66,7 +66,7 @@ export class DialogClient implements IDialogClient {
 		}
 
 		this.store.update(item.id, {
-			isOpen: false,
+			status: 'closed',
 		});
 
 		this.notify();

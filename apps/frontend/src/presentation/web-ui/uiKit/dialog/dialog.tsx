@@ -15,9 +15,13 @@ export function Dialog() {
 		useCallback(() => client.getSnapshot(), [client]),
 	);
 
-	useAppScale(dialogs.some((dialog) => dialog.isOpen));
+	useAppScale(dialogs.some((dialog) => dialog.status === 'open'));
 
 	return dialogs.map((dialog) => {
+		if (dialog.status === 'initial') {
+			return null;
+		}
+
 		let Component = dialog.type === 'sheet' ? ActionSheet : Modal;
 
 		return createPortal(
@@ -25,7 +29,7 @@ export function Dialog() {
 				id={dialog.id}
 				close={dialog.close}
 				onUnmount={dialog.unmount}
-				isOpen={dialog.isOpen}
+				isOpen={dialog.status === 'open'}
 			>
 				{createElement(dialog.component, {
 					id: dialog.id,

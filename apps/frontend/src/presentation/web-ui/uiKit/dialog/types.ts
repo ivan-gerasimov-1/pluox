@@ -21,5 +21,5 @@ export type TDialog = {
 	close: () => void;
 	unmount: () => void;
 
-	isOpen: boolean;
+	status: 'initial' | 'open' | 'closed';
 };
