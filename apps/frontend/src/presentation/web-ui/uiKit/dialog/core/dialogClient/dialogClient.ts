@@ -1,6 +1,6 @@
 import type { IDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/types';
 import type { IDialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
-import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
+import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 import type { IDialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/dialogStore/types';
 import type { IIdGenerator } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 

@@ -1,5 +1,5 @@
-import type { IDialogPublicApi } from '@root/presentation/web-ui/uiKit/dialog/types';
-import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/useDialogClient';
+import type { IDialogApi } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
 import { useMemo } from 'react';
 
 export function useDialog(): {
@@ -9,7 +9,7 @@ export function useDialog(): {
 			close: () => void;
 		}>,
 		props?: {},
-	) => IDialogPublicApi;
+	) => IDialogApi;
 } {
 	let client = useDialogClient();
 

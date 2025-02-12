@@ -1,11 +1,11 @@
 import { createElement, useCallback, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/useDialogClient';
+import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
 
-import { ActionSheet } from '@root/presentation/web-ui/uiKit/dialog/components/actionSheet';
-import { Modal } from '@root/presentation/web-ui/uiKit/dialog/components/modal';
-import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/useAppScale';
+import { ActionSheet } from '@root/presentation/web-ui/uiKit/dialog/react/actionSheet/actionSheet';
+import { Modal } from '@root/presentation/web-ui/uiKit/dialog/react/modal/modal';
+import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/react/hooks/useAppScale';
 
 export function Dialog() {
 	let client = useDialogClient();
