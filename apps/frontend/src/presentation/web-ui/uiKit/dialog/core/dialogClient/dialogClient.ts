@@ -49,9 +49,9 @@ export class DialogClient implements IDialogClient {
 			return;
 		}
 
-		item.isOpen = true;
-
-		this.store.add(item);
+		this.store.update(item.id, {
+			isOpen: true,
+		});
 
 		this.notify();
 
@@ -65,9 +65,9 @@ export class DialogClient implements IDialogClient {
 			return;
 		}
 
-		item.isOpen = false;
-
-		this.store.add(item);
+		this.store.update(item.id, {
+			isOpen: false,
+		});
 
 		this.notify();
 
