@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid';
-
 import type { IDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/types';
 import type { IDialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
 import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
