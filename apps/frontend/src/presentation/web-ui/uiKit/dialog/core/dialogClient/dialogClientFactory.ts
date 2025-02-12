@@ -1,7 +1,7 @@
 import { DialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/dialogClient';
 import type { IDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/types';
 import { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/dialogObserver';
-import { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
+import { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/dialogStore/dialogStore';
 import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
 
 export function createDialogClient(): IDialogClient {

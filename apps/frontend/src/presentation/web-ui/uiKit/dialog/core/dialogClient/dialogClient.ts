@@ -2,12 +2,12 @@ import { nanoid } from 'nanoid';
 
 import type { IDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/types';
 import type { IDialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
-import type { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
 import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
+import type { IDialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/dialogStore/types';
 
 export class DialogClient implements IDialogClient {
 	constructor(
-		private readonly store: DialogStore<TDialog>,
+		private readonly store: IDialogStore<TDialog>,
 		private readonly observer: IDialogObserver,
 	) {}
 
