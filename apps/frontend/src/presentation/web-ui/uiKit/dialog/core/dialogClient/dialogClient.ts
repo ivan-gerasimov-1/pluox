@@ -16,7 +16,7 @@ export class DialogClient implements IDialogClient {
 	public create(component: TDialog['component'], props?: TDialog['props']) {
 		let id = this.idGenerator();
 
-		let item: TDialog = {
+		let dialog: TDialog = {
 			id,
 			type: 'sheet',
 
@@ -29,11 +29,11 @@ export class DialogClient implements IDialogClient {
 			unmount: () => this.remove(id),
 		};
 
-		let actionSheet = this.store.add(item);
+		this.store.add(dialog);
 
 		this.notify();
 
-		return actionSheet;
+		return dialog;
 	}
 
 	public remove(id: string) {

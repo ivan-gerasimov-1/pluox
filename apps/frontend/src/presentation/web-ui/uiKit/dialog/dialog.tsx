@@ -17,20 +17,20 @@ export function Dialog() {
 
 	useAppScale(dialogs.some((dialog) => dialog.isOpen));
 
-	return dialogs.map((actionSheet) => {
-		let Component = actionSheet.type === 'sheet' ? ActionSheet : Modal;
+	return dialogs.map((dialog) => {
+		let Component = dialog.type === 'sheet' ? ActionSheet : Modal;
 
 		return createPortal(
 			<Component
-				id={actionSheet.id}
-				close={actionSheet.close}
-				onUnmount={actionSheet.unmount}
-				isOpen={actionSheet.isOpen}
+				id={dialog.id}
+				close={dialog.close}
+				onUnmount={dialog.unmount}
+				isOpen={dialog.isOpen}
 			>
-				{createElement(actionSheet.component, {
-					id: actionSheet.id,
-					close: actionSheet.close,
-					...actionSheet.props,
+				{createElement(dialog.component, {
+					id: dialog.id,
+					close: dialog.close,
+					...dialog.props,
 				})}
 			</Component>,
 			document.body,

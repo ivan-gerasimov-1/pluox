@@ -22,15 +22,15 @@ export function useDialog(): {
 				}>,
 				props?: {},
 			) => {
-				let sheet = client.create(component, props);
+				let dialog = client.create(component, props);
 
 				requestAnimationFrame(() => {
-					client.open(sheet.id);
+					client.open(dialog.id);
 				});
 
 				return {
-					id: sheet.id,
-					close: sheet.close,
+					id: dialog.id,
+					close: dialog.close,
 				};
 			},
 		}),
