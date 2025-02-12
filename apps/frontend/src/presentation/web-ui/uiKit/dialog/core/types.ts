@@ -6,6 +6,9 @@ export interface IIdGenerator {
 	(): string;
 }
 
+export type TDialogType = 'sheet' | 'modal';
+export type TDialogStatus = 'initial' | 'open' | 'closed';
+
 export type TDialogProps<P> = P & {
 	id: string;
 	close: () => void;
@@ -18,8 +21,8 @@ export interface IDialogApi {
 
 export type TDialog = {
 	id: string;
-	type: 'sheet' | 'modal';
-	status: 'initial' | 'open' | 'closed';
+	type: TDialogType;
+	status: TDialogStatus;
 
 	component: React.FunctionComponent<{
 		id: string;

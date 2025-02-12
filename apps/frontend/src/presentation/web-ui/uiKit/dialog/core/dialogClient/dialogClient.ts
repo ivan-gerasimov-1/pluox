@@ -1,8 +1,15 @@
+import {
+	EDialogStatus,
+	EDialogType,
+} from '@root/presentation/web-ui/uiKit/dialog/core/enums';
+
 import type { IDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/types';
 import type { IDialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
-import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 import type { IDialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/dialogStore/types';
-import type { IIdGenerator } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import type {
+	IIdGenerator,
+	TDialog,
+} from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
 export class DialogClient implements IDialogClient {
 	constructor(
@@ -16,12 +23,11 @@ export class DialogClient implements IDialogClient {
 
 		let dialog: TDialog = {
 			id,
-			type: 'sheet',
+			type: EDialogType.SHEET,
+			status: EDialogStatus.INITIAL,
 
 			component,
 			props,
-
-			status: 'initial',
 
 			close: () => this.close(id),
 			remove: () => this.remove(id),
@@ -45,12 +51,12 @@ export class DialogClient implements IDialogClient {
 	public open(id: string) {
 		let item = this.store.read(id);
 
-		if (!item || item?.status === 'open') {
+		if (!item || item?.status === EDialogStatus.OPEN) {
 			return;
 		}
 
 		this.store.update(item.id, {
-			status: 'open',
+			status: EDialogStatus.OPEN,
 		});
 
 		this.notify();
@@ -66,7 +72,7 @@ export class DialogClient implements IDialogClient {
 		}
 
 		this.store.update(item.id, {
-			status: 'closed',
+			status: EDialogStatus.CLOSED,
 		});
 
 		this.notify();
