@@ -1,4 +1,6 @@
-export class DialogObserver {
+import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+
+export class DialogObserver implements IDisposable {
 	private readonly listeners: Set<() => void>;
 
 	constructor() {
