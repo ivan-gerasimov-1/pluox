@@ -1,36 +1,36 @@
 import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
-type TListener = () => void;
+type TObserver = () => void;
 
 interface IDialogObserver extends IDisposable {
-	subscribe(listener: TListener): () => void;
+	subscribe(observer: TObserver): () => void;
 	notify(): void;
 }
 
 export class DialogObserver implements IDialogObserver {
-	private readonly listeners: Set<TListener>;
+	private readonly observers: Set<TObserver>;
 
 	constructor() {
-		this.listeners = new Set();
+		this.observers = new Set();
 	}
 
-	public subscribe(listener: TListener) {
-		if (!this.listeners.has(listener)) {
-			this.listeners.add(listener);
+	public subscribe(listener: TObserver): () => void {
+		if (!this.observers.has(listener)) {
+			this.observers.add(listener);
 		}
 
 		return () => {
-			this.listeners.delete(listener);
+			this.observers.delete(listener);
 		};
 	}
 
 	public notify() {
-		for (let listener of this.listeners) {
+		for (let listener of this.observers) {
 			listener();
 		}
 	}
 
 	public dispose() {
-		this.listeners.clear();
+		this.observers.clear();
 	}
 }
