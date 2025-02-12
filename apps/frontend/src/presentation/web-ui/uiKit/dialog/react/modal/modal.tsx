@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
+import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/react/hooks/useAppScale';
 
 import styles from './modal.module.css';
 
@@ -23,6 +24,8 @@ type TModalProps = {
 
 export function Modal(props: TModalProps) {
 	let modalRef = useRef(null);
+
+	useAppScale(props.isOpen);
 
 	return (
 		<>
