@@ -2,7 +2,12 @@ import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/ty
 
 type TListener = () => void;
 
-export class DialogObserver implements IDisposable {
+interface IDialogObserver extends IDisposable {
+	subscribe(listener: TListener): () => void;
+	notify(): void;
+}
+
+export class DialogObserver implements IDialogObserver {
 	private readonly listeners: Set<TListener>;
 
 	constructor() {
