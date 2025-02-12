@@ -4,7 +4,7 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { useAppScale } from '@root/presentation/web-ui/modules/app/components/actionSheet/useAppScale';
+import { useAppScale } from '@root/presentation/web-ui/modules/app/components/dialog/useAppScale';
 import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
 
 import styles from './actionSheet.module.css';
@@ -17,7 +17,7 @@ type TActionSheetProps = {
 	id: string;
 
 	close: () => void;
-	handleUnmount: () => void;
+	onUnmount: () => void;
 
 	isOpen: boolean;
 };
@@ -36,7 +36,7 @@ export function ActionSheet(props: TActionSheetProps) {
 				in={props.isOpen}
 				timeout={TRANSITION_DURATION}
 				classNames={styles}
-				onExited={props.handleUnmount}
+				onExited={props.onUnmount}
 				appear
 			>
 				<div

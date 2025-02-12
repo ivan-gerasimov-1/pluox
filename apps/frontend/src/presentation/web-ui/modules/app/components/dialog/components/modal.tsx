@@ -16,7 +16,7 @@ type TModalProps = {
 	id: string;
 
 	close: () => void;
-	handleUnmount: () => void;
+	onUnmount: () => void;
 
 	isOpen: boolean;
 };
@@ -33,7 +33,7 @@ export function Modal(props: TModalProps) {
 				in={props.isOpen}
 				timeout={TRANSITION_DURATION}
 				classNames={styles}
-				onExited={props.handleUnmount}
+				onExited={props.onUnmount}
 				appear
 			>
 				<div ref={modalRef} id={props.id} className={styles.modalContainer}>

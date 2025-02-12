@@ -8,10 +8,10 @@ import { IRouter } from '@root/presentation/web-ui/router';
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 import { ContainerProvider } from '@root/presentation/web-ui/modules/serviceContainer/provider';
 
-import type { TDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
+import { Dialog } from '@root/presentation/web-ui/modules/app/components/dialog/dialog';
+import { DialogClientProvider } from '@root/presentation/web-ui/modules/app/components/dialog/dialogClientProvider';
 
-import { ActionSheetProvider } from '@root/presentation/web-ui/modules/app/components/actionSheet/actionSheetProvider';
-import { ModalProvider } from '@root/presentation/web-ui/modules/app/components/modal/modalProvider';
+import type { TDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
 
 import '@root/presentation/web-ui/modules/app/components/root/root.css';
 
@@ -42,11 +42,11 @@ export function Root(props: IRootProps) {
 			<QueryClientProvider client={props.queryClient}>
 				<ReactQueryDevtools initialIsOpen={false} />
 
-				<ModalProvider>
-					<ActionSheetProvider>
-						<RouterProvider router={props.router} />
-					</ActionSheetProvider>
-				</ModalProvider>
+				<DialogClientProvider>
+					<RouterProvider router={props.router} />
+
+					<Dialog />
+				</DialogClientProvider>
 			</QueryClientProvider>
 		</ContainerProvider>
 	);

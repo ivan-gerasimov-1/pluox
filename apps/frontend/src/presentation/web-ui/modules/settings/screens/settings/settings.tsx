@@ -26,9 +26,8 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-import type { TActionsSheetProps } from '@root/presentation/web-ui/modules/app/components/actionSheet/types';
-import { useActionSheet } from '@root/presentation/web-ui/modules/app/components/actionSheet/useActionSheet';
-import { useModal } from '@root/presentation/web-ui/modules/app/components/modal/useModal';
+import type { TDialogProps } from '@root/presentation/web-ui/modules/app/components/dialog/types';
+import { useDialog } from '@root/presentation/web-ui/modules/app/components/dialog/useDialog';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
@@ -54,8 +53,7 @@ import styles from './settings.module.css';
  *    *queryKey* contains *QUERY_APP_CONFIG_BUDGET*
  */
 export function SettingsScreen() {
-	let modal = useModal();
-	let actionSheet = useActionSheet();
+	let dialog = useDialog();
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let intl = useIntl(settingsI18n);
 	let navigation = useAppNavigation();
@@ -142,7 +140,7 @@ export function SettingsScreen() {
 								<IconButton
 									iconName={EIconName.Edit}
 									onClick={() => {
-										let actionSheetApi = actionSheet.render(
+										let actionSheetApi = dialog.render(
 											// @ts-expect-error
 											UserNameEditActionSheet,
 											{
@@ -331,7 +329,7 @@ export function SettingsScreen() {
 								<IconButton
 									iconName={EIconName.Edit}
 									onClick={() => {
-										let actionSheetApi = actionSheet.render(
+										let actionSheetApi = dialog.render(
 											// @ts-expect-error
 											BudgetEditActionsSheet,
 											{
@@ -411,8 +409,8 @@ export function SettingsScreen() {
 						</Card>
 					</CardContainer>
 
-					<Button onClick={() => modal.render(TestModal)}>Open Modal</Button>
-					<Button onClick={() => modal.render(AuthTestModal)}>
+					<Button onClick={() => dialog.render(TestModal)}>Open Modal</Button>
+					<Button onClick={() => dialog.render(AuthTestModal)}>
 						Check Auth
 					</Button>
 				</ScreenBody>
@@ -422,7 +420,7 @@ export function SettingsScreen() {
 }
 
 export function UserNameEditActionSheet(
-	props: TActionsSheetProps<{
+	props: TDialogProps<{
 		userName: string;
 	}>,
 ) {
@@ -463,7 +461,7 @@ export function UserNameEditActionSheet(
 }
 
 export function BudgetEditActionsSheet(
-	props: TActionsSheetProps<{
+	props: TDialogProps<{
 		budget: number;
 		currency: ECurrency;
 	}>,
