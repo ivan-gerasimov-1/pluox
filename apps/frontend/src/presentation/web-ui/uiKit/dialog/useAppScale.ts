@@ -4,7 +4,7 @@ export function useAppScale(isScaled: boolean): void {
 	useEffect(() => {
 		let appRoot = window.document.getElementById('saveeRoot');
 
-		requestAnimationFrame(() => {
+		let animationFrame = requestAnimationFrame(() => {
 			if (isScaled) {
 				appRoot?.classList.add('savee-action-sheet-open');
 			} else {
@@ -13,6 +13,8 @@ export function useAppScale(isScaled: boolean): void {
 		});
 
 		return () => {
+			cancelAnimationFrame(animationFrame);
+
 			requestAnimationFrame(() => {
 				appRoot?.classList.remove(
 					'savee-action-sheet-open',
