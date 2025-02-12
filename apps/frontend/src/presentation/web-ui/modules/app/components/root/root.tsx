@@ -8,8 +8,8 @@ import { IRouter } from '@root/presentation/web-ui/router';
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
 import { ContainerProvider } from '@root/presentation/web-ui/modules/serviceContainer/provider';
 
-import { Dialog } from '@root/presentation/web-ui/modules/app/components/dialog/dialog';
-import { DialogClientProvider } from '@root/presentation/web-ui/modules/app/components/dialog/dialogClientProvider';
+import { Dialog } from '@root/presentation/web-ui/uiKit/dialog/dialog';
+import { DialogClientProvider } from '@root/presentation/web-ui/uiKit/dialog/dialogClientProvider';
 
 import type { TDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
 

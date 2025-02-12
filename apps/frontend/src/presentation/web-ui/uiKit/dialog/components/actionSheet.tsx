@@ -4,7 +4,7 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { useAppScale } from '@root/presentation/web-ui/modules/app/components/dialog/useAppScale';
+import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/useAppScale';
 import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
 
 import styles from './actionSheet.module.css';

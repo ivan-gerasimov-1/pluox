@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid';
 
-import type { DialogObserver } from '@root/presentation/web-ui/modules/app/components/dialog/core/observer';
-import type { DialogStore } from '@root/presentation/web-ui/modules/app/components/dialog/core/store';
-import type { TDialog } from '@root/presentation/web-ui/modules/app/components/dialog/types';
+import type { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/observer';
+import type { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
+import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
 
 export class DialogClient {
 	constructor(

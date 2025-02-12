@@ -26,8 +26,8 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-import type { TDialogProps } from '@root/presentation/web-ui/modules/app/components/dialog/types';
-import { useDialog } from '@root/presentation/web-ui/modules/app/components/dialog/useDialog';
+import type { TDialogProps } from '@root/presentation/web-ui/uiKit/dialog/types';
+import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/useDialog';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';

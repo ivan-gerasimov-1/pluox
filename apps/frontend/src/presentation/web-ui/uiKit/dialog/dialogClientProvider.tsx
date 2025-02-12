@@ -1,7 +1,7 @@
 import React, { createContext, useMemo } from 'react';
 
-import { createDialogClient } from '@root/presentation/web-ui/modules/app/components/dialog/core/factory';
-import { DialogClient } from '@root/presentation/web-ui/modules/app/components/dialog/core/client';
+import { createDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/factory';
+import { DialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/client';
 
 export const DialogClientContext = createContext<DialogClient | null>(null);
 
