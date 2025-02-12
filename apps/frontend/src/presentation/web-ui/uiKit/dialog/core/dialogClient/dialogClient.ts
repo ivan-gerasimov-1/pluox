@@ -1,12 +1,11 @@
 import { nanoid } from 'nanoid';
 
-import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-
+import type { IDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/types';
 import type { IDialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
 import type { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
 import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
 
-export class DialogClient implements IDisposable {
+export class DialogClient implements IDialogClient {
 	constructor(
 		private readonly store: DialogStore<TDialog>,
 		private readonly observer: IDialogObserver,
@@ -33,6 +32,14 @@ export class DialogClient implements IDisposable {
 		this.notify();
 
 		return actionSheet;
+	}
+
+	public remove(id: string) {
+		let result = this.store.remove(id);
+
+		this.notify();
+
+		return result;
 	}
 
 	public open(id: string) {
@@ -67,22 +74,6 @@ export class DialogClient implements IDisposable {
 		return item;
 	}
 
-	public remove(id: string) {
-		let result = this.store.remove(id);
-
-		this.notify();
-
-		return result;
-	}
-
-	private notify() {
-		this.observer.notify();
-	}
-
-	public subscribe(callback: () => void) {
-		return this.observer.subscribe(callback);
-	}
-
 	public getSnapshot() {
 		return this.store.snapshot;
 	}
@@ -90,5 +81,13 @@ export class DialogClient implements IDisposable {
 	public dispose() {
 		this.store.dispose();
 		this.observer.dispose();
+	}
+
+	public subscribe(listener: () => void) {
+		return this.observer.subscribe(listener);
+	}
+
+	private notify() {
+		this.observer.notify();
 	}
 }

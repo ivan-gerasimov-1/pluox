@@ -1,13 +1,13 @@
 import React, { createContext, useMemo } from 'react';
 
-import { createDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/factory';
-import { DialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/client';
+import { createDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/dialogClientFactory';
+import type { IDialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/dialogClient/types';
 
-export const DialogClientContext = createContext<DialogClient | null>(null);
+export const DialogClientContext = createContext<IDialogClient | null>(null);
 
 type TDialogClientProviderProps = {
+	client?: IDialogClient;
 	children: React.ReactNode;
-	client?: DialogClient;
 };
 
 export function DialogClientProvider(props: TDialogClientProviderProps) {
