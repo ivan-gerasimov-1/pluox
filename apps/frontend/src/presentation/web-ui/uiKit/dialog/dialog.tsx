@@ -28,7 +28,7 @@ export function Dialog() {
 			<Component
 				id={dialog.id}
 				close={dialog.close}
-				onUnmount={dialog.unmount}
+				onUnmount={dialog.remove}
 				isOpen={dialog.status === 'open'}
 			>
 				{createElement(dialog.component, {

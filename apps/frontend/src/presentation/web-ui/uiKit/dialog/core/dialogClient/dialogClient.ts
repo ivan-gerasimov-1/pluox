@@ -24,7 +24,7 @@ export class DialogClient implements IDialogClient {
 			status: 'initial',
 
 			close: () => this.close(id),
-			unmount: () => this.remove(id),
+			remove: () => this.remove(id),
 		};
 
 		this.store.add(dialog);

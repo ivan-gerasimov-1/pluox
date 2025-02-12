@@ -19,7 +19,7 @@ export type TDialog = {
 	props?: {};
 
 	close: () => void;
-	unmount: () => void;
+	remove: () => void;
 
 	status: 'initial' | 'open' | 'closed';
 };
