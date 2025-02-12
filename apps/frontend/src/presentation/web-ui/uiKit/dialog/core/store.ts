@@ -32,6 +32,11 @@ export class DialogStore<T extends { id: string }> {
 		return result;
 	}
 
+	public dispose() {
+		this.store.clear();
+		this.#snapshot = [];
+	}
+
 	private updateShapshot() {
 		this.#snapshot = Array.from(this.store.values());
 	}
