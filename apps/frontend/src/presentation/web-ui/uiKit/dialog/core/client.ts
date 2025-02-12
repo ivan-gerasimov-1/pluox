@@ -1,15 +1,15 @@
 import { nanoid } from 'nanoid';
 
-import type { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/dialogObserver';
+import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+
+import type { IDialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
 import type { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
 import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
-
-import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
 export class DialogClient implements IDisposable {
 	constructor(
 		private readonly store: DialogStore<TDialog>,
-		private readonly observer: DialogObserver,
+		private readonly observer: IDialogObserver,
 	) {}
 
 	public create(component: TDialog['component'], props?: TDialog['props']) {
