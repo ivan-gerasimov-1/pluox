@@ -25,9 +25,6 @@ import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
-import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/useDialog';
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-
 import styles from './main.module.css';
 
 function useMonthlyAmount(): number {
@@ -105,7 +102,6 @@ export function useScreenLoader() {
 }
 
 export function MainScreen() {
-	let dialog = useDialog();
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
@@ -202,14 +198,12 @@ export function MainScreen() {
 							</ul>
 						</div>
 					</div>
-
-					<Button onClick={() => dialog.render(ExpenseNew)}>Добавить</Button>
 				</ScreenBody>
 			</Screen>
 
-			{/* <ActionSheet>
+			<ActionSheet>
 				<ExpenseNew />
-			</ActionSheet> */}
+			</ActionSheet>
 		</>
 	);
 }
