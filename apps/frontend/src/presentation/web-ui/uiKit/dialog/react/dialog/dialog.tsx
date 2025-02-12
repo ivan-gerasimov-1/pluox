@@ -15,8 +15,6 @@ export function Dialog() {
 		useCallback(() => client.getSnapshot(), [client]),
 	);
 
-	useAppScale(dialogs.some((dialog) => dialog.status === 'open'));
-
 	return dialogs.map((dialog) => {
 		if (dialog.status === 'initial') {
 			return null;
