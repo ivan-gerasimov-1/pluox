@@ -84,4 +84,9 @@ export class DialogClient {
 	public getSnapshot() {
 		return this.store.snapshot;
 	}
+
+	public dispose() {
+		this.store.dispose();
+		this.observer.dispose();
+	}
 }
