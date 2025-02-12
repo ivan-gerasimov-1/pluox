@@ -1,4 +1,6 @@
-export class DialogStore<T extends { id: string }> {
+import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+
+export class DialogStore<T extends { id: string }> implements IDisposable {
 	private readonly store: Map<string, T>;
 
 	#snapshot: T[];
