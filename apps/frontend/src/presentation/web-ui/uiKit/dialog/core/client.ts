@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-import type { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/observer';
+import type { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/dialogObserver';
 import type { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
 import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
 

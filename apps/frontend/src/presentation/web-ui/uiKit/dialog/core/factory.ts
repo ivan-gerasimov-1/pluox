@@ -1,4 +1,4 @@
-import { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/observer';
+import { DialogObserver } from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/dialogObserver';
 import { DialogClient } from '@root/presentation/web-ui/uiKit/dialog/core/client';
 import { DialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/store';
 import { TDialog } from '@root/presentation/web-ui/uiKit/dialog/types';
