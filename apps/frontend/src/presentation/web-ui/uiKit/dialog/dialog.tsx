@@ -10,14 +10,14 @@ import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/useAppScale'
 export function Dialog() {
 	let client = useDialogClient();
 
-	let actionSheets = useSyncExternalStore(
+	let dialogs = useSyncExternalStore(
 		useCallback((onStoreChange) => client.subscribe(onStoreChange), [client]),
 		useCallback(() => client.getSnapshot(), [client]),
 	);
 
-	useAppScale(actionSheets.some((actionSheet) => actionSheet.isOpen));
+	useAppScale(dialogs.some((dialog) => dialog.isOpen));
 
-	return actionSheets.map((actionSheet) => {
+	return dialogs.map((actionSheet) => {
 		let Component = actionSheet.type === 'sheet' ? ActionSheet : Modal;
 
 		return createPortal(
