@@ -332,7 +332,7 @@ export function SettingsScreen() {
 											budget: appConfig.budget ?? 0,
 											currency: appConfig.currency,
 
-											close: (payload) => {
+											close: (payload: { budget: number }) => {
 												mutateAppConfig({
 													budget: payload.budget,
 												});
@@ -465,7 +465,9 @@ export function BudgetEditActionsSheet(
 			budget: number;
 			currency: ECurrency;
 		},
-		{ budget: number }
+		{
+			budget: number;
+		}
 	>,
 ) {
 	let intl = useIntl(settingsI18n);

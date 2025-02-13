@@ -12,7 +12,7 @@ export function useDialog() {
 
 	let dialog = useMemo(
 		() => ({
-			render: <TProps extends {}, TClosePayload extends {} = never>(
+			render: <TProps, TClosePayload>(
 				component: TDialogComponent<TProps, TClosePayload>,
 				props?: TDialogProps<TProps, TClosePayload>,
 			): IDialogApi => {

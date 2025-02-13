@@ -15,31 +15,30 @@ export interface IDialogApi {
 }
 
 export type TDialogComponent<
-	TProps extends {},
-	TClosePayload extends {} = never,
+	TProps,
+	TClosePayload = never,
 > = React.FunctionComponent<TDialogComponentProps<TProps, TClosePayload>>;
 
-export type TDialogComponentProps<
-	TProps extends {} = {},
-	TClosePayload extends {} = never,
-> = {
+export type TDialogComponentProps<TProps = {}, TClosePayload = void> = {
 	id: string;
-	close: (payload: TClosePayload) => void;
+	close: TClosePayload extends void
+		? () => void
+		: (payload: TClosePayload) => void;
 } & TProps;
 
-export type TDialogProps<
-	TProps extends {} = {},
-	TClosePayload extends {} = never,
-> = Omit<TDialogComponentProps<TProps, TClosePayload>, 'id' | 'close'> &
+export type TDialogProps<TProps = {}, TClosePayload = void> = Omit<
+	TDialogComponentProps<TProps, TClosePayload>,
+	'id' | 'close'
+> &
 	Partial<Pick<TDialogComponentProps<TProps, TClosePayload>, 'close'>>;
 
-export type TDialog<TProps extends {} = {}> = {
+export type TDialog<TProps = {}, TClosePayload = void> = {
 	id: string;
 	type: TDialogType;
 	status: TDialogStatus;
 
-	component: TDialogComponent<TProps>;
-	props: TDialogProps<TProps> | null;
+	component: TDialogComponent<TProps, TClosePayload>;
+	props: TDialogProps<TProps, TClosePayload> | null;
 
 	close: () => void;
 	remove: () => void;

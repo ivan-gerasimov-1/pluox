@@ -20,13 +20,13 @@ export class DialogClient implements IDialogClient {
 		private readonly idGenerator: IIdGenerator,
 	) {}
 
-	public create<TProps extends {}>(
-		component: TDialogComponent<TProps>,
-		props?: TDialogProps<TProps>,
+	public create<TProps, TClosePayload = void>(
+		component: TDialogComponent<TProps, TClosePayload>,
+		props?: TDialogProps<TProps, TClosePayload>,
 	) {
 		let id = this.idGenerator();
 
-		let dialog: TDialog<TProps> = {
+		let dialog: TDialog<TProps, TClosePayload> = {
 			id,
 			type: EDialogType.SHEET,
 			status: EDialogStatus.INITIAL,
