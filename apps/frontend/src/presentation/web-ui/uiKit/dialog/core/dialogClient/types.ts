@@ -1,8 +1,15 @@
-import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-import type { TDialog } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import type {
+	IDisposable,
+	TDialog,
+	TDialogComponent,
+	TDialogProps,
+} from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
 export interface IDialogClient extends IDisposable {
-	create(component: TDialog['component'], props?: TDialog['props']): TDialog;
+	create<TProps extends {}, TClosePayload extends {} = never>(
+		component: TDialogComponent<TProps, TClosePayload>,
+		props: TDialogProps<TProps>,
+	): TDialog<TProps>;
 	remove(id: string): void;
 	open(id: string): void;
 	close(id: string): void;

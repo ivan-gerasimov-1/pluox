@@ -9,19 +9,24 @@ import type { IDialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/d
 import type {
 	IIdGenerator,
 	TDialog,
+	TDialogComponent,
+	TDialogProps,
 } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
 export class DialogClient implements IDialogClient {
 	constructor(
-		private readonly store: IDialogStore<TDialog>,
+		private readonly store: IDialogStore<TDialog<any>>,
 		private readonly observer: IDialogObserver,
 		private readonly idGenerator: IIdGenerator,
 	) {}
 
-	public create(component: TDialog['component'], props?: TDialog['props']) {
+	public create<TProps extends {}>(
+		component: TDialogComponent<TProps>,
+		props: TDialogProps<TProps>,
+	) {
 		let id = this.idGenerator();
 
-		let dialog: TDialog = {
+		let dialog: TDialog<TProps> = {
 			id,
 			type: EDialogType.SHEET,
 			status: EDialogStatus.INITIAL,

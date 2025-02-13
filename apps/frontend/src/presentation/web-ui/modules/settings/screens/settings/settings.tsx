@@ -26,7 +26,7 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-import type { TDialogProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
@@ -141,7 +141,6 @@ export function SettingsScreen() {
 									iconName={EIconName.Edit}
 									onClick={() => {
 										let actionSheetApi = dialog.render(
-											// @ts-expect-error
 											UserNameEditActionSheet,
 											{
 												userName: user.name,
@@ -329,22 +328,18 @@ export function SettingsScreen() {
 								<IconButton
 									iconName={EIconName.Edit}
 									onClick={() => {
-										let actionSheetApi = dialog.render(
-											// @ts-expect-error
-											BudgetEditActionsSheet,
-											{
-												budget: appConfig.budget,
-												currency: appConfig.currency,
+										let actionSheetApi = dialog.render(BudgetEditActionsSheet, {
+											budget: appConfig.budget ?? 0,
+											currency: appConfig.currency,
 
-												close: (payload: { budget: number }) => {
-													mutateAppConfig({
-														budget: payload.budget,
-													});
+											close: (payload) => {
+												mutateAppConfig({
+													budget: payload.budget,
+												});
 
-													actionSheetApi.close();
-												},
+												actionSheetApi.close();
 											},
-										);
+										});
 									}}
 								/>
 							</div>
@@ -409,8 +404,10 @@ export function SettingsScreen() {
 						</Card>
 					</CardContainer>
 
-					<Button onClick={() => dialog.render(TestModal)}>Open Modal</Button>
-					<Button onClick={() => dialog.render(AuthTestModal)}>
+					<Button onClick={() => dialog.render(TestModal, {})}>
+						Open Modal
+					</Button>
+					<Button onClick={() => dialog.render(AuthTestModal, {})}>
 						Check Auth
 					</Button>
 				</ScreenBody>
@@ -420,9 +417,14 @@ export function SettingsScreen() {
 }
 
 export function UserNameEditActionSheet(
-	props: TDialogProps<{
-		userName: string;
-	}>,
+	props: TDialogComponentProps<
+		{
+			userName: string;
+		},
+		{
+			userName: string;
+		}
+	>,
 ) {
 	let intl = useIntl(settingsI18n);
 	let [userName, setUserName] = useState(props.userName);
@@ -447,7 +449,6 @@ export function UserNameEditActionSheet(
 					marginTop: '20px',
 				}}
 				onClick={() => {
-					// @ts-expect-error
 					props.close({
 						userName,
 					});
@@ -461,10 +462,13 @@ export function UserNameEditActionSheet(
 }
 
 export function BudgetEditActionsSheet(
-	props: TDialogProps<{
-		budget: number;
-		currency: ECurrency;
-	}>,
+	props: TDialogComponentProps<
+		{
+			budget: number;
+			currency: ECurrency;
+		},
+		{ budget: number }
+	>,
 ) {
 	let intl = useIntl(settingsI18n);
 	let [budget, setBudget] = useState(props.budget);
@@ -491,7 +495,6 @@ export function BudgetEditActionsSheet(
 					marginTop: '20px',
 				}}
 				onClick={() => {
-					// @ts-expect-error
 					props.close({
 						budget,
 					});

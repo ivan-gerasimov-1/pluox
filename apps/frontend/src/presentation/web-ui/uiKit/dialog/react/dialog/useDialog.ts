@@ -1,27 +1,21 @@
-import type { IDialogApi } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
 import { useMemo } from 'react';
 
-export function useDialog(): {
-	render: (
-		component: React.FunctionComponent<{
-			id: string;
-			close: () => void;
-		}>,
-		props?: {},
-	) => IDialogApi;
-} {
+import type {
+	IDialogApi,
+	TDialogComponent,
+	TDialogProps,
+} from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
+
+export function useDialog() {
 	let client = useDialogClient();
 
 	let dialog = useMemo(
 		() => ({
-			render: (
-				component: React.FunctionComponent<{
-					id: string;
-					close: () => void;
-				}>,
-				props?: {},
-			) => {
+			render: <TProps extends {}, TClosePayload extends {} = never>(
+				component: TDialogComponent<TProps, TClosePayload>,
+				props: TDialogProps<TProps, TClosePayload>,
+			): IDialogApi => {
 				let dialog = client.create(component, props);
 
 				requestAnimationFrame(() => {
