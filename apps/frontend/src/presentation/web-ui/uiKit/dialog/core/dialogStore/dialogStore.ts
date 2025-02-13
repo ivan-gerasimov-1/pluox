@@ -10,11 +10,11 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 		this.#snapshot = [];
 	}
 
-	public get snapshot() {
+	public get snapshot(): T[] {
 		return this.#snapshot;
 	}
 
-	public add(item: T) {
+	public add(item: T): T {
 		this.store.set(item.id, item);
 
 		this.updateSnapshot();
@@ -22,11 +22,11 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 		return item;
 	}
 
-	public read(id: string) {
+	public read(id: string): T | undefined {
 		return this.store.get(id);
 	}
 
-	public update(id: string, payload: Partial<Omit<T, 'id'>>) {
+	public update(id: string, payload: Partial<Omit<T, 'id'>>): T | undefined {
 		let item = this.store.get(id);
 
 		if (!item) {
@@ -45,7 +45,7 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 		return newItem;
 	}
 
-	public remove(id: string) {
+	public remove(id: string): boolean {
 		let result = this.store.delete(id);
 
 		this.updateSnapshot();
@@ -53,12 +53,12 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 		return result;
 	}
 
-	public dispose() {
+	public dispose(): void {
 		this.store.clear();
 		this.#snapshot = [];
 	}
 
-	private updateSnapshot() {
+	private updateSnapshot(): void {
 		this.#snapshot = Array.from(this.store.values());
 	}
 }
