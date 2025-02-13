@@ -17,7 +17,7 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 	public add(item: T) {
 		this.store.set(item.id, item);
 
-		this.updateShapshot();
+		this.updateSnapshot();
 
 		return item;
 	}
@@ -40,7 +40,7 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 
 		this.store.set(id, newItem);
 
-		this.updateShapshot();
+		this.updateSnapshot();
 
 		return newItem;
 	}
@@ -48,7 +48,7 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 	public remove(id: string) {
 		let result = this.store.delete(id);
 
-		this.updateShapshot();
+		this.updateSnapshot();
 
 		return result;
 	}
@@ -58,7 +58,7 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 		this.#snapshot = [];
 	}
 
-	private updateShapshot() {
+	private updateSnapshot() {
 		this.#snapshot = Array.from(this.store.values());
 	}
 }
