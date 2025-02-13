@@ -1,4 +1,4 @@
-import { createElement, useCallback, useSyncExternalStore } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
 import {
@@ -33,11 +33,11 @@ export function Dialog() {
 				onUnmount={dialog.remove}
 				isOpen={dialog.status === EDialogStatus.OPEN}
 			>
-				{createElement(dialog.component, {
-					id: dialog.id,
-					close: dialog.close,
-					...dialog.props,
-				})}
+				<dialog.component
+					id={dialog.id}
+					close={dialog.close}
+					{...dialog.props}
+				/>
 			</Component>,
 			document.body,
 		);
