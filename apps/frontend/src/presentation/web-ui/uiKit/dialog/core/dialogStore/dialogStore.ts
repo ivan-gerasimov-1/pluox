@@ -6,7 +6,26 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 	#snapshot: T[];
 
 	constructor() {
-		this.store = new Map();
+		this.store = new Proxy(new Map(), {
+			get: (target, property) => {
+				let value = Reflect.get(target, property);
+
+				if (typeof value === 'function') {
+					return (...args: unknown[]) => {
+						let result = Reflect.apply(value, target, args);
+
+						if (['set', 'delete', 'clear'].includes(String(property))) {
+							this.updateSnapshot();
+						}
+
+						return result;
+					};
+				}
+
+				return value;
+			},
+		});
+
 		this.#snapshot = [];
 	}
 
@@ -16,8 +35,6 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 
 	public add(item: T): T {
 		this.store.set(item.id, item);
-
-		this.updateSnapshot();
 
 		return item;
 	}
@@ -40,15 +57,11 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 
 		this.store.set(id, newItem);
 
-		this.updateSnapshot();
-
 		return newItem;
 	}
 
 	public remove(id: string): boolean {
 		let result = this.store.delete(id);
-
-		this.updateSnapshot();
 
 		return result;
 	}
