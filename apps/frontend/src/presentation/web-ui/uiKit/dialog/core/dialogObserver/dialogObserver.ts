@@ -21,8 +21,8 @@ export class DialogObserver implements IDialogObserver {
 	}
 
 	public notify() {
-		for (let listener of this.observers) {
-			listener();
+		for (let observer of this.observers) {
+			observer();
 		}
 	}
 
