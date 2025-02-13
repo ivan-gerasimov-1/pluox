@@ -11,9 +11,7 @@ export class DialogObserver implements IDialogObserver {
 	}
 
 	public subscribe(listener: TObserver): () => void {
-		if (!this.observers.has(listener)) {
-			this.observers.add(listener);
-		}
+		this.observers.add(listener);
 
 		return () => {
 			this.observers.delete(listener);
