@@ -39,7 +39,7 @@ export type TDialog<TProps extends {} = {}> = {
 	status: TDialogStatus;
 
 	component: TDialogComponent<TProps>;
-	props: TDialogProps<TProps>;
+	props: TDialogProps<TProps> | null;
 
 	close: () => void;
 	remove: () => void;

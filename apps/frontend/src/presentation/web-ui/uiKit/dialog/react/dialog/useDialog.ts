@@ -14,7 +14,7 @@ export function useDialog() {
 		() => ({
 			render: <TProps extends {}, TClosePayload extends {} = never>(
 				component: TDialogComponent<TProps, TClosePayload>,
-				props: TDialogProps<TProps, TClosePayload>,
+				props?: TDialogProps<TProps, TClosePayload>,
 			): IDialogApi => {
 				let dialog = client.create(component, props);
 

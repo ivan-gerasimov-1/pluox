@@ -22,7 +22,7 @@ export class DialogClient implements IDialogClient {
 
 	public create<TProps extends {}>(
 		component: TDialogComponent<TProps>,
-		props: TDialogProps<TProps>,
+		props?: TDialogProps<TProps>,
 	) {
 		let id = this.idGenerator();
 
@@ -32,7 +32,7 @@ export class DialogClient implements IDialogClient {
 			status: EDialogStatus.INITIAL,
 
 			component,
-			props,
+			props: props ?? null,
 
 			close: () => this.close(id),
 			remove: () => this.remove(id),

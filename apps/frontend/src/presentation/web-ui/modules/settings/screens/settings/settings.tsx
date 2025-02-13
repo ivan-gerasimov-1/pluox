@@ -404,10 +404,8 @@ export function SettingsScreen() {
 						</Card>
 					</CardContainer>
 
-					<Button onClick={() => dialog.render(TestModal, {})}>
-						Open Modal
-					</Button>
-					<Button onClick={() => dialog.render(AuthTestModal, {})}>
+					<Button onClick={() => dialog.render(TestModal)}>Open Modal</Button>
+					<Button onClick={() => dialog.render(AuthTestModal)}>
 						Check Auth
 					</Button>
 				</ScreenBody>

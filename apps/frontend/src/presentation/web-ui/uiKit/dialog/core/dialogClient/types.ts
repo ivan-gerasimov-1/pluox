@@ -8,7 +8,7 @@ import type {
 export interface IDialogClient extends IDisposable {
 	create<TProps extends {}, TClosePayload extends {} = never>(
 		component: TDialogComponent<TProps, TClosePayload>,
-		props: TDialogProps<TProps>,
+		props?: TDialogProps<TProps>,
 	): TDialog<TProps>;
 	remove(id: string): void;
 	open(id: string): void;
