@@ -18,13 +18,13 @@ export class DialogObserver implements IDialogObserver {
 		};
 	}
 
-	public notify() {
+	public notify(): void {
 		for (let observer of this.observers) {
 			observer();
 		}
 	}
 
-	public dispose() {
+	public dispose(): void {
 		this.observers.clear();
 	}
 }
