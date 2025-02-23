@@ -1,6 +1,7 @@
 import {
 	EHttpHeader,
 	EHttpMethod,
+	type THttpMethod,
 	type IApiClient,
 	type IApiClientConfigProvider,
 	type THttpHeaders,
@@ -46,7 +47,7 @@ export class ApiClient implements IApiClient {
 	private async request<TPayload, TResponse>(
 		path: string,
 		options: {
-			method: EHttpMethod;
+			method: THttpMethod;
 			payload?: TPayload;
 			abortSignal?: AbortSignal;
 		},

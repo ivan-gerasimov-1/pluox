@@ -1,11 +1,11 @@
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
+import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
 
 export interface ICurrencyFormatter {
 	format(
 		value: number,
-		currency: ECurrency,
-		locale: ELocaleCode,
+		currency: TCurrency,
+		locale: TLocaleCode,
 		options?: {
 			hideDecimal?: boolean;
 		},

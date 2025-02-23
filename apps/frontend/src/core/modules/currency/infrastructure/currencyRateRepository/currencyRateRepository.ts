@@ -4,7 +4,7 @@ import type {
 	ICurrencyRateRepository,
 	TCurrencyFindManyResult,
 } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateRepository implements ICurrencyRateRepository {
@@ -24,7 +24,7 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 		throw new NotImplementedError();
 	}
 
-	public findByCode(code: ECurrency): TCurrencyRateDTO {
+	public findByCode(code: TCurrency): TCurrencyRateDTO {
 		let rate = this.currencyRateDataSource.findById(code);
 
 		return {
@@ -33,7 +33,7 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 		};
 	}
 
-	public findRateByCode(code: ECurrency): number {
+	public findRateByCode(code: TCurrency): number {
 		return this.currencyRateDataSource.findById(code);
 	}
 

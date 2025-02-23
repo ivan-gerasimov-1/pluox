@@ -1,16 +1,16 @@
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
+import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
 import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
 
 export interface IIntlService {
-	readonly locale: ELocaleCode;
-	readonly currency: ECurrency;
+	readonly locale: TLocaleCode;
+	readonly currency: TCurrency;
 	readonly decimalSeparator: TDecimalSeparator;
 
 	formatCurrency(
 		value: number,
 		options?: {
-			currency?: ECurrency;
+			currency?: TCurrency;
 			hideDecimal?: boolean;
 		},
 	): string;

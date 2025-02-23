@@ -3,7 +3,10 @@ import { useState } from 'react';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import { ECurrency } from '@root/core/modules/currency/domain/types';
+import {
+	ECurrency,
+	type TCurrency,
+} from '@root/core/modules/currency/domain/types';
 import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
@@ -463,7 +466,7 @@ export function BudgetEditActionsSheet(
 	props: TDialogComponentProps<
 		{
 			budget: number;
-			currency: ECurrency;
+			currency: TCurrency;
 		},
 		{
 			budget: number;

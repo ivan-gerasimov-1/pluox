@@ -1,10 +1,13 @@
-import { ECurrency } from '@root/core/modules/currency/domain/types';
+import {
+	ECurrency,
+	type TCurrency,
+} from '@root/core/modules/currency/domain/types';
 
 import styles from './currencyInput.module.css';
 
 type TCurrencyInputProps = {
-	value: ECurrency;
-	onChange(currency: ECurrency): void;
+	value: TCurrency;
+	onChange(currency: TCurrency): void;
 };
 
 /** @deprecated */

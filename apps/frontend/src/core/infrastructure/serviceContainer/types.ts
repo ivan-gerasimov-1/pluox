@@ -1,3 +1,5 @@
+import type { TValueOf } from '@root/core/types';
+
 import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 import type { IAppConfigService } from '@root/core/modules/settings/application/appConfigService/types';
 import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
@@ -95,10 +97,12 @@ export type TServiceType<T> = new (...args: any[]) => T;
 export type TServiceToken = keyof IServiceMap;
 export type TFactoryFn<T> = (...args: any[]) => T;
 
-export const enum EServiceScope {
-	SINGLETON = 'singleton',
-	TRANSIENT = 'transient',
-}
+export const EServiceScope = {
+	SINGLETON: 'singleton',
+	TRANSIENT: 'transient',
+} as const;
+
+export type TServiceScope = TValueOf<typeof EServiceScope>;
 
 export interface IServiceProvider<T = unknown> {
 	token: TServiceToken;
@@ -106,7 +110,7 @@ export interface IServiceProvider<T = unknown> {
 	useFactory?: TFactoryFn<T>;
 	useValue?: T;
 	deps?: TServiceToken[];
-	scope?: EServiceScope;
+	scope?: TServiceScope;
 }
 
 export interface IModule {
@@ -115,94 +119,94 @@ export interface IModule {
 	exports?: Array<IServiceProvider>;
 }
 
-export enum EServiceToken {
-	GLOBAL = 'Global',
-	LOCAL_STORAGE = 'LocalStorage',
+export const EServiceToken = {
+	GLOBAL: 'Global',
+	LOCAL_STORAGE: 'LocalStorage',
 
-	PROCESS_ENV = 'ProcessEnv',
-	ENVIRONMENT = 'Environment',
+	PROCESS_ENV: 'ProcessEnv',
+	ENVIRONMENT: 'Environment',
 
-	DATABASE = 'Database',
-	DATABASE_COLLECTION_FACTORY = 'CustomCollectionFactory',
+	DATABASE: 'Database',
+	DATABASE_COLLECTION_FACTORY: 'CustomCollectionFactory',
 
-	APP_CONFIG = 'AppConfig',
-	APP_CONFIG_DATASOURCE = 'AppConfigDataSource',
-	APP_CONFIG_SERVICE = 'AppConfigService',
+	APP_CONFIG: 'AppConfig',
+	APP_CONFIG_DATASOURCE: 'AppConfigDataSource',
+	APP_CONFIG_SERVICE: 'AppConfigService',
 
-	INTL_SERVICE = 'IntlService',
-	NUMBER_PARSER = 'NumberParser',
-	CURRENCY_FORMATTER = 'CurrencyFormatter',
-	DATE_FORMATTER = 'DateFormatter',
+	INTL_SERVICE: 'IntlService',
+	NUMBER_PARSER: 'NumberParser',
+	CURRENCY_FORMATTER: 'CurrencyFormatter',
+	DATE_FORMATTER: 'DateFormatter',
 
-	CURRENCY_CONVERTER = 'CurrencyConverter',
-	CURRENCY_RATE_DATASOURCE = 'CurrencyRateDataSource',
-	CURRENCY_RATE_SERVICE = 'CurrencyRateService',
-	CURRENCY_RATE_API = 'CurrencyRateAPI',
-	CURRENCY_RATE_REPOSITORY = 'CurrencyRateRepository',
+	CURRENCY_CONVERTER: 'CurrencyConverter',
+	CURRENCY_RATE_DATASOURCE: 'CurrencyRateDataSource',
+	CURRENCY_RATE_SERVICE: 'CurrencyRateService',
+	CURRENCY_RATE_API: 'CurrencyRateAPI',
+	CURRENCY_RATE_REPOSITORY: 'CurrencyRateRepository',
 
-	ID_GENERATOR_FACTORY = 'IdGeneratorFactory',
-	ID_GENERATOR = 'IdGenerator',
+	ID_GENERATOR_FACTORY: 'IdGeneratorFactory',
+	ID_GENERATOR: 'IdGenerator',
 
-	SESSION_DATASOURCE = 'SessionDataSource',
-	SESSION_SERVICE = 'SessionService',
-	SESSION_FACTORY = 'SessionFactory',
+	SESSION_DATASOURCE: 'SessionDataSource',
+	SESSION_SERVICE: 'SessionService',
+	SESSION_FACTORY: 'SessionFactory',
 
-	CLIENT_ID = 'ClientId',
-	CLIENT_ID_FACTORY = 'ClientIdFactory',
+	CLIENT_ID: 'ClientId',
+	CLIENT_ID_FACTORY: 'ClientIdFactory',
 
-	CATEGORY_SERVICE = 'CategoryService',
-	CATEGORY_REPOSITORY = 'CategoryRepository',
-	CATEGORY_DATASOURCE = 'CategoryDataSource',
-	CATEGORY_MAPPER = 'CategoryMapper',
-	CATEGORY_USE_CASE = 'CategoryUseCase',
-	CATEGORY_CREATE_USE_CASE = 'CategoryCreateUseCase',
-	CATEGORY_UPDATE_USE_CASE = 'CategoryUpdateUseCase',
-	CATEGORY_DELETE_USE_CASE = 'CategoryDeleteUseCase',
-	CATEGORY_WEIGHT_USE_CASE = 'CategoryWeightUseCase',
-	CATEGORY_INITIALIZE_USE_CASE = 'CategoryInitializeUseCase',
-	CATEGORY_QUERY_SERVICE = 'CategoryQueryService',
+	CATEGORY_SERVICE: 'CategoryService',
+	CATEGORY_REPOSITORY: 'CategoryRepository',
+	CATEGORY_DATASOURCE: 'CategoryDataSource',
+	CATEGORY_MAPPER: 'CategoryMapper',
+	CATEGORY_USE_CASE: 'CategoryUseCase',
+	CATEGORY_CREATE_USE_CASE: 'CategoryCreateUseCase',
+	CATEGORY_UPDATE_USE_CASE: 'CategoryUpdateUseCase',
+	CATEGORY_DELETE_USE_CASE: 'CategoryDeleteUseCase',
+	CATEGORY_WEIGHT_USE_CASE: 'CategoryWeightUseCase',
+	CATEGORY_INITIALIZE_USE_CASE: 'CategoryInitializeUseCase',
+	CATEGORY_QUERY_SERVICE: 'CategoryQueryService',
 
-	EXPENSE_REPOSITORY = 'ExpenseRepository',
-	EXPENSE_DATASOURCE = 'ExpenseDataSource',
-	EXPENSE_SERVICE = 'ExpenseService',
-	EXPENSE_MAPPER = 'ExpenseMapper',
-	EXPENSE_GROUPING_SERVICE = 'ExpenseGroupingService',
-	EXPENSE_AMOUNT_SERVICE = 'ExpenseAmountService',
-	EXPENSE_QUERY_SERVICE = 'ExpenseQueryService',
-	EXPENSE_USE_CASE = 'ExpenseUseCase',
+	EXPENSE_REPOSITORY: 'ExpenseRepository',
+	EXPENSE_DATASOURCE: 'ExpenseDataSource',
+	EXPENSE_SERVICE: 'ExpenseService',
+	EXPENSE_MAPPER: 'ExpenseMapper',
+	EXPENSE_GROUPING_SERVICE: 'ExpenseGroupingService',
+	EXPENSE_AMOUNT_SERVICE: 'ExpenseAmountService',
+	EXPENSE_QUERY_SERVICE: 'ExpenseQueryService',
+	EXPENSE_USE_CASE: 'ExpenseUseCase',
 
-	VENUE_REPOSITORY = 'VenueRepository',
-	VENUE_DATASOURCE = 'VenueDataSource',
-	VENUE_MAPPER = 'VenueMapper',
-	VENUE_QUERY_SERVICE = 'VenueQueryService',
-	VENUE_USE_CASE = 'VenueUseCase',
-	VENUE_CREATE_USE_CASE = 'VenueCreateUseCase',
-	VENUE_DELETE_USE_CASE = 'VenueDeleteUseCase',
+	VENUE_REPOSITORY: 'VenueRepository',
+	VENUE_DATASOURCE: 'VenueDataSource',
+	VENUE_MAPPER: 'VenueMapper',
+	VENUE_QUERY_SERVICE: 'VenueQueryService',
+	VENUE_USE_CASE: 'VenueUseCase',
+	VENUE_CREATE_USE_CASE: 'VenueCreateUseCase',
+	VENUE_DELETE_USE_CASE: 'VenueDeleteUseCase',
 
-	LAUNCH_CONTROL = 'LaunchControl',
+	LAUNCH_CONTROL: 'LaunchControl',
 
-	AUTH_SERVICE = 'AuthService',
-	AUTH_TOKEN_FACTORY = 'AuthTokenFactory',
+	AUTH_SERVICE: 'AuthService',
+	AUTH_TOKEN_FACTORY: 'AuthTokenFactory',
 
-	API_CLIENT = 'ApiClient',
-	API_CLIENT_CONFIG_PROVIDER = 'ApiClientConfigProvider',
+	API_CLIENT: 'ApiClient',
+	API_CLIENT_CONFIG_PROVIDER: 'ApiClientConfigProvider',
 
-	AUTH_API = 'AuthApi',
-	EXPENSE_API = 'ExpensesApi',
+	AUTH_API: 'AuthApi',
+	EXPENSE_API: 'ExpensesApi',
 
-	USER_SERVICE = 'UserService',
-	USER_DATASOURCE = 'UserDataSource',
-	USER_MAPPER = 'UserMapper',
-	USER_REPOSITORY = 'UserRepository',
+	USER_SERVICE: 'UserService',
+	USER_DATASOURCE: 'UserDataSource',
+	USER_MAPPER: 'UserMapper',
+	USER_REPOSITORY: 'UserRepository',
 
-	TEMPORAL = 'Temporal',
+	TEMPORAL: 'Temporal',
 
-	EXPENSE_CREATE_USE_CASE = 'ExpenseCreateUseCase',
-	EXPENSE_UPDATE_USE_CASE = 'ExpenseUpdateUseCase',
-	EXPENSE_DELETE_USE_CASE = 'ExpenseDeleteUseCase',
+	EXPENSE_CREATE_USE_CASE: 'ExpenseCreateUseCase',
+	EXPENSE_UPDATE_USE_CASE: 'ExpenseUpdateUseCase',
+	EXPENSE_DELETE_USE_CASE: 'ExpenseDeleteUseCase',
 
-	SYNC_SERVICE = 'SyncService',
-}
+	SYNC_SERVICE: 'SyncService',
+} as const;
 
 export interface IServiceMap {
 	[EServiceToken.GLOBAL]: typeof Window;

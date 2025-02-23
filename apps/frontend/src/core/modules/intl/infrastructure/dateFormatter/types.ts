@@ -1,19 +1,11 @@
-export const enum EDay {
-	NUMERIC = 'numeric',
-}
+export const EDay = {
+	NUMERIC: 'numeric',
+} as const;
 
-export const enum EMonth {
-	LONG = 'long',
-}
+export const EMonth = {
+	LONG: 'long',
+} as const;
 
-export const enum EYear {
-	NUMERIC = 'numeric',
-}
-
-export const enum EHour {
-	NUMERIC = 'numeric',
-}
-
-export const enum EMinute {
-	NUMERIC = 'numeric',
-}
+export const EYear = {
+	NUMERIC: 'numeric',
+} as const;

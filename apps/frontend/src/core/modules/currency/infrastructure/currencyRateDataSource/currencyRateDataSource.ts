@@ -1,6 +1,6 @@
 import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
 import type {
-	ECurrency,
+	TCurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
 import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
@@ -10,7 +10,7 @@ export class CurrencyRateDataSource
 	extends DataSource<TCurrencyRates>
 	implements ICurrencyRateDataSource
 {
-	public findById(currency: ECurrency): number {
+	public findById(currency: TCurrency): number {
 		let rates = this.findOne({
 			id: 'data',
 		});
@@ -22,7 +22,7 @@ export class CurrencyRateDataSource
 		return rates[currency];
 	}
 
-	public exists(currency: ECurrency): boolean {
+	public exists(currency: TCurrency): boolean {
 		try {
 			return !!this.findById(currency);
 		} catch (error) {

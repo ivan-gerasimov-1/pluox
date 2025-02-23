@@ -3,15 +3,16 @@ import { useMemo } from 'react';
 import {
 	EIconSize,
 	iconSizeToPx,
+	type TIconSize,
 } from '@root/presentation/web-ui/uiKit/icon/iconSize';
 
-import { getIcon, EIconName } from './icons';
+import { getIcon, type TIconName } from './icons';
 
 import styles from './icon.module.css';
 
 type TIconProps = {
-	name: EIconName;
-	size?: EIconSize;
+	name: TIconName;
+	size?: TIconSize;
 };
 
 export function Icon(props: TIconProps) {
@@ -29,6 +30,3 @@ export function Icon(props: TIconProps) {
 		/>
 	);
 }
-
-Icon.IconName = EIconName;
-Icon.Size = EIconSize;

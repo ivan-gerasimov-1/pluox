@@ -1,6 +1,6 @@
-const enum EServiceWorkerEvent {
-	LOAD = 'load',
-}
+const EServiceWorkerEvent = {
+	LOAD: 'load',
+} as const;
 
 function hasServiceWorkerSupport() {
 	return 'serviceWorker' in navigator;

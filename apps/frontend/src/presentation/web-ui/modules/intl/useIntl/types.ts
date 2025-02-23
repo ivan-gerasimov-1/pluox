@@ -1,9 +1,9 @@
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
 
 export type TBaseScope = Record<string, unknown>;
 
 export type TUseIntl<TScope extends TBaseScope> = {
-	localeCode: ELocaleCode;
+	localeCode: TLocaleCode;
 	translate: TScopedTranslateFunction<TScope>;
 };
 

@@ -1,15 +1,15 @@
-export const enum EAppPath {
-	MAIN = '/',
+export const EAppPath = {
+	MAIN: '/',
 
-	SIGN_UP = '/signup',
-	LOG_IN = '/login',
+	SIGN_UP: '/signup',
+	LOG_IN: '/login',
 
-	SETTINGS = '/settings',
+	SETTINGS: '/settings',
 
-	EXPENSES = '/expenses',
+	EXPENSES: '/expenses',
 
-	VENUES = '/venues',
-	VENUES_CREATE = '/venues/new',
-	VENUES_VIEW = '/venues/:id',
-	VENUES_EDIT = '/venues/:id/edit',
-}
+	VENUES: '/venues',
+	VENUES_CREATE: '/venues/new',
+	VENUES_VIEW: '/venues/:id',
+	VENUES_EDIT: '/venues/:id/edit',
+} as const;

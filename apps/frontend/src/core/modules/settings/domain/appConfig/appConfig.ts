@@ -1,14 +1,17 @@
-import { ECurrency } from '@root/core/modules/currency/domain/types';
-import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import {
+	ECurrency,
+	type TCurrency,
+} from '@root/core/modules/currency/domain/types';
+import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
 import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 
 export class AppConfig implements IAppConfig {
-	#locale: ELocaleCode;
-	#currency: ECurrency;
-	#availableCurrencies: ECurrency[];
+	#locale: TLocaleCode;
+	#currency: TCurrency;
+	#availableCurrencies: TCurrency[];
 	#budget: number | null;
 
-	constructor(locale: ELocaleCode, currency: ECurrency) {
+	constructor(locale: TLocaleCode, currency: TCurrency) {
 		this.#locale = locale;
 		this.#currency = currency;
 		this.#availableCurrencies = [
@@ -21,27 +24,27 @@ export class AppConfig implements IAppConfig {
 		this.#budget = 4800;
 	}
 
-	public get locale(): ELocaleCode {
+	public get locale(): TLocaleCode {
 		return this.#locale;
 	}
 
-	public set locale(locale: ELocaleCode) {
+	public set locale(locale: TLocaleCode) {
 		this.#locale = locale;
 	}
 
-	public get currency(): ECurrency {
+	public get currency(): TCurrency {
 		return this.#currency;
 	}
 
-	public set currency(value: ECurrency) {
+	public set currency(value: TCurrency) {
 		this.#currency = value;
 	}
 
-	public get availableCurrencies(): ECurrency[] {
+	public get availableCurrencies(): TCurrency[] {
 		return this.#availableCurrencies;
 	}
 
-	public set availableCurrencies(value: ECurrency[]) {
+	public set availableCurrencies(value: TCurrency[]) {
 		this.#availableCurrencies = value;
 	}
 
