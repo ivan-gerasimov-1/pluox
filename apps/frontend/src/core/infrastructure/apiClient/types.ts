@@ -1,4 +1,4 @@
-import { TValueOf } from '@root/core/types';
+import type { TValueOf } from '@root/core/types';
 
 export interface IApiClient {
 	get<TResponse>(
