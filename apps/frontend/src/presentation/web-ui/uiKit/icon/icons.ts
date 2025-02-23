@@ -10,19 +10,21 @@ import Settings from 'ionicons/dist/svg/options-outline.svg';
 import CaretDown from 'ionicons/dist/svg/chevron-down-outline.svg';
 import ArrowBack from 'ionicons/dist/svg/arrow-back-outline.svg';
 
-export enum EIconName {
-	Close = 'close',
-	Edit = 'edit',
-	Trash = 'trash',
-	User = 'user',
-	LogIn = 'logIn',
-	LogOut = 'logOut',
-	Back = 'back',
-	Calendar = 'calendar',
-	Settings = 'settings',
-	CaretDown = 'caretDown',
-	ArrowBack = 'arrowBack',
-}
+export const EIconName = {
+	Close: 'close',
+	Edit: 'edit',
+	Trash: 'trash',
+	User: 'user',
+	LogIn: 'logIn',
+	LogOut: 'logOut',
+	Back: 'back',
+	Calendar: 'calendar',
+	Settings: 'settings',
+	CaretDown: 'caretDown',
+	ArrowBack: 'arrowBack',
+} as const;
+
+export type TIconName = (typeof EIconName)[keyof typeof EIconName];
 
 const IconComponent = {
 	[EIconName.Trash]: TrashOutlineIcon,
@@ -38,6 +40,6 @@ const IconComponent = {
 	[EIconName.ArrowBack]: ArrowBack,
 };
 
-export function getIcon(iconName: EIconName) {
+export function getIcon(iconName: TIconName) {
 	return IconComponent[iconName];
 }

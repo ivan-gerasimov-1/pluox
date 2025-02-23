@@ -3,11 +3,6 @@ import {
 	useQueryClient,
 	useSuspenseQuery,
 } from '@tanstack/react-query';
-
-import type { Id } from '@domain/types';
-import type { TISODateString } from '@root/core/domain/temporal/types';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import {
 	SwipeAction,
 	SwipeableList,
@@ -16,15 +11,21 @@ import {
 	Type,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
-import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
+
+import type { Id } from '@domain/types';
+import type { TISODateString } from '@root/core/domain/temporal/types';
 import {
-	deleteOne,
-	getList,
 	EXPENSES_QUERY_LIST,
 	EXPENSES_QUERY_MONTHLY_AMOUNT,
 	EXPENSES_QUERY_TOTAL_AMOUNT,
+	deleteOne,
+	getList,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
+import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
+import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 
 import styles from './expenseList.module.css';
 
@@ -124,7 +125,7 @@ export function ExpenseList(props: TExpenseListProps) {
 											destructive
 										>
 											<button type="button" className={styles.actionButton}>
-												<Icon name={Icon.IconName.Trash} />
+												<Icon name={EIconName.Trash} />
 											</button>
 										</SwipeAction>
 									</TrailingActions>

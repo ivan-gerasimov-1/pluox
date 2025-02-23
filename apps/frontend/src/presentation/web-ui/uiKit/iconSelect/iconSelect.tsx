@@ -1,5 +1,5 @@
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
-import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
+import { TIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 
 import styles from './iconSelect.module.css';
 
@@ -7,7 +7,7 @@ export type TIconSelectProps<T> = {
 	name: string;
 	id: string;
 
-	icon: EIconName;
+	icon: TIconName;
 
 	value: T;
 	onChange(value: T): void;
