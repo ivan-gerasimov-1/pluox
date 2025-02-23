@@ -1,4 +1,4 @@
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import { Entity } from '@root/core/domain/entity/entity';
 import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
 import type { Id, TCategory, TDescription } from '@domain/types';
@@ -7,7 +7,7 @@ import type { TISODateString } from '@root/core/domain/temporal/types';
 export class Expense extends Entity implements IExpense {
 	#userId: Id;
 	#amount: number;
-	#currency: ECurrency;
+	#currency: TCurrency;
 	#description: TDescription;
 	#category: TCategory | null;
 	#venue: Id | null;
@@ -18,7 +18,7 @@ export class Expense extends Entity implements IExpense {
 		id: Id,
 		userId: Id,
 		amount: number,
-		currency: ECurrency,
+		currency: TCurrency,
 		description: TDescription,
 		category: TCategory | null,
 		venue: Id | null,
@@ -53,11 +53,11 @@ export class Expense extends Entity implements IExpense {
 		this.touch();
 	}
 
-	public get currency(): ECurrency {
+	public get currency(): TCurrency {
 		return this.#currency;
 	}
 
-	public set currency(currency: ECurrency) {
+	public set currency(currency: TCurrency) {
 		this.#currency = currency;
 
 		this.touch();

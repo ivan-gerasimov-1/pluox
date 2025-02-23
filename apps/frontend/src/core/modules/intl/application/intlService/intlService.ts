@@ -1,10 +1,12 @@
 import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import { DECIMAL_SEPARATORS } from '@root/core/modules/intl/domain/constants';
-import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/domain/errors';
 import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
-import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
+import type {
+	TDecimalSeparator,
+	TLocaleCode,
+} from '@root/core/modules/intl/domain/types';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
 import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
@@ -17,11 +19,11 @@ export class IntlService implements IIntlService {
 		private readonly dateFormatter: IDateFormatter,
 	) {}
 
-	public get locale(): ELocaleCode {
+	public get locale(): TLocaleCode {
 		return this.appConfig.locale;
 	}
 
-	public get currency(): ECurrency {
+	public get currency(): TCurrency {
 		return this.appConfig.currency;
 	}
 
@@ -32,7 +34,7 @@ export class IntlService implements IIntlService {
 	public formatCurrency(
 		value: number,
 		options?: {
-			currency?: ECurrency;
+			currency?: TCurrency;
 			hideDecimal?: boolean;
 		},
 	): string {
@@ -57,7 +59,7 @@ export class IntlService implements IIntlService {
 	/**
 	 * @throws {UnsupportedDecimalSeparatorError}
 	 */
-	private getDecimalSeparator(locale: ELocaleCode): TDecimalSeparator {
+	private getDecimalSeparator(locale: TLocaleCode): TDecimalSeparator {
 		let decimalSeaparator = (1.1).toLocaleString(locale).substring(1, 2);
 
 		if (!this.isDecimalSeparator(decimalSeaparator)) {

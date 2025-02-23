@@ -1,8 +1,9 @@
 import { STORAGE_NAMESPACE } from '@root/core/modules/settings/infrastructure/environment/constants';
 import {
-	type IEnvironment,
-	type TProcessEnv,
 	EEnvironment,
+	type IEnvironment,
+	type TEnvironment,
+	type TProcessEnv,
 } from '@root/core/modules/settings/infrastructure/environment/types';
 
 /**
@@ -54,15 +55,15 @@ export class Environment implements IEnvironment {
 		return this.#storage;
 	}
 
-	private detectDevEnvironment(environment?: string | EEnvironment): boolean {
+	private detectDevEnvironment(environment?: string | TEnvironment): boolean {
 		return environment === EEnvironment.DEVELOPMENT;
 	}
 
-	private getApiUrl(env?: string | EEnvironment): string {
+	private getApiUrl(env?: string | TEnvironment): string {
 		return process.env.APP_API_URL as string;
 	}
 
-	private getOpenExchangeRatesApi(env?: string | EEnvironment) {
+	private getOpenExchangeRatesApi(env?: string | TEnvironment) {
 		return {
 			apiUrl: process.env.APP_OPEN_EXCHANGE_RATES_API_URL as string,
 			apiKey: process.env.APP_OPEN_EXCHANGE_RATES_API_KEY as string,

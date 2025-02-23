@@ -1,7 +1,11 @@
-export const enum EEnvironment {
-	DEVELOPMENT = 'development',
-	PRODUCTION = 'production',
-}
+import type { TValueOf } from '@root/core/types';
+
+export const EEnvironment = {
+	DEVELOPMENT: 'development',
+	PRODUCTION: 'production',
+} as const;
+
+export type TEnvironment = TValueOf<typeof EEnvironment>;
 
 export interface TProcessEnv {
 	NODE_ENV: string;

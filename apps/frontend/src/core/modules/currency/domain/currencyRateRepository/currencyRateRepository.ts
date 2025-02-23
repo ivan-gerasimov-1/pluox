@@ -1,5 +1,5 @@
 import type { TCurrencyRateDTO } from '@root/core/modules/currency/application/dto/currencyRateDTO';
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 
 export interface ICurrencyRateRepository {
 	/** @todo Not Implemented */
@@ -12,13 +12,13 @@ export interface ICurrencyRateRepository {
 	/**
 	 * @throws {CategoryNotFoundError}
 	 */
-	findByCode(code: ECurrency): TCurrencyRateDTO;
-	findRateByCode(code: ECurrency): number;
+	findByCode(code: TCurrency): TCurrencyRateDTO;
+	findRateByCode(code: TCurrency): number;
 
 	/**
 	 * @throws {CategoryNotFoundError}
 	 */
-	remove(code: ECurrency): void;
+	remove(code: TCurrency): void;
 }
 
 export type TCurrencyFindManyResult = {

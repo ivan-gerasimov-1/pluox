@@ -1,6 +1,6 @@
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
-import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
 import {
 	ECurrencyDisplay,
 	ENumberFormatStyle,
@@ -13,8 +13,8 @@ import {
 export class CurrencyFormatter implements ICurrencyFormatter {
 	public format(
 		value: number,
-		currency: ECurrency,
-		locale: ELocaleCode,
+		currency: TCurrency,
+		locale: TLocaleCode,
 		options?: {
 			hideDecimal?: boolean;
 		},
@@ -28,8 +28,8 @@ export class CurrencyFormatter implements ICurrencyFormatter {
 
 	/** @todo #1 */
 	private createFormatter(
-		currency: ECurrency,
-		locale: ELocaleCode,
+		currency: TCurrency,
+		locale: TLocaleCode,
 		options?: {
 			hideDecimal?: boolean;
 		},

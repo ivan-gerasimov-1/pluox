@@ -1,9 +1,10 @@
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
+import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
 import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 
 type IndexReplacer = (digit: string) => string;
-type NumberFormatterCache = Map<ELocaleCode, Intl.NumberFormat>;
+type NumberFormatterCache = Map<TLocaleCode, Intl.NumberFormat>;
 
 /**
  * @todo
@@ -19,7 +20,7 @@ export class NumberParser implements INumberParser {
 
 	private indexReplacer: IndexReplacer;
 
-	private locale: ELocaleCode;
+	private locale: TLocaleCode;
 
 	private readonly formatterCache: NumberFormatterCache;
 
@@ -123,7 +124,7 @@ export class NumberParser implements INumberParser {
 		const key = this.appConfig.locale;
 		const cacheKey =
 			options?.useGrouping !== undefined
-				? (`${key}-with-grouping-option` as ELocaleCode)
+				? (`${key}-with-grouping-option` as TLocaleCode)
 				: key;
 
 		if (!this.formatterCache.has(cacheKey)) {

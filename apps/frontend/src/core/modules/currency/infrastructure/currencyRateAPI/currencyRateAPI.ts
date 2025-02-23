@@ -1,7 +1,7 @@
 import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
 import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
 import type {
-	ECurrency,
+	TCurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
 import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
@@ -20,7 +20,7 @@ export class CurrencyRateAPI implements ICurrencyRateAPI {
 		return this.environment.openExchangeRates.apiKey;
 	}
 
-	private get availableCurrencies(): ECurrency[] {
+	private get availableCurrencies(): TCurrency[] {
 		return this.appConfig.availableCurrencies;
 	}
 

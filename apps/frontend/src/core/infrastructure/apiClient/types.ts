@@ -1,3 +1,5 @@
+import { TValueOf } from '@root/core/types';
+
 export interface IApiClient {
 	get<TResponse>(
 		path: string,
@@ -24,14 +26,18 @@ export type THttpHeaders = {
 	[EHttpHeader.AUTHORIZATION]?: string;
 };
 
-export const enum EHttpMethod {
-	GET = 'GET',
-	POST = 'POST',
-	PUT = 'PUT',
-	DELETE = 'DELETE',
-}
+export const EHttpMethod = {
+	GET: 'GET',
+	POST: 'POST',
+	PUT: 'PUT',
+	DELETE: 'DELETE',
+} as const;
 
-export const enum EHttpHeader {
-	CONTENT_TYPE = 'Content-Type',
-	AUTHORIZATION = 'Authorization',
-}
+export type THttpMethod = TValueOf<typeof EHttpMethod>;
+
+export const EHttpHeader = {
+	CONTENT_TYPE: 'Content-Type',
+	AUTHORIZATION: 'Authorization',
+} as const;
+
+export type THttpHeader = TValueOf<typeof EHttpHeader>;

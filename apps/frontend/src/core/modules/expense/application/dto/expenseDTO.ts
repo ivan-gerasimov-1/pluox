@@ -1,6 +1,6 @@
 import type { Id, TDescription, TCategory } from '@root/core/domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 
 export type TExpenseDTO = {
 	id: Id;
@@ -10,7 +10,7 @@ export type TExpenseDTO = {
 	 * - Use specialized library to store big numbers
 	 */
 	amount: number;
-	currency: ECurrency;
+	currency: TCurrency;
 	description: TDescription;
 	category: TCategory | null;
 	venue: Id | null;

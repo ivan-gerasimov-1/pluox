@@ -1,5 +1,5 @@
-import type { ECurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 
 export interface ICurrencyConverter {
-	convert(amount: number, from: ECurrency, to: ECurrency): number;
+	convert(amount: number, from: TCurrency, to: TCurrency): number;
 }

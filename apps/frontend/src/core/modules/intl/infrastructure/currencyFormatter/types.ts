@@ -1,8 +1,8 @@
-export enum ECurrencyDisplay {
-	NARROW_SYMBOL = 'narrowSymbol',
-	CODE = 'code',
-}
+export const ECurrencyDisplay = {
+	NARROW_SYMBOL: 'narrowSymbol',
+	CODE: 'code',
+} as const;
 
-export enum ENumberFormatStyle {
-	CURRENCY = 'currency',
-}
+export const ENumberFormatStyle = {
+	CURRENCY: 'currency',
+} as const;

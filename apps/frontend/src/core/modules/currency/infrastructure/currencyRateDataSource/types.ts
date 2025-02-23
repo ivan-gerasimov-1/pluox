@@ -1,12 +1,12 @@
 import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
 import type {
-	ECurrency,
+	TCurrency,
 	TCurrencyRates,
 } from '@root/core/modules/currency/domain/types';
 
 export interface ICurrencyRateDataSource extends IDataSource<TCurrencyRates> {
-	findById(currency: ECurrency): number;
+	findById(currency: TCurrency): number;
 
-	exists(currency: ECurrency): boolean;
+	exists(currency: TCurrency): boolean;
 	isEmpty(): boolean;
 }

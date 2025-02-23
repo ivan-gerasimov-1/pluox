@@ -1,5 +1,6 @@
 import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
-import type { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
+
 import {
 	EDay,
 	EMonth,
@@ -7,7 +8,7 @@ import {
 } from '@root/core/modules/intl/infrastructure/dateFormatter/types';
 
 export class DateFormatter implements IDateFormatter {
-	format(value: number | string | Date, locale: ELocaleCode): string {
+	format(value: number | string | Date, locale: TLocaleCode): string {
 		let date = value;
 
 		if (typeof date === 'string') {

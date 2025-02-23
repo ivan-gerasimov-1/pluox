@@ -7,7 +7,10 @@ import {
 
 import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
-import { ECurrency } from '@root/core/modules/currency/domain/types';
+import {
+	ECurrency,
+	type TCurrency,
+} from '@root/core/modules/currency/domain/types';
 
 import { AmountInput } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/amountInput';
 import { CategoryPills } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/categoryPills/categoryPills';
@@ -22,7 +25,7 @@ import styles from './expenseForm.module.css';
 
 export type TExpenseFormProps = {
 	amount: number;
-	currency: ECurrency;
+	currency: TCurrency;
 	description: TDescription;
 	category: TCategory | null;
 	venue: Id | null;
@@ -30,7 +33,7 @@ export type TExpenseFormProps = {
 
 	onSubmit(payload: {
 		amount: number;
-		currency: ECurrency;
+		currency: TCurrency;
 		description: TDescription;
 		category: TCategory | null;
 		venue: Id | null;
@@ -40,7 +43,7 @@ export type TExpenseFormProps = {
 
 type TExpenseFormState = {
 	amount: number;
-	currency: ECurrency;
+	currency: TCurrency;
 	description: TDescription;
 	category: TCategory | null;
 	venue: Id | null;
