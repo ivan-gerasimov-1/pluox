@@ -1,7 +1,7 @@
 name: Backend (Cloudflare)
 
 env:
-  NODE_VERSION: 22.9.0
+  NODE_VERSION: 22.14.0
 
   NPM_LINT_CMD: --workspace=@savee/backend-lite run lint
 
