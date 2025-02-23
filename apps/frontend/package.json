@@ -26,10 +26,6 @@
 	"private": true,
 	"dependencies": {
 		"@fontsource-variable/inter": "5.1.1",
-		"@formatjs/intl-getcanonicallocales": "2.5.4",
-		"@formatjs/intl-locale": "4.2.10",
-		"@formatjs/intl-numberformat": "8.15.3",
-		"@formatjs/intl-pluralrules": "5.4.3",
 		"@tanstack/react-query": "5.66.9",
 		"@tanstack/react-query-devtools": "5.66.9",
 		"clsx": "2.1.1",
@@ -50,7 +46,6 @@
 		"@types/react-dom": "19.0.4",
 		"@types/react-router": "5.1.20",
 		"@types/react-transition-group": "4.4.12",
-		"@vitejs/plugin-legacy": "6.0.1",
 		"@vitejs/plugin-react": "4.3.4",
 		"@vitest/coverage-v8": "3.0.6",
 		"@vitest/ui": "3.0.6",

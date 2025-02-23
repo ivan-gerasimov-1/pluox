@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 
 import react from '@vitejs/plugin-react';
-import legacy from '@vitejs/plugin-legacy';
 import svgr from 'vite-plugin-svgr';
 import postcssNested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
@@ -39,20 +38,6 @@ export default defineConfig(({ mode }) => {
 			enableBuild: true,
 		}),
 		tsconfigPaths(),
-		legacy({
-			modernTargets: '>1%, last 2 versions, not dead',
-			targets: '>0.3%, iOS >= 12, not dead',
-			additionalLegacyPolyfills: [
-				'@formatjs/intl-getcanonicallocales/polyfill',
-				'@formatjs/intl-locale/polyfill',
-				'@formatjs/intl-pluralrules/polyfill',
-				'@formatjs/intl-pluralrules/locale-data/en',
-				'@formatjs/intl-pluralrules/locale-data/ru',
-				'@formatjs/intl-numberformat/polyfill',
-				'@formatjs/intl-numberformat/locale-data/en',
-				'@formatjs/intl-numberformat/locale-data/ru',
-			],
-		}),
 		VitePWA({
 			manifest: false,
 		}),
