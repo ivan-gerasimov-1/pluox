@@ -37,7 +37,9 @@ export default defineConfig(({ mode }) => {
 			},
 			enableBuild: true,
 		}),
-		tsconfigPaths(),
+		tsconfigPaths({
+			root: './',
+		}),
 		VitePWA({
 			manifest: false,
 		}),
