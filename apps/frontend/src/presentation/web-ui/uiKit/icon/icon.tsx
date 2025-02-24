@@ -23,6 +23,8 @@ export function Icon(props: TIconProps) {
 
 	return (
 		<SvgIcon
+			/** @description Type conflict with env.d.ts */
+			// @ts-expect-error
 			width={size}
 			height={size}
 			viewBox="0 0 512 512"

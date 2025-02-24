@@ -12,8 +12,12 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
-	const appEnv = loadEnv(mode, process.cwd(), ['APP', 'DEV']);
+	const envPrefix = ['APP_'];
 	const isDevelopment = mode === 'development';
+
+	if (isDevelopment) {
+		envPrefix.push('DEV_');
+	}
 
 	const plugins = [
 		react(),
@@ -56,23 +60,7 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		plugins,
-
-		define: {
-			'process.env.NODE_ENV': JSON.stringify(mode),
-			'process.env.APP_API_URL': JSON.stringify(appEnv.APP_API_URL),
-			'process.env.APP_OPEN_EXCHANGE_RATES_API_URL': JSON.stringify(
-				appEnv.APP_OPEN_EXCHANGE_RATES_API_URL,
-			),
-			'process.env.APP_OPEN_EXCHANGE_RATES_API_KEY': JSON.stringify(
-				appEnv.APP_OPEN_EXCHANGE_RATES_API_KEY,
-			),
-
-			/** Development */
-			'process.env.DEV_REACT_SCAN': JSON.stringify(appEnv.DEV_REACT_SCAN),
-			'process.env.DEV_TANSTACK_QUERY_DEVTOOLS': JSON.stringify(
-				appEnv.DEV_TANSTACK_QUERY_DEVTOOLS,
-			),
-		},
+		envPrefix,
 
 		optimizeDeps: {
 			esbuildOptions: {

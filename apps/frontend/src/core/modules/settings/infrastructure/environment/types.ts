@@ -7,8 +7,8 @@ export const EEnvironment = {
 
 export type TEnvironment = TValueOf<typeof EEnvironment>;
 
-export interface TProcessEnv {
-	NODE_ENV: string;
+export interface TMetaEnv {
+	MODE: string;
 
 	APP_API_URL: string;
 

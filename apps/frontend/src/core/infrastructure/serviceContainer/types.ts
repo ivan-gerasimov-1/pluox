@@ -24,7 +24,7 @@ import type { IUserDataSource } from '@root/core/modules/user/infrastructure/use
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type {
 	IEnvironment,
-	TProcessEnv,
+	TMetaEnv,
 } from '@root/core/modules/settings/infrastructure/environment/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
 import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
@@ -212,7 +212,7 @@ export interface IServiceMap {
 	[EServiceToken.GLOBAL]: typeof Window;
 	[EServiceToken.LOCAL_STORAGE]: IStorage;
 
-	[EServiceToken.PROCESS_ENV]: TProcessEnv;
+	[EServiceToken.PROCESS_ENV]: TMetaEnv;
 	[EServiceToken.ENVIRONMENT]: IEnvironment;
 
 	[EServiceToken.DATABASE]: IDatabase;

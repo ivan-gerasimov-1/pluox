@@ -55,7 +55,7 @@ const sharedModule: IModule = {
 	providers: [
 		{
 			token: EServiceToken.PROCESS_ENV,
-			useValue: process.env,
+			useValue: import.meta.env,
 		},
 
 		{

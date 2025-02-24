@@ -10,9 +10,9 @@ export type TDevToolsConfig = {
 };
 
 export async function createDevToolsConfig(): Promise<TDevToolsConfig> {
-	let isReactScanEnabled = process.env.DEV_REACT_SCAN === 'true';
+	let isReactScanEnabled = import.meta.env.DEV_REACT_SCAN === 'true';
 	let isReactQueryDevtoolsEnabled =
-		process.env.DEV_TANSTACK_QUERY_DEVTOOLS === 'true';
+		import.meta.env.DEV_TANSTACK_QUERY_DEVTOOLS === 'true';
 
 	let config: TDevToolsConfig = {
 		reactScan: {

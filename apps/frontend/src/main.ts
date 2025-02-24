@@ -15,7 +15,7 @@ export async function main(window: IWindow): Promise<void> {
 
 	let diContainer = createDIContainer({
 		isGlobal: true,
-		isDevelopment: process.env.NODE_ENV === 'development',
+		isDevelopment: import.meta.env.MODE === 'development',
 	});
 
 	runMigrations();
