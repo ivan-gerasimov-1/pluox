@@ -1,6 +1,3 @@
-/// <reference types="vite-plugin-pwa/vanillajs" />
-import { registerSW } from 'virtual:pwa-register';
-
 import { createDIContainer } from '@root/diContainer';
 import { createUI } from '@root/presentation/web-ui';
 import { runMigrations } from '@root/migrations';
@@ -14,7 +11,7 @@ import {
 import type { IWindow } from '@root/presentation/web-ui/types';
 
 export async function main(window: IWindow): Promise<void> {
-	runServiceWorkerUpdateRequest();
+	registerServiceWorker();
 
 	let diContainer = createDIContainer({
 		isGlobal: true,
@@ -38,21 +35,5 @@ async function runCore(container: IContainer): Promise<void> {
 async function runUI(window: IWindow, diContainer: IContainer): Promise<void> {
 	const ui = await createUI(window, diContainer);
 
-	registerServiceWorker();
-
 	await ui.start();
-}
-
-function runServiceWorkerUpdateRequest(): void {
-	let updateSW = registerSW({
-		onNeedRefresh() {
-			let isUpdateAccepted = window.confirm(
-				'New version of the app is available. Do you want to install update?',
-			);
-
-			if (isUpdateAccepted) {
-				updateSW();
-			}
-		},
-	});
 }

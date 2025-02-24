@@ -1,17 +1,16 @@
-const EServiceWorkerEvent = {
-	LOAD: 'load',
-} as const;
-
-function hasServiceWorkerSupport() {
-	return 'serviceWorker' in navigator;
-}
+/// <reference types="vite-plugin-pwa/vanillajs" />
+import { registerSW } from 'virtual:pwa-register';
 
 export function registerServiceWorker() {
-	if (!hasServiceWorkerSupport()) {
-		console.log('Service worker is not supported in this browser');
-	}
+	let updateSW = registerSW({
+		onNeedRefresh() {
+			let isUpdateAccepted = window.confirm(
+				'New version of the app is available. Do you want to install update?',
+			);
 
-	window.addEventListener(EServiceWorkerEvent.LOAD, () => {
-		navigator.serviceWorker.register('/sw.js');
+			if (isUpdateAccepted) {
+				updateSW();
+			}
+		},
 	});
 }
