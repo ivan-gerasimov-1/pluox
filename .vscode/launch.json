@@ -59,11 +59,11 @@
 			"skipFiles": ["<node_internals>/**"]
 		},
 		{
-			"command": "npm --workspace=@savee/landing run start",
-			"name": "Landing",
+			"command": "npm --workspace=@savee/website run start",
+			"name": "Website",
 			"request": "launch",
 			"type": "node-terminal",
-			"cwd": "${workspaceFolder}/apps/landing",
+			"cwd": "${workspaceFolder}/apps/website",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		}
