@@ -4,7 +4,7 @@ name: DEPRECATED_Backend CI/CD V2
 env:
   NODE_VERSION: 22.14.0
 
-  NPM_BUILD_CMD: --workspace=@savee/backend-lite run build
+  NPM_BUILD_CMD: --workspace=@savee/backend run build
 
   # deprecated
   DEPLOY_DESTINATION: ~/srv/savee/api
@@ -20,13 +20,13 @@ on:
   #   branches:
   #     - main
   #   paths:
-  #     - 'apps/backend-lite/**'
+  #     - 'apps/backend/**'
   #     - '.github/workflows/backend-v2.yml'
   # pull_request:
   #   branches:
   #     - main
   #   paths:
-  #     - 'apps/backend-lite/**'
+  #     - 'apps/backend/**'
 
 jobs:
   build:
@@ -62,13 +62,13 @@ jobs:
 
       - name: Build
         run: |
-          echo -e "$ENV_FILE" > apps/backend-lite/.env
+          echo -e "$ENV_FILE" > apps/backend/.env
           npm ci
           npm $NPM_BUILD_CMD
 
       - name: Build Docker image
         run: |
-          cd apps/backend-lite
+          cd apps/backend
           npm run _docker:copyFiles
           cd dist
           docker buildx build \
@@ -132,7 +132,7 @@ jobs:
             --archive \
             --compress \
             --delete \
-            apps/backend-lite/.docker/docker-compose.yml $USER@$HOST:$DEPLOY_DESTINATION
+            apps/backend/.docker/docker-compose.yml $USER@$HOST:$DEPLOY_DESTINATION
 
       - name: Deploy
         run: |

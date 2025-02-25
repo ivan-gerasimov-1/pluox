@@ -10,7 +10,7 @@
 		},
 		{
 			"name": "API",
-			"path": "../apps/backend-lite",
+			"path": "../apps/backend",
 		},
 		{
 			"name": "GitHub Actions",

@@ -33,28 +33,28 @@
 		},
 		{
 			"name": "API",
-			"command": "npm --workspace=@savee/backend-lite start",
+			"command": "npm --workspace=@savee/backend start",
 			"request": "launch",
 			"type": "node-terminal",
-			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"cwd": "${workspaceFolder}/apps/backend",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		},
 		{
 			"name": "API (Next)",
-			"command": "npm --workspace=@savee/backend-lite run start:next",
+			"command": "npm --workspace=@savee/backend run start:next",
 			"request": "launch",
 			"type": "node-terminal",
-			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"cwd": "${workspaceFolder}/apps/backend",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		},
 		{
 			"name": "API (Cloudflare)",
-			"command": "npm --workspace=@savee/backend-lite run start:cf",
+			"command": "npm --workspace=@savee/backend run start:cf",
 			"request": "launch",
 			"type": "node-terminal",
-			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"cwd": "${workspaceFolder}/apps/backend",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		},

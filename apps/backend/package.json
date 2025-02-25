@@ -1,30 +1,65 @@
 {
 	"name": "@savee/backend",
-	"version": "0.1.0",
-	"description": "Savee app backend",
+	"version": "0.0.1",
+	"main": "src/index.ts",
+	"type": "module",
 	"scripts": {
-		"build:clear": "rm -f ./.cache/.tsbuildinfo && rm -rf ./build",
-		"prebuild": "npm run build:clear",
-		"build": "tsc",
-		"start": "nodemon --watch ./src --ext ts -r dotenv/config ./src/index.ts",
-		"preview": "node ./build/index.js"
+		"___start___": "",
+		"start": "npm run start:dev",
+		"start:dev": "node --env-file=.env --experimental-transform-types --watch ./src/index.ts",
+		"start:prod": "node --env-file=.env --experimental-transform-types ./src/index.ts",
+		"___start___next___": "",
+		"start:next": "npm run start:dev:next",
+		"start:dev:next": "node --env-file=.env --experimental-transform-types --watch ./src/index.node.ts",
+		"start:prod:next": "node --env-file=.env --experimental-transform-types ./src/index.node.ts",
+		"___start___cloudflare___": "",
+		"start:cf": "npm run start:dev:cf",
+		"start:dev:cf": "wrangler dev",
+		"#NOT_IMPLEMENTED#start:prod:cf": "",
+		"___test___": "",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"___build___": "",
+		"prebuild": "npm run _build:removeDist && npm run _build:createDist",
+		"build": "npm run _build:copyApp && npm run _build:copyAssets",
+		"_build:removeDist": "rm -rf dist",
+		"_build:createDist": "mkdir dist",
+		"_build:copyApp": "cp -r src dist",
+		"_build:copyAssets": "cp package.json .env dist",
+		"___docker___": "",
+		"docker:build": "npm run _docker:copyFiles && cd dist && npm run _docker:buildImage",
+		"docker:compose:up": "cd .docker && docker-compose up -d",
+		"docker:compose:down": "cd .docker && docker-compose down",
+		"_docker:copyFiles": "cp -r .docker/Dockerfile dist",
+		"_docker:buildImage": "docker build -t savee-api-lite:latest .",
+		"___db___": "",
+		"db:init": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/init.ts",
+		"db:reset": "echo 'Not Implemented' && exit 0 && npm run db:delete && npm run db:init",
+		"db:delete": "rm -rf ./db.sqlite",
+		"db:migrate": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/migrate.ts",
+		"___D1___": "",
+		"d1:init": "wrangler d1 execute savee -j --local --file .db/schema.sql",
+		"__lint__": "",
+		"lint": "eslint ./src"
 	},
+	"imports": {
+		"#app/*": "./src/*.ts"
+	},
+	"packageManager": "npm@11.1.0",
+	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
-	"private": true,
-	"__deprecated__devDependencies": {
-		"@types/bcrypt": "5.0.2",
-		"nodemon": "3.1.9",
-		"ts-node": "10.9.2",
-		"typescript": "5.7.3"
+	"description": "Savee app backend (lite)",
+	"dependencies": {
+		"@hono/node-server": "1.13.8",
+		"@hono/zod-validator": "0.4.3",
+		"better-sqlite3": "11.8.1",
+		"hono": "4.7.2",
+		"zod": "3.24.2"
 	},
-	"__deprecated__dependencies": {
-		"@fastify/cors": "10.0.2",
-		"@fastify/jwt": "9.0.3",
-		"@fastify/mongodb": "9.0.2",
-		"bcrypt": "5.1.1",
-		"dotenv": "16.4.7",
-		"fastify": "5.2.1",
-		"nanoid": "3.3.7",
-		"tslib": "2.8.1"
+	"devDependencies": {
+		"@cloudflare/workers-types": "4.20250224.0",
+		"@lv48/eslint-config": "",
+		"@types/better-sqlite3": "7.6.12",
+		"@types/node": "22.13.5",
+		"wrangler": "3.109.3"
 	}
 }

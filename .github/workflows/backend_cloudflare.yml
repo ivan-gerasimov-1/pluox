@@ -3,19 +3,19 @@ name: Backend (Cloudflare)
 env:
   NODE_VERSION: 22.14.0
 
-  NPM_LINT_CMD: --workspace=@savee/backend-lite run lint
+  NPM_LINT_CMD: --workspace=@savee/backend run lint
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'apps/backend-lite/**'
+      - 'apps/backend/**'
       - '.github/workflows/backend_cloudflare.yml'
   push:
     branches:
       - main
     paths:
-      - 'apps/backend-lite/**'
+      - 'apps/backend/**'
       - '.github/workflows/backend_cloudflare.yml'
 
 jobs:
@@ -59,7 +59,7 @@ jobs:
 
       - name: Create .dev.vars file
         run: |
-          echo -e "$ENV_FILE" > apps/backend-lite/.dev.vars
+          echo -e "$ENV_FILE" > apps/backend/.dev.vars
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
@@ -67,7 +67,7 @@ jobs:
           wranglerVersion: '3.109.3'
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: 'apps/backend-lite'
+          workingDirectory: 'apps/backend'
           secrets: |
             JWT_TOKEN_SECRET
             AUTH_COOKIE_SECRET
