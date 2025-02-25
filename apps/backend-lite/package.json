@@ -56,10 +56,10 @@
 		"zod": "3.24.2"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20250214.0",
+		"@cloudflare/workers-types": "4.20250224.0",
 		"@lv48/eslint-config": "",
 		"@types/better-sqlite3": "7.6.12",
 		"@types/node": "22.13.5",
-		"wrangler": "3.109.2"
+		"wrangler": "3.109.3"
 	}
 }

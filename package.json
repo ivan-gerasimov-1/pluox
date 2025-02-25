@@ -12,6 +12,6 @@
 		"dependencies:update": "ncu --deep -u -x globals,@lv48/eslint-config"
 	},
 	"devDependencies": {
-		"npm-check-updates": "17.1.14"
+		"npm-check-updates": "17.1.15"
 	}
 }
