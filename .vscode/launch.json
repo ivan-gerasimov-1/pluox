@@ -36,7 +36,7 @@
 			"command": "npm --workspace=@savee/backend start",
 			"request": "launch",
 			"type": "node-terminal",
-			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"cwd": "${workspaceFolder}/apps/backend",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		},
@@ -45,7 +45,7 @@
 			"command": "npm --workspace=@savee/backend run start:next",
 			"request": "launch",
 			"type": "node-terminal",
-			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"cwd": "${workspaceFolder}/apps/backend",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		},
@@ -54,7 +54,7 @@
 			"command": "npm --workspace=@savee/backend run start:cf",
 			"request": "launch",
 			"type": "node-terminal",
-			"cwd": "${workspaceFolder}/apps/backend-lite",
+			"cwd": "${workspaceFolder}/apps/backend",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		},
