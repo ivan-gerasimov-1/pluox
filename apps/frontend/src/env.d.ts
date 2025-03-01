@@ -7,6 +7,7 @@ interface ImportMetaEnv {
 	readonly APP_OPEN_EXCHANGE_RATES_API_URL: string;
 	readonly APP_OPEN_EXCHANGE_RATES_API_KEY: string;
 
+	readonly APP_UMAMI_WEBSITE_ID: string;
 	readonly APP_SENTRY_DSN: string;
 
 	/** Development */
