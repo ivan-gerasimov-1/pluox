@@ -1,3 +1,5 @@
+import { initializeSentry } from '@root/sentry';
+
 import { createDIContainer } from '@root/diContainer';
 import { createUI } from '@root/presentation/web-ui';
 import { runMigrations } from '@root/migrations';
@@ -11,6 +13,8 @@ import {
 import type { IWindow } from '@root/presentation/web-ui/types';
 
 export async function main(window: IWindow): Promise<void> {
+	initializeSentry();
+
 	registerServiceWorker();
 
 	let diContainer = createDIContainer({
