@@ -59,7 +59,7 @@
 		"@cloudflare/workers-types": "4.20250224.0",
 		"@lv48/eslint-config": "",
 		"@types/better-sqlite3": "7.6.12",
-		"@types/node": "22.13.8",
+		"@types/node": "22.13.9",
 		"wrangler": "3.111.0"
 	}
 }
