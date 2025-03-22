@@ -3,7 +3,6 @@ import { initializeSentry } from '@root/sentry';
 import { createDIContainer } from '@root/diContainer';
 import { createUI } from '@root/presentation/web-ui';
 import { runMigrations } from '@root/migrations';
-import { runMockServiceWorker } from '@root/mockServiceWorker/run';
 import { registerServiceWorker } from '@root/serviceWorker';
 
 import {
@@ -29,8 +28,6 @@ export async function main(window: IWindow): Promise<void> {
 }
 
 async function runCore(container: IContainer): Promise<void> {
-	await runMockServiceWorker();
-
 	let launchControl = container.get(EServiceToken.LAUNCH_CONTROL);
 
 	await launchControl.start();
