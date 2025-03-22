@@ -51,7 +51,6 @@
 		"@vitest/coverage-v8": "3.0.9",
 		"@vitest/ui": "3.0.9",
 		"lightningcss": "1.29.3",
-		"msw": "2.7.3",
 		"postcss-nested": "7.0.2",
 		"postcss-preset-env": "10.1.5",
 		"prettier": "3.5.3",
@@ -65,10 +64,5 @@
 		"vite-tsconfig-paths": "5.1.4",
 		"vitest": "3.0.9",
 		"wrangler": "4.3.0"
-	},
-	"msw": {
-		"workerDirectory": [
-			"public"
-		]
 	}
 }
