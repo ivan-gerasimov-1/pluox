@@ -14,7 +14,14 @@
 			"database_name": "savee"
 		}
 	],
+	"kv_namespaces": [
+		{
+			"binding": "CURRENCIES_KV",
+			"id": "e61d34f283e14973b44b376b4f8a60ce"
+		}
+	],
 	"vars": {
-		"AUTH_COOKIE_NAME": "session"
+		"AUTH_COOKIE_NAME": "session",
+		"APP_OPEN_EXCHANGE_RATES_API_URL": "https://openexchangerates.org/api"
 	}
 }

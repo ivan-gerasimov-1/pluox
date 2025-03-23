@@ -1,4 +1,4 @@
-import type { D1Database } from '@cloudflare/workers-types';
+import type { D1Database, KVNamespace } from '@cloudflare/workers-types';
 
 import { Hono } from 'hono';
 import { env } from 'hono/adapter';
@@ -24,6 +24,7 @@ export const app = new Hono<{
 	}>;
 	Bindings: {
 		DB: D1Database;
+		CURRENCIES_KV: KVNamespace;
 
 		/** Secrets */
 		JWT_TOKEN_SECRET: string;
@@ -31,6 +32,12 @@ export const app = new Hono<{
 
 		/** Variables */
 		AUTH_COOKIE_NAME: string;
+
+		/** Open Exchange Rates */
+		/** Variables */
+		APP_OPEN_EXCHANGE_RATES_API_URL: string;
+		/** Secrets */
+		APP_OPEN_EXCHANGE_RATES_API_KEY: string;
 	};
 }>();
 
@@ -210,4 +217,90 @@ app
 			id: jwtPayload.id,
 			email: jwtPayload.email,
 		});
+	})
+	/**
+	 * @route GET /currencies
+	 * @description Retrieves current exchange rates for supported currencies
+	 * @returns {Object} JSON response containing:
+	 *   - timestamp {number} - Unix timestamp of the exchange rates data
+	 *   - base {string} - Base currency code (typically USD)
+	 *   - rates {Object} - Exchange rates for supported currencies
+	 * 
+	 * @example
+	 * // Response example:
+	 * {
+	 *   "timestamp": 1679529600,
+	 *   "base": "USD",
+	 *   "rates": {
+	 *     "GEL": 2.5,
+	 *     "RUB": 76.2,
+	 *     "USD": 1,
+	 *     "EUR": 0.92,
+	 *     "THB": 34.1
+	 *   }
+	 * }
+	 * 
+	 * @error {500} Internal Server Error - Returns when API call fails
+	 * @note Data is cached in Cloudflare KV with key format: currencies_rates_YYYY-MM-DD
+	 * @note Supported currencies: GEL, RUB, USD, EUR, THB
+	 */
+	.get('/currencies', async (c) => {
+		const SUPPORTED_CURRENCIES = ['GEL', 'RUB', 'USD', 'EUR', 'THB'];
+
+		let currentDate = new Date().toISOString().split('T')[0];
+		let KV_KEY = `currencies_rates_${currentDate}`;
+
+		try {
+			let cachedData = await env(c).CURRENCIES_KV.get(KV_KEY, 'json');
+
+			if (cachedData) {
+				return c.json(cachedData);
+			}
+
+			let url = new URL(
+				`${env(c).APP_OPEN_EXCHANGE_RATES_API_URL}/latest.json`,
+			);
+
+			url.searchParams.set('prettyprint', '0');
+			url.searchParams.set('symbols', SUPPORTED_CURRENCIES.join(','));
+
+			let response = await fetch(url.toString(), {
+				headers: {
+					Authorization: `Token ${env(c).APP_OPEN_EXCHANGE_RATES_API_KEY}`,
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error(
+					`Failed to fetch currency rates: ${response.statusText}`,
+				);
+			}
+
+			let responseData = await response.json();
+
+			let result = {
+				timestamp: responseData.timestamp,
+				base: responseData.base,
+				rates: responseData.rates,
+			};
+
+			await env(c).CURRENCIES_KV.put(KV_KEY, JSON.stringify(result));
+
+			return c.json(result);
+		} catch (error) {
+			console.error('Error fetching currency rates:', error);
+
+			return c.json(
+				{
+					error: {
+						code: EResponseCode.INTERNAL_SERVER_ERROR,
+						message:
+							error instanceof Error
+								? error.message
+								: 'Failed to fetch currency rates',
+					},
+				},
+				500,
+			);
+		}
 	});
