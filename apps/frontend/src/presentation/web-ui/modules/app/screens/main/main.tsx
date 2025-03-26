@@ -132,6 +132,9 @@ export function MainScreen() {
 								style={{
 									marginBlockStart: '5px',
 									fontWeight: 'var(--fw-200)',
+									alignSelf: 'flex-end',
+									fontFamily: 'monospace',
+									fontSize: 'var(--fs-200)',
 								}}
 							>
 								{intlService.formatCurrency(dailyTotal, {
@@ -146,6 +149,9 @@ export function MainScreen() {
 								style={{
 									marginBlockStart: '5px',
 									fontWeight: 'var(--fw-200)',
+									alignSelf: 'flex-end',
+									fontFamily: 'monospace',
+									fontSize: 'var(--fs-200)',
 								}}
 							>
 								{intlService.formatCurrency(leftover, {
