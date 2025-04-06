@@ -1,8 +1,4 @@
-import { useNavigate } from 'react-router';
-
 import { EAppPath } from '@root/presentation/web-ui/appPath';
-
-import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
 
 import { IconLink } from '@root/presentation/web-ui/uiKit/iconLink/iconLink';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
@@ -13,19 +9,26 @@ import styles from './navbar.module.css';
 type TNavbarProps = {};
 
 export function Navbar(props: TNavbarProps) {
-	let navigate = useNavigate();
-
 	return (
 		<div className={styles.container}>
-			<IconButton
-				onClick={() => navigate(-1)}
-				iconName={EIconName.ArrowBack}
+			<IconLink
+				className={styles.navLink}
+				to={EAppPath.MAIN}
+				iconName={EIconName.Circle}
 				iconSize={EIconSize.LARGE}
 			/>
 
 			<IconLink
+				className={styles.navLink}
+				to={EAppPath.EXPENSES}
+				iconName={EIconName.Infinite}
+				iconSize={EIconSize.LARGE}
+			/>
+
+			<IconLink
+				className={styles.navLink}
 				to={EAppPath.SETTINGS}
-				iconName={EIconName.User}
+				iconName={EIconName.Triangle}
 				iconSize={EIconSize.LARGE}
 			/>
 		</div>

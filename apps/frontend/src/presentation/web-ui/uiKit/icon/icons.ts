@@ -9,6 +9,9 @@ import CalendarOutlineIcon from 'ionicons/dist/svg/calendar-outline.svg';
 import Settings from 'ionicons/dist/svg/options-outline.svg';
 import CaretDown from 'ionicons/dist/svg/chevron-down-outline.svg';
 import ArrowBack from 'ionicons/dist/svg/arrow-back-outline.svg';
+import CircleOutline from 'ionicons/dist/svg/ellipse-outline.svg';
+import InfiniteOutline from 'ionicons/dist/svg/infinite-outline.svg';
+import TriangleOutline from 'ionicons/dist/svg/triangle-outline.svg';
 
 export const EIconName = {
 	Close: 'close',
@@ -22,6 +25,9 @@ export const EIconName = {
 	Settings: 'settings',
 	CaretDown: 'caretDown',
 	ArrowBack: 'arrowBack',
+	Circle: 'circle',
+	Infinite: 'infinite',
+	Triangle: 'triangle',
 } as const;
 
 export type TIconName = (typeof EIconName)[keyof typeof EIconName];
@@ -38,6 +44,9 @@ const IconComponent = {
 	[EIconName.Settings]: Settings,
 	[EIconName.CaretDown]: CaretDown,
 	[EIconName.ArrowBack]: ArrowBack,
+	[EIconName.Circle]: CircleOutline,
+	[EIconName.Infinite]: InfiniteOutline,
+	[EIconName.Triangle]: TriangleOutline,
 };
 
 export function getIcon(iconName: TIconName) {

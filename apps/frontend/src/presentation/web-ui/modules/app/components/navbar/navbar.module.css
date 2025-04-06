@@ -23,3 +23,13 @@
 
 	z-index: 1000;
 }
+
+.navLink {
+	color: var(--grey-600);
+
+	transition: color 150ms ease-in-out;
+
+	&:global(.active) {
+		color: var(--black-100);
+	}
+}

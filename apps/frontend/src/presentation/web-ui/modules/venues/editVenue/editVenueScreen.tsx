@@ -22,25 +22,21 @@ export function EditVenueScreen() {
 	}
 
 	return (
-		<Screen hasNavbar>
-			<Header title="Venue" />
+		<div>
+			<div>
+				<pre>
+					<b>ID</b> {venue.id}
+				</pre>
+			</div>
 
 			<div>
-				<div>
-					<pre>
-						<b>ID</b> {venue.id}
-					</pre>
-				</div>
-
-				<div>
-					<b>Название</b> {venue.name}
-				</div>
-
-				<div>
-					<b>Категория</b> {venue.categoryId}
-				</div>
+				<b>Название</b> {venue.name}
 			</div>
-		</Screen>
+
+			<div>
+				<b>Категория</b> {venue.categoryId}
+			</div>
+		</div>
 	);
 }
 
