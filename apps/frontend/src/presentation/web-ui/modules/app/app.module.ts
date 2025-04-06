@@ -20,7 +20,7 @@ export const appRoutes: TRouteObject[] = [
 	},
 	{
 		path: '*',
-		component: NotFoundErrorScreen,
+		Component: NotFoundErrorScreen,
 		handle: {
 			title: 'Error',
 		},
