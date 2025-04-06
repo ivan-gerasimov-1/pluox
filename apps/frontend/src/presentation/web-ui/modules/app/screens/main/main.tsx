@@ -22,8 +22,6 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionSheet';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
-import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
-import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 import styles from './main.module.css';
 
@@ -78,8 +76,6 @@ function useBudget(): number {
 }
 
 export function useScreenLoader() {
-	let temporal = useService(EServiceToken.TEMPORAL);
-
 	let monthlyTotal = useMonthlyAmount();
 	let dailyTotal = useDailyAmount();
 	let budget = useBudget();
@@ -88,16 +84,11 @@ export function useScreenLoader() {
 
 	let leftover = budget - monthlyTotal;
 
-	let today = temporal.format({
-		format: 'MMMM, YYYY',
-	});
-
 	return {
 		categories,
 		monthlyTotal,
 		dailyTotal,
 		leftover,
-		today,
 	};
 }
 
@@ -105,111 +96,114 @@ export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
-	let { categories, monthlyTotal, dailyTotal, leftover, today } =
-		useScreenLoader();
+	let { categories, monthlyTotal, dailyTotal, leftover } = useScreenLoader();
 
 	return (
 		<>
-			<Screen className={styles.screenWithBottomSpace}>
-				<Header title={today} />
+			<AppLink to={EAppPath.EXPENSES}>
+				<div className={styles.title}>
+					<span>
+						{intlService.formatCurrency(monthlyTotal, {
+							hideDecimal: true,
+						})}
+					</span>
+				</div>
+			</AppLink>
 
-				<ScreenBody>
-					<AppLink to={EAppPath.EXPENSES}>
-						<div className={styles.title}>
-							<span>
-								{intlService.formatCurrency(monthlyTotal, {
-									hideDecimal: true,
-								})}
-							</span>
-						</div>
-					</AppLink>
+			<div className={styles.cardContainer}>
+				<div className={cls(styles.card, styles.todayCard)}>
+					<div>Сегодня</div>
 
-					<div className={styles.cardContainer}>
-						<div className={cls(styles.card, styles.todayCard)}>
-							<div>Сегодня</div>
-
-							<div
-								style={{
-									marginBlockStart: '5px',
-									fontWeight: 'var(--fw-200)',
-									alignSelf: 'flex-end',
-									fontFamily: 'monospace',
-									fontSize: 'var(--fs-200)',
-								}}
-							>
-								{intlService.formatCurrency(dailyTotal, {
-									hideDecimal: true,
-								})}
-							</div>
-						</div>
-						<div className={cls(styles.card)}>
-							<div>Остаток</div>
-
-							<div
-								style={{
-									marginBlockStart: '5px',
-									fontWeight: 'var(--fw-200)',
-									alignSelf: 'flex-end',
-									fontFamily: 'monospace',
-									fontSize: 'var(--fs-200)',
-								}}
-							>
-								{intlService.formatCurrency(leftover, {
-									hideDecimal: true,
-								})}
-							</div>
-						</div>
-						<div className={cls(styles.card, styles.categoryCard)}>
-							<div>Категории</div>
-
-							<ul
-								style={{
-									width: '100%',
-									padding: 0,
-									listStyle: 'none',
-									fontWeight: 'var(--fw-200)',
-								}}
-							>
-								{categories.map(({ id, total }) => (
-									<li
-										key={id}
-										style={{
-											display: 'flex',
-											justifyContent: 'space-between',
-											marginBlockEnd: '10px',
-											alignItems: 'flex-end',
-										}}
-									>
-										<span
-											style={{
-												lineHeight: 1,
-											}}
-										>
-											{categoryService.getCategoryIcon(id)}
-										</span>
-
-										<span className={styles.dotFilledSpace}></span>
-
-										<span
-											style={{
-												lineHeight: 1,
-											}}
-										>
-											{intlService.formatCurrency(total, {
-												hideDecimal: true,
-											})}
-										</span>
-									</li>
-								))}
-							</ul>
-						</div>
+					<div
+						style={{
+							marginBlockStart: '5px',
+							fontWeight: 'var(--fw-200)',
+							alignSelf: 'flex-end',
+							fontFamily: 'monospace',
+							fontSize: 'var(--fs-200)',
+						}}
+					>
+						{intlService.formatCurrency(dailyTotal, {
+							hideDecimal: true,
+						})}
 					</div>
-				</ScreenBody>
-			</Screen>
+				</div>
+				<div className={cls(styles.card)}>
+					<div>Остаток</div>
+
+					<div
+						style={{
+							marginBlockStart: '5px',
+							fontWeight: 'var(--fw-200)',
+							alignSelf: 'flex-end',
+							fontFamily: 'monospace',
+							fontSize: 'var(--fs-200)',
+						}}
+					>
+						{intlService.formatCurrency(leftover, {
+							hideDecimal: true,
+						})}
+					</div>
+				</div>
+				<div className={cls(styles.card, styles.categoryCard)}>
+					<div>Категории</div>
+
+					<ul
+						style={{
+							width: '100%',
+							padding: 0,
+							listStyle: 'none',
+							fontWeight: 'var(--fw-200)',
+						}}
+					>
+						{categories.map(({ id, total }) => (
+							<li
+								key={id}
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									marginBlockEnd: '10px',
+									alignItems: 'flex-end',
+								}}
+							>
+								<span
+									style={{
+										lineHeight: 1,
+									}}
+								>
+									{categoryService.getCategoryIcon(id)}
+								</span>
+
+								<span className={styles.dotFilledSpace}></span>
+
+								<span
+									style={{
+										lineHeight: 1,
+									}}
+								>
+									{intlService.formatCurrency(total, {
+										hideDecimal: true,
+									})}
+								</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
 
 			<ActionSheet>
 				<ExpenseNew />
 			</ActionSheet>
 		</>
 	);
+}
+
+export function MainScreenHeader() {
+	let temporal = useService(EServiceToken.TEMPORAL);
+
+	let today = temporal.format({
+		format: 'MMMM, YYYY',
+	});
+
+	return <Header title={today} />;
 }

@@ -17,16 +17,17 @@ export function ExpenseListScreen() {
 	let screenData = useScreenLoader();
 
 	return (
-		<Screen hasNavbar>
-			<Header title={intl.translate('title')} />
+		<ExpenseList dateFrom={screenData.dateFrom} dateTo={screenData.dateTo} />
+		// <Screen hasNavbar>
+		// 	<Header title={intl.translate('title')} />
 
-			<ScreenBody>
-				<ExpenseList
-					dateFrom={screenData.dateFrom}
-					dateTo={screenData.dateTo}
-				/>
-			</ScreenBody>
-		</Screen>
+		// 	<ScreenBody>
+		// 		<ExpenseList
+		// 			dateFrom={screenData.dateFrom}
+		// 			dateTo={screenData.dateTo}
+		// 		/>
+		// 	</ScreenBody>
+		// </Screen>
 	);
 }
 

@@ -5,5 +5,9 @@ export const settingsRoutes = [
 	{
 		path: EAppPath.SETTINGS,
 		Component: SettingsScreen,
+		handle: {
+			title: 'Settings',
+			hasNavbar: true,
+		},
 	},
 ];
