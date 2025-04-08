@@ -17,10 +17,12 @@ import {
 	getBudget,
 } from '@root/presentation/web-ui/modules/settings/appConfig.query';
 
+import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
+
 import { ExpenseNew } from '@root/presentation/web-ui/modules/expenses/components/expenseNew/addExpense';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { ActionSheet } from '@root/presentation/web-ui/uiKit/actionSheet/actionSheet';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 
 import styles from './main.module.css';
@@ -93,6 +95,7 @@ export function useScreenLoader() {
 }
 
 export function MainScreen() {
+	let dialog = useDialog();
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
@@ -191,9 +194,7 @@ export function MainScreen() {
 				</div>
 			</div>
 
-			<ActionSheet>
-				<ExpenseNew />
-			</ActionSheet>
+			<Button onClick={() => dialog.render(ExpenseNew)}>Add Expense</Button>
 		</>
 	);
 }
