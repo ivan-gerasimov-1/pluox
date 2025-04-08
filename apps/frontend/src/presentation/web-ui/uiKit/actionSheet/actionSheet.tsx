@@ -16,6 +16,7 @@ export type TActionSheetProps = {
 	onClose?(): void;
 };
 
+/** @deprecated */
 export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let { isOpen, open, close } = useActionSheetContainer(props.isOpen);
 	let actionSheetContainerRef = useRef<HTMLDivElement>(null);
