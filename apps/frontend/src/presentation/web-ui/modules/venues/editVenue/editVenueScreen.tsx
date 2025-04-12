@@ -1,24 +1,12 @@
 import { useParams } from 'react-router';
 
-import { Header } from '@root/presentation/web-ui/uiKit/header/header';
-import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
-import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
-
 import { useVenueQueryById } from '@root/presentation/web-ui/modules/venues/venues.query';
 
 export function EditVenueScreen() {
 	let { venue } = useScreenParams();
 
 	if (!venue) {
-		return (
-			<Screen hasNavbar>
-				<Header title="Venue" />
-
-				<ScreenBody>
-					<div>Место не найдено</div>
-				</ScreenBody>
-			</Screen>
-		);
+		return <div>Место не найдено</div>;
 	}
 
 	return (
