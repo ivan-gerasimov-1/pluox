@@ -28,9 +28,13 @@
 	padding-block: 20px;
 	color: var(--grey-600);
 
-	transition: color 150ms ease-in-out;
+	transition:
+		color 150ms ease-in-out,
+		transform 150ms ease-in-out;
 
 	&:global(.active) {
 		color: var(--black-100);
+
+		transform: scale(1.125);
 	}
 }
