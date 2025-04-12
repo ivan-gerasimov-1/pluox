@@ -23,7 +23,7 @@ export function ScreenLayout() {
 				<Outlet />
 			</ScreenBody>
 
-			{meta.hasNavbar && <Navbar />}
+			{meta.hasNavbar && <Navbar hasMainAction={meta.hasNavbarActions} />}
 		</Screen>
 	);
 }

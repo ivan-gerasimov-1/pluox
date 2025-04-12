@@ -16,6 +16,7 @@ export const appRoutes: TRouteObject[] = [
 			TitleComponent: MainScreenHeader,
 			/** @todo LV-99 */
 			hasNavbar: true,
+			hasNavbarActions: true,
 		},
 	},
 	{

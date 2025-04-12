@@ -1,10 +1,11 @@
 .container {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 
 	width: 100%;
 
 	padding-inline: var(--navbar-gap);
+	padding-block-start: var(--navbar-gap);
 	padding-block-end: calc(var(--navbar-gap) * 1.5);
 
 	position: fixed;
@@ -21,6 +22,8 @@
 	border: var(--border-90);
 
 	z-index: 1000;
+
+	transition: all 150ms ease-in-out;
 }
 
 .navLink {
@@ -37,4 +40,9 @@
 
 		transform: scale(1.125);
 	}
+}
+
+.navLinksContainer {
+	display: flex;
+	justify-content: space-between;
 }

@@ -2,6 +2,7 @@ import type { IndexRouteObject, NonIndexRouteObject } from 'react-router';
 
 export type TRouteMeta = {
 	hasNavbar?: boolean;
+	hasNavbarActions?: boolean;
 } & (
 	| {
 			title: string;
