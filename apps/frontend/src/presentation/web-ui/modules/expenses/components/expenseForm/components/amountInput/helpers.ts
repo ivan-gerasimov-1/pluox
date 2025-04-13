@@ -24,7 +24,7 @@ export function validateKey(event: React.KeyboardEvent<HTMLInputElement>) {
 
 	if (
 		!getAllowedSymbols().includes(
-			// @ts-expect-error
+			// @ts-expect-error | typeguard
 			event.key,
 		)
 	) {

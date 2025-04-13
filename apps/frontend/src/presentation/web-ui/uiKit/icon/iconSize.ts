@@ -17,10 +17,11 @@ export function iconSizeToPx(size: TIconSize): '16px' | '24px' | '32px' {
 			return '24px';
 		case EIconSize.LARGE:
 			return '32px';
-		default:
+		default: {
 			const unknownSize: never = size;
 
 			throw new UnknownIconSizeError(unknownSize);
+		}
 	}
 }
 

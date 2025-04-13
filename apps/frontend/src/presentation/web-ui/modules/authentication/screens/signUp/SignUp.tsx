@@ -16,7 +16,8 @@ export function SignUpScreen() {
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		// @ts-expect-error
+		/** @todo Remove @ts-expect-error */
+		// @ts-expect-error | Use proper types
 		const formElements = event.target.elements;
 
 		const email = formElements.email.value;

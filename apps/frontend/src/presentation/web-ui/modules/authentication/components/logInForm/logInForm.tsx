@@ -130,7 +130,8 @@ function Form<T>(
 		event.preventDefault();
 
 		props.onSubmit(
-			// @ts-expect-error
+			/** @todo Remove @ts-expect-error */
+			// @ts-expect-error | Use proper types
 			event.target.elements,
 		);
 	}

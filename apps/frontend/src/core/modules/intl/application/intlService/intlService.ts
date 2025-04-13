@@ -71,7 +71,7 @@ export class IntlService implements IIntlService {
 
 	private isDecimalSeparator(value: unknown): value is TDecimalSeparator {
 		return DECIMAL_SEPARATORS.includes(
-			// @ts-expect-error
+			// @ts-expect-error | typeguard
 			value,
 		);
 	}

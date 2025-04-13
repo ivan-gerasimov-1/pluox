@@ -8,7 +8,8 @@ type TDigit = (typeof DIGITS)[number];
 
 function isDigit(value: string | number): value is TDigit {
 	const possibleDigit = Number.parseInt(
-		// @ts-expect-error
+		/** @todo Remove @ts-expect-error */
+		// @ts-expect-error | FIX
 		value,
 	);
 
@@ -32,6 +33,7 @@ function isSeparator(value: string): value is TSeparator {
 }
 
 type TNumericKeyboardProps = {
+	/** @todo Remove @ts-expect-error */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	value: any;
 	onClick(value: TDigit | TSeparator, type: 'digit' | 'separator'): void;
@@ -42,7 +44,8 @@ export function NumericKeyboard(props: TNumericKeyboardProps) {
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	): void {
 		let value: string =
-			// @ts-expect-error
+			/** @todo Remove @ts-expect-error */
+			// @ts-expect-error | FIX
 			event.target.value;
 
 		if (isDigit(value)) {

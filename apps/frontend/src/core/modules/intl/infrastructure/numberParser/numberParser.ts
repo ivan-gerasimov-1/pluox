@@ -58,10 +58,8 @@ export class NumberParser implements INumberParser {
 		this.groupRegExp = this.createGroupRegExp();
 		this.decimalRegExp = this.createDecimalRegExp();
 		this.numeralRegExp = this.createNumeralRegExp();
-		/**
-		 * @todo
-		 */
-		/** @ts-expect-error */
+		/** @todo Remove @ts-expect-error */
+		/** @ts-expect-error | FIX */
 		this.indexReplacer = this.createIndexReplacer();
 	}
 

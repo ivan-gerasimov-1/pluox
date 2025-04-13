@@ -15,8 +15,8 @@ export function CurrencyInput(props: TCurrencyInputProps) {
 	function handleCurrencyChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const currency = event.target.value;
 
-		/** @todo */
-		// @ts-expect-error
+		/** @todo Remove @ts-expect-error */
+		// @ts-expect-error | FIX
 		props.onChange(currency);
 	}
 

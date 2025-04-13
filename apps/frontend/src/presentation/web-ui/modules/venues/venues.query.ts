@@ -19,9 +19,10 @@ function createVenueQuery(type: 'list' | 'oneById') {
 			return () => [VENUE_QUERY_LIST];
 		case 'oneById':
 			return (id: Id) => [VENUE_QUERY_BY_ID, id];
-		default:
+		default: {
 			let invalidType: never = type;
 			throw new Error(`Unknown venue query type: ${invalidType}`);
+		}
 	}
 }
 
