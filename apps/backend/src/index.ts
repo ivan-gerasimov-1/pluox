@@ -327,6 +327,7 @@ function main() {
 
 	const server = createServer(async (request, response) => {
 		try {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			let body: Record<any, any> | null = null;
 
 			if (isJson(request)) {
@@ -388,8 +389,11 @@ function main() {
 
 			let routeHander =
 				match?.handler<
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					Record<string, any> & {
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
 						error?: Record<string, any>;
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
 						meta?: Record<string, any>;
 					}
 				> || notFoundController;
@@ -399,6 +403,9 @@ function main() {
 					body,
 					pathParams: match?.params || null,
 					cookie,
+					/** @todo Fix @ts-expect-error */
+					/** @todo Fix @ts-expect-error */
+					// @ts-expect-error | FIX
 					auth,
 				},
 				dependencies,
@@ -417,7 +424,8 @@ function main() {
 			}
 
 			let {
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				meta,
 				...responsePayload
 			} = result;
@@ -440,10 +448,12 @@ function main() {
 			console.log(error);
 
 			let errorCode =
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				error?.code ?? EResponseCode.INTERNAL_SERVER_ERROR;
 			let errorMessage =
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				error?.code ? error?.message : 'Internal server error';
 
 			sendJsonResponse(response, errorCode, {
@@ -466,7 +476,8 @@ function main() {
 		)
 		.on('error', (error) => {
 			if (
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				error.code === 'EADDRINUSE'
 			) {
 				console.error('[Error] Address in use:', appConfig.port);
