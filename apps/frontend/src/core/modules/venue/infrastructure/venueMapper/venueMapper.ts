@@ -4,8 +4,6 @@ import { Venue } from '@root/core/modules/venue/domain/venueEntity/venue';
 import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/types';
 
 export class VenueMapper implements IVenueMapper {
-	constructor() {}
-
 	public toDTO(venue: IVenue): TVenueDTO {
 		return {
 			id: venue.id,

@@ -1,5 +1,6 @@
 type TTrieNode = {
 	children: Record<string, TTrieNode>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	handler: <T>(...args: any) => Promise<T> | null;
 	isDynamic: boolean;
 	paramName: string | null;
@@ -15,7 +16,14 @@ export class Router {
 		this.#routes = this.#createTrieNode();
 	}
 
-	public addRoute(path: string, handler, options?: Record<any, any>) {
+	public addRoute(
+		path: string,
+		/** @todo Fix @ts-expect-error */
+		// @ts-expect-error | FIX
+		handler,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		options?: Record<any, any>,
+	) {
 		let segments = path.split('/').filter(Boolean);
 		let currentNode = this.#routes;
 
@@ -36,6 +44,8 @@ export class Router {
 		}
 
 		currentNode.handler = handler;
+		/** @todo Fix @ts-expect-error */
+		// @ts-expect-error | FIX
 		currentNode.options = options;
 
 		return this;
@@ -54,6 +64,8 @@ export class Router {
 				options = currentNode.options;
 			} else if (currentNode.children[':']) {
 				currentNode = currentNode.children[':'];
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				params[currentNode.paramName] = segment;
 			} else {
 				return null;
@@ -72,6 +84,8 @@ export class Router {
 	#createTrieNode(): TTrieNode {
 		return {
 			children: {},
+			/** @todo Fix @ts-expect-error */
+			// @ts-expect-error | FIX
 			handler: null,
 			isDynamic: false,
 			paramName: null,

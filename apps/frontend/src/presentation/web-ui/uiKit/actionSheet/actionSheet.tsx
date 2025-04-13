@@ -32,7 +32,13 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 
 	let [dragStart, setDragStart] = useState(0);
 
-	function closeActionSheet(event: React.MouseEvent<any, MouseEvent>) {
+	function closeActionSheet(
+		event: React.MouseEvent<
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			any,
+			MouseEvent
+		>,
+	) {
 		if (props.onClose) {
 			props.onClose();
 		}
@@ -48,8 +54,8 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 		let diff = event.changedTouches[0]?.clientY - dragStart;
 
 		if (diff >= 100) {
-			/** @todo remove ts-expect-error */
-			// @ts-expect-error
+			/** @todo Remove @ts-expect-error */
+			// @ts-expect-error | FIX
 			close(event);
 		} else {
 			document.documentElement.style.setProperty(

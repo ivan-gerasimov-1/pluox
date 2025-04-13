@@ -7,8 +7,6 @@ export async function sendEmail(to, subject, message) {
 	const smtpServer = appConfig.email.host;
 	const smtpPort = appConfig.email.port;
 
-	console.log('Start sending email');
-
 	const socket = createConnection(
 		{
 			host: smtpServer,
@@ -35,6 +33,7 @@ export async function sendEmail(to, subject, message) {
 					'MIME-Version: 1.0',
 					'Content-Type: text/html; charset=UTF-8',
 					'',
+					// eslint-disable-next-line no-useless-call
 					`${message.call(null, to, subject)}`,
 					'.',
 					'QUIT',
@@ -50,18 +49,22 @@ export async function sendEmail(to, subject, message) {
 	);
 
 	socket.on('connect', () => {
+		// eslint-disable-next-line no-console
 		console.log('CONNECT: Connected to SMTP server');
 	});
 
 	socket.on('data', (data) => {
+		// eslint-disable-next-line no-console
 		console.log('DATA RECEIVED:', data.toString());
 	});
 
 	socket.on('end', () => {
+		// eslint-disable-next-line no-console
 		console.log('END: Disconnected from SMTP server');
 	});
 
 	socket.on('error', (error) => {
+		// eslint-disable-next-line no-console
 		console.error('Error:', error);
 	});
 }

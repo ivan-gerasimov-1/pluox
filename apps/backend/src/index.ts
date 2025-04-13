@@ -325,8 +325,10 @@ function main() {
 		.addRoute('/login', postSignIn)
 		.addRoute('/signup', postSignUp);
 
+	// eslint-disable-next-line complexity
 	const server = createServer(async (request, response) => {
 		try {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			let body: Record<any, any> | null = null;
 
 			if (isJson(request)) {
@@ -388,8 +390,11 @@ function main() {
 
 			let routeHander =
 				match?.handler<
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					Record<string, any> & {
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
 						error?: Record<string, any>;
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
 						meta?: Record<string, any>;
 					}
 				> || notFoundController;
@@ -399,6 +404,9 @@ function main() {
 					body,
 					pathParams: match?.params || null,
 					cookie,
+					/** @todo Fix @ts-expect-error */
+					/** @todo Fix @ts-expect-error */
+					// @ts-expect-error | FIX
 					auth,
 				},
 				dependencies,
@@ -407,8 +415,6 @@ function main() {
 			);
 
 			if (result?.error) {
-				console.log(result.error);
-
 				sendJsonResponse(response, result.error?.code, {
 					message: result.error?.message,
 				});
@@ -417,7 +423,8 @@ function main() {
 			}
 
 			let {
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				meta,
 				...responsePayload
 			} = result;
@@ -437,13 +444,13 @@ function main() {
 				responsePayload,
 			);
 		} catch (error) {
-			console.log(error);
-
 			let errorCode =
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				error?.code ?? EResponseCode.INTERNAL_SERVER_ERROR;
 			let errorMessage =
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				error?.code ? error?.message : 'Internal server error';
 
 			sendJsonResponse(response, errorCode, {
@@ -459,6 +466,7 @@ function main() {
 				port: appConfig.port,
 			},
 			() => {
+				// eslint-disable-next-line no-console
 				console.log(
 					`Server is running on port ${appConfig.port}, host ${appConfig.host}`,
 				);
@@ -466,9 +474,11 @@ function main() {
 		)
 		.on('error', (error) => {
 			if (
-				// @ts-expect-error
+				/** @todo Fix @ts-expect-error */
+				// @ts-expect-error | FIX
 				error.code === 'EADDRINUSE'
 			) {
+				// eslint-disable-next-line no-console
 				console.error('[Error] Address in use:', appConfig.port);
 				db.close();
 				server.close();
@@ -485,13 +495,16 @@ main();
 
 function createShutdownHandler(server: Server, database: Database) {
 	return function handleShutdown(signalName: EProcessEvent) {
+		// eslint-disable-next-line no-console
 		console.log('Server is shutting down due to:', signalName);
 
 		server.close(() => {
+			// eslint-disable-next-line no-console
 			console.log('Server closed');
 
 			database.close();
 
+			// eslint-disable-next-line no-console
 			console.log('Database closed');
 
 			process.exit(0);

@@ -79,6 +79,8 @@ function useScreenLoader() {
 		};
 	}
 
+	/** @todo LV-105 */
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	let venue = useVenueQueryById(id);
 
 	return {

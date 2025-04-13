@@ -33,9 +33,6 @@ import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dial
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Header } from '@root/presentation/web-ui/uiKit/header/header';
-import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
-import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 
@@ -105,7 +102,7 @@ export function SettingsScreen() {
 		mutationFn: async (payload: Partial<TAppConfig>) => {
 			updateAppConfig(payload);
 		},
-		onSuccess: async (data, variables) => {
+		onSuccess: async () => {
 			let queryKey = [APP_CONFIG_QUERY];
 
 			/** @todo #1 */
@@ -295,6 +292,7 @@ export function SettingsScreen() {
 						<IconButton
 							iconName={EIconName.Settings}
 							onClick={() => {
+								// eslint-disable-next-line no-alert
 								window.alert('Not Implemented');
 							}}
 						/>
@@ -356,6 +354,7 @@ export function SettingsScreen() {
 						<IconButton
 							iconName={EIconName.Settings}
 							onClick={() => {
+								// eslint-disable-next-line no-alert
 								window.alert('Not Implemented');
 							}}
 						/>
@@ -416,11 +415,7 @@ export function UserNameEditActionSheet(
 					type="text"
 					className={styles.budgetInput}
 					value={userName}
-					onChange={(event) => {
-						let userName = event.target.value;
-
-						setUserName(userName);
-					}}
+					onChange={(event) => setUserName(event.target.value)}
 				/>
 			</div>
 
@@ -465,9 +460,9 @@ export function BudgetEditActionsSheet(
 					className={styles.budgetInput}
 					value={budget ?? 0}
 					onChange={(event) => {
-						let budget = Number.parseInt(event.target.value);
+						let budgetValue = Number.parseInt(event.target.value, 10);
 
-						setBudget(budget);
+						setBudget(budgetValue);
 					}}
 				/>
 			</div>

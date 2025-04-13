@@ -28,7 +28,7 @@ export class UILoader implements IUILoader {
 		this.element.dispose();
 	}
 
-	private async delay(timeoutMs: number): Promise<void> {
+	private delay(timeoutMs: number): Promise<void> {
 		return delay(timeoutMs);
 	}
 }

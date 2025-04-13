@@ -3,7 +3,8 @@ import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContaine
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 export function validateNumber(value: string): boolean {
-	if (RegExp('[A-z]+').test(value)) {
+	let numberRegExp = /[A-z]+/u;
+	if (numberRegExp.test(value)) {
 		return false;
 	}
 
@@ -24,12 +25,10 @@ export function validateKey(event: React.KeyboardEvent<HTMLInputElement>) {
 
 	if (
 		!getAllowedSymbols().includes(
-			// @ts-expect-error
+			// @ts-expect-error | typeguard
 			event.key,
 		)
 	) {
 		event.preventDefault();
-
-		return;
 	}
 }

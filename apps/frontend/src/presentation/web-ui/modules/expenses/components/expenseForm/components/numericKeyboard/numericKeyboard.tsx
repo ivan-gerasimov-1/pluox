@@ -1,24 +1,15 @@
-import { useEffect } from 'react';
-
 import styles from './numericKeyboard.module.css';
 
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 
 type TDigit = (typeof DIGITS)[number];
 
-function isNumber(value: unknown): value is number {
-	const result = Number.parseInt(
-		// @ts-expect-error
-		value,
-	);
-
-	return !Number.isNaN(result);
-}
-
 function isDigit(value: string | number): value is TDigit {
 	const possibleDigit = Number.parseInt(
-		// @ts-expect-error
+		/** @todo Remove @ts-expect-error */
+		// @ts-expect-error | FIX
 		value,
+		10,
 	);
 
 	if (Number.isNaN(possibleDigit)) {
@@ -41,6 +32,8 @@ function isSeparator(value: string): value is TSeparator {
 }
 
 type TNumericKeyboardProps = {
+	/** @todo Remove @ts-expect-error */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	value: any;
 	onClick(value: TDigit | TSeparator, type: 'digit' | 'separator'): void;
 };
@@ -50,7 +43,8 @@ export function NumericKeyboard(props: TNumericKeyboardProps) {
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	): void {
 		let value: string =
-			// @ts-expect-error
+			/** @todo Remove @ts-expect-error */
+			// @ts-expect-error | FIX
 			event.target.value;
 
 		if (isDigit(value)) {
@@ -63,10 +57,6 @@ export function NumericKeyboard(props: TNumericKeyboardProps) {
 
 		throw new Error(`Unknown input type: ${value}`);
 	}
-
-	useEffect(() => {
-		console.log(props.value);
-	}, [props.value]);
 
 	return (
 		<div>

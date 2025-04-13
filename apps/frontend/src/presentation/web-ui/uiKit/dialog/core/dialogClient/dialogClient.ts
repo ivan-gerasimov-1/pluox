@@ -15,7 +15,10 @@ import type {
 
 export class DialogClient implements IDialogClient {
 	constructor(
-		private readonly store: IDialogStore<TDialog<any>>,
+		private readonly store: IDialogStore<
+			TDialog<// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			any>
+		>,
 		private readonly observer: IDialogObserver,
 		private readonly idGenerator: IIdGenerator,
 	) {}

@@ -93,8 +93,10 @@ export interface IContainer {
 	disposeAll(): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TServiceType<T> = new (...args: any[]) => T;
 export type TServiceToken = keyof IServiceMap;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TFactoryFn<T> = (...args: any[]) => T;
 
 export const EServiceScope = {

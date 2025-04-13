@@ -19,7 +19,14 @@ export function useLoginForm() {
 
 	let { pending, setPending } = usePending();
 
-	async function onSubmit(payload: Record<string, any>) {
+	async function onSubmit(payload: {
+		email: {
+			value: string;
+		};
+		password: {
+			value: string;
+		};
+	}) {
 		let email = payload.email.value;
 		let password = payload.password.value;
 
@@ -29,8 +36,6 @@ export function useLoginForm() {
 			await authService.logIn(email, password);
 
 			navigation.mainPage();
-		} catch (error) {
-			console.log(error);
 		} finally {
 			await delay(500);
 
@@ -72,16 +77,19 @@ export function LogInForm() {
 				</FormGroup>
 
 				<FormGroup>
-					{!pending ? (
+					{pending ? (
+						<div>Загрузка…</div>
+					) : (
 						<Button
 							type="submit"
 							className={styles.submitButton}
-							onClick={() => {}}
+							onClick={() =>
+								// eslint-disable-next-line no-empty-function
+								{}
+							}
 						>
 							Войти
 						</Button>
-					) : (
-						<div>Загрузка…</div>
 					)}
 				</FormGroup>
 
@@ -113,17 +121,18 @@ export function LogInForm() {
 	);
 }
 
-function Form(
+function Form<T>(
 	props: React.PropsWithChildren<{
 		name: string;
-		onSubmit: (payload: Record<string, any>) => void;
+		onSubmit: (payload: T) => void;
 	}>,
 ) {
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
 		props.onSubmit(
-			// @ts-expect-error
+			/** @todo Remove @ts-expect-error */
+			// @ts-expect-error | Use proper types
 			event.target.elements,
 		);
 	}

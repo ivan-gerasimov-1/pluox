@@ -8,10 +8,10 @@ import type {
 /**
  * @throws InvalidMonthError
  */
-export function getDateParts(date: TISODateString): TDateParts {
-	const _date = new Date(date);
-	const month = _date.getMonth();
-	const year = _date.getFullYear();
+export function getDateParts(dateString: TISODateString): TDateParts {
+	const date = new Date(dateString);
+	const month = date.getMonth();
+	const year = date.getFullYear();
 
 	if (!monthGuard(month)) {
 		throw new InvalidMonthError(month);

@@ -12,10 +12,12 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 		private readonly currencyRateDataSource: ICurrencyRateDataSource,
 	) {}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public create(currency: TCurrencyRateDTO): TCurrencyRateDTO {
 		throw new NotImplementedError();
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public update(currency: TCurrencyRateDTO): TCurrencyRateDTO {
 		throw new NotImplementedError();
 	}
@@ -37,6 +39,7 @@ export class CurrencyRateRepository implements ICurrencyRateRepository {
 		return this.currencyRateDataSource.findById(code);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public remove(id: Id): void {
 		throw new NotImplementedError();
 	}

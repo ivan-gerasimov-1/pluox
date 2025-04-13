@@ -15,7 +15,7 @@ export class DateFormatter implements IDateFormatter {
 			date = new Date(date);
 		}
 
-		return Intl.DateTimeFormat(locale, {
+		return new Intl.DateTimeFormat(locale, {
 			day: EDay.NUMERIC,
 			month: EMonth.LONG,
 			year: EYear.NUMERIC,

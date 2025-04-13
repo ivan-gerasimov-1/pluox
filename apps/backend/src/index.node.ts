@@ -9,6 +9,7 @@ serve(
 		port: Number.parseInt(process.env.APP_PORT as string, 10),
 	},
 	(info) => {
+		// eslint-disable-next-line no-console
 		console.log(
 			`Server is running on ${info.address}:${info.port} (${info.family})`,
 		);

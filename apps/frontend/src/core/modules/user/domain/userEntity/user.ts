@@ -32,14 +32,14 @@ export class User extends Entity implements IUser {
 		return this.#name;
 	}
 
-	public get locale(): TLocaleCode {
-		return this.#locale;
-	}
-
 	public set name(email: string) {
 		this.#name = email;
 
 		this.touch();
+	}
+
+	public get locale(): TLocaleCode {
+		return this.#locale;
 	}
 
 	public set locale(locale: TLocaleCode) {

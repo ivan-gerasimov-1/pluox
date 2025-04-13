@@ -53,7 +53,7 @@ export class ExpenseAmountService implements IExpenseAmountService {
 			totalAmount += expenseAmount;
 		}
 
-		for (let category in expensesByCategory) {
+		for (let category of Object.keys(expensesByCategory)) {
 			expensesByCategory[category].percentage =
 				(expensesByCategory[category].total / totalAmount) * 100;
 		}
@@ -61,7 +61,7 @@ export class ExpenseAmountService implements IExpenseAmountService {
 		// prettier-ignore
 		return Object //
 			.values(expensesByCategory)
-			.sort((a, b) => b.total - a.total);
+			.sort((firstValue, secondValue) => secondValue.total - firstValue.total);
 	}
 
 	private createEmptyCategory(categoryId: TCategory = '—'): TAmountByCategory {

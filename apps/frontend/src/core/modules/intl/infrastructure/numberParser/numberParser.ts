@@ -25,11 +25,11 @@ export class NumberParser implements INumberParser {
 	private readonly formatterCache: NumberFormatterCache;
 
 	constructor(private readonly appConfig: IAppConfig) {
-		this.groupRegExp = /.*/;
-		this.decimalRegExp = /.*/;
-		this.numeralRegExp = /.*/;
+		this.groupRegExp = /.*/u;
+		this.decimalRegExp = /.*/u;
+		this.numeralRegExp = /.*/u;
 
-		this.indexReplacer = (d: string) => d;
+		this.indexReplacer = (digit: string) => digit;
 
 		this.locale = ELocaleCode.EN_US;
 
@@ -49,7 +49,7 @@ export class NumberParser implements INumberParser {
 			.replace(this.decimalRegExp, '.')
 			.replace(this.numeralRegExp, this.indexReplacer);
 
-		return parsedValue ? +parsedValue : NaN;
+		return parsedValue ? Number(parsedValue) : NaN;
 	}
 
 	private initialize() {
@@ -58,10 +58,8 @@ export class NumberParser implements INumberParser {
 		this.groupRegExp = this.createGroupRegExp();
 		this.decimalRegExp = this.createDecimalRegExp();
 		this.numeralRegExp = this.createNumeralRegExp();
-		/**
-		 * @todo
-		 */
-		/** @ts-expect-error */
+		/** @todo Remove @ts-expect-error */
+		/** @ts-expect-error | FIX */
 		this.indexReplacer = this.createIndexReplacer();
 	}
 
@@ -69,20 +67,20 @@ export class NumberParser implements INumberParser {
 		let parts = this.getParts();
 		let group = parts.find((item): boolean => item.type === 'group');
 
-		return new RegExp(`[${group?.value}]`, 'g');
+		return new RegExp(`[${group?.value}]`, 'ug');
 	}
 
 	private createDecimalRegExp(): RegExp {
 		let parts = this.getParts();
 		let decimal = parts.find((item): boolean => item.type === 'decimal');
 
-		return new RegExp(`[${decimal?.value}]`);
+		return new RegExp(`[${decimal?.value}]`, 'u');
 	}
 
 	private createNumeralRegExp(): RegExp {
 		let numerals = this.getNumerals();
 
-		return new RegExp(`[${numerals.join('')}]`, 'g');
+		return new RegExp(`[${numerals.join('')}]`, 'ug');
 	}
 
 	private createIndexReplacer() {
@@ -123,9 +121,9 @@ export class NumberParser implements INumberParser {
 	): Intl.NumberFormat {
 		const key = this.appConfig.locale;
 		const cacheKey =
-			options?.useGrouping !== undefined
-				? (`${key}-with-grouping-option` as TLocaleCode)
-				: key;
+			options?.useGrouping === undefined
+				? key
+				: (`${key}-with-grouping-option` as TLocaleCode);
 
 		if (!this.formatterCache.has(cacheKey)) {
 			this.formatterCache.set(

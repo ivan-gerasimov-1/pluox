@@ -35,7 +35,7 @@ export class UpdateExpenseUseCase implements IUpdateExpenseUseCase {
 		expense.description = payload.description ?? expense.description;
 		expense.date = payload.date ?? expense.date;
 		expense.category =
-			payload.category !== undefined ? payload.category : expense.category;
+			payload.category === undefined ? expense.category : payload.category;
 
 		this.expenseRepository.save(expense);
 

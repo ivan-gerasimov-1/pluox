@@ -9,7 +9,7 @@ export function useToggle(initialState: boolean): {
 	let [state, setState] = useState<boolean>(initialState);
 
 	function toggle() {
-		setState((state) => !state);
+		setState((prevState) => !prevState);
 	}
 
 	function setOn() {

@@ -11,7 +11,10 @@ type TDialogClientProviderProps = {
 };
 
 export function DialogClientProvider(props: TDialogClientProviderProps) {
-	let client = useMemo(() => props.client ?? createDialogClient(), []);
+	let client = useMemo(
+		() => props.client ?? createDialogClient(),
+		[props.client],
+	);
 
 	return (
 		<DialogClientContext.Provider value={client}>

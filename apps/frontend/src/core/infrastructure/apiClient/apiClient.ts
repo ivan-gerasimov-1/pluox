@@ -18,7 +18,7 @@ export class ApiClient implements IApiClient {
 		return this.configProvider.baseUrl;
 	}
 
-	public async get<TResponse>(
+	public get<TResponse>(
 		path: string,
 		options?: {
 			abortSignal?: AbortSignal;
@@ -30,7 +30,7 @@ export class ApiClient implements IApiClient {
 		});
 	}
 
-	public async post<TPayload, TResponse>(
+	public post<TPayload, TResponse>(
 		path: string,
 		payload?: TPayload,
 		options?: {

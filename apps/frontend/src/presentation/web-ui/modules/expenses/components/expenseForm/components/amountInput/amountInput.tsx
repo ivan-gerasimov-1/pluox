@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type default as React } from 'react';
 
 import {
 	validateKey,
@@ -48,7 +47,7 @@ export function AmountInput(props: TAmountInputProps) {
 
 		let modelValue = toModelValue(rawValue);
 
-		return props.onChange(modelValue);
+		props.onChange(modelValue);
 	}
 
 	return (

@@ -43,7 +43,7 @@ export class Category extends Entity implements ICategory {
 	}
 
 	public increaseWeight(): ICategory {
-		this.#weight++;
+		this.#weight += 1;
 
 		this.touch();
 
@@ -51,7 +51,7 @@ export class Category extends Entity implements ICategory {
 	}
 
 	public decreaseWeight(): ICategory {
-		this.#weight--;
+		this.#weight -= 1;
 
 		this.touch();
 

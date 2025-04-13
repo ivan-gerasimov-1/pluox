@@ -1,6 +1,8 @@
 import type { TCurrency } from '@root/core/modules/currency/domain/types';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
-import type { TDecimalSeparator } from '@root/core/modules/intl/domain/types';
+import type {
+	TDecimalSeparator,
+	TLocaleCode,
+} from '@root/core/modules/intl/domain/types';
 
 export interface IIntlService {
 	readonly locale: TLocaleCode;

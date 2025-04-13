@@ -25,8 +25,8 @@ export function PillsSelect<T extends { id: string; name: string }>(
 							let isPressed = target.getAttribute('aria-pressed') === 'true';
 							let nextState = !isPressed;
 
-							for (let item of props.items) {
-								let element = document.getElementById(item.id);
+							for (let pill of props.items) {
+								let element = document.getElementById(pill.id);
 
 								if (!element) {
 									continue;
@@ -38,7 +38,7 @@ export function PillsSelect<T extends { id: string; name: string }>(
 							target.setAttribute('aria-pressed', String(nextState));
 
 							let targetItem = props.items.find(
-								(item) => item.id === target.id,
+								(pill) => pill.id === target.id,
 							);
 
 							props.onSelect(nextState ? targetItem : undefined);

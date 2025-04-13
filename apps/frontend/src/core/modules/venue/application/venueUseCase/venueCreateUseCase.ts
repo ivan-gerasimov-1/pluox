@@ -14,7 +14,7 @@ export class VenueCreateUseCase implements IVenueCreateUseCase {
 		private readonly temporal: ITemporal,
 	) {}
 
-	async execute(venueCreateDTO: TVenueCreateDTO): Promise<void> {
+	public execute(venueCreateDTO: TVenueCreateDTO): void {
 		let venue = this.createVenue(venueCreateDTO);
 
 		this.venueRepository.save(venue);

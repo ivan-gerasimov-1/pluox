@@ -18,7 +18,7 @@ export function CategoryPills(props: TCategoryPillsProps) {
 			categoryQueryService.getAll({
 				useWeights: true,
 			}),
-		[],
+		[categoryQueryService],
 	);
 
 	return (

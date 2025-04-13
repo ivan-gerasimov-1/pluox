@@ -47,7 +47,7 @@ export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 		let item = this.store.get(id);
 
 		if (!item) {
-			return;
+			return undefined;
 		}
 
 		let newItem = {

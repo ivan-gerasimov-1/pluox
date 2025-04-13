@@ -8,6 +8,7 @@ export class DatabaseCollectionCacheDecorator
 	private readonly DEFAULT_ID = 'data';
 
 	private isCacheComplete: boolean;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private cache: Map<string, any>;
 
 	constructor(decoratee: IDatabaseCollection) {
@@ -95,6 +96,7 @@ export class DatabaseCollectionCacheDecorator
 		this.clearCache();
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private writeCache(id: string, payload: any): void {
 		this.cache.set(id, payload);
 	}

@@ -11,7 +11,7 @@ export type TAmountInputProps = {
 	onChange(value: string): void;
 };
 
-export function _AmountInput(props: TAmountInputProps) {
+export function AmountInputV2(props: TAmountInputProps) {
 	let [amount, setAmount] = useState<string>(props.amount);
 
 	let intlService = useService(EServiceToken.INTL_SERVICE);

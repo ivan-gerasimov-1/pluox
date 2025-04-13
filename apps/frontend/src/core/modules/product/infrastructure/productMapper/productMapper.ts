@@ -4,8 +4,6 @@ import type { IProduct } from '@root/core/modules/product/domain/productEntity/t
 import type { IProductMapper } from '@root/core/modules/product/infrastructure/productMapper/types';
 
 export class ProductMapper implements IProductMapper {
-	constructor() {}
-
 	public toDTO(entity: Product): TProductDTO {
 		return {
 			id: entity.id,
