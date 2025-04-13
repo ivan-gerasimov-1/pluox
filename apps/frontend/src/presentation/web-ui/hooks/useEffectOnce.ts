@@ -11,5 +11,5 @@ export function useEffectOnce(callback: () => void): void {
 		isRun.current = true;
 
 		callback();
-	}, []);
+	}, [callback]);
 }

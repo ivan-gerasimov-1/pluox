@@ -11,7 +11,7 @@ type TVenuePillsProps = {
 
 export function VenuePills(props: TVenuePillsProps) {
 	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
-	let venues = useMemo(() => venueQueryService.getAll(), []);
+	let venues = useMemo(() => venueQueryService.getAll(), [venueQueryService]);
 
 	return (
 		<PillsSelect
