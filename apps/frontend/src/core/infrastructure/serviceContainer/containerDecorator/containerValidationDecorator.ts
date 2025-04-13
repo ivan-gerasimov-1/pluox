@@ -36,10 +36,10 @@ export class ContainerValidationDecorator extends ContainerDecorator {
 				this.validateClassProvider(provider);
 			}
 
-			/** @todo №1 */
-			if (provider.useFactory && false) {
-				this.validateFactoryProvider(provider);
-			}
+			/** @todo LV-103 */
+			// if (provider.useFactory) {
+			// 	this.validateFactoryProvider(provider);
+			// }
 		}
 	}
 
@@ -95,13 +95,14 @@ export class ContainerValidationDecorator extends ContainerDecorator {
 
 		/** @todo №2 */
 		for (let paramName of paramNames) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			if (!(instance as any)[paramName]) {
 				throw new InvalidProviderConfigurationError(provider.token, paramName);
 			}
 		}
 	}
 
-	private validateFactoryProvider(provider: IServiceProvider): void {
+	private validateFactoryProvider(): void {
 		throw new NotImplementedError();
 	}
 }

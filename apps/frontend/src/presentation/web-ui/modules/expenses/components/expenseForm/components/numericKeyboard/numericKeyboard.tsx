@@ -6,15 +6,6 @@ const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 
 type TDigit = (typeof DIGITS)[number];
 
-function isNumber(value: unknown): value is number {
-	const result = Number.parseInt(
-		// @ts-expect-error
-		value,
-	);
-
-	return !Number.isNaN(result);
-}
-
 function isDigit(value: string | number): value is TDigit {
 	const possibleDigit = Number.parseInt(
 		// @ts-expect-error
@@ -41,6 +32,7 @@ function isSeparator(value: string): value is TSeparator {
 }
 
 type TNumericKeyboardProps = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	value: any;
 	onClick(value: TDigit | TSeparator, type: 'digit' | 'separator'): void;
 };

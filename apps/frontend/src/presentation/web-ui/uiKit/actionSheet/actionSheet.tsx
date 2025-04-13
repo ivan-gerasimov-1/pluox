@@ -32,7 +32,13 @@ export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 
 	let [dragStart, setDragStart] = useState(0);
 
-	function closeActionSheet(event: React.MouseEvent<any, MouseEvent>) {
+	function closeActionSheet(
+		event: React.MouseEvent<
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			any,
+			MouseEvent
+		>,
+	) {
 		if (props.onClose) {
 			props.onClose();
 		}

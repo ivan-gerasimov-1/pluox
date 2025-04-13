@@ -33,9 +33,6 @@ import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dial
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Header } from '@root/presentation/web-ui/uiKit/header/header';
-import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
-import { ScreenBody } from '@root/presentation/web-ui/uiKit/screen/screenBody';
 
 import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 
@@ -105,7 +102,7 @@ export function SettingsScreen() {
 		mutationFn: async (payload: Partial<TAppConfig>) => {
 			updateAppConfig(payload);
 		},
-		onSuccess: async (data, variables) => {
+		onSuccess: async () => {
 			let queryKey = [APP_CONFIG_QUERY];
 
 			/** @todo #1 */

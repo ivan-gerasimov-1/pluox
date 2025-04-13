@@ -19,7 +19,14 @@ export function useLoginForm() {
 
 	let { pending, setPending } = usePending();
 
-	async function onSubmit(payload: Record<string, any>) {
+	async function onSubmit(payload: {
+		email: {
+			value: string;
+		};
+		password: {
+			value: string;
+		};
+	}) {
 		let email = payload.email.value;
 		let password = payload.password.value;
 
@@ -113,10 +120,10 @@ export function LogInForm() {
 	);
 }
 
-function Form(
+function Form<T>(
 	props: React.PropsWithChildren<{
 		name: string;
-		onSubmit: (payload: Record<string, any>) => void;
+		onSubmit: (payload: T) => void;
 	}>,
 ) {
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
