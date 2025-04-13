@@ -24,7 +24,7 @@ export class CurrencyRateDataSource
 
 	public exists(currency: TCurrency): boolean {
 		try {
-			return !!this.findById(currency);
+			return Boolean(this.findById(currency));
 		} catch (error) {
 			if (error instanceof CurrencyRatesNotAvailableError) {
 				return false;

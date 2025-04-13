@@ -27,15 +27,15 @@ export class ExpenseGroupingService implements IExpenseGroupingService {
 		}
 
 		return Object.keys(groups)
-			.sort((a: string, b: string): -1 | 0 | 1 => {
-				const left = Number.parseInt(a, 10);
-				const right = Number.parseInt(b, 10);
+			.sort((firstValue: string, secondValue: string): -1 | 0 | 1 => {
+				let first = Number.parseInt(firstValue, 10);
+				let second = Number.parseInt(secondValue, 10);
 
-				if (left < right) {
+				if (first < second) {
 					return 1;
 				}
 
-				if (left > right) {
+				if (first > second) {
 					return -1;
 				}
 

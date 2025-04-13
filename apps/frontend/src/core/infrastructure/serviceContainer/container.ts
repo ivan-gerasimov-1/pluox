@@ -78,6 +78,7 @@ export class Container implements IContainer {
 
 		if (provider.useClass) {
 			let deps = (provider.deps || []).map((dep) => this.get(dep));
+
 			return new provider.useClass(...deps) as T;
 		}
 

@@ -28,8 +28,6 @@ export function SignUpScreen() {
 
 			await authService.signUp(email, password);
 			navigation.loginPage();
-		} catch (error) {
-			console.log(error);
 		} finally {
 			await delay(500);
 			setPending(false);
@@ -69,12 +67,12 @@ export function SignUpScreen() {
 				</label>
 
 				<div className={styles.inputGroup}>
-					{!pending ? (
+					{pending ? (
+						<div>Регистрация…</div>
+					) : (
 						<button type="submit" className={styles.submitButton}>
 							Зарегистрироваться
 						</button>
-					) : (
-						<div>Регистрация…</div>
 					)}
 				</div>
 			</form>

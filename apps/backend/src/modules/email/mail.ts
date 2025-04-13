@@ -44,6 +44,7 @@ export class Mail {
 				() => {
 					socket.write(this.#wrapSocketMessage(`EHLO ${this.server.host}`));
 
+					// eslint-disable-next-line no-console
 					console.log('CONNECTED');
 					resolve(socket);
 				},
@@ -64,6 +65,7 @@ export class Mail {
 						reject(error);
 					}
 
+					// eslint-disable-next-line no-console
 					console.log('AUTHENTICATED');
 					resolve();
 				},
@@ -105,6 +107,7 @@ export class Mail {
 						reject(error);
 					}
 
+					// eslint-disable-next-line no-console
 					console.log('EMAIL SENT');
 
 					resolve();

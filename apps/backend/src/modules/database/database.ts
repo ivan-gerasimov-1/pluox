@@ -39,6 +39,7 @@ export function initializeDatabase(
 			)
 		`);
 	} catch (error) {
+		// eslint-disable-next-line no-console
 		console.log(error);
 	}
 

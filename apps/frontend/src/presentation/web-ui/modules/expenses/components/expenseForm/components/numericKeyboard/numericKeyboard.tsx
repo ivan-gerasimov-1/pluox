@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import styles from './numericKeyboard.module.css';
 
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
@@ -11,6 +9,7 @@ function isDigit(value: string | number): value is TDigit {
 		/** @todo Remove @ts-expect-error */
 		// @ts-expect-error | FIX
 		value,
+		10,
 	);
 
 	if (Number.isNaN(possibleDigit)) {
@@ -58,10 +57,6 @@ export function NumericKeyboard(props: TNumericKeyboardProps) {
 
 		throw new Error(`Unknown input type: ${value}`);
 	}
-
-	useEffect(() => {
-		console.log(props.value);
-	}, [props.value]);
 
 	return (
 		<div>

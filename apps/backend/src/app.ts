@@ -64,10 +64,10 @@ app
 				modifiedAt: z.string().datetime(),
 			}),
 		),
-		async (c) => {
-			let payload = c.req.valid('json');
+		async (ctx) => {
+			let payload = ctx.req.valid('json');
 
-			let existingUser = await env(c)
+			let existingUser = await env(ctx)
 				.DB //
 				.prepare('SELECT * FROM users WHERE email = ?')
 				.bind(payload.email)
@@ -77,7 +77,7 @@ app
 				}>();
 
 			if (existingUser) {
-				return c.json({
+				return ctx.json({
 					error: {
 						code: EResponseCode.CONFLICT,
 						message: 'User already exists',
@@ -95,7 +95,7 @@ app
 				modifiedAt: payload.modifiedAt,
 			};
 
-			let result = await env(c)
+			let result = await env(ctx)
 				.DB //
 				.prepare(
 					'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)',
@@ -104,7 +104,7 @@ app
 				.run();
 
 			if (!result.success) {
-				return c.json({
+				return ctx.json({
 					error: {
 						code: EResponseCode.INTERNAL_SERVER_ERROR,
 						message: 'Unable to create new user',
@@ -113,16 +113,16 @@ app
 			}
 
 			await setSignedCookie(
-				c,
-				env(c).AUTH_COOKIE_NAME,
+				ctx,
+				env(ctx).AUTH_COOKIE_NAME,
 				await sign(
 					{
 						id: user.id,
 						email: user.email,
 					},
-					env(c).JWT_TOKEN_SECRET,
+					env(ctx).JWT_TOKEN_SECRET,
 				),
-				env(c).AUTH_COOKIE_SECRET,
+				env(ctx).AUTH_COOKIE_SECRET,
 				{
 					httpOnly: true,
 					secure: true,
@@ -130,7 +130,7 @@ app
 				},
 			);
 
-			return c.json({
+			return ctx.json({
 				id: user.id,
 				email: user.email,
 			});
@@ -145,10 +145,10 @@ app
 				password: z.string().nonempty(),
 			}),
 		),
-		async (c) => {
-			let payload = c.req.valid('json');
+		async (ctx) => {
+			let payload = ctx.req.valid('json');
 
-			let user = await env(c)
+			let user = await env(ctx)
 				.DB //
 				.prepare('SELECT * FROM users WHERE email = ?')
 				.bind(payload.email)
@@ -159,7 +159,7 @@ app
 				}>();
 
 			if (!user || !comparePasswordHash(payload.password, user.password)) {
-				return c.json(
+				return ctx.json(
 					{
 						error: {
 							message: 'Please ensure both email and password are correct',
@@ -170,16 +170,16 @@ app
 			}
 
 			await setSignedCookie(
-				c,
-				env(c).AUTH_COOKIE_NAME,
+				ctx,
+				env(ctx).AUTH_COOKIE_NAME,
 				await sign(
 					{
 						id: user.id,
 						email: user.email,
 					},
-					env(c).JWT_TOKEN_SECRET,
+					env(ctx).JWT_TOKEN_SECRET,
 				),
-				env(c).AUTH_COOKIE_SECRET,
+				env(ctx).AUTH_COOKIE_SECRET,
 				{
 					httpOnly: true,
 					secure: true,
@@ -187,33 +187,33 @@ app
 				},
 			);
 
-			return c.json({
+			return ctx.json({
 				id: user.id,
 				email: user.email,
 			});
 		},
 	)
-	.post('/logout', async (c) => {
-		deleteCookie(c, env(c).AUTH_COOKIE_NAME);
+	.post('/logout', async (ctx) => {
+		deleteCookie(ctx, env(ctx).AUTH_COOKIE_NAME);
 
-		return c.json({
+		return ctx.json({
 			status: 'success',
 		});
 	})
-	.use('/users/*', (c, next) => {
+	.use('/users/*', (ctx, next) => {
 		const jwtMiddleware = jwt({
-			secret: env(c).JWT_TOKEN_SECRET,
+			secret: env(ctx).JWT_TOKEN_SECRET,
 			cookie: {
-				key: env(c).AUTH_COOKIE_NAME,
-				secret: env(c).AUTH_COOKIE_SECRET,
+				key: env(ctx).AUTH_COOKIE_NAME,
+				secret: env(ctx).AUTH_COOKIE_SECRET,
 			},
 		});
-		return jwtMiddleware(c, next);
+		return jwtMiddleware(ctx, next);
 	})
-	.get('/users/me', (c) => {
-		let jwtPayload = c.get('jwtPayload');
+	.get('/users/me', (ctx) => {
+		let jwtPayload = ctx.get('jwtPayload');
 
-		return c.json({
+		return ctx.json({
 			id: jwtPayload.id,
 			email: jwtPayload.email,
 		});
@@ -225,7 +225,7 @@ app
 	 *   - timestamp {number} - Unix timestamp of the exchange rates data
 	 *   - base {string} - Base currency code (typically USD)
 	 *   - rates {Object} - Exchange rates for supported currencies
-	 * 
+	 *
 	 * @example
 	 * // Response example:
 	 * {
@@ -239,26 +239,26 @@ app
 	 *     "THB": 34.1
 	 *   }
 	 * }
-	 * 
+	 *
 	 * @error {500} Internal Server Error - Returns when API call fails
 	 * @note Data is cached in Cloudflare KV with key format: currencies_rates_YYYY-MM-DD
 	 * @note Supported currencies: GEL, RUB, USD, EUR, THB
 	 */
-	.get('/currencies', async (c) => {
+	.get('/currencies', async (ctx) => {
 		const SUPPORTED_CURRENCIES = ['GEL', 'RUB', 'USD', 'EUR', 'THB'];
 
 		let currentDate = new Date().toISOString().split('T')[0];
 		let KV_KEY = `currencies_rates_${currentDate}`;
 
 		try {
-			let cachedData = await env(c).CURRENCIES_KV.get(KV_KEY, 'json');
+			let cachedData = await env(ctx).CURRENCIES_KV.get(KV_KEY, 'json');
 
 			if (cachedData) {
-				return c.json(cachedData);
+				return ctx.json(cachedData);
 			}
 
 			let url = new URL(
-				`${env(c).APP_OPEN_EXCHANGE_RATES_API_URL}/latest.json`,
+				`${env(ctx).APP_OPEN_EXCHANGE_RATES_API_URL}/latest.json`,
 			);
 
 			url.searchParams.set('prettyprint', '0');
@@ -266,7 +266,7 @@ app
 
 			let response = await fetch(url.toString(), {
 				headers: {
-					Authorization: `Token ${env(c).APP_OPEN_EXCHANGE_RATES_API_KEY}`,
+					Authorization: `Token ${env(ctx).APP_OPEN_EXCHANGE_RATES_API_KEY}`,
 				},
 			});
 
@@ -284,13 +284,11 @@ app
 				rates: responseData.rates,
 			};
 
-			await env(c).CURRENCIES_KV.put(KV_KEY, JSON.stringify(result));
+			await env(ctx).CURRENCIES_KV.put(KV_KEY, JSON.stringify(result));
 
-			return c.json(result);
+			return ctx.json(result);
 		} catch (error) {
-			console.error('Error fetching currency rates:', error);
-
-			return c.json(
+			return ctx.json(
 				{
 					error: {
 						code: EResponseCode.INTERNAL_SERVER_ERROR,

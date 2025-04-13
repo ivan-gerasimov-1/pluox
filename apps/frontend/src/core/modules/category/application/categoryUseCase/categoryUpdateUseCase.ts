@@ -3,8 +3,6 @@ import type { ICategoryUpdateUseCase } from '@root/core/modules/category/applica
 import type { TCategoryUpdateDTO } from '@root/core/modules/category/application/dto/categoryDTO';
 
 export class CategoryUpdateUseCase implements ICategoryUpdateUseCase {
-	constructor() {}
-
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public execute(id: Id, categoryUpdateDTO: TCategoryUpdateDTO): void {
 		throw new Error('Not Implemented');

@@ -10,7 +10,7 @@ import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/di
 export function useDialog() {
 	let client = useDialogClient();
 
-	let dialog = useMemo(
+	let dialogApi = useMemo(
 		() => ({
 			render: <TProps, TClosePayload>(
 				component: TDialogComponent<TProps, TClosePayload>,
@@ -31,5 +31,5 @@ export function useDialog() {
 		[client],
 	);
 
-	return dialog;
+	return dialogApi;
 }

@@ -8,7 +8,9 @@ export function createScopedTranslateFunction<TScope extends TBaseScope>(
 	scope: Record<TLocaleCode, TScope>,
 	localeCode: TLocaleCode,
 ): TScopedTranslateFunction<TScope> {
-	return function <TKey extends keyof TScope>(key: TKey): TScope[TKey] {
+	return function scopedTranslateFunction<TKey extends keyof TScope>(
+		key: TKey,
+	): TScope[TKey] {
 		return scope[localeCode][key];
 	};
 }

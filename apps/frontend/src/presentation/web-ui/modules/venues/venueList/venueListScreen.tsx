@@ -12,7 +12,14 @@ export function VenueListScreen() {
 	return (
 		<>
 			<AppLink to={EAppPath.VENUES_CREATE}>
-				<Button onClick={() => {}} size="m" isWide>
+				<Button
+					onClick={() =>
+						// eslint-disable-next-line no-empty-function
+						{}
+					}
+					size="m"
+					isWide
+				>
 					New
 				</Button>
 			</AppLink>

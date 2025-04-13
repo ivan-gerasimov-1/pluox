@@ -85,7 +85,7 @@ export class ContainerValidationDecorator extends ContainerDecorator {
 		const paramNames =
 			provider.useClass
 				.toString()
-				.match(/constructor\s*\(([^)]*)\)/)?.[1]
+				.match(/constructor\s*\(([^)]*)\)/u)?.[1]
 				?.split(',')
 				.map((param) => param.trim())
 				.filter(Boolean) ?? [];

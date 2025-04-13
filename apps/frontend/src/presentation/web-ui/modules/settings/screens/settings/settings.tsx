@@ -292,6 +292,7 @@ export function SettingsScreen() {
 						<IconButton
 							iconName={EIconName.Settings}
 							onClick={() => {
+								// eslint-disable-next-line no-alert
 								window.alert('Not Implemented');
 							}}
 						/>
@@ -353,6 +354,7 @@ export function SettingsScreen() {
 						<IconButton
 							iconName={EIconName.Settings}
 							onClick={() => {
+								// eslint-disable-next-line no-alert
 								window.alert('Not Implemented');
 							}}
 						/>
@@ -413,11 +415,7 @@ export function UserNameEditActionSheet(
 					type="text"
 					className={styles.budgetInput}
 					value={userName}
-					onChange={(event) => {
-						let userName = event.target.value;
-
-						setUserName(userName);
-					}}
+					onChange={(event) => setUserName(event.target.value)}
 				/>
 			</div>
 
@@ -462,9 +460,9 @@ export function BudgetEditActionsSheet(
 					className={styles.budgetInput}
 					value={budget ?? 0}
 					onChange={(event) => {
-						let budget = Number.parseInt(event.target.value);
+						let budgetValue = Number.parseInt(event.target.value, 10);
 
-						setBudget(budget);
+						setBudget(budgetValue);
 					}}
 				/>
 			</div>

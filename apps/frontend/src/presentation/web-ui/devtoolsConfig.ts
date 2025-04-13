@@ -16,6 +16,7 @@ export async function createDevToolsConfig(): Promise<TDevToolsConfig> {
 
 	let config: TDevToolsConfig = {
 		reactScan: {
+			// eslint-disable-next-line no-empty-function
 			scan: () => {},
 		},
 		reactQuery: {
@@ -30,6 +31,7 @@ export async function createDevToolsConfig(): Promise<TDevToolsConfig> {
 	}
 
 	if (isReactQueryDevtoolsEnabled) {
+		// eslint-disable-next-line no-shadow
 		let { ReactQueryDevtools } = await import('@tanstack/react-query-devtools');
 
 		config.reactQuery.ReactQueryDevtools = ReactQueryDevtools;

@@ -2,6 +2,8 @@ import { EKey } from '@root/presentation/web-ui/modules/expenses/components/expe
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
+/** @todo Find out if possible to use "function getAllowedSymbols(…) { … }" */
+// eslint-disable-next-line func-style
 export const getAllowedSymbols = () => {
 	let intlService = resolveService(EServiceToken.INTL_SERVICE);
 

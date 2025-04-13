@@ -325,6 +325,7 @@ function main() {
 		.addRoute('/login', postSignIn)
 		.addRoute('/signup', postSignUp);
 
+	// eslint-disable-next-line complexity
 	const server = createServer(async (request, response) => {
 		try {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -414,8 +415,6 @@ function main() {
 			);
 
 			if (result?.error) {
-				console.log(result.error);
-
 				sendJsonResponse(response, result.error?.code, {
 					message: result.error?.message,
 				});
@@ -445,8 +444,6 @@ function main() {
 				responsePayload,
 			);
 		} catch (error) {
-			console.log(error);
-
 			let errorCode =
 				/** @todo Fix @ts-expect-error */
 				// @ts-expect-error | FIX
@@ -469,6 +466,7 @@ function main() {
 				port: appConfig.port,
 			},
 			() => {
+				// eslint-disable-next-line no-console
 				console.log(
 					`Server is running on port ${appConfig.port}, host ${appConfig.host}`,
 				);
@@ -480,6 +478,7 @@ function main() {
 				// @ts-expect-error | FIX
 				error.code === 'EADDRINUSE'
 			) {
+				// eslint-disable-next-line no-console
 				console.error('[Error] Address in use:', appConfig.port);
 				db.close();
 				server.close();
@@ -496,13 +495,16 @@ main();
 
 function createShutdownHandler(server: Server, database: Database) {
 	return function handleShutdown(signalName: EProcessEvent) {
+		// eslint-disable-next-line no-console
 		console.log('Server is shutting down due to:', signalName);
 
 		server.close(() => {
+			// eslint-disable-next-line no-console
 			console.log('Server closed');
 
 			database.close();
 
+			// eslint-disable-next-line no-console
 			console.log('Database closed');
 
 			process.exit(0);

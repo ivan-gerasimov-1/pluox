@@ -34,8 +34,8 @@ export class Cookie implements ICookie {
 		rawCookie
 			.split(';')
 			.filter(Boolean)
-			.reduce((state, cookie) => {
-				let [key, value] = cookie.split('=');
+			.reduce((state, cookieItem) => {
+				let [key, value] = cookieItem.split('=');
 
 				state.set(key, {
 					value,
@@ -61,6 +61,7 @@ export class Cookie implements ICookie {
 
 			cookie += `${key}=${container.value}; `;
 
+			// eslint-disable-next-line no-shadow
 			for (let [key, value] of Object.entries(container)) {
 				if (key === 'value') {
 					continue;
@@ -78,7 +79,6 @@ export class Cookie implements ICookie {
 			return null;
 		}
 
-		// @ts-expect-error | We know that cookie has value
 		return this.#cookie.get(key).value;
 	}
 
@@ -87,7 +87,6 @@ export class Cookie implements ICookie {
 			return null;
 		}
 
-		// @ts-expect-error | We know that cookie has value
 		return this.#cookie.get(key);
 	}
 

@@ -36,8 +36,6 @@ export function useLoginForm() {
 			await authService.logIn(email, password);
 
 			navigation.mainPage();
-		} catch (error) {
-			console.log(error);
 		} finally {
 			await delay(500);
 
@@ -79,16 +77,19 @@ export function LogInForm() {
 				</FormGroup>
 
 				<FormGroup>
-					{!pending ? (
+					{pending ? (
+						<div>Загрузка…</div>
+					) : (
 						<Button
 							type="submit"
 							className={styles.submitButton}
-							onClick={() => {}}
+							onClick={() =>
+								// eslint-disable-next-line no-empty-function
+								{}
+							}
 						>
 							Войти
 						</Button>
-					) : (
-						<div>Загрузка…</div>
 					)}
 				</FormGroup>
 
