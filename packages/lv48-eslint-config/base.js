@@ -1,11 +1,11 @@
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
-export const base = [pluginJs.configs.all, ...tseslint.configs.recommended];
+export const base = [pluginJs.configs.all, ...tseslint.configs.strict];
 
 export const rules = {
 	rules: {
-		// ESLint
+		// ESLint All
 		// off
 		'arrow-body-style': 'off',
 		'capitalized-comments': 'off',
@@ -29,8 +29,10 @@ export const rules = {
 		'prefer-promise-reject-errors': 'off',
 
 		// off, to verify
-		'sort-imports': 'off',
 		'consistent-return': 'off',
+		'prefer-named-capture-group': 'off',
+		'prefer-object-has-own': 'off',
+		'sort-imports': 'off',
 		'no-magic-numbers': [
 			'off',
 			{
@@ -40,8 +42,6 @@ export const rules = {
 				enforceConst: true,
 			},
 		],
-		'prefer-object-has-own': 'off',
-		'prefer-named-capture-group': 'off',
 
 		// warn
 		'func-names': 'warn',
@@ -83,10 +83,22 @@ export const rules = {
 			},
 		],
 
-		// TypeScript
+		// TypeScript Strict
 		'@typescript-eslint/no-empty-object-type': 'off',
+		'@typescript-eslint/unified-signatures': 'off',
+		'@typescript-eslint/no-extraneous-class': 'off',
+		'@typescript-eslint/no-invalid-void-type': 'off',
 
-		'@typescript-eslint/ban-ts-comment': 'warn',
 		'@typescript-eslint/no-unused-vars': 'warn',
+		'@typescript-eslint/ban-ts-comment': [
+			'warn',
+			{
+				minimumDescriptionLength: 3,
+				'ts-check': false,
+				'ts-expect-error': 'allow-with-description',
+				'ts-ignore': true,
+				'ts-nocheck': true,
+			},
+		],
 	},
 };
