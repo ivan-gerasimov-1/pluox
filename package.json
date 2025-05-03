@@ -9,7 +9,7 @@
 		"packages/*"
 	],
 	"scripts": {
-		"dependencies:update": "ncu --deep -u -x globals,@lv48/eslint-config"
+		"dependencies:update": "ncu --deep -u -x globals,@lv48/eslint-config,ionicons"
 	},
 	"devDependencies": {
 		"npm-check-updates": "18.0.1"
