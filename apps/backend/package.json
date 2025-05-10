@@ -51,15 +51,15 @@
 	"dependencies": {
 		"@hono/node-server": "1.14.1",
 		"@hono/zod-validator": "0.5.0",
-		"better-sqlite3": "11.9.1",
-		"hono": "4.7.8",
-		"zod": "3.24.3"
+		"better-sqlite3": "11.10.0",
+		"hono": "4.7.9",
+		"zod": "3.24.4"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20250503.0",
+		"@cloudflare/workers-types": "4.20250510.0",
 		"@lv48/eslint-config": "",
 		"@types/better-sqlite3": "7.6.13",
-		"@types/node": "22.15.3",
-		"wrangler": "4.14.1"
+		"@types/node": "22.15.17",
+		"wrangler": "4.14.4"
 	}
 }
