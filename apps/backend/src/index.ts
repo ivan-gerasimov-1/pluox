@@ -50,7 +50,7 @@ export type TEndpointControllerDependencies = {
 
 function getIndex() {
 	return {
-		message: 'Savee API',
+		message: 'Pluox API',
 	};
 }
 
@@ -82,7 +82,7 @@ async function postMailTest(
 			heading: 'Добро пожаловать!',
 			body: `
 				<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
-				<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
+				<a href="https://pluox.app/auth/confirm?token=abc123">Подтвердить</a>
 			`,
 		}),
 	});
@@ -260,13 +260,13 @@ async function postSignUp(
 	mail.send({
 		from: appConfig.email.from,
 		to: body.email,
-		subject: 'Добро пожаловать в Savee',
+		subject: 'Добро пожаловать в Pluox',
 		message: createEmailTemplate({
-			title: 'Добро пожаловать в Savee',
+			title: 'Добро пожаловать в Pluox',
 			heading: 'Добро пожаловать!',
 			body: `
 				<p>Пожалуйста, подтвердите свою регистрацию, нажав на ссылку ниже:</p>
-				<a href="https://savee.app/auth/confirm?token=abc123">Подтвердить</a>
+				<a href="https://pluox.app/auth/confirm?token=abc123">Подтвердить</a>
 			`,
 		}),
 	});
