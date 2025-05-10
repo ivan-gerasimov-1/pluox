@@ -54,7 +54,7 @@ export function LogInForm() {
 
 	return (
 		<div className={styles.formContainer}>
-			<h1 className={styles.title}>Savee</h1>
+			<h1 className={styles.title}>Pluox</h1>
 
 			<Form name="signIn" onSubmit={onSubmit}>
 				<FormGroup>

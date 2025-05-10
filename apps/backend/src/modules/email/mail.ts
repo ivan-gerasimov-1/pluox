@@ -90,11 +90,11 @@ export class Mail {
 
 					'DATA',
 
-					`From: "Savee Team" <${params.from}>`,
+					`From: "Pluox Team" <${params.from}>`,
 					`To: <${params.to}>`,
 					`Subject: ${params.subject}`,
 					`Date: ${datetime}`,
-					`Message-ID: <${messageId}@savee.app>`,
+					`Message-ID: <${messageId}@pluox.app>`,
 					'MIME-Version: 1.0',
 					'Content-Type: text/html; charset=UTF-8',
 					'',

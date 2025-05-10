@@ -36,7 +36,7 @@ export function SignUpScreen() {
 
 	return (
 		<div className={styles.formContainer}>
-			<h1>Savee</h1>
+			<h1>Pluox</h1>
 
 			<h2>Создать аккаунт</h2>
 
