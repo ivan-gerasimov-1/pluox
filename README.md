@@ -56,8 +56,8 @@ apps/
 1. **Клонирование репозитория**
 
 ```bash
-git clone https://github.com/your-username/savee.git
-cd savee
+git clone https://github.com/ivan-gerasimov-1/pluox.git
+cd pluox
 ```
 
 2. **Настройка Node.js**
