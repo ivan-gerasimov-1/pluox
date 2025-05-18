@@ -95,7 +95,7 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SSH_KEY: 'op://Pluox/GitHub Actions/private key'
+          SSH_KEY: 'op://LV48/GitHub Actions/private key'
           HOST: 'op://Pluox/Main Server/Host'
           USER: 'op://Pluox/Main Server/Username'
 
