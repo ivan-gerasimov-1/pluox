@@ -57,8 +57,8 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: 'op://Pluox/Cloudflare Wrangler/Account ID'
-          CLOUDFLARE_API_TOKEN: 'op://Pluox/Cloudflare Wrangler/API Token'
+          CLOUDFLARE_ACCOUNT_ID: 'op://LV48/Cloudflare Wrangler/Account ID'
+          CLOUDFLARE_API_TOKEN: 'op://LV48/Cloudflare Wrangler/API Token'
           ENV_FILE: 'op://Pluox/pluox-api_cloudflare_env/.dev.vars.production'
           JWT_TOKEN_SECRET: 'op://Pluox/pluox-api_cloudflare_env/JWT_TOKEN_SECRET.production'
           AUTH_COOKIE_SECRET: 'op://Pluox/pluox-api_cloudflare_env/AUTH_COOKIE_SECRET.production'
