@@ -44,7 +44,11 @@ export const app = new Hono<{
 app
 	.use(
 		cors({
-			origin: ['https://savee.gerasimov.dev'],
+			origin: [
+				'https://pluox.gerasimov.dev',
+				/** @deprecated */
+				'https://savee.gerasimov.dev',
+			],
 			credentials: true,
 		}),
 	) //
