@@ -8,7 +8,7 @@
 		{
 			"name": "UI",
 			"type": "node-terminal",
-			"command": "npm --workspace=@savee/frontend start",
+			"command": "npm --workspace=@pluox/frontend start",
 			"request": "launch",
 			"cwd": "${workspaceFolder}/apps/frontend",
 			"sourceMaps": true,
@@ -27,7 +27,7 @@
 		// API
 		{
 			"name": "API (Cloudflare)",
-			"command": "npm --workspace=@savee/backend run start:cf",
+			"command": "npm --workspace=@pluox/backend run start:cf",
 			"request": "launch",
 			"type": "node-terminal",
 			"cwd": "${workspaceFolder}/apps/backend",
@@ -37,7 +37,7 @@
 
 		// Website
 		{
-			"command": "npm --workspace=@savee/website run start",
+			"command": "npm --workspace=@pluox/website run start",
 			"name": "Website",
 			"request": "launch",
 			"type": "node-terminal",

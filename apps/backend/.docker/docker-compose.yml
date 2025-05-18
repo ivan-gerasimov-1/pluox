@@ -3,8 +3,8 @@ networks:
     external: true
 
 services:
-  savee-api:
-    image: ghcr.io/ivan-gerasimov-1/savee/savee-api:stable
+  pluox-api:
+    image: ghcr.io/ivan-gerasimov-1/pluox/pluox-api:stable
     ports:
       - '3000:3000'
     # volumes:

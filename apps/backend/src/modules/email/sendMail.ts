@@ -29,7 +29,7 @@ export async function sendEmail(to, subject, message) {
 					`To: <${to}>`,
 					`Subject: ${subject}`,
 					`Date: ${new Date().toUTCString()}`,
-					`Message-ID: <${crypto.randomUUID()}@savee.app>`,
+					`Message-ID: <${crypto.randomUUID()}@pluox.app>`,
 					'MIME-Version: 1.0',
 					'Content-Type: text/html; charset=UTF-8',
 					'',

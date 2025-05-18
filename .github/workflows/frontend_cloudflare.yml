@@ -3,9 +3,9 @@ name: Frontend (Cloudflare)
 env:
   NODE_VERSION: 22.14.0
 
-  NPM_BUILD_CMD: --workspace=@savee/frontend run build
-  NPM_LINT_CMD: --workspace=@savee/frontend run lint
-  NPM_TEST_CMD: --workspace=@savee/frontend run test
+  NPM_BUILD_CMD: --workspace=@pluox/frontend run build
+  NPM_LINT_CMD: --workspace=@pluox/frontend run lint
+  NPM_TEST_CMD: --workspace=@pluox/frontend run test
 
   ARTIFACTS_DIR: apps/frontend/build
   ARTIFACT_NAME: build

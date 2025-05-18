@@ -3,7 +3,7 @@ name: Backend (Cloudflare)
 env:
   NODE_VERSION: 22.14.0
 
-  NPM_LINT_CMD: --workspace=@savee/backend run lint
+  NPM_LINT_CMD: --workspace=@pluox/backend run lint
 
 on:
   workflow_dispatch:
