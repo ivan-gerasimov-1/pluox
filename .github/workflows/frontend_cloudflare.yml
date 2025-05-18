@@ -41,7 +41,7 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          ENV_FILE: 'op://Savee/savee_frontend_env/.env.production'
+          ENV_FILE: 'op://Savee/pluox_frontend_env/.env.production'
 
       - name: Install dependencies
         run: |
