@@ -51,7 +51,7 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          ENV_FILE: 'op://Savee/pluox-api_backend-lite_env/.env.production'
+          ENV_FILE: 'op://Pluox/pluox-api_backend-lite_env/.env.production'
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
@@ -95,9 +95,9 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SSH_KEY: 'op://Savee/GitHub Actions/private key'
-          HOST: 'op://Savee/Main Server/Host'
-          USER: 'op://Savee/Main Server/Username'
+          SSH_KEY: 'op://Pluox/GitHub Actions/private key'
+          HOST: 'op://Pluox/Main Server/Host'
+          USER: 'op://Pluox/Main Server/Username'
 
       - name: Setup SSH
         run: |
