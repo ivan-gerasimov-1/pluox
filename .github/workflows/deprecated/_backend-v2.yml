@@ -2,7 +2,7 @@
 name: DEPRECATED_Backend CI/CD V2
 
 env:
-  NODE_VERSION: 22.14.0
+  NODE_VERSION: 22.15.1
 
   NPM_BUILD_CMD: --workspace=@pluox/backend run build
 
