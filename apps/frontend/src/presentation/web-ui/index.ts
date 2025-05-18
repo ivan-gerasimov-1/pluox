@@ -20,7 +20,7 @@ export async function createUI(
 	let devtoolsConfig = await createDevToolsConfig();
 
 	let appElement = new UIElement(window.document, {
-		id: 'saveeRoot',
+		id: 'pluoxRoot',
 	});
 	let uiElement = new UIElement(window.document, {
 		id: 'loader',

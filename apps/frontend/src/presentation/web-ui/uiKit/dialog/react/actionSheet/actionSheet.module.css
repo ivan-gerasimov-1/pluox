@@ -1,10 +1,10 @@
-:global(.savee-action-sheet-open) {
+:global(.action-sheet-open) {
 	transform: scale(0.95);
 
 	transition: transform var(--transition-100);
 }
 
-:global(.savee-action-sheet-before-close) {
+:global(.action-sheet-before-close) {
 	transform: scale(1);
 
 	transition: transform var(--transition-100);

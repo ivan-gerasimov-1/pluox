@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 
 export function useAppScale(isScaled: boolean): void {
 	useEffect(() => {
-		let appRoot = window.document.getElementById('saveeRoot');
+		let appRoot = window.document.getElementById('pluoxRoot');
 
 		let animationFrame = requestAnimationFrame(() => {
 			if (isScaled) {
-				appRoot?.classList.add('savee-action-sheet-open');
+				appRoot?.classList.add('action-sheet-open');
 			} else {
-				appRoot?.classList.add('savee-action-sheet-before-close');
+				appRoot?.classList.add('action-sheet-before-close');
 			}
 		});
 
@@ -17,8 +17,8 @@ export function useAppScale(isScaled: boolean): void {
 
 			requestAnimationFrame(() => {
 				appRoot?.classList.remove(
-					'savee-action-sheet-open',
-					'savee-action-sheet-before-close',
+					'action-sheet-open',
+					'action-sheet-before-close',
 				);
 			});
 		};
