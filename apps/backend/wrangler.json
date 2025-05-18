@@ -10,8 +10,8 @@
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_id": "db0da424-580c-44c5-8c6a-244f0c8eb0d9",
-			"database_name": "savee"
+			"database_id": "bd07d79d-f9d7-446c-b6a1-6369f13f2421",
+			"database_name": "pluox"
 		}
 	],
 	"kv_namespaces": [

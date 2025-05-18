@@ -37,7 +37,7 @@
 		"db:delete": "rm -rf ./db.sqlite",
 		"db:migrate": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/migrate.ts",
 		"___D1___": "",
-		"d1:init": "wrangler d1 execute savee -j --local --file .db/schema.sql",
+		"d1:init": "wrangler d1 execute pluox -j --local --file .db/schema.sql",
 		"__lint__": "",
 		"lint": "eslint ./src"
 	},
