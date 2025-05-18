@@ -44,7 +44,7 @@
 	"imports": {
 		"#app/*": "./src/*.ts"
 	},
-	"packageManager": "npm@11.3.0",
+	"packageManager": "npm@11.4.0",
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"description": "Savee app backend (lite)",
@@ -52,14 +52,14 @@
 		"@hono/node-server": "1.14.1",
 		"@hono/zod-validator": "0.5.0",
 		"better-sqlite3": "11.10.0",
-		"hono": "4.7.9",
+		"hono": "4.7.10",
 		"zod": "3.24.4"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20250510.0",
+		"@cloudflare/workers-types": "4.20250517.0",
 		"@lv48/eslint-config": "",
 		"@types/better-sqlite3": "7.6.13",
-		"@types/node": "22.15.17",
-		"wrangler": "4.14.4"
+		"@types/node": "22.15.18",
+		"wrangler": "4.15.2"
 	}
 }
