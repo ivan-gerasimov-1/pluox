@@ -1,7 +1,7 @@
 name: Backend (Cloudflare)
 
 env:
-  NODE_VERSION: 22.15.1
+  NODE_VERSION: 24.1.0
 
   NPM_LINT_CMD: --workspace=@pluox/backend run lint
 
