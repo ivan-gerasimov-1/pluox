@@ -68,7 +68,7 @@ jobs:
           path: ${{ env.ARTIFACTS_DIR }}
 
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build
     if: github.ref == 'refs/heads/main'
 
