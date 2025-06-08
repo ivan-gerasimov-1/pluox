@@ -24,7 +24,7 @@ export function runMigrations() {
 	let persistedMigrations = readMigrationsFromStorage();
 	let migrations = registerMigrations({
 		_addLocaleToUser_: addLocaleToUser,
-		// _removeSaveeMigrations_: removeSaveeMigrations,
+		_removeSaveeMigrations_: removeSaveeMigrations,
 		// _moveSaveeDataToPluox_: moveSaveeDataToPluox,
 	});
 
