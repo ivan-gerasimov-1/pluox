@@ -8,10 +8,14 @@ import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
  */
 export function runMigrations() {
 	let persistedMigrations = JSON.parse(
-		window.localStorage.getItem('@savee/migrations') ?? '{}',
+		/** @todo LV-114 | Remove @savee/migrations backwards compatibility */
+		(window.localStorage.getItem('@savee/migrations') ||
+			window.localStorage.getItem('@pluox/migrations')) ??
+			'{}',
 	);
 	let migrations = registerMigrations({
 		_addLocaleToUser_: addLocaleToUser,
+		_removeSaveeMigrations_: removeSaveeMigrations,
 	});
 
 	for (let [id, migrationFn] of migrations) {
@@ -30,7 +34,7 @@ export function runMigrations() {
 	}
 
 	window.localStorage.setItem(
-		'@savee/migrations',
+		'@pluox/migrations',
 		JSON.stringify(persistedMigrations),
 	);
 }
@@ -81,4 +85,8 @@ export function addLocaleToUser(): void {
 			locale: ELocaleCode.RU_RU,
 		});
 	}
+}
+
+export function removeSaveeMigrations(): void {
+	window.localStorage.removeItem('@savee/migrations');
 }
