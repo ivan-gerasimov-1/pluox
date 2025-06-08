@@ -104,6 +104,9 @@ export function removeSaveeMigrations(): void {
 }
 
 export function moveSaveeDataToPluox(): void {
+	const PREV_NAMESPACE_NAME = '@savee';
+	const NEXT_NAMESPACE_NAME = '@pluox';
+
 	let storageKeys: string[] = [];
 
 	// eslint-disable-next-line no-plusplus
@@ -114,7 +117,10 @@ export function moveSaveeDataToPluox(): void {
 			break;
 		}
 
-		if (storageKey.includes('@pluox') || !storageKey.includes('@savee')) {
+		if (
+			storageKey.includes(NEXT_NAMESPACE_NAME) ||
+			!storageKey.includes(PREV_NAMESPACE_NAME)
+		) {
 			continue;
 		}
 
@@ -128,7 +134,10 @@ export function moveSaveeDataToPluox(): void {
 			continue;
 		}
 
-		let newStorageKey = storageKey.replace('@savee', '@pluox');
+		let newStorageKey = storageKey.replace(
+			PREV_NAMESPACE_NAME,
+			NEXT_NAMESPACE_NAME,
+		);
 
 		window.localStorage.setItem(newStorageKey, storageValue);
 		window.localStorage.removeItem(storageKey);
