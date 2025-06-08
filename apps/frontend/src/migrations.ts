@@ -25,6 +25,7 @@ export function runMigrations() {
 	let migrations = registerMigrations({
 		_addLocaleToUser_: addLocaleToUser,
 		// _removeSaveeMigrations_: removeSaveeMigrations,
+		// _moveSaveeDataToPluox_: moveSaveeDataToPluox,
 	});
 
 	for (let [id, migrationFn] of migrations) {
@@ -100,4 +101,36 @@ export function addLocaleToUser(): void {
 
 export function removeSaveeMigrations(): void {
 	window.localStorage.removeItem('@savee/migrations');
+}
+
+export function moveSaveeDataToPluox(): void {
+	let storageKeys: string[] = [];
+
+	// eslint-disable-next-line no-plusplus
+	for (let idx = 0; idx < window.localStorage.length; idx++) {
+		let storageKey = window.localStorage.key(idx);
+
+		if (storageKey === null) {
+			break;
+		}
+
+		if (storageKey.includes('@pluox') || !storageKey.includes('@savee')) {
+			continue;
+		}
+
+		storageKeys.push(storageKey);
+	}
+
+	for (let storageKey of storageKeys) {
+		let storageValue = window.localStorage.getItem(storageKey);
+
+		if (storageValue === null) {
+			continue;
+		}
+
+		let newStorageKey = storageKey.replace('@savee', '@pluox');
+
+		window.localStorage.setItem(newStorageKey, storageValue);
+		window.localStorage.removeItem(storageKey);
+	}
 }
