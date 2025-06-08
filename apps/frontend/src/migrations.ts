@@ -2,17 +2,26 @@ import { resolveService } from '@root/core/infrastructure/serviceContainer/resol
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
+type TMigrationDTO = {
+	id: string;
+	success: boolean;
+	createdAt: string;
+};
+
+type TMigrationCreateDTO = {
+	id: string;
+	success: boolean;
+	createdAt?: string;
+};
+
+type TMigrations = Record<string, TMigrationDTO>;
+
 /**
  * @todo
  * 1. Handle migration failures
  */
 export function runMigrations() {
-	let persistedMigrations = JSON.parse(
-		/** @todo LV-114 | Remove @savee/migrations backwards compatibility */
-		(window.localStorage.getItem('@savee/migrations') ||
-			window.localStorage.getItem('@pluox/migrations')) ??
-			'{}',
-	);
+	let persistedMigrations = readMigrationsFromStorage();
 	let migrations = registerMigrations({
 		_addLocaleToUser_: addLocaleToUser,
 		_removeSaveeMigrations_: removeSaveeMigrations,
@@ -33,10 +42,20 @@ export function runMigrations() {
 		persistedMigrations[migrationDTO.id] = migrationDTO;
 	}
 
-	window.localStorage.setItem(
-		'@pluox/migrations',
-		JSON.stringify(persistedMigrations),
+	saveMigrationsToStorage(persistedMigrations);
+}
+
+/** @todo LV-114 | Remove @savee/migrations backwards compatibility */
+function readMigrationsFromStorage(): TMigrations {
+	return JSON.parse(
+		(window.localStorage.getItem('@savee/migrations') ||
+			window.localStorage.getItem('@pluox/migrations')) ??
+			'{}',
 	);
+}
+
+function saveMigrationsToStorage(migrations: TMigrations) {
+	window.localStorage.setItem('@pluox/migrations', JSON.stringify(migrations));
 }
 
 function registerMigrations(
@@ -51,15 +70,7 @@ function registerMigrations(
 	return migrations;
 }
 
-function createMigrationDTO(createDTO: {
-	id: string;
-	success: boolean;
-	createdAt?: string;
-}): {
-	id: string;
-	success: boolean;
-	createdAt: string;
-} {
+function createMigrationDTO(createDTO: TMigrationCreateDTO): TMigrationDTO {
 	return {
 		id: createDTO.id,
 		success: createDTO.success,
