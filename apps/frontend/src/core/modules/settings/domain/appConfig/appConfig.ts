@@ -15,6 +15,7 @@ export class AppConfig implements IAppConfig {
 		this.#locale = locale;
 		this.#currency = currency;
 		this.#availableCurrencies = [
+			ECurrency.RSD,
 			ECurrency.GEL,
 			ECurrency.RUB,
 			ECurrency.USD,

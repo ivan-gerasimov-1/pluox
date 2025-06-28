@@ -54,7 +54,7 @@ export function ExpenseNew() {
 	});
 
 	/** @todo Make configurable */
-	let defaultCurrency = ECurrency.GEL;
+	let defaultCurrency = ECurrency.RSD;
 
 	return (
 		<ExpenseForm
