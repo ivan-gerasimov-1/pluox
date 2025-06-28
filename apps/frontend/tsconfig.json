@@ -3,7 +3,7 @@
 		"target": "ES2021",
 		"moduleResolution": "node",
 		"module": "ES2022",
-		"lib": ["ES2021", "DOM"],
+		"lib": ["ES2022", "DOM"],
 
 		"baseUrl": "./",
 		"outDir": "build/",
