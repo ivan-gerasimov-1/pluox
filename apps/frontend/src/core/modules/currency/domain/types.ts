@@ -6,6 +6,7 @@ export const ECurrency = {
 	RUB: 'RUB',
 	USD: 'USD',
 	THB: 'THB',
+	RSD: 'RSD',
 } as const;
 
 export type TCurrency = TValueOf<typeof ECurrency>;

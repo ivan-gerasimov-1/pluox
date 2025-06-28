@@ -249,7 +249,7 @@ app
 	 * @note Supported currencies: GEL, RUB, USD, EUR, THB
 	 */
 	.get('/currencies', async (ctx) => {
-		const SUPPORTED_CURRENCIES = ['GEL', 'RUB', 'USD', 'EUR', 'THB'];
+		const SUPPORTED_CURRENCIES = ['GEL', 'RUB', 'USD', 'EUR', 'THB', 'RSD'];
 
 		let currentDate = new Date().toISOString().split('T')[0];
 		let KV_KEY = `currencies_rates_${currentDate}`;
