@@ -28,6 +28,7 @@ export class VenueCreateUseCase implements IVenueCreateUseCase {
 			id,
 			name: venueCreateDTO.name,
 			categoryId: venueCreateDTO.categoryId,
+			isArchived: venueCreateDTO.isArchived,
 			createdAt: currentDate,
 			modifiedAt: currentDate,
 		});

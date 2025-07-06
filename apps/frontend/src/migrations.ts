@@ -25,6 +25,7 @@ export function runMigrations() {
 	let migrations = registerMigrations({
 		_addLocaleToUser_: addLocaleToUser,
 		_removeSaveeMigrations_: removeSaveeMigrations,
+		_addIsArchivedFieldToVenues: addIsArchivedFieldToVenues,
 		// _moveSaveeDataToPluox_: moveSaveeDataToPluox,
 	});
 
@@ -101,6 +102,26 @@ export function addLocaleToUser(): void {
 
 export function removeSaveeMigrations(): void {
 	window.localStorage.removeItem('@savee/migrations');
+}
+
+export function addIsArchivedFieldToVenues() {
+	const venueDataSource = resolveService(EServiceToken.VENUE_DATASOURCE);
+
+	const venues = venueDataSource.findAll();
+
+	if (!venues) {
+		return;
+	}
+
+	for (let venue of venues) {
+		if (venue.isArchived !== undefined) {
+			continue;
+		}
+
+		venueDataSource.update(venue.id, {
+			isArchived: false,
+		});
+	}
 }
 
 export function moveSaveeDataToPluox(): void {

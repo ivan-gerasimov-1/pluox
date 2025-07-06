@@ -9,6 +9,7 @@ export class VenueMapper implements IVenueMapper {
 			id: venue.id,
 			name: venue.name,
 			categoryId: venue.categoryId,
+			isArchived: venue.isArchived,
 			createdAt: venue.createdAt,
 			modifiedAt: venue.modifiedAt,
 		};
@@ -19,6 +20,7 @@ export class VenueMapper implements IVenueMapper {
 			venueDTO.id,
 			venueDTO.name,
 			venueDTO.categoryId,
+			venueDTO.isArchived,
 			venueDTO.createdAt,
 			venueDTO.modifiedAt,
 		);
