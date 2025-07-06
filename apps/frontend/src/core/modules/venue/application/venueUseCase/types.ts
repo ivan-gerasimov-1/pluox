@@ -4,6 +4,7 @@ import type { TVenueCreateDTO } from '@root/core/modules/venue/application/dto/v
 export interface IVenueUseCase {
 	create(venueCreateDTO: TVenueCreateDTO): void;
 	remove(id: Id): void;
+	archive(id: Id): void;
 }
 
 export interface IVenueCreateUseCase extends IUseCase {
