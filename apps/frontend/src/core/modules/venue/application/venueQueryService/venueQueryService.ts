@@ -9,14 +9,16 @@ export class VenueQueryService implements IVenueQueryService {
 		private readonly venueMapper: IVenueMapper,
 	) {}
 
-	public getAll(): TVenueDTO[] {
+	public getAll(options: { archived?: boolean } = {}): TVenueDTO[] {
 		let result = this.venueRepository.findMany();
 
 		if (result.total === 0) {
 			return [];
 		}
 
-		return result.items.map((item) => this.venueMapper.toDTO(item));
+		return result.items
+			.filter((venue) => venue.isArchived === Boolean(options.archived))
+			.map((item) => this.venueMapper.toDTO(item));
 	}
 
 	public getById(id: string): TVenueDTO | null {
