@@ -44,7 +44,7 @@ export class Venue extends Entity implements IVenue {
 	}
 
 	public set isArchived(isArchived: boolean) {
-		this.isArchived = isArchived;
+		this.#isArchived = isArchived;
 
 		this.touch();
 	}
