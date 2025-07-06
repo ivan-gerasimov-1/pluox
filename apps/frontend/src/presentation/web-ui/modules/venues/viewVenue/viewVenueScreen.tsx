@@ -4,6 +4,7 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 
 import {
+	useVenueArchiveMutation,
 	useVenueQueryById,
 	useVenueRemoveMutation,
 } from '@root/presentation/web-ui/modules/venues/venues.query';
@@ -11,11 +12,14 @@ import {
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 
 import styles from './viewVenueScreen.module.css';
+import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
+import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 
 export function VenueViewScreen() {
 	let navigation = useAppNavigation();
 	let { venue } = useScreenLoader();
 
+	let venueArchiveMutation = useVenueArchiveMutation();
 	let venueRemoveMutation = useVenueRemoveMutation();
 
 	if (!venue) {
@@ -57,14 +61,27 @@ export function VenueViewScreen() {
 
 				<Button
 					onClick={() => {
-						venueRemoveMutation.mutate(venue.id);
+						venueArchiveMutation.mutate(venue.id);
 					}}
 					size="m"
 					color="red"
 					isWide
 				>
-					Удалить
+					Архивировать
 				</Button>
+
+				<div>
+					<Button
+						onClick={() => {
+							venueRemoveMutation.mutate(venue.id);
+						}}
+						size="m"
+						color="red"
+						isWide
+					>
+						<Icon name={EIconName.Trash} />
+					</Button>
+				</div>
 			</div>
 		</>
 	);

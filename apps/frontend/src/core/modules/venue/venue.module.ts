@@ -4,6 +4,7 @@ import {
 } from '@root/core/infrastructure/serviceContainer/types';
 
 import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
+import { VenueArchiveUseCase } from '@root/core/modules/venue/application/venueUseCase/venueArchiveUseCase';
 import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
 import { VenueDeleteUseCase } from '@root/core/modules/venue/application/venueUseCase/venueDeleteUseCase';
 import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
@@ -38,6 +39,7 @@ export const venueModule: IModule = {
 			deps: [
 				EServiceToken.VENUE_CREATE_USE_CASE,
 				EServiceToken.VENUE_DELETE_USE_CASE,
+				EServiceToken.VENUE_ARCHIVE_USE_CASE,
 			],
 		},
 		{
@@ -53,6 +55,11 @@ export const venueModule: IModule = {
 		{
 			token: EServiceToken.VENUE_DELETE_USE_CASE,
 			useClass: VenueDeleteUseCase,
+			deps: [EServiceToken.VENUE_REPOSITORY],
+		},
+		{
+			token: EServiceToken.VENUE_ARCHIVE_USE_CASE,
+			useClass: VenueArchiveUseCase,
 			deps: [EServiceToken.VENUE_REPOSITORY],
 		},
 	],

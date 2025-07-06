@@ -9,14 +9,18 @@ import type { Id } from '@root/core/domain/types';
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
 export const VENUE_QUERY_LIST = 'venueQueryList';
+export const VENUE_QUERY_LIST_ARCHVIED = 'venueQueryListArchived';
 export const VENUE_QUERY_BY_ID = 'venueQueryById';
 
 function createVenueQuery(type: 'list'): () => [];
+function createVenueQuery(type: 'list:archived'): () => [];
 function createVenueQuery(type: 'oneById'): (id: Id) => [];
-function createVenueQuery(type: 'list' | 'oneById') {
+function createVenueQuery(type: 'list' | 'list:archived' | 'oneById') {
 	switch (type) {
 		case 'list':
 			return () => [VENUE_QUERY_LIST];
+		case 'list:archived':
+			return () => [VENUE_QUERY_LIST_ARCHVIED];
 		case 'oneById':
 			return (id: Id) => [VENUE_QUERY_BY_ID, id];
 		default: {
@@ -36,6 +40,30 @@ export function useVenueListQuery(): (TVenueDTO & {
 		queryKey: createVenueQuery('list')(),
 		queryFn: () => {
 			let venues = venueQueryService.getAll();
+
+			return venues.map((venue) => ({
+				...venue,
+				categoryName: categoryService.getCategoryName(venue.categoryId),
+			}));
+		},
+		refetchOnMount: false,
+	});
+
+	return data ?? [];
+}
+
+export function useVenueListArchivedQuery(): (TVenueDTO & {
+	categoryName: string;
+})[] {
+	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
+
+	let { data } = useQuery({
+		queryKey: createVenueQuery('list:archived')(),
+		queryFn: () => {
+			let venues = venueQueryService.getAll({
+				archived: true,
+			});
 
 			return venues.map((venue) => ({
 				...venue,
@@ -84,6 +112,34 @@ export function useVenueRemoveMutation() {
 	let result = useMutation({
 		mutationFn: async (id: Id) => {
 			return venueUseCase.remove(id);
+		},
+		onSuccess: async (_, id) => {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: createVenueQuery('list')(),
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: createVenueQuery('oneById')(id),
+					refetchType: 'all',
+				}),
+			]);
+
+			navigation.venueListPage();
+		},
+	});
+
+	return result;
+}
+
+export function useVenueArchiveMutation() {
+	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
+	let queryClient = useQueryClient();
+	let navigation = useAppNavigation();
+
+	let result = useMutation({
+		mutationFn: async (id: Id) => {
+			return venueUseCase.archive(id);
 		},
 		onSuccess: async (_, id) => {
 			await Promise.all([

@@ -68,6 +68,7 @@ import type {
 import type { ICategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/types';
 import type { IVenueQueryService } from '@root/core/modules/venue/application/venueQueryService/types';
 import type {
+	IVenueArchiveUseCase,
 	IVenueCreateUseCase,
 	IVenueDeleteUseCase,
 	IVenueUseCase,
@@ -184,6 +185,7 @@ export const EServiceToken = {
 	VENUE_USE_CASE: 'VenueUseCase',
 	VENUE_CREATE_USE_CASE: 'VenueCreateUseCase',
 	VENUE_DELETE_USE_CASE: 'VenueDeleteUseCase',
+	VENUE_ARCHIVE_USE_CASE: 'VenueArchiveUseCase',
 
 	LAUNCH_CONTROL: 'LaunchControl',
 
@@ -269,6 +271,7 @@ export interface IServiceMap {
 	[EServiceToken.VENUE_USE_CASE]: IVenueUseCase;
 	[EServiceToken.VENUE_CREATE_USE_CASE]: IVenueCreateUseCase;
 	[EServiceToken.VENUE_DELETE_USE_CASE]: IVenueDeleteUseCase;
+	[EServiceToken.VENUE_ARCHIVE_USE_CASE]: IVenueArchiveUseCase;
 
 	[EServiceToken.APP_CONFIG_DATASOURCE]: IAppConfigDataSource;
 	[EServiceToken.APP_CONFIG_SERVICE]: IAppConfigService;
