@@ -70,16 +70,18 @@ export function VenueViewScreen() {
 					Архивировать
 				</Button>
 
-				<Button
-					onClick={() => {
-						venueRemoveMutation.mutate(venue.id);
-					}}
-					size="m"
-					color="red"
-					isWide
-				>
-					<Icon name={EIconName.Trash} />
-				</Button>
+				<div>
+					<Button
+						onClick={() => {
+							venueRemoveMutation.mutate(venue.id);
+						}}
+						size="m"
+						color="red"
+						isWide
+					>
+						<Icon name={EIconName.Trash} />
+					</Button>
+				</div>
 			</div>
 		</>
 	);
