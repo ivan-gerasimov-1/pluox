@@ -4,4 +4,5 @@ import type { Id } from '@root/core/domain/types';
 export interface IVenue extends IEntity {
 	name: string;
 	categoryId: Id;
+	isArchived: boolean;
 }

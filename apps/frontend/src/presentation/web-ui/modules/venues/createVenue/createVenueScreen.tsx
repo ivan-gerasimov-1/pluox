@@ -24,6 +24,7 @@ export function CreateVenueScreen() {
 		venueUseCase.create({
 			name: venueData.venueName,
 			categoryId: venueData.category,
+			isArchived: false,
 		});
 	});
 

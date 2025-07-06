@@ -6,11 +6,13 @@ import type { IVenue } from '@root/core/modules/venue/domain/venueEntity/types';
 export class Venue extends Entity implements IVenue {
 	#name: string;
 	#categoryId: Id;
+	#isArchived: boolean;
 
 	constructor(
 		id: Id,
 		name: string,
 		categoryId: Id,
+		isArchived: boolean,
 		createdAt: TISODateString,
 		modifiedAt?: TISODateString,
 	) {
@@ -18,6 +20,7 @@ export class Venue extends Entity implements IVenue {
 
 		this.#name = name;
 		this.#categoryId = categoryId;
+		this.#isArchived = isArchived;
 	}
 
 	public get name(): string {
@@ -38,5 +41,15 @@ export class Venue extends Entity implements IVenue {
 		this.#categoryId = categoryId;
 
 		this.touch();
+	}
+
+	public set isArchived(isArchived: boolean) {
+		this.isArchived = isArchived;
+
+		this.touch();
+	}
+
+	public get isArchived(): boolean {
+		return this.#isArchived;
 	}
 }
