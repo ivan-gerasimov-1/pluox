@@ -103,3 +103,31 @@ export function useVenueRemoveMutation() {
 
 	return result;
 }
+
+export function useVenueArchiveMutation() {
+	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
+	let queryClient = useQueryClient();
+	let navigation = useAppNavigation();
+
+	let result = useMutation({
+		mutationFn: async (id: Id) => {
+			return venueUseCase.archive(id);
+		},
+		onSuccess: async (_, id) => {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: createVenueQuery('list')(),
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: createVenueQuery('oneById')(id),
+					refetchType: 'all',
+				}),
+			]);
+
+			navigation.venueListPage();
+		},
+	});
+
+	return result;
+}
