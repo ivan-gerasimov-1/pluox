@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 import {
 	EXPENSES_QUERY_DAILY_AMOUNT,
@@ -18,7 +17,6 @@ import {
 } from '@root/presentation/web-ui/modules/settings/appConfig.query';
 
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 
 import styles from './main.module.css';
@@ -98,15 +96,13 @@ export function MainScreen() {
 
 	return (
 		<>
-			<AppLink to={EAppPath.EXPENSES}>
-				<div className={styles.title}>
-					<span>
-						{intlService.formatCurrency(monthlyTotal, {
-							hideDecimal: true,
-						})}
-					</span>
-				</div>
-			</AppLink>
+			<div className={styles.title}>
+				<span>
+					{intlService.formatCurrency(monthlyTotal, {
+						hideDecimal: true,
+					})}
+				</span>
+			</div>
 
 			<div className={styles.cardContainer}>
 				<div className={cls(styles.card, styles.todayCard)}>
