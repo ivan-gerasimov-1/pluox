@@ -4,10 +4,16 @@ import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types'
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
 import type { Id } from '@root/core/domain/types';
-import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
+import type {
+	TVenueCreateDTO,
+	TVenueDTO,
+} from '@root/core/modules/venue/application/dto/venueDTO';
 
 import { createVenueQuery } from '@root/presentation/web-ui/modules/venues/queries/createVenueQuery';
-import { invalidateVenueOneByIdQuery } from '@root/presentation/web-ui/modules/venues/queries/invalidateVenueQuery';
+import {
+	invalidateVenueListQuery,
+	invalidateVenueOneByIdQuery,
+} from '@root/presentation/web-ui/modules/venues/queries/invalidateVenueQuery';
 
 export function useVenueListQuery(options?: {
 	archived?: boolean;
@@ -85,6 +91,28 @@ export function useVenueOneByIdQuery(
 	});
 
 	return data ?? null;
+}
+
+export function useVenueCreateMutation(options?: { onSuccess?: () => void }) {
+	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
+	let queryClient = useQueryClient();
+
+	let result = useMutation({
+		mutationFn: async (venueData: TVenueCreateDTO) => {
+			return venueUseCase.create(venueData);
+		},
+		onSuccess: async () => {
+			await invalidateVenueListQuery({
+				queryClient,
+			});
+
+			if (options?.onSuccess) {
+				options.onSuccess();
+			}
+		},
+	});
+
+	return result;
 }
 
 export function useVenueRemoveMutation(options: { onSuccess?: () => void }) {
