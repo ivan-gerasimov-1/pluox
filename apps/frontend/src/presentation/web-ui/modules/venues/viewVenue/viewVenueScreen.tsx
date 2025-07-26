@@ -1,5 +1,7 @@
 import { useParams } from 'react-router';
 
+import { Id } from '@root/core/domain/types';
+
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 
@@ -9,11 +11,14 @@ import {
 	useVenueRemoveMutation,
 } from '@root/presentation/web-ui/modules/venues/venues.query';
 
+import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
+
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 
-import styles from './viewVenueScreen.module.css';
-import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
+import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
+
+import styles from './viewVenueScreen.module.css';
 
 export function VenueViewScreen() {
 	let navigation = useAppNavigation();
@@ -88,16 +93,8 @@ export function VenueViewScreen() {
 }
 
 function useScreenLoader() {
-	let { id } = useParams();
+	let { id = INVALID_ID } = useParams<{ id: Id }>();
 
-	if (!id) {
-		return {
-			venue: null,
-		};
-	}
-
-	/** @todo LV-105 */
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	let venue = useVenueQueryById(id);
 
 	return {
