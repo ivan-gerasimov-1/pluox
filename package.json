@@ -9,9 +9,9 @@
 		"packages/*"
 	],
 	"scripts": {
-		"dependencies:update": "ncu --deep -u -x globals,@lv48/eslint-config,ionicons,vite"
+		"dependencies:update": "ncu --deep -u -x globals,@lv48/eslint-config,ionicons,vite,zod"
 	},
 	"devDependencies": {
-		"npm-check-updates": "18.0.1"
+		"npm-check-updates": "18.0.2"
 	}
 }
