@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+	type QueryClient,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from '@tanstack/react-query';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -111,16 +116,9 @@ export function useVenueRemoveMutation(options: { onSuccess?: () => void }) {
 			return venueUseCase.remove(id);
 		},
 		onSuccess: async (_, id) => {
-			await Promise.all([
-				queryClient.invalidateQueries({
-					queryKey: createVenueQuery('list')(),
-					refetchType: 'all',
-				}),
-				queryClient.invalidateQueries({
-					queryKey: createVenueQuery('one:id')(id),
-					refetchType: 'all',
-				}),
-			]);
+			await invalidateVenueOneByIdQuery(id, {
+				queryClient,
+			});
 
 			if (options.onSuccess) {
 				options.onSuccess();
@@ -140,16 +138,9 @@ export function useVenueArchiveMutation(options: { onSuccess?: () => void }) {
 			return venueUseCase.archive(id);
 		},
 		onSuccess: async (_, id) => {
-			await Promise.all([
-				queryClient.invalidateQueries({
-					queryKey: createVenueQuery('list')(),
-					refetchType: 'all',
-				}),
-				queryClient.invalidateQueries({
-					queryKey: createVenueQuery('one:id')(id),
-					refetchType: 'all',
-				}),
-			]);
+			await invalidateVenueOneByIdQuery(id, {
+				queryClient,
+			});
 
 			if (options.onSuccess) {
 				options.onSuccess();
@@ -158,4 +149,30 @@ export function useVenueArchiveMutation(options: { onSuccess?: () => void }) {
 	});
 
 	return result;
+}
+
+export function invalidateVenueListQuery({
+	queryClient,
+}: {
+	queryClient: QueryClient;
+}) {
+	return queryClient.invalidateQueries({
+		queryKey: createVenueQuery('list')(),
+		refetchType: 'all',
+	});
+}
+
+export function invalidateVenueOneByIdQuery(
+	id: Id,
+	{ queryClient }: { queryClient: QueryClient },
+) {
+	return Promise.all([
+		invalidateVenueListQuery({
+			queryClient,
+		}),
+		queryClient.invalidateQueries({
+			queryKey: createVenueQuery('one:id')(id),
+			refetchType: 'all',
+		}),
+	]);
 }
