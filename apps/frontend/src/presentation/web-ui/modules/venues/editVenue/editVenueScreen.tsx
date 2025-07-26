@@ -1,5 +1,9 @@
 import { useParams } from 'react-router';
 
+import { Id } from '@root/core/domain/types';
+
+import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
+
 import { useVenueQueryById } from '@root/presentation/web-ui/modules/venues/venues.query';
 
 export function EditVenueScreen() {
@@ -29,16 +33,8 @@ export function EditVenueScreen() {
 }
 
 function useScreenParams() {
-	let { id } = useParams();
+	let { id = INVALID_ID } = useParams<{ id: Id }>();
 
-	if (!id) {
-		return {
-			venue: null,
-		};
-	}
-
-	/** @todo LV-105 */
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	let venue = useVenueQueryById(id);
 
 	return {
