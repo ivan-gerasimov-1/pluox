@@ -7,7 +7,7 @@ import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation'
 
 import {
 	useVenueArchiveMutation,
-	useVenueQueryById,
+	useVenueOneByIdQuery,
 	useVenueRemoveMutation,
 } from '@root/presentation/web-ui/modules/venues/venues.query';
 
@@ -103,7 +103,7 @@ export function VenueViewScreen() {
 function useScreenLoader() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();
 
-	let venue = useVenueQueryById(id);
+	let venue = useVenueOneByIdQuery(id);
 
 	return {
 		venue,

@@ -4,7 +4,7 @@ import { Id } from '@root/core/domain/types';
 
 import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
 
-import { useVenueQueryById } from '@root/presentation/web-ui/modules/venues/venues.query';
+import { useVenueOneByIdQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
 
 export function EditVenueScreen() {
 	let { venue } = useScreenParams();
@@ -35,7 +35,7 @@ export function EditVenueScreen() {
 function useScreenParams() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();
 
-	let venue = useVenueQueryById(id);
+	let venue = useVenueOneByIdQuery(id);
 
 	return {
 		venue,

@@ -59,7 +59,7 @@ export function useVenueListArchivedQuery(): (TVenueDTO & {
 	return data ?? [];
 }
 
-export function useVenueQueryById(
+export function useVenueOneByIdQuery(
 	id: Id,
 ): (TVenueDTO & { categoryName: string }) | null {
 	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
