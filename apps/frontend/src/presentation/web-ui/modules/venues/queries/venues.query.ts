@@ -93,7 +93,9 @@ export function useVenueOneByIdQuery(
 	return data ?? null;
 }
 
-export function useVenueCreateMutation(options?: { onSuccess?: () => void }) {
+export function useVenueCreateMutation(options?: {
+	onSuccess?: (venueDto: TVenueDTO) => void;
+}) {
 	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
 	let queryClient = useQueryClient();
 
@@ -101,13 +103,13 @@ export function useVenueCreateMutation(options?: { onSuccess?: () => void }) {
 		mutationFn: async (venueData: TVenueCreateDTO) => {
 			return venueUseCase.create(venueData);
 		},
-		onSuccess: async () => {
+		onSuccess: async (venueDto: TVenueDTO) => {
 			await invalidateVenueListQuery({
 				queryClient,
 			});
 
 			if (options?.onSuccess) {
-				options.onSuccess();
+				options.onSuccess(venueDto);
 			}
 		},
 	});
