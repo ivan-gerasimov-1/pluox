@@ -32,7 +32,7 @@ export function VenueViewScreen() {
 	let venueRemoveMutation = useVenueRemoveMutation({
 		onSuccess: () => {
 			navigation.venueListPage();
-
+		},
 	});
 
 	if (!venue) {
