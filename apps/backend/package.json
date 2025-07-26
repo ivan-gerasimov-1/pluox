@@ -44,22 +44,22 @@
 	"imports": {
 		"#app/*": "./src/*.ts"
 	},
-	"packageManager": "npm@11.4.2",
+	"packageManager": "npm@11.5.1",
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"description": "Pluox app backend (lite)",
 	"dependencies": {
-		"@hono/node-server": "1.15.0",
-		"@hono/zod-validator": "0.7.0",
+		"@hono/node-server": "1.17.1",
+		"@hono/zod-validator": "0.7.2",
 		"better-sqlite3": "12.2.0",
-		"hono": "4.8.4",
+		"hono": "4.8.9",
 		"zod": "3.25.74"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20250705.0",
+		"@cloudflare/workers-types": "4.20250726.0",
 		"@lv48/eslint-config": "",
 		"@types/better-sqlite3": "7.6.13",
-		"@types/node": "24.0.10",
-		"wrangler": "4.23.0"
+		"@types/node": "24.1.0",
+		"wrangler": "4.26.0"
 	}
 }
