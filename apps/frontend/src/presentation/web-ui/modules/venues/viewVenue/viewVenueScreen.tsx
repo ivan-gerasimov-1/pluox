@@ -24,8 +24,16 @@ export function VenueViewScreen() {
 	let navigation = useAppNavigation();
 	let { venue } = useScreenLoader();
 
-	let venueArchiveMutation = useVenueArchiveMutation();
-	let venueRemoveMutation = useVenueRemoveMutation();
+	let venueArchiveMutation = useVenueArchiveMutation({
+		onSuccess: () => {
+			navigation.venueListPage();
+		},
+	});
+	let venueRemoveMutation = useVenueRemoveMutation({
+		onSuccess: () => {
+			navigation.venueListPage();
+
+	});
 
 	if (!venue) {
 		return 'Venue not found';

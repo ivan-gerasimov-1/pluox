@@ -3,8 +3,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-
 import type { Id } from '@root/core/domain/types';
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
@@ -104,10 +102,9 @@ export function useVenueQueryById(
 	return data ?? null;
 }
 
-export function useVenueRemoveMutation() {
+export function useVenueRemoveMutation(options: { onSuccess?: () => void }) {
 	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
 	let queryClient = useQueryClient();
-	let navigation = useAppNavigation();
 
 	let result = useMutation({
 		mutationFn: async (id: Id) => {
@@ -125,17 +122,18 @@ export function useVenueRemoveMutation() {
 				}),
 			]);
 
-			navigation.venueListPage();
+			if (options.onSuccess) {
+				options.onSuccess();
+			}
 		},
 	});
 
 	return result;
 }
 
-export function useVenueArchiveMutation() {
+export function useVenueArchiveMutation(options: { onSuccess?: () => void }) {
 	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
 	let queryClient = useQueryClient();
-	let navigation = useAppNavigation();
 
 	let result = useMutation({
 		mutationFn: async (id: Id) => {
@@ -153,7 +151,9 @@ export function useVenueArchiveMutation() {
 				}),
 			]);
 
-			navigation.venueListPage();
+			if (options.onSuccess) {
+				options.onSuccess();
+			}
 		},
 	});
 
