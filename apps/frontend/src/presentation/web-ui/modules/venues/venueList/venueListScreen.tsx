@@ -1,7 +1,7 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 import {
 	useVenueListArchivedQuery,
-	useVenueListQuery,
+	useVenueListUnarchivedQuery,
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
@@ -10,7 +10,7 @@ import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import styles from './venueListScreen.module.css';
 
 export function VenueListScreen() {
-	let venueList = useVenueListQuery();
+	let venueList = useVenueListUnarchivedQuery();
 	let venueListArchived = useVenueListArchivedQuery();
 
 	return (

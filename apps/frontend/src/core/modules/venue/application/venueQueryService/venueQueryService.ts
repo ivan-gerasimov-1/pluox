@@ -17,7 +17,13 @@ export class VenueQueryService implements IVenueQueryService {
 		}
 
 		return result.items
-			.filter((venue) => venue.isArchived === Boolean(options.archived))
+			.filter((venue) => {
+				if (options.archived === undefined) {
+					return true;
+				}
+
+				return venue.isArchived === options.archived;
+			})
 			.map((item) => this.venueMapper.toDTO(item));
 	}
 

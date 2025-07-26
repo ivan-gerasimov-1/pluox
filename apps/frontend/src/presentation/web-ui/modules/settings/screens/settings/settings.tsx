@@ -22,7 +22,7 @@ import {
 	updateUser,
 	USER_QUERY_BY_ID,
 } from '@root/presentation/web-ui/modules/settings/settings.query';
-import { useVenueListQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
+import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
@@ -72,7 +72,7 @@ export function SettingsScreen() {
 		// refetchOnMount: false,
 	});
 
-	let venueListQuery = useVenueListQuery();
+	let venueListQuery = useVenueListUnarchivedQuery();
 
 	let { mutate: mutateUser } = useMutation({
 		mutationFn: async (userUpdateDTO: TUserUpdateDTO) => {

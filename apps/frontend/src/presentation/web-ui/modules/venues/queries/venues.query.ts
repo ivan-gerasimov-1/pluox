@@ -9,16 +9,26 @@ import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDT
 import { createVenueQuery } from '@root/presentation/web-ui/modules/venues/queries/createVenueQuery';
 import { invalidateVenueOneByIdQuery } from '@root/presentation/web-ui/modules/venues/queries/invalidateVenueQuery';
 
-export function useVenueListQuery(): (TVenueDTO & {
+export function useVenueListQuery(options?: {
+	archived?: boolean;
+}): (TVenueDTO & {
 	categoryName: string;
 })[] {
 	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
+	let queryParams: {
+		archived?: boolean;
+	} = {};
+
+	if (options?.archived !== undefined) {
+		queryParams.archived = options.archived;
+	}
+
 	let { data } = useQuery({
-		queryKey: createVenueQuery('list'),
+		queryKey: createVenueQuery('list', queryParams),
 		queryFn: () => {
-			let venues = venueQueryService.getAll();
+			let venues = venueQueryService.getAll(queryParams);
 
 			return venues.map((venue) => ({
 				...venue,
@@ -31,28 +41,20 @@ export function useVenueListQuery(): (TVenueDTO & {
 	return data ?? [];
 }
 
+export function useVenueListUnarchivedQuery(): (TVenueDTO & {
+	categoryName: string;
+})[] {
+	return useVenueListQuery({
+		archived: false,
+	});
+}
+
 export function useVenueListArchivedQuery(): (TVenueDTO & {
 	categoryName: string;
 })[] {
-	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
-	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
-
-	let { data } = useQuery({
-		queryKey: createVenueQuery('list:archived'),
-		queryFn: () => {
-			let venues = venueQueryService.getAll({
-				archived: true,
-			});
-
-			return venues.map((venue) => ({
-				...venue,
-				categoryName: categoryService.getCategoryName(venue.categoryId),
-			}));
-		},
-		refetchOnMount: false,
+	return useVenueListQuery({
+		archived: true,
 	});
-
-	return data ?? [];
 }
 
 export function useVenueOneByIdQuery(

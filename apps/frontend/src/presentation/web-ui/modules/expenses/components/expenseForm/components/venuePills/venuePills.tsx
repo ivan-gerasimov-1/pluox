@@ -1,7 +1,4 @@
-import { useMemo } from 'react';
-
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { PillsSelect } from '@root/presentation/web-ui/uiKit/pillsSelect/pillsSelect';
 
@@ -10,8 +7,7 @@ type TVenuePillsProps = {
 };
 
 export function VenuePills(props: TVenuePillsProps) {
-	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
-	let venues = useMemo(() => venueQueryService.getAll(), [venueQueryService]);
+	let venues = useVenueListUnarchivedQuery();
 
 	return (
 		<PillsSelect
