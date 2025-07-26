@@ -1,5 +1,8 @@
 import type { Id } from '@root/core/domain/types';
-import type { TVenueCreateDTO } from '@root/core/modules/venue/application/dto/venueDTO';
+import type {
+	TVenueCreateDTO,
+	TVenueDTO,
+} from '@root/core/modules/venue/application/dto/venueDTO';
 import type {
 	IVenueArchiveUseCase,
 	IVenueCreateUseCase,
@@ -14,8 +17,8 @@ export class VenueUseCase implements IVenueUseCase {
 		private readonly venueArchiveUseCase: IVenueArchiveUseCase,
 	) {}
 
-	public create(venueCreateDTO: TVenueCreateDTO): void {
-		this.venueCreateUseCase.execute(venueCreateDTO);
+	public create(venueCreateDTO: TVenueCreateDTO): TVenueDTO {
+		return this.venueCreateUseCase.execute(venueCreateDTO);
 	}
 
 	public remove(id: Id): void {

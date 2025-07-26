@@ -1,14 +1,17 @@
 import type { Id, IUseCase } from '@root/core/domain/types';
-import type { TVenueCreateDTO } from '@root/core/modules/venue/application/dto/venueDTO';
+import type {
+	TVenueCreateDTO,
+	TVenueDTO,
+} from '@root/core/modules/venue/application/dto/venueDTO';
 
 export interface IVenueUseCase {
-	create(venueCreateDTO: TVenueCreateDTO): void;
+	create(venueCreateDTO: TVenueCreateDTO): TVenueDTO;
 	remove(id: Id): void;
 	archive(id: Id): void;
 }
 
 export interface IVenueCreateUseCase extends IUseCase {
-	execute(venueCreateDTO: TVenueCreateDTO): void;
+	execute(venueCreateDTO: TVenueCreateDTO): TVenueDTO;
 }
 
 export interface IVenueDeleteUseCase extends IUseCase {

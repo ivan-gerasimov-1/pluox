@@ -1,6 +1,9 @@
 import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
 import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { TVenueCreateDTO } from '@root/core/modules/venue/application/dto/venueDTO';
+import type {
+	TVenueCreateDTO,
+	TVenueDTO,
+} from '@root/core/modules/venue/application/dto/venueDTO';
 import type { IVenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/types';
 import type { IVenue } from '@root/core/modules/venue/domain/venueEntity/types';
 import type { IVenueRepository } from '@root/core/modules/venue/domain/venueRepository/types';
@@ -14,10 +17,12 @@ export class VenueCreateUseCase implements IVenueCreateUseCase {
 		private readonly temporal: ITemporal,
 	) {}
 
-	public execute(venueCreateDTO: TVenueCreateDTO): void {
+	public execute(venueCreateDTO: TVenueCreateDTO): TVenueDTO {
 		let venue = this.createVenue(venueCreateDTO);
 
 		this.venueRepository.save(venue);
+
+		return this.venueMapper.toDTO(venue);
 	}
 
 	private createVenue(venueCreateDTO: TVenueCreateDTO): IVenue {
