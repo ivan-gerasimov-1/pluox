@@ -1,9 +1,4 @@
-import {
-	type QueryClient,
-	useMutation,
-	useQuery,
-	useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -12,6 +7,7 @@ import type { Id } from '@root/core/domain/types';
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
 import { createVenueQuery } from '@root/presentation/web-ui/modules/venues/queries/createVenueQuery';
+import { invalidateVenueOneByIdQuery } from '@root/presentation/web-ui/modules/venues/queries/invalidateVenueQuery';
 
 export function useVenueListQuery(): (TVenueDTO & {
 	categoryName: string;
@@ -131,32 +127,4 @@ export function useVenueArchiveMutation(options: { onSuccess?: () => void }) {
 	});
 
 	return result;
-}
-
-export function invalidateVenueListQuery({
-	queryClient,
-}: {
-	queryClient: QueryClient;
-}) {
-	return queryClient.invalidateQueries({
-		queryKey: createVenueQuery('list'),
-		refetchType: 'all',
-	});
-}
-
-export function invalidateVenueOneByIdQuery(
-	id: Id,
-	{ queryClient }: { queryClient: QueryClient },
-) {
-	return Promise.all([
-		invalidateVenueListQuery({
-			queryClient,
-		}),
-		queryClient.invalidateQueries({
-			queryKey: createVenueQuery('one:id', {
-				id,
-			}),
-			refetchType: 'all',
-		}),
-	]);
 }
