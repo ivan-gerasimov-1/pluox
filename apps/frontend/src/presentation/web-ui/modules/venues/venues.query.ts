@@ -11,13 +11,15 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import type { Id } from '@root/core/domain/types';
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
-function createVenueQuery(type: 'list'): [];
-function createVenueQuery(type: 'list:archived'): [];
-function createVenueQuery(type: 'one:id', options: { id: Id }): [];
+type TVenueQueryType = 'list' | 'list:archived' | 'one:id';
+
+function createVenueQuery(type: 'list'): [TVenueQueryType];
+function createVenueQuery(type: 'list:archived'): [TVenueQueryType];
 function createVenueQuery(
-	type: 'list' | 'list:archived' | 'one:id',
-	options?: { id: Id },
-) {
+	type: 'one:id',
+	options: { id: Id },
+): [TVenueQueryType, Id];
+function createVenueQuery(type: TVenueQueryType, options?: { id: Id }) {
 	switch (type) {
 		case 'list':
 			return ['venue:list'];
