@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 type TVenueFormData = {
 	venueName: string;
@@ -12,16 +13,16 @@ export function CreateVenueScreen() {
 	let categoryQueryService = useService(EServiceToken.CATEGORY_QUERY_SERVICE);
 	let categories = categoryQueryService.getAll();
 
-	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
-
 	let {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<TVenueFormData>();
 
+	let venueCreateMutation = useVenueCreateMutation();
+
 	const onSubmit = handleSubmit(async (venueData: TVenueFormData) => {
-		venueUseCase.create({
+		venueCreateMutation.mutate({
 			name: venueData.venueName,
 			categoryId: venueData.category,
 			isArchived: false,
