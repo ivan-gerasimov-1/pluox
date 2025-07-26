@@ -11,28 +11,7 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import type { Id } from '@root/core/domain/types';
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
-type TVenueQueryType = 'list' | 'list:archived' | 'one:id';
-
-function createVenueQuery(type: 'list'): [TVenueQueryType];
-function createVenueQuery(type: 'list:archived'): [TVenueQueryType];
-function createVenueQuery(
-	type: 'one:id',
-	options: { id: Id },
-): [TVenueQueryType, Id];
-function createVenueQuery(type: TVenueQueryType, options?: { id: Id }) {
-	switch (type) {
-		case 'list':
-			return ['venue:list'];
-		case 'list:archived':
-			return ['venue:list:archived'];
-		case 'one:id':
-			return ['venue:one:id', options?.id];
-		default: {
-			let invalidType: never = type;
-			throw new Error(`Unknown venue query type: ${invalidType}`);
-		}
-	}
-}
+import { createVenueQuery } from '@root/presentation/web-ui/modules/venues/queries/createVenueQuery';
 
 export function useVenueListQuery(): (TVenueDTO & {
 	categoryName: string;
