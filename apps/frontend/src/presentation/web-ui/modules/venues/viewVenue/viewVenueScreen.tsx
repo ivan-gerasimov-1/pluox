@@ -9,14 +9,14 @@ import {
 	useVenueArchiveMutation,
 	useVenueOneByIdQuery,
 	useVenueRemoveMutation,
-} from '@root/presentation/web-ui/modules/venues/venues.query';
+} from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 
-import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
+import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 
 import styles from './viewVenueScreen.module.css';
 

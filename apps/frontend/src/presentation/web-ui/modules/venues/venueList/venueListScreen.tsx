@@ -2,7 +2,7 @@ import { EAppPath } from '@root/presentation/web-ui/appPath';
 import {
 	useVenueListArchivedQuery,
 	useVenueListQuery,
-} from '@root/presentation/web-ui/modules/venues/venues.query';
+} from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';

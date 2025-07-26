@@ -22,7 +22,7 @@ import {
 	updateUser,
 	USER_QUERY_BY_ID,
 } from '@root/presentation/web-ui/modules/settings/settings.query';
-import { useVenueListQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
+import { useVenueListQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';

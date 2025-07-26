@@ -4,7 +4,7 @@ import { Id } from '@root/core/domain/types';
 
 import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
 
-import { useVenueOneByIdQuery } from '@root/presentation/web-ui/modules/venues/venues.query';
+import { useVenueOneByIdQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 export function EditVenueScreen() {
 	let { venue } = useScreenParams();
