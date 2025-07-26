@@ -1,7 +1,11 @@
 import { useForm } from 'react-hook-form';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
+
+import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+
 import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 type TVenueFormData = {
@@ -10,6 +14,7 @@ type TVenueFormData = {
 };
 
 export function CreateVenueScreen() {
+	let navigation = useAppNavigation();
 	let categoryQueryService = useService(EServiceToken.CATEGORY_QUERY_SERVICE);
 	let categories = categoryQueryService.getAll();
 
@@ -19,7 +24,11 @@ export function CreateVenueScreen() {
 		formState: { errors },
 	} = useForm<TVenueFormData>();
 
-	let venueCreateMutation = useVenueCreateMutation();
+	let venueCreateMutation = useVenueCreateMutation({
+		onSuccess: (venueDto: TVenueDTO) => {
+			navigation.venuePage(venueDto.id);
+		},
+	});
 
 	const onSubmit = handleSubmit(async (venueData: TVenueFormData) => {
 		venueCreateMutation.mutate({
