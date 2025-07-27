@@ -8,6 +8,7 @@ export interface IVenueUseCase {
 	create(venueCreateDTO: TVenueCreateDTO): TVenueDTO;
 	remove(id: Id): void;
 	archive(id: Id): void;
+	unarchive(id: Id): void;
 }
 
 export interface IVenueCreateUseCase extends IUseCase {

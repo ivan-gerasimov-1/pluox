@@ -7,6 +7,7 @@ import type {
 	IVenueArchiveUseCase,
 	IVenueCreateUseCase,
 	IVenueDeleteUseCase,
+	IVenueUnarchiveUseCase,
 	IVenueUseCase,
 } from '@root/core/modules/venue/application/venueUseCase/types';
 
@@ -15,6 +16,7 @@ export class VenueUseCase implements IVenueUseCase {
 		private readonly venueCreateUseCase: IVenueCreateUseCase,
 		private readonly venueDeleteUseCase: IVenueDeleteUseCase,
 		private readonly venueArchiveUseCase: IVenueArchiveUseCase,
+		private readonly venueUnarchiveUseCase: IVenueUnarchiveUseCase,
 	) {}
 
 	public create(venueCreateDTO: TVenueCreateDTO): TVenueDTO {
@@ -27,5 +29,9 @@ export class VenueUseCase implements IVenueUseCase {
 
 	public archive(id: Id): void {
 		this.venueArchiveUseCase.execute(id);
+	}
+
+	public unarchive(id: Id): void {
+		this.venueUnarchiveUseCase.execute(id);
 	}
 }
