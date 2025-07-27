@@ -160,3 +160,27 @@ export function useVenueArchiveMutation(options: { onSuccess?: () => void }) {
 
 	return result;
 }
+
+export function useVenueUnarchiveMutation(options?: {
+	onSuccess?: () => void;
+}) {
+	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
+	let queryClient = useQueryClient();
+
+	let result = useMutation({
+		mutationFn: async (id: Id) => {
+			return venueUseCase.unarchive(id);
+		},
+		onSuccess: async (_, id) => {
+			await invalidateVenueOneByIdQuery(id, {
+				queryClient,
+			});
+
+			if (options.onSuccess) {
+				options.onSuccess();
+			}
+		},
+	});
+
+	return result;
+}
