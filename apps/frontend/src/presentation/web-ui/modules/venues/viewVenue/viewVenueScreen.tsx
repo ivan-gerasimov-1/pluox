@@ -9,6 +9,7 @@ import {
 	useVenueArchiveMutation,
 	useVenueOneByIdQuery,
 	useVenueRemoveMutation,
+	useVenueUnarchiveMutation,
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
@@ -29,6 +30,9 @@ export function VenueViewScreen() {
 			navigation.venueListPage();
 		},
 	});
+
+	let venueUnarchiveMutation = useVenueUnarchiveMutation();
+
 	let venueRemoveMutation = useVenueRemoveMutation({
 		onSuccess: () => {
 			navigation.venueListPage();
@@ -74,13 +78,17 @@ export function VenueViewScreen() {
 
 				<Button
 					onClick={() => {
-						venueArchiveMutation.mutate(venue.id);
+						if (venue.isArchived) {
+							venueUnarchiveMutation.mutate(venue.id);
+						} else {
+							venueArchiveMutation.mutate(venue.id);
+						}
 					}}
 					size="m"
 					color="red"
 					isWide
 				>
-					Архивировать
+					{venue.isArchived ? 'Разархивировать' : 'Архивировать'}
 				</Button>
 
 				<div>
