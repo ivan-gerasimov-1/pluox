@@ -21,3 +21,7 @@ export interface IVenueDeleteUseCase extends IUseCase {
 export interface IVenueArchiveUseCase extends IUseCase {
 	execute(id: Id): void;
 }
+
+export interface IVenueUnarchiveUseCase extends IUseCase {
+	execute(id: Id): void;
+}
