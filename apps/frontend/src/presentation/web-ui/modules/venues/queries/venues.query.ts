@@ -139,7 +139,7 @@ export function useVenueRemoveMutation(options: { onSuccess?: () => void }) {
 	return result;
 }
 
-export function useVenueArchiveMutation(options: { onSuccess?: () => void }) {
+export function useVenueArchiveMutation(options?: { onSuccess?: () => void }) {
 	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
 	let queryClient = useQueryClient();
 
@@ -152,7 +152,7 @@ export function useVenueArchiveMutation(options: { onSuccess?: () => void }) {
 				queryClient,
 			});
 
-			if (options.onSuccess) {
+			if (options?.onSuccess) {
 				options.onSuccess();
 			}
 		},
@@ -176,7 +176,7 @@ export function useVenueUnarchiveMutation(options?: {
 				queryClient,
 			});
 
-			if (options.onSuccess) {
+			if (options?.onSuccess) {
 				options.onSuccess();
 			}
 		},
