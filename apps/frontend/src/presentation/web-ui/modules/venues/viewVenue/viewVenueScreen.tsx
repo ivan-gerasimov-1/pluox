@@ -25,12 +25,7 @@ export function VenueViewScreen() {
 	let navigation = useAppNavigation();
 	let { venue } = useScreenLoader();
 
-	let venueArchiveMutation = useVenueArchiveMutation({
-		onSuccess: () => {
-			navigation.venueListPage();
-		},
-	});
-
+	let venueArchiveMutation = useVenueArchiveMutation();
 	let venueUnarchiveMutation = useVenueUnarchiveMutation();
 
 	let venueRemoveMutation = useVenueRemoveMutation({
