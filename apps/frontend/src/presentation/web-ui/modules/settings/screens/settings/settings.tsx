@@ -11,17 +11,11 @@ import { getLanguageNameByLocale } from '@root/core/modules/intl/application/hel
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
 import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
-import type { TUserUpdateDTO } from '@root/core/modules/user/application/dto/userDTO';
 import {
 	APP_CONFIG_QUERY,
 	getAppConfig,
 	updateAppConfig,
 } from '@root/presentation/web-ui/modules/settings/appConfig.query';
-import {
-	getUser,
-	updateUser,
-	USER_QUERY_BY_ID,
-} from '@root/presentation/web-ui/modules/settings/settings.query';
 import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
@@ -43,6 +37,11 @@ import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
 import { IconSelect } from '@root/presentation/web-ui/uiKit/iconSelect/iconSelect';
 
+import {
+	useUserOneByIdQuery,
+	useUserUpdateMutation,
+} from '@root/presentation/web-ui/modules/settings/queries/user';
+
 import styles from './settings.module.css';
 
 /**
@@ -60,30 +59,10 @@ export function SettingsScreen() {
 
 	let queryClient = useQueryClient();
 
-	let {
-		data: user = {
-			id: '',
-			name: '',
-			locale: ELocaleCode.RU_RU,
-		},
-	} = useQuery({
-		queryKey: [USER_QUERY_BY_ID],
-		queryFn: getUser,
-		// refetchOnMount: false,
-	});
+	let user = useUserOneByIdQuery();
+	let mutateUser = useUserUpdateMutation(user.id);
 
 	let venueListQuery = useVenueListUnarchivedQuery();
-
-	let { mutate: mutateUser } = useMutation({
-		mutationFn: async (userUpdateDTO: TUserUpdateDTO) => {
-			updateUser(user.id, userUpdateDTO);
-		},
-		onSuccess: async () => {
-			await queryClient.invalidateQueries({
-				queryKey: [USER_QUERY_BY_ID],
-			});
-		},
-	});
 
 	let {
 		data: appConfig = {
