@@ -10,7 +10,6 @@ import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseDTO,
-	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
@@ -24,30 +23,6 @@ export const EXPENSES_QUERY_MONTHLY_AMOUNT = 'expenseQueryMonthlyAmount';
 export const EXPENSES_QUERY_DAILY_AMOUNT = 'expenseQueryDailyAmount';
 export const EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY =
 	'expenseQueryMonthlyTotalByCategory';
-
-export function addOne(payload: TExpenseCreateDTO): void {
-	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);
-
-	expenseUseCase.create(payload);
-}
-
-export function updateOne(id: Id, payload: TExpenseUpdateDTO): void {
-	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);
-
-	expenseUseCase.update(id, payload);
-}
-
-export function deleteOne(id: Id): void {
-	let expenseUseCase = resolveService(EServiceToken.EXPENSE_USE_CASE);
-
-	expenseUseCase.delete(id);
-}
-
-export function getOne(id: Id): TExpenseDTO | null {
-	let expenseQueryService = resolveService(EServiceToken.EXPENSE_QUERY_SERVICE);
-
-	return expenseQueryService.getExpenseById(id);
-}
 
 export function getList(query?: {
 	dateFrom?: TISODateString;
