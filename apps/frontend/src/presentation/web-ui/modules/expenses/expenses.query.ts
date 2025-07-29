@@ -167,3 +167,38 @@ export function useExpenseCreateMutation() {
 		},
 	});
 }
+
+export function useExpenseDeleteMutation() {
+	let queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: async (id: Id) => {
+			deleteOne(id);
+		},
+		onSuccess: async () => {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
+					/**
+					 * @description
+					 * For now we could use this approach, alternative is to
+					 * refetch a query onMount if it is invalidated
+					 * @example
+					 *   refetchOnMount({ state }) {
+					 *     return state.isInvalidated;
+					 *   }
+					 */
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_LIST],
+					refetchType: 'all',
+				}),
+			]);
+		},
+	});
+}
