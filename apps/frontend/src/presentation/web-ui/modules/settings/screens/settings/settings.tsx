@@ -119,7 +119,7 @@ export function SettingsScreen() {
 									userName: user.name,
 
 									close: (payload: { userName: string }) => {
-										mutateUser({
+										updateUser({
 											name: payload.userName,
 										});
 
@@ -200,7 +200,7 @@ export function SettingsScreen() {
 									locale,
 								});
 
-								mutateUser({
+								updateUser({
 									locale,
 								});
 							}}
