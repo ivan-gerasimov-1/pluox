@@ -170,10 +170,11 @@ export function useExpenseCreateMutation() {
 
 export function useExpenseDeleteMutation() {
 	let queryClient = useQueryClient();
+	let expenseUseCase = useService(EServiceToken.EXPENSE_USE_CASE);
 
 	return useMutation({
 		mutationFn: async (id: Id) => {
-			deleteOne(id);
+			expenseUseCase.delete(id);
 		},
 		onSuccess: async () => {
 			await Promise.all([
