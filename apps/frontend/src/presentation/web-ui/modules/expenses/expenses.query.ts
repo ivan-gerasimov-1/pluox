@@ -124,7 +124,7 @@ export function useMonthlyTotalByCategory() {
 	return data;
 }
 
-export function useCreateExpenseMutation() {
+export function useExpenseCreateMutation() {
 	let queryClient = useQueryClient();
 	let expenseUseCase = useService(EServiceToken.EXPENSE_USE_CASE);
 
