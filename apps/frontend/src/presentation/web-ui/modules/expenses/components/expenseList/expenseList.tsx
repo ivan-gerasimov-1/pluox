@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
 import {
 	SwipeAction,
 	SwipeableList,
@@ -10,9 +9,8 @@ import 'react-swipeable-list/dist/styles.css';
 
 import type { TISODateString } from '@root/core/domain/temporal/types';
 import {
-	EXPENSES_QUERY_LIST,
-	getList,
 	useExpenseDeleteMutation,
+	useExpenseListQuery,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -30,48 +28,21 @@ export type TExpenseListProps = {
 export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let currencyRatesService = useService(EServiceToken.CURRENCY_RATE_SERVICE);
-	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
-	let vanueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 
-	/**
-	 * @todo
-	 * 1. Experimental usage of useSuspenseQuery
-	 */
-	let expenseListQuery = useSuspenseQuery({
-		queryKey: [EXPENSES_QUERY_LIST, props.dateFrom, props.dateTo],
-		queryFn: ({ queryKey }) => {
-			let [, dateFrom, dateTo] = queryKey;
-
-			let expenseList = getList({
-				dateFrom,
-				dateTo,
-			}).map((expense) => {
-				if (expense.venue) {
-					let venue = vanueQueryService.getById(expense.venue);
-
-					expense.venue = venue?.name ?? null;
-				}
-
-				return expense;
-			});
-
-			return expenseService.groupExpenseByDate(expenseList);
-		},
-		// placeholderData: [],
-		refetchOnMount: false,
+	let { data: expenseList } = useExpenseListQuery({
+		dateFrom: props.dateFrom,
+		dateTo: props.dateTo,
 	});
 
 	let { mutate: deleteExpense } = useExpenseDeleteMutation();
 
-	return expenseListQuery.data.map((group) => {
-		let expenseList = group.items;
-
+	return expenseList.map((group) => {
 		return (
 			<div key={group.date} className={styles.groupContainer}>
 				<div className={styles.date}>{intlService.formatDate(group.date)}</div>
 
 				<SwipeableList className={styles.list}>
-					{expenseList?.map((item) => {
+					{group.items?.map((item) => {
 						return (
 							<SwipeableListItem
 								key={item.id}
