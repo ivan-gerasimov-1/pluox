@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { Id } from '@domain/types';
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
@@ -122,4 +122,48 @@ export function useMonthlyTotalByCategory() {
 	});
 
 	return data;
+}
+
+export function useCreateExpenseMutation() {
+	let queryClient = useQueryClient();
+	let expenseUseCase = useService(EServiceToken.EXPENSE_USE_CASE);
+
+	return useMutation({
+		mutationFn: async (payload: TExpenseCreateDTO) => {
+			expenseUseCase.create(payload);
+		},
+		onSuccess: async () => {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
+					/**
+					 * @description
+					 * For now we could use this approach, alternative is to
+					 * refetch a query onMount if it is invalidated
+					 * @example
+					 *   refetchOnMount({ state }) {
+					 *     return state.isInvalidated;
+					 *   }
+					 */
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_LIST],
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
+					refetchType: 'all',
+				}),
+				queryClient.invalidateQueries({
+					queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY],
+					refetchType: 'all',
+				}),
+			]);
+		},
+	});
 }
