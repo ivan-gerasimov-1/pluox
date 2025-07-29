@@ -11,10 +11,7 @@ import {
 	getDailyAmount,
 	getMonthlyAmount,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
-import {
-	APP_CONFIG_QUERY_BUDGET,
-	getBudget,
-} from '@root/presentation/web-ui/modules/settings/appConfig.query';
+import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
 
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
@@ -62,19 +59,10 @@ function useMonthlyTotalByCategory() {
 	return data;
 }
 
-function useBudget(): number {
-	let { data = 0 } = useQuery({
-		queryKey: [APP_CONFIG_QUERY_BUDGET],
-		queryFn: getBudget,
-	});
-
-	return data;
-}
-
 export function useScreenLoader() {
 	let monthlyTotal = useMonthlyAmount();
 	let dailyTotal = useDailyAmount();
-	let budget = useBudget();
+	let budget = useAppConfigBudgetQuery();
 
 	let categories = useMonthlyTotalByCategory();
 
