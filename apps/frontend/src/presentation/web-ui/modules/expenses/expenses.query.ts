@@ -6,10 +6,8 @@ import {
 } from '@tanstack/react-query';
 
 import type { Id } from '@domain/types';
-import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
+import type { TISODateString } from '@root/core/domain/temporal/types';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
-
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -21,43 +19,38 @@ export const EXPENSES_QUERY_DAILY_AMOUNT = 'expenseQueryDailyAmount';
 export const EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY =
 	'expenseQueryMonthlyTotalByCategory';
 
-export function getMonthlyAmount(month: TMonth): number {
-	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
-
-	return expenseService.getTotalByMonth(month);
-}
-
-export function getDailyAmount(): number {
-	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
-
-	return expenseService.getTotalByDay();
-}
-
-export function useMonthlyAmount(): number {
+export function useExpenseAmountByMonthQuery(): number {
 	let temporal = useService(EServiceToken.TEMPORAL);
+	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 
 	let currentMonth = temporal.getCurrentMonth();
 
 	let { data = 0 } = useQuery({
 		queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT, currentMonth],
-		queryFn: () => getMonthlyAmount(currentMonth),
+		queryFn: () => {
+			return expenseService.getTotalByMonth(currentMonth);
+		},
 		refetchOnMount: false,
 	});
 
 	return data;
 }
 
-export function useDailyAmount(): number {
+export function useExpenseAmountByDayQuery(): number {
+	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
+
 	let { data = 0 } = useQuery({
 		queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
-		queryFn: getDailyAmount,
+		queryFn: () => {
+			return expenseService.getTotalByDay();
+		},
 		refetchOnMount: false,
 	});
 
 	return data;
 }
 
-export function useMonthlyTotalByCategory() {
+export function useExpenseAmountByCategory() {
 	let temporal = useService(EServiceToken.TEMPORAL);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 
