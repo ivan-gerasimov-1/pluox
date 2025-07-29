@@ -1,8 +1,4 @@
-import {
-	useMutation,
-	useQueryClient,
-	useSuspenseQuery,
-} from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import {
 	SwipeAction,
 	SwipeableList,
@@ -12,14 +8,11 @@ import {
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
 
-import type { Id } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
 import {
 	EXPENSES_QUERY_LIST,
-	EXPENSES_QUERY_MONTHLY_AMOUNT,
-	EXPENSES_QUERY_TOTAL_AMOUNT,
-	deleteOne,
 	getList,
+	useExpenseDeleteMutation,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -39,7 +32,6 @@ export function ExpenseList(props: TExpenseListProps) {
 	let currencyRatesService = useService(EServiceToken.CURRENCY_RATE_SERVICE);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let vanueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
-	let queryClient = useQueryClient();
 
 	/**
 	 * @todo
@@ -69,36 +61,7 @@ export function ExpenseList(props: TExpenseListProps) {
 		refetchOnMount: false,
 	});
 
-	let deleteExpense = useMutation({
-		mutationFn: async (id: Id) => {
-			deleteOne(id);
-		},
-		onSuccess: async () => {
-			await Promise.all([
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
-					/**
-					 * @description
-					 * For now we could use this approach, alternative is to
-					 * refetch a query onMount if it is invalidated
-					 * @example
-					 *   refetchOnMount({ state }) {
-					 *     return state.isInvalidated;
-					 *   }
-					 */
-					refetchType: 'all',
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
-					refetchType: 'all',
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_LIST],
-					refetchType: 'all',
-				}),
-			]);
-		},
-	});
+	let { mutate: deleteExpense } = useExpenseDeleteMutation();
 
 	return expenseListQuery.data.map((group) => {
 		let expenseList = group.items;
@@ -120,7 +83,7 @@ export function ExpenseList(props: TExpenseListProps) {
 										<SwipeAction
 											Tag="div"
 											onClick={() => {
-												deleteExpense.mutate(item.id);
+												deleteExpense(item.id);
 											}}
 											destructive
 										>
