@@ -1,15 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
 
 import {
-	EXPENSES_QUERY_DAILY_AMOUNT,
-	EXPENSES_QUERY_MONTHLY_AMOUNT,
-	EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY,
-	getDailyAmount,
-	getMonthlyAmount,
+	useDailyAmount,
+	useMonthlyAmount,
+	useMonthlyTotalByCategory,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
 
@@ -17,47 +13,6 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 
 import styles from './main.module.css';
-
-function useMonthlyAmount(): number {
-	let temporal = useService(EServiceToken.TEMPORAL);
-
-	let currentMonth = temporal.getCurrentMonth();
-
-	let { data = 0 } = useQuery({
-		queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT, currentMonth],
-		queryFn: () => getMonthlyAmount(currentMonth),
-		refetchOnMount: false,
-	});
-
-	return data;
-}
-
-function useDailyAmount(): number {
-	let { data = 0 } = useQuery({
-		queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
-		queryFn: getDailyAmount,
-		refetchOnMount: false,
-	});
-
-	return data;
-}
-
-function useMonthlyTotalByCategory() {
-	let temporal = useService(EServiceToken.TEMPORAL);
-	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
-
-	let currentMonth = temporal.getCurrentMonth();
-
-	let { data = [] } = useQuery({
-		queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY, currentMonth],
-		queryFn: () => {
-			return expenseService.getMonthlyTotalByCategory(currentMonth);
-		},
-		refetchOnMount: false,
-	});
-
-	return data;
-}
 
 export function useScreenLoader() {
 	let monthlyTotal = useMonthlyAmount();

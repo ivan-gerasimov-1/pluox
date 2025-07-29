@@ -1,14 +1,17 @@
+import { useQuery } from '@tanstack/react-query';
+
+import type { Id } from '@domain/types';
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
 import type {
-	TExpenseDTO,
 	TExpenseCreateDTO,
+	TExpenseDTO,
 	TExpenseUpdateDTO,
 } from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { Id } from '@domain/types';
 
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
 export const EXPENSES_QUERY_LIST = 'expenseQueryList';
 export const EXPENSES_QUERY_TOTAL_AMOUNT = 'expenseQueryTotalAmount';
@@ -78,4 +81,45 @@ export function getDailyAmount(): number {
 	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
 
 	return expenseService.getTotalByDay();
+}
+
+export function useMonthlyAmount(): number {
+	let temporal = useService(EServiceToken.TEMPORAL);
+
+	let currentMonth = temporal.getCurrentMonth();
+
+	let { data = 0 } = useQuery({
+		queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT, currentMonth],
+		queryFn: () => getMonthlyAmount(currentMonth),
+		refetchOnMount: false,
+	});
+
+	return data;
+}
+
+export function useDailyAmount(): number {
+	let { data = 0 } = useQuery({
+		queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
+		queryFn: getDailyAmount,
+		refetchOnMount: false,
+	});
+
+	return data;
+}
+
+export function useMonthlyTotalByCategory() {
+	let temporal = useService(EServiceToken.TEMPORAL);
+	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
+
+	let currentMonth = temporal.getCurrentMonth();
+
+	let { data = [] } = useQuery({
+		queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY, currentMonth],
+		queryFn: () => {
+			return expenseService.getMonthlyTotalByCategory(currentMonth);
+		},
+		refetchOnMount: false,
+	});
+
+	return data;
 }
