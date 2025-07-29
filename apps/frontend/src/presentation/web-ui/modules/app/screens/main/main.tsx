@@ -1,15 +1,15 @@
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
 import {
+	useExpenseAmountByCategoryQuery,
 	useExpenseAmountByDayQuery,
 	useExpenseAmountByMonthQuery,
-	useExpenseAmountByCategoryQuery,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
 
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 
 import styles from './main.module.css';
@@ -17,9 +17,9 @@ import styles from './main.module.css';
 export function useScreenLoader() {
 	let monthlyTotal = useExpenseAmountByMonthQuery();
 	let dailyTotal = useExpenseAmountByDayQuery();
-	let budget = useAppConfigBudgetQuery();
-
 	let categories = useExpenseAmountByCategoryQuery();
+
+	let budget = useAppConfigBudgetQuery();
 
 	let leftover = budget - monthlyTotal;
 
