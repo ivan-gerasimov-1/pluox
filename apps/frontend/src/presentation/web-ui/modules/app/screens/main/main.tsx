@@ -5,7 +5,7 @@ import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types'
 import {
 	useExpenseAmountByDayQuery,
 	useExpenseAmountByMonthQuery,
-	useExpenseAmountByCategory,
+	useExpenseAmountByCategoryQuery,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
 
@@ -19,7 +19,7 @@ export function useScreenLoader() {
 	let dailyTotal = useExpenseAmountByDayQuery();
 	let budget = useAppConfigBudgetQuery();
 
-	let categories = useExpenseAmountByCategory();
+	let categories = useExpenseAmountByCategoryQuery();
 
 	let leftover = budget - monthlyTotal;
 

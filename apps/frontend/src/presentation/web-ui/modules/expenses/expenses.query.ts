@@ -50,7 +50,7 @@ export function useExpenseAmountByDayQuery(): number {
 	return data;
 }
 
-export function useExpenseAmountByCategory() {
+export function useExpenseAmountByCategoryQuery() {
 	let temporal = useService(EServiceToken.TEMPORAL);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 
