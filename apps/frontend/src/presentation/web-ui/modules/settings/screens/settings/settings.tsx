@@ -1,4 +1,3 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
@@ -10,12 +9,6 @@ import {
 import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
-import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
-import {
-	APP_CONFIG_QUERY,
-	getAppConfig,
-	updateAppConfig,
-} from '@root/presentation/web-ui/modules/settings/appConfig.query';
 import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
@@ -38,6 +31,10 @@ import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButto
 import { IconSelect } from '@root/presentation/web-ui/uiKit/iconSelect/iconSelect';
 
 import {
+	useAppConfigQuery,
+	useAppConfigUpdateMutation,
+} from '@root/presentation/web-ui/modules/settings/queries/appConfig';
+import {
 	useUserOneByIdQuery,
 	useUserUpdateMutation,
 } from '@root/presentation/web-ui/modules/settings/queries/user';
@@ -57,43 +54,13 @@ export function SettingsScreen() {
 	let intl = useIntl(settingsI18n);
 	let navigation = useAppNavigation();
 
-	let queryClient = useQueryClient();
-
 	let user = useUserOneByIdQuery();
 	let { mutate: updateUser } = useUserUpdateMutation(user.id);
 
+	let appConfig = useAppConfigQuery();
+	let { mutate: updateAppConfig } = useAppConfigUpdateMutation();
+
 	let venueListQuery = useVenueListUnarchivedQuery();
-
-	let {
-		data: appConfig = {
-			locale: ELocaleCode.EN_US,
-			budget: null,
-			currency: ECurrency.USD,
-			availabelCurrencies: [ECurrency.USD, ECurrency.EUR],
-		},
-	} = useQuery({
-		queryKey: [APP_CONFIG_QUERY],
-		queryFn: getAppConfig,
-		// refetchOnMount: false,
-	});
-
-	let { mutate: mutateAppConfig } = useMutation({
-		mutationFn: async (payload: Partial<TAppConfig>) => {
-			updateAppConfig(payload);
-		},
-		onSuccess: async () => {
-			let queryKey = [APP_CONFIG_QUERY];
-
-			/** @todo #1 */
-			// if (variables.budget !== undefined) {
-			// 	queryKey.push(QUERY_APP_CONFIG_BUDGET);
-			// }
-
-			await queryClient.invalidateQueries({
-				queryKey,
-			});
-		},
-	});
 
 	return (
 		<>
@@ -196,7 +163,7 @@ export function SettingsScreen() {
 							icon={EIconName.CaretDown}
 							value={appConfig.locale}
 							onChange={(locale) => {
-								mutateAppConfig({
+								updateAppConfig({
 									locale,
 								});
 
@@ -238,7 +205,7 @@ export function SettingsScreen() {
 							icon={EIconName.CaretDown}
 							value={appConfig.currency}
 							onChange={(currency) => {
-								mutateAppConfig({
+								updateAppConfig({
 									currency,
 								});
 							}}
@@ -300,7 +267,7 @@ export function SettingsScreen() {
 									currency: appConfig.currency,
 
 									close: (payload: { budget: number }) => {
-										mutateAppConfig({
+										updateAppConfig({
 											budget: payload.budget,
 										});
 
