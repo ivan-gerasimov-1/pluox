@@ -60,7 +60,7 @@ export function SettingsScreen() {
 	let queryClient = useQueryClient();
 
 	let user = useUserOneByIdQuery();
-	let mutateUser = useUserUpdateMutation(user.id);
+	let { mutate: updateUser } = useUserUpdateMutation(user.id);
 
 	let venueListQuery = useVenueListUnarchivedQuery();
 

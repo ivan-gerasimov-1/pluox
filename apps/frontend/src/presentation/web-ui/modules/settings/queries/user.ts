@@ -71,7 +71,7 @@ export function useUserUpdateMutation(id: Id) {
 	let queryClient = useQueryClient();
 	let userService = resolveService(EServiceToken.USER_SERVICE);
 
-	let { mutate: mutateUser } = useMutation({
+	let mutation = useMutation({
 		mutationFn: async (userUpdateDTO: TUserUpdateDTO) => {
 			userService.updateUser(id, userUpdateDTO);
 		},
@@ -83,5 +83,5 @@ export function useUserUpdateMutation(id: Id) {
 		},
 	});
 
-	return mutateUser;
+	return mutation;
 }
