@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+	useMutation,
+	useQuery,
+	useQueryClient,
+	useSuspenseQuery,
+} from '@tanstack/react-query';
 
 import type { Id } from '@domain/types';
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
@@ -122,6 +127,42 @@ export function useMonthlyTotalByCategory() {
 	});
 
 	return data;
+}
+
+export function useExpenseListQuery(options: {
+	dateFrom?: TISODateString;
+	dateTo?: TISODateString;
+}) {
+	let vanueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
+	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
+
+	/**
+	 * @todo
+	 * 1. Experimental usage of useSuspenseQuery
+	 */
+	return useSuspenseQuery({
+		queryKey: [EXPENSES_QUERY_LIST, options.dateFrom, options.dateTo],
+		queryFn: ({ queryKey }) => {
+			let [, dateFrom, dateTo] = queryKey;
+
+			let expenseList = getList({
+				dateFrom,
+				dateTo,
+			}).map((expense) => {
+				if (expense.venue) {
+					let venue = vanueQueryService.getById(expense.venue);
+
+					expense.venue = venue?.name ?? null;
+				}
+
+				return expense;
+			});
+
+			return expenseService.groupExpenseByDate(expenseList);
+		},
+		// placeholderData: [],
+		refetchOnMount: false,
+	});
 }
 
 export function useExpenseCreateMutation() {
