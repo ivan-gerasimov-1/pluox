@@ -7,10 +7,7 @@ import {
 
 import type { Id } from '@domain/types';
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
-import type {
-	TExpenseCreateDTO,
-	TExpenseDTO,
-} from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
@@ -23,33 +20,6 @@ export const EXPENSES_QUERY_MONTHLY_AMOUNT = 'expenseQueryMonthlyAmount';
 export const EXPENSES_QUERY_DAILY_AMOUNT = 'expenseQueryDailyAmount';
 export const EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY =
 	'expenseQueryMonthlyTotalByCategory';
-
-export function getList(query?: {
-	dateFrom?: TISODateString;
-	dateTo?: TISODateString;
-}): TExpenseDTO[] {
-	let expenseRepository = resolveService(EServiceToken.EXPENSE_REPOSITORY);
-	let expenseMapper = resolveService(EServiceToken.EXPENSE_MAPPER);
-
-	let expenses = expenseRepository.findMany(
-		query && {
-			filter: {
-				dateFrom: query?.dateFrom,
-				dateTo: query?.dateTo,
-			},
-		},
-	);
-
-	return expenses.items.map((expense) => {
-		return expenseMapper.toDTO(expense);
-	});
-}
-
-export function getTotalAmount(): number {
-	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
-
-	return expenseService.getTotalByYear();
-}
 
 export function getMonthlyAmount(month: TMonth): number {
 	let expenseService = resolveService(EServiceToken.EXPENSE_SERVICE);
@@ -110,28 +80,41 @@ export function useExpenseListQuery(options: {
 }) {
 	let vanueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
+	let expenseRepository = useService(EServiceToken.EXPENSE_REPOSITORY);
+	let expenseMapper = useService(EServiceToken.EXPENSE_MAPPER);
 
 	/**
 	 * @todo
 	 * 1. Experimental usage of useSuspenseQuery
 	 */
 	return useSuspenseQuery({
-		queryKey: [EXPENSES_QUERY_LIST, options.dateFrom, options.dateTo],
-		queryFn: ({ queryKey }) => {
-			let [, dateFrom, dateTo] = queryKey;
+		queryKey: [EXPENSES_QUERY_LIST, options],
+		/** @todo LV-124 | Use queryKey */
+		queryFn: (/* { queryKey } */) => {
+			// let [, dateFrom, dateTo] = queryKey;
 
-			let expenseList = getList({
-				dateFrom,
-				dateTo,
-			}).map((expense) => {
-				if (expense.venue) {
-					let venue = vanueQueryService.getById(expense.venue);
+			let expenses = expenseRepository.findMany(
+				options && {
+					filter: {
+						dateFrom: options.dateFrom,
+						dateTo: options.dateTo,
+					},
+				},
+			);
 
-					expense.venue = venue?.name ?? null;
-				}
+			let expenseList = expenses.items
+				.map((expense) => {
+					return expenseMapper.toDTO(expense);
+				})
+				.map((expense) => {
+					if (expense.venue) {
+						let venue = vanueQueryService.getById(expense.venue);
 
-				return expense;
-			});
+						expense.venue = venue?.name ?? null;
+					}
+
+					return expense;
+				});
 
 			return expenseService.groupExpenseByDate(expenseList);
 		},
