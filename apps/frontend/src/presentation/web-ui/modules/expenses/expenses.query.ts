@@ -1,4 +1,5 @@
 import {
+	type QueryClient,
 	useMutation,
 	useQuery,
 	useQueryClient,
@@ -75,6 +76,17 @@ function createExpenseQuery(
 	}
 
 	return queryKey;
+}
+
+export function invalidateVenueQuery({
+	queryClient,
+}: {
+	queryClient: QueryClient;
+}) {
+	return queryClient.invalidateQueries({
+		queryKey: createExpenseQuery(),
+		refetchType: 'all',
+	});
 }
 
 export function useExpenseAmountByMonthQuery(): number {
@@ -182,8 +194,8 @@ export function useExpenseCreateMutation() {
 			expenseUseCase.create(payload);
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries({
-				queryKey: createExpenseQuery(),
+			await invalidateVenueQuery({
+				queryClient,
 			});
 		},
 	});
@@ -198,8 +210,8 @@ export function useExpenseDeleteMutation() {
 			expenseUseCase.delete(id);
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries({
-				queryKey: createExpenseQuery(),
+			await invalidateVenueQuery({
+				queryClient,
 			});
 		},
 	});
