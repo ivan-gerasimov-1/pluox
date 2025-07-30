@@ -10,6 +10,7 @@ import { ECurrency } from '@root/core/modules/currency/domain/types';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
 
+import { invalidateExpenseQuery } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 function createAppConfigQuery() {
@@ -23,6 +24,10 @@ async function invalidateAppConfigQuery({
 }) {
 	let result = await queryClient.invalidateQueries({
 		queryKey: createAppConfigQuery(),
+	});
+
+	invalidateExpenseQuery({
+		queryClient,
 	});
 
 	return result;
