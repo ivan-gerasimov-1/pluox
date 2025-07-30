@@ -6,18 +6,76 @@ import {
 } from '@tanstack/react-query';
 
 import type { Id } from '@domain/types';
-import type { TISODateString } from '@root/core/domain/temporal/types';
+import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
 import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 
-export const EXPENSES_QUERY_LIST = 'expenseQueryList';
-export const EXPENSES_QUERY_TOTAL_AMOUNT = 'expenseQueryTotalAmount';
-export const EXPENSES_QUERY_MONTHLY_AMOUNT = 'expenseQueryMonthlyAmount';
-export const EXPENSES_QUERY_DAILY_AMOUNT = 'expenseQueryDailyAmount';
-export const EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY =
-	'expenseQueryMonthlyTotalByCategory';
+type TExpenseQueryType =
+	| 'list'
+	| 'amount:byMonth'
+	| 'amount:byDay'
+	| 'amount:byCategory';
+
+function createExpenseQuery(): unknown[];
+function createExpenseQuery(
+	type: 'list',
+	options?: {
+		dateFrom?: TISODateString;
+		dateTo?: TISODateString;
+	},
+): unknown[];
+function createExpenseQuery(
+	type: 'amount:byMonth' | 'amount:byCategory',
+	options: {
+		month: TMonth;
+	},
+): unknown[];
+function createExpenseQuery(type: 'amount:byDay'): unknown[];
+function createExpenseQuery(
+	type?: TExpenseQueryType,
+	options?: {
+		month?: TMonth;
+		dateFrom?: TISODateString;
+		dateTo?: TISODateString;
+	},
+): unknown[] {
+	let queryKey: unknown[] = ['expense'];
+
+	if (!type) {
+		return queryKey;
+	}
+
+	switch (type) {
+		case 'list':
+			queryKey.push('list', {
+				dateFrom: options?.dateFrom,
+				dateTo: options?.dateTo,
+			});
+			break;
+		case 'amount:byMonth':
+			queryKey.push('amount:byMonth', {
+				month: options?.month?.toString(),
+			});
+			break;
+		case 'amount:byDay':
+			queryKey.push('amount:byDay');
+			break;
+		case 'amount:byCategory':
+			queryKey.push('amount:byCategory', {
+				month: options?.month?.toString(),
+			});
+			break;
+		default: {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			let unknownType: never = type;
+			break;
+		}
+	}
+
+	return queryKey;
+}
 
 export function useExpenseAmountByMonthQuery(): number {
 	let temporal = useService(EServiceToken.TEMPORAL);
@@ -26,7 +84,9 @@ export function useExpenseAmountByMonthQuery(): number {
 	let currentMonth = temporal.getCurrentMonth();
 
 	let { data = 0 } = useQuery({
-		queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT, currentMonth],
+		queryKey: createExpenseQuery('amount:byMonth', {
+			month: currentMonth,
+		}),
 		queryFn: () => {
 			return expenseService.getTotalByMonth(currentMonth);
 		},
@@ -39,7 +99,7 @@ export function useExpenseAmountByDayQuery(): number {
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 
 	let { data = 0 } = useQuery({
-		queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
+		queryKey: createExpenseQuery('amount:byDay'),
 		queryFn: () => {
 			return expenseService.getTotalByDay();
 		},
@@ -55,7 +115,9 @@ export function useExpenseAmountByCategoryQuery() {
 	let currentMonth = temporal.getCurrentMonth();
 
 	let { data = [] } = useQuery({
-		queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY, currentMonth],
+		queryKey: createExpenseQuery('amount:byCategory', {
+			month: currentMonth,
+		}),
 		queryFn: () => {
 			return expenseService.getMonthlyTotalByCategory(currentMonth);
 		},
@@ -78,7 +140,7 @@ export function useExpenseListQuery(options: {
 	 * 1. Experimental usage of useSuspenseQuery
 	 */
 	return useSuspenseQuery({
-		queryKey: [EXPENSES_QUERY_LIST, options],
+		queryKey: createExpenseQuery('list', options),
 		/** @todo LV-124 | Use queryKey */
 		queryFn: (/* { queryKey } */) => {
 			// let [, dateFrom, dateTo] = queryKey;
@@ -120,23 +182,9 @@ export function useExpenseCreateMutation() {
 			expenseUseCase.create(payload);
 		},
 		onSuccess: async () => {
-			await Promise.all([
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_LIST],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY],
-				}),
-			]);
+			await queryClient.invalidateQueries({
+				queryKey: createExpenseQuery(),
+			});
 		},
 	});
 }
@@ -150,17 +198,9 @@ export function useExpenseDeleteMutation() {
 			expenseUseCase.delete(id);
 		},
 		onSuccess: async () => {
-			await Promise.all([
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
-				}),
-				queryClient.invalidateQueries({
-					queryKey: [EXPENSES_QUERY_LIST],
-				}),
-			]);
+			await queryClient.invalidateQueries({
+				queryKey: createExpenseQuery(),
+			});
 		},
 	});
 }
