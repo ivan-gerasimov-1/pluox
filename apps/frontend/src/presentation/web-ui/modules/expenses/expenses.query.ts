@@ -78,7 +78,7 @@ function createExpenseQuery(
 	return queryKey;
 }
 
-export function invalidateVenueQuery({
+export function invalidateExpenseQuery({
 	queryClient,
 }: {
 	queryClient: QueryClient;
@@ -198,7 +198,7 @@ export function useExpenseCreateMutation() {
 			expenseUseCase.create(payload);
 		},
 		onSuccess: async () => {
-			await invalidateVenueQuery({
+			await invalidateExpenseQuery({
 				queryClient,
 			});
 		},
@@ -214,7 +214,7 @@ export function useExpenseDeleteMutation() {
 			expenseUseCase.delete(id);
 		},
 		onSuccess: async () => {
-			await invalidateVenueQuery({
+			await invalidateExpenseQuery({
 				queryClient,
 			});
 		},
