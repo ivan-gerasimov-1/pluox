@@ -96,6 +96,7 @@ export function useExpenseAmountByMonthQuery(): number {
 	let currentMonth = temporal.getCurrentMonth();
 
 	let { data = 0 } = useQuery({
+		refetchOnMount: false,
 		queryKey: createExpenseQuery('amount:byMonth', {
 			month: currentMonth,
 		}),
@@ -111,6 +112,7 @@ export function useExpenseAmountByDayQuery(): number {
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 
 	let { data = 0 } = useQuery({
+		refetchOnMount: false,
 		queryKey: createExpenseQuery('amount:byDay'),
 		queryFn: () => {
 			return expenseService.getTotalByDay();
@@ -127,6 +129,7 @@ export function useExpenseAmountByCategoryQuery() {
 	let currentMonth = temporal.getCurrentMonth();
 
 	let { data = [] } = useQuery({
+		refetchOnMount: false,
 		queryKey: createExpenseQuery('amount:byCategory', {
 			month: currentMonth,
 		}),
@@ -152,6 +155,7 @@ export function useExpenseListQuery(options: {
 	 * 1. Experimental usage of useSuspenseQuery
 	 */
 	return useSuspenseQuery({
+		refetchOnMount: false,
 		queryKey: createExpenseQuery('list', options),
 		/** @todo LV-124 | Use queryKey */
 		queryFn: (/* { queryKey } */) => {
