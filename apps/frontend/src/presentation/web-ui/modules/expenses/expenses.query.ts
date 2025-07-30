@@ -30,7 +30,6 @@ export function useExpenseAmountByMonthQuery(): number {
 		queryFn: () => {
 			return expenseService.getTotalByMonth(currentMonth);
 		},
-		refetchOnMount: false,
 	});
 
 	return data;
@@ -44,7 +43,6 @@ export function useExpenseAmountByDayQuery(): number {
 		queryFn: () => {
 			return expenseService.getTotalByDay();
 		},
-		refetchOnMount: false,
 	});
 
 	return data;
@@ -61,7 +59,6 @@ export function useExpenseAmountByCategoryQuery() {
 		queryFn: () => {
 			return expenseService.getMonthlyTotalByCategory(currentMonth);
 		},
-		refetchOnMount: false,
 	});
 
 	return data;
@@ -111,8 +108,6 @@ export function useExpenseListQuery(options: {
 
 			return expenseService.groupExpenseByDate(expenseList);
 		},
-		// placeholderData: [],
-		refetchOnMount: false,
 	});
 }
 
@@ -128,32 +123,18 @@ export function useExpenseCreateMutation() {
 			await Promise.all([
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
-					/**
-					 * @description
-					 * For now we could use this approach, alternative is to
-					 * refetch a query onMount if it is invalidated
-					 * @example
-					 *   refetchOnMount({ state }) {
-					 *     return state.isInvalidated;
-					 *   }
-					 */
-					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
-					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_LIST],
-					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_DAILY_AMOUNT],
-					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_MONTHLY_TOTAL_BY_CATEGORY],
-					refetchType: 'all',
 				}),
 			]);
 		},
@@ -172,24 +153,12 @@ export function useExpenseDeleteMutation() {
 			await Promise.all([
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_TOTAL_AMOUNT],
-					/**
-					 * @description
-					 * For now we could use this approach, alternative is to
-					 * refetch a query onMount if it is invalidated
-					 * @example
-					 *   refetchOnMount({ state }) {
-					 *     return state.isInvalidated;
-					 *   }
-					 */
-					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_MONTHLY_AMOUNT],
-					refetchType: 'all',
 				}),
 				queryClient.invalidateQueries({
 					queryKey: [EXPENSES_QUERY_LIST],
-					refetchType: 'all',
 				}),
 			]);
 		},
