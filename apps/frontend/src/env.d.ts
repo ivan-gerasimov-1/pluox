@@ -4,7 +4,9 @@ interface ImportMetaEnv {
 	/** Production */
 	readonly APP_API_URL: string;
 
+	readonly APP_UMAMI_SCRIPT_URL: string;
 	readonly APP_UMAMI_WEBSITE_ID: string;
+
 	readonly APP_SENTRY_DSN: string;
 
 	/** Development */
