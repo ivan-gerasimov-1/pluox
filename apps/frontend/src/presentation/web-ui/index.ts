@@ -1,5 +1,3 @@
-import 'react-scan';
-
 import { QueryClient } from '@tanstack/react-query';
 
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
