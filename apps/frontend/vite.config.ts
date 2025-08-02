@@ -112,6 +112,13 @@ export default defineConfig(({ mode }) => {
 			rollupOptions: {
 				output: {
 					manualChunks(id) {
+						if (
+							id.includes('node_modules/@sentry') ||
+							id.includes('node_modules/@sentry-internal')
+						) {
+							return 'sentry';
+						}
+
 						if (id.includes('node_modules')) {
 							return 'vendors';
 						}
