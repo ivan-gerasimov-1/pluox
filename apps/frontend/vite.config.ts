@@ -5,7 +5,7 @@ import svgr from 'vite-plugin-svgr';
 import postcssNested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { visualizer } from 'rollup-plugin-visualizer';
+import { analyzer } from 'vite-bundle-analyzer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { checker } from 'vite-plugin-checker';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -49,13 +49,8 @@ export default defineConfig(({ mode }) => {
 		}),
 	];
 
-	if (env.BUNDLE_ANALYZER === 'on') {
-		plugins.push(
-			visualizer({
-				open: true,
-				filename: 'node_modules/.cache/bundle-analysis.html',
-			}),
-		);
+	if (env.DEV_BUNDLE_ANALYZER === 'on') {
+		plugins.push(analyzer());
 	}
 
 	return {
