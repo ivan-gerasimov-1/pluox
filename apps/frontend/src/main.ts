@@ -1,4 +1,5 @@
 import { initializeSentry } from '@root/sentry';
+import { initializeUmami } from '@root/umami';
 
 import { createDIContainer } from '@root/diContainer';
 import { createUI } from '@root/presentation/web-ui';
@@ -12,6 +13,7 @@ import {
 import type { IWindow } from '@root/presentation/web-ui/types';
 
 export async function main(window: IWindow): Promise<void> {
+	initializeUmami();
 	initializeSentry();
 
 	registerServiceWorker();
