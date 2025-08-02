@@ -16,8 +16,9 @@ export async function createDevToolsConfig(): Promise<TDevToolsConfig> {
 
 	let config: TDevToolsConfig = {
 		reactScan: {
-			// eslint-disable-next-line no-empty-function
-			scan: () => {},
+			scan: () => {
+				//
+			},
 		},
 		reactQuery: {
 			ReactQueryDevtools: () => null,
