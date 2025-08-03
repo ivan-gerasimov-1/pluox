@@ -15,19 +15,29 @@ import {
 import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-
+import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
+import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
+
+import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
 
 import styles from './viewVenueScreen.module.css';
 
 export function VenueViewScreen() {
 	let navigation = useAppNavigation();
+	let dialog = useDialog();
+
 	let { venue } = useScreenLoader();
 
 	let venueArchiveMutation = useVenueArchiveMutation();
 	let venueUnarchiveMutation = useVenueUnarchiveMutation();
 
+	let venueUpdateMutation = {
+		mutate: (venueId: Id, venueUpdateDto: { name: string }) => {
+			//
+		},
+	};
 	let venueRemoveMutation = useVenueRemoveMutation({
 		onSuccess: () => {
 			navigation.venueListPage();
@@ -49,8 +59,28 @@ export function VenueViewScreen() {
 
 				<br />
 
-				<div>
-					<b>Название:</b> {venue.name}
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+					}}
+				>
+					<b>Название: </b> {venue.name}
+					<IconButton
+						iconName={EIconName.Edit}
+						onClick={() => {
+							let actionSheetApi = dialog.render(VenueNameActionSheet, {
+								venueName: venue.name,
+								close: (payload: { venueName: string }) => {
+									venueUpdateMutation.mutate(venue.id, {
+										name: payload.venueName,
+									});
+
+									actionSheetApi.close();
+								},
+							});
+						}}
+					/>
 				</div>
 
 				<br />
