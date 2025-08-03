@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { Id } from '@root/core/domain/types';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 
 import {
 	useVenueArchiveMutation,
@@ -21,11 +22,14 @@ import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButto
 
 import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
 
+import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
+
 import styles from './viewVenueScreen.module.css';
 
 export function VenueViewScreen() {
 	let navigation = useAppNavigation();
 	let dialog = useDialog();
+	let intl = useIntl(venueViewScreenI18n);
 
 	let { venue } = useScreenLoader();
 
@@ -39,7 +43,7 @@ export function VenueViewScreen() {
 	});
 
 	if (!venue) {
-		return 'Venue not found';
+		return <div>{intl.translate('notFoundError')}</div>;
 	}
 
 	return (
@@ -59,7 +63,7 @@ export function VenueViewScreen() {
 						alignItems: 'center',
 					}}
 				>
-					<b>Название: </b> {venue.name}
+					<b>{intl.translate('name')}: </b> {venue.name}
 					<IconButton
 						iconName={EIconName.Edit}
 						onClick={() => dialog.render(VenueNameActionSheet, { venue })}
@@ -69,7 +73,7 @@ export function VenueViewScreen() {
 				<br />
 
 				<div>
-					<b>Категории:</b> {venue.categoryName}
+					<b>{intl.translate('categories')}: </b> {venue.categoryName}
 				</div>
 			</div>
 
@@ -84,7 +88,9 @@ export function VenueViewScreen() {
 					}}
 					isWide
 				>
-					{venue.isArchived ? 'Разархивировать' : 'Архивировать'}
+					{venue.isArchived
+						? intl.translate('unarchive')
+						: intl.translate('archive')}
 				</Button>
 
 				<div>
