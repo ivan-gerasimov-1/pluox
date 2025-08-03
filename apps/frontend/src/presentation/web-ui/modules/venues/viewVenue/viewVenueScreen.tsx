@@ -95,9 +95,7 @@ export function VenueViewScreen() {
 
 				<div>
 					<Button
-						onClick={() => {
-							venueRemoveMutation.mutate(venue.id);
-						}}
+						onClick={() => venueRemoveMutation.mutate(venue.id)}
 						color="red"
 						isWide
 					>
