@@ -18,4 +18,5 @@ export type TVenueCreateDTO = {
 
 export type TVenueUpdateDTO = {
 	name?: string;
+	categoryId?: Id;
 };
