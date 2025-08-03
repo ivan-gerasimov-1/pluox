@@ -1,0 +1,16 @@
+.actionSheetInput {
+	width: 100%;
+	padding: 10px 15px;
+
+	font-family: inherit;
+	font-size: var(--fs-100);
+
+	border: var(--border-90);
+	border-radius: var(--br-90);
+
+	color: inherit;
+}
+
+.actionSheetButton {
+	margin-top: 20px;
+}
