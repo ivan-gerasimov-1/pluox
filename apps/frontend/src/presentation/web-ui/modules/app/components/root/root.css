@@ -95,9 +95,12 @@
 	--header-height: 40px;
 
 	/** Navbar */
-	--navbar-inner-height: 55px;
+	--navbar-inner-height: 70px;
 	--navbar-gap: 15px;
-	--navbar-height: calc(var(--navbar-inner-height) + var(--navbar-gap));
+	--navbar-height: calc(
+		var(--navbar-inner-height) + var(--navbar-gap) +
+			calc(var(--navbar-gap) * 1.5)
+	);
 }
 
 body {
