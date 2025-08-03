@@ -12,7 +12,7 @@ import {
 } from '@root/core/infrastructure/serviceContainer/types';
 import type { IWindow } from '@root/presentation/web-ui/types';
 
-export async function main(window: IWindow): Promise<void> {
+export async function app(window: IWindow): Promise<void> {
 	initializeUmami();
 	initializeSentry();
 

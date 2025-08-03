@@ -1,3 +1,3 @@
-import { main } from '@root/main';
+import { app } from '@root/app';
 
-main(window);
+app(window);
