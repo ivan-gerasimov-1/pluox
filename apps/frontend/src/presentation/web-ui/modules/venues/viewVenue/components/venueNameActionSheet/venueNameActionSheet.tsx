@@ -8,12 +8,16 @@ import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { venueNameActionSheetI18n } from './venueNameActionSheet.i18n';
 
 import styles from './venueNameActionSheet.module.css';
+import { useVenueUpdateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
+import { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
-export function VenueNameActionSheet(
-	props: TDialogComponentProps<{ venueName: string }>,
-) {
+export function VenueNameActionSheet({
+	venue,
+	close,
+}: TDialogComponentProps<{ venue: TVenueDTO }, {}>) {
 	let intl = useIntl(venueNameActionSheetI18n);
-	let [name, setName] = useState(props.venueName);
+	let venueUpdateMutation = useVenueUpdateMutation(venue.id);
+	let [name, setName] = useState(venue.name);
 
 	function handleSave() {
 		let nextName = name.trim();
@@ -22,9 +26,16 @@ export function VenueNameActionSheet(
 			return;
 		}
 
-		props.close({
-			venueName: nextName,
-		});
+		venueUpdateMutation.mutate(
+			{
+				name: nextName,
+			},
+			{
+				onSuccess: () => {
+					close({});
+				},
+			},
+		);
 	}
 
 	return (

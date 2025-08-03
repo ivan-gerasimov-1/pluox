@@ -2,7 +2,6 @@ import { useParams } from 'react-router';
 
 import { Id } from '@root/core/domain/types';
 
-import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 
 import {
@@ -33,11 +32,6 @@ export function VenueViewScreen() {
 	let venueArchiveMutation = useVenueArchiveMutation();
 	let venueUnarchiveMutation = useVenueUnarchiveMutation();
 
-	let venueUpdateMutation = {
-		mutate: (venueId: Id, venueUpdateDto: { name: string }) => {
-			//
-		},
-	};
 	let venueRemoveMutation = useVenueRemoveMutation({
 		onSuccess: () => {
 			navigation.venueListPage();
@@ -68,18 +62,7 @@ export function VenueViewScreen() {
 					<b>Название: </b> {venue.name}
 					<IconButton
 						iconName={EIconName.Edit}
-						onClick={() => {
-							let actionSheetApi = dialog.render(VenueNameActionSheet, {
-								venueName: venue.name,
-								close: (payload: { venueName: string }) => {
-									venueUpdateMutation.mutate(venue.id, {
-										name: payload.venueName,
-									});
-
-									actionSheetApi.close();
-								},
-							});
-						}}
+						onClick={() => dialog.render(VenueNameActionSheet, { venue })}
 					/>
 				</div>
 
