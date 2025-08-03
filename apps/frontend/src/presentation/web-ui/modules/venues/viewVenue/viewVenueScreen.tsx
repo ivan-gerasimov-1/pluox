@@ -20,6 +20,7 @@ import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
 
+import { VenueCategoryActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueCategoryActionSheet/venueCategoryActionSheet';
 import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
 
 import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
@@ -72,8 +73,17 @@ export function VenueViewScreen() {
 
 				<br />
 
-				<div>
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+					}}
+				>
 					<b>{intl.translate('categories')}: </b> {venue.categoryName}
+					<IconButton
+						iconName={EIconName.Edit}
+						onClick={() => dialog.render(VenueCategoryActionSheet, { venue })}
+					/>
 				</div>
 			</div>
 
