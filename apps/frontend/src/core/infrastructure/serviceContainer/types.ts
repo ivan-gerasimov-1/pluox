@@ -72,6 +72,7 @@ import type {
 	IVenueCreateUseCase,
 	IVenueDeleteUseCase,
 	IVenueUnarchiveUseCase,
+	IVenueUpdateUseCase,
 	IVenueUseCase,
 } from '@root/core/modules/venue/application/venueUseCase/types';
 import type { IVenueRepository } from '@root/core/modules/venue/domain/venueRepository/types';
@@ -185,6 +186,7 @@ export const EServiceToken = {
 	VENUE_QUERY_SERVICE: 'VenueQueryService',
 	VENUE_USE_CASE: 'VenueUseCase',
 	VENUE_CREATE_USE_CASE: 'VenueCreateUseCase',
+	VENUE_UPDATE_USE_CASE: 'VenueUpdateUseCase',
 	VENUE_DELETE_USE_CASE: 'VenueDeleteUseCase',
 	VENUE_ARCHIVE_USE_CASE: 'VenueArchiveUseCase',
 	VENUE_UNARCHIVE_USE_CASE: 'VenueUnarchiveUseCase',
@@ -272,6 +274,7 @@ export interface IServiceMap {
 	[EServiceToken.VENUE_QUERY_SERVICE]: IVenueQueryService;
 	[EServiceToken.VENUE_USE_CASE]: IVenueUseCase;
 	[EServiceToken.VENUE_CREATE_USE_CASE]: IVenueCreateUseCase;
+	[EServiceToken.VENUE_UPDATE_USE_CASE]: IVenueUpdateUseCase;
 	[EServiceToken.VENUE_DELETE_USE_CASE]: IVenueDeleteUseCase;
 	[EServiceToken.VENUE_ARCHIVE_USE_CASE]: IVenueArchiveUseCase;
 	[EServiceToken.VENUE_UNARCHIVE_USE_CASE]: IVenueUnarchiveUseCase;

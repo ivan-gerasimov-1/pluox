@@ -8,6 +8,7 @@ import { VenueArchiveUseCase } from '@root/core/modules/venue/application/venueU
 import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
 import { VenueDeleteUseCase } from '@root/core/modules/venue/application/venueUseCase/venueDeleteUseCase';
 import { VenueUnarchiveUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUnarchiveUseCase';
+import { VenueUpdateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUpdateUseCase';
 import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
 import { venueDataSourceFactory } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSourceFactory';
 import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
@@ -39,6 +40,7 @@ export const venueModule: IModule = {
 			useClass: VenueUseCase,
 			deps: [
 				EServiceToken.VENUE_CREATE_USE_CASE,
+				EServiceToken.VENUE_UPDATE_USE_CASE,
 				EServiceToken.VENUE_DELETE_USE_CASE,
 				EServiceToken.VENUE_ARCHIVE_USE_CASE,
 				EServiceToken.VENUE_UNARCHIVE_USE_CASE,
@@ -53,6 +55,11 @@ export const venueModule: IModule = {
 				EServiceToken.ID_GENERATOR,
 				EServiceToken.TEMPORAL,
 			],
+		},
+		{
+			token: EServiceToken.VENUE_UPDATE_USE_CASE,
+			useClass: VenueUpdateUseCase,
+			deps: [EServiceToken.VENUE_REPOSITORY, EServiceToken.VENUE_MAPPER],
 		},
 		{
 			token: EServiceToken.VENUE_DELETE_USE_CASE,

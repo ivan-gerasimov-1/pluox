@@ -16,4 +16,6 @@ export type TVenueCreateDTO = {
 	isArchived: boolean;
 };
 
-export type TVenueUpdateDTO = {};
+export type TVenueUpdateDTO = {
+	name: string;
+};
