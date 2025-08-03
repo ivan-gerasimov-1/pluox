@@ -93,24 +93,12 @@ export function VenueViewScreen() {
 			<div className={styles.actionsContainer}>
 				<Button
 					onClick={() => {
-						navigation.to(EAppPath.VENUES_EDIT.replace(':id', venue.id));
-					}}
-					size="m"
-					isWide
-				>
-					Редактировать
-				</Button>
-
-				<Button
-					onClick={() => {
 						if (venue.isArchived) {
 							venueUnarchiveMutation.mutate(venue.id);
 						} else {
 							venueArchiveMutation.mutate(venue.id);
 						}
 					}}
-					size="m"
-					color="red"
 					isWide
 				>
 					{venue.isArchived ? 'Разархивировать' : 'Архивировать'}
@@ -121,7 +109,6 @@ export function VenueViewScreen() {
 						onClick={() => {
 							venueRemoveMutation.mutate(venue.id);
 						}}
-						size="m"
 						color="red"
 						isWide
 					>
