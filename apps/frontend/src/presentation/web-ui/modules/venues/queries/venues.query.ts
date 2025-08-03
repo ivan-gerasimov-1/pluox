@@ -7,6 +7,7 @@ import type { Id } from '@root/core/domain/types';
 import type {
 	TVenueCreateDTO,
 	TVenueDTO,
+	TVenueUpdateDTO,
 } from '@root/core/modules/venue/application/dto/venueDTO';
 
 import { createVenueQuery } from '@root/presentation/web-ui/modules/venues/queries/createVenueQuery';
@@ -131,6 +132,31 @@ export function useVenueRemoveMutation(options: { onSuccess?: () => void }) {
 			});
 
 			if (options.onSuccess) {
+				options.onSuccess();
+			}
+		},
+	});
+
+	return result;
+}
+
+export function useVenueUpdateMutation(
+	id: Id,
+	options?: { onSuccess?: () => void },
+) {
+	let queryClient = useQueryClient();
+	let venueUseCase = useService(EServiceToken.VENUE_USE_CASE);
+
+	let result = useMutation({
+		mutationFn: async (venueUpdateDto: TVenueUpdateDTO) => {
+			return venueUseCase.update(id, venueUpdateDto);
+		},
+		onSuccess: async () => {
+			await invalidateVenueOneByIdQuery(id, {
+				queryClient,
+			});
+
+			if (options?.onSuccess) {
 				options.onSuccess();
 			}
 		},
