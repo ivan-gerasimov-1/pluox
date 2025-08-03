@@ -19,7 +19,7 @@ export type TDialogComponent<
 	TClosePayload = never,
 > = React.FunctionComponent<TDialogComponentProps<TProps, TClosePayload>>;
 
-export type TDialogComponentProps<TProps = {}, TClosePayload = void> = {
+export type TDialogComponentProps<TProps = {}, TClosePayload = TProps> = {
 	id: string;
 	close: TClosePayload extends void
 		? () => void
