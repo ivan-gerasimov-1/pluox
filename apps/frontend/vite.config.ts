@@ -123,11 +123,11 @@ export default defineConfig(({ mode }) => {
 							return 'vendors';
 						}
 
-						if (id.includes('/core')) {
+						if (id.includes('src/core')) {
 							return 'core';
 						}
 
-						if (id.includes('/presentation')) {
+						if (id.includes('src/presentation')) {
 							return 'ui';
 						}
 					},
