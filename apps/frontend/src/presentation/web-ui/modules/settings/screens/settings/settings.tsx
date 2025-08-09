@@ -2,10 +2,7 @@ import { useState } from 'react';
 
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import {
-	ECurrency,
-	type TCurrency,
-} from '@root/core/modules/currency/domain/types';
+import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
@@ -24,6 +21,7 @@ import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 
 import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
+import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
@@ -199,22 +197,9 @@ export function SettingsScreen() {
 							<span className={styles.fieldValue}>{appConfig.currency}</span>
 						</div>
 
-						<IconSelect
-							id="currency"
-							name="currency"
-							icon={EIconName.CaretDown}
-							value={appConfig.currency}
-							onChange={(currency) => {
-								updateAppConfig({
-									currency,
-								});
-							}}
-							options={Object.values(ECurrency).map((currency) => {
-								return {
-									value: currency,
-									label: currency,
-								};
-							})}
+						<IconButton
+							iconName={EIconName.CaretDown}
+							onClick={() => dialog.render(CurrencyActionSheet)}
 						/>
 					</div>
 
