@@ -1,0 +1,34 @@
+.list {
+	margin: 0;
+	padding: 0;
+	padding-block-end: 20px;
+
+	list-style: none;
+}
+
+.listItem {
+	display: flex;
+	justify-content: space-between;
+
+	padding: 10px;
+}
+
+.listMarker {
+	width: 25px;
+	height: 25px;
+
+	margin-inline-end: 15px;
+
+	border-radius: 10px;
+
+	background-color: var(--black-100);
+}
+
+.itemTitle {
+	display: flex;
+	align-items: center;
+}
+
+.checkmark {
+	font-weight: var(--fw-200);
+}
