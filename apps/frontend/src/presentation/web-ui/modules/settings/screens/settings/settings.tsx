@@ -4,7 +4,6 @@ import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
 import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
@@ -22,11 +21,11 @@ import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens
 
 import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
 import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
+import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-import { IconSelect } from '@root/presentation/web-ui/uiKit/iconSelect/iconSelect';
 
 import {
 	useAppConfigQuery,
@@ -155,30 +154,9 @@ export function SettingsScreen() {
 							</span>
 						</div>
 
-						<IconSelect
-							id="locale"
-							name="locale"
-							icon={EIconName.CaretDown}
-							value={appConfig.locale}
-							onChange={(locale) => {
-								updateAppConfig({
-									locale,
-								});
-
-								updateUser({
-									locale,
-								});
-							}}
-							options={[
-								{
-									value: ELocaleCode.RU_RU,
-									label: 'Русский',
-								},
-								{
-									value: ELocaleCode.EN_US,
-									label: 'English',
-								},
-							]}
+						<IconButton
+							iconName={EIconName.CaretDown}
+							onClick={() => dialog.render(LocaleActionSheet)}
 						/>
 					</div>
 				</Card>
