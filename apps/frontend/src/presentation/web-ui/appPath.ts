@@ -8,6 +8,9 @@ export const EAppPath = {
 
 	EXPENSES: '/expenses',
 
+	CATEGORIES: '/categories',
+	CATEGORIES_VIEW: '/categories/:id',
+
 	VENUES: '/venues',
 	VENUES_CREATE: '/venues/new',
 	VENUES_VIEW: '/venues/:id',

@@ -9,6 +9,9 @@ interface IAppNavigation {
 	mainPage(): void;
 	loginPage(): void;
 
+	categoryListPage(): void;
+	categoryPage(id: Id): void;
+
 	venueListPage(): void;
 	venuePage(id: Id): void;
 }
@@ -28,6 +31,14 @@ export function useAppNavigation(): IAppNavigation {
 		});
 	}
 
+	function goToCategoryListPage() {
+		navigate(EAppPath.CATEGORIES);
+	}
+
+	function goToCategoryPage(id: Id) {
+		navigate(`${EAppPath.CATEGORIES}/${id}`);
+	}
+
 	function goToVenueListPage() {
 		navigate(EAppPath.VENUES);
 	}
@@ -40,6 +51,8 @@ export function useAppNavigation(): IAppNavigation {
 		to: navigate,
 		mainPage: goToMainPage,
 		loginPage: goToLoginPage,
+		categoryListPage: goToCategoryListPage,
+		categoryPage: goToCategoryPage,
 		venueListPage: goToVenueListPage,
 		venuePage: goToVenuePage,
 	};
