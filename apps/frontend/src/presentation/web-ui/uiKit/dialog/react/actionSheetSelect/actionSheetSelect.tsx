@@ -1,16 +1,16 @@
 import styles from './actionSheetSelect.module.css';
 
-export function ActionSheetSelect<T extends string>({
+export function ActionSheetSelect<T extends { id: string; name: string }>({
 	value,
 	items,
 	onSelect,
 }: {
-	value?: T;
+	value?: T['id'];
 	items: T[];
-	onSelect: (value: T) => void;
+	onSelect: (value: T['id']) => void;
 }) {
 	function handleSelectItem(event: React.UIEvent<HTMLLIElement>) {
-		let item = event.currentTarget.dataset.item as T;
+		let item = event.currentTarget.dataset.item;
 
 		if (!item) {
 			return;
@@ -27,18 +27,18 @@ export function ActionSheetSelect<T extends string>({
 		<ul className={styles.list}>
 			{items.map((item) => (
 				<li
-					key={item}
+					key={item.id}
 					className={styles.listItem}
-					data-item={item}
+					data-item={item.id}
 					onClick={handleSelectItem}
 				>
 					<div className={styles.itemTitle}>
 						<div className={styles.listMarker}></div>
 
-						<span>{item}</span>
+						<span>{item.name}</span>
 					</div>
 
-					{isSelected(item) && <span className={styles.checkmark}>✓</span>}
+					{isSelected(item.id) && <span className={styles.checkmark}>✓</span>}
 				</li>
 			))}
 		</ul>
