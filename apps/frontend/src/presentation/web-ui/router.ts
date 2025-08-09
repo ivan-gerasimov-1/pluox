@@ -1,10 +1,11 @@
 import { createBrowserRouter as createRouter } from 'react-router';
 
+import { appRoutes } from '@root/presentation/web-ui/modules/app/app.module';
 import { authenticationRoutes } from '@root/presentation/web-ui/modules/authentication/authentication.module';
+import { categoryRoutes } from '@root/presentation/web-ui/modules/categories/categories.module';
 import { expenseRoutes } from '@root/presentation/web-ui/modules/expenses/expenses.module';
 import { settingsRoutes } from '@root/presentation/web-ui/modules/settings/settings.module';
 import { venueRoutes } from '@root/presentation/web-ui/modules/venues/venues.module';
-import { appRoutes } from '@root/presentation/web-ui/modules/app/app.module';
 
 import { ScreenLayout } from '@root/presentation/web-ui/modules/app/components/screenLayout/screenLayout';
 
@@ -19,6 +20,7 @@ export function createAppRouter(): IRouter {
 			children: [
 				...expenseRoutes,
 				...venueRoutes,
+				...categoryRoutes,
 				...settingsRoutes,
 				...appRoutes,
 			],
