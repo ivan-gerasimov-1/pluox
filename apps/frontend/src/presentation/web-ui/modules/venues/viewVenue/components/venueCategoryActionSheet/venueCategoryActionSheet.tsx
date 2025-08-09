@@ -9,6 +9,7 @@ import { useCategoryListQuery } from '@root/presentation/web-ui/modules/categori
 import { useVenueUpdateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { ActionSheetSelect } from '@root/presentation/web-ui/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
 
 import { venueCategoryActionSheetI18n } from './venueCategoryActionSheet.i18n';
 
@@ -42,53 +43,11 @@ export function VenueCategoryActionSheet({
 
 	return (
 		<>
-			<ul
-				style={{
-					listStyle: 'none',
-					margin: 0,
-					padding: 0,
-					paddingBlockEnd: '20px',
-				}}
-			>
-				{categories?.map((category) => (
-					<li
-						key={category.id}
-						style={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							padding: '10px',
-						}}
-						onClick={() => setSelectedCategory(category.id)}
-					>
-						<div
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-							}}
-						>
-							<div
-								style={{
-									width: '25px',
-									height: '25px',
-									backgroundColor: 'var(--black-100)',
-									borderRadius: '10px',
-									marginInlineEnd: '15px',
-								}}
-							></div>
-							<span>{category.name}</span>
-						</div>
-						{selectedCategory === category.id && (
-							<span
-								style={{
-									fontWeight: 600,
-								}}
-							>
-								✓
-							</span>
-						)}
-					</li>
-				))}
-			</ul>
+			<ActionSheetSelect
+				value={selectedCategory}
+				items={categories}
+				onSelect={setSelectedCategory}
+			/>
 
 			<Button className={styles.actionSheetButton} onClick={handleSave} isWide>
 				{intl.translate('save')}
