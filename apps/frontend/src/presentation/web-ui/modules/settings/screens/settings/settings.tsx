@@ -300,8 +300,7 @@ export function SettingsScreen() {
 						<IconButton
 							iconName={EIconName.Settings}
 							onClick={() => {
-								// eslint-disable-next-line no-alert
-								window.alert('Not Implemented');
+								navigation.categoryListPage();
 							}}
 						/>
 					</div>
