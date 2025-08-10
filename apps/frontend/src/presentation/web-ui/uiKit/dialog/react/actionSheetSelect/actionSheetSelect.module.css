@@ -1,4 +1,8 @@
 .list {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+
 	margin: 0;
 	padding: 0;
 	padding-block-end: 20px;
@@ -9,26 +13,103 @@
 .listItem {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	gap: 15px;
 
-	padding: 10px;
-}
+	padding: 15px 10px;
 
-.listMarker {
-	width: 25px;
-	height: 25px;
+	border-radius: var(--br-90);
 
-	margin-inline-end: 15px;
+	user-select: none;
+	outline: none;
 
-	border-radius: 10px;
+	transition:
+		background-color var(--transition-100),
+		box-shadow var(--transition-100);
 
-	background-color: var(--black-100);
+	&:hover {
+		background-color: var(--grey-100);
+	}
+
+	&:active {
+		background-color: var(--grey-200);
+	}
+
+	&:focus-visible {
+		box-shadow: 0 0 0 2px var(--black-200);
+	}
 }
 
 .itemTitle {
 	display: flex;
 	align-items: center;
+
+	gap: 10px;
+}
+
+.marker {
+	position: relative;
+
+	padding: 7.5px;
+
+	border: var(--border-900);
+	border-width: 2px;
+	border-radius: var(--br-100);
+
+	background-color: transparent;
+
+	transition:
+		border-color var(--transition-90),
+		background-color var(--transition-90);
+
+	&::after {
+		position: absolute;
+		inset: 1px;
+
+		content: '';
+
+		border-radius: var(--br-100);
+
+		background: var(--black-100);
+		opacity: 0;
+
+		transform: scale(2);
+
+		transition:
+			opacity var(--transition-90),
+			transform var(--transition-90);
+	}
+}
+
+.selected {
+	background: var(--grey-200);
+
+	& .marker {
+		border-color: var(--black-200);
+
+		&::after {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
 }
 
 .checkmark {
 	font-weight: var(--fw-200);
+	color: var(--black-100);
+
+	opacity: 0;
+
+	transition: opacity var(--transition-90);
+
+	&[data-selected='true'] {
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.listItem,
+	.marker::after {
+		transition: none;
+	}
 }
