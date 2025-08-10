@@ -47,13 +47,8 @@ export function runMigrations() {
 	saveMigrationsToStorage(persistedMigrations);
 }
 
-/** @todo LV-114 | Remove @savee/migrations backwards compatibility */
 function readMigrationsFromStorage(): TMigrations {
-	return JSON.parse(
-		(window.localStorage.getItem('@savee/migrations') ||
-			window.localStorage.getItem('@pluox/migrations')) ??
-			'{}',
-	);
+	return JSON.parse(window.localStorage.getItem('@pluox/migrations') ?? '{}');
 }
 
 function saveMigrationsToStorage(migrations: TMigrations) {
