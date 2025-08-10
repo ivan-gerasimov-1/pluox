@@ -23,10 +23,10 @@ type TMigrations = Record<string, TMigrationDTO>;
 export function runMigrations() {
 	let persistedMigrations = readMigrationsFromStorage();
 	let migrations = registerMigrations({
-		_addLocaleToUser_: addLocaleToUser,
+		_moveSaveeDataToPluox_: moveSaveeDataToPluox,
 		_removeSaveeMigrations_: removeSaveeMigrations,
+		_addLocaleToUser_: addLocaleToUser,
 		_addIsArchivedFieldToVenues: addIsArchivedFieldToVenues,
-		// _moveSaveeDataToPluox_: moveSaveeDataToPluox,
 	});
 
 	for (let [id, migrationFn] of migrations) {
