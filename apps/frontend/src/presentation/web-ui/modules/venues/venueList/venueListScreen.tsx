@@ -30,27 +30,39 @@ export function VenueListScreen() {
 
 			<ul className={styles.venueList}>
 				{venueList.map((venue) => (
-					<li key={venue.id} className={styles.venueListItem}>
+					<li key={venue.id}>
 						<AppLink
 							className={styles.venueLink}
 							to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}
 						>
-							{venue.name} ({venue.categoryName})
+							<div className={styles.venue}>
+								<span className={styles.icon}>{venue.name?.[0]}</span>
+
+								<div className={styles.meta}>
+									<span className={styles.name}>{venue.name}</span>
+									<span className={styles.category}>{venue.categoryName}</span>
+								</div>
+							</div>
 						</AppLink>
 					</li>
 				))}
-			</ul>
 
-			<hr />
-
-			<ul className={styles.venueList}>
 				{venueListArchived.map((venue) => (
-					<li key={venue.id} className={styles.venueListItem}>
+					<li key={venue.id}>
 						<AppLink
 							className={styles.venueLink}
 							to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}
 						>
-							{venue.name} ({venue.categoryName}, ARCHIVED)
+							<div className={styles.venue}>
+								<span className={styles.icon}>{venue.name?.[0]}</span>
+
+								<div className={styles.meta}>
+									<span className={styles.name}>{venue.name}</span>
+									<span className={styles.category}>{venue.categoryName}</span>
+								</div>
+							</div>
+
+							<span className={styles.badge}>Archived</span>
 						</AppLink>
 					</li>
 				))}
