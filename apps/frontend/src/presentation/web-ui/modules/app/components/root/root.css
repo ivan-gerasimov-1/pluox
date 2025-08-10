@@ -85,6 +85,7 @@
 	--br-100: 24px;
 
 	/* misc */
+	--transition-90: 150ms ease-in-out;
 	--transition-100: 200ms ease-in-out;
 
 	/* ActionSheet */
