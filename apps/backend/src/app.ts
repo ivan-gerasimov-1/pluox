@@ -1,5 +1,9 @@
 import type { D1Database, KVNamespace } from '@cloudflare/workers-types';
 
+import { eq } from 'drizzle-orm';
+import { z } from 'zod';
+
+import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
 import { env } from 'hono/adapter';
 import { deleteCookie, setSignedCookie } from 'hono/cookie';
@@ -8,17 +12,22 @@ import { csrf } from 'hono/csrf';
 import { jwt, sign, type JwtVariables } from 'hono/jwt';
 import { secureHeaders } from 'hono/secure-headers';
 
-import { zValidator } from '@hono/zod-validator';
-import { z } from 'zod';
+import { users } from '#db/schema/schema';
 
 import { EResponseCode } from '#app/enums';
 import {
 	comparePasswordHash,
 	createPasswordHash,
 } from '#app/modules/crypto/index';
+import {
+	createD1Instance,
+	type TDbClient,
+} from '#app/modules/database/drizzle';
 
 export const app = new Hono<{
-	Variables: JwtVariables<{
+	Variables: {
+		db: TDbClient;
+	} & JwtVariables<{
 		id: string;
 		email: string;
 	}>;
@@ -54,6 +63,14 @@ app
 	) //
 	.use(csrf())
 	.use(secureHeaders())
+	.use(async (ctx, next) => {
+		let database = env(ctx).DB;
+		let drizzleInstance = createD1Instance(database);
+
+		ctx.set('db', drizzleInstance);
+
+		await next();
+	})
 	.post(
 		'/signup',
 		zValidator(
@@ -69,16 +86,12 @@ app
 			}),
 		),
 		async (ctx) => {
+			let dbInstance = ctx.get('db');
 			let payload = ctx.req.valid('json');
 
-			let existingUser = await env(ctx)
-				.DB //
-				.prepare('SELECT * FROM users WHERE email = ?')
-				.bind(payload.email)
-				.first<{
-					id: string;
-					email: string;
-				}>();
+			let existingUser = await dbInstance.query.users.findFirst({
+				where: eq(users.email, payload.email),
+			});
 
 			if (existingUser) {
 				return ctx.json({
@@ -96,18 +109,35 @@ app
 				name: payload.name,
 				locale: payload.locale,
 				createdAt: payload.createdAt,
-				modifiedAt: payload.modifiedAt,
+				updatedAt: payload.modifiedAt,
 			};
 
-			let result = await env(ctx)
-				.DB //
-				.prepare(
-					'INSERT INTO users (id, email, password) VALUES (:id, :email, :password)',
-				)
-				.bind(user.id, user.email, user.password)
-				.run();
+			try {
+				await dbInstance.insert(users).values(user);
 
-			if (!result.success) {
+				await setSignedCookie(
+					ctx,
+					env(ctx).AUTH_COOKIE_NAME,
+					await sign(
+						{
+							id: user.id,
+							email: user.email,
+						},
+						env(ctx).JWT_TOKEN_SECRET,
+					),
+					env(ctx).AUTH_COOKIE_SECRET,
+					{
+						httpOnly: true,
+						secure: true,
+						sameSite: 'Lax',
+					},
+				);
+
+				return ctx.json({
+					id: user.id,
+					email: user.email,
+				});
+			} catch (error) {
 				return ctx.json({
 					error: {
 						code: EResponseCode.INTERNAL_SERVER_ERROR,
@@ -115,29 +145,6 @@ app
 					},
 				});
 			}
-
-			await setSignedCookie(
-				ctx,
-				env(ctx).AUTH_COOKIE_NAME,
-				await sign(
-					{
-						id: user.id,
-						email: user.email,
-					},
-					env(ctx).JWT_TOKEN_SECRET,
-				),
-				env(ctx).AUTH_COOKIE_SECRET,
-				{
-					httpOnly: true,
-					secure: true,
-					sameSite: 'Lax',
-				},
-			);
-
-			return ctx.json({
-				id: user.id,
-				email: user.email,
-			});
 		},
 	)
 	.post(
@@ -150,17 +157,12 @@ app
 			}),
 		),
 		async (ctx) => {
+			let dbInstance = ctx.get('db');
 			let payload = ctx.req.valid('json');
 
-			let user = await env(ctx)
-				.DB //
-				.prepare('SELECT * FROM users WHERE email = ?')
-				.bind(payload.email)
-				.first<{
-					id: string;
-					email: string;
-					password: string;
-				}>();
+			let user = await dbInstance.query.users.findFirst({
+				where: eq(users.email, payload.email),
+			});
 
 			if (!user || !comparePasswordHash(payload.password, user.password)) {
 				return ctx.json(
