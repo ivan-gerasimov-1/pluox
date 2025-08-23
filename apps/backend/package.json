@@ -42,6 +42,7 @@
 		"lint": "eslint ./src"
 	},
 	"imports": {
+		"#db/*": "./.db/*.ts",
 		"#app/*": "./src/*.ts"
 	},
 	"packageManager": "npm@11.5.1",

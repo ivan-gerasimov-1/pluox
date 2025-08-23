@@ -11,7 +11,8 @@
 		{
 			"binding": "DB",
 			"database_id": "bd07d79d-f9d7-446c-b6a1-6369f13f2421",
-			"database_name": "pluox"
+			"database_name": "pluox",
+			"migrations_dir": ".db/migrations"
 		}
 	],
 	"kv_namespaces": [
