@@ -72,6 +72,15 @@ jobs:
         run: |
           echo -e "$ENV_FILE" > apps/backend/.dev.vars
 
+      - name: Migrate
+        uses: cloudflare/wrangler-action@v3
+        with:
+          wranglerVersion: '4.26.0'
+          apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: 'apps/backend'
+          command: d1 migrations apply DB --remote
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
