@@ -15,8 +15,13 @@ const drizzleAdapterConfig = {
 } satisfies DrizzleAdapterConfig;
 
 const betterAuthConfig = {
+	appName: 'Pluox',
 	emailAndPassword: {
 		enabled: true,
+	},
+	advanced: {
+		cookiePrefix: 'pluox',
+		useSecureCookies: true,
 	},
 } satisfies BetterAuthOptions;
 
