@@ -38,7 +38,7 @@
 		"db:migrate": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/migrate.ts",
 		"___drizzle___": "",
 		"db:drizzle:generate": "drizzle-kit generate",
-		"db:auth:generate": "npx @better-auth/cli generate --config=./src/modules/authentication/createAuthClient.ts",
+		"db:auth:generate": "npx @better-auth/cli generate --config=./src/modules/authentication/createAuthClient.ts --output=./.db/schema/schema.ts",
 		"db:drizzle:migrate": "wrangler d1 migrations apply --local DB",
 		"___D1___": "",
 		"d1:init": "wrangler d1 execute pluox -j --local --file .db/schema.sql",
