@@ -63,6 +63,7 @@ jobs:
           JWT_TOKEN_SECRET: 'op://Pluox/pluox-api_cloudflare_env/JWT_TOKEN_SECRET.production'
           AUTH_COOKIE_SECRET: 'op://Pluox/pluox-api_cloudflare_env/AUTH_COOKIE_SECRET.production'
           APP_OPEN_EXCHANGE_RATES_API_KEY: 'op://Pluox/pluox-api_cloudflare_env/APP_OPEN_EXCHANGE_RATES_API_KEY.production'
+          AUTH_SECRET: 'op://Pluox/pluox-api_cloudflare_env/AUTH_SECRET.production'
 
       - name: Install dependencies
         run: |
@@ -92,8 +93,10 @@ jobs:
             JWT_TOKEN_SECRET
             AUTH_COOKIE_SECRET
             APP_OPEN_EXCHANGE_RATES_API_KEY
+            AUTH_SECRET
           command: deploy
         env:
           JWT_TOKEN_SECRET: ${{ env.JWT_TOKEN_SECRET }}
           AUTH_COOKIE_SECRET: ${{ env.AUTH_COOKIE_SECRET }}
           APP_OPEN_EXCHANGE_RATES_API_KEY: ${{ env.APP_OPEN_EXCHANGE_RATES_API_KEY }}
+          AUTH_SECRET: ${{ env.AUTH_SECRET }}
