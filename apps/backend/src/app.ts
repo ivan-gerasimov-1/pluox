@@ -9,12 +9,16 @@ import { env } from 'hono/adapter';
 import { deleteCookie, setSignedCookie } from 'hono/cookie';
 import { cors } from 'hono/cors';
 import { csrf } from 'hono/csrf';
-import { jwt, sign, type JwtVariables } from 'hono/jwt';
+import { jwt, type JwtVariables, sign } from 'hono/jwt';
 import { secureHeaders } from 'hono/secure-headers';
 
 import { users } from '#db/schema/schema';
 
 import { EResponseCode } from '#app/enums';
+import {
+	createAuthClient,
+	type IAuthClient,
+} from '#app/modules/authentication/createAuthClient';
 import {
 	comparePasswordHash,
 	createPasswordHash,
@@ -27,6 +31,7 @@ import {
 export const app = new Hono<{
 	Variables: {
 		db: TDbClient;
+		auth: IAuthClient;
 	} & JwtVariables<{
 		id: string;
 		email: string;
@@ -68,6 +73,14 @@ app
 		let drizzleInstance = createD1Instance(database);
 
 		ctx.set('db', drizzleInstance);
+
+		await next();
+	})
+	.use(async (ctx, next) => {
+		let database = env(ctx).DB;
+		let authClient = createAuthClient(database);
+
+		ctx.set('auth', authClient);
 
 		await next();
 	})
