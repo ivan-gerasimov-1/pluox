@@ -77,7 +77,7 @@ app
 		await next();
 	})
 	.use(async (ctx, next) => {
-		let database = env(ctx).DB;
+		let database = ctx.get('db');
 		let authClient = createAuthClient(database);
 
 		ctx.set('auth', authClient);
