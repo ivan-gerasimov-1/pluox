@@ -199,12 +199,17 @@ export function useExpenseCreateMutation() {
 
 export function useExpenseUpdateMutation() {
 	let queryClient = useQueryClient();
-	// let expenseUseCase = useService(EServiceToken.EXPENSE_USE_CASE);
+	let expenseUseCase = useService(EServiceToken.EXPENSE_USE_CASE);
 
 	return useMutation({
-		mutationFn: async (payload: TExpenseUpdateDTO) => {
-			console.log(payload);
-			// expenseUseCase.update(payload);
+		mutationFn: async ({
+			id,
+			payload,
+		}: {
+			id: Id;
+			payload: TExpenseUpdateDTO;
+		}) => {
+			expenseUseCase.update(id, payload);
 		},
 		onSuccess: async () => {
 			await invalidateExpenseQuery({

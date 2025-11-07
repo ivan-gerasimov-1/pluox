@@ -14,11 +14,17 @@ export function EditExpenseActionSheet({
 	return (
 		<ExpenseForm
 			onSubmit={(payload) =>
-				updateExpense(payload, {
-					onSuccess() {
-						close();
+				updateExpense(
+					{
+						id: expense.id,
+						payload,
 					},
-				})
+					{
+						onSuccess() {
+							close();
+						},
+					},
+				)
 			}
 			amount={expense.amount}
 			currency={expense.currency}
