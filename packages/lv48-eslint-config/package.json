@@ -5,16 +5,16 @@
 	"type": "module",
 	"main": "index.js",
 	"dependencies": {
-		"@eslint/js": "9.36.0",
-		"eslint": "9.36.0",
+		"@eslint/js": "9.39.1",
+		"eslint": "9.39.1",
 		"eslint-plugin-react": "7.37.5",
 		"globals": "14.0.0",
-		"jiti": "2.6.0",
-		"typescript": "5.9.2",
-		"typescript-eslint": "8.44.1"
+		"jiti": "2.6.1",
+		"typescript": "5.9.3",
+		"typescript-eslint": "8.46.3"
 	},
 	"devDependencies": {
-		"@tanstack/eslint-plugin-query": "5.90.1",
-		"eslint-plugin-react-hooks": "5.2.0"
+		"@tanstack/eslint-plugin-query": "5.91.2",
+		"eslint-plugin-react-hooks": "7.0.1"
 	}
 }

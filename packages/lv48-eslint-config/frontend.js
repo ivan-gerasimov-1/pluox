@@ -21,7 +21,7 @@ export default [
 	...base,
 	pluginReact.configs.flat.recommended,
 	pluginReact.configs.flat['jsx-runtime'],
-	pluignHooks.configs['recommended-latest'],
+	pluignHooks.configs.flat['recommended-latest'],
 	...pluginQuery.configs['flat/recommended'],
 	rules,
 ];
