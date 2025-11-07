@@ -15,6 +15,7 @@ import {
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { useVenueName } from '@root/presentation/web-ui/modules/venues/hooks/useVenueName';
 import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
@@ -31,6 +32,8 @@ export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let currencyRatesService = useService(EServiceToken.CURRENCY_RATE_SERVICE);
 	let dialog = useDialog();
+
+	let getVenueName = useVenueName();
 
 	let { data: expenseList } = useExpenseListQuery({
 		dateFrom: props.dateFrom,
@@ -101,7 +104,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 									{(item.description || item.venue) && (
 										<div className={styles.description}>
-											{item.venue && <span>⚲ {item.venue}</span>}
+											{item.venue && <span>⚲ {getVenueName(item.venue)}</span>}
 											{item.venue && item.description && <span> | </span>}
 											{item.description}
 										</div>
