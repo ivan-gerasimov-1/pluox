@@ -8,7 +8,10 @@ import {
 
 import type { Id } from '@domain/types';
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
-import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type {
+	TExpenseCreateDTO,
+	TExpenseUpdateDTO,
+} from '@root/core/modules/expense/application/dto/expenseDTO';
 
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -196,6 +199,23 @@ export function useExpenseCreateMutation() {
 	return useMutation({
 		mutationFn: async (payload: TExpenseCreateDTO) => {
 			expenseUseCase.create(payload);
+		},
+		onSuccess: async () => {
+			await invalidateExpenseQuery({
+				queryClient,
+			});
+		},
+	});
+}
+
+export function useExpenseUpdateMutation() {
+	let queryClient = useQueryClient();
+	// let expenseUseCase = useService(EServiceToken.EXPENSE_USE_CASE);
+
+	return useMutation({
+		mutationFn: async (payload: TExpenseUpdateDTO) => {
+			console.log(payload);
+			// expenseUseCase.update(payload);
 		},
 		onSuccess: async () => {
 			await invalidateExpenseQuery({
