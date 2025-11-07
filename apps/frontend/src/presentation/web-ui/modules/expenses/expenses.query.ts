@@ -148,7 +148,6 @@ export function useExpenseListQuery(options: {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
 }) {
-	let vanueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let expenseRepository = useService(EServiceToken.EXPENSE_REPOSITORY);
 	let expenseMapper = useService(EServiceToken.EXPENSE_MAPPER);
@@ -173,19 +172,9 @@ export function useExpenseListQuery(options: {
 				},
 			);
 
-			let expenseList = expenses.items
-				.map((expense) => {
-					return expenseMapper.toDTO(expense);
-				})
-				.map((expense) => {
-					if (expense.venue) {
-						let venue = vanueQueryService.getById(expense.venue);
-
-						expense.venue = venue?.name ?? null;
-					}
-
-					return expense;
-				});
+			let expenseList = expenses.items.map((expense) => {
+				return expenseMapper.toDTO(expense);
+			});
 
 			return expenseService.groupExpenseByDate(expenseList);
 		},
