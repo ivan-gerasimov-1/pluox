@@ -2,6 +2,7 @@ import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dial
 
 import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
 import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
+import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
 import { useExpenseUpdateMutation } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 
 export function EditExpenseActionSheet({
@@ -24,7 +25,7 @@ export function EditExpenseActionSheet({
 			description={expense.description}
 			category={expense.category}
 			venue={expense.venue}
-			date={expense.date}
+			date={createDateViewValue(expense.date)}
 		/>
 	);
 }
