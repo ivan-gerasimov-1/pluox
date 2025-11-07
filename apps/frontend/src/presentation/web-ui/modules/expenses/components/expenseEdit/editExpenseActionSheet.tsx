@@ -8,7 +8,7 @@ import { useExpenseUpdateMutation } from '@root/presentation/web-ui/modules/expe
 export function EditExpenseActionSheet({
 	expense,
 	close,
-}: TDialogComponentProps<{ expense: TExpenseDTO }, {}>) {
+}: TDialogComponentProps<{ expense: TExpenseDTO }, void>) {
 	let { mutate: updateExpense } = useExpenseUpdateMutation();
 
 	return (
@@ -16,7 +16,7 @@ export function EditExpenseActionSheet({
 			onSubmit={(payload) =>
 				updateExpense(payload, {
 					onSuccess() {
-						close({});
+						close();
 					},
 				})
 			}
