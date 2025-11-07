@@ -1,7 +1,9 @@
 import type { TISODateString } from '@root/core/domain/temporal/types';
 
-export function createDateViewValue(): TISODateString {
-	const date = new Date();
+export function createDateViewValue(
+	initialDate?: string | null,
+): TISODateString {
+	const date = initialDate ? new Date(initialDate) : new Date();
 
 	function format(value: number): string {
 		if (value < 10) {

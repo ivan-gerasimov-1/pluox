@@ -8,7 +8,10 @@ import {
 
 import type { Id } from '@domain/types';
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
-import type { TExpenseCreateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type {
+	TExpenseCreateDTO,
+	TExpenseUpdateDTO,
+} from '@root/core/modules/expense/application/dto/expenseDTO';
 
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
@@ -145,7 +148,6 @@ export function useExpenseListQuery(options: {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
 }) {
-	let vanueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);
 	let expenseService = useService(EServiceToken.EXPENSE_SERVICE);
 	let expenseRepository = useService(EServiceToken.EXPENSE_REPOSITORY);
 	let expenseMapper = useService(EServiceToken.EXPENSE_MAPPER);
@@ -170,19 +172,9 @@ export function useExpenseListQuery(options: {
 				},
 			);
 
-			let expenseList = expenses.items
-				.map((expense) => {
-					return expenseMapper.toDTO(expense);
-				})
-				.map((expense) => {
-					if (expense.venue) {
-						let venue = vanueQueryService.getById(expense.venue);
-
-						expense.venue = venue?.name ?? null;
-					}
-
-					return expense;
-				});
+			let expenseList = expenses.items.map((expense) => {
+				return expenseMapper.toDTO(expense);
+			});
 
 			return expenseService.groupExpenseByDate(expenseList);
 		},
@@ -196,6 +188,28 @@ export function useExpenseCreateMutation() {
 	return useMutation({
 		mutationFn: async (payload: TExpenseCreateDTO) => {
 			expenseUseCase.create(payload);
+		},
+		onSuccess: async () => {
+			await invalidateExpenseQuery({
+				queryClient,
+			});
+		},
+	});
+}
+
+export function useExpenseUpdateMutation() {
+	let queryClient = useQueryClient();
+	let expenseUseCase = useService(EServiceToken.EXPENSE_USE_CASE);
+
+	return useMutation({
+		mutationFn: async ({
+			id,
+			payload,
+		}: {
+			id: Id;
+			payload: TExpenseUpdateDTO;
+		}) => {
+			expenseUseCase.update(id, payload);
 		},
 		onSuccess: async () => {
 			await invalidateExpenseQuery({

@@ -5,13 +5,14 @@ import styles from './categoryIcon.module.css';
 
 export type TCategoryIconProps = {
 	categoryId: string | null;
+	onClick?: () => void;
 };
 
 export function CategoryIcon(props: TCategoryIconProps) {
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
 	return (
-		<span className={styles.icon}>
+		<span className={styles.icon} onClick={props.onClick}>
 			{categoryService.getCategoryIcon(props.categoryId)}
 		</span>
 	);
