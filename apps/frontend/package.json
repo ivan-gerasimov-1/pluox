@@ -39,10 +39,12 @@
 		"react-router": "7.9.5",
 		"react-scan": "0.4.3",
 		"react-swipeable-list": "1.10.0",
-		"react-transition-group": "4.4.5"
+		"react-transition-group": "4.4.5",
+		"tailwindcss": "4.1.17"
 	},
 	"devDependencies": {
 		"@lv48/eslint-config": "",
+		"@tailwindcss/vite": "4.1.17",
 		"@types/react": "19.2.2",
 		"@types/react-dom": "19.2.2",
 		"@types/react-router": "5.1.20",
