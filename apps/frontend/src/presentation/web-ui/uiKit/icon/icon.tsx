@@ -8,8 +8,6 @@ import {
 
 import { getIcon, type TIconName } from './icons';
 
-import styles from './icon.module.css';
-
 type TIconProps = {
 	name: TIconName;
 	size?: TIconSize;
@@ -21,5 +19,5 @@ export function Icon(props: TIconProps) {
 		return getIcon(props.name);
 	}, [props.name]);
 
-	return <SvgIcon width={size} height={size} className={styles.icon} />;
+	return <SvgIcon width={size} height={size} className="text-inherit" />;
 }
