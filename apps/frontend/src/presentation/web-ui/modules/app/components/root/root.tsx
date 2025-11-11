@@ -10,6 +10,7 @@ import { IRouter } from '@root/presentation/web-ui/router';
 import { Dialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/dialog';
 import { DialogClientProvider } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/dialogClientProvider';
 
+import '@root/presentation/web-ui/modules/app/components/root/tailwind.css';
 import '@root/presentation/web-ui/modules/app/components/root/root.css';
 
 type IRootProps = {
