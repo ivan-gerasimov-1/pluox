@@ -12,7 +12,7 @@
 		"build:production": "vite build --mode production",
 		"__analyze__": "",
 		"analyze": "npm run analyze:production",
-		"analyze:production": "BUNDLE_ANALYZER='on' vite build --mode production",
+		"analyze:production": "DEV_BUNDLE_ANALYZER='on' vite build --mode production",
 		"__lint__": "",
 		"lint": "eslint ./src",
 		"__test__": "",
