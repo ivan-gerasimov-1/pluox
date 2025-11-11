@@ -6,7 +6,7 @@ export function registerServiceWorker() {
 		onNeedRefresh() {
 			// eslint-disable-next-line no-alert
 			let isUpdateAccepted = window.confirm(
-				'New version of the app is available. Do you want to install update?',
+				'New version of the app is available. Do you want to install the update?',
 			);
 
 			if (isUpdateAccepted) {
