@@ -8,13 +8,16 @@ import {
 import 'react-swipeable-list/dist/styles.css';
 
 import type { TISODateString } from '@root/core/domain/temporal/types';
+import { EditExpenseActionSheet } from '@root/presentation/web-ui/modules/expenses/components/expenseEdit/editExpenseActionSheet';
 import {
 	useExpenseDeleteMutation,
 	useExpenseListQuery,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { useVenueName } from '@root/presentation/web-ui/modules/venues/hooks/useVenueName';
 import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
+import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 
@@ -28,6 +31,9 @@ export type TExpenseListProps = {
 export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let currencyRatesService = useService(EServiceToken.CURRENCY_RATE_SERVICE);
+	let dialog = useDialog();
+
+	let getVenueName = useVenueName();
 
 	let { data: expenseList } = useExpenseListQuery({
 		dateFrom: props.dateFrom,
@@ -66,7 +72,14 @@ export function ExpenseList(props: TExpenseListProps) {
 								}
 								fullSwipe
 							>
-								<CategoryIcon categoryId={item.category} />
+								<CategoryIcon
+									categoryId={item.category}
+									onClick={() => {
+										dialog.render(EditExpenseActionSheet, {
+											expense: item,
+										});
+									}}
+								/>
 
 								<div className={styles.info}>
 									<div className={styles.amount}>
@@ -91,7 +104,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 									{(item.description || item.venue) && (
 										<div className={styles.description}>
-											{item.venue && <span>⚲ {item.venue}</span>}
+											{item.venue && <span>⚲ {getVenueName(item.venue)}</span>}
 											{item.venue && item.description && <span> | </span>}
 											{item.description}
 										</div>

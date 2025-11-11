@@ -1,6 +1,10 @@
 {
 	"name": "pluox",
-	"compatibility_date": "2024-05-18",
+	"compatibility_date": "2025-11-11",
+	"workers_dev": false,
 
-	"pages_build_output_dir": "build"
+	"not_found_handling": "single-page-application",
+	"assets": {
+		"directory": "./build"
+	}
 }
