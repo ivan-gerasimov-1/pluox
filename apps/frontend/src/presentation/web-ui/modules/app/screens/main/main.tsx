@@ -36,16 +36,14 @@ export function MainScreen() {
 
 	return (
 		<>
-			<div className={styles.title}>
-				<span>
-					{intlService.formatCurrency(monthlyTotal, {
-						hideDecimal: true,
-					})}
-				</span>
+			<div className="font-bold text-3xl">
+				{intlService.formatCurrency(monthlyTotal, {
+					hideDecimal: true,
+				})}
 			</div>
 
 			<div className={styles.cardContainer}>
-				<div className={cls(styles.card, styles.todayCard)}>
+				<div className={cls(styles.card, '-rotate-z-2')}>
 					<div>Сегодня</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -54,6 +52,7 @@ export function MainScreen() {
 						})}
 					</div>
 				</div>
+
 				<div className={cls(styles.card)}>
 					<div>Остаток</div>
 
@@ -63,12 +62,13 @@ export function MainScreen() {
 						})}
 					</div>
 				</div>
+
 				<div className={cls(styles.card, styles.categoryCard)}>
 					<div>Категории</div>
 
 					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">
 						{categories.map(({ id, total }) => (
-							<li key={id} className="flex items-end justify-between">
+							<li key={id} className="start-end flex justify-between">
 								<span className="leading-none">
 									{categoryService.getCategoryIcon(id)}
 								</span>
