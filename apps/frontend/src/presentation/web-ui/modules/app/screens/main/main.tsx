@@ -31,14 +31,8 @@ export function MainScreen() {
 				})}
 			</div>
 
-			<div className="gap-4 grid min-h-[300px] grid-cols-2 grid-rows-2">
-				<div
-					className={cls(
-						styles.card,
-						'flex flex-col items-start justify-between',
-						'-rotate-z-2',
-					)}
-				>
+			<CardContainer>
+				<Card className="-rotate-z-2">
 					<div>Сегодня</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -46,14 +40,9 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</div>
+				</Card>
 
-				<div
-					className={cls(
-						styles.card,
-						'flex flex-col items-start justify-between',
-					)}
-				>
+				<Card>
 					<div>Остаток</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -61,16 +50,9 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</div>
+				</Card>
 
-				<div
-					className={cls(
-						styles.card,
-						'flex flex-col items-start justify-between',
-						styles.categoryCard,
-						'overflow-auto',
-					)}
-				>
+				<Card className={cls(styles.categoryCard, 'overflow-auto')}>
 					<div>Категории</div>
 
 					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">
@@ -90,8 +72,8 @@ export function MainScreen() {
 							</li>
 						))}
 					</ul>
-				</div>
-			</div>
+				</Card>
+			</CardContainer>
 		</>
 	);
 }
@@ -104,4 +86,37 @@ export function MainScreenHeader() {
 	});
 
 	return <Header title={today} />;
+}
+
+function CardContainer({
+	className,
+	children,
+}: React.PropsWithChildren<{ className?: string }>) {
+	return (
+		<div
+			className={cls(
+				className,
+				'gap-4 grid min-h-[300px] grid-cols-2 grid-rows-2',
+			)}
+		>
+			{children}
+		</div>
+	);
+}
+
+function Card({
+	className,
+	children,
+}: React.PropsWithChildren<{ className?: string }>) {
+	return (
+		<div
+			className={cls(
+				className,
+				styles.card,
+				'flex flex-col items-start justify-between',
+			)}
+		>
+			{children}
+		</div>
+	);
 }
