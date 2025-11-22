@@ -1,16 +1,13 @@
-import { cls } from '@root/presentation/web-ui/utils/classnames';
-
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-
 import {
 	useExpenseAmountByCategoryQuery,
 	useExpenseAmountByDayQuery,
 	useExpenseAmountByMonthQuery,
 } from '@root/presentation/web-ui/modules/expenses/expenses.query';
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
-
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import styles from './main.module.css';
 
@@ -51,15 +48,7 @@ export function MainScreen() {
 				<div className={cls(styles.card, styles.todayCard)}>
 					<div>Сегодня</div>
 
-					<div
-						style={{
-							marginBlockStart: '5px',
-							fontWeight: 'var(--fw-200)',
-							alignSelf: 'flex-end',
-							fontFamily: 'monospace',
-							fontSize: 'var(--fs-200)',
-						}}
-					>
+					<div className="font-mono font-semibold text-base self-end">
 						{intlService.formatCurrency(dailyTotal, {
 							hideDecimal: true,
 						})}
@@ -68,15 +57,7 @@ export function MainScreen() {
 				<div className={cls(styles.card)}>
 					<div>Остаток</div>
 
-					<div
-						style={{
-							marginBlockStart: '5px',
-							fontWeight: 'var(--fw-200)',
-							alignSelf: 'flex-end',
-							fontFamily: 'monospace',
-							fontSize: 'var(--fs-200)',
-						}}
-					>
+					<div className="font-mono font-semibold text-base self-end">
 						{intlService.formatCurrency(leftover, {
 							hideDecimal: true,
 						})}
@@ -85,39 +66,16 @@ export function MainScreen() {
 				<div className={cls(styles.card, styles.categoryCard)}>
 					<div>Категории</div>
 
-					<ul
-						style={{
-							width: '100%',
-							padding: 0,
-							listStyle: 'none',
-							fontWeight: 'var(--fw-200)',
-						}}
-					>
+					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">
 						{categories.map(({ id, total }) => (
-							<li
-								key={id}
-								style={{
-									display: 'flex',
-									justifyContent: 'space-between',
-									marginBlockEnd: '10px',
-									alignItems: 'flex-end',
-								}}
-							>
-								<span
-									style={{
-										lineHeight: 1,
-									}}
-								>
+							<li key={id} className="flex items-end justify-between">
+								<span className="leading-none">
 									{categoryService.getCategoryIcon(id)}
 								</span>
 
 								<span className={styles.dotFilledSpace}></span>
 
-								<span
-									style={{
-										lineHeight: 1,
-									}}
-								>
+								<span className="leading-none">
 									{intlService.formatCurrency(total, {
 										hideDecimal: true,
 									})}
