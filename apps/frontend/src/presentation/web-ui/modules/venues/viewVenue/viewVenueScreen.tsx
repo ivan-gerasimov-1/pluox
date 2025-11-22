@@ -2,28 +2,23 @@ import { useParams } from 'react-router';
 
 import { Id } from '@root/core/domain/types';
 
+import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-
 import {
 	useVenueArchiveMutation,
 	useVenueOneByIdQuery,
 	useVenueRemoveMutation,
 	useVenueUnarchiveMutation,
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-
-import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
-
+import { VenueCategoryActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueCategoryActionSheet/venueCategoryActionSheet';
+import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
+import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-
-import { VenueCategoryActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueCategoryActionSheet/venueCategoryActionSheet';
-import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
-
-import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
 
 import styles from './viewVenueScreen.module.css';
 
@@ -58,12 +53,7 @@ export function VenueViewScreen() {
 
 				<br />
 
-				<div
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-					}}
-				>
+				<div className="gap-1 flex items-center">
 					<b>{intl.translate('name')}: </b> {venue.name}
 					<IconButton
 						iconName={EIconName.Edit}
@@ -73,12 +63,7 @@ export function VenueViewScreen() {
 
 				<br />
 
-				<div
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-					}}
-				>
+				<div className="gap-1 flex items-center">
 					<b>{intl.translate('categories')}: </b> {venue.categoryName}
 					<IconButton
 						iconName={EIconName.Edit}
