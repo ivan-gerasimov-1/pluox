@@ -31,8 +31,14 @@ export function MainScreen() {
 				})}
 			</div>
 
-			<div className={styles.cardContainer}>
-				<div className={cls(styles.card, '-rotate-z-2')}>
+			<div className="gap-4 grid min-h-[300px] grid-cols-2 grid-rows-2">
+				<div
+					className={cls(
+						styles.card,
+						'flex flex-col items-start justify-between',
+						'-rotate-z-2',
+					)}
+				>
 					<div>Сегодня</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -42,7 +48,12 @@ export function MainScreen() {
 					</div>
 				</div>
 
-				<div className={cls(styles.card)}>
+				<div
+					className={cls(
+						styles.card,
+						'flex flex-col items-start justify-between',
+					)}
+				>
 					<div>Остаток</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -52,7 +63,14 @@ export function MainScreen() {
 					</div>
 				</div>
 
-				<div className={cls(styles.card, styles.categoryCard)}>
+				<div
+					className={cls(
+						styles.card,
+						'flex flex-col items-start justify-between',
+						styles.categoryCard,
+						'overflow-auto',
+					)}
+				>
 					<div>Категории</div>
 
 					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">

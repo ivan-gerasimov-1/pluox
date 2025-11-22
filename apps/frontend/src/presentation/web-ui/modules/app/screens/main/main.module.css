@@ -1,18 +1,4 @@
-.cardContainer {
-	min-height: 300px;
-
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-
-	gap: 16px;
-}
-
 .card {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: space-between;
 	padding: 15px 20px;
 
 	background: var(--white-200);
@@ -29,8 +15,6 @@
 .categoryCard {
 	grid-row: 1 / -1;
 	grid-column: 2 / 2;
-
-	overflow: auto;
 }
 
 .dotFilledSpace {
