@@ -11,7 +11,7 @@
 		"globals": "14.0.0",
 		"jiti": "2.6.1",
 		"typescript": "5.9.3",
-		"typescript-eslint": "8.46.3"
+		"typescript-eslint": "8.47.0"
 	},
 	"devDependencies": {
 		"@tanstack/eslint-plugin-query": "5.91.2",
