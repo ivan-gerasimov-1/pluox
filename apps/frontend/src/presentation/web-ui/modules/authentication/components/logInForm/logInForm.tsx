@@ -1,15 +1,12 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
-
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-
 import { usePending } from '@root/presentation/web-ui/hooks/usePending';
-
-import { delay } from '@root/presentation/web-ui/utils/delay';
-
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { delay } from '@root/presentation/web-ui/utils/delay';
 
 import styles from './logInForm.module.css';
 
@@ -63,17 +60,7 @@ export function LogInForm() {
 
 				<FormGroup>
 					<PasswordInput name="password" label="Пароль" />
-					<span
-						style={{
-							fontSize: 'var(--fs-100)',
-							marginBlockStart: '7.5px',
-							textAlign: 'right',
-							userSelect: 'none',
-							cursor: 'pointer',
-						}}
-					>
-						Забыли пароль?
-					</span>
+					<span className="mt-2 text-sm text-right">Забыли пароль?</span>
 				</FormGroup>
 
 				<FormGroup>
@@ -93,26 +80,11 @@ export function LogInForm() {
 					)}
 				</FormGroup>
 
-				<br />
-				<br />
-				<br />
-
-				<FormGroup>
-					<div
-						style={{
-							fontSize: 'var(--fs-100)',
-							textAlign: 'center',
-						}}
-					>
-						Нет аккаунта?{' '}
-						<AppLink to={EAppPath.SIGN_UP}>
-							<span
-								style={{
-									color: 'rgb(66, 66, 190)',
-								}}
-							>
-								Создать
-							</span>
+				<FormGroup className="mt-10">
+					<div className="gap-1 text-sm flex items-center justify-center">
+						Нет аккаунта?
+						<AppLink className="text-indigo-600" to={EAppPath.SIGN_UP}>
+							Создать
 						</AppLink>
 					</div>
 				</FormGroup>
@@ -144,8 +116,12 @@ function Form<T>(
 	);
 }
 
-function FormGroup(props: React.PropsWithChildren) {
-	return <div className={styles.inputGroup}>{props.children}</div>;
+function FormGroup(props: React.PropsWithChildren<{ className?: string }>) {
+	return (
+		<div className={cls(props.className, styles.inputGroup)}>
+			{props.children}
+		</div>
+	);
 }
 
 function InputLabel(
