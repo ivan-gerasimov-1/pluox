@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 
 import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-
 import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 type TVenueFormData = {
@@ -48,13 +48,7 @@ export function CreateVenueScreen() {
 					})}
 				/>
 				{errors.venueName && (
-					<div
-						style={{
-							color: 'red',
-						}}
-					>
-						{errors.venueName.message}
-					</div>
+					<div className="text-red-600">{errors.venueName.message}</div>
 				)}
 			</div>
 
