@@ -11,7 +11,10 @@ import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import styles from './main.module.css';
 
-export function useScreenLoader() {
+export function MainScreen() {
+	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
+
 	let monthlyTotal = useExpenseAmountByMonthQuery();
 	let dailyTotal = useExpenseAmountByDayQuery();
 	let categories = useExpenseAmountByCategoryQuery();
@@ -19,20 +22,6 @@ export function useScreenLoader() {
 	let budget = useAppConfigBudgetQuery();
 
 	let leftover = budget - monthlyTotal;
-
-	return {
-		categories,
-		monthlyTotal,
-		dailyTotal,
-		leftover,
-	};
-}
-
-export function MainScreen() {
-	let intlService = useService(EServiceToken.INTL_SERVICE);
-	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
-
-	let { categories, monthlyTotal, dailyTotal, leftover } = useScreenLoader();
 
 	return (
 		<>
