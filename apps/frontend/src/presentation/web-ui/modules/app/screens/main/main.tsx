@@ -29,8 +29,8 @@ export function MainScreen() {
 				})}
 			</div>
 
-			<CardContainer>
-				<Card className="-rotate-z-2">
+			<SummaryCardContainer>
+				<SummaryCard className="-rotate-z-2">
 					<div>Сегодня</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -38,9 +38,9 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</Card>
+				</SummaryCard>
 
-				<Card>
+				<SummaryCard>
 					<div>Остаток</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -48,9 +48,9 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</Card>
+				</SummaryCard>
 
-				<Card className="col-2 row-span-full overflow-auto">
+				<SummaryCard className="col-2 row-span-full overflow-auto">
 					<div>Категории</div>
 
 					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">
@@ -76,8 +76,8 @@ export function MainScreen() {
 							</li>
 						))}
 					</ul>
-				</Card>
-			</CardContainer>
+				</SummaryCard>
+			</SummaryCardContainer>
 		</>
 	);
 }
@@ -92,7 +92,7 @@ export function MainScreenHeader() {
 	return <Header title={today} />;
 }
 
-function CardContainer({
+function SummaryCardContainer({
 	className,
 	children,
 }: React.PropsWithChildren<{ className?: string }>) {
@@ -108,7 +108,7 @@ function CardContainer({
 	);
 }
 
-function Card({
+function SummaryCard({
 	className,
 	children,
 }: React.PropsWithChildren<{ className?: string }>) {
