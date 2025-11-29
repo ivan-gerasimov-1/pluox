@@ -7,11 +7,16 @@ import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContaine
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
+import {
+	SummaryCard,
+	SummaryCardContainer,
+} from '@root/presentation/web-ui/uiKit/summaryCard/summaryCard';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import styles from './main.module.css';
+export function MainScreen() {
+	let intlService = useService(EServiceToken.INTL_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
-export function useScreenLoader() {
 	let monthlyTotal = useExpenseAmountByMonthQuery();
 	let dailyTotal = useExpenseAmountByDayQuery();
 	let categories = useExpenseAmountByCategoryQuery();
@@ -20,32 +25,16 @@ export function useScreenLoader() {
 
 	let leftover = budget - monthlyTotal;
 
-	return {
-		categories,
-		monthlyTotal,
-		dailyTotal,
-		leftover,
-	};
-}
-
-export function MainScreen() {
-	let intlService = useService(EServiceToken.INTL_SERVICE);
-	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
-
-	let { categories, monthlyTotal, dailyTotal, leftover } = useScreenLoader();
-
 	return (
 		<>
-			<div className={styles.title}>
-				<span>
-					{intlService.formatCurrency(monthlyTotal, {
-						hideDecimal: true,
-					})}
-				</span>
+			<div className="font-bold text-3xl">
+				{intlService.formatCurrency(monthlyTotal, {
+					hideDecimal: true,
+				})}
 			</div>
 
-			<div className={styles.cardContainer}>
-				<div className={cls(styles.card, styles.todayCard)}>
+			<SummaryCardContainer>
+				<SummaryCard className="-rotate-z-2">
 					<div>Сегодня</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -53,8 +42,9 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</div>
-				<div className={cls(styles.card)}>
+				</SummaryCard>
+
+				<SummaryCard>
 					<div>Остаток</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -62,18 +52,25 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</div>
-				<div className={cls(styles.card, styles.categoryCard)}>
+				</SummaryCard>
+
+				<SummaryCard className="col-2 row-span-full overflow-auto">
 					<div>Категории</div>
 
 					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">
 						{categories.map(({ id, total }) => (
-							<li key={id} className="flex items-end justify-between">
+							<li key={id} className="start-end flex justify-between">
 								<span className="leading-none">
 									{categoryService.getCategoryIcon(id)}
 								</span>
 
-								<span className={styles.dotFilledSpace}></span>
+								<span
+									className={cls(
+										'h-4 mx-1 w-full',
+										'bg-size-[0.5rem_1.25rem]',
+										'bg-radial-[circle,var(--color-neutral-400)_1px,transparent_0]',
+									)}
+								></span>
 
 								<span className="leading-none">
 									{intlService.formatCurrency(total, {
@@ -83,8 +80,8 @@ export function MainScreen() {
 							</li>
 						))}
 					</ul>
-				</div>
-			</div>
+				</SummaryCard>
+			</SummaryCardContainer>
 		</>
 	);
 }
