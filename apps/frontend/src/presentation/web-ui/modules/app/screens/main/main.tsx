@@ -9,8 +9,6 @@ import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/setti
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import styles from './main.module.css';
-
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
@@ -52,7 +50,7 @@ export function MainScreen() {
 					</div>
 				</Card>
 
-				<Card className={cls(styles.categoryCard, 'overflow-auto')}>
+				<Card className="col-2 row-span-full overflow-auto">
 					<div>Категории</div>
 
 					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">
@@ -62,7 +60,13 @@ export function MainScreen() {
 									{categoryService.getCategoryIcon(id)}
 								</span>
 
-								<span className={styles.dotFilledSpace}></span>
+								<span
+									className={cls(
+										'h-4 mx-1 w-full',
+										'bg-size-[0.5rem_1.25rem]',
+										'bg-radial-[circle,var(--color-neutral-400)_1px,transparent_0]',
+									)}
+								></span>
 
 								<span className="leading-none">
 									{intlService.formatCurrency(total, {
@@ -112,8 +116,13 @@ function Card({
 		<div
 			className={cls(
 				className,
-				styles.card,
 				'flex flex-col items-start justify-between',
+				'px-5 py-4',
+				'font-extrabold text-sm tracking-tight',
+				'bg-white',
+				'border-neutral-200/50 border',
+				'shadow-lg shadow-neutral-200/75',
+				'rounded-tl-lg rounded-tr-2xl rounded-bl-2xl rounded-br-3xl',
 			)}
 		>
 			{children}
