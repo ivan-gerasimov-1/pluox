@@ -1,32 +1,13 @@
 import { useState } from 'react';
 
-import { cls } from '@root/presentation/web-ui/utils/classnames';
-
+import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
 import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
-
-import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-
-import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
-
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-
-import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
-
-import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
-import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
-import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
-import { Card } from '@root/presentation/web-ui/uiKit/card/card';
-import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
-import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
-import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-
 import {
 	useAppConfigQuery,
 	useAppConfigUpdateMutation,
@@ -35,6 +16,18 @@ import {
 	useUserOneByIdQuery,
 	useUserUpdateMutation,
 } from '@root/presentation/web-ui/modules/settings/queries/user';
+import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
+import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
+import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
+import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { Card } from '@root/presentation/web-ui/uiKit/card/card';
+import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
+import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
+import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
+import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import styles from './settings.module.css';
 
@@ -325,9 +318,7 @@ export function UserNameEditActionSheet(
 			</div>
 
 			<Button
-				style={{
-					marginTop: '20px',
-				}}
+				className="mt-5"
 				onClick={() => {
 					props.close({
 						userName,
@@ -373,9 +364,7 @@ export function BudgetEditActionsSheet(
 			</div>
 
 			<Button
-				style={{
-					marginTop: '20px',
-				}}
+				className="mt-5"
 				onClick={() => {
 					props.close({
 						budget,

@@ -18,18 +18,5 @@
 	"start_url": "/",
 	"display": "standalone",
 	"background_color": "#FAFAFA",
-	"theme_color": "#FAFAFA",
-	"shortcuts": [
-		{
-			"name": "Add expense",
-			"description": "Add new expense to the list",
-			"url": "/expenses/add",
-			"icons": [
-				{
-					"src": "/icons/icon_512.png",
-					"sizes": "512x512"
-				}
-			]
-		}
-	]
+	"theme_color": "#FAFAFA"
 }

@@ -1,14 +1,12 @@
-import { defineConfig, loadEnv } from 'vite';
-
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import postcssNested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
+import { defineConfig, loadEnv } from 'vite';
 import { analyzer } from 'vite-bundle-analyzer';
 import { checker } from 'vite-plugin-checker';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
-import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => {
@@ -23,16 +21,6 @@ export default defineConfig(({ mode }) => {
 	const plugins = [
 		react(),
 		tailwindcss(),
-		svgr({
-			svgrOptions: {
-				icon: true,
-				exportType: 'default',
-				ref: true,
-				svgo: true,
-				titleProp: true,
-			},
-			include: ['**/*.svg'],
-		}),
 		createHtmlPlugin({
 			minify: !isDevelopment,
 		}),
