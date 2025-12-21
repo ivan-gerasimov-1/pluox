@@ -1,13 +1,15 @@
 import {
-	SwipeAction,
 	SwipeableList,
 	SwipeableListItem,
+	SwipeAction,
 	TrailingActions,
 	Type,
 } from 'react-swipeable-list';
+
 import 'react-swipeable-list/dist/styles.css';
 
 import type { TISODateString } from '@root/core/domain/temporal/types';
+
 import { EditExpenseActionSheet } from '@root/presentation/web-ui/modules/expenses/components/expenseEdit/editExpenseActionSheet';
 import {
 	useExpenseDeleteMutation,
@@ -35,7 +37,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 	let getVenueName = useVenueName();
 
-	let { data: expenseList } = useExpenseListQuery({
+	let { data: expenseList = [] } = useExpenseListQuery({
 		dateFrom: props.dateFrom,
 		dateTo: props.dateTo,
 	});

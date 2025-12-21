@@ -1,13 +1,13 @@
+import type { Id } from '@domain/types';
 import {
-	type QueryClient,
 	useMutation,
 	useQuery,
 	useQueryClient,
-	useSuspenseQuery,
+	type QueryClient,
 } from '@tanstack/react-query';
 
-import type { Id } from '@domain/types';
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
+
 import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
@@ -152,11 +152,7 @@ export function useExpenseListQuery(options: {
 	let expenseRepository = useService(EServiceToken.EXPENSE_REPOSITORY);
 	let expenseMapper = useService(EServiceToken.EXPENSE_MAPPER);
 
-	/**
-	 * @todo
-	 * 1. Experimental usage of useSuspenseQuery
-	 */
-	return useSuspenseQuery({
+	return useQuery({
 		refetchOnMount: false,
 		queryKey: createExpenseQuery('list', options),
 		/** @todo LV-124 | Use queryKey */
