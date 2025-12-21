@@ -1,11 +1,16 @@
 import type { IndexRouteObject, NonIndexRouteObject } from 'react-router';
 
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+
 export type TRouteMeta = {
 	hasNavbar?: boolean;
 	hasNavbarActions?: boolean;
 } & (
 	| {
-			title: string;
+			title: {
+				[ELocaleCode.EN_US]: string;
+				[ELocaleCode.RU_RU]: string;
+			};
 			TitleComponent?: never;
 	  }
 	| {

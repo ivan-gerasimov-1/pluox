@@ -1,7 +1,7 @@
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+
 import { EAppPath } from '@root/presentation/web-ui/appPath';
-
 import type { TRouteObject } from '@root/presentation/web-ui/hooks/useScreenMeta/types';
-
 import { NotFoundErrorScreen } from '@root/presentation/web-ui/modules/app/screens/error/screens/notFoundErrorScreen/notFoundErrorScreen';
 import {
 	MainScreen,
@@ -23,7 +23,10 @@ export const appRoutes: TRouteObject[] = [
 		path: '*',
 		Component: NotFoundErrorScreen,
 		handle: {
-			title: 'Error',
+			title: {
+				[ELocaleCode.EN_US]: 'Error',
+				[ELocaleCode.RU_RU]: 'Ошибка',
+			},
 		},
 	},
 ];

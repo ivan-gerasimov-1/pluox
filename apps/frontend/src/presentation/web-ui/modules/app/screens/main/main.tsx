@@ -93,5 +93,5 @@ export function MainScreenHeader() {
 		format: 'MMMM, YYYY',
 	});
 
-	return <Header title={today} />;
+	return <Header title={{ 'en-US': today, 'ru-RU': today }} />;
 }

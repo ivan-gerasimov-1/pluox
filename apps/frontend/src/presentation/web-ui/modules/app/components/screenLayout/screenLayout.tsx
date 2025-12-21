@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router';
 
 import { useRouteMeta } from '@root/presentation/web-ui/hooks/useScreenMeta/useScreenMeta';
-
 import { Navbar } from '@root/presentation/web-ui/modules/app/components/navbar/navbar';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
@@ -18,7 +17,11 @@ export function ScreenLayout() {
 
 	return (
 		<Screen>
-			{CustomHeader ? <CustomHeader /> : <Header title={meta.title ?? ''} />}
+			{CustomHeader ? (
+				<CustomHeader />
+			) : (
+				<Header title={meta.title ?? { 'en-US': '', 'ru-RU': '' }} />
+			)}
 			<ScreenBody>
 				<Outlet />
 			</ScreenBody>
