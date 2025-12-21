@@ -29,7 +29,14 @@ function createExpenseQuery(
 		dateFrom?: TISODateString;
 		dateTo?: TISODateString;
 	},
-): unknown[];
+): [
+	'expense',
+	'list',
+	{
+		dateFrom?: TISODateString;
+		dateTo?: TISODateString;
+	},
+];
 function createExpenseQuery(
 	type: 'amount:byMonth' | 'amount:byCategory',
 	options: {
@@ -155,15 +162,12 @@ export function useExpenseListQuery(options: {
 	return useQuery({
 		refetchOnMount: false,
 		queryKey: createExpenseQuery('list', options),
-		/** @todo LV-124 | Use queryKey */
-		queryFn: (/* { queryKey } */) => {
-			// let [, dateFrom, dateTo] = queryKey;
-
+		queryFn: ({ queryKey: [, , queryOptions] }) => {
 			let expenses = expenseRepository.findMany(
-				options && {
+				queryOptions && {
 					filter: {
-						dateFrom: options.dateFrom,
-						dateTo: options.dateTo,
+						dateFrom: queryOptions.dateFrom,
+						dateTo: queryOptions.dateTo,
 					},
 				},
 			);
