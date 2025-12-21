@@ -15,7 +15,7 @@
 			"skipFiles": ["<node_internals>/**"]
 		},
 		{
-			"name": "Chrome (Debug Mode)",
+			"name": "Browser (Debug Mode)",
 			"type": "chrome",
 			"request": "launch",
 			"url": "http://localhost:3000",
@@ -48,8 +48,8 @@
 	],
 	"compounds": [
 		{
-			"name": "UI (Chrome)",
-			"configurations": ["UI", "Chrome (Debug Mode)"],
+			"name": "UI (Browser)",
+			"configurations": ["UI", "Browser (Debug Mode)"],
 			"stopAll": true,
 			"presentation": {
 				"hidden": false,
@@ -60,8 +60,8 @@
 			}
 		},
 		{
-			"name": "UI (Chrome) with API",
-			"configurations": ["UI", "Chrome (Debug Mode)", "API (Cloudflare)"],
+			"name": "UI (Browser) with API",
+			"configurations": ["UI", "Browser (Debug Mode)", "API (Cloudflare)"],
 			"stopAll": true,
 			"presentation": {
 				"hidden": false,
