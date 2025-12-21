@@ -8,7 +8,7 @@ export function CategoryList() {
 	let categories = useCategoryListQuery();
 
 	return (
-		<ul className={styles.list}>
+		<ul className="gap-2.5 m-0 p-0 flex list-none flex-col">
 			{categories.map((category) => (
 				<li key={category.id}>
 					<button
