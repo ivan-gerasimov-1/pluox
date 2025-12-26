@@ -5,7 +5,9 @@ import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types'
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { createVenueScreenI18n } from '@root/presentation/web-ui/modules/venues/createVenue/createVenueScreen.i18n';
 import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 
 type TVenueFormData = {
@@ -15,6 +17,7 @@ type TVenueFormData = {
 
 export function CreateVenueScreen() {
 	let navigation = useAppNavigation();
+	let intl = useIntl(createVenueScreenI18n);
 	let categoryQueryService = useService(EServiceToken.CATEGORY_QUERY_SERVICE);
 	let categories = categoryQueryService.getAll();
 
@@ -44,7 +47,7 @@ export function CreateVenueScreen() {
 				<input
 					type="text"
 					{...register('venueName', {
-						required: 'Обязательно',
+						required: intl.translate('required'),
 					})}
 				/>
 				{errors.venueName && (
@@ -67,7 +70,7 @@ export function CreateVenueScreen() {
 			<br />
 
 			<div>
-				<button type="submit">Добавить</button>
+				<button type="submit">{intl.translate('add')}</button>
 			</div>
 		</form>
 	);
