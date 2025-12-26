@@ -5,8 +5,6 @@ import {
 	type TIconSize,
 } from '@root/presentation/web-ui/uiKit/icon/iconSize';
 
-import styles from './iconButton.module.css';
-
 export type TIconButtonProps = {
 	onClick?: () => void;
 
@@ -16,7 +14,11 @@ export type TIconButtonProps = {
 
 export function IconButton(props: TIconButtonProps) {
 	return (
-		<button type="button" className={styles.iconButton} onClick={props.onClick}>
+		<button
+			type="button"
+			className="m-0 p-2 flex items-center border-0 bg-transparent text-inherit"
+			onClick={props.onClick}
+		>
 			<Icon name={props.iconName} size={props.iconSize || EIconSize.MEDIUM} />
 		</button>
 	);
