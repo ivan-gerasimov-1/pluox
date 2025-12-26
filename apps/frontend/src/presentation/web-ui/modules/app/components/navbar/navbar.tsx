@@ -1,26 +1,29 @@
 import { EAppPath } from '@root/presentation/web-ui/appPath';
-
-import { IconLink } from '@root/presentation/web-ui/uiKit/iconLink/iconLink';
-import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
-import { EIconSize } from '@root/presentation/web-ui/uiKit/icon/iconSize';
-
-import styles from './navbar.module.css';
-
+import { navbarI18n } from '@root/presentation/web-ui/modules/app/components/navbar/navbar.i18n';
+import { ExpenseNew } from '@root/presentation/web-ui/modules/expenses/components/expenseNew/addExpense';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
-import { ExpenseNew } from '@root/presentation/web-ui/modules/expenses/components/expenseNew/addExpense';
+import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
+import { EIconSize } from '@root/presentation/web-ui/uiKit/icon/iconSize';
+import { IconLink } from '@root/presentation/web-ui/uiKit/iconLink/iconLink';
+
+import styles from './navbar.module.css';
 
 type TNavbarProps = {
 	hasMainAction?: boolean;
 };
 
 export function Navbar(props: TNavbarProps) {
+	let intl = useIntl(navbarI18n);
 	let dialog = useDialog();
 
 	return (
 		<div className={styles.container}>
 			{props.hasMainAction && (
-				<Button onClick={() => dialog.render(ExpenseNew)}>Add Expense</Button>
+				<Button onClick={() => dialog.render(ExpenseNew)}>
+					{intl.translate('addExpense')}
+				</Button>
 			)}
 			<div className={styles.navLinksContainer}>
 				<IconLink
