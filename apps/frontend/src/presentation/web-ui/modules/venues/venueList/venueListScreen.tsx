@@ -1,15 +1,18 @@
+import { venueListScreenI18n } from './venueListScreen.i18n';
+
 import { EAppPath } from '@root/presentation/web-ui/appPath';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import {
 	useVenueListArchivedQuery,
 	useVenueListUnarchivedQuery,
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 
 import styles from './venueListScreen.module.css';
 
 export function VenueListScreen() {
+	let intl = useIntl(venueListScreenI18n);
 	let venueList = useVenueListUnarchivedQuery();
 	let venueListArchived = useVenueListArchivedQuery();
 
@@ -24,7 +27,7 @@ export function VenueListScreen() {
 					size="m"
 					isWide
 				>
-					New
+					{intl.translate('add')}
 				</Button>
 			</AppLink>
 
@@ -62,7 +65,7 @@ export function VenueListScreen() {
 								</div>
 							</div>
 
-							<span className={styles.badge}>Archived</span>
+							<span className={styles.badge}>{intl.translate('archived')}</span>
 						</AppLink>
 					</li>
 				))}
