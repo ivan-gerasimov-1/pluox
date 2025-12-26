@@ -7,6 +7,7 @@ import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/u
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { EIconSize } from '@root/presentation/web-ui/uiKit/icon/iconSize';
 import { IconLink } from '@root/presentation/web-ui/uiKit/iconLink/iconLink';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 import styles from './navbar.module.css';
 
@@ -25,23 +26,23 @@ export function Navbar(props: TNavbarProps) {
 					{intl.translate('addExpense')}
 				</Button>
 			)}
-			<div className={styles.navLinksContainer}>
+			<div className="flex justify-between">
 				<IconLink
-					className={styles.navLink}
+					className={cls('p-5', styles.navLink)}
 					to={EAppPath.MAIN}
 					iconName={EIconName.Circle}
 					iconSize={EIconSize.LARGE}
 				/>
 
 				<IconLink
-					className={styles.navLink}
+					className={cls('p-5', styles.navLink)}
 					to={EAppPath.EXPENSES}
 					iconName={EIconName.Infinite}
 					iconSize={EIconSize.LARGE}
 				/>
 
 				<IconLink
-					className={styles.navLink}
+					className={cls('p-5', styles.navLink)}
 					to={EAppPath.SETTINGS}
 					iconName={EIconName.Triangle}
 					iconSize={EIconSize.LARGE}

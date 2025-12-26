@@ -27,8 +27,6 @@
 }
 
 .navLink {
-	padding-inline: 20px;
-	padding-block: 20px;
 	color: var(--grey-600);
 
 	transition:
