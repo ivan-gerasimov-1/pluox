@@ -1,0 +1,14 @@
+import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+
+export const mainI18n = {
+	[ELocaleCode.RU_RU]: {
+		today: 'Сегодня',
+		leftover: 'Остаток',
+		categories: 'Категории',
+	},
+	[ELocaleCode.EN_US]: {
+		today: 'Today',
+		leftover: 'Leftover',
+		categories: 'Categories',
+	},
+};
