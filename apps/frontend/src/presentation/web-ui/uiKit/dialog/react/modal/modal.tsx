@@ -12,8 +12,6 @@ import styles from './modal.module.css';
 const TRANSITION_DURATION = 200;
 
 type TModalProps = {
-	children: React.ReactNode;
-
 	id: string;
 
 	close: () => void;
@@ -22,7 +20,7 @@ type TModalProps = {
 	isOpen: boolean;
 };
 
-export function Modal(props: TModalProps) {
+export function Modal(props: React.PropsWithChildren<TModalProps>) {
 	let modalRef = useRef(null);
 
 	useAppScale(props.isOpen);

@@ -7,10 +7,11 @@ export const DialogClientContext = createContext<IDialogClient | null>(null);
 
 type TDialogClientProviderProps = {
 	client?: IDialogClient;
-	children: React.ReactNode;
 };
 
-export function DialogClientProvider(props: TDialogClientProviderProps) {
+export function DialogClientProvider(
+	props: React.PropsWithChildren<TDialogClientProviderProps>,
+) {
 	let client = useMemo(
 		() => props.client ?? createDialogClient(),
 		[props.client],

@@ -4,16 +4,14 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/react/hooks/useAppScale';
 import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
+import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/react/hooks/useAppScale';
 
 import styles from './actionSheet.module.css';
 
 const TRANSITION_DURATION = 200;
 
 type TActionSheetProps = {
-	children: React.ReactNode;
-
 	id: string;
 
 	close: () => void;
@@ -22,7 +20,7 @@ type TActionSheetProps = {
 	isOpen: boolean;
 };
 
-export function ActionSheet(props: TActionSheetProps) {
+export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
 	let actionSheetRef = useRef(null);
 
 	useAppScale(props.isOpen);
