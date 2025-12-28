@@ -1,13 +1,18 @@
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import styles from './screen.module.css';
-
 type TScreenBodyProps = {
 	className?: string;
 };
 
 export function ScreenBody(props: React.PropsWithChildren<TScreenBodyProps>) {
 	return (
-		<div className={cls(props.className, styles.body)}>{props.children}</div>
+		<div
+			className={cls(
+				'p-4 gap-6 mt-[var(--header-height)] mb-[var(--navbar-height)] flex flex-col',
+				props.className,
+			)}
+		>
+			{props.children}
+		</div>
 	);
 }
