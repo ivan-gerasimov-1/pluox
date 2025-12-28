@@ -1,10 +1,7 @@
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-
 import { errorI18n } from '@root/presentation/web-ui/uiKit/error/error.i18n';
-
-import styles from './error.module.css';
 
 type TErrorProps = {
 	title: string;
@@ -17,11 +14,13 @@ export function Error(props: TErrorProps) {
 
 	return (
 		<>
-			<h1 className={styles.header}>{props.title}</h1>
+			<h1 className="font-semibold text-2xl">{props.title}</h1>
 
-			<h2 className={styles.message}>{props.message}</h2>
+			<h2 className="mt-2 text-sm text-neutral-600 font-normal">
+				{props.message}
+			</h2>
 
-			<Button className={styles.button} onClick={navigation.mainPage}>
+			<Button className="mt-10" onClick={navigation.mainPage}>
 				{intl.translate('mainPageButtonLabel')}
 			</Button>
 		</>
