@@ -3,3 +3,7 @@
 /* @todo Replace reset.css with preflight */
 /* @import "tailwindcss/preflight.css" layer(base); */
 @import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+	--default-transition-duration: 200ms;
+}
