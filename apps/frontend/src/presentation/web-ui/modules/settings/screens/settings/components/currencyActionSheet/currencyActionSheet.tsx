@@ -1,21 +1,16 @@
+import { currencyActionSheetI18n } from './currencyActionSheet.i18n';
 import { useState } from 'react';
 
 import { ECurrency, TCurrency } from '@root/core/modules/currency/domain/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { ActionSheetSelect } from '@root/presentation/web-ui/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
-
 import {
 	useAppConfigQuery,
 	useAppConfigUpdateMutation,
 } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
-
-import { currencyActionSheetI18n } from './currencyActionSheet.i18n';
-
-import styles from './currencyActionSheet.module.css';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import { ActionSheetSelect } from '@root/presentation/web-ui/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
 
 export function CurrencyActionSheet({
 	close,
@@ -55,7 +50,7 @@ export function CurrencyActionSheet({
 				onSelect={setSelectedCurrency}
 			/>
 
-			<Button className={styles.actionSheetButton} onClick={handleSave} isWide>
+			<Button onClick={handleSave} isWide>
 				{intl.translate('save')}
 			</Button>
 		</>
