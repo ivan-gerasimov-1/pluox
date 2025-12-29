@@ -1,15 +1,13 @@
+import { venueNameActionSheetI18n } from './venueNameActionSheet.i18n';
 import { useState } from 'react';
 
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-
-import { venueNameActionSheetI18n } from './venueNameActionSheet.i18n';
-
-import styles from './venueNameActionSheet.module.css';
-import { useVenueUpdateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
+
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { useVenueUpdateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 export function VenueNameActionSheet({
 	venue,
@@ -42,12 +40,16 @@ export function VenueNameActionSheet({
 		<>
 			<input
 				type="text"
-				className={styles.actionSheetInput}
+				className={cls(
+					'px-4 py-3 w-full',
+					'border-neutral-200/50 rounded-2xl border',
+					'text-sm font-[inherit] text-inherit',
+				)}
 				value={name}
 				onChange={(event) => setName(event.target.value)}
 			/>
 
-			<Button className={styles.actionSheetButton} onClick={handleSave} isWide>
+			<Button className="mt-5" onClick={handleSave} isWide>
 				{intl.translate('save')}
 			</Button>
 		</>
