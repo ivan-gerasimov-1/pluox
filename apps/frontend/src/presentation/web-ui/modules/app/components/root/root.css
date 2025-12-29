@@ -27,7 +27,7 @@
 :root {
 	/* White color */
 	--white-100: #fafafa;
-	--white-100_op75: rgb(250, 250, 250, 0.75);
+	--white-100_op75: rgb(250, 250, 250, 0.75); /* bg-neutral-50/50 */
 	--white-200: #fff;
 	--black-100: #333; /* text-neutral-800 */
 	--black-200: #252525; /* text-neutral-900 */
