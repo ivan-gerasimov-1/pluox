@@ -20,8 +20,6 @@ import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
 
-import styles from './viewVenueScreen.module.css';
-
 export function VenueViewScreen() {
 	let navigation = useAppNavigation();
 	let dialog = useDialog();
@@ -72,7 +70,7 @@ export function VenueViewScreen() {
 				</div>
 			</div>
 
-			<div className={styles.actionsContainer}>
+			<div className="gap-3 flex">
 				<Button
 					onClick={() => {
 						if (venue.isArchived) {
