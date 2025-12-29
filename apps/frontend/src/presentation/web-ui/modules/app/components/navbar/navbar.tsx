@@ -9,8 +9,6 @@ import { EIconSize } from '@root/presentation/web-ui/uiKit/icon/iconSize';
 import { IconLink } from '@root/presentation/web-ui/uiKit/iconLink/iconLink';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-import styles from './navbar.module.css';
-
 type TNavbarProps = {
 	hasMainAction?: boolean;
 };
@@ -20,29 +18,42 @@ export function Navbar(props: TNavbarProps) {
 	let dialog = useDialog();
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={cls(
+				'flex flex-col',
+				'left-0 bottom-0 fixed w-full',
+				'px-[var(--navbar-gap)] pt-[var(--navbar-gap)] pb-[calc(var(--navbar-gap)*1.5)]',
+				'border-neutral-200/50 rounded-tl-2xl rounded-tr-2xl border',
+				'backdrop-blur-xs bg-neutral-50/50',
+				'z-50',
+			)}
+		>
 			{props.hasMainAction && (
 				<Button onClick={() => dialog.render(ExpenseNew)}>
 					{intl.translate('addExpense')}
 				</Button>
 			)}
-			<div className="flex justify-between">
+			<div
+				className={cls(
+					'flex justify-between',
+					'*:p-5 *:text-neutral-600 *:[.active]:text-neutral-900 *:transition-colors',
+				)}
+			>
 				<IconLink
-					className={cls('p-5', styles.navLink)}
+					className="-ml-2.5"
 					to={EAppPath.MAIN}
 					iconName={EIconName.Circle}
 					iconSize={EIconSize.LARGE}
 				/>
 
 				<IconLink
-					className={cls('p-5', styles.navLink)}
 					to={EAppPath.EXPENSES}
 					iconName={EIconName.Infinite}
 					iconSize={EIconSize.LARGE}
 				/>
 
 				<IconLink
-					className={cls('p-5', styles.navLink)}
+					className="-mr-2.5"
 					to={EAppPath.SETTINGS}
 					iconName={EIconName.Triangle}
 					iconSize={EIconSize.LARGE}
