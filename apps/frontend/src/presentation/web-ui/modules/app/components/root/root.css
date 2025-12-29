@@ -47,7 +47,7 @@
 	/* Font size */
 	--fs-90: calc(var(--fs-100) - 2px); /* text-xs */
 	--fs-100: 14px; /* text-sm */
-	--fs-200: calc(var(--fs-100) + 2px); /* 16px */
+	--fs-200: calc(var(--fs-100) + 2px); /* 16px text-base */
 	--fs-300: calc(var(--fs-200) + 2px); /* 18px */
 	--fs-400: calc(var(--fs-300) + 2px); /* 20px */
 	--fs-500: calc(var(--fs-400) + 2px); /* 22px */
@@ -76,7 +76,7 @@
 	--box-shadow-100: 0 10px 15px -5px var(--grey-350);
 
 	/** Border */
-	--border-90: 1px solid var(--bc-90);
+	--border-90: 1px solid var(--bc-90); /* border-neutral-200/50 border */
 	--border-100: 1px solid var(--bc-100); /* border border-neutral-200 */
 	--border-900: 1px solid var(--bc-900);
 
