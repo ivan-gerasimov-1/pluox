@@ -1,19 +1,14 @@
+import { venueCategoryActionSheetI18n } from './venueCategoryActionSheet.i18n';
 import { useState } from 'react';
 
 import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
 
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-
 import { useCategoryListQuery } from '@root/presentation/web-ui/modules/categories/queries/categories.queries';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useVenueUpdateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 import { ActionSheetSelect } from '@root/presentation/web-ui/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
-
-import { venueCategoryActionSheetI18n } from './venueCategoryActionSheet.i18n';
-
-import styles from './venueCategoryActionSheet.module.css';
 
 export function VenueCategoryActionSheet({
 	venue,
@@ -49,7 +44,7 @@ export function VenueCategoryActionSheet({
 				onSelect={setSelectedCategory}
 			/>
 
-			<Button className={styles.actionSheetButton} onClick={handleSave} isWide>
+			<Button onClick={handleSave} isWide>
 				{intl.translate('save')}
 			</Button>
 		</>
