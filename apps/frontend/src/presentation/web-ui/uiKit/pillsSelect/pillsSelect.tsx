@@ -1,4 +1,4 @@
-import styles from './pillsSelect.module.css';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TPillsSelectProps<T> = {
 	value?: string | null;
@@ -11,14 +11,24 @@ export function PillsSelect<T extends { id: string; name: string }>(
 	props: TPillsSelectProps<T>,
 ) {
 	return (
-		<div className={styles.wrapper}>
+		<div className="gap-1 flex flex-wrap">
 			{props.items.map((item) => {
 				return (
 					<button
 						key={item.id}
 						id={item.id}
 						type="button"
-						className={styles.pill}
+						className={cls(
+							'flex grow items-center justify-center',
+							'px-4 py-3',
+							'appearance-none',
+							'leading-none',
+							'text-xs',
+							'border-neutral-200 rounded-2xl border',
+							'bg-white text-neutral-800',
+							'transition-colors',
+							'aria-pressed:bg-neutral-100 aria-pressed:border-neutral-900',
+						)}
 						aria-pressed={item.id === props.value}
 						onClick={(event) => {
 							let target = event.currentTarget;
