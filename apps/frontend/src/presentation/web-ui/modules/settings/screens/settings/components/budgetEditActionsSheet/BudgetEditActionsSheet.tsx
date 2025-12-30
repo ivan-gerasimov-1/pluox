@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { TCurrency } from '@root/core/modules/currency/domain/types';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
+import { budgetEditActionsSheetI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/components/budgetEditActionsSheet/budgetEditActionsSheet.i18n';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
@@ -18,7 +18,7 @@ type BudgetEditActionsSheetProps = TDialogComponentProps<
 >;
 
 export function BudgetEditActionsSheet(props: BudgetEditActionsSheetProps) {
-	let intl = useIntl(settingsI18n);
+	let intl = useIntl(budgetEditActionsSheetI18n);
 	let [budget, setBudget] = useState(props.budget);
 
 	return (
