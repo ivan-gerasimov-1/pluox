@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
+import { UserNameEditActionSheetI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/components/userNameEditActionSheet/UserNameEditActionSheet.i18n';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 
-export function UserNameEditActionSheet(
-	props: TDialogComponentProps<
-		{
-			userName: string;
-		},
-		{
-			userName: string;
-		}
-	>,
-) {
-	let intl = useIntl(settingsI18n);
+type UserNameEditActionSheetProps = TDialogComponentProps<
+	{
+		userName: string;
+	},
+	{
+		userName: string;
+	}
+>;
+
+export function UserNameEditActionSheet(props: UserNameEditActionSheetProps) {
+	let intl = useIntl(UserNameEditActionSheetI18n);
 	let [userName, setUserName] = useState(props.userName);
 
 	return (
