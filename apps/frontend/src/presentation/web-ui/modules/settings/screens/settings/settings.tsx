@@ -18,6 +18,7 @@ import {
 } from '@root/presentation/web-ui/modules/settings/queries/user';
 import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
 import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
+import { UserNameEditActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/userNameEditActionSheet/userNameEditActionSheet';
 import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { Badge } from '@root/presentation/web-ui/uiKit/badge/badge';
@@ -279,45 +280,6 @@ export function SettingsScreen() {
 					</div>
 				</Card>
 			</CardContainer>
-		</>
-	);
-}
-
-export function UserNameEditActionSheet(
-	props: TDialogComponentProps<
-		{
-			userName: string;
-		},
-		{
-			userName: string;
-		}
-	>,
-) {
-	let intl = useIntl(settingsI18n);
-	let [userName, setUserName] = useState(props.userName);
-
-	return (
-		<>
-			<div className={styles.budgetContainer}>
-				<input
-					type="text"
-					className={styles.budgetInput}
-					value={userName}
-					onChange={(event) => setUserName(event.target.value)}
-				/>
-			</div>
-
-			<Button
-				className="mt-5"
-				onClick={() => {
-					props.close({
-						userName,
-					});
-				}}
-				isWide
-			>
-				{intl.translate('save')}
-			</Button>
 		</>
 	);
 }
