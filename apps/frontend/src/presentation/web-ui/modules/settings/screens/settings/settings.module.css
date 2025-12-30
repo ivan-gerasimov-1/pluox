@@ -1,9 +1,3 @@
-.sectionHeader {
-	margin: 0 0 15px 0;
-
-	font-size: var(--fs-100);
-}
-
 .field {
 	display: flex;
 	justify-content: space-between;

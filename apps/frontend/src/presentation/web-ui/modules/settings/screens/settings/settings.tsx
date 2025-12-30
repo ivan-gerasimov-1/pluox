@@ -22,7 +22,7 @@ import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/v
 import { Badge } from '@root/presentation/web-ui/uiKit/badge/badge';
 import { Badges } from '@root/presentation/web-ui/uiKit/badges/badges';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Card } from '@root/presentation/web-ui/uiKit/card/card';
+import { Card, CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
@@ -56,9 +56,7 @@ export function SettingsScreen() {
 		<>
 			<CardContainer>
 				<Card>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('userSectionTitle')}
-					</h2>
+					<CardHeader>{intl.translate('userSectionTitle')}</CardHeader>
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
@@ -110,9 +108,7 @@ export function SettingsScreen() {
 				</Card>
 
 				<Card>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('appSectionTitle')}
-					</h2>
+					<CardHeader>{intl.translate('appSectionTitle')}</CardHeader>
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
@@ -133,9 +129,7 @@ export function SettingsScreen() {
 				</Card>
 
 				<Card>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('currencySectionTitle')}
-					</h2>
+					<CardHeader>{intl.translate('currencySectionTitle')}</CardHeader>
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
@@ -176,9 +170,7 @@ export function SettingsScreen() {
 				</Card>
 
 				<Card>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('budgetSectionTitle')}
-					</h2>
+					<CardHeader>{intl.translate('budgetSectionTitle')}</CardHeader>
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
@@ -210,9 +202,7 @@ export function SettingsScreen() {
 				</Card>
 
 				<Card>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('categoriesSectionTitle')}
-					</h2>
+					<CardHeader>{intl.translate('categoriesSectionTitle')}</CardHeader>
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
@@ -233,9 +223,7 @@ export function SettingsScreen() {
 				</Card>
 
 				<Card>
-					<h2 className={styles.sectionHeader}>
-						{intl.translate('venuesSectionTitle')}
-					</h2>
+					<CardHeader>{intl.translate('venuesSectionTitle')}</CardHeader>
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
