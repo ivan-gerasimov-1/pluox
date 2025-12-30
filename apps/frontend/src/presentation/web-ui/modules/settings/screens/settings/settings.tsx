@@ -13,7 +13,7 @@ import {
 	useUserOneByIdQuery,
 	useUserUpdateMutation,
 } from '@root/presentation/web-ui/modules/settings/queries/user';
-import { BudgetEditActionsSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/budgetEditActionsSheet/BudgetEditActionsSheet';
+import { BudgetEditActionsSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/budgetEditActionsSheet/budgetEditActionsSheet';
 import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
 import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
 import { UserNameEditActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/userNameEditActionSheet/userNameEditActionSheet';
