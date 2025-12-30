@@ -1,7 +1,4 @@
-import { useState } from 'react';
-
 import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
 import { getLanguageNameByLocale } from '@root/core/modules/intl/application/helpers';
 
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
@@ -27,7 +24,6 @@ import { Badges } from '@root/presentation/web-ui/uiKit/badges/badges';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
-import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
