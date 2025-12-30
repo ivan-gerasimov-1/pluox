@@ -43,32 +43,6 @@
 	display: flex;
 }
 
-.pillsContainer {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-
-	margin-top: 2px;
-	margin-left: -5px;
-
-	& > .pill {
-		flex-grow: 1;
-
-		margin-top: 5px;
-		margin-left: 5px;
-	}
-}
-
-.pill {
-	padding: 5px;
-
-	font-size: var(--fs-90);
-	text-align: center;
-
-	border: var(--border-100);
-	border-radius: var(--br-90);
-}
-
 .categories {
 	display: flex;
 	justify-content: space-between;

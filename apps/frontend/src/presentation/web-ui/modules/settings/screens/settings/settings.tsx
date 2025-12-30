@@ -20,6 +20,8 @@ import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/
 import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
 import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
+import { Badge } from '@root/presentation/web-ui/uiKit/badge/badge';
+import { Badges } from '@root/presentation/web-ui/uiKit/badges/badges';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
@@ -180,15 +182,11 @@ export function SettingsScreen() {
 								{intl.translate('currencyAvailable')}
 							</span>
 
-							<div className={cls(styles.fieldValue, styles.pillsContainer)}>
-								{appConfig.availabelCurrencies.map((currency) => {
-									return (
-										<span key={currency} className={styles.pill}>
-											{currency}
-										</span>
-									);
-								})}
-							</div>
+							<Badges className={cls(styles.fieldValue, 'mt-2')}>
+								{appConfig.availabelCurrencies.map((currency) => (
+									<Badge key={currency}>{currency}</Badge>
+								))}
+							</Badges>
 						</div>
 
 						<IconButton
@@ -242,15 +240,11 @@ export function SettingsScreen() {
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
-							<div className={cls(styles.fieldValue, styles.pillsContainer)}>
-								{categoryTemplates.map((category) => {
-									return (
-										<span key={category.id} className={styles.pill}>
-											{category.name}
-										</span>
-									);
-								})}
-							</div>
+							<Badges className={styles.fieldValue}>
+								{categoryTemplates.map((category) => (
+									<Badge key={category.id}>{category.name}</Badge>
+								))}
+							</Badges>
 						</div>
 
 						<IconButton
@@ -269,15 +263,11 @@ export function SettingsScreen() {
 
 					<div className={styles.field}>
 						<div className={styles.fieldData}>
-							<div className={cls(styles.fieldValue, styles.pillsContainer)}>
-								{venueListQuery.map((venue) => {
-									return (
-										<span key={venue.id} className={styles.pill}>
-											{venue.name}
-										</span>
-									);
-								})}
-							</div>
+							<Badges className={styles.fieldValue}>
+								{venueListQuery.map((venue) => (
+									<Badge key={venue.id}>{venue.name}</Badge>
+								))}
+							</Badges>
 						</div>
 
 						<IconButton
