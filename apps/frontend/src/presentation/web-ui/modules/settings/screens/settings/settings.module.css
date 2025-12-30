@@ -110,15 +110,3 @@
 
 	color: inherit;
 }
-
-.separator {
-	height: 1px;
-
-	margin: 20px 0;
-
-	border: 0;
-
-	background-color: black;
-
-	opacity: 0.15;
-}
