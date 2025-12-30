@@ -23,3 +23,16 @@ export function Card(props: React.PropsWithChildren<TCardProps>) {
 		</div>
 	);
 }
+
+type CardHeaderProps = {
+	className?: string;
+	as?: React.ElementType;
+};
+
+export function CardHeader({
+	className,
+	as: As = 'h2',
+	children,
+}: React.PropsWithChildren<CardHeaderProps>) {
+	return <As className={cls('m-0 mb-3 text-sm', className)}>{children}</As>;
+}
