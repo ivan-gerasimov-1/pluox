@@ -16,6 +16,7 @@ import {
 	useUserOneByIdQuery,
 	useUserUpdateMutation,
 } from '@root/presentation/web-ui/modules/settings/queries/user';
+import { BudgetEditActionsSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/budgetEditActionsSheet/BudgetEditActionsSheet';
 import { CurrencyActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
 import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
 import { UserNameEditActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/userNameEditActionSheet/userNameEditActionSheet';
@@ -280,52 +281,6 @@ export function SettingsScreen() {
 					</div>
 				</Card>
 			</CardContainer>
-		</>
-	);
-}
-
-export function BudgetEditActionsSheet(
-	props: TDialogComponentProps<
-		{
-			budget: number;
-			currency: TCurrency;
-		},
-		{
-			budget: number;
-		}
-	>,
-) {
-	let intl = useIntl(settingsI18n);
-	let [budget, setBudget] = useState(props.budget);
-
-	return (
-		<>
-			<div className={styles.budgetContainer}>
-				<span className={styles.budgetCurrency}>{props.currency}</span>
-
-				<input
-					type="number"
-					className={styles.budgetInput}
-					value={budget ?? 0}
-					onChange={(event) => {
-						let budgetValue = Number.parseInt(event.target.value, 10);
-
-						setBudget(budgetValue);
-					}}
-				/>
-			</div>
-
-			<Button
-				className="mt-5"
-				onClick={() => {
-					props.close({
-						budget,
-					});
-				}}
-				isWide
-			>
-				{intl.translate('save')}
-			</Button>
 		</>
 	);
 }
