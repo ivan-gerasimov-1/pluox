@@ -107,28 +107,6 @@ export function SettingsScreen() {
 							</Button>
 						</div>
 					</div>
-
-					{/* Temporarily disabled */}
-					{/* <Separator />
-
-						<div className={cls(styles.field, styles.sectionActionsContainer)}>
-							<div style={{ width: '100%' }} />
-
-							<Button
-								size="s"
-								onClick={() => {
-									if (!window.confirm(intl.translate('exitConfirmation'))) {
-										return;
-									}
-
-									authService.logOut();
-
-									navigation.mainPage();
-								}}
-							>
-								{intl.translate('exitButton')}
-							</Button>
-						</div> */}
 				</Card>
 
 				<Card>
