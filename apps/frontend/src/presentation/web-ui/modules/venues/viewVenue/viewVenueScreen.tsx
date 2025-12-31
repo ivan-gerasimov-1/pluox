@@ -15,10 +15,19 @@ import { VenueCategoryActionSheet } from '@root/presentation/web-ui/modules/venu
 import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
 import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { Card } from '@root/presentation/web-ui/uiKit/card/card';
+import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
+import {
+	ValueAction,
+	ValueActionContent,
+	ValueActionLabel,
+	ValueActionLeading,
+	ValueActionTrailing,
+} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
 export function VenueViewScreen() {
 	let navigation = useAppNavigation();
@@ -42,33 +51,48 @@ export function VenueViewScreen() {
 
 	return (
 		<>
-			<div>
-				<div>
-					<pre>
-						<b>ID:</b> {venue.id}
-					</pre>
-				</div>
+			<CardContainer>
+				<Card>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>ID</ValueActionLabel>
+							<ValueActionContent>{venue.id}</ValueActionContent>
+						</ValueActionLeading>
+					</ValueAction>
 
-				<br />
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>{intl.translate('name')}</ValueActionLabel>
+							<ValueActionContent>{venue.name}</ValueActionContent>
+						</ValueActionLeading>
 
-				<div className="gap-1 flex items-center">
-					<b>{intl.translate('name')}: </b> {venue.name}
-					<IconButton
-						iconName={EIconName.Edit}
-						onClick={() => dialog.render(VenueNameActionSheet, { venue })}
-					/>
-				</div>
+						<ValueActionTrailing>
+							<IconButton
+								iconName={EIconName.Edit}
+								onClick={() => dialog.render(VenueNameActionSheet, { venue })}
+							/>
+						</ValueActionTrailing>
+					</ValueAction>
 
-				<br />
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>
+								{intl.translate('categories')}
+							</ValueActionLabel>
+							<ValueActionContent>{venue.categoryName}</ValueActionContent>
+						</ValueActionLeading>
 
-				<div className="gap-1 flex items-center">
-					<b>{intl.translate('categories')}: </b> {venue.categoryName}
-					<IconButton
-						iconName={EIconName.Edit}
-						onClick={() => dialog.render(VenueCategoryActionSheet, { venue })}
-					/>
-				</div>
-			</div>
+						<ValueActionTrailing>
+							<IconButton
+								iconName={EIconName.Edit}
+								onClick={() =>
+									dialog.render(VenueCategoryActionSheet, { venue })
+								}
+							/>
+						</ValueActionTrailing>
+					</ValueAction>
+				</Card>
+			</CardContainer>
 
 			<div className="gap-3 flex">
 				<Button
