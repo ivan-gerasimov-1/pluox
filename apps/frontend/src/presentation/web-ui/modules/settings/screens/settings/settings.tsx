@@ -27,9 +27,13 @@ import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/car
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
-
-import styles from './settings.module.css';
+import {
+	ValueAction,
+	ValueActionContent,
+	ValueActionLabel,
+	ValueActionLeading,
+	ValueActionTrailing,
+} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
 /**
  * @todo
@@ -58,14 +62,12 @@ export function SettingsScreen() {
 				<Card>
 					<CardHeader>{intl.translate('userSectionTitle')}</CardHeader>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>
-								{intl.translate('userName')}
-							</span>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>{intl.translate('userName')}</ValueActionLabel>
 
-							<span className={styles.fieldValue}>{user.name}</span>
-						</div>
+							<ValueActionContent>{user.name}</ValueActionContent>
+						</ValueActionLeading>
 
 						<IconButton
 							iconName={EIconName.Edit}
@@ -83,18 +85,18 @@ export function SettingsScreen() {
 								});
 							}}
 						/>
-					</div>
+					</ValueAction>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>
 								{intl.translate('userAccount')}
-							</span>
+							</ValueActionLabel>
 
-							<span className={styles.fieldValue}>—</span>
-						</div>
+							<ValueActionContent>—</ValueActionContent>
+						</ValueActionLeading>
 
-						<div className={styles.fieldAction}>
+						<ValueActionTrailing>
 							<Button
 								size="s"
 								onClick={() => {
@@ -103,61 +105,63 @@ export function SettingsScreen() {
 							>
 								{intl.translate('loginButton')}
 							</Button>
-						</div>
-					</div>
+						</ValueActionTrailing>
+					</ValueAction>
 				</Card>
 
 				<Card>
 					<CardHeader>{intl.translate('appSectionTitle')}</CardHeader>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>
 								{intl.translate('appLanguage')}
-							</span>
+							</ValueActionLabel>
 
-							<span className={styles.fieldValue}>
+							<ValueActionContent>
 								{getLanguageNameByLocale(appConfig.locale)}
-							</span>
-						</div>
+							</ValueActionContent>
+						</ValueActionLeading>
 
 						<IconButton
 							iconName={EIconName.CaretDown}
 							onClick={() => dialog.render(LocaleActionSheet)}
 						/>
-					</div>
+					</ValueAction>
 				</Card>
 
 				<Card>
 					<CardHeader>{intl.translate('currencySectionTitle')}</CardHeader>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>
 								{intl.translate('currencyMain')}
-							</span>
+							</ValueActionLabel>
 
-							<span className={styles.fieldValue}>{appConfig.currency}</span>
-						</div>
+							<ValueActionContent>{appConfig.currency}</ValueActionContent>
+						</ValueActionLeading>
 
 						<IconButton
 							iconName={EIconName.CaretDown}
 							onClick={() => dialog.render(CurrencyActionSheet)}
 						/>
-					</div>
+					</ValueAction>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>
+					<ValueAction>
+						<ValueActionLeading className="gap-2">
+							<ValueActionLabel>
 								{intl.translate('currencyAvailable')}
-							</span>
+							</ValueActionLabel>
 
-							<Badges className={cls(styles.fieldValue, 'mt-2')}>
-								{appConfig.availabelCurrencies.map((currency) => (
-									<Badge key={currency}>{currency}</Badge>
-								))}
-							</Badges>
-						</div>
+							<ValueActionContent>
+								<Badges>
+									{appConfig.availabelCurrencies.map((currency) => (
+										<Badge key={currency}>{currency}</Badge>
+									))}
+								</Badges>
+							</ValueActionContent>
+						</ValueActionLeading>
 
 						<IconButton
 							iconName={EIconName.Settings}
@@ -166,20 +170,20 @@ export function SettingsScreen() {
 								window.alert('Not Implemented');
 							}}
 						/>
-					</div>
+					</ValueAction>
 				</Card>
 
 				<Card>
 					<CardHeader>{intl.translate('budgetSectionTitle')}</CardHeader>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<span className={styles.fieldLabel}>{appConfig.currency}</span>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionLabel>{appConfig.currency}</ValueActionLabel>
 
-							<span className={styles.fieldValue}>
+							<ValueActionContent>
 								{intlService.formatCurrency(appConfig.budget || 0)}
-							</span>
-						</div>
+							</ValueActionContent>
+						</ValueActionLeading>
 
 						<IconButton
 							iconName={EIconName.Edit}
@@ -198,20 +202,22 @@ export function SettingsScreen() {
 								});
 							}}
 						/>
-					</div>
+					</ValueAction>
 				</Card>
 
 				<Card>
 					<CardHeader>{intl.translate('categoriesSectionTitle')}</CardHeader>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<Badges className={styles.fieldValue}>
-								{categoryTemplates.map((category) => (
-									<Badge key={category.id}>{category.name}</Badge>
-								))}
-							</Badges>
-						</div>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionContent>
+								<Badges>
+									{categoryTemplates.map((category) => (
+										<Badge key={category.id}>{category.name}</Badge>
+									))}
+								</Badges>
+							</ValueActionContent>
+						</ValueActionLeading>
 
 						<IconButton
 							iconName={EIconName.Settings}
@@ -219,20 +225,22 @@ export function SettingsScreen() {
 								navigation.categoryListPage();
 							}}
 						/>
-					</div>
+					</ValueAction>
 				</Card>
 
 				<Card>
 					<CardHeader>{intl.translate('venuesSectionTitle')}</CardHeader>
 
-					<div className={styles.field}>
-						<div className={styles.fieldData}>
-							<Badges className={styles.fieldValue}>
-								{venueListQuery.map((venue) => (
-									<Badge key={venue.id}>{venue.name}</Badge>
-								))}
-							</Badges>
-						</div>
+					<ValueAction>
+						<ValueActionLeading>
+							<ValueActionContent>
+								<Badges>
+									{venueListQuery.map((venue) => (
+										<Badge key={venue.id}>{venue.name}</Badge>
+									))}
+								</Badges>
+							</ValueActionContent>
+						</ValueActionLeading>
 
 						<IconButton
 							iconName={EIconName.Settings}
@@ -240,7 +248,7 @@ export function SettingsScreen() {
 								navigation.venueListPage();
 							}}
 						/>
-					</div>
+					</ValueAction>
 				</Card>
 			</CardContainer>
 		</>
