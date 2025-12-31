@@ -36,20 +36,3 @@ export function CardHeader({
 }: React.PropsWithChildren<CardHeaderProps>) {
 	return <As className={cls('m-0 mb-3 text-sm', className)}>{children}</As>;
 }
-
-type TCardSectionProps = {
-	className?: string;
-};
-
-export function CardSection({
-	className,
-	children,
-}: React.PropsWithChildren<TCardSectionProps>) {
-	return (
-		<div
-			className={cls('[&+&]:mt-3 flex items-start justify-between', className)}
-		>
-			{children}
-		</div>
-	);
-}
