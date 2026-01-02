@@ -5,13 +5,13 @@ import { Id } from '@root/core/domain/types';
 import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { VenueCategoryActionSheet } from '@root/presentation/web-ui/modules/venues/components/venueCategoryActionSheet/venueCategoryActionSheet';
 import {
 	useVenueArchiveMutation,
 	useVenueOneByIdQuery,
 	useVenueRemoveMutation,
 	useVenueUnarchiveMutation,
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-import { VenueCategoryActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueCategoryActionSheet/venueCategoryActionSheet';
 import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
 import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
