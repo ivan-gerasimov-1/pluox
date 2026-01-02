@@ -17,6 +17,7 @@ export type TButtonProps = {
 	  }
 	| {
 			type: 'submit';
+			form?: string;
 
 			onClick?: () => void;
 	  }
@@ -31,11 +32,13 @@ export function Button(props: React.PropsWithChildren<TButtonProps>) {
 	let color = props.color || 'none';
 	let size = props.size || 'm';
 	let isWide = Boolean(props.isWide);
+	let form = props.type === 'submit' && props.form ? props.form : undefined;
 
 	return (
 		<button
 			type={type}
 			style={props.style}
+			form={form}
 			className={cls(styles.button, props.className, styles[size], {
 				[styles[color]]: true,
 				[styles.wide]: isWide,
