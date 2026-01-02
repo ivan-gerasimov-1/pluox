@@ -21,14 +21,18 @@ export function ValueAction({
 	);
 }
 
-type TValueActionLeadingProps = TValueActionBaseProps;
+type TValueActionLeadingProps = TValueActionBaseProps & {
+	label?: string;
+};
 
 export function ValueActionLeading({
 	className,
+	label,
 	children,
 }: React.PropsWithChildren<TValueActionLeadingProps>) {
 	return (
-		<div className={cls('gap-1 flex w-3/4 flex-col', className)}>
+		<div className={cls('gap-1 text-sm flex w-3/4 flex-col', className)}>
+			{label && <ValueActionLabel>{label}</ValueActionLabel>}
 			{children}
 		</div>
 	);
@@ -43,22 +47,24 @@ export function ValueActionTrailing({
 	return <div className={cls('m-1', className)}>{children}</div>;
 }
 
+/** @deprecated */
 type TValueActionLabelProps = TValueActionBaseProps;
 
+/** @deprecated */
 export function ValueActionLabel({
 	className,
 	children,
 }: React.PropsWithChildren<TValueActionLabelProps>) {
-	return (
-		<div className={cls('text-sm text-neutral-600', className)}>{children}</div>
-	);
+	return <div className={cls('text-neutral-600', className)}>{children}</div>;
 }
 
+/** @deprecated */
 type TValueActionContentProps = TValueActionBaseProps;
 
+/** @deprecated */
 export function ValueActionContent({
 	className,
 	children,
 }: React.PropsWithChildren<TValueActionContentProps>) {
-	return <div className={cls('text-sm', className)}>{children}</div>;
+	return <div className={className}>{children}</div>;
 }
