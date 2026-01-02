@@ -5,7 +5,7 @@ import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TInputProps = React.InputHTMLAttributes<HTMLInputElement> &
 	TSlottable & {
-		type?: 'text';
+		type?: 'text' | 'number';
 	};
 
 export function Input({ className, asChild, ...props }: TInputProps) {
