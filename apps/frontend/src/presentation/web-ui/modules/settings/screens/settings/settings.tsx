@@ -29,10 +29,7 @@ import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
 import {
 	ValueAction,
-	ValueActionContent,
-	ValueActionLabel,
 	ValueActionLeading,
-	ValueActionTrailing,
 } from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
 /**
@@ -63,10 +60,8 @@ export function SettingsScreen() {
 					<CardHeader>{intl.translate('userSectionTitle')}</CardHeader>
 
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>{intl.translate('userName')}</ValueActionLabel>
-
-							<ValueActionContent>{user.name}</ValueActionContent>
+						<ValueActionLeading label={intl.translate('userName')}>
+							{user.name}
 						</ValueActionLeading>
 
 						<IconButton
@@ -88,24 +83,19 @@ export function SettingsScreen() {
 					</ValueAction>
 
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>
-								{intl.translate('userAccount')}
-							</ValueActionLabel>
-
-							<ValueActionContent>—</ValueActionContent>
+						<ValueActionLeading label={intl.translate('userAccount')}>
+							—
 						</ValueActionLeading>
 
-						<ValueActionTrailing>
-							<Button
-								size="s"
-								onClick={() => {
-									navigation.loginPage();
-								}}
-							>
-								{intl.translate('loginButton')}
-							</Button>
-						</ValueActionTrailing>
+						<Button
+							className="mr-1"
+							size="s"
+							onClick={() => {
+								navigation.loginPage();
+							}}
+						>
+							{intl.translate('loginButton')}
+						</Button>
 					</ValueAction>
 				</Card>
 
@@ -113,14 +103,8 @@ export function SettingsScreen() {
 					<CardHeader>{intl.translate('appSectionTitle')}</CardHeader>
 
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>
-								{intl.translate('appLanguage')}
-							</ValueActionLabel>
-
-							<ValueActionContent>
-								{getLanguageNameByLocale(appConfig.locale)}
-							</ValueActionContent>
+						<ValueActionLeading label={intl.translate('appLanguage')}>
+							{getLanguageNameByLocale(appConfig.locale)}
 						</ValueActionLeading>
 
 						<IconButton
@@ -134,12 +118,8 @@ export function SettingsScreen() {
 					<CardHeader>{intl.translate('currencySectionTitle')}</CardHeader>
 
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>
-								{intl.translate('currencyMain')}
-							</ValueActionLabel>
-
-							<ValueActionContent>{appConfig.currency}</ValueActionContent>
+						<ValueActionLeading label={intl.translate('currencyMain')}>
+							{appConfig.currency}
 						</ValueActionLeading>
 
 						<IconButton
@@ -149,18 +129,15 @@ export function SettingsScreen() {
 					</ValueAction>
 
 					<ValueAction>
-						<ValueActionLeading className="gap-2">
-							<ValueActionLabel>
-								{intl.translate('currencyAvailable')}
-							</ValueActionLabel>
-
-							<ValueActionContent>
-								<Badges>
-									{appConfig.availabelCurrencies.map((currency) => (
-										<Badge key={currency}>{currency}</Badge>
-									))}
-								</Badges>
-							</ValueActionContent>
+						<ValueActionLeading
+							className="gap-2"
+							label={intl.translate('currencyAvailable')}
+						>
+							<Badges>
+								{appConfig.availabelCurrencies.map((currency) => (
+									<Badge key={currency}>{currency}</Badge>
+								))}
+							</Badges>
 						</ValueActionLeading>
 
 						<IconButton
@@ -177,12 +154,8 @@ export function SettingsScreen() {
 					<CardHeader>{intl.translate('budgetSectionTitle')}</CardHeader>
 
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>{appConfig.currency}</ValueActionLabel>
-
-							<ValueActionContent>
-								{intlService.formatCurrency(appConfig.budget || 0)}
-							</ValueActionContent>
+						<ValueActionLeading label={appConfig.currency}>
+							{intlService.formatCurrency(appConfig.budget || 0)}
 						</ValueActionLeading>
 
 						<IconButton
@@ -210,13 +183,11 @@ export function SettingsScreen() {
 
 					<ValueAction>
 						<ValueActionLeading>
-							<ValueActionContent>
-								<Badges>
-									{categoryTemplates.map((category) => (
-										<Badge key={category.id}>{category.name}</Badge>
-									))}
-								</Badges>
-							</ValueActionContent>
+							<Badges>
+								{categoryTemplates.map((category) => (
+									<Badge key={category.id}>{category.name}</Badge>
+								))}
+							</Badges>
 						</ValueActionLeading>
 
 						<IconButton
@@ -233,13 +204,11 @@ export function SettingsScreen() {
 
 					<ValueAction>
 						<ValueActionLeading>
-							<ValueActionContent>
-								<Badges>
-									{venueListQuery.map((venue) => (
-										<Badge key={venue.id}>{venue.name}</Badge>
-									))}
-								</Badges>
-							</ValueActionContent>
+							<Badges>
+								{venueListQuery.map((venue) => (
+									<Badge key={venue.id}>{venue.name}</Badge>
+								))}
+							</Badges>
 						</ValueActionLeading>
 
 						<IconButton
