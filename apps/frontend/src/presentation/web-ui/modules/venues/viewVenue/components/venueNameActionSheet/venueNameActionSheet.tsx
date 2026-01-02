@@ -7,7 +7,7 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { useVenueUpdateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 
 export function VenueNameActionSheet({
 	venue,
@@ -38,13 +38,8 @@ export function VenueNameActionSheet({
 
 	return (
 		<>
-			<input
+			<Input
 				type="text"
-				className={cls(
-					'px-4 py-3 w-full',
-					'border-neutral-200/50 rounded-2xl border',
-					'text-sm font-[inherit] text-inherit',
-				)}
 				value={name}
 				onChange={(event) => setName(event.target.value)}
 			/>
