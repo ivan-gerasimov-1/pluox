@@ -3,8 +3,8 @@
 	"compatibility_date": "2025-11-11",
 	"workers_dev": false,
 
-	"not_found_handling": "single-page-application",
 	"assets": {
-		"directory": "./build"
+		"directory": "./build",
+		"not_found_handling": "single-page-application"
 	}
 }
