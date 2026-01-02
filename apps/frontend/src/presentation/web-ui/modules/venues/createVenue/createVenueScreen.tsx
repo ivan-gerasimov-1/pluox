@@ -89,7 +89,7 @@ export function CreateVenueScreen() {
 								<ValueActionContent className="mt-1">
 									<select
 										{...register('category')}
-										className="px-4 py-3 border-neutral-200/50 rounded-2xl text-sm w-full border font-[inherit] text-inherit"
+										className="px-4 py-3 border-neutral-200/50 rounded-2xl text-sm w-full appearance-none border font-[inherit] text-inherit"
 									>
 										{categories.map((category) => (
 											<option key={category.id} value={category.id}>
