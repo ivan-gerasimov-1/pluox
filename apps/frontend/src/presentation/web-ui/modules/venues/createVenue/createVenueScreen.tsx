@@ -12,6 +12,7 @@ import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
+import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 import {
 	ValueAction,
 	ValueActionContent,
@@ -63,9 +64,8 @@ export function CreateVenueScreen() {
 								</ValueActionLabel>
 
 								<ValueActionContent className="mt-1">
-									<input
+									<Input
 										type="text"
-										className="px-4 py-3 border-neutral-200/50 rounded-2xl text-sm w-full border font-[inherit] text-inherit"
 										{...register('venueName', {
 											required: intl.translate('required'),
 										})}
@@ -87,16 +87,15 @@ export function CreateVenueScreen() {
 								</ValueActionLabel>
 
 								<ValueActionContent className="mt-1">
-									<select
-										{...register('category')}
-										className="px-4 py-3 border-neutral-200/50 rounded-2xl text-sm w-full appearance-none border font-[inherit] text-inherit"
-									>
-										{categories.map((category) => (
-											<option key={category.id} value={category.id}>
-												{category.name}
-											</option>
-										))}
-									</select>
+									<Input asChild>
+										<select {...register('category')}>
+											{categories.map((category) => (
+												<option key={category.id} value={category.id}>
+													{category.name}
+												</option>
+											))}
+										</select>
+									</Input>
 								</ValueActionContent>
 							</ValueActionLeading>
 						</ValueAction>
