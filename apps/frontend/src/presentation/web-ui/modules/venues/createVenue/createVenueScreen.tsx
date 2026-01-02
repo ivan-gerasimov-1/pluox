@@ -15,8 +15,6 @@ import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/car
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 import {
 	ValueAction,
-	ValueActionContent,
-	ValueActionLabel,
 	ValueActionLeading,
 } from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
@@ -58,45 +56,39 @@ export function CreateVenueScreen() {
 				<Card>
 					<form id="createVenueForm" onSubmit={onSubmit}>
 						<ValueAction>
-							<ValueActionLeading>
-								<ValueActionLabel>
-									{intl.translate('venueName')}
-								</ValueActionLabel>
+							<ValueActionLeading
+								className="gap-2"
+								label={intl.translate('venueName')}
+							>
+								<Input
+									type="text"
+									{...register('venueName', {
+										required: intl.translate('required'),
+									})}
+								/>
 
-								<ValueActionContent className="mt-1">
-									<Input
-										type="text"
-										{...register('venueName', {
-											required: intl.translate('required'),
-										})}
-									/>
-
-									{errors.venueName && (
-										<div className="ml-2 mt-1 text-red-600">
-											{errors.venueName.message}
-										</div>
-									)}
-								</ValueActionContent>
+								{errors.venueName && (
+									<div className="ml-2 mt-1 text-red-600">
+										{errors.venueName.message}
+									</div>
+								)}
 							</ValueActionLeading>
 						</ValueAction>
 
 						<ValueAction>
-							<ValueActionLeading>
-								<ValueActionLabel>
-									{intl.translate('category')}
-								</ValueActionLabel>
-
-								<ValueActionContent className="mt-1">
-									<Input asChild>
-										<select {...register('category')}>
-											{categories.map((category) => (
-												<option key={category.id} value={category.id}>
-													{category.name}
-												</option>
-											))}
-										</select>
-									</Input>
-								</ValueActionContent>
+							<ValueActionLeading
+								className="mt-1"
+								label={intl.translate('category')}
+							>
+								<Input asChild>
+									<select {...register('category')}>
+										{categories.map((category) => (
+											<option key={category.id} value={category.id}>
+												{category.name}
+											</option>
+										))}
+									</select>
+								</Input>
 							</ValueActionLeading>
 						</ValueAction>
 					</form>
