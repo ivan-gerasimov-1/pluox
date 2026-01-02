@@ -23,8 +23,8 @@ export const venueRoutes: TRouteObject[] = [
 		Component: CreateVenueScreen,
 		handle: {
 			title: {
-				[ELocaleCode.EN_US]: 'Create Venue',
-				[ELocaleCode.RU_RU]: 'Создать место',
+				[ELocaleCode.EN_US]: 'New venue',
+				[ELocaleCode.RU_RU]: 'Новое место',
 			},
 			hasNavbar: true,
 		},
