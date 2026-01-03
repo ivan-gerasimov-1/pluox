@@ -22,8 +22,6 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 
-import styles from './expenseForm.module.css';
-
 export type TExpenseFormProps = {
 	amount: number;
 	currency: TCurrency;
@@ -80,23 +78,28 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	});
 
 	return (
-		<form name="expenseForm" onSubmit={onSubmit}>
-			<div className={styles.formGroup}>
-				<select
-					id="currency"
-					className={styles.currencySelect}
-					{...register('currency')}
-				>
-					{/* @todo Add a placeholder */}
-					{/* <option value="" disabled /> */}
-					{Object.values(ECurrency).map((currency) => {
-						return (
-							<option key={currency} value={currency}>
-								{currency}
-							</option>
-						);
-					})}
-				</select>
+		<form
+			name="expenseForm"
+			className="gap-6 flex flex-col"
+			onSubmit={onSubmit}
+		>
+			<div className="flex">
+				<Input asChild>
+					<select
+						className="w-auto! rounded-tr-none rounded-br-none border-r-0"
+						{...register('currency')}
+					>
+						{/* @todo Add a placeholder */}
+						{/* <option value="" disabled /> */}
+						{Object.values(ECurrency).map((currency) => {
+							return (
+								<option key={currency} value={currency}>
+									{currency}
+								</option>
+							);
+						})}
+					</select>
+				</Input>
 
 				<AmountInputController control={control} setValue={setValue} />
 
@@ -105,21 +108,13 @@ export function ExpenseForm(props: TExpenseFormProps) {
 				</Button>
 			</div>
 
-			<div className={styles.formGroup}>
-				<VenuePillsController control={control} setValue={setValue} />
-			</div>
+			<VenuePillsController control={control} setValue={setValue} />
 
-			<div className={styles.formGroup}>
-				<CategoryPillsController control={control} />
-			</div>
+			<CategoryPillsController control={control} />
 
-			<div className={styles.formGroup}>
-				<Input type="datetime-local" {...register('date')} />
-			</div>
+			<Input type="datetime-local" {...register('date')} />
 
-			<div className={styles.formGroup}>
-				<DescriptionInput {...register('description')} />
-			</div>
+			<DescriptionInput {...register('description')} />
 		</form>
 	);
 }
