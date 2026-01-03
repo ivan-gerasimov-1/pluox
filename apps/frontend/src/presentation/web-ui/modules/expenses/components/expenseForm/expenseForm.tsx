@@ -100,7 +100,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 
 				<AmountInputController control={control} setValue={setValue} />
 
-				<Button type="submit" className={styles.submitButton}>
+				<Button type="submit" className="ms-3 px-12">
 					{intl.translate('submitButton')}
 				</Button>
 			</div>
