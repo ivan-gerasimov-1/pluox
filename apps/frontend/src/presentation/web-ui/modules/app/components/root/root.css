@@ -82,7 +82,7 @@
 
 	/** Border radius */
 	--br-90: calc(var(--br-100) - 10px); /* rounded-2xl */
-	--br-100: 24px;
+	--br-100: 24px; /* rounded-2xl */
 
 	/* misc */
 	--transition-90: 150ms ease-in-out;
