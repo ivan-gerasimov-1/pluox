@@ -1,11 +1,13 @@
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { usePending } from '@root/presentation/web-ui/hooks/usePending';
-
+import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { Input } from '@root/presentation/web-ui/uiKit/input/input';
+import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 import { delay } from '@root/presentation/web-ui/utils/delay';
-
-import styles from './signUp.module.css';
 
 export function SignUpScreen() {
 	let authService = useService(EServiceToken.AUTH_SERVICE);
@@ -35,47 +37,52 @@ export function SignUpScreen() {
 	}
 
 	return (
-		<div className={styles.formContainer}>
-			<h1>Pluox</h1>
+		<Screen>
+			<div className="gap-10 px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-[var(--box-shadow-100)]">
+				<h1 className="text-2xl font-semibold">Pluox</h1>
 
-			<h2>Создать аккаунт</h2>
+				<form name="signIn" className="gap-5 flex flex-col" onSubmit={onSubmit}>
+					<label htmlFor="email" className="*:mt-3 flex flex-col">
+						<div className="text-sm font-semibold mt-0!">Эл. почта</div>
 
-			<form name="signIn" className={styles.signInForm} onSubmit={onSubmit}>
-				<label htmlFor="email" className={styles.inputGroup}>
-					<div className={styles.label}>Эл. почта</div>
+						<Input
+							type="email"
+							id="email"
+							name="email"
+							autoComplete="email"
+							autoFocus
+						/>
+					</label>
 
-					<input
-						type="email"
-						id="email"
-						name="email"
-						className={styles.inputField}
-						autoComplete="email"
-						autoFocus
-					/>
-				</label>
+					<label htmlFor="password" className="*:mt-3 flex flex-col">
+						<div className="text-sm font-semibold mt-0!">Пароль</div>
 
-				<label htmlFor="password" className={styles.inputGroup}>
-					<div className={styles.label}>Пароль</div>
+						<Input
+							type="password"
+							id="password"
+							name="password"
+							autoComplete="current-password"
+						/>
+					</label>
 
-					<input
-						type="password"
-						id="password"
-						name="password"
-						className={styles.inputField}
-						autoComplete="current-password"
-					/>
-				</label>
+					<div>
+						{pending ? (
+							<div className="text-sm text-center">Регистрация…</div>
+						) : (
+							<Button type="submit" isWide>
+								Зарегистрироваться
+							</Button>
+						)}
+					</div>
+				</form>
 
-				<div className={styles.inputGroup}>
-					{pending ? (
-						<div>Регистрация…</div>
-					) : (
-						<button type="submit" className={styles.submitButton}>
-							Зарегистрироваться
-						</button>
-					)}
+				<div className="gap-1 text-sm flex items-center justify-center">
+					Есть аккаунт?
+					<AppLink className="text-indigo-600" to={EAppPath.LOG_IN}>
+						Войти
+					</AppLink>
 				</div>
-			</form>
-		</div>
+			</div>
+		</Screen>
 	);
 }
