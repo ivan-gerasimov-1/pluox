@@ -24,7 +24,7 @@ export function PillsSelect<T extends { id: string; name: string }>(
 							'appearance-none',
 							'leading-none',
 							'text-xs',
-							'border-neutral-200 rounded-2xl border',
+							'border-neutral-200/50 rounded-2xl border',
 							'bg-white text-neutral-800',
 							'transition-colors',
 							'aria-pressed:bg-neutral-100 aria-pressed:border-neutral-900',
