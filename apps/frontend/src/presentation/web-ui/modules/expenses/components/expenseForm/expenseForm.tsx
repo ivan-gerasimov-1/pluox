@@ -1,12 +1,13 @@
+import type { Id, TCategory, TDescription } from '@domain/types';
 import {
-	type Control,
-	type UseFormSetValue,
 	Controller,
 	useForm,
+	type Control,
+	type UseFormSetValue,
 } from 'react-hook-form';
 
-import type { Id, TCategory, TDescription } from '@domain/types';
 import type { TISODateString } from '@root/core/domain/temporal/types';
+
 import {
 	ECurrency,
 	type TCurrency,
@@ -15,11 +16,11 @@ import {
 import { AmountInput } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/amountInput';
 import { CategoryPills } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/categoryPills/categoryPills';
 import { DescriptionInput } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/commentInput/descriptionInput';
-import { DateInput } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/dateInput/dateInput';
 import { VenuePills } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/venuePills/venuePills';
 import { expenseFormI18n } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm.i18n';
 import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 
 import styles from './expenseForm.module.css';
 
@@ -113,7 +114,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			</div>
 
 			<div className={styles.formGroup}>
-				<DateInput {...register('date')} />
+				<Input type="datetime-local" {...register('date')} />
 			</div>
 
 			<div className={styles.formGroup}>
