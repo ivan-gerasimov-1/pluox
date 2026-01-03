@@ -53,10 +53,7 @@ export function AmountInput({
 			{...props}
 			type="text"
 			inputMode={inputMode}
-			className={cls(
-				'border-neutral-300/75 rounded-tl-none rounded-bl-none',
-				className,
-			)}
+			className={cls('rounded-tl-none rounded-bl-none', className)}
 			value={amount}
 			onChange={handleChange}
 			onKeyDown={validateKey}
