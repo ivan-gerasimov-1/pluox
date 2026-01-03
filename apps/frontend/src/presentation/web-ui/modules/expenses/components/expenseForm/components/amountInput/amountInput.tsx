@@ -10,32 +10,20 @@ import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContaine
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-type TAmountInputProps = {
-	id?: string;
-	name: string;
-
-	className?: string;
-
-	ref?: React.Ref<HTMLInputElement>;
-
+type TAmountInputProps = Omit<
+	React.InputHTMLAttributes<HTMLInputElement>,
+	'onChange' | 'value'
+> & {
 	value: number;
-	autoFocus?: boolean;
-	required?: boolean;
-
 	onChange(value: number): void;
-	onBlur(event: React.FocusEvent<HTMLInputElement, Element>): void;
 };
 
 export function AmountInput({
-	className,
-	ref,
-	id,
-	name,
 	value,
-	autoFocus,
-	required,
-	onBlur,
 	onChange,
+	className,
+	inputMode = 'decimal',
+	...props
 }: TAmountInputProps) {
 	let [amount, setAmount] = useState<string>(() => {
 		return toViewValue(value);
@@ -62,21 +50,16 @@ export function AmountInput({
 
 	return (
 		<Input
-			id={id || name}
-			name={name}
+			{...props}
 			type="text"
-			inputMode="decimal"
+			inputMode={inputMode}
 			className={cls(
 				'border-neutral-300/75 rounded-tl-none rounded-bl-none',
 				className,
 			)}
-			ref={ref}
 			value={amount}
 			onChange={handleChange}
-			onBlur={onBlur}
 			onKeyDown={validateKey}
-			required={required}
-			autoFocus={autoFocus}
 		/>
 	);
 }
