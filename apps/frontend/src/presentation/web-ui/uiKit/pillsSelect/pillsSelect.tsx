@@ -23,7 +23,7 @@ export function PillsSelect<T extends { id: string; name: string }>(
 							'px-4 py-3',
 							'appearance-none',
 							'leading-none',
-							'text-xs',
+							'text-xs font-[inherit]',
 							'border-neutral-200/50 rounded-2xl border',
 							'bg-white text-neutral-800',
 							'transition-colors',
