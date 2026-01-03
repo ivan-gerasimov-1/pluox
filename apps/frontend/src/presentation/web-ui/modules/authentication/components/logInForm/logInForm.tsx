@@ -5,10 +5,9 @@ import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContaine
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 import { delay } from '@root/presentation/web-ui/utils/delay';
-
-import styles from './logInForm.module.css';
 
 export function useLoginForm() {
 	let authService = useService(EServiceToken.AUTH_SERVICE);
@@ -50,8 +49,8 @@ export function LogInForm() {
 	let { onSubmit, pending } = useLoginForm();
 
 	return (
-		<div className={styles.formContainer}>
-			<h1 className={styles.title}>Pluox</h1>
+		<div className="px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-[var(--box-shadow-100)]">
+			<h1 className="text-2xl font-semibold">Pluox</h1>
 
 			<Form name="signIn" onSubmit={onSubmit}>
 				<FormGroup>
@@ -67,16 +66,7 @@ export function LogInForm() {
 					{pending ? (
 						<div>Загрузка…</div>
 					) : (
-						<Button
-							type="submit"
-							className={styles.submitButton}
-							onClick={() =>
-								// eslint-disable-next-line no-empty-function
-								{}
-							}
-						>
-							Войти
-						</Button>
+						<Button type="submit">Войти</Button>
 					)}
 				</FormGroup>
 
@@ -93,16 +83,18 @@ export function LogInForm() {
 	);
 }
 
-function Form<T>(
-	props: React.PropsWithChildren<{
-		name: string;
-		onSubmit: (payload: T) => void;
-	}>,
-) {
-	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+function Form<T>({
+	name,
+	onSubmit,
+	children,
+}: React.PropsWithChildren<{
+	name: string;
+	onSubmit: (payload: T) => void;
+}>) {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		props.onSubmit(
+		onSubmit(
 			/** @todo Remove @ts-expect-error */
 			// @ts-expect-error | Use proper types
 			event.target.elements,
@@ -110,84 +102,78 @@ function Form<T>(
 	}
 
 	return (
-		<form name={props.name} className={styles.form} onSubmit={onSubmit}>
-			{props.children}
+		<form name={name} className="mt-10 flex flex-col" onSubmit={handleSubmit}>
+			{children}
 		</form>
 	);
 }
 
-function FormGroup(props: React.PropsWithChildren<{ className?: string }>) {
+function FormGroup({
+	className,
+	children,
+}: React.PropsWithChildren<{ className?: string }>) {
 	return (
-		<div className={cls(props.className, styles.inputGroup)}>
-			{props.children}
-		</div>
+		<div className={cls('[&+&]:mt-5 flex flex-col', className)}>{children}</div>
 	);
 }
 
-function InputLabel(
-	props: React.PropsWithChildren<{
-		for?: string;
-		text?: string;
-	}>,
-) {
+function InputLabel({
+	for: htmlFor,
+	text,
+	children,
+}: React.PropsWithChildren<{
+	for?: string;
+	text?: string;
+}>) {
 	return (
-		<label htmlFor={props.for} className={styles.label}>
-			{props.text && <div className={styles.labelText}>{props.text}</div>}
+		<label htmlFor={htmlFor} className="*:mt-3 flex flex-col">
+			{text && <div className="text-sm font-semibold mt-0!">{text}</div>}
 
-			{props.children}
+			{children}
 		</label>
 	);
 }
 
-function Input(props: {
-	type: 'text' | 'email' | 'password';
+function EmailInput({
+	name,
+	label,
+	autoFocus,
+}: {
 	name: string;
 	label?: string;
-	autoComplete?: string;
 	autoFocus?: boolean;
 }) {
 	return (
-		<InputLabel for={props.name} text={props.label}>
-			<input
-				type={props.type}
-				id={props.name}
-				name={props.name}
-				className={styles.inputField}
-				autoComplete={props.autoComplete}
-				autoFocus={props.autoFocus}
+		<InputLabel for={name} text={label}>
+			<Input
+				type="email"
+				id={name}
+				name={name}
+				autoComplete="email"
+				autoFocus={autoFocus}
 			/>
 		</InputLabel>
 	);
 }
 
-function EmailInput(props: {
+function PasswordInput({
+	name,
+	label,
+	autoFocus,
+}: {
 	name: string;
 	label?: string;
 	autoFocus?: boolean;
 }) {
 	return (
-		<Input
-			type="email"
-			name={props.name}
-			label={props.label}
-			autoComplete="email"
-			autoFocus={props.autoFocus}
-		/>
-	);
-}
-
-function PasswordInput(props: {
-	name: string;
-	label?: string;
-	autoFocus?: boolean;
-}) {
-	return (
-		<Input
-			type="password"
-			name={props.name}
-			label={props.label}
-			autoComplete="current-password"
-			autoFocus={props.autoFocus}
-		/>
+		<InputLabel for={name} text={label}>
+			<Input
+				type="password"
+				id={name}
+				name={name}
+				autoComplete="current-password"
+				autoFocus={autoFocus}
+			/>
+		</InputLabel>
 	);
 }
