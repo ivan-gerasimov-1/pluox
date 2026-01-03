@@ -1,13 +1,13 @@
-import { useEffect, useState, type default as React } from 'react';
+import { useEffect, useState } from 'react';
+
+import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
 
 import {
 	validateKey,
 	validateNumber,
 } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/helpers';
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
-
-import styles from './amountInput.module.css';
+import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TAmountInputProps = {
@@ -16,7 +16,7 @@ type TAmountInputProps = {
 
 	className?: string;
 
-	ref?: React.RefCallback<HTMLInputElement>;
+	ref?: React.Ref<HTMLInputElement>;
 
 	value: number;
 	autoFocus?: boolean;
@@ -26,14 +26,24 @@ type TAmountInputProps = {
 	onBlur(event: React.FocusEvent<HTMLInputElement, Element>): void;
 };
 
-export function AmountInput(props: TAmountInputProps) {
+export function AmountInput({
+	className,
+	ref,
+	id,
+	name,
+	value,
+	autoFocus,
+	required,
+	onBlur,
+	onChange,
+}: TAmountInputProps) {
 	let [amount, setAmount] = useState<string>(() => {
-		return toViewValue(props.value);
+		return toViewValue(value);
 	});
 
 	useEffect(() => {
-		setAmount(toViewValue(props.value));
-	}, [props.value]);
+		setAmount(toViewValue(value));
+	}, [value]);
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		let rawValue = event.target.value;
@@ -47,23 +57,26 @@ export function AmountInput(props: TAmountInputProps) {
 
 		let modelValue = toModelValue(rawValue);
 
-		props.onChange(modelValue);
+		onChange(modelValue);
 	}
 
 	return (
-		<input
-			id={props.id || props.name}
-			name={props.name}
+		<Input
+			id={id || name}
+			name={name}
 			type="text"
 			inputMode="decimal"
-			className={cls(styles.textInput, props.className)}
-			ref={props.ref}
+			className={cls(
+				'border-neutral-300/75 rounded-tl-none rounded-bl-none',
+				className,
+			)}
+			ref={ref}
 			value={amount}
 			onChange={handleChange}
-			onBlur={props.onBlur}
+			onBlur={onBlur}
 			onKeyDown={validateKey}
-			required={props.required}
-			autoFocus={props.autoFocus}
+			required={required}
+			autoFocus={autoFocus}
 		/>
 	);
 }
