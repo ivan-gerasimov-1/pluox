@@ -88,7 +88,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 								<div className="ml-3 flex grow flex-col">
 									<div className="flex items-end justify-start">
-										<span className="text-sm grow text-left">
+										<span className="text-sm grow text-left leading-none">
 											{intlService.formatCurrency(item.amount, {
 												currency: item.currency,
 											})}
