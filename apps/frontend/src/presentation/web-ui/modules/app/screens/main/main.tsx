@@ -9,12 +9,9 @@ import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContaine
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
 import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
+import { Grid } from '@root/presentation/web-ui/uiKit/grid/grid';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
-import {
-	SummaryCard,
-	SummaryCardContainer,
-} from '@root/presentation/web-ui/uiKit/summaryCard/summaryCard';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { SummaryCard } from '@root/presentation/web-ui/uiKit/summaryCard/summaryCard';
 
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
@@ -38,8 +35,8 @@ export function MainScreen() {
 				})}
 			</div>
 
-			<SummaryCardContainer>
-				<SummaryCard className="-rotate-z-2">
+			<Grid>
+				<SummaryCard className="min-h-36 -rotate-z-2">
 					<div>{intl.translate('today')}</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -49,7 +46,7 @@ export function MainScreen() {
 					</div>
 				</SummaryCard>
 
-				<SummaryCard>
+				<SummaryCard className="min-h-36">
 					<div>{intl.translate('leftover')}</div>
 
 					<div className="font-mono font-semibold text-base self-end">
@@ -80,7 +77,7 @@ export function MainScreen() {
 						))}
 					</ul>
 				</SummaryCard>
-			</SummaryCardContainer>
+			</Grid>
 		</>
 	);
 }
