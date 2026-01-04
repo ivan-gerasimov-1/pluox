@@ -1,21 +1,5 @@
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
-export function SummaryCardContainer({
-	className,
-	children,
-}: React.PropsWithChildren<{ className?: string }>) {
-	return (
-		<div
-			className={cls(
-				className,
-				'gap-4 grid min-h-[300px] grid-cols-2 grid-rows-2',
-			)}
-		>
-			{children}
-		</div>
-	);
-}
-
 export function SummaryCard({
 	className,
 	children,
