@@ -19,11 +19,13 @@ import { LocaleActionSheet } from '@root/presentation/web-ui/modules/settings/sc
 import { UserNameEditActionSheet } from '@root/presentation/web-ui/modules/settings/screens/settings/components/userNameEditActionSheet/userNameEditActionSheet';
 import { settingsI18n } from '@root/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
 import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-import { Badge } from '@root/presentation/web-ui/uiKit/badge/badge';
-import { Badges } from '@root/presentation/web-ui/uiKit/badges/badges';
+import { Badge, Badges } from '@root/presentation/web-ui/uiKit/badge/badge';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Card, CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
-import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
+import {
+	Card,
+	CardContainer,
+	CardHeader,
+} from '@root/presentation/web-ui/uiKit/card/card';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';

@@ -15,8 +15,7 @@ import {
 import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
 import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Card } from '@root/presentation/web-ui/uiKit/card/card';
-import { CardContainer } from '@root/presentation/web-ui/uiKit/cardContainer/cardContainer';
+import { Card, CardContainer } from '@root/presentation/web-ui/uiKit/card/card';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';

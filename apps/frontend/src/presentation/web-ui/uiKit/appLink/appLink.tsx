@@ -7,13 +7,17 @@ type TNavigableProps = {
 	className?: string;
 };
 
-export function AppLink(props: React.PropsWithChildren<TNavigableProps>) {
+export function AppLink({
+	className,
+	to,
+	children,
+}: React.PropsWithChildren<TNavigableProps>) {
 	return (
 		<NavLink
-			className={cls('leading-none text-inherit no-underline', props.className)}
-			to={props.to}
+			className={cls('leading-none text-inherit no-underline', className)}
+			to={to}
 		>
-			{props.children}
+			{children}
 		</NavLink>
 	);
 }
