@@ -24,6 +24,8 @@ import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButto
 
 import 'react-swipeable-list/dist/styles.css';
 
+import { cls } from '@root/presentation/web-ui/utils/classnames';
+
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
 	dateTo?: TISODateString;
@@ -57,7 +59,16 @@ export function ExpenseList(props: TExpenseListProps) {
 							<SwipeableListItem
 								key={item.id}
 								listType={Type.IOS}
-								className="mt-5 flex items-center justify-between"
+								// className="mt-5 flex items-center justify-between"
+								className={cls(
+									'gap-4 p-4 mt-3 flex w-full items-center justify-start',
+									'rounded-2xl border-neutral-200/50 border',
+									'bg-white shadow-(--box-shadow-90)',
+									'transition',
+									'hover:border-neutral-200 hover:-translate-y-px hover:shadow-(--box-shadow-100)',
+									'active:shadow-(--box-shadow-90)',
+									'focus-visible:border-neutral-900 focus-visible:outline-none',
+								)}
 								trailingActions={
 									<TrailingActions>
 										<SwipeAction
