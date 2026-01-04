@@ -9,7 +9,7 @@ export function CardContainer({
 	children,
 }: React.PropsWithChildren<TCardContainerProps>) {
 	return (
-		<div className={cls('gap-5 flex flex-col', className)}>{children}</div>
+		<div className={cls('gap-4 flex flex-col', className)}>{children}</div>
 	);
 }
 
@@ -24,7 +24,10 @@ export function Card({
 	return (
 		<div
 			className={cls(
-				'px-5 py-6 rounded-2xl border-gray-100 bg-white shadow-lg shadow-neutral-200/75 border',
+				'px-5 py-6',
+				'bg-white',
+				'border-gray-100 rounded-2xl border',
+				'shadow-lg shadow-neutral-200/75',
 				className,
 			)}
 		>
