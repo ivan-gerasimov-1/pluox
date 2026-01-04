@@ -10,8 +10,9 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { createVenueScreenI18n } from '@root/presentation/web-ui/modules/venues/createVenue/createVenueScreen.i18n';
 import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Card, Stack } from '@root/presentation/web-ui/uiKit/card/card';
+import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
+import { Stack } from '@root/presentation/web-ui/uiKit/stack/stack';
 import {
 	ValueAction,
 	ValueActionLeading,
