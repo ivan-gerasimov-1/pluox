@@ -8,6 +8,7 @@ import {
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
 
 import styles from './venueListScreen.module.css';
 
@@ -39,7 +40,7 @@ export function VenueListScreen() {
 							to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}
 						>
 							<div className={styles.venue}>
-								<span className={styles.icon}>{venue.name?.[0]}</span>
+								<CategoryIcon>{venue.name?.[0]}</CategoryIcon>
 
 								<div className={styles.meta}>
 									<span className={styles.name}>{venue.name}</span>
@@ -57,7 +58,7 @@ export function VenueListScreen() {
 							to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}
 						>
 							<div className={styles.venue}>
-								<span className={styles.icon}>{venue.name?.[0]}</span>
+								<CategoryIcon>{venue.name?.[0]}</CategoryIcon>
 
 								<div className={styles.meta}>
 									<span className={styles.name}>{venue.name}</span>
