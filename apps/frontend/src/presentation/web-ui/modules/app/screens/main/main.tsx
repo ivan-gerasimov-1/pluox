@@ -8,10 +8,10 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
+import { SummaryCard } from '@root/presentation/web-ui/uiKit/card/summaryCard';
 import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { Grid } from '@root/presentation/web-ui/uiKit/grid/grid';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
-import { SummaryCard } from '@root/presentation/web-ui/uiKit/summaryCard/summaryCard';
 
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
