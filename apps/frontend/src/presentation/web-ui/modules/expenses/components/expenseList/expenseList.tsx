@@ -32,6 +32,7 @@ export type TExpenseListProps = {
 export function ExpenseList(props: TExpenseListProps) {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let currencyRatesService = useService(EServiceToken.CURRENCY_RATE_SERVICE);
+	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 	let dialog = useDialog();
 
 	let getVenueName = useVenueName();
@@ -70,13 +71,14 @@ export function ExpenseList(props: TExpenseListProps) {
 								fullSwipe
 							>
 								<CategoryIcon
-									categoryId={item.category}
-									onClick={() => {
+									onClick={() =>
 										dialog.render(EditExpenseActionSheet, {
 											expense: item,
-										});
-									}}
-								/>
+										})
+									}
+								>
+									{categoryService.getCategoryIcon(item.category)}
+								</CategoryIcon>
 
 								<div className="ml-3 flex grow flex-col">
 									<div className="flex items-end justify-start">
