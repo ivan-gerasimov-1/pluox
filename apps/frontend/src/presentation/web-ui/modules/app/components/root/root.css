@@ -58,7 +58,7 @@
 	--fc-70: var(--grey-500); /* text-neutral-400 */
 	--fc-80: var(--grey-600); /* text-neutral-500 */
 	--fc-90: var(--grey-700); /* text-neutral-600 */
-	--fc-100: var(--black-100);
+	--fc-100: var(--black-100); /* text-neutral-800 */
 
 	/** Font weight */
 	--fw-100: 400; /* font-normal */
