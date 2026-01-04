@@ -23,8 +23,8 @@ import { Badge, Badges } from '@root/presentation/web-ui/uiKit/badge/badge';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import {
 	Card,
-	CardContainer,
 	CardHeader,
+	Stack,
 } from '@root/presentation/web-ui/uiKit/card/card';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
@@ -57,7 +57,7 @@ export function SettingsScreen() {
 
 	return (
 		<>
-			<CardContainer>
+			<Stack>
 				<Card>
 					<CardHeader>{intl.translate('userSectionTitle')}</CardHeader>
 
@@ -221,7 +221,7 @@ export function SettingsScreen() {
 						/>
 					</ValueAction>
 				</Card>
-			</CardContainer>
+			</Stack>
 		</>
 	);
 }

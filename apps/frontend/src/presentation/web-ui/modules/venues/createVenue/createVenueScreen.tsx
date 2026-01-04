@@ -10,7 +10,7 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { createVenueScreenI18n } from '@root/presentation/web-ui/modules/venues/createVenue/createVenueScreen.i18n';
 import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Card, CardContainer } from '@root/presentation/web-ui/uiKit/card/card';
+import { Card, Stack } from '@root/presentation/web-ui/uiKit/card/card';
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
 import {
 	ValueAction,
@@ -51,7 +51,7 @@ export function CreateVenueScreen() {
 
 	return (
 		<>
-			<CardContainer>
+			<Stack>
 				<Card>
 					<form id="createVenueForm" onSubmit={onSubmit}>
 						<ValueAction>
@@ -92,7 +92,7 @@ export function CreateVenueScreen() {
 						</ValueAction>
 					</form>
 				</Card>
-			</CardContainer>
+			</Stack>
 
 			<Button type="submit" form="createVenueForm" isWide>
 				{intl.translate('add')}
