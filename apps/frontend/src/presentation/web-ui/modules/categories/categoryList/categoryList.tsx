@@ -1,7 +1,7 @@
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useCategoryListQuery } from '@root/presentation/web-ui/modules/categories/queries/categories.queries';
-
-import styles from './categoryList.module.css';
+import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 export function CategoryList() {
 	let navigate = useAppNavigation();
@@ -13,14 +13,22 @@ export function CategoryList() {
 				<li key={category.id}>
 					<button
 						type="button"
-						className={styles.listItem}
+						className={cls(
+							'gap-4 p-4 flex w-full items-center justify-start',
+							'rounded-2xl border-neutral-200/50 border',
+							'bg-white shadow-(--box-shadow-90)',
+							'transition',
+							'hover:border-neutral-200 hover:-translate-y-px hover:shadow-(--box-shadow-100)',
+							'active:shadow-(--box-shadow-90)',
+							'focus-visible:border-neutral-900 focus-visible:outline-none',
+						)}
 						onClick={() => navigate.categoryPage(category.id)}
 					>
-						<span className={styles.icon}>
-							{category.icon ?? category.name[0]}
-						</span>
+						<CategoryIcon>{category.icon ?? category.name[0]}</CategoryIcon>
 
-						<span className={styles.name}>{category.name}</span>
+						<span className="text-sm font-normal text-neutral-800 overflow-hidden text-ellipsis whitespace-nowrap">
+							{category.name}
+						</span>
 					</button>
 				</li>
 			))}
