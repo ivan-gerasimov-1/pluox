@@ -49,7 +49,7 @@ export function LogInForm() {
 	let { onSubmit, pending } = useLoginForm();
 
 	return (
-		<div className="px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-[var(--box-shadow-100)]">
+		<div className="px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-(--box-shadow-100)">
 			<h1 className="text-2xl font-semibold">Pluox</h1>
 
 			<Form name="signIn" onSubmit={onSubmit}>

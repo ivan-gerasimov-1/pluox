@@ -15,7 +15,7 @@ export function Header(props: THeaderProps) {
 			className={cls(
 				'inset-x-0 top-0 fixed',
 				'flex items-center justify-between',
-				'h-[var(--header-height)]',
+				'h-(--header-height)',
 				'px-4 py-1',
 				'backdrop-blur-xs bg-neutral-50/50',
 				'border-neutral-200/50 border border-t-0',

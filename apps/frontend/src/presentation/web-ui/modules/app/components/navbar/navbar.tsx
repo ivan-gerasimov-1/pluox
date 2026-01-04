@@ -22,7 +22,7 @@ export function Navbar(props: TNavbarProps) {
 			className={cls(
 				'flex flex-col',
 				'left-0 bottom-0 fixed w-full',
-				'px-[var(--navbar-gap)] pt-[var(--navbar-gap)] pb-[calc(var(--navbar-gap)*1.5)]',
+				'px-(--navbar-gap) pt-(--navbar-gap) pb-[calc(var(--navbar-gap)*1.5)]',
 				'border-neutral-200/50 rounded-tl-2xl rounded-tr-2xl border',
 				'backdrop-blur-xs bg-neutral-50/50',
 				'z-50',

@@ -38,7 +38,7 @@ export function SignUpScreen() {
 
 	return (
 		<Screen>
-			<div className="gap-10 px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-[var(--box-shadow-100)]">
+			<div className="gap-10 px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-(--box-shadow-100)">
 				<h1 className="text-2xl font-semibold">Pluox</h1>
 
 				<form name="signIn" className="gap-5 flex flex-col" onSubmit={onSubmit}>
