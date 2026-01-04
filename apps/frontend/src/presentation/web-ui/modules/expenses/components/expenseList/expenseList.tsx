@@ -53,21 +53,16 @@ export function ExpenseList(props: TExpenseListProps) {
 					{intlService.formatDate(group.date)}
 				</div>
 
-				<SwipeableList className="pl-2 font-mono">
+				<SwipeableList className="font-mono">
 					{group.items?.map((item) => {
 						return (
 							<SwipeableListItem
 								key={item.id}
 								listType={Type.IOS}
-								// className="mt-5 flex items-center justify-between"
 								className={cls(
-									'gap-4 p-4 mt-3 flex w-full items-center justify-start',
+									'px-3 py-4 mt-3',
 									'rounded-2xl border-neutral-200/50 border',
 									'bg-white shadow-(--box-shadow-90)',
-									'transition',
-									'hover:border-neutral-200 hover:-translate-y-px hover:shadow-(--box-shadow-100)',
-									'active:shadow-(--box-shadow-90)',
-									'focus-visible:border-neutral-900 focus-visible:outline-none',
 								)}
 								trailingActions={
 									<TrailingActions>
@@ -75,7 +70,7 @@ export function ExpenseList(props: TExpenseListProps) {
 											onClick={() => deleteExpense(item.id)}
 											destructive
 										>
-											<IconButton className="ml-4" iconName={EIconName.Trash} />
+											<IconButton className="mx-4" iconName={EIconName.Trash} />
 										</SwipeAction>
 									</TrailingActions>
 								}
