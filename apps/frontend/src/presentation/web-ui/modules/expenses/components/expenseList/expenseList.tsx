@@ -6,8 +6,6 @@ import {
 	Type,
 } from 'react-swipeable-list';
 
-import 'react-swipeable-list/dist/styles.css';
-
 import type { TISODateString } from '@root/core/domain/temporal/types';
 
 import { EditExpenseActionSheet } from '@root/presentation/web-ui/modules/expenses/components/expenseEdit/editExpenseActionSheet';
@@ -20,10 +18,11 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { useVenueName } from '@root/presentation/web-ui/modules/venues/hooks/useVenueName';
 import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
-import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
+import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
+import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
 
-import styles from './expenseList.module.css';
+import 'react-swipeable-list/dist/styles.css';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -46,29 +45,25 @@ export function ExpenseList(props: TExpenseListProps) {
 
 	return expenseList.map((group) => {
 		return (
-			<div key={group.date} className={styles.groupContainer}>
-				<div className={styles.date}>{intlService.formatDate(group.date)}</div>
+			<div key={group.date}>
+				<div className="text-xs font-semibold">
+					{intlService.formatDate(group.date)}
+				</div>
 
-				<SwipeableList className={styles.list}>
+				<SwipeableList className="pl-2 font-mono">
 					{group.items?.map((item) => {
 						return (
 							<SwipeableListItem
 								key={item.id}
-								maxSwipe={1}
 								listType={Type.IOS}
-								className={styles.listItem}
+								className="mt-5 flex items-center justify-between"
 								trailingActions={
 									<TrailingActions>
 										<SwipeAction
-											Tag="div"
-											onClick={() => {
-												deleteExpense(item.id);
-											}}
+											onClick={() => deleteExpense(item.id)}
 											destructive
 										>
-											<button type="button" className={styles.actionButton}>
-												<Icon name={EIconName.Trash} />
-											</button>
+											<IconButton className="ml-4" iconName={EIconName.Trash} />
 										</SwipeAction>
 									</TrailingActions>
 								}
@@ -83,17 +78,17 @@ export function ExpenseList(props: TExpenseListProps) {
 									}}
 								/>
 
-								<div className={styles.info}>
-									<div className={styles.amount}>
-										<span className={styles.expense}>
+								<div className="ml-3 flex grow flex-col">
+									<div className="flex items-end justify-start">
+										<span className="text-sm grow text-left">
 											{intlService.formatCurrency(item.amount, {
 												currency: item.currency,
 											})}
 										</span>
 
-										<span className={styles.dotFilledSpace} />
+										<DotSpace />
 
-										<span className={styles.expenseInMainCurrency}>
+										<span className="text-base font-semibold leading-none">
 											{intlService.formatCurrency(
 												currencyRatesService.convert(
 													item.amount,
@@ -105,7 +100,7 @@ export function ExpenseList(props: TExpenseListProps) {
 									</div>
 
 									{(item.description || item.venue) && (
-										<div className={styles.description}>
+										<div className="mt-2 text-xs text-neutral-600">
 											{item.venue && <span>⚲ {getVenueName(item.venue)}</span>}
 											{item.venue && item.description && <span> | </span>}
 											{item.description}
