@@ -4,22 +4,33 @@ import {
 	EIconSize,
 	type TIconSize,
 } from '@root/presentation/web-ui/uiKit/icon/iconSize';
+import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 export type TIconButtonProps = {
+	className?: string;
+
 	onClick?: () => void;
 
 	iconName: TIconName;
 	iconSize?: TIconSize;
 };
 
-export function IconButton(props: TIconButtonProps) {
+export function IconButton({
+	className,
+	onClick,
+	iconName,
+	iconSize,
+}: TIconButtonProps) {
 	return (
 		<button
 			type="button"
-			className="m-0 p-2 flex items-center border-0 bg-transparent text-inherit"
-			onClick={props.onClick}
+			className={cls(
+				'm-0 p-2 flex items-center border-0 bg-transparent text-inherit',
+				className,
+			)}
+			onClick={onClick}
 		>
-			<Icon name={props.iconName} size={props.iconSize || EIconSize.MEDIUM} />
+			<Icon name={iconName} size={iconSize || EIconSize.MEDIUM} />
 		</button>
 	);
 }
