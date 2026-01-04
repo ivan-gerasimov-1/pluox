@@ -8,6 +8,7 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
+import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
 import {
 	SummaryCard,
@@ -68,13 +69,7 @@ export function MainScreen() {
 									{categoryService.getCategoryIcon(id)}
 								</span>
 
-								<span
-									className={cls(
-										'h-4 mx-1 w-full',
-										'bg-size-[0.5rem_1.25rem]',
-										'bg-radial-[circle,var(--color-neutral-400)_1px,transparent_0]',
-									)}
-								></span>
+								<DotSpace />
 
 								<span className="leading-none">
 									{intlService.formatCurrency(total, {
