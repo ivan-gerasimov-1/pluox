@@ -44,7 +44,7 @@ export function VenueNameActionSheet({
 				onChange={(event) => setName(event.target.value)}
 			/>
 
-			<Button className="mt-5" onClick={handleSave} isWide>
+			<Button className="mt-5" onClick={handleSave} wide>
 				{intl.translate('save')}
 			</Button>
 		</>

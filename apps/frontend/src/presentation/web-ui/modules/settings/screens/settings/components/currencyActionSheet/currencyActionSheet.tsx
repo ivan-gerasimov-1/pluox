@@ -50,7 +50,7 @@ export function CurrencyActionSheet({
 				onSelect={setSelectedCurrency}
 			/>
 
-			<Button onClick={handleSave} isWide>
+			<Button onClick={handleSave} wide>
 				{intl.translate('save')}
 			</Button>
 		</>

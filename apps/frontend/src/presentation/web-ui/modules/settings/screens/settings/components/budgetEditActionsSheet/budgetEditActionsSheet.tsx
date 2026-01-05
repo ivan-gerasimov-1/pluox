@@ -46,7 +46,7 @@ export function BudgetEditActionsSheet(props: BudgetEditActionsSheetProps) {
 						budget,
 					});
 				}}
-				isWide
+				wide
 			>
 				{intl.translate('save')}
 			</Button>

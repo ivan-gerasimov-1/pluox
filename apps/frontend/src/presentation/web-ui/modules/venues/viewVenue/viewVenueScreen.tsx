@@ -103,7 +103,7 @@ export function VenueViewScreen() {
 							venueArchiveMutation.mutate(venue.id);
 						}
 					}}
-					isWide
+					wide
 				>
 					{venue.isArchived
 						? intl.translate('unarchive')
@@ -113,8 +113,8 @@ export function VenueViewScreen() {
 				<div>
 					<Button
 						onClick={() => venueRemoveMutation.mutate(venue.id)}
-						color="red"
-						isWide
+						intent="danger"
+						wide
 					>
 						<Icon name={EIconName.Trash} />
 					</Button>

@@ -26,7 +26,7 @@ export function VenueListScreen() {
 						{}
 					}
 					size="m"
-					isWide
+					wide
 				>
 					{intl.translate('add')}
 				</Button>

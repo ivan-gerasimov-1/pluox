@@ -95,7 +95,7 @@ export function CreateVenueScreen() {
 				</Card>
 			</Stack>
 
-			<Button type="submit" form="createVenueForm" isWide>
+			<Button type="submit" form="createVenueForm" wide>
 				{intl.translate('add')}
 			</Button>
 		</>

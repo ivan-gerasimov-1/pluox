@@ -44,7 +44,7 @@ export function VenueCategoryActionSheet({
 				onSelect={setSelectedCategory}
 			/>
 
-			<Button onClick={handleSave} isWide>
+			<Button onClick={handleSave} wide>
 				{intl.translate('save')}
 			</Button>
 		</>

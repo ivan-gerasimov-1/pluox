@@ -69,7 +69,7 @@ export function SignUpScreen() {
 						{pending ? (
 							<div className="text-sm text-center">Регистрация…</div>
 						) : (
-							<Button type="submit" isWide>
+							<Button type="submit" wide>
 								Зарегистрироваться
 							</Button>
 						)}

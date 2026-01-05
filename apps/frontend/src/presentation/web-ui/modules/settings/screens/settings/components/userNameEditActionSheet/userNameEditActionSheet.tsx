@@ -36,7 +36,7 @@ export function UserNameEditActionSheet(props: UserNameEditActionSheetProps) {
 						userName,
 					});
 				}}
-				isWide
+				wide
 			>
 				{intl.translate('save')}
 			</Button>
