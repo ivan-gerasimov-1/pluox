@@ -4,7 +4,6 @@ import styles from './button.module.css';
 
 export type TButtonProps = {
 	className?: string;
-	style?: React.CSSProperties;
 
 	color?: 'red' | 'none';
 	size?: 's' | 'm' | 'l';
@@ -37,7 +36,6 @@ export function Button(props: React.PropsWithChildren<TButtonProps>) {
 	return (
 		<button
 			type={type}
-			style={props.style}
 			form={form}
 			className={cls(styles.button, props.className, styles[size], {
 				[styles[color]]: true,
