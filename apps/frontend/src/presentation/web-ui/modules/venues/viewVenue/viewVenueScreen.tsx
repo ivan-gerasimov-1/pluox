@@ -23,18 +23,18 @@ import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButto
 import { Stack } from '@root/presentation/web-ui/uiKit/stack/stack';
 import {
 	ValueAction,
-	ValueActionContent,
-	ValueActionLabel,
 	ValueActionLeading,
 	ValueActionTrailing,
 } from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
 export function VenueViewScreen() {
+	let { id = INVALID_ID } = useParams<{ id: Id }>();
+
 	let navigation = useAppNavigation();
 	let dialog = useDialog();
 	let intl = useIntl(venueViewScreenI18n);
 
-	let { venue } = useScreenLoader();
+	let venue = useVenueOneByIdQuery(id);
 
 	let venueArchiveMutation = useVenueArchiveMutation();
 	let venueUnarchiveMutation = useVenueUnarchiveMutation();
@@ -54,16 +54,12 @@ export function VenueViewScreen() {
 			<Stack>
 				<Card>
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>ID</ValueActionLabel>
-							<ValueActionContent>{venue.id}</ValueActionContent>
-						</ValueActionLeading>
+						<ValueActionLeading label="ID">{venue.id}</ValueActionLeading>
 					</ValueAction>
 
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>{intl.translate('name')}</ValueActionLabel>
-							<ValueActionContent>{venue.name}</ValueActionContent>
+						<ValueActionLeading label={intl.translate('name')}>
+							{venue.name}
 						</ValueActionLeading>
 
 						<ValueActionTrailing>
@@ -75,11 +71,8 @@ export function VenueViewScreen() {
 					</ValueAction>
 
 					<ValueAction>
-						<ValueActionLeading>
-							<ValueActionLabel>
-								{intl.translate('categories')}
-							</ValueActionLabel>
-							<ValueActionContent>{venue.categoryName}</ValueActionContent>
+						<ValueActionLeading label={intl.translate('categories')}>
+							{venue.categoryName}
 						</ValueActionLeading>
 
 						<ValueActionTrailing>
@@ -94,7 +87,7 @@ export function VenueViewScreen() {
 				</Card>
 			</Stack>
 
-			<div className="gap-3 flex">
+			<div className="gap-4 flex">
 				<Button
 					onClick={() => {
 						if (venue.isArchived) {
@@ -110,26 +103,13 @@ export function VenueViewScreen() {
 						: intl.translate('archive')}
 				</Button>
 
-				<div>
-					<Button
-						onClick={() => venueRemoveMutation.mutate(venue.id)}
-						intent="danger"
-						wide
-					>
-						<Icon name={EIconName.Trash} />
-					</Button>
-				</div>
+				<Button
+					onClick={() => venueRemoveMutation.mutate(venue.id)}
+					intent="danger"
+				>
+					<Icon name={EIconName.Trash} />
+				</Button>
 			</div>
 		</>
 	);
-}
-
-function useScreenLoader() {
-	let { id = INVALID_ID } = useParams<{ id: Id }>();
-
-	let venue = useVenueOneByIdQuery(id);
-
-	return {
-		venue,
-	};
 }
