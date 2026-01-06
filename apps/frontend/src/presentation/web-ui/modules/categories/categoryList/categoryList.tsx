@@ -1,37 +1,35 @@
 import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
 import { useCategoryListQuery } from '@root/presentation/web-ui/modules/categories/queries/categories.queries';
-import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import {
+	List,
+	ListIcon,
+	ListItem,
+} from '@root/presentation/web-ui/uiKit/list/list';
+import {
+	ValueAction,
+	ValueActionLeading,
+} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
 export function CategoryList() {
 	let navigate = useAppNavigation();
 	let categories = useCategoryListQuery();
 
 	return (
-		<ul className="gap-2.5 m-0 p-0 flex list-none flex-col">
+		<List>
 			{categories.map((category) => (
-				<li key={category.id}>
+				<ListItem key={category.id} asChild>
 					<button
 						type="button"
-						className={cls(
-							'gap-4 p-4 flex w-full items-center justify-start',
-							'rounded-2xl border-neutral-200/50 border',
-							'bg-white shadow-(--box-shadow-90)',
-							'transition',
-							'hover:border-neutral-200 hover:-translate-y-px hover:shadow-(--box-shadow-100)',
-							'active:shadow-(--box-shadow-90)',
-							'focus-visible:border-neutral-900 focus-visible:outline-none',
-						)}
 						onClick={() => navigate.categoryPage(category.id)}
 					>
-						<CategoryIcon>{category.icon ?? category.name[0]}</CategoryIcon>
+						<ListIcon>{category.icon ?? category.name[0]}</ListIcon>
 
-						<span className="text-sm font-normal text-neutral-800 overflow-hidden text-ellipsis whitespace-nowrap">
-							{category.name}
-						</span>
+						<ValueAction>
+							<ValueActionLeading label={category.name}>Asd</ValueActionLeading>
+						</ValueAction>
 					</button>
-				</li>
+				</ListItem>
 			))}
-		</ul>
+		</List>
 	);
 }
