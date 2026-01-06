@@ -6,13 +6,7 @@ export function SummaryCard({
 	children,
 }: React.PropsWithChildren<{ className?: string }>) {
 	return (
-		<Card
-			className={cls(
-				'flex flex-col items-start justify-between',
-				'rounded-tl-lg rounded-br-3xl',
-				className,
-			)}
-		>
+		<Card className={cls('rounded-tl-lg rounded-br-3xl', className)}>
 			{children}
 		</Card>
 	);

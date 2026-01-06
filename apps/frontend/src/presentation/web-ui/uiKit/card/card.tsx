@@ -11,6 +11,7 @@ export function Card({
 	return (
 		<div
 			className={cls(
+				'gap-3 flex flex-col',
 				'px-5 py-6',
 				'bg-white',
 				'border-gray-100 rounded-2xl border',
@@ -34,8 +35,6 @@ export function CardHeader({
 	children,
 }: React.PropsWithChildren<CardHeaderProps>) {
 	return (
-		<As className={cls('m-0 mb-3 text-sm tracking-tight', className)}>
-			{children}
-		</As>
+		<As className={cls('text-sm tracking-tight', className)}>{children}</As>
 	);
 }

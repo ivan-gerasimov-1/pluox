@@ -37,7 +37,7 @@ export function MainScreen() {
 			</div>
 
 			<Grid>
-				<SummaryCard className="min-h-36 -rotate-z-2">
+				<SummaryCard className="min-h-36 -rotate-z-2 justify-between">
 					<CardHeader>{intl.translate('today')}</CardHeader>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
@@ -47,7 +47,7 @@ export function MainScreen() {
 					</div>
 				</SummaryCard>
 
-				<SummaryCard className="min-h-36">
+				<SummaryCard className="min-h-36 justify-between">
 					<CardHeader>{intl.translate('leftover')}</CardHeader>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
@@ -57,7 +57,7 @@ export function MainScreen() {
 					</div>
 				</SummaryCard>
 
-				<SummaryCard className="col-2 row-span-full justify-start overflow-auto">
+				<SummaryCard className="col-2 row-span-full overflow-auto">
 					<CardHeader>{intl.translate('categories')}</CardHeader>
 
 					<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">

@@ -13,12 +13,7 @@ export function ValueAction({
 	children,
 }: React.PropsWithChildren<TValueActionProps>) {
 	return (
-		<div
-			className={cls(
-				'[&+&]:mt-3 flex w-full items-start justify-between',
-				className,
-			)}
-		>
+		<div className={cls('flex w-full items-start justify-between', className)}>
 			{children}
 		</div>
 	);
