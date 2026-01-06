@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'cva';
 
 const buttonVariants = cva(
@@ -45,6 +46,7 @@ const buttonVariants = cva(
 export type TButtonProps = VariantProps<typeof buttonVariants> & {
 	className?: string;
 	onClick?: () => void;
+	asChild?: boolean;
 } & (
 		| {
 				type?: 'button';
@@ -61,23 +63,28 @@ export type TButtonProps = VariantProps<typeof buttonVariants> & {
  * 1. Investigate usage of onPointerDown/onKeyDown
  */
 export function Button({
-	className,
 	type = 'button',
-	form,
+
+	className,
 	intent,
 	size,
 	wide,
-	onClick,
+
+	asChild,
 	children,
+
+	...props
 }: React.PropsWithChildren<TButtonProps>) {
+	let Component = asChild ? Slot : 'button';
+
 	return (
-		<button
+		<Component
+			// @ts-expect-error | "type" is only passed to "button", but not to Slot
 			type={type}
-			form={type === 'submit' ? form : undefined}
 			className={buttonVariants({ className, size, intent, wide })}
-			onClick={onClick}
+			{...props}
 		>
 			{children}
-		</button>
+		</Component>
 	);
 }
