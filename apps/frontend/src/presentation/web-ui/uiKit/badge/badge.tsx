@@ -32,7 +32,9 @@ export function Badge({
 	return (
 		<Component
 			className={cls(
-				'px-3 py-2 border-neutral-200 rounded-2xl text-xs border text-center whitespace-nowrap',
+				'px-4 py-2.5',
+				'text-xs bg-white text-neutral-800 text-center leading-none whitespace-nowrap',
+				'border-neutral-200/50 rounded-2xl border',
 				className,
 			)}
 		>
