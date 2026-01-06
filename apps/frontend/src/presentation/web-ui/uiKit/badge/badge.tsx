@@ -24,13 +24,13 @@ export function Badge({
 	children,
 }: React.PropsWithChildren<TBadgeProps>) {
 	return (
-		<span
+		<div
 			className={cls(
-				'px-3 py-2 border-neutral-200 rounded-2xl text-xs border text-center',
+				'px-3 py-2 border-neutral-200 rounded-2xl text-xs border text-center whitespace-nowrap',
 				className,
 			)}
 		>
 			{children}
-		</span>
+		</div>
 	);
 }
