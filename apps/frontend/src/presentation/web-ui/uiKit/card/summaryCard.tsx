@@ -8,12 +8,9 @@ export function SummaryCard({
 	return (
 		<Card
 			className={cls(
-				className,
 				'flex flex-col items-start justify-between',
-				'px-5 py-4',
-				/** @todo Move to SummaryCardHeader or SummaryCardTitle */
-				'font-extrabold text-sm tracking-tight',
-				'rounded-tl-lg rounded-tr-2xl rounded-bl-2xl rounded-br-3xl',
+				'rounded-tl-lg rounded-br-3xl',
+				className,
 			)}
 		>
 			{children}
