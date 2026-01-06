@@ -1,3 +1,6 @@
+import { Slot } from '@radix-ui/react-slot';
+
+import type { TSlottable } from '@root/presentation/web-ui/uiKit/types';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TBadgesProps = {
@@ -15,22 +18,25 @@ export function Badges({
 	);
 }
 
-type TBadgeProps = {
+type TBadgeProps = TSlottable & {
 	className?: string;
 };
 
 export function Badge({
 	className,
+	asChild,
 	children,
 }: React.PropsWithChildren<TBadgeProps>) {
+	let Component = asChild ? Slot : 'div';
+
 	return (
-		<div
+		<Component
 			className={cls(
 				'px-3 py-2 border-neutral-200 rounded-2xl text-xs border text-center whitespace-nowrap',
 				className,
 			)}
 		>
 			{children}
-		</div>
+		</Component>
 	);
 }
