@@ -25,7 +25,7 @@ export function CategoryList() {
 						<ListIcon>{category.icon ?? category.name[0]}</ListIcon>
 
 						<ValueAction>
-							<ValueActionLeading label={category.name}>Asd</ValueActionLeading>
+							<ValueActionLeading label={category.name} />
 						</ValueAction>
 					</button>
 				</ListItem>
