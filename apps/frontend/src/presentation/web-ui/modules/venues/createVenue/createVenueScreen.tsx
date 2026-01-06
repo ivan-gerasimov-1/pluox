@@ -18,11 +18,6 @@ import {
 	ValueActionLeading,
 } from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
-type TVenueFormData = {
-	venueName: string;
-	category: string;
-};
-
 export function CreateVenueScreen() {
 	let navigation = useAppNavigation();
 	let intl = useIntl(createVenueScreenI18n);
@@ -34,7 +29,10 @@ export function CreateVenueScreen() {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<TVenueFormData>();
+	} = useForm<{
+		venueName: string;
+		category: string;
+	}>();
 
 	let venueCreateMutation = useVenueCreateMutation({
 		onSuccess: (venueDto: TVenueDTO) => {
@@ -42,7 +40,7 @@ export function CreateVenueScreen() {
 		},
 	});
 
-	const onSubmit = handleSubmit(async (venueData: TVenueFormData) => {
+	const onSubmit = handleSubmit((venueData) => {
 		venueCreateMutation.mutate({
 			name: venueData.venueName,
 			categoryId: venueData.category,
@@ -51,53 +49,51 @@ export function CreateVenueScreen() {
 	});
 
 	return (
-		<>
-			<Stack>
-				<Card>
-					<form id="createVenueForm" onSubmit={onSubmit}>
-						<ValueAction>
-							<ValueActionLeading
-								className="gap-2"
-								label={intl.translate('venueName')}
-							>
-								<Input
-									type="text"
-									{...register('venueName', {
-										required: intl.translate('required'),
-									})}
-								/>
+		<Stack>
+			<Card asChild>
+				<form id="createVenueForm" onSubmit={onSubmit}>
+					<ValueAction>
+						<ValueActionLeading
+							className="gap-2"
+							label={intl.translate('venueName')}
+						>
+							<Input
+								type="text"
+								{...register('venueName', {
+									required: intl.translate('required'),
+								})}
+							/>
 
-								{errors.venueName && (
-									<div className="ml-2 mt-1 text-red-600">
-										{errors.venueName.message}
-									</div>
-								)}
-							</ValueActionLeading>
-						</ValueAction>
+							{errors.venueName && (
+								<div className="ml-2 mt-1 text-red-600">
+									{errors.venueName.message}
+								</div>
+							)}
+						</ValueActionLeading>
+					</ValueAction>
 
-						<ValueAction>
-							<ValueActionLeading
-								className="mt-1"
-								label={intl.translate('category')}
-							>
-								<Input asChild>
-									<select {...register('category')}>
-										{categories.map((category) => (
-											<option key={category.id} value={category.id}>
-												{category.name}
-											</option>
-										))}
-									</select>
-								</Input>
-							</ValueActionLeading>
-						</ValueAction>
-					</form>
-				</Card>
-			</Stack>
+					<ValueAction>
+						<ValueActionLeading
+							className="gap-2"
+							label={intl.translate('category')}
+						>
+							<Input asChild>
+								<select {...register('category')}>
+									{categories.map((category) => (
+										<option key={category.id} value={category.id}>
+											{category.name}
+										</option>
+									))}
+								</select>
+							</Input>
+						</ValueActionLeading>
+					</ValueAction>
+				</form>
+			</Card>
 
 			<Button type="submit" form="createVenueForm" wide>
 				{intl.translate('add')}
 			</Button>
-		</>
+		</Stack>
 	);
 }
