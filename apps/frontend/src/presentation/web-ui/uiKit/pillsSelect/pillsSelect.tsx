@@ -1,3 +1,6 @@
+import { useCallback } from 'react';
+
+import { Badge, Badges } from '@root/presentation/web-ui/uiKit/badge/badge';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TPillsSelectProps<T> = {
@@ -7,57 +10,58 @@ type TPillsSelectProps<T> = {
 	onSelect(payload?: T): void;
 };
 
-export function PillsSelect<T extends { id: string; name: string }>(
-	props: TPillsSelectProps<T>,
-) {
+export function PillsSelect<T extends { id: string; name: string }>({
+	value,
+	items,
+	onSelect,
+}: TPillsSelectProps<T>) {
+	let handleSelect = useCallback(
+		(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+			let target = event.currentTarget;
+			let isPressed = target.getAttribute('aria-pressed') === 'true';
+			let nextState = !isPressed;
+
+			for (let pill of items) {
+				let element = document.getElementById(pill.id);
+
+				if (!element) {
+					continue;
+				}
+
+				element.setAttribute('aria-pressed', 'false');
+			}
+
+			target.setAttribute('aria-pressed', String(nextState));
+
+			let targetItem = items.find((pill) => pill.id === target.id);
+
+			onSelect(nextState ? targetItem : undefined);
+		},
+		[items, onSelect],
+	);
+
 	return (
-		<div className="gap-1 flex flex-wrap">
-			{props.items.map((item) => {
+		<Badges>
+			{items.map((item) => {
 				return (
-					<button
-						key={item.id}
-						id={item.id}
-						type="button"
-						className={cls(
-							'flex grow items-center justify-center',
-							'px-4 py-3',
-							'appearance-none',
-							'leading-none',
-							'text-xs font-[inherit]',
-							'border-neutral-200/50 rounded-2xl border',
-							'bg-white text-neutral-800',
-							'transition-colors',
-							'aria-pressed:bg-neutral-100 aria-pressed:border-neutral-900',
-						)}
-						aria-pressed={item.id === props.value}
-						onClick={(event) => {
-							let target = event.currentTarget;
-							let isPressed = target.getAttribute('aria-pressed') === 'true';
-							let nextState = !isPressed;
-
-							for (let pill of props.items) {
-								let element = document.getElementById(pill.id);
-
-								if (!element) {
-									continue;
-								}
-
-								element.setAttribute('aria-pressed', 'false');
-							}
-
-							target.setAttribute('aria-pressed', String(nextState));
-
-							let targetItem = props.items.find(
-								(pill) => pill.id === target.id,
-							);
-
-							props.onSelect(nextState ? targetItem : undefined);
-						}}
-					>
-						{item.name}
-					</button>
+					<Badge key={item.id} asChild>
+						<button
+							id={item.id}
+							type="button"
+							className={cls(
+								'py-3',
+								'appearance-none font-[inherit]',
+								'transition-colors',
+								'aria-pressed:bg-neutral-100 aria-pressed:border-neutral-900',
+							)}
+							aria-pressed={item.id === value}
+							onClick={handleSelect}
+						>
+							{item.name}
+						</button>
+					</Badge>
 				);
 			})}
-		</div>
+		</Badges>
 	);
 }
