@@ -33,5 +33,9 @@ export function CardHeader({
 	as: As = 'h2',
 	children,
 }: React.PropsWithChildren<CardHeaderProps>) {
-	return <As className={cls('m-0 mb-3 text-sm', className)}>{children}</As>;
+	return (
+		<As className={cls('m-0 mb-3 text-sm tracking-tight', className)}>
+			{children}
+		</As>
+	);
 }
