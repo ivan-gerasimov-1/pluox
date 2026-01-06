@@ -7,10 +7,18 @@ import {
 	useVenueListUnarchivedQuery,
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
+import { Badge } from '@root/presentation/web-ui/uiKit/badge/badge';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { ListIcon } from '@root/presentation/web-ui/uiKit/list/list';
-
-import styles from './venueListScreen.module.css';
+import {
+	List,
+	ListIcon,
+	ListItem,
+} from '@root/presentation/web-ui/uiKit/list/list';
+import {
+	ValueAction,
+	ValueActionLeading,
+	ValueActionTrailing,
+} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
 
 export function VenueListScreen() {
 	let intl = useIntl(venueListScreenI18n);
@@ -19,58 +27,43 @@ export function VenueListScreen() {
 
 	return (
 		<>
-			<AppLink to={EAppPath.VENUES_CREATE}>
-				<Button
-					onClick={() =>
-						// eslint-disable-next-line no-empty-function
-						{}
-					}
-					size="m"
-					wide
-				>
-					{intl.translate('add')}
-				</Button>
-			</AppLink>
+			<Button size="m" wide asChild>
+				<AppLink to={EAppPath.VENUES_CREATE}>{intl.translate('add')}</AppLink>
+			</Button>
 
-			<ul className={styles.venueList}>
+			<List>
 				{venueList.map((venue) => (
-					<li key={venue.id}>
-						<AppLink
-							className={styles.venueLink}
-							to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}
-						>
-							<div className={styles.venue}>
-								<ListIcon>{venue.name?.[0]}</ListIcon>
+					<ListItem key={venue.id} asChild>
+						<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
+							<ListIcon>{venue.name?.[0]}</ListIcon>
 
-								<div className={styles.meta}>
-									<span className={styles.name}>{venue.name}</span>
-									<span className={styles.category}>{venue.categoryName}</span>
-								</div>
-							</div>
+							<ValueAction>
+								<ValueActionLeading label={venue.name}>
+									{venue.categoryName}
+								</ValueActionLeading>
+							</ValueAction>
 						</AppLink>
-					</li>
+					</ListItem>
 				))}
 
 				{venueListArchived.map((venue) => (
-					<li key={venue.id}>
-						<AppLink
-							className={styles.venueLink}
-							to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}
-						>
-							<div className={styles.venue}>
-								<ListIcon>{venue.name?.[0]}</ListIcon>
+					<ListItem key={venue.id} asChild>
+						<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
+							<ListIcon>{venue.name?.[0]}</ListIcon>
 
-								<div className={styles.meta}>
-									<span className={styles.name}>{venue.name}</span>
-									<span className={styles.category}>{venue.categoryName}</span>
-								</div>
-							</div>
+							<ValueAction>
+								<ValueActionLeading label={venue.name}>
+									{venue.categoryName}
+								</ValueActionLeading>
 
-							<span className={styles.badge}>{intl.translate('archived')}</span>
+								<ValueActionTrailing>
+									<Badge>{intl.translate('archived')}</Badge>
+								</ValueActionTrailing>
+							</ValueAction>
 						</AppLink>
-					</li>
+					</ListItem>
 				))}
-			</ul>
+			</List>
 		</>
 	);
 }
