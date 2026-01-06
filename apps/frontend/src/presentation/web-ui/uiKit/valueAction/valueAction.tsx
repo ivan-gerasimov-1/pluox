@@ -13,7 +13,12 @@ export function ValueAction({
 	children,
 }: React.PropsWithChildren<TValueActionProps>) {
 	return (
-		<div className={cls('flex w-full items-start justify-between', className)}>
+		<div
+			className={cls(
+				'gap-4 flex w-full items-start justify-between',
+				className,
+			)}
+		>
 			{children}
 		</div>
 	);
@@ -31,7 +36,7 @@ export function ValueActionLeading({
 	return (
 		<div
 			className={cls(
-				'gap-1 text-sm flex w-3/4 flex-col overflow-hidden text-left',
+				'gap-1 text-sm flex grow flex-col overflow-hidden text-left',
 				className,
 			)}
 		>
