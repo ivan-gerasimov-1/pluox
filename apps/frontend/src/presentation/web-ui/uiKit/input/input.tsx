@@ -15,7 +15,11 @@ export function Input({ className, asChild, ...props }: TInputProps) {
 	return (
 		<Component
 			className={cls(
-				'px-4 py-3 border-neutral-200/50 rounded-2xl text-sm placeholder:text-neutral-500 bg-white w-full appearance-none border font-[inherit] text-inherit outline-0',
+				'px-4 py-3 w-full',
+				'bg-white',
+				'border-neutral-200/50 rounded-2xl border',
+				'text-sm placeholder:text-neutral-500 font-[inherit] text-inherit',
+				'appearance-none outline-0',
 				'focus:border-neutral-900 transition-colors',
 				className,
 			)}
