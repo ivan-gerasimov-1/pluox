@@ -16,11 +16,11 @@ import {
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useVenueName } from '@root/presentation/web-ui/modules/venues/hooks/useVenueName';
-import { CategoryIcon } from '@root/presentation/web-ui/uiKit/categoryIcon/categoryIcon';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
+import { ListIcon } from '@root/presentation/web-ui/uiKit/list/list';
 
 import 'react-swipeable-list/dist/styles.css';
 
@@ -76,7 +76,7 @@ export function ExpenseList(props: TExpenseListProps) {
 								}
 								fullSwipe
 							>
-								<CategoryIcon
+								<ListIcon
 									onClick={() =>
 										dialog.render(EditExpenseActionSheet, {
 											expense: item,
@@ -84,7 +84,7 @@ export function ExpenseList(props: TExpenseListProps) {
 									}
 								>
 									{categoryService.getCategoryIcon(item.category)}
-								</CategoryIcon>
+								</ListIcon>
 
 								<div className="ml-3 flex grow flex-col">
 									<div className="flex items-end justify-start">
