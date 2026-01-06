@@ -8,6 +8,7 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
+import { CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
 import { SummaryCard } from '@root/presentation/web-ui/uiKit/card/summaryCard';
 import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { Grid } from '@root/presentation/web-ui/uiKit/grid/grid';
@@ -37,9 +38,9 @@ export function MainScreen() {
 
 			<Grid>
 				<SummaryCard className="min-h-36 -rotate-z-2">
-					<div>{intl.translate('today')}</div>
+					<CardHeader>{intl.translate('today')}</CardHeader>
 
-					<div className="font-mono font-semibold text-base self-end">
+					<div className="font-mono font-semibold text-base tracking-tight self-end">
 						{intlService.formatCurrency(dailyTotal, {
 							hideDecimal: true,
 						})}
@@ -47,32 +48,31 @@ export function MainScreen() {
 				</SummaryCard>
 
 				<SummaryCard className="min-h-36">
-					<div>{intl.translate('leftover')}</div>
+					<CardHeader>{intl.translate('leftover')}</CardHeader>
 
-					<div className="font-mono font-semibold text-base self-end">
+					<div className="font-mono font-semibold text-base tracking-tight self-end">
 						{intlService.formatCurrency(leftover, {
 							hideDecimal: true,
 						})}
 					</div>
 				</SummaryCard>
 
-				<SummaryCard className="col-2 row-span-full overflow-auto">
-					<div>{intl.translate('categories')}</div>
+				<SummaryCard className="col-2 row-span-full justify-start overflow-auto">
+					<CardHeader>{intl.translate('categories')}</CardHeader>
 
-					<ul className="gap-3 p-0 font-semibold flex w-full flex-col">
+					<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">
 						{categories.map(({ id, total }) => (
-							<li key={id} className="start-end flex justify-between">
-								<span className="leading-none">
-									{categoryService.getCategoryIcon(id)}
-								</span>
+							<li
+								key={id}
+								className="start-end text-sm tracking-tight flex justify-between leading-none"
+							>
+								{categoryService.getCategoryIcon(id)}
 
 								<DotSpace />
 
-								<span className="leading-none">
-									{intlService.formatCurrency(total, {
-										hideDecimal: true,
-									})}
-								</span>
+								{intlService.formatCurrency(total, {
+									hideDecimal: true,
+								})}
 							</li>
 						))}
 					</ul>
