@@ -1,5 +1,7 @@
-import { cva, VariantProps } from 'cva';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'cva';
 
+import type { TSlottable } from '@root/presentation/web-ui/uiKit/types';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 let cardVariants = cva(
@@ -23,24 +25,28 @@ let cardVariants = cva(
 	},
 );
 
-type TCardProps = VariantProps<typeof cardVariants> & {
-	className?: string;
-};
+type TCardProps = VariantProps<typeof cardVariants> &
+	TSlottable & {
+		className?: string;
+	};
 
 export function Card({
 	className,
 	summary,
+	asChild,
 	children,
 }: React.PropsWithChildren<TCardProps>) {
+	let Component = asChild ? Slot : 'div';
+
 	return (
-		<div
+		<Component
 			className={cardVariants({
 				className,
 				summary,
 			})}
 		>
 			{children}
-		</div>
+		</Component>
 	);
 }
 
