@@ -8,8 +8,7 @@ import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl'
 import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
-import { CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
-import { SummaryCard } from '@root/presentation/web-ui/uiKit/card/summaryCard';
+import { Card, CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
 import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { Grid } from '@root/presentation/web-ui/uiKit/grid/grid';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
@@ -37,7 +36,7 @@ export function MainScreen() {
 			</div>
 
 			<Grid>
-				<SummaryCard className="min-h-36 -rotate-z-2 justify-between">
+				<Card className="min-h-36 -rotate-z-2 justify-between" summary>
 					<CardHeader>{intl.translate('today')}</CardHeader>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
@@ -45,9 +44,9 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</SummaryCard>
+				</Card>
 
-				<SummaryCard className="min-h-36 justify-between">
+				<Card className="min-h-36 justify-between" summary>
 					<CardHeader>{intl.translate('leftover')}</CardHeader>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
@@ -55,9 +54,9 @@ export function MainScreen() {
 							hideDecimal: true,
 						})}
 					</div>
-				</SummaryCard>
+				</Card>
 
-				<SummaryCard className="col-2 row-span-full overflow-auto">
+				<Card className="col-2 row-span-full overflow-auto" summary>
 					<CardHeader>{intl.translate('categories')}</CardHeader>
 
 					<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">
@@ -76,7 +75,7 @@ export function MainScreen() {
 							</li>
 						))}
 					</ul>
-				</SummaryCard>
+				</Card>
 			</Grid>
 		</>
 	);
