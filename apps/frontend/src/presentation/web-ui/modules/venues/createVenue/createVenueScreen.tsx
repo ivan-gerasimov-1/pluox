@@ -12,7 +12,7 @@ import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Card } from '@root/presentation/web-ui/uiKit/card/card';
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
-import { Stack } from '@root/presentation/web-ui/uiKit/stack/stack';
+import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 import {
 	ValueAction,
 	ValueActionLeading,

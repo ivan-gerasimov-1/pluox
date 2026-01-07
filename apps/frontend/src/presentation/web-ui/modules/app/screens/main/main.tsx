@@ -10,8 +10,8 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
 import { Card, CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
 import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
-import { Grid } from '@root/presentation/web-ui/uiKit/grid/grid';
 import { Header } from '@root/presentation/web-ui/uiKit/header/header';
+import { Grid } from '@root/presentation/web-ui/uiKit/layout/layout';
 
 export function MainScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);

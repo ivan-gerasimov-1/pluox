@@ -20,7 +20,7 @@ import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/u
 import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-import { Stack } from '@root/presentation/web-ui/uiKit/stack/stack';
+import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 import {
 	ValueAction,
 	ValueActionLeading,
