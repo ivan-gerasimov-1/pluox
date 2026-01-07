@@ -5,7 +5,6 @@ import type {
 
 export const EDialogType: Record<string, TDialogType> = {
 	SHEET: 'sheet',
-	MODAL: 'modal',
 } as const;
 
 export const EDialogStatus: Record<string, TDialogStatus> = {
