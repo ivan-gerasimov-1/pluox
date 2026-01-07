@@ -9,7 +9,7 @@ let cardVariants = cva(
 		'gap-3 flex flex-col',
 		'px-5 py-6',
 		'bg-white',
-		'border-gray-100 rounded-2xl border',
+		'border-neutral-100 rounded-2xl border',
 		'shadow-lg shadow-neutral-200/75',
 	],
 	{
