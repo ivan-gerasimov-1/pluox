@@ -62,7 +62,7 @@ export function ExpenseList(props: TExpenseListProps) {
 								className={cls(
 									'px-3 py-4 mt-3',
 									'rounded-2xl border-neutral-200/50 border',
-									'bg-white shadow-(--box-shadow-90)',
+									'bg-white',
 								)}
 								trailingActions={
 									<TrailingActions>
