@@ -26,11 +26,11 @@
 	margin: calc(var(--header-height) + 15px) 15px 0 15px;
 	padding: 30px 25px;
 
-	background-color: var(--white-100);
+	background-color: var(--color-neutral-50);
 	box-shadow: var(--box-shadow-100);
 
 	border: var(--border-90);
-	border-radius: var(--br-100);
+	border-radius: var(--radius-3xl);
 
 	will-change: filter, opacity, transform;
 
@@ -46,7 +46,7 @@
 
 	margin: -15px auto 25px auto;
 
-	border-radius: var(--br-100);
+	border-radius: var(--radius-3xl);
 
 	background-color: var(--grey-500);
 }

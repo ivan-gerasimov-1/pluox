@@ -18,7 +18,7 @@
 
 	padding: 15px 10px;
 
-	border-radius: var(--br-90);
+	border-radius: var(--radius-2xl);
 
 	user-select: none;
 	outline: none;
@@ -36,7 +36,7 @@
 	}
 
 	&:focus-visible {
-		box-shadow: 0 0 0 2px var(--black-200);
+		box-shadow: 0 0 0 2px var(--color-neutral-900);
 	}
 }
 
@@ -54,13 +54,13 @@
 
 	border: var(--border-900);
 	border-width: 2px;
-	border-radius: var(--br-100);
+	border-radius: var(--radius-3xl);
 
 	background-color: transparent;
 
 	transition:
-		border-color var(--transition-90),
-		background-color var(--transition-90);
+		border-color var(--transition-100),
+		background-color var(--transition-100);
 
 	&::after {
 		position: absolute;
@@ -68,16 +68,16 @@
 
 		content: '';
 
-		border-radius: var(--br-100);
+		border-radius: var(--radius-3xl);
 
-		background: var(--black-100);
+		background: var(--color-neutral-800);
 		opacity: 0;
 
 		transform: scale(2);
 
 		transition:
-			opacity var(--transition-90),
-			transform var(--transition-90);
+			opacity var(--transition-100),
+			transform var(--transition-100);
 	}
 }
 
@@ -85,7 +85,7 @@
 	background: var(--grey-200);
 
 	& .marker {
-		border-color: var(--black-200);
+		border-color: var(--color-neutral-900);
 
 		&::after {
 			opacity: 1;
@@ -95,12 +95,12 @@
 }
 
 .checkmark {
-	font-weight: var(--fw-200);
-	color: var(--black-100);
+	font-weight: 600 /* font-semibold */;
+	color: var(--color-neutral-800);
 
 	opacity: 0;
 
-	transition: opacity var(--transition-90);
+	transition: opacity var(--transition-100);
 
 	&[data-selected='true'] {
 		opacity: 1;

@@ -70,7 +70,7 @@ export function ListIcon({
 				'bg-neutral-100 rounded-ss-xl rounded-se-md rounded-es-md rounded-ee-2xl rounded',
 				'text-base text-neutral-600 font-semibold font-sans leading-none',
 				'border-neutral-200/50 border',
-				'bg-linear-135 from-(--color-grey-100) to-(--white-200)',
+				'to-white from-neutral-50 bg-linear-135',
 				'select-none',
 				className,
 			)}

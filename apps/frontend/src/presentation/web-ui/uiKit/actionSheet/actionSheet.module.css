@@ -2,8 +2,8 @@
 	padding: 25px;
 	padding-block-start: 10px;
 
-	border-top-left-radius: var(--br-100);
-	border-top-right-radius: var(--br-100);
+	border-top-left-radius: var(--radius-3xl);
+	border-top-right-radius: var(--radius-3xl);
 }
 
 .header {
@@ -23,7 +23,7 @@
 	width: 10%;
 	height: 5px;
 
-	border-radius: var(--br-100);
+	border-radius: var(--radius-3xl);
 
 	background-color: var(--grey-500);
 }

@@ -7,11 +7,11 @@
 	bottom: 0;
 	left: 0;
 
-	background-color: var(--white-200);
+	background-color: var(--color-white);
 	box-shadow: var(--box-shadow-100_negative);
 
-	border-top-left-radius: var(--br-100);
-	border-top-right-radius: var(--br-100);
+	border-top-left-radius: var(--radius-3xl);
+	border-top-right-radius: var(--radius-3xl);
 
 	transform: translateY(var(--action-sheet-start));
 
