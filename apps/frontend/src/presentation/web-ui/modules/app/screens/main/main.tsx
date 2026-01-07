@@ -28,60 +28,60 @@ export function MainScreen() {
 	let leftover = budget - monthlyTotal;
 
 	return (
-		<>
-			<div className="font-bold text-3xl">
-				{intlService.formatCurrency(monthlyTotal, {
-					hideDecimal: true,
-				})}
-			</div>
+		<Grid className="grow" cols="2" rows="6">
+			<Card className="col-span-2 row-1 items-center justify-center">
+				<CardHeader className="text-3xl!">
+					{intlService.formatCurrency(monthlyTotal, {
+						hideDecimal: true,
+					})}
+				</CardHeader>
+			</Card>
 
-			<Grid className="grow" cols="2" rows="3">
-				<Card className="-rotate-z-2 justify-between" summary>
-					<CardHeader>{intl.translate('today')}</CardHeader>
+			<Card className="-rotate-z-2 justify-between" summary>
+				<CardHeader>{intl.translate('today')}</CardHeader>
 
-					<div className="font-mono font-semibold text-base tracking-tight self-end">
-						{intlService.formatCurrency(dailyTotal, {
-							hideDecimal: true,
-						})}
-					</div>
-				</Card>
+				<div className="font-mono font-semibold text-base tracking-tight self-end">
+					{intlService.formatCurrency(dailyTotal, {
+						hideDecimal: true,
+					})}
+				</div>
+			</Card>
 
-				<Card className="justify-between" summary>
-					<CardHeader>{intl.translate('leftover')}</CardHeader>
+			<Card className="col-2 row-span-2 overflow-auto" summary>
+				<CardHeader>{intl.translate('categories')}</CardHeader>
 
-					<div className="font-mono font-semibold text-base tracking-tight self-end">
-						{intlService.formatCurrency(leftover, {
-							hideDecimal: true,
-						})}
-					</div>
-				</Card>
+				<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">
+					{categories.map(({ id, total }) => (
+						<li
+							key={id}
+							className="start-end text-sm tracking-tight flex justify-between leading-none"
+						>
+							{categoryService.getCategoryIcon(id)}
 
-				<Card className="col-1 row-span-2 overflow-auto" summary>
-					<CardHeader>{intl.translate('categories')}</CardHeader>
+							<DotSpace />
 
-					<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">
-						{categories.map(({ id, total }) => (
-							<li
-								key={id}
-								className="start-end text-sm tracking-tight flex justify-between leading-none"
-							>
-								{categoryService.getCategoryIcon(id)}
+							{intlService.formatCurrency(total, {
+								hideDecimal: true,
+							})}
+						</li>
+					))}
+				</ul>
+			</Card>
 
-								<DotSpace />
+			<Card className="col-1 row-span-2 overflow-auto opacity-75" summary>
+				<CardHeader>{intl.translate('venues')}</CardHeader>
+			</Card>
 
-								{intlService.formatCurrency(total, {
-									hideDecimal: true,
-								})}
-							</li>
-						))}
-					</ul>
-				</Card>
+			<Card className="justify-between" summary>
+				<CardHeader>{intl.translate('leftover')}</CardHeader>
 
-				<Card className="col-2 row-span-2 overflow-auto opacity-75" summary>
-					<CardHeader>{intl.translate('venues')}</CardHeader>
-				</Card>
-			</Grid>
-		</>
+				<div className="font-mono font-semibold text-base tracking-tight self-end">
+					{intlService.formatCurrency(leftover, {
+						hideDecimal: true,
+					})}
+				</div>
+			</Card>
+		</Grid>
 	);
 }
 
