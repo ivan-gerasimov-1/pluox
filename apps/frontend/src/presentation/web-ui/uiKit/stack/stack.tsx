@@ -4,6 +4,7 @@ type TStackProps = {
 	className?: string;
 };
 
+/** @deprecated */
 export function Stack({
 	className,
 	children,
