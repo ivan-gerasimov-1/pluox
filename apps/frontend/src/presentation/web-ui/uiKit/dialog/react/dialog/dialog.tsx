@@ -1,15 +1,9 @@
 import { useCallback, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
-import {
-	EDialogStatus,
-	EDialogType,
-} from '@root/presentation/web-ui/uiKit/dialog/core/enums';
-
-import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
-
+import { EDialogStatus } from '@root/presentation/web-ui/uiKit/dialog/core/enums';
 import { ActionSheet } from '@root/presentation/web-ui/uiKit/dialog/react/actionSheet/actionSheet';
-import { Modal } from '@root/presentation/web-ui/uiKit/dialog/react/modal/modal';
+import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
 
 export function Dialog() {
 	let client = useDialogClient();
@@ -24,7 +18,7 @@ export function Dialog() {
 			return null;
 		}
 
-		let Component = dialog.type === EDialogType.SHEET ? ActionSheet : Modal;
+		let Component = ActionSheet;
 
 		return createPortal(
 			<Component
