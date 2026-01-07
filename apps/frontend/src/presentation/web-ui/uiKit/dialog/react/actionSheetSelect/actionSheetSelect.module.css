@@ -28,11 +28,11 @@
 		box-shadow var(--transition-100);
 
 	&:hover {
-		background-color: var(--grey-100);
+		background-color: var(--color-neutral-100);
 	}
 
 	&:active {
-		background-color: var(--grey-200);
+		background-color: var(--color-neutral-200);
 	}
 
 	&:focus-visible {
@@ -52,7 +52,7 @@
 
 	padding: 7.5px;
 
-	border: var(--border-900);
+	border: 1px solid var(--color-neutral-900);
 	border-width: 2px;
 	border-radius: var(--radius-3xl);
 
@@ -82,7 +82,7 @@
 }
 
 .selected {
-	background: var(--grey-200);
+	background: var(--color-neutral-100);
 
 	& .marker {
 		border-color: var(--color-neutral-900);

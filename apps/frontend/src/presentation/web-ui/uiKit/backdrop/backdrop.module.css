@@ -1,5 +1,6 @@
 .backdrop {
 	--backdrop-blur: 6px;
+	--bg-color: --alpha(var(--color-neutral-200) / 50%);
 
 	position: fixed;
 
@@ -22,7 +23,7 @@
 
 .appearActive,
 .enterActive {
-	background-color: var(--white-100_op75);
+	background-color: var(--bg-color);
 	backdrop-filter: blur(var(--backdrop-blur));
 
 	transition:
@@ -32,12 +33,12 @@
 
 .appearDone,
 .enterDone {
-	background-color: var(--white-100_op75);
+	background-color: var(--bg-color);
 	backdrop-filter: blur(var(--backdrop-blur));
 }
 
 .exit {
-	background-color: var(--white-100_op75);
+	background-color: var(--bg-color);
 	backdrop-filter: blur(var(--backdrop-blur));
 }
 
