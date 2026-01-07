@@ -35,8 +35,8 @@ export function MainScreen() {
 				})}
 			</div>
 
-			<Grid>
-				<Card className="min-h-36 -rotate-z-2 justify-between" summary>
+			<Grid className="grow" cols="2" rows="3">
+				<Card className="-rotate-z-2 justify-between" summary>
 					<CardHeader>{intl.translate('today')}</CardHeader>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
@@ -46,7 +46,7 @@ export function MainScreen() {
 					</div>
 				</Card>
 
-				<Card className="min-h-36 justify-between" summary>
+				<Card className="justify-between" summary>
 					<CardHeader>{intl.translate('leftover')}</CardHeader>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
@@ -56,7 +56,7 @@ export function MainScreen() {
 					</div>
 				</Card>
 
-				<Card className="col-2 row-span-full overflow-auto" summary>
+				<Card className="col-1 row-span-2 overflow-auto" summary>
 					<CardHeader>{intl.translate('categories')}</CardHeader>
 
 					<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">
@@ -75,6 +75,10 @@ export function MainScreen() {
 							</li>
 						))}
 					</ul>
+				</Card>
+
+				<Card className="col-2 row-span-2 overflow-auto opacity-75" summary>
+					<CardHeader>{intl.translate('venues')}</CardHeader>
 				</Card>
 			</Grid>
 		</>
