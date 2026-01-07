@@ -4,6 +4,7 @@ type TGridProps = {
 	className?: string;
 };
 
+/** @deprecated */
 export function Grid({
 	className,
 	children,
