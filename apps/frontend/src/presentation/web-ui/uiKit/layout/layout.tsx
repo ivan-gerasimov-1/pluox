@@ -25,6 +25,7 @@ let gridVariants = cva('gap-4 grid', {
 		rows: {
 			'2': 'grid-rows-2',
 			'3': 'grid-rows-3',
+			'6': 'grid-rows-6',
 		},
 	},
 	defaultVariants: {
