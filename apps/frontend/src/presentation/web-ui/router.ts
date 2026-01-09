@@ -3,6 +3,7 @@ import { createBrowserRouter as createRouter } from 'react-router';
 import { appRoutes } from '@root/presentation/web-ui/modules/app/app.module';
 import { AppLayout } from '@root/presentation/web-ui/modules/app/appLayout';
 import { authenticationRoutes } from '@root/presentation/web-ui/modules/authentication/authentication.module';
+import { AuthenticationLayout } from '@root/presentation/web-ui/modules/authentication/authenticationLayout';
 import { categoryRoutes } from '@root/presentation/web-ui/modules/categories/categories.module';
 import { dashboardRoutes } from '@root/presentation/web-ui/modules/dashboard/dashboard.module';
 import { ErrorLayout } from '@root/presentation/web-ui/modules/errors/errorLayout';
@@ -15,7 +16,10 @@ export interface IRouter extends TRouter {}
 
 export function createAppRouter(): IRouter {
 	return createRouter([
-		...authenticationRoutes,
+		{
+			Component: AuthenticationLayout,
+			children: [...authenticationRoutes],
+		},
 		{
 			Component: AppLayout,
 			children: [
