@@ -8,7 +8,7 @@ const config = {
 	/** prettier-plugin-tailwindcss */
 	tailwindFunctions: ['clsx'],
 	tailwindStylesheet:
-		'./src/presentation/web-ui/modules/app/components/root/root.css',
+		'./src/presentation/web-ui/modules/app/components/app/app.css',
 
 	/** @ianvs/prettier-plugin-sort-imports */
 	importOrder: [
