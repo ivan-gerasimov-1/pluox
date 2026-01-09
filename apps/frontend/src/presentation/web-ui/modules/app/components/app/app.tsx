@@ -10,8 +10,8 @@ import { IRouter } from '@root/presentation/web-ui/router';
 import { Dialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/dialog';
 import { DialogClientProvider } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/dialogClientProvider';
 
-import '@root/presentation/web-ui/modules/app/components/root/tailwind.css';
-import '@root/presentation/web-ui/modules/app/components/root/app.css';
+import '@root/presentation/web-ui/modules/app/components/app/app.css';
+import '@root/presentation/web-ui/modules/app/components/app/tailwind.css';
 
 type IAppProps = {
 	queryClient: QueryClient;
