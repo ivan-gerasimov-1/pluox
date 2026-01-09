@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router';
 
-import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { Id } from '@root/core/domain/types';
+
+import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 interface IAppNavigation {
 	to: (path: string, options?: { replace?: boolean }) => void;
@@ -20,7 +21,7 @@ export function useAppNavigation(): IAppNavigation {
 	const navigate = useNavigate();
 
 	function goToMainPage() {
-		navigate(EAppPath.MAIN, {
+		navigate(EAppPath.DASHBOARD, {
 			replace: true,
 		});
 	}

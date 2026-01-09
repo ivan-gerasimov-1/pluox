@@ -41,7 +41,7 @@ export function Navbar(props: TNavbarProps) {
 			>
 				<IconLink
 					className="-ml-2.5"
-					to={EAppPath.MAIN}
+					to={EAppPath.DASHBOARD}
 					iconName={EIconName.Circle}
 					iconSize={EIconSize.LARGE}
 				/>

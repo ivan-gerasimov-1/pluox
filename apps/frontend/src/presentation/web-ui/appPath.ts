@@ -1,5 +1,5 @@
 export const EAppPath = {
-	MAIN: '/',
+	DASHBOARD: '/',
 
 	SIGN_UP: '/signup',
 	LOG_IN: '/login',

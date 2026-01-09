@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
-export const mainI18n = {
+export const dashboardI18n = {
 	[ELocaleCode.RU_RU]: {
 		today: 'Сегодня',
 		leftover: 'Остаток',
