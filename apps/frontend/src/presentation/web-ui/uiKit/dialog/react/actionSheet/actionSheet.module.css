@@ -23,7 +23,7 @@
 	bottom: calc(var(--navbar-height) + 25px);
 	left: 0;
 
-	margin: calc(var(--header-height) + 15px) 15px 0 15px;
+	margin: 15px 15px 0 15px;
 	padding: 30px 25px;
 
 	background-color: var(--color-neutral-50);

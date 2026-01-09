@@ -33,9 +33,6 @@
 	/* misc */
 	--transition-100: 200ms ease-in-out;
 
-	/** Header */
-	--header-height: 2.5rem;
-
 	/** Navbar */
 	--navbar-gap: calc(var(--spacing) * 3);
 	--navbar-height: calc(

@@ -1,3 +1,4 @@
+import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TScreenProps = {
@@ -22,13 +23,15 @@ export function ScreenBody({
 	children,
 }: React.PropsWithChildren<TScreenBodyProps>) {
 	return (
-		<div
+		<Stack
 			className={cls(
-				'p-4 gap-6 mt-(--header-height) mb-(--navbar-height) flex min-h-[calc(100dvh-var(--header-height)-var(--navbar-height))] flex-col',
+				'min-h-[calc(100dvh-var(--navbar-height))]',
+				'gap-6',
+				'p-4 mb-(--navbar-height)',
 				className,
 			)}
 		>
 			{children}
-		</div>
+		</Stack>
 	);
 }
