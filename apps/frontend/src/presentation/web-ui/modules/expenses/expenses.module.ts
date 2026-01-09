@@ -1,5 +1,3 @@
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-
 import { EAppPath } from '@root/presentation/web-ui/appPath';
 import type { TRouteObject } from '@root/presentation/web-ui/hooks/useScreenMeta/types';
 import { ExpenseListScreen } from '@root/presentation/web-ui/modules/expenses/screens/expenseList/expenseList';
@@ -9,10 +7,6 @@ export const expenseRoutes: TRouteObject[] = [
 		path: EAppPath.EXPENSES,
 		Component: ExpenseListScreen,
 		handle: {
-			title: {
-				[ELocaleCode.EN_US]: 'Expenses',
-				[ELocaleCode.RU_RU]: 'Расходы',
-			},
 			hasNavbar: true,
 		},
 	},
