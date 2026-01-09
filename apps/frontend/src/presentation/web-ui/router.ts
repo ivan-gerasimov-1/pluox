@@ -1,7 +1,7 @@
 import { createBrowserRouter as createRouter } from 'react-router';
 
 import { appRoutes } from '@root/presentation/web-ui/modules/app/app.module';
-import { AppScreen } from '@root/presentation/web-ui/modules/app/components/appScreen/appScreen';
+import { AppLayout } from '@root/presentation/web-ui/modules/app/appLayout';
 import { authenticationRoutes } from '@root/presentation/web-ui/modules/authentication/authentication.module';
 import { categoryRoutes } from '@root/presentation/web-ui/modules/categories/categories.module';
 import { dashboardRoutes } from '@root/presentation/web-ui/modules/dashboard/dashboard.module';
@@ -17,7 +17,7 @@ export function createAppRouter(): IRouter {
 	return createRouter([
 		...authenticationRoutes,
 		{
-			Component: AppScreen,
+			Component: AppLayout,
 			children: [
 				...dashboardRoutes,
 				...expenseRoutes,

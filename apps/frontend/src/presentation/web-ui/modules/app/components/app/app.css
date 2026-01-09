@@ -1,4 +1,26 @@
-@import './reset.css';
+/** @deprecated In favor of TailwindCSS */
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+
+	cursor: default;
+	user-select: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+}
+
 
 /* inter-latin-wght-normal */
 @font-face {

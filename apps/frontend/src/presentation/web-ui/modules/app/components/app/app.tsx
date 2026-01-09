@@ -11,9 +11,9 @@ import { Dialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/dial
 import { DialogClientProvider } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/dialogClientProvider';
 
 import '@root/presentation/web-ui/modules/app/components/root/tailwind.css';
-import '@root/presentation/web-ui/modules/app/components/root/root.css';
+import '@root/presentation/web-ui/modules/app/components/root/app.css';
 
-type IRootProps = {
+type IAppProps = {
 	queryClient: QueryClient;
 	router: IRouter;
 	diContainer: IContainer;
@@ -22,7 +22,7 @@ type IRootProps = {
 	onRendered?(): void;
 };
 
-export function Root(props: IRootProps) {
+export function App(props: IAppProps) {
 	let { ReactQueryDevtools } = props.devtoolsConfig.reactQuery;
 
 	useEffectOnce(() => {

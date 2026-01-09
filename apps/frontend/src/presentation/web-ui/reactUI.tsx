@@ -1,18 +1,18 @@
+import type { QueryClient } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import type { QueryClient } from '@tanstack/react-query';
-
-import { Root } from '@root/presentation/web-ui/modules/app/components/root/root';
-import { AppContainerNotInitializedError } from '@root/presentation/web-ui/errors';
-
 import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
+
 import type { IUserInterface } from '@root/presentation/shared/types';
+
+import type { TDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
+import { AppContainerNotInitializedError } from '@root/presentation/web-ui/errors';
+import { App } from '@root/presentation/web-ui/modules/app/components/app/app';
 import type { IRouter } from '@root/presentation/web-ui/router';
 import type { IRoot } from '@root/presentation/web-ui/types';
 import type { IUIElement } from '@root/presentation/web-ui/uiElement';
 import type { IUILoader } from '@root/presentation/web-ui/uiLoader';
-import type { TDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
 
 export class ReactUI implements IUserInterface {
 	#appContainer?: IRoot;
@@ -41,7 +41,7 @@ export class ReactUI implements IUserInterface {
 
 		this.appContainer.render(
 			<StrictMode>
-				<Root
+				<App
 					queryClient={this.queryClient}
 					router={this.router}
 					diContainer={this.diContainer}
