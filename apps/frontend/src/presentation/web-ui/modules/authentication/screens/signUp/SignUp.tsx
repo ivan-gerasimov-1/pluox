@@ -6,7 +6,7 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
-import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
+import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 import { delay } from '@root/presentation/web-ui/utils/delay';
 
 export function SignUpScreen() {
@@ -37,11 +37,11 @@ export function SignUpScreen() {
 	}
 
 	return (
-		<Screen>
-			<div className="gap-10 px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-(--box-shadow-100)">
-				<h1 className="text-2xl font-semibold">Pluox</h1>
+		<Stack className="gap-10 px-10 py-15 w-96 rounded-3xl border-neutral-200/50 max-w-full border shadow-(--box-shadow-100)">
+			<h1 className="text-2xl font-semibold">Pluox</h1>
 
-				<form name="signIn" className="gap-5 flex flex-col" onSubmit={onSubmit}>
+			<Stack asChild>
+				<form name="signIn" className="gap-5" onSubmit={onSubmit}>
 					<label htmlFor="email" className="*:mt-3 flex flex-col">
 						<div className="text-sm font-semibold mt-0!">Эл. почта</div>
 
@@ -75,14 +75,14 @@ export function SignUpScreen() {
 						)}
 					</div>
 				</form>
+			</Stack>
 
-				<div className="gap-1 text-sm flex items-center justify-center">
-					Есть аккаунт?
-					<AppLink className="text-indigo-600" to={EAppPath.LOG_IN}>
-						Войти
-					</AppLink>
-				</div>
-			</div>
-		</Screen>
+			<Stack className="gap-1! text-sm flex-row items-center justify-center">
+				Есть аккаунт?
+				<AppLink className="text-indigo-600" to={EAppPath.LOG_IN}>
+					Войти
+				</AppLink>
+			</Stack>
+		</Stack>
 	);
 }

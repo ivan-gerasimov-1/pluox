@@ -6,6 +6,7 @@ import { useService } from '@root/presentation/web-ui/modules/serviceContainer/u
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import { Input } from '@root/presentation/web-ui/uiKit/input/input';
+import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 import { delay } from '@root/presentation/web-ui/utils/delay';
 
@@ -49,7 +50,7 @@ export function LogInForm() {
 	let { onSubmit, pending } = useLoginForm();
 
 	return (
-		<div className="px-10 py-15 w-96 rounded-3xl border-neutral-200/50 m-auto flex max-w-full flex-col justify-center border shadow-(--box-shadow-100)">
+		<Stack className="px-10 py-15 w-96 rounded-3xl border-neutral-200/50 max-w-full border shadow-(--box-shadow-100)">
 			<h1 className="text-2xl font-semibold">Pluox</h1>
 
 			<Form name="signIn" onSubmit={onSubmit}>
@@ -71,15 +72,15 @@ export function LogInForm() {
 				</FormGroup>
 
 				<FormGroup className="mt-10">
-					<div className="gap-1 text-sm flex items-center justify-center">
+					<Stack className="gap-1! text-sm flex-row items-center justify-center">
 						Нет аккаунта?
 						<AppLink className="text-indigo-600" to={EAppPath.SIGN_UP}>
 							Создать
 						</AppLink>
-					</div>
+					</Stack>
 				</FormGroup>
 			</Form>
-		</div>
+		</Stack>
 	);
 }
 
