@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router';
 
 import { useRouteMeta } from '@root/presentation/web-ui/hooks/useScreenMeta/useScreenMeta';
-import { Navbar } from '@root/presentation/web-ui/modules/app/components/navbar/navbar';
+import { AppNavbar } from '@root/presentation/web-ui/modules/app/components/appNavbar/appNavbar';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
 export function AppLayout() {
@@ -11,7 +11,7 @@ export function AppLayout() {
 		<Screen className="mb-(--navbar-height)">
 			<Outlet />
 
-			{meta.hasNavbar && <Navbar hasMainAction={meta.hasNavbarActions} />}
+			{meta.hasNavbar && <AppNavbar hasMainAction={meta.hasNavbarActions} />}
 		</Screen>
 	);
 }

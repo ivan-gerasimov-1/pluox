@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
-export const navbarI18n = {
+export const appNavbarI18n = {
 	[ELocaleCode.RU_RU]: {
 		addExpense: 'Добавить',
 	},
