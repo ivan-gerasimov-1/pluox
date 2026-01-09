@@ -1,26 +1,26 @@
-import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { errorI18n } from '@root/presentation/web-ui/uiKit/error/error.i18n';
+import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 
 type TErrorProps = {
 	title: string;
 	message: string;
 };
 
-export function Error({ title, message }: TErrorProps) {
-	const intl = useIntl(errorI18n);
-	const navigation = useAppNavigation();
-
+export function Error({
+	title,
+	message,
+	children,
+}: React.PropsWithChildren<TErrorProps>) {
 	return (
-		<>
-			<h1 className="font-semibold text-2xl">{title}</h1>
+		<Stack>
+			<h1 className="font-semibold text-2xl text-center leading-none">
+				{title}
+			</h1>
 
-			<h2 className="mt-2 text-sm text-neutral-600 font-normal">{message}</h2>
+			<h2 className="text-sm text-neutral-600 font-normal text-center">
+				{message}
+			</h2>
 
-			<Button className="mt-10" onClick={navigation.mainPage}>
-				{intl.translate('mainPageButtonLabel')}
-			</Button>
-		</>
+			{children}
+		</Stack>
 	);
 }

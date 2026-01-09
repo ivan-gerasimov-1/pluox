@@ -2,9 +2,13 @@ import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
 
 export const notFoundErrorScreenI18n = {
 	[ELocaleCode.RU_RU]: {
-		pageNotFound: 'Страница не найдена',
+		title: 'Ошибка',
+		message: 'Страница не найдена',
+		mainPageButtonLabel: 'На главную',
 	},
 	[ELocaleCode.EN_US]: {
-		pageNotFound: 'Page not found',
+		title: 'Error',
+		message: 'Page not found',
+		mainPageButtonLabel: 'Go Home',
 	},
 };

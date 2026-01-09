@@ -1,10 +1,20 @@
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-
-import { ErrorScreen } from '@root/presentation/web-ui/modules/app/screens/error/error';
+import { EAppPath } from '@root/presentation/web-ui/appPath';
 import { notFoundErrorScreenI18n } from '@root/presentation/web-ui/modules/app/screens/error/screens/notFoundErrorScreen/notFoundErrorScreen.i18n';
+import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
+import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { Error } from '@root/presentation/web-ui/uiKit/error/error';
 
 export function NotFoundErrorScreen() {
 	let intl = useIntl(notFoundErrorScreenI18n);
 
-	return <ErrorScreen message={intl.translate('pageNotFound')} />;
+	return (
+		<Error title={intl.translate('title')} message={intl.translate('message')}>
+			<Button className="mt-4" wide asChild>
+				<AppLink to={EAppPath.DASHBOARD}>
+					{intl.translate('mainPageButtonLabel')}
+				</AppLink>
+			</Button>
+		</Error>
+	);
 }
