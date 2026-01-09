@@ -9,9 +9,5 @@ export function Screen({
 	className,
 	children,
 }: React.PropsWithChildren<TScreenProps>) {
-	return (
-		<Stack className={cls('p-4 mb-(--navbar-height)', className)}>
-			{children}
-		</Stack>
-	);
+	return <Stack className={cls('p-4', className)}>{children}</Stack>;
 }

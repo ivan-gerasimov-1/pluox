@@ -4,11 +4,11 @@ import { useRouteMeta } from '@root/presentation/web-ui/hooks/useScreenMeta/useS
 import { Navbar } from '@root/presentation/web-ui/modules/app/components/navbar/navbar';
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
-export function ScreenLayout() {
+export function AppScreen() {
 	let meta = useRouteMeta();
 
 	return (
-		<Screen>
+		<Screen className="mb-(--navbar-height)">
 			<Outlet />
 
 			{meta.hasNavbar && <Navbar hasMainAction={meta.hasNavbarActions} />}
