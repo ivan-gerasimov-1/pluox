@@ -1,19 +1,26 @@
+import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'cva';
 
+import type { TSlottable } from '@root/presentation/web-ui/uiKit/types';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TBaseProps = {
 	className?: string;
 };
 
-type TStackProps = TBaseProps;
+type TStackProps = TBaseProps & TSlottable;
 
 export function Stack({
 	className,
+	asChild,
 	children,
 }: React.PropsWithChildren<TStackProps>) {
+	let Component = asChild ? Slot : 'div';
+
 	return (
-		<div className={cls('gap-4 flex flex-col', className)}>{children}</div>
+		<Component className={cls('gap-4 flex flex-col', className)}>
+			{children}
+		</Component>
 	);
 }
 
