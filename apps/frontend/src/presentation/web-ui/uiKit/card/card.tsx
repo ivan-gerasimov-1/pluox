@@ -16,7 +16,7 @@ let cardVariants = cva(
 		variants: {
 			summary: {
 				false: null,
-				true: 'rounded-tl-lg rounded-br-3xl',
+				true: 'px-4! py-5! rounded-tl-lg rounded-br-3xl',
 			},
 		},
 		defaultVariants: {
