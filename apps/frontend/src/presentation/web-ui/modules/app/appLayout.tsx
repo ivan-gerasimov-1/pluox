@@ -5,13 +5,13 @@ import { AppNavbar } from '@root/presentation/web-ui/modules/app/components/appN
 import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
 export function AppLayout() {
-	let meta = useRouteMeta();
+	let { Actions } = useRouteMeta();
 
 	return (
 		<Screen className="mb-(--navbar-height)">
 			<Outlet />
 
-			{meta.hasNavbar && <AppNavbar hasMainAction={meta.hasNavbarActions} />}
+			<AppNavbar Actions={Actions} />
 		</Screen>
 	);
 }

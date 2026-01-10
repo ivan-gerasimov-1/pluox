@@ -6,8 +6,6 @@ export const settingsRoutes: TRouteObject[] = [
 	{
 		path: EAppPath.SETTINGS,
 		Component: SettingsScreen,
-		handle: {
-			hasNavbar: true,
-		},
+		handle: {},
 	},
 ];

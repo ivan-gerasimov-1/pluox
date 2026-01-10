@@ -7,15 +7,11 @@ export const categoryRoutes: TRouteObject[] = [
 	{
 		path: EAppPath.CATEGORIES,
 		Component: CategoryList,
-		handle: {
-			hasNavbar: true,
-		},
+		handle: {},
 	},
 	{
 		path: EAppPath.CATEGORIES_VIEW,
 		Component: CategoryView,
-		handle: {
-			hasNavbar: true,
-		},
+		handle: {},
 	},
 ];

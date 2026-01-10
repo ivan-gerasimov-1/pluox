@@ -6,8 +6,6 @@ export const expenseRoutes: TRouteObject[] = [
 	{
 		path: EAppPath.EXPENSES,
 		Component: ExpenseListScreen,
-		handle: {
-			hasNavbar: true,
-		},
+		handle: {},
 	},
 ];

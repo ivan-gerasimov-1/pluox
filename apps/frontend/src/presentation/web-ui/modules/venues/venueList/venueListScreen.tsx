@@ -8,7 +8,6 @@ import {
 } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
 import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
 import { Badge } from '@root/presentation/web-ui/uiKit/badge/badge';
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
 import {
 	List,
 	ListIcon,
@@ -26,44 +25,38 @@ export function VenueListScreen() {
 	let venueListArchived = useVenueListArchivedQuery();
 
 	return (
-		<>
-			<Button size="m" wide asChild>
-				<AppLink to={EAppPath.VENUES_CREATE}>{intl.translate('add')}</AppLink>
-			</Button>
+		<List>
+			{venueList.map((venue) => (
+				<ListItem key={venue.id} asChild>
+					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
+						<ListIcon>{venue.name?.[0]}</ListIcon>
 
-			<List>
-				{venueList.map((venue) => (
-					<ListItem key={venue.id} asChild>
-						<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
-							<ListIcon>{venue.name?.[0]}</ListIcon>
+						<ValueAction>
+							<ValueActionLeading label={venue.name}>
+								{venue.categoryName}
+							</ValueActionLeading>
+						</ValueAction>
+					</AppLink>
+				</ListItem>
+			))}
 
-							<ValueAction>
-								<ValueActionLeading label={venue.name}>
-									{venue.categoryName}
-								</ValueActionLeading>
-							</ValueAction>
-						</AppLink>
-					</ListItem>
-				))}
+			{venueListArchived.map((venue) => (
+				<ListItem key={venue.id} asChild>
+					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
+						<ListIcon>{venue.name?.[0]}</ListIcon>
 
-				{venueListArchived.map((venue) => (
-					<ListItem key={venue.id} asChild>
-						<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
-							<ListIcon>{venue.name?.[0]}</ListIcon>
+						<ValueAction>
+							<ValueActionLeading label={venue.name}>
+								{venue.categoryName}
+							</ValueActionLeading>
 
-							<ValueAction>
-								<ValueActionLeading label={venue.name}>
-									{venue.categoryName}
-								</ValueActionLeading>
-
-								<ValueActionTrailing>
-									<Badge>{intl.translate('archived')}</Badge>
-								</ValueActionTrailing>
-							</ValueAction>
-						</AppLink>
-					</ListItem>
-				))}
-			</List>
-		</>
+							<ValueActionTrailing>
+								<Badge>{intl.translate('archived')}</Badge>
+							</ValueActionTrailing>
+						</ValueAction>
+					</AppLink>
+				</ListItem>
+			))}
+		</List>
 	);
 }
