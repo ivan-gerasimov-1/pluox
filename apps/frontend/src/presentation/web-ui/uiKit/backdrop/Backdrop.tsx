@@ -9,24 +9,20 @@ export type TBackdropProps = {
 	onClick?(event: unknown): void;
 };
 
-export function Backdrop(props: TBackdropProps) {
+export function Backdrop({ isVisible, onClick }: TBackdropProps) {
 	let backdropRef = useRef(null);
 
 	return (
 		<CSSTransition
 			nodeRef={backdropRef}
-			in={props.isVisible}
+			in={isVisible}
 			timeout={200}
 			classNames={styles}
 			appear
 			mountOnEnter
 			unmountOnExit
 		>
-			<div
-				ref={backdropRef}
-				className={styles.backdrop}
-				onClick={props.onClick}
-			/>
+			<div ref={backdropRef} className={styles.backdrop} onClick={onClick} />
 		</CSSTransition>
 	);
 }
