@@ -18,7 +18,6 @@ export function Navbar({
 				'px-(--navbar-gap) pt-(--navbar-gap) pb-[calc(var(--navbar-gap)*1.5)]',
 				'border-neutral-200/50 rounded-tl-2xl rounded-tr-2xl border',
 				'backdrop-blur-xs bg-neutral-50/50',
-				'z-50',
 			)}
 		>
 			{children}
