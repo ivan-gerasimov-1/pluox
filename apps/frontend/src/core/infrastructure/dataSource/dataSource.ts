@@ -1,8 +1,9 @@
-import type { Id } from '@domain/types';
 import type {
 	TFindManyOptions,
 	TFindManyResult,
 } from '@root/core/domain/repository/types';
+import type { Id } from '@root/core/domain/types';
+
 import type { IDatabaseCollection } from '@root/core/infrastructure/database/types';
 import {
 	DuplicateItemError,

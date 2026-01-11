@@ -1,4 +1,4 @@
-import type { Id } from '@domain/types';
+import type { Id } from '@root/core/domain/types';
 
 export interface IExpenseApi {
 	create(payload: Record<string, unknown>): Promise<{

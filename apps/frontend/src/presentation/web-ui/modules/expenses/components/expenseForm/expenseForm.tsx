@@ -1,4 +1,3 @@
-import type { Id, TCategory, TDescription } from '@domain/types';
 import {
 	Controller,
 	useForm,
@@ -7,6 +6,7 @@ import {
 } from 'react-hook-form';
 
 import type { TISODateString } from '@root/core/domain/temporal/types';
+import type { Id, TCategory, TDescription } from '@root/core/domain/types';
 
 import {
 	ECurrency,

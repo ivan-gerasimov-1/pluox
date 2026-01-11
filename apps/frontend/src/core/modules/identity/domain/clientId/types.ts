@@ -1,4 +1,4 @@
-import type { Id } from '@domain/types';
+import type { Id } from '@root/core/domain/types';
 import type { IValueObject } from '@root/core/domain/valueObject/types';
 
 export interface IClientIdFactory {

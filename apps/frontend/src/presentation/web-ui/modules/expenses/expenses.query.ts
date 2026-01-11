@@ -1,4 +1,3 @@
-import type { Id } from '@domain/types';
 import {
 	useMutation,
 	useQuery,
@@ -7,6 +6,7 @@ import {
 } from '@tanstack/react-query';
 
 import type { TISODateString, TMonth } from '@root/core/domain/temporal/types';
+import type { Id } from '@root/core/domain/types';
 
 import type {
 	TExpenseCreateDTO,

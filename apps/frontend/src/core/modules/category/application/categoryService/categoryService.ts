@@ -1,4 +1,5 @@
-import type { Id } from '@domain/types';
+import type { Id } from '@root/core/domain/types';
+
 import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
 import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
 
