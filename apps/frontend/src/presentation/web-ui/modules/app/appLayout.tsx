@@ -9,11 +9,11 @@ export function AppLayout() {
 
 	return (
 		<>
-			<Screen className="mb-(--navbar-height)">
+			<Screen id="appScreen" className="mb-(--navbar-height)">
 				<Outlet />
 			</Screen>
 
-			<AppNavbar Actions={Actions} />
+			<AppNavbar id="appNavbar" Actions={Actions} />
 		</>
 	);
 }
