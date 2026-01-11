@@ -8,10 +8,12 @@ export function AppLayout() {
 	let { Actions } = useRouteMeta();
 
 	return (
-		<Screen className="mb-(--navbar-height)">
-			<Outlet />
+		<>
+			<Screen className="mb-(--navbar-height)">
+				<Outlet />
+			</Screen>
 
 			<AppNavbar Actions={Actions} />
-		</Screen>
+		</>
 	);
 }
