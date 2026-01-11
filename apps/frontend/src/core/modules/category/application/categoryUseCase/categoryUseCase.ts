@@ -1,4 +1,5 @@
 import type { Id } from '@/core/domain/types';
+
 import type {
 	ICategoryCreateUseCase,
 	ICategoryDeleteUseCase,

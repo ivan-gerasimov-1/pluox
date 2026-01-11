@@ -1,7 +1,8 @@
+import { Outlet } from 'react-router';
+
 import { useRouteMeta } from '@/presentation/web-ui/hooks/useScreenMeta/useScreenMeta';
 import { AppNavbar } from '@/presentation/web-ui/modules/app/components/appNavbar/appNavbar';
 import { Screen } from '@/presentation/web-ui/uiKit/screen/screen';
-import { Outlet } from 'react-router';
 
 export function AppLayout() {
 	let { Actions } = useRouteMeta();

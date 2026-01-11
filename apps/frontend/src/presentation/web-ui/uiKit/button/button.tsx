@@ -3,10 +3,10 @@ import { cva, type VariantProps } from 'cva';
 
 const buttonVariants = cva(
 	[
-		'm-0 px-4 py-3',
+		'py-3 px-4 m-0',
 		'rounded-2xl border',
 		'text-xs font-bold font-[inherit]',
-		'text-center leading-none uppercase whitespace-nowrap',
+		'text-center leading-none whitespace-nowrap uppercase',
 		'outline-0 transition',
 		'hover:shadow-[0_0_0_2px_var(--color-neutral-50)_inset]',
 		'focus:shadow-[0_0_0_2px_var(--color-neutral-50)_inset]',

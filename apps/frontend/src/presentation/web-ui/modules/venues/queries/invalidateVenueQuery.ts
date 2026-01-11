@@ -1,6 +1,8 @@
-import { Id } from '@/core/domain/types';
-import { createVenueQuery } from '@/presentation/web-ui/modules/venues/queries/createVenueQuery';
 import { QueryClient } from '@tanstack/react-query';
+
+import { Id } from '@/core/domain/types';
+
+import { createVenueQuery } from '@/presentation/web-ui/modules/venues/queries/createVenueQuery';
 
 export function invalidateVenueListQuery({
 	queryClient,

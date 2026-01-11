@@ -1,5 +1,9 @@
+import { useForm } from 'react-hook-form';
+
 import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
+
 import type { TVenueDTO } from '@/core/modules/venue/application/dto/venueDTO';
+
 import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
@@ -13,7 +17,6 @@ import {
 	ValueAction,
 	ValueActionLeading,
 } from '@/presentation/web-ui/uiKit/valueAction/valueAction';
-import { useForm } from 'react-hook-form';
 
 export function CreateVenueScreen() {
 	let navigation = useAppNavigation();

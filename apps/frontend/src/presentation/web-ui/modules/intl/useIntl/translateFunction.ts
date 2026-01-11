@@ -1,4 +1,5 @@
 import type { TLocaleCode } from '@/core/modules/intl/domain/types';
+
 import {
 	TBaseScope,
 	TScopedTranslateFunction,

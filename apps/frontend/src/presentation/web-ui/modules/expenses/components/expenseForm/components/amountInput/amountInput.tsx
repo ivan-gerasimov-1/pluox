@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
+
 import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
+
 import {
 	validateKey,
 	validateNumber,
@@ -6,7 +9,6 @@ import {
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
 import { cls } from '@/presentation/web-ui/utils/classnames';
-import { useEffect, useState } from 'react';
 
 type TAmountInputProps = Omit<
 	React.InputHTMLAttributes<HTMLInputElement>,

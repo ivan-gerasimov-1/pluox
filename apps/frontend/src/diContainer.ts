@@ -12,6 +12,7 @@ import {
 	type IModule,
 } from '@/core/infrastructure/serviceContainer/types';
 import { Temporal } from '@/core/infrastructure/temporal/temporal';
+
 import { bootstrapModule } from '@/core/modules/bootstrap/bootstrap.module';
 import { categoryModule } from '@/core/modules/category/category.module';
 import { currencyModule } from '@/core/modules/currency/currency.module';

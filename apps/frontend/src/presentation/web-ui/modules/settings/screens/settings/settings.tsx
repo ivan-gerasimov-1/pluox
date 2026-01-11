@@ -1,5 +1,6 @@
 import { categoryTemplates } from '@/core/modules/category/domain/categoryTemplate/templates';
 import { getLanguageNameByLocale } from '@/core/modules/intl/application/helpers';
+
 import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';

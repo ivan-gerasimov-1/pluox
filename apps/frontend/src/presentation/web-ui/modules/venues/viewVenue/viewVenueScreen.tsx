@@ -1,4 +1,7 @@
+import { useParams } from 'react-router';
+
 import { Id } from '@/core/domain/types';
+
 import { INVALID_ID } from '@/presentation/web-ui/constants/invalidId';
 import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
@@ -23,7 +26,6 @@ import {
 	ValueActionLeading,
 	ValueActionTrailing,
 } from '@/presentation/web-ui/uiKit/valueAction/valueAction';
-import { useParams } from 'react-router';
 
 export function VenueViewScreen() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();

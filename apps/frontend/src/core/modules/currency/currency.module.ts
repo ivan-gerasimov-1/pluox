@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@/core/infrastructure/serviceContainer/types';
+
 import { CurrencyConverter } from '@/core/modules/currency/application/currencyConverter/currencyConverter';
 import { CurrencyRateService } from '@/core/modules/currency/application/currencyRateService/currencyRateService';
 import { CurrencyRateAPI } from '@/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';

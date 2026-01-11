@@ -1,7 +1,8 @@
-import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
-import { cls } from '@/presentation/web-ui/utils/classnames';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'cva';
+
+import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
+import { cls } from '@/presentation/web-ui/utils/classnames';
 
 type TBaseProps = {
 	id?: string;

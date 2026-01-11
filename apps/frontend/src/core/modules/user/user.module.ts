@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@/core/infrastructure/serviceContainer/types';
+
 import { UserService } from '@/core/modules/user/application/userService/userService';
 import { userDataSourceFactory } from '@/core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
 import { UserMapper } from '@/core/modules/user/infrastructure/userMapper/userMapper';

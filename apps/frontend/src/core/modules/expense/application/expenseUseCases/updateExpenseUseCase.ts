@@ -1,4 +1,5 @@
 import type { Id, TCategory } from '@/core/domain/types';
+
 import type { ICategoryUseCase } from '@/core/modules/category/application/categoryUseCase/types';
 import type { TExpenseUpdateDTO } from '@/core/modules/expense/application/dto/expenseDTO';
 import type { IUpdateExpenseUseCase } from '@/core/modules/expense/application/expenseUseCases/types';

@@ -1,9 +1,18 @@
+import {
+	Controller,
+	useForm,
+	type Control,
+	type UseFormSetValue,
+} from 'react-hook-form';
+
 import type { TISODateString } from '@/core/domain/temporal/types';
 import type { Id, TCategory, TDescription } from '@/core/domain/types';
+
 import {
 	ECurrency,
 	type TCurrency,
 } from '@/core/modules/currency/domain/types';
+
 import { AmountInput } from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/amountInput';
 import { CategoryPills } from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/categoryPills/categoryPills';
 import { DescriptionInput } from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/commentInput/descriptionInput';
@@ -12,12 +21,6 @@ import { expenseFormI18n } from '@/presentation/web-ui/modules/expenses/componen
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
-import {
-	Controller,
-	useForm,
-	type Control,
-	type UseFormSetValue,
-} from 'react-hook-form';
 
 export type TExpenseFormProps = {
 	amount: number;

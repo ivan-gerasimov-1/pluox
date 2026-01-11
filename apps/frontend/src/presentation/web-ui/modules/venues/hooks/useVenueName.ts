@@ -1,7 +1,9 @@
+import { useCallback } from 'react';
+
 import type { Id } from '@/core/domain/types';
+
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
-import { useCallback } from 'react';
 
 export function useVenueName() {
 	let venueQueryService = useService(EServiceToken.VENUE_QUERY_SERVICE);

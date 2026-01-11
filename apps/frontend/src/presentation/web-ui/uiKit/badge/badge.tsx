@@ -1,6 +1,7 @@
+import { Slot } from '@radix-ui/react-slot';
+
 import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 import { cls } from '@/presentation/web-ui/utils/classnames';
-import { Slot } from '@radix-ui/react-slot';
 
 type TBadgesProps = {
 	className?: string;

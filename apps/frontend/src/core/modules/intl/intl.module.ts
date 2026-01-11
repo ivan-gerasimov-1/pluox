@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@/core/infrastructure/serviceContainer/types';
+
 import { IntlService } from '@/core/modules/intl/application/intlService/intlService';
 import { CurrencyFormatter } from '@/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
 import { DateFormatter } from '@/core/modules/intl/infrastructure/dateFormatter/dateFormatter';

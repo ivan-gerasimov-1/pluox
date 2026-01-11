@@ -1,8 +1,9 @@
 import { app } from '@/app';
-import type { IWindow } from '@/presentation/web-ui/types';
 import { initializeSentry } from '@/sentry';
 import { registerServiceWorker } from '@/serviceWorker';
 import { initializeUmami } from '@/umami';
+
+import type { IWindow } from '@/presentation/web-ui/types';
 
 (function main(window: IWindow) {
 	initializeUmami();

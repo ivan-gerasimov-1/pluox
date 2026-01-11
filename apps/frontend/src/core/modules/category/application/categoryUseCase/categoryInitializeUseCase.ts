@@ -1,6 +1,7 @@
 import type { IIdGenerator } from '@/core/domain/idGenerator/types';
 import type { ITemporal } from '@/core/domain/temporal/types';
 import type { Id } from '@/core/domain/types';
+
 import type { ICategoryInitializeUseCase } from '@/core/modules/category/application/categoryUseCase/types';
 import type { ICategory } from '@/core/modules/category/domain/categoryEntity/types';
 import type { ICategoryRepository } from '@/core/modules/category/domain/categoryRepository/types';

@@ -1,10 +1,11 @@
+import { useMemo } from 'react';
+
 import type {
 	IDialogApi,
 	TDialogComponent,
 	TDialogProps,
 } from '@/presentation/web-ui/uiKit/dialog/core/types';
 import { useDialogClient } from '@/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
-import { useMemo } from 'react';
 
 export function useDialog() {
 	let client = useDialogClient();

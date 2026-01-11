@@ -1,5 +1,6 @@
 import type { IRepository } from '@/core/domain/repository/types';
 import type { TISODateString } from '@/core/domain/temporal/types';
+
 import type { IExpense } from '@/core/modules/expense/domain/expenseEntity/types';
 
 export interface IExpenseRepository

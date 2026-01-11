@@ -1,11 +1,13 @@
 import { venueNameActionSheetI18n } from './venueNameActionSheet.i18n';
+import { useState } from 'react';
+
 import { TVenueDTO } from '@/core/modules/venue/application/dto/venueDTO';
+
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useVenueUpdateMutation } from '@/presentation/web-ui/modules/venues/queries/venues.query';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import type { TDialogComponentProps } from '@/presentation/web-ui/uiKit/dialog/core/types';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
-import { useState } from 'react';
 
 export function VenueNameActionSheet({
 	venue,

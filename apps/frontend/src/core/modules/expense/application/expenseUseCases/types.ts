@@ -1,4 +1,5 @@
 import type { Id, IUseCase } from '@/core/domain/types';
+
 import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,

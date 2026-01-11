@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@/core/infrastructure/serviceContainer/types';
+
 import { ECurrency } from '@/core/modules/currency/domain/types';
 import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 import { AppConfigService } from '@/core/modules/settings/application/appConfigService/appConfigService';

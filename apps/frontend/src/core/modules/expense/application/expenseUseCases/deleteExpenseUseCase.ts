@@ -1,4 +1,5 @@
 import type { Id } from '@/core/domain/types';
+
 import type { ICategoryUseCase } from '@/core/modules/category/application/categoryUseCase/types';
 import type { IDeleteExpenseUseCase } from '@/core/modules/expense/application/expenseUseCases/types';
 import type { IExpenseRepository } from '@/core/modules/expense/domain/expenseRepository/types';

@@ -1,6 +1,9 @@
 import { localeActionSheetI18n } from './localeActionSheet.i18n';
+import { useState } from 'react';
+
 import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 import type { TLocaleCode } from '@/core/modules/intl/domain/types';
+
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import {
 	useAppConfigQuery,
@@ -9,7 +12,6 @@ import {
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import type { TDialogComponentProps } from '@/presentation/web-ui/uiKit/dialog/core/types';
 import { ActionSheetSelect } from '@/presentation/web-ui/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
-import { useState } from 'react';
 
 export function LocaleActionSheet({ close }: TDialogComponentProps<{}, void>) {
 	let intl = useIntl(localeActionSheetI18n);

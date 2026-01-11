@@ -1,17 +1,21 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
 import type { Id } from '@/core/domain/types';
+
 import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
+
 import type {
 	TVenueCreateDTO,
 	TVenueDTO,
 	TVenueUpdateDTO,
 } from '@/core/modules/venue/application/dto/venueDTO';
+
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
 import { createVenueQuery } from '@/presentation/web-ui/modules/venues/queries/createVenueQuery';
 import {
 	invalidateVenueListQuery,
 	invalidateVenueOneByIdQuery,
 } from '@/presentation/web-ui/modules/venues/queries/invalidateVenueQuery';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export function useVenueListQuery(options?: {
 	archived?: boolean;

@@ -1,8 +1,10 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import type { Id } from '@/core/domain/types';
+
 import type { IDataSource } from '@/core/infrastructure/dataSource/types';
 import type { IMapper } from '@/core/infrastructure/mapper/types';
 import { Repository } from '@/core/infrastructure/repository/repository';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('Repository', () => {
 	const TEST_ID = 'ID';

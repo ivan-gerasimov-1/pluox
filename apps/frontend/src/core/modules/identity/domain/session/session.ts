@@ -1,5 +1,6 @@
 import type { Id } from '@/core/domain/types';
 import { ValueObject } from '@/core/domain/valueObject/valueObject';
+
 import type { IAuthToken } from '@/core/modules/identity/domain/authToken/types';
 import type { IClientId } from '@/core/modules/identity/domain/clientId/types';
 import type {

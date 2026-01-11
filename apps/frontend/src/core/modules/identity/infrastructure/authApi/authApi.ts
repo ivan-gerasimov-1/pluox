@@ -1,4 +1,5 @@
 import type { IApiClient } from '@/core/infrastructure/apiClient/types';
+
 import type { IAuthApi } from '@/core/modules/identity/infrastructure/authApi/types';
 
 export class AuthApi implements IAuthApi {

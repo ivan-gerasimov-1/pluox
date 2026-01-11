@@ -1,4 +1,5 @@
 import { venueListScreenI18n } from './venueListScreen.i18n';
+
 import { EAppPath } from '@/presentation/web-ui/appPath';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import {

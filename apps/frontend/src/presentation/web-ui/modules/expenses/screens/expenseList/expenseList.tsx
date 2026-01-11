@@ -1,7 +1,8 @@
+import { useSearchParams } from 'react-router';
+
 import { ExpenseList } from '@/presentation/web-ui/modules/expenses/components/expenseList/expenseList';
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
-import { useSearchParams } from 'react-router';
 
 export function ExpenseListScreen() {
 	let temporal = useService(EServiceToken.TEMPORAL);

@@ -1,12 +1,14 @@
 import { venueCategoryActionSheetI18n } from './venueCategoryActionSheet.i18n';
+import { useState } from 'react';
+
 import type { TVenueDTO } from '@/core/modules/venue/application/dto/venueDTO';
+
 import { useCategoryListQuery } from '@/presentation/web-ui/modules/categories/queries/categories.queries';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useVenueUpdateMutation } from '@/presentation/web-ui/modules/venues/queries/venues.query';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import type { TDialogComponentProps } from '@/presentation/web-ui/uiKit/dialog/core/types';
 import { ActionSheetSelect } from '@/presentation/web-ui/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
-import { useState } from 'react';
 
 export function VenueCategoryActionSheet({
 	venue,

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function useEffectOnce(callback: () => void): void {
 	let isRun = useRef(false);

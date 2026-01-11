@@ -1,5 +1,8 @@
+import type { TValueOf } from '@/core/types';
+
 import type { IIdGenerator } from '@/core/domain/idGenerator/types';
 import type { ITemporal } from '@/core/domain/temporal/types';
+
 import type {
 	IApiClient,
 	IApiClientConfigProvider,
@@ -10,6 +13,7 @@ import type {
 	IStorage,
 } from '@/core/infrastructure/database/types';
 import type { IIdGeneratorFactory } from '@/core/infrastructure/idGenerator/factory';
+
 import type { ILauchControl } from '@/core/modules/bootstrap/application/launchControl/types';
 import type { ICategoryQueryService } from '@/core/modules/category/application/categoryQueryService/types';
 import type { ICategoryService } from '@/core/modules/category/application/categoryService/types';
@@ -81,7 +85,6 @@ import type {
 import type { IVenueRepository } from '@/core/modules/venue/domain/venueRepository/types';
 import type { IVenueDataSource } from '@/core/modules/venue/infrastructure/venueDataSource/types';
 import type { IVenueMapper } from '@/core/modules/venue/infrastructure/venueMapper/types';
-import type { TValueOf } from '@/core/types';
 
 export interface IContainer {
 	readonly providers: Map<TServiceToken, IServiceProvider>;

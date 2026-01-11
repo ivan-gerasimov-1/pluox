@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@/core/infrastructure/serviceContainer/types';
+
 import { ExpenseAmountService } from '@/core/modules/expense/application/expenseAmountService/expenseAmountService';
 import { ExpenseGroupingService } from '@/core/modules/expense/application/expenseGroupingService/expenseGroupingService';
 import { ExpenseQueryService } from '@/core/modules/expense/application/expenseQueryService/expenseQueryService';

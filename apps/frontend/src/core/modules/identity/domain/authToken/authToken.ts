@@ -1,4 +1,5 @@
 import { ValueObject } from '@/core/domain/valueObject/valueObject';
+
 import type {
 	IAuthToken,
 	TAuthTokenValue,

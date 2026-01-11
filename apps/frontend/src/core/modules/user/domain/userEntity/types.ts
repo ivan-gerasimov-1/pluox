@@ -1,4 +1,5 @@
 import type { IEntity } from '@/core/domain/entity/types';
+
 import type { TLocaleCode } from '@/core/modules/intl/domain/types';
 
 export interface IUser extends IEntity {

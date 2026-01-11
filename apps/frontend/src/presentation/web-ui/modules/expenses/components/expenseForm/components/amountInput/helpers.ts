@@ -1,4 +1,5 @@
 import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
+
 import { getAllowedSymbols } from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/constants';
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 

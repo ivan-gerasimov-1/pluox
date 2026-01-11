@@ -1,9 +1,11 @@
+import { createDIContainer } from '@/diContainer';
+import { runMigrations } from '@/migrations';
+
 import {
 	EServiceToken,
 	type IContainer,
 } from '@/core/infrastructure/serviceContainer/types';
-import { createDIContainer } from '@/diContainer';
-import { runMigrations } from '@/migrations';
+
 import { createUI } from '@/presentation/web-ui';
 import type { IWindow } from '@/presentation/web-ui/types';
 

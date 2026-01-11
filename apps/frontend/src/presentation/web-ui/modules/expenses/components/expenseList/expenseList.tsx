@@ -1,4 +1,13 @@
+import {
+	SwipeableList,
+	SwipeableListItem,
+	SwipeAction,
+	TrailingActions,
+	Type,
+} from 'react-swipeable-list';
+
 import type { TISODateString } from '@/core/domain/temporal/types';
+
 import { EditExpenseActionSheet } from '@/presentation/web-ui/modules/expenses/components/expenseEdit/editExpenseActionSheet';
 import {
 	useExpenseDeleteMutation,
@@ -12,13 +21,6 @@ import { DotSpace } from '@/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
 import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
-import {
-	SwipeableList,
-	SwipeableListItem,
-	SwipeAction,
-	TrailingActions,
-	Type,
-} from 'react-swipeable-list';
 
 import 'react-swipeable-list/dist/styles.css';
 

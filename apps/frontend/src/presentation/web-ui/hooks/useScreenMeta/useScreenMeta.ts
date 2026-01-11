@@ -1,6 +1,5 @@
-import { useMatches } from 'react-router';
-
 import { TRouteMeta } from './types';
+import { useMatches } from 'react-router';
 
 export function useRouteMeta(): TRouteMeta {
 	let matches = useMatches();

@@ -1,5 +1,6 @@
-import { cls } from '@/presentation/web-ui/utils/classnames';
 import { NavLink } from 'react-router';
+
+import { cls } from '@/presentation/web-ui/utils/classnames';
 
 type TNavigableProps = {
 	to: string;

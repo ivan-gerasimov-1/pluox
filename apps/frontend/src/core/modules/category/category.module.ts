@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@/core/infrastructure/serviceContainer/types';
+
 import { CategoryQueryService } from '@/core/modules/category/application/categoryQueryService/categoryQueryService';
 import { CategoryService } from '@/core/modules/category/application/categoryService/categoryService';
 import { CategoryCreateUseCase } from '@/core/modules/category/application/categoryUseCase/categoryCreateUseCase';
