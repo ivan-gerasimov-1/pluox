@@ -25,7 +25,6 @@ import { Card, CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
 import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 import {
 	ValueAction,
 	ValueActionLeading,
