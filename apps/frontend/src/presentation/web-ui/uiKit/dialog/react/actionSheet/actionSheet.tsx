@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
 import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/react/hooks/useAppScale';
+import { Pinch } from '@root/presentation/web-ui/uiKit/pinch/pinch';
 
 import styles from './actionSheet.module.css';
 
@@ -44,14 +45,11 @@ export function ActionSheet({
 				appear
 			>
 				<div
-					ref={actionSheetRef}
 					id={id}
+					ref={actionSheetRef}
 					className={styles.actionSheetContainer}
 				>
-					<div
-						className="h-1 rounded-3xl bg-neutral-400 mx-auto -mt-[15px] mb-[25px] w-[10%]"
-						onClick={close}
-					/>
+					<Pinch />
 
 					{children}
 				</div>
