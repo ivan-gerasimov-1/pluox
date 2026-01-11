@@ -1,3 +1,17 @@
+import type { TISODateString } from '@/core/domain/temporal/types';
+import { EditExpenseActionSheet } from '@/presentation/web-ui/modules/expenses/components/expenseEdit/editExpenseActionSheet';
+import {
+	useExpenseDeleteMutation,
+	useExpenseListQuery,
+} from '@/presentation/web-ui/modules/expenses/expenses.query';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { useVenueName } from '@/presentation/web-ui/modules/venues/hooks/useVenueName';
+import { useDialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
+import { DotSpace } from '@/presentation/web-ui/uiKit/dotSpace/dotSpace';
+import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
+import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
+import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
 import {
 	SwipeableList,
 	SwipeableListItem,
@@ -6,25 +20,9 @@ import {
 	Type,
 } from 'react-swipeable-list';
 
-import type { TISODateString } from '@root/core/domain/temporal/types';
-
-import { EditExpenseActionSheet } from '@root/presentation/web-ui/modules/expenses/components/expenseEdit/editExpenseActionSheet';
-import {
-	useExpenseDeleteMutation,
-	useExpenseListQuery,
-} from '@root/presentation/web-ui/modules/expenses/expenses.query';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { useVenueName } from '@root/presentation/web-ui/modules/venues/hooks/useVenueName';
-import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
-import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
-import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
-import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-import { ListIcon } from '@root/presentation/web-ui/uiKit/list/list';
-
 import 'react-swipeable-list/dist/styles.css';
 
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { cls } from '@/presentation/web-ui/utils/classnames';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;

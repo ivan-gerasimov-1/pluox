@@ -1,11 +1,11 @@
 import {
 	EHttpHeader,
 	EHttpMethod,
-	type THttpMethod,
 	type IApiClient,
 	type IApiClientConfigProvider,
 	type THttpHeaders,
-} from '@root/core/infrastructure/apiClient/types';
+	type THttpMethod,
+} from '@/core/infrastructure/apiClient/types';
 
 export class ApiClient implements IApiClient {
 	constructor(private readonly configProvider: IApiClientConfigProvider) {}

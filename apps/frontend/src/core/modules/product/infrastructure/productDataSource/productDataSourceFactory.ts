@@ -1,8 +1,8 @@
-import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { TProductDTO } from '@root/core/modules/product/application/dto/productDTO';
-import type { TProductFindOptions } from '@root/core/modules/product/domain/productRepository/types';
-import type { IProductDataSource } from '@root/core/modules/product/infrastructure/productDataSource/types';
-import type { IDatabase } from '@root/core/infrastructure/database/types';
+import type { IDatabase } from '@/core/infrastructure/database/types';
+import { DataSource } from '@/core/infrastructure/dataSource/dataSource';
+import type { TProductDTO } from '@/core/modules/product/application/dto/productDTO';
+import type { TProductFindOptions } from '@/core/modules/product/domain/productRepository/types';
+import type { IProductDataSource } from '@/core/modules/product/infrastructure/productDataSource/types';
 
 const PRODUCT_STORAGE_ID = 'products';
 

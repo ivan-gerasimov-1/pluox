@@ -1,17 +1,15 @@
+import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
+import { ECurrency } from '@/core/modules/currency/domain/types';
+import { ELocaleCode } from '@/core/modules/intl/domain/enums';
+import type { TAppConfig } from '@/core/modules/settings/domain/appConfig/types';
+import { invalidateExpenseQuery } from '@/presentation/web-ui/modules/expenses/expenses.query';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import {
-	type QueryClient,
 	useMutation,
 	useQuery,
 	useQueryClient,
+	type QueryClient,
 } from '@tanstack/react-query';
-
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
-import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-import type { TAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
-
-import { invalidateExpenseQuery } from '@root/presentation/web-ui/modules/expenses/expenses.query';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
 
 function createAppConfigQuery() {
 	return ['appConfig'];

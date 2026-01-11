@@ -1,22 +1,19 @@
-import { useForm } from 'react-hook-form';
-
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-
-import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
-
-import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { createVenueScreenI18n } from '@root/presentation/web-ui/modules/venues/createVenue/createVenueScreen.i18n';
-import { useVenueCreateMutation } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Card } from '@root/presentation/web-ui/uiKit/card/card';
-import { Input } from '@root/presentation/web-ui/uiKit/input/input';
-import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
+import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
+import type { TVenueDTO } from '@/core/modules/venue/application/dto/venueDTO';
+import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
+import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { createVenueScreenI18n } from '@/presentation/web-ui/modules/venues/createVenue/createVenueScreen.i18n';
+import { useVenueCreateMutation } from '@/presentation/web-ui/modules/venues/queries/venues.query';
+import { Button } from '@/presentation/web-ui/uiKit/button/button';
+import { Card } from '@/presentation/web-ui/uiKit/card/card';
+import { Input } from '@/presentation/web-ui/uiKit/input/input';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import {
 	ValueAction,
 	ValueActionLeading,
-} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
+} from '@/presentation/web-ui/uiKit/valueAction/valueAction';
+import { useForm } from 'react-hook-form';
 
 export function CreateVenueScreen() {
 	let navigation = useAppNavigation();

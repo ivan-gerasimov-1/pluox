@@ -1,13 +1,12 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-
-import { CurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/currencyConverter';
-import { CurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/currencyRateService';
-import { CurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
-import { currencyRateDataSourceFactory } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSourceFactory';
-import { CurrencyRateRepository } from '@root/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
+} from '@/core/infrastructure/serviceContainer/types';
+import { CurrencyConverter } from '@/core/modules/currency/application/currencyConverter/currencyConverter';
+import { CurrencyRateService } from '@/core/modules/currency/application/currencyRateService/currencyRateService';
+import { CurrencyRateAPI } from '@/core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
+import { currencyRateDataSourceFactory } from '@/core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSourceFactory';
+import { CurrencyRateRepository } from '@/core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 
 export const currencyModule: IModule = {
 	providers: [

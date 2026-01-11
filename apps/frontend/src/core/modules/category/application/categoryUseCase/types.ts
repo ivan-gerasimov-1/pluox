@@ -1,8 +1,8 @@
-import type { Id, IUseCase } from '@root/core/domain/types';
+import type { Id, IUseCase } from '@/core/domain/types';
 import type {
 	TCategoryCreateDTO,
 	TCategoryUpdateDTO,
-} from '@root/core/modules/category/application/dto/categoryDTO';
+} from '@/core/modules/category/application/dto/categoryDTO';
 
 export interface ICategoryUseCase {
 	initialize(): void;

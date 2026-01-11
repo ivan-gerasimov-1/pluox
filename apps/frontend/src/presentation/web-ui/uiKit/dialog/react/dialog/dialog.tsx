@@ -1,9 +1,8 @@
+import { EDialogStatus } from '@/presentation/web-ui/uiKit/dialog/core/enums';
+import { ActionSheet } from '@/presentation/web-ui/uiKit/dialog/react/actionSheet/actionSheet';
+import { useDialogClient } from '@/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
 import { useCallback, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
-
-import { EDialogStatus } from '@root/presentation/web-ui/uiKit/dialog/core/enums';
-import { ActionSheet } from '@root/presentation/web-ui/uiKit/dialog/react/actionSheet/actionSheet';
-import { useDialogClient } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/useDialogClient';
 
 export function Dialog() {
 	let client = useDialogClient();

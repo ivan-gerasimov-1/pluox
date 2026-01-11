@@ -1,4 +1,4 @@
-import type { Id } from '@root/core/domain/types';
+import type { Id } from '@/core/domain/types';
 
 export interface IIdGenerator {
 	getId(): Id;

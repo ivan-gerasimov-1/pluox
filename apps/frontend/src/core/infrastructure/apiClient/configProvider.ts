@@ -1,6 +1,6 @@
-import type { IApiClientConfigProvider } from '@root/core/infrastructure/apiClient/types';
-import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
-import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
+import type { IApiClientConfigProvider } from '@/core/infrastructure/apiClient/types';
+import type { ISessionService } from '@/core/modules/identity/application/sessionService/types';
+import type { IEnvironment } from '@/core/modules/settings/infrastructure/environment/types';
 
 export class ApiClientConfigProvider implements IApiClientConfigProvider {
 	constructor(

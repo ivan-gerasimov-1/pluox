@@ -1,5 +1,5 @@
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
+import { ELocaleCode } from '@/core/modules/intl/domain/enums';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
 
 const languageNameByLocale = Object.create({
 	[ELocaleCode.RU_RU]: 'Русский',

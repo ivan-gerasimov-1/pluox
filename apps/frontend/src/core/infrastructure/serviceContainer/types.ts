@@ -1,62 +1,18 @@
-import type { TValueOf } from '@root/core/types';
-
-import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
-import type { IAppConfigService } from '@root/core/modules/settings/application/appConfigService/types';
-import type { IAppConfigDataSource } from '@root/core/modules/settings/infrastructure/appConfigDataSource/types';
-import type { IAuthApi } from '@root/core/modules/identity/infrastructure/authApi/types';
-import type { IAuthSerivce } from '@root/core/modules/identity/application/authService/types';
+import type { IIdGenerator } from '@/core/domain/idGenerator/types';
+import type { ITemporal } from '@/core/domain/temporal/types';
 import type {
 	IApiClient,
 	IApiClientConfigProvider,
-} from '@root/core/infrastructure/apiClient/types';
+} from '@/core/infrastructure/apiClient/types';
 import type {
-	IClientId,
-	IClientIdFactory,
-} from '@root/core/modules/identity/domain/clientId/types';
-import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
-import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
-import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
-import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
-import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
-import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
-import type { IUserDataSource } from '@root/core/modules/user/infrastructure/userDataSource/types';
-import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
-import type {
-	IEnvironment,
-	TMetaEnv,
-} from '@root/core/modules/settings/infrastructure/environment/types';
-import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
-import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
-import type { IExpenseService } from '@root/core/modules/expense/application/expenseService/types';
-import type { IIdGeneratorFactory } from '@root/core/infrastructure/idGenerator/factory';
-import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
-import type { ICategoryDataSource } from '@root/core/modules/category/infrastructure/categoryDataSource/types';
-import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
-import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
-import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
-import type { ILauchControl } from '@root/core/modules/bootstrap/application/launchControl/types';
-import type { IUserService } from '@root/core/modules/user/application/userService/types';
-import type { IExpenseMapper } from '@root/core/modules/expense/infrastructure/expenseMapper/types';
-import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
-import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMapper/types';
-import type { IUserRepository } from '@root/core/modules/user/domain/userRepository/types';
-import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
-import type { ISessionDataSource } from '@root/core/modules/identity/infrastructure/sessionDataSource/types';
-import type { ISessionFactory } from '@root/core/modules/identity/domain/session/types';
-import type { ISyncService } from '@root/core/modules/sync/application/syncService/types';
-import type { IAuthTokenFactory } from '@root/core/modules/identity/domain/authToken/types';
-import type { IExpenseGroupingService } from '@root/core/modules/expense/application/expenseGroupingService/types';
-import type { IExpenseAmountService } from '@root/core/modules/expense/application/expenseAmountService/types';
-import type { IExpenseQueryService } from '@root/core/modules/expense/application/expenseQueryService/types';
-import type {
-	ICreateExpenseUseCase,
-	IDeleteExpenseUseCase,
-	IExpenseUseCase,
-	IUpdateExpenseUseCase,
-} from '@root/core/modules/expense/application/expenseUseCases/types';
+	IDatabase,
+	IDatabaseCollectionFactory,
+	IStorage,
+} from '@/core/infrastructure/database/types';
+import type { IIdGeneratorFactory } from '@/core/infrastructure/idGenerator/factory';
+import type { ILauchControl } from '@/core/modules/bootstrap/application/launchControl/types';
+import type { ICategoryQueryService } from '@/core/modules/category/application/categoryQueryService/types';
+import type { ICategoryService } from '@/core/modules/category/application/categoryService/types';
 import type {
 	ICategoryCreateUseCase,
 	ICategoryDeleteUseCase,
@@ -64,9 +20,56 @@ import type {
 	ICategoryUpdateUseCase,
 	ICategoryUseCase,
 	ICategoryWeightUseCase,
-} from '@root/core/modules/category/application/categoryUseCase/types';
-import type { ICategoryQueryService } from '@root/core/modules/category/application/categoryQueryService/types';
-import type { IVenueQueryService } from '@root/core/modules/venue/application/venueQueryService/types';
+} from '@/core/modules/category/application/categoryUseCase/types';
+import type { ICategoryRepository } from '@/core/modules/category/domain/categoryRepository/types';
+import type { ICategoryDataSource } from '@/core/modules/category/infrastructure/categoryDataSource/types';
+import type { ICategoryMapper } from '@/core/modules/category/infrastructure/categoryMapper/types';
+import type { ICurrencyConverter } from '@/core/modules/currency/application/currencyConverter/types';
+import type { ICurrencyRateService } from '@/core/modules/currency/application/currencyRateService/types';
+import type { ICurrencyRateRepository } from '@/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
+import type { ICurrencyRateAPI } from '@/core/modules/currency/infrastructure/currencyRateAPI/types';
+import type { ICurrencyRateDataSource } from '@/core/modules/currency/infrastructure/currencyRateDataSource/types';
+import type { IExpenseAmountService } from '@/core/modules/expense/application/expenseAmountService/types';
+import type { IExpenseGroupingService } from '@/core/modules/expense/application/expenseGroupingService/types';
+import type { IExpenseQueryService } from '@/core/modules/expense/application/expenseQueryService/types';
+import type { IExpenseService } from '@/core/modules/expense/application/expenseService/types';
+import type {
+	ICreateExpenseUseCase,
+	IDeleteExpenseUseCase,
+	IExpenseUseCase,
+	IUpdateExpenseUseCase,
+} from '@/core/modules/expense/application/expenseUseCases/types';
+import type { IExpenseRepository } from '@/core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseApi } from '@/core/modules/expense/infrastructure/expenseApi/types';
+import type { IExpenseDataSource } from '@/core/modules/expense/infrastructure/expenseDataSource/types';
+import type { IExpenseMapper } from '@/core/modules/expense/infrastructure/expenseMapper/types';
+import type { IAuthSerivce } from '@/core/modules/identity/application/authService/types';
+import type { ISessionService } from '@/core/modules/identity/application/sessionService/types';
+import type { IAuthTokenFactory } from '@/core/modules/identity/domain/authToken/types';
+import type {
+	IClientId,
+	IClientIdFactory,
+} from '@/core/modules/identity/domain/clientId/types';
+import type { ISessionFactory } from '@/core/modules/identity/domain/session/types';
+import type { IAuthApi } from '@/core/modules/identity/infrastructure/authApi/types';
+import type { ISessionDataSource } from '@/core/modules/identity/infrastructure/sessionDataSource/types';
+import type { IIntlService } from '@/core/modules/intl/application/intlService/types';
+import type { ICurrencyFormatter } from '@/core/modules/intl/domain/currencyFormatter/types';
+import type { IDateFormatter } from '@/core/modules/intl/domain/dateFormatter/types';
+import type { INumberParser } from '@/core/modules/intl/domain/numberParser/types';
+import type { IAppConfigService } from '@/core/modules/settings/application/appConfigService/types';
+import type { IAppConfig } from '@/core/modules/settings/domain/appConfig/types';
+import type { IAppConfigDataSource } from '@/core/modules/settings/infrastructure/appConfigDataSource/types';
+import type {
+	IEnvironment,
+	TMetaEnv,
+} from '@/core/modules/settings/infrastructure/environment/types';
+import type { ISyncService } from '@/core/modules/sync/application/syncService/types';
+import type { IUserService } from '@/core/modules/user/application/userService/types';
+import type { IUserRepository } from '@/core/modules/user/domain/userRepository/types';
+import type { IUserDataSource } from '@/core/modules/user/infrastructure/userDataSource/types';
+import type { IUserMapper } from '@/core/modules/user/infrastructure/userMapper/types';
+import type { IVenueQueryService } from '@/core/modules/venue/application/venueQueryService/types';
 import type {
 	IVenueArchiveUseCase,
 	IVenueCreateUseCase,
@@ -74,15 +77,11 @@ import type {
 	IVenueUnarchiveUseCase,
 	IVenueUpdateUseCase,
 	IVenueUseCase,
-} from '@root/core/modules/venue/application/venueUseCase/types';
-import type { IVenueRepository } from '@root/core/modules/venue/domain/venueRepository/types';
-import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/types';
-import type { IVenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/types';
-import type {
-	IDatabaseCollectionFactory,
-	IDatabase,
-	IStorage,
-} from '@root/core/infrastructure/database/types';
+} from '@/core/modules/venue/application/venueUseCase/types';
+import type { IVenueRepository } from '@/core/modules/venue/domain/venueRepository/types';
+import type { IVenueDataSource } from '@/core/modules/venue/infrastructure/venueDataSource/types';
+import type { IVenueMapper } from '@/core/modules/venue/infrastructure/venueMapper/types';
+import type { TValueOf } from '@/core/types';
 
 export interface IContainer {
 	readonly providers: Map<TServiceToken, IServiceProvider>;

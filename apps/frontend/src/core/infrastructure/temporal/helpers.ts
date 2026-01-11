@@ -1,9 +1,6 @@
-import { InvalidMonthError } from '@root/core/infrastructure/temporal/errors';
-import { monthGuard } from '@root/core/infrastructure/temporal/typeGuards';
-import type {
-	TDateParts,
-	TISODateString,
-} from '@root/core/domain/temporal/types';
+import type { TDateParts, TISODateString } from '@/core/domain/temporal/types';
+import { InvalidMonthError } from '@/core/infrastructure/temporal/errors';
+import { monthGuard } from '@/core/infrastructure/temporal/typeGuards';
 
 /**
  * @throws InvalidMonthError

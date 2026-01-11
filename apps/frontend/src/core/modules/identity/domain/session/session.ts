@@ -1,11 +1,11 @@
-import type { Id } from '@root/core/domain/types';
-import { ValueObject } from '@root/core/domain/valueObject/valueObject';
-import type { IAuthToken } from '@root/core/modules/identity/domain/authToken/types';
-import type { IClientId } from '@root/core/modules/identity/domain/clientId/types';
+import type { Id } from '@/core/domain/types';
+import { ValueObject } from '@/core/domain/valueObject/valueObject';
+import type { IAuthToken } from '@/core/modules/identity/domain/authToken/types';
+import type { IClientId } from '@/core/modules/identity/domain/clientId/types';
 import type {
 	ISession,
 	TSessionValue,
-} from '@root/core/modules/identity/domain/session/types';
+} from '@/core/modules/identity/domain/session/types';
 
 export class Session extends ValueObject<TSessionValue> implements ISession {
 	constructor(clientId: IClientId, userId: Id, authToken: IAuthToken | null) {

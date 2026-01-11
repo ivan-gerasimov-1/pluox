@@ -22,7 +22,7 @@
 		"jsx": "react-jsx",
 
 		"paths": {
-			"@root/*": ["src/*"]
+			"@/*": ["src/*"]
 		}
 	},
 	"include": ["src/**/*"]

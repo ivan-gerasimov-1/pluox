@@ -1,8 +1,8 @@
-import { Entity } from '@root/core/domain/entity/entity';
-import type { TISODateString } from '@root/core/domain/temporal/types';
-import type { Id } from '@root/core/domain/types';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
-import type { IUser } from '@root/core/modules/user/domain/userEntity/types';
+import { Entity } from '@/core/domain/entity/entity';
+import type { TISODateString } from '@/core/domain/temporal/types';
+import type { Id } from '@/core/domain/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
+import type { IUser } from '@/core/modules/user/domain/userEntity/types';
 
 export class User extends Entity implements IUser {
 	#email: string;

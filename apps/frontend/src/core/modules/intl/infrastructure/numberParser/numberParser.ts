@@ -1,7 +1,7 @@
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
-import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
+import { ELocaleCode } from '@/core/modules/intl/domain/enums';
+import type { INumberParser } from '@/core/modules/intl/domain/numberParser/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
+import type { IAppConfig } from '@/core/modules/settings/domain/appConfig/types';
 
 type IndexReplacer = (digit: string) => string;
 type NumberFormatterCache = Map<TLocaleCode, Intl.NumberFormat>;

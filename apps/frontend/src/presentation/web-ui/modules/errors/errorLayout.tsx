@@ -1,6 +1,5 @@
+import { Screen } from '@/presentation/web-ui/uiKit/screen/screen';
 import { Outlet } from 'react-router';
-
-import { Screen } from '@root/presentation/web-ui/uiKit/screen/screen';
 
 export function ErrorLayout() {
 	return (

@@ -1,5 +1,5 @@
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
 
 export interface ICurrencyFormatter {
 	format(

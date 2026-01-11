@@ -1,15 +1,15 @@
-import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
-import { DECIMAL_SEPARATORS } from '@root/core/modules/intl/domain/constants';
-import { UnsupportedDecimalSeparatorError } from '@root/core/modules/intl/domain/errors';
-import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
+import type { IIntlService } from '@/core/modules/intl/application/intlService/types';
+import { DECIMAL_SEPARATORS } from '@/core/modules/intl/domain/constants';
+import type { ICurrencyFormatter } from '@/core/modules/intl/domain/currencyFormatter/types';
+import type { IDateFormatter } from '@/core/modules/intl/domain/dateFormatter/types';
+import { UnsupportedDecimalSeparatorError } from '@/core/modules/intl/domain/errors';
+import type { INumberParser } from '@/core/modules/intl/domain/numberParser/types';
 import type {
 	TDecimalSeparator,
 	TLocaleCode,
-} from '@root/core/modules/intl/domain/types';
-import type { INumberParser } from '@root/core/modules/intl/domain/numberParser/types';
-import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
-import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
+} from '@/core/modules/intl/domain/types';
+import type { IAppConfig } from '@/core/modules/settings/domain/appConfig/types';
 
 export class IntlService implements IIntlService {
 	constructor(

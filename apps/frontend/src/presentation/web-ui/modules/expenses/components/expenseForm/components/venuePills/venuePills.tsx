@@ -1,8 +1,6 @@
-import type { Id } from '@root/core/domain/types';
-
-import { useVenueListUnarchivedQuery } from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-
-import { PillsSelect } from '@root/presentation/web-ui/uiKit/pillsSelect/pillsSelect';
+import type { Id } from '@/core/domain/types';
+import { useVenueListUnarchivedQuery } from '@/presentation/web-ui/modules/venues/queries/venues.query';
+import { PillsSelect } from '@/presentation/web-ui/uiKit/pillsSelect/pillsSelect';
 
 type TVenuePillsProps = {
 	value: Id | null;

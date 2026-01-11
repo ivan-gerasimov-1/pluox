@@ -1,11 +1,11 @@
-import type { Id } from '@root/core/domain/types';
-import type { TCurrencyRateDTO } from '@root/core/modules/currency/application/dto/currencyRateDTO';
+import type { Id } from '@/core/domain/types';
+import type { TCurrencyRateDTO } from '@/core/modules/currency/application/dto/currencyRateDTO';
 import type {
 	ICurrencyRateRepository,
 	TCurrencyFindManyResult,
-} from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
-import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
+} from '@/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
+import type { ICurrencyRateDataSource } from '@/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateRepository implements ICurrencyRateRepository {
 	constructor(

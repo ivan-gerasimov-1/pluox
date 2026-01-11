@@ -1,8 +1,8 @@
-import type { Id, TCategory } from '@root/core/domain/types';
-import type { ICategoryUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
-import type { TExpenseUpdateDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { IUpdateExpenseUseCase } from '@root/core/modules/expense/application/expenseUseCases/types';
-import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
+import type { Id, TCategory } from '@/core/domain/types';
+import type { ICategoryUseCase } from '@/core/modules/category/application/categoryUseCase/types';
+import type { TExpenseUpdateDTO } from '@/core/modules/expense/application/dto/expenseDTO';
+import type { IUpdateExpenseUseCase } from '@/core/modules/expense/application/expenseUseCases/types';
+import type { IExpenseRepository } from '@/core/modules/expense/domain/expenseRepository/types';
 
 /**
  * @todo

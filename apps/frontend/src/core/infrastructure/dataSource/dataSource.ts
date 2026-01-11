@@ -1,15 +1,14 @@
 import type {
 	TFindManyOptions,
 	TFindManyResult,
-} from '@root/core/domain/repository/types';
-import type { Id } from '@root/core/domain/types';
-
-import type { IDatabaseCollection } from '@root/core/infrastructure/database/types';
+} from '@/core/domain/repository/types';
+import type { Id } from '@/core/domain/types';
+import type { IDatabaseCollection } from '@/core/infrastructure/database/types';
 import {
 	DuplicateItemError,
 	ItemNotFoundError,
-} from '@root/core/infrastructure/dataSource/errors';
-import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
+} from '@/core/infrastructure/dataSource/errors';
+import type { IDataSource } from '@/core/infrastructure/dataSource/types';
 
 export class DataSource<TDto, TFindOptions = {}>
 	implements IDataSource<TDto, TFindOptions>

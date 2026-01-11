@@ -1,7 +1,6 @@
+import { Badge, Badges } from '@/presentation/web-ui/uiKit/badge/badge';
+import { cls } from '@/presentation/web-ui/utils/classnames';
 import { useCallback } from 'react';
-
-import { Badge, Badges } from '@root/presentation/web-ui/uiKit/badge/badge';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TPillsSelectProps<T> = {
 	value?: string | null;

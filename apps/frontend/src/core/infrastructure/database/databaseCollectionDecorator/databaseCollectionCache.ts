@@ -1,5 +1,5 @@
-import { DatabaseCollectionDecorator } from '@root/core/infrastructure/database/databaseCollectionDecorator/databaseCollectionDecorator';
-import type { IDatabaseCollection } from '@root/core/infrastructure/database/types';
+import { DatabaseCollectionDecorator } from '@/core/infrastructure/database/databaseCollectionDecorator/databaseCollectionDecorator';
+import type { IDatabaseCollection } from '@/core/infrastructure/database/types';
 
 export class DatabaseCollectionCacheDecorator
 	extends DatabaseCollectionDecorator

@@ -1,14 +1,14 @@
-import type { Id } from '@root/core/domain/types';
+import type { Id } from '@/core/domain/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
-} from '@root/core/modules/expense/application/dto/expenseDTO';
+} from '@/core/modules/expense/application/dto/expenseDTO';
 import type {
 	ICreateExpenseUseCase,
 	IDeleteExpenseUseCase,
 	IExpenseUseCase,
 	IUpdateExpenseUseCase,
-} from '@root/core/modules/expense/application/expenseUseCases/types';
+} from '@/core/modules/expense/application/expenseUseCases/types';
 
 export class ExpenseUseCase implements IExpenseUseCase {
 	constructor(

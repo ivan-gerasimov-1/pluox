@@ -1,8 +1,8 @@
-import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
+import type { IDataSource } from '@/core/infrastructure/dataSource/types';
 import type {
 	TCurrency,
 	TCurrencyRates,
-} from '@root/core/modules/currency/domain/types';
+} from '@/core/modules/currency/domain/types';
 
 export interface ICurrencyRateDataSource extends IDataSource<TCurrencyRates> {
 	findById(currency: TCurrency): number;

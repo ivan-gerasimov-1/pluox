@@ -1,12 +1,11 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-
-import { IntlService } from '@root/core/modules/intl/application/intlService/intlService';
-import { CurrencyFormatter } from '@root/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
-import { DateFormatter } from '@root/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
-import { NumberParser } from '@root/core/modules/intl/infrastructure/numberParser/numberParser';
+} from '@/core/infrastructure/serviceContainer/types';
+import { IntlService } from '@/core/modules/intl/application/intlService/intlService';
+import { CurrencyFormatter } from '@/core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
+import { DateFormatter } from '@/core/modules/intl/infrastructure/dateFormatter/dateFormatter';
+import { NumberParser } from '@/core/modules/intl/infrastructure/numberParser/numberParser';
 
 export const intlModule: IModule = {
 	providers: [

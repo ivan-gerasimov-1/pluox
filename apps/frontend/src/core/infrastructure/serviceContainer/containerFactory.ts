@@ -1,6 +1,6 @@
-import { Container } from '@root/core/infrastructure/serviceContainer/container';
-import { ContainerValidationDecorator } from '@root/core/infrastructure/serviceContainer/containerDecorator/containerValidationDecorator';
-import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
+import { Container } from '@/core/infrastructure/serviceContainer/container';
+import { ContainerValidationDecorator } from '@/core/infrastructure/serviceContainer/containerDecorator/containerValidationDecorator';
+import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
 
 export let globalContainer: IContainer;
 

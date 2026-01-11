@@ -1,6 +1,6 @@
-import type { TMonth, TYear } from '@root/core/domain/temporal/types';
-import type { Id } from '@root/core/domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { TMonth, TYear } from '@/core/domain/temporal/types';
+import type { Id } from '@/core/domain/types';
+import type { TExpenseDTO } from '@/core/modules/expense/application/dto/expenseDTO';
 
 export interface IExpenseQueryService {
 	getExpenseById(id: Id): TExpenseDTO | null;

@@ -1,12 +1,11 @@
-import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
-
 import type {
 	TFindManyOptions,
 	TFindManyResult,
-} from '@root/core/domain/repository/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
-import type { TExpenseFindOptions } from '@root/core/modules/expense/domain/expenseRepository/types';
-import type { IExpenseDataSource } from '@root/core/modules/expense/infrastructure/expenseDataSource/types';
+} from '@/core/domain/repository/types';
+import { DataSource } from '@/core/infrastructure/dataSource/dataSource';
+import type { TExpenseDTO } from '@/core/modules/expense/application/dto/expenseDTO';
+import type { TExpenseFindOptions } from '@/core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseDataSource } from '@/core/modules/expense/infrastructure/expenseDataSource/types';
 
 export class ExpenseDataSource
 	extends DataSource<TExpenseDTO, TExpenseFindOptions>

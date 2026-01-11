@@ -1,14 +1,12 @@
-import { useMemo } from 'react';
-
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
-
-import { createScopedTranslateFunction } from '@root/presentation/web-ui/modules/intl/useIntl/translateFunction';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
+import { createScopedTranslateFunction } from '@/presentation/web-ui/modules/intl/useIntl/translateFunction';
 import {
 	TBaseScope,
 	TUseIntl,
-} from '@root/presentation/web-ui/modules/intl/useIntl/types';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+} from '@/presentation/web-ui/modules/intl/useIntl/types';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { useMemo } from 'react';
 
 export function useIntl<TScope extends TBaseScope>(
 	scope: Record<TLocaleCode, TScope>,

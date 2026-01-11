@@ -1,4 +1,4 @@
-import type { Id } from '@root/core/domain/types';
+import type { Id } from '@/core/domain/types';
 import type {
 	ICategoryCreateUseCase,
 	ICategoryDeleteUseCase,
@@ -6,11 +6,11 @@ import type {
 	ICategoryUpdateUseCase,
 	ICategoryUseCase,
 	ICategoryWeightUseCase,
-} from '@root/core/modules/category/application/categoryUseCase/types';
+} from '@/core/modules/category/application/categoryUseCase/types';
 import type {
 	TCategoryCreateDTO,
 	TCategoryUpdateDTO,
-} from '@root/core/modules/category/application/dto/categoryDTO';
+} from '@/core/modules/category/application/dto/categoryDTO';
 
 export class CategoryUseCase implements ICategoryUseCase {
 	constructor(

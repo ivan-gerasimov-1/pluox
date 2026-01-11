@@ -1,12 +1,10 @@
-import { useMemo } from 'react';
-
+import { getIcon, type TIconName } from './icons';
 import {
 	EIconSize,
 	iconSizeToPx,
 	type TIconSize,
-} from '@root/presentation/web-ui/uiKit/icon/iconSize';
-
-import { getIcon, type TIconName } from './icons';
+} from '@/presentation/web-ui/uiKit/icon/iconSize';
+import { useMemo } from 'react';
 
 type TIconProps = {
 	name: TIconName;

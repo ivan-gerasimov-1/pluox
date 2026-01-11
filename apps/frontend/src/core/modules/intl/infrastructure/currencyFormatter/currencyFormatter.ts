@@ -1,10 +1,10 @@
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
-import type { ICurrencyFormatter } from '@root/core/modules/intl/domain/currencyFormatter/types';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
+import type { ICurrencyFormatter } from '@/core/modules/intl/domain/currencyFormatter/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
 import {
 	ECurrencyDisplay,
 	ENumberFormatStyle,
-} from '@root/core/modules/intl/infrastructure/currencyFormatter/types';
+} from '@/core/modules/intl/infrastructure/currencyFormatter/types';
 
 /**
  * @todo

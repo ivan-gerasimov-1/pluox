@@ -1,17 +1,16 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-import objectSupport from 'dayjs/plugin/objectSupport';
-
-import type { IIntlService } from '@root/core/modules/intl/application/intlService/types';
 import type {
 	ITemporal,
 	TISODateString,
 	TMonth,
 	TYear,
-} from '@root/core/domain/temporal/types';
-import { monthGuard } from '@root/core/infrastructure/temporal/typeGuards';
-import { InvalidMonthError } from '@root/core/infrastructure/temporal/errors';
+} from '@/core/domain/temporal/types';
+import { InvalidMonthError } from '@/core/infrastructure/temporal/errors';
+import { monthGuard } from '@/core/infrastructure/temporal/typeGuards';
+import type { IIntlService } from '@/core/modules/intl/application/intlService/types';
+import dayjs from 'dayjs';
+import objectSupport from 'dayjs/plugin/objectSupport';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 
 /**
  * @todo Load additional locales in IntlService

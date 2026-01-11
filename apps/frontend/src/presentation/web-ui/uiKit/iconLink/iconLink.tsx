@@ -1,11 +1,11 @@
-import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
-import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
-import type { TIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
+import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
+import { Icon } from '@/presentation/web-ui/uiKit/icon/icon';
+import type { TIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import {
 	EIconSize,
 	type TIconSize,
-} from '@root/presentation/web-ui/uiKit/icon/iconSize';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+} from '@/presentation/web-ui/uiKit/icon/iconSize';
+import { cls } from '@/presentation/web-ui/utils/classnames';
 
 type TIconLinkProps = {
 	className?: string;

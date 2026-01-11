@@ -1,4 +1,4 @@
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
 
 export type TBaseScope = Record<string, unknown>;
 

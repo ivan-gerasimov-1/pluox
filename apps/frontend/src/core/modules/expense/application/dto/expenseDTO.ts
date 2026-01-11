@@ -1,6 +1,6 @@
-import type { Id, TDescription, TCategory } from '@root/core/domain/types';
-import type { TISODateString } from '@root/core/domain/temporal/types';
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
+import type { TISODateString } from '@/core/domain/temporal/types';
+import type { Id, TCategory, TDescription } from '@/core/domain/types';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
 
 export type TExpenseDTO = {
 	id: Id;

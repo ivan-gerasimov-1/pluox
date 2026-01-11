@@ -3,7 +3,7 @@ import type {
 	TDialog,
 	TDialogComponent,
 	TDialogProps,
-} from '@root/presentation/web-ui/uiKit/dialog/core/types';
+} from '@/presentation/web-ui/uiKit/dialog/core/types';
 
 export interface IDialogClient extends IDisposable {
 	create<TProps, TClosePayload>(

@@ -1,11 +1,10 @@
-import type { IDateFormatter } from '@root/core/modules/intl/domain/dateFormatter/types';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
-
+import type { IDateFormatter } from '@/core/modules/intl/domain/dateFormatter/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
 import {
 	EDay,
 	EMonth,
 	EYear,
-} from '@root/core/modules/intl/infrastructure/dateFormatter/types';
+} from '@/core/modules/intl/infrastructure/dateFormatter/types';
 
 export class DateFormatter implements IDateFormatter {
 	format(value: number | string | Date, locale: TLocaleCode): string {

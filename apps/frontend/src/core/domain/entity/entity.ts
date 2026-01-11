@@ -1,6 +1,6 @@
-import type { IEntity } from '@root/core/domain/entity/types';
-import type { TISODateString } from '@root/core/domain/temporal/types';
-import type { Id } from '@root/core/domain/types';
+import type { IEntity } from '@/core/domain/entity/types';
+import type { TISODateString } from '@/core/domain/temporal/types';
+import type { Id } from '@/core/domain/types';
 
 export abstract class Entity implements IEntity {
 	readonly #id: Id;

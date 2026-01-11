@@ -1,4 +1,4 @@
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { cls } from '@/presentation/web-ui/utils/classnames';
 
 type TDotSpaceProps = {
 	className?: string;

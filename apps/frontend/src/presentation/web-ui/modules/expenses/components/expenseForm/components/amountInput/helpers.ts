@@ -1,6 +1,6 @@
-import { getAllowedSymbols } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/constants';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
+import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
+import { getAllowedSymbols } from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/constants';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 
 export function validateNumber(value: string): boolean {
 	let numberRegExp = /[A-z]+/u;

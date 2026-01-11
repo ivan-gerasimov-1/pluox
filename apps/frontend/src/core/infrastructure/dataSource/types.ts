@@ -1,8 +1,8 @@
 import type {
 	TFindManyOptions,
 	TFindManyResult,
-} from '@root/core/domain/repository/types';
-import type { Id } from '@root/core/domain/types';
+} from '@/core/domain/repository/types';
+import type { Id } from '@/core/domain/types';
 
 export interface IDataSource<TDto, TFindOptions = {}> {
 	upsert(id: Id, dto: TDto): void;

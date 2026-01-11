@@ -1,23 +1,22 @@
 import { venueListScreenI18n } from './venueListScreen.i18n';
-
-import { EAppPath } from '@root/presentation/web-ui/appPath';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { EAppPath } from '@/presentation/web-ui/appPath';
+import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import {
 	useVenueListArchivedQuery,
 	useVenueListUnarchivedQuery,
-} from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
-import { Badge } from '@root/presentation/web-ui/uiKit/badge/badge';
+} from '@/presentation/web-ui/modules/venues/queries/venues.query';
+import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
+import { Badge } from '@/presentation/web-ui/uiKit/badge/badge';
 import {
 	List,
 	ListIcon,
 	ListItem,
-} from '@root/presentation/web-ui/uiKit/list/list';
+} from '@/presentation/web-ui/uiKit/list/list';
 import {
 	ValueAction,
 	ValueActionLeading,
 	ValueActionTrailing,
-} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
+} from '@/presentation/web-ui/uiKit/valueAction/valueAction';
 
 export function VenueListScreen() {
 	let intl = useIntl(venueListScreenI18n);

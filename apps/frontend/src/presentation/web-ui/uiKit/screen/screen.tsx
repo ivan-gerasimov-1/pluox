@@ -1,5 +1,5 @@
-import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { cls } from '@/presentation/web-ui/utils/classnames';
 
 type TScreenProps = {
 	id?: string;

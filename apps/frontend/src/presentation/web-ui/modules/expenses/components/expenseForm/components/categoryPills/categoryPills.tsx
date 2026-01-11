@@ -1,9 +1,7 @@
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { PillsSelect } from '@/presentation/web-ui/uiKit/pillsSelect/pillsSelect';
 import { useMemo } from 'react';
-
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-
-import { PillsSelect } from '@root/presentation/web-ui/uiKit/pillsSelect/pillsSelect';
 
 type TCategoryPillsProps = {
 	value?: string | null;

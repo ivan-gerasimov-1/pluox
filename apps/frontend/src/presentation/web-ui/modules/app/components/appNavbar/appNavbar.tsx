@@ -1,9 +1,9 @@
-import { EAppPath } from '@root/presentation/web-ui/appPath';
-import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
-import { EIconSize } from '@root/presentation/web-ui/uiKit/icon/iconSize';
-import { IconLink } from '@root/presentation/web-ui/uiKit/iconLink/iconLink';
-import { Navbar } from '@root/presentation/web-ui/uiKit/navbar/navbar';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+import { EAppPath } from '@/presentation/web-ui/appPath';
+import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
+import { EIconSize } from '@/presentation/web-ui/uiKit/icon/iconSize';
+import { IconLink } from '@/presentation/web-ui/uiKit/iconLink/iconLink';
+import { Navbar } from '@/presentation/web-ui/uiKit/navbar/navbar';
+import { cls } from '@/presentation/web-ui/utils/classnames';
 
 type TAppNavbarProps = {
 	id?: string;

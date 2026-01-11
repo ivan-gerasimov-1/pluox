@@ -1,8 +1,6 @@
+import { Id } from '@/core/domain/types';
+import { EAppPath } from '@/presentation/web-ui/appPath';
 import { useNavigate } from 'react-router';
-
-import { Id } from '@root/core/domain/types';
-
-import { EAppPath } from '@root/presentation/web-ui/appPath';
 
 interface IAppNavigation {
 	to: (path: string, options?: { replace?: boolean }) => void;

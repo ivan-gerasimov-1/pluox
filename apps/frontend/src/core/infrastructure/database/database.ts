@@ -1,9 +1,9 @@
 import type {
+	IDatabase,
 	IDatabaseCollection,
 	IDatabaseCollectionFactory,
-	IDatabase,
 	IStorage,
-} from '@root/core/infrastructure/database/types';
+} from '@/core/infrastructure/database/types';
 
 export class Database implements IDatabase {
 	readonly #collections: Map<string, IDatabaseCollection>;

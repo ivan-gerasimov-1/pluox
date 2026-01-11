@@ -1,8 +1,6 @@
-import type { Id } from '@root/core/domain/types';
-
-import type { IApiClient } from '@root/core/infrastructure/apiClient/types';
-
-import type { IExpenseApi } from '@root/core/modules/expense/infrastructure/expenseApi/types';
+import type { Id } from '@/core/domain/types';
+import type { IApiClient } from '@/core/infrastructure/apiClient/types';
+import type { IExpenseApi } from '@/core/modules/expense/infrastructure/expenseApi/types';
 
 export class ExpenseApi implements IExpenseApi {
 	constructor(private readonly apiClient: IApiClient) {}

@@ -1,5 +1,5 @@
-import type { IValueObject } from '@root/core/domain/valueObject/types';
-import type { TAuthTokenDTO } from '@root/core/modules/identity/application/dto/authTokenDTO';
+import type { IValueObject } from '@/core/domain/valueObject/types';
+import type { TAuthTokenDTO } from '@/core/modules/identity/application/dto/authTokenDTO';
 
 export type TAuthTokenValue = {
 	accessToken: string | null;

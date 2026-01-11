@@ -1,4 +1,4 @@
-import type { TAuthTokenDTO } from '@root/core/modules/identity/application/dto/authTokenDTO';
+import type { TAuthTokenDTO } from '@/core/modules/identity/application/dto/authTokenDTO';
 
 export type TSessionDTO = {
 	clientId: string;

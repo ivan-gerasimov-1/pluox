@@ -1,7 +1,7 @@
-import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
-import type { Id } from '@root/core/domain/types';
-import { Entity } from '@root/core/domain/entity/entity';
-import type { TISODateString } from '@root/core/domain/temporal/types';
+import { Entity } from '@/core/domain/entity/entity';
+import type { TISODateString } from '@/core/domain/temporal/types';
+import type { Id } from '@/core/domain/types';
+import type { ICategory } from '@/core/modules/category/domain/categoryEntity/types';
 
 export class Category extends Entity implements ICategory {
 	#userId: Id;

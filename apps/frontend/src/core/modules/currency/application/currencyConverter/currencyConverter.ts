@@ -1,10 +1,9 @@
-import type { ICurrencyConverter } from '@root/core/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRateRepository } from '@root/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-
+import type { ICurrencyConverter } from '@/core/modules/currency/application/currencyConverter/types';
+import type { ICurrencyRateRepository } from '@/core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
 import {
 	ECurrency,
 	type TCurrency,
-} from '@root/core/modules/currency/domain/types';
+} from '@/core/modules/currency/domain/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
 	constructor(

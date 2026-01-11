@@ -1,10 +1,10 @@
-import type { TCategory } from '@root/core/domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { TCategory } from '@/core/domain/types';
+import type { TExpenseDTO } from '@/core/modules/expense/application/dto/expenseDTO';
 import type {
 	IExpenseGroupingService,
 	TExpenseGroupByCategory,
 	TExpenseGroupByDate,
-} from '@root/core/modules/expense/application/expenseGroupingService/types';
+} from '@/core/modules/expense/application/expenseGroupingService/types';
 
 export class ExpenseGroupingService implements IExpenseGroupingService {
 	public groupByDay(expenseList: TExpenseDTO[]): TExpenseGroupByDate[] {

@@ -1,8 +1,8 @@
-import { EAppPath } from '@root/presentation/web-ui/appPath';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { venuesActionsI18n } from '@root/presentation/web-ui/modules/venues/components/venuesActions/venuesActions.i18n';
-import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
+import { EAppPath } from '@/presentation/web-ui/appPath';
+import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { venuesActionsI18n } from '@/presentation/web-ui/modules/venues/components/venuesActions/venuesActions.i18n';
+import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
+import { Button } from '@/presentation/web-ui/uiKit/button/button';
 
 export function VenuesActions() {
 	let intl = useIntl(venuesActionsI18n);

@@ -1,7 +1,7 @@
-import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
-import { Category } from '@root/core/modules/category/domain/categoryEntity/category';
-import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
-import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
+import type { TCategoryDTO } from '@/core/modules/category/application/dto/categoryDTO';
+import { Category } from '@/core/modules/category/domain/categoryEntity/category';
+import type { ICategory } from '@/core/modules/category/domain/categoryEntity/types';
+import type { ICategoryMapper } from '@/core/modules/category/infrastructure/categoryMapper/types';
 
 export class CategoryMapper implements ICategoryMapper {
 	public toDTO(category: ICategory): TCategoryDTO {

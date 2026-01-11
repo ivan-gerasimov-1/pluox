@@ -1,9 +1,8 @@
-import type { TDialogComponentProps } from '@root/presentation/web-ui/uiKit/dialog/core/types';
-
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
-import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
-import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
-import { useExpenseUpdateMutation } from '@root/presentation/web-ui/modules/expenses/expenses.query';
+import type { TExpenseDTO } from '@/core/modules/expense/application/dto/expenseDTO';
+import { ExpenseForm } from '@/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
+import { createDateViewValue } from '@/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
+import { useExpenseUpdateMutation } from '@/presentation/web-ui/modules/expenses/expenses.query';
+import type { TDialogComponentProps } from '@/presentation/web-ui/uiKit/dialog/core/types';
 
 export function EditExpenseActionSheet({
 	expense,

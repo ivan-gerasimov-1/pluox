@@ -1,6 +1,6 @@
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
+import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
+import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 
 type TMigrationDTO = {
 	id: string;

@@ -1,4 +1,4 @@
-import type { TCategoryTemplate } from '@root/core/modules/category/domain/categoryTemplate/types';
+import type { TCategoryTemplate } from '@/core/modules/category/domain/categoryTemplate/types';
 
 export const categoryTemplates: TCategoryTemplate[] = [
 	{

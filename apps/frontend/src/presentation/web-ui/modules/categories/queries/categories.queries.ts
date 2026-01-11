@@ -1,6 +1,6 @@
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-import type { TCategoryDTO } from '@root/core/modules/category/application/dto/categoryDTO';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
+import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
+import type { TCategoryDTO } from '@/core/modules/category/application/dto/categoryDTO';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
 import { useQuery } from '@tanstack/react-query';
 
 export function useCategoryListQuery(): TCategoryDTO[] {

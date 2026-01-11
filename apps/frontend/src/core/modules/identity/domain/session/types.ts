@@ -1,8 +1,8 @@
-import type { Id } from '@root/core/domain/types';
-import type { ValueObject } from '@root/core/domain/valueObject/valueObject';
-import type { TSessionDTO } from '@root/core/modules/identity/application/dto/sessionDTO';
-import type { IAuthToken } from '@root/core/modules/identity/domain/authToken/types';
-import type { IClientId } from '@root/core/modules/identity/domain/clientId/types';
+import type { Id } from '@/core/domain/types';
+import type { ValueObject } from '@/core/domain/valueObject/valueObject';
+import type { TSessionDTO } from '@/core/modules/identity/application/dto/sessionDTO';
+import type { IAuthToken } from '@/core/modules/identity/domain/authToken/types';
+import type { IClientId } from '@/core/modules/identity/domain/clientId/types';
 
 export type TSessionValue = {
 	clientId: IClientId;

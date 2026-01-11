@@ -1,30 +1,29 @@
-import { ApiClient } from '@root/core/infrastructure/apiClient/apiClient';
-import { ApiClientConfigProvider } from '@root/core/infrastructure/apiClient/configProvider';
-import { DatabaseCollectionFactory } from '@root/core/infrastructure/database/databaseCollectionFactory';
-import { databaseFactory } from '@root/core/infrastructure/database/databaseFactory';
+import { ApiClient } from '@/core/infrastructure/apiClient/apiClient';
+import { ApiClientConfigProvider } from '@/core/infrastructure/apiClient/configProvider';
+import { DatabaseCollectionFactory } from '@/core/infrastructure/database/databaseCollectionFactory';
+import { databaseFactory } from '@/core/infrastructure/database/databaseFactory';
 import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
-} from '@root/core/infrastructure/idGenerator/factory';
-import { containerFactory } from '@root/core/infrastructure/serviceContainer/containerFactory';
+} from '@/core/infrastructure/idGenerator/factory';
+import { containerFactory } from '@/core/infrastructure/serviceContainer/containerFactory';
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-import { Temporal } from '@root/core/infrastructure/temporal/temporal';
-
-import { bootstrapModule } from '@root/core/modules/bootstrap/bootstrap.module';
-import { categoryModule } from '@root/core/modules/category/category.module';
-import { currencyModule } from '@root/core/modules/currency/currency.module';
-import { expenseModule } from '@root/core/modules/expense/expense.module';
-import { identityModule } from '@root/core/modules/identity/identity.module';
-import { intlModule } from '@root/core/modules/intl/intl.module';
-import { productModule } from '@root/core/modules/product/product.module';
-import { Environment } from '@root/core/modules/settings/infrastructure/environment/environment';
-import { settingsModule } from '@root/core/modules/settings/settings.module';
-import { syncModule } from '@root/core/modules/sync/sync.module';
-import { userModule } from '@root/core/modules/user/user.module';
-import { venueModule } from '@root/core/modules/venue/venue.module';
+} from '@/core/infrastructure/serviceContainer/types';
+import { Temporal } from '@/core/infrastructure/temporal/temporal';
+import { bootstrapModule } from '@/core/modules/bootstrap/bootstrap.module';
+import { categoryModule } from '@/core/modules/category/category.module';
+import { currencyModule } from '@/core/modules/currency/currency.module';
+import { expenseModule } from '@/core/modules/expense/expense.module';
+import { identityModule } from '@/core/modules/identity/identity.module';
+import { intlModule } from '@/core/modules/intl/intl.module';
+import { productModule } from '@/core/modules/product/product.module';
+import { Environment } from '@/core/modules/settings/infrastructure/environment/environment';
+import { settingsModule } from '@/core/modules/settings/settings.module';
+import { syncModule } from '@/core/modules/sync/sync.module';
+import { userModule } from '@/core/modules/user/user.module';
+import { venueModule } from '@/core/modules/venue/venue.module';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;

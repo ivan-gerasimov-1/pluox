@@ -1,7 +1,7 @@
-import type { IEntity } from '@root/core/domain/entity/types';
-import type { Id, TCategory, TDescription } from '@root/core/domain/types';
-import type { TISODateString } from '@root/core/domain/temporal/types';
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
+import type { IEntity } from '@/core/domain/entity/types';
+import type { TISODateString } from '@/core/domain/temporal/types';
+import type { Id, TCategory, TDescription } from '@/core/domain/types';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
 
 export interface IExpense extends IEntity {
 	readonly userId: string;

@@ -1,10 +1,10 @@
-import { Database } from '@root/core/infrastructure/database/database';
+import { Database } from '@/core/infrastructure/database/database';
 import type {
-	IDatabaseCollectionFactory,
 	IDatabase,
+	IDatabaseCollectionFactory,
 	IStorage,
-} from '@root/core/infrastructure/database/types';
-import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
+} from '@/core/infrastructure/database/types';
+import type { IEnvironment } from '@/core/modules/settings/infrastructure/environment/types';
 
 export function databaseFactory(
 	storage: IStorage,

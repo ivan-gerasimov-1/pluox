@@ -1,4 +1,4 @@
-import type { IDialogStore } from '@root/presentation/web-ui/uiKit/dialog/core/dialogStore/types';
+import type { IDialogStore } from '@/presentation/web-ui/uiKit/dialog/core/dialogStore/types';
 
 export class DialogStore<T extends { id: string }> implements IDialogStore<T> {
 	private readonly store: Map<string, T>;

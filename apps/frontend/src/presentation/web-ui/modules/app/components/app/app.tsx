@@ -1,17 +1,15 @@
+import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
+import type { TDevToolsConfig } from '@/presentation/web-ui/devtoolsConfig';
+import { useEffectOnce } from '@/presentation/web-ui/hooks/useEffectOnce';
+import { ContainerProvider } from '@/presentation/web-ui/modules/serviceContainer/provider';
+import { IRouter } from '@/presentation/web-ui/router';
+import { Dialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/dialog';
+import { DialogClientProvider } from '@/presentation/web-ui/uiKit/dialog/react/dialogClient/dialogClientProvider';
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router';
 
-import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
-
-import type { TDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
-import { useEffectOnce } from '@root/presentation/web-ui/hooks/useEffectOnce';
-import { ContainerProvider } from '@root/presentation/web-ui/modules/serviceContainer/provider';
-import { IRouter } from '@root/presentation/web-ui/router';
-import { Dialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/dialog';
-import { DialogClientProvider } from '@root/presentation/web-ui/uiKit/dialog/react/dialogClient/dialogClientProvider';
-
-import '@root/presentation/web-ui/modules/app/components/app/app.css';
-import '@root/presentation/web-ui/modules/app/components/app/tailwind.css';
+import '@/presentation/web-ui/modules/app/components/app/app.css';
+import '@/presentation/web-ui/modules/app/components/app/tailwind.css';
 
 type IAppProps = {
 	queryClient: QueryClient;

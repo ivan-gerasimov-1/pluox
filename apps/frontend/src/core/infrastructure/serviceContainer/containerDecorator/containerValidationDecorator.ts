@@ -1,4 +1,4 @@
-import { ContainerDecorator } from '@root/core/infrastructure/serviceContainer/containerDecorator/containerDecorator';
+import { ContainerDecorator } from '@/core/infrastructure/serviceContainer/containerDecorator/containerDecorator';
 import {
 	InvalidProviderConfigurationError,
 	MissingDependencyError,
@@ -6,11 +6,11 @@ import {
 	MissingProviderTokenError,
 	MultipleImplementationError,
 	NotImplementedError,
-} from '@root/core/infrastructure/serviceContainer/containerDecorator/errors';
+} from '@/core/infrastructure/serviceContainer/containerDecorator/errors';
 import type {
 	IContainer,
 	IServiceProvider,
-} from '@root/core/infrastructure/serviceContainer/types';
+} from '@/core/infrastructure/serviceContainer/types';
 
 /**
  * @todo

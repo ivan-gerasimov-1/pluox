@@ -1,12 +1,11 @@
 /**
  * @description Work In Progress
  */
+import { Backdrop } from '@/presentation/web-ui/uiKit/backdrop/Backdrop';
+import { useAppScale } from '@/presentation/web-ui/uiKit/dialog/react/hooks/useAppScale';
+import { Pinch } from '@/presentation/web-ui/uiKit/pinch/pinch';
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
-
-import { Backdrop } from '@root/presentation/web-ui/uiKit/backdrop/Backdrop';
-import { useAppScale } from '@root/presentation/web-ui/uiKit/dialog/react/hooks/useAppScale';
-import { Pinch } from '@root/presentation/web-ui/uiKit/pinch/pinch';
 
 import styles from './actionSheet.module.css';
 

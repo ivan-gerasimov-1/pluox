@@ -1,4 +1,4 @@
-import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 
 type TErrorProps = {
 	title: string;

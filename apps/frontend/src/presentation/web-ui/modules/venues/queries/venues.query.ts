@@ -1,21 +1,17 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
-import type { Id } from '@root/core/domain/types';
-
-import { EServiceToken } from '@root/core/infrastructure/serviceContainer/types';
-
+import type { Id } from '@/core/domain/types';
+import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
 import type {
 	TVenueCreateDTO,
 	TVenueDTO,
 	TVenueUpdateDTO,
-} from '@root/core/modules/venue/application/dto/venueDTO';
-
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { createVenueQuery } from '@root/presentation/web-ui/modules/venues/queries/createVenueQuery';
+} from '@/core/modules/venue/application/dto/venueDTO';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { createVenueQuery } from '@/presentation/web-ui/modules/venues/queries/createVenueQuery';
 import {
 	invalidateVenueListQuery,
 	invalidateVenueOneByIdQuery,
-} from '@root/presentation/web-ui/modules/venues/queries/invalidateVenueQuery';
+} from '@/presentation/web-ui/modules/venues/queries/invalidateVenueQuery';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export function useVenueListQuery(options?: {
 	archived?: boolean;

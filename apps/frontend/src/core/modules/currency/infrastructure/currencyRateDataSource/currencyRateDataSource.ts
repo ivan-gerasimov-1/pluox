@@ -1,10 +1,10 @@
-import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
+import { DataSource } from '@/core/infrastructure/dataSource/dataSource';
 import type {
 	TCurrency,
 	TCurrencyRates,
-} from '@root/core/modules/currency/domain/types';
-import { CurrencyRatesNotAvailableError } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/errors';
-import type { ICurrencyRateDataSource } from '@root/core/modules/currency/infrastructure/currencyRateDataSource/types';
+} from '@/core/modules/currency/domain/types';
+import { CurrencyRatesNotAvailableError } from '@/core/modules/currency/infrastructure/currencyRateDataSource/errors';
+import type { ICurrencyRateDataSource } from '@/core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateDataSource
 	extends DataSource<TCurrencyRates>

@@ -1,7 +1,6 @@
+import { IServiceMap } from '@/core/infrastructure/serviceContainer/types';
+import { ContainerContext } from '@/presentation/web-ui/modules/serviceContainer/provider';
 import { useContext } from 'react';
-
-import { IServiceMap } from '@root/core/infrastructure/serviceContainer/types';
-import { ContainerContext } from '@root/presentation/web-ui/modules/serviceContainer/provider';
 
 export function useService<T extends keyof IServiceMap = keyof IServiceMap>(
 	serviceId: T,

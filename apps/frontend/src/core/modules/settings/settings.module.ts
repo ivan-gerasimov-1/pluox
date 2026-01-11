@@ -1,13 +1,12 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-
-import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
-import { AppConfigService } from '@root/core/modules/settings/application/appConfigService/appConfigService';
-import { AppConfig } from '@root/core/modules/settings/domain/appConfig/appConfig';
-import { appConfigDataSourceFactory } from '@root/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSourceFactory';
+} from '@/core/infrastructure/serviceContainer/types';
+import { ECurrency } from '@/core/modules/currency/domain/types';
+import { ELocaleCode } from '@/core/modules/intl/domain/enums';
+import { AppConfigService } from '@/core/modules/settings/application/appConfigService/appConfigService';
+import { AppConfig } from '@/core/modules/settings/domain/appConfig/appConfig';
+import { appConfigDataSourceFactory } from '@/core/modules/settings/infrastructure/appConfigDataSource/appConfigDataSourceFactory';
 
 export const settingsModule: IModule = {
 	providers: [

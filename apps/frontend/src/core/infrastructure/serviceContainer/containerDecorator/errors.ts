@@ -1,4 +1,4 @@
-import type { TServiceToken } from '@root/core/infrastructure/serviceContainer/types';
+import type { TServiceToken } from '@/core/infrastructure/serviceContainer/types';
 
 export class InvalidProviderConfigurationError extends Error {
 	constructor(providerToken: TServiceToken, paramName: string) {

@@ -1,5 +1,5 @@
-import type { TCurrencyRateDTO } from '@root/core/modules/currency/application/dto/currencyRateDTO';
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
+import type { TCurrencyRateDTO } from '@/core/modules/currency/application/dto/currencyRateDTO';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
 
 export interface ICurrencyRateRepository {
 	/** @todo Not Implemented */

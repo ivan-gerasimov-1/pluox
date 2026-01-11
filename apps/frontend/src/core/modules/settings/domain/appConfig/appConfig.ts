@@ -1,9 +1,9 @@
 import {
 	ECurrency,
 	type TCurrency,
-} from '@root/core/modules/currency/domain/types';
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
-import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
+} from '@/core/modules/currency/domain/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
+import type { IAppConfig } from '@/core/modules/settings/domain/appConfig/types';
 
 export class AppConfig implements IAppConfig {
 	#locale: TLocaleCode;

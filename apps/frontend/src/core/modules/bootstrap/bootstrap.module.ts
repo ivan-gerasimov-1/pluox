@@ -1,9 +1,8 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-
-import { LaunchControl } from '@root/core/modules/bootstrap/application/launchControl/launchControl';
+} from '@/core/infrastructure/serviceContainer/types';
+import { LaunchControl } from '@/core/modules/bootstrap/application/launchControl/launchControl';
 
 export const bootstrapModule: IModule = {
 	providers: [

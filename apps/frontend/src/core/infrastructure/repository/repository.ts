@@ -2,10 +2,10 @@ import type {
 	IRepository,
 	TFindManyOptions,
 	TFindManyResult,
-} from '@root/core/domain/repository/types';
-import type { Id } from '@root/core/domain/types';
-import type { IDataSource } from '@root/core/infrastructure/dataSource/types';
-import type { IMapper } from '@root/core/infrastructure/mapper/types';
+} from '@/core/domain/repository/types';
+import type { Id } from '@/core/domain/types';
+import type { IDataSource } from '@/core/infrastructure/dataSource/types';
+import type { IMapper } from '@/core/infrastructure/mapper/types';
 
 export class Repository<
 	TEntity extends { id: Id },

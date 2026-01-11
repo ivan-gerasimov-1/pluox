@@ -1,12 +1,11 @@
-import { createDIContainer } from '@root/diContainer';
-import { runMigrations } from '@root/migrations';
-import { createUI } from '@root/presentation/web-ui';
-
 import {
 	EServiceToken,
 	type IContainer,
-} from '@root/core/infrastructure/serviceContainer/types';
-import type { IWindow } from '@root/presentation/web-ui/types';
+} from '@/core/infrastructure/serviceContainer/types';
+import { createDIContainer } from '@/diContainer';
+import { runMigrations } from '@/migrations';
+import { createUI } from '@/presentation/web-ui';
+import type { IWindow } from '@/presentation/web-ui/types';
 
 export async function app(window: IWindow): Promise<void> {
 	let diContainer = createDIContainer({

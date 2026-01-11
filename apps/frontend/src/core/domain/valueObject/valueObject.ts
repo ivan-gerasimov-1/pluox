@@ -1,4 +1,4 @@
-import type { IValueObject } from '@root/core/domain/valueObject/types';
+import type { IValueObject } from '@/core/domain/valueObject/types';
 
 export abstract class ValueObject<T> implements IValueObject<T> {
 	protected value: T;

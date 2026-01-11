@@ -1,14 +1,14 @@
-import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { useCategoryListQuery } from '@root/presentation/web-ui/modules/categories/queries/categories.queries';
+import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
+import { useCategoryListQuery } from '@/presentation/web-ui/modules/categories/queries/categories.queries';
 import {
 	List,
 	ListIcon,
 	ListItem,
-} from '@root/presentation/web-ui/uiKit/list/list';
+} from '@/presentation/web-ui/uiKit/list/list';
 import {
 	ValueAction,
 	ValueActionLeading,
-} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
+} from '@/presentation/web-ui/uiKit/valueAction/valueAction';
 
 export function CategoryList() {
 	let navigate = useAppNavigation();

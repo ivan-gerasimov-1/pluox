@@ -1,6 +1,6 @@
-import { EKey } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/enums';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
+import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
+import { EKey } from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/enums';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 
 /** @todo Find out if possible to use "function getAllowedSymbols(…) { … }" */
 // eslint-disable-next-line func-style

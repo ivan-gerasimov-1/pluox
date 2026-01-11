@@ -1,3 +1,3 @@
-import { Id } from '@root/core/domain/types';
+import { Id } from '@/core/domain/types';
 
 export const INVALID_ID: Id = '__invalidId__';

@@ -1,8 +1,8 @@
-import type { TLocaleCode } from '@root/core/modules/intl/domain/types';
+import type { TLocaleCode } from '@/core/modules/intl/domain/types';
 import {
 	TBaseScope,
 	TScopedTranslateFunction,
-} from '@root/presentation/web-ui/modules/intl/useIntl/types';
+} from '@/presentation/web-ui/modules/intl/useIntl/types';
 
 export function createScopedTranslateFunction<TScope extends TBaseScope>(
 	scope: Record<TLocaleCode, TScope>,

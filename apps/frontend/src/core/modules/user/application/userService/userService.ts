@@ -1,16 +1,16 @@
-import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
-import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { Id } from '@root/core/domain/types';
-import { ELocaleCode } from '@root/core/modules/intl/domain/enums';
+import type { IIdGenerator } from '@/core/domain/idGenerator/types';
+import type { ITemporal } from '@/core/domain/temporal/types';
+import type { Id } from '@/core/domain/types';
+import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 import type {
 	TUserCreateDTO,
 	TUserDTO,
 	TUserUpdateDTO,
-} from '@root/core/modules/user/application/dto/userDTO';
-import { UserNotFoundError } from '@root/core/modules/user/application/userService/errors';
-import type { IUserService } from '@root/core/modules/user/application/userService/types';
-import type { IUserRepository } from '@root/core/modules/user/domain/userRepository/types';
-import type { IUserMapper } from '@root/core/modules/user/infrastructure/userMapper/types';
+} from '@/core/modules/user/application/dto/userDTO';
+import { UserNotFoundError } from '@/core/modules/user/application/userService/errors';
+import type { IUserService } from '@/core/modules/user/application/userService/types';
+import type { IUserRepository } from '@/core/modules/user/domain/userRepository/types';
+import type { IUserMapper } from '@/core/modules/user/infrastructure/userMapper/types';
 
 export class UserService implements IUserService {
 	constructor(

@@ -1,11 +1,11 @@
-import type { Id, TCategory } from '@root/core/domain/types';
-import type { ICurrencyRateService } from '@root/core/modules/currency/application/currencyRateService/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { Id, TCategory } from '@/core/domain/types';
+import type { ICurrencyRateService } from '@/core/modules/currency/application/currencyRateService/types';
+import type { TExpenseDTO } from '@/core/modules/expense/application/dto/expenseDTO';
 import type {
 	IExpenseAmountService,
 	TAmountByCategory,
-} from '@root/core/modules/expense/application/expenseAmountService/types';
-import type { IAppConfig } from '@root/core/modules/settings/domain/appConfig/types';
+} from '@/core/modules/expense/application/expenseAmountService/types';
+import type { IAppConfig } from '@/core/modules/settings/domain/appConfig/types';
 
 export class ExpenseAmountService implements IExpenseAmountService {
 	constructor(

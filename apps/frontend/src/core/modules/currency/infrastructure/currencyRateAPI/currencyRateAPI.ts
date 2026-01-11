@@ -1,6 +1,6 @@
-import type { TCurrencyRates } from '@root/core/modules/currency/domain/types';
-import type { ICurrencyRateAPI } from '@root/core/modules/currency/infrastructure/currencyRateAPI/types';
-import type { IEnvironment } from '@root/core/modules/settings/infrastructure/environment/types';
+import type { TCurrencyRates } from '@/core/modules/currency/domain/types';
+import type { ICurrencyRateAPI } from '@/core/modules/currency/infrastructure/currencyRateAPI/types';
+import type { IEnvironment } from '@/core/modules/settings/infrastructure/environment/types';
 
 /**
  * @todo LV-98 | Use ApiClient as base class

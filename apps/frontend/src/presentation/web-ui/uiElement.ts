@@ -1,5 +1,5 @@
-import { HTMLElementNotFoundError } from '@root/presentation/web-ui/errors';
-import type { IHTMLElement, IDocument } from '@root/presentation/web-ui/types';
+import { HTMLElementNotFoundError } from '@/presentation/web-ui/errors';
+import type { IDocument, IHTMLElement } from '@/presentation/web-ui/types';
 
 export interface IUIElement {
 	get(): IHTMLElement;

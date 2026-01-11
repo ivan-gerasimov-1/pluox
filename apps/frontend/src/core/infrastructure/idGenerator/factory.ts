@@ -1,5 +1,5 @@
-import { IdGenerator } from '@root/core/infrastructure/idGenerator/idGenerator';
-import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
+import type { IIdGenerator } from '@/core/domain/idGenerator/types';
+import { IdGenerator } from '@/core/infrastructure/idGenerator/idGenerator';
 import { customAlphabet } from 'nanoid';
 
 export interface IIdGeneratorFactory {

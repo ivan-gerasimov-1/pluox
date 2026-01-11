@@ -1,14 +1,14 @@
-import { EAppPath } from '@root/presentation/web-ui/appPath';
-import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { usePending } from '@root/presentation/web-ui/hooks/usePending';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { AppLink } from '@root/presentation/web-ui/uiKit/appLink/appLink';
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Input } from '@root/presentation/web-ui/uiKit/input/input';
-import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
-import { delay } from '@root/presentation/web-ui/utils/delay';
+import { EAppPath } from '@/presentation/web-ui/appPath';
+import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
+import { usePending } from '@/presentation/web-ui/hooks/usePending';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
+import { Button } from '@/presentation/web-ui/uiKit/button/button';
+import { Input } from '@/presentation/web-ui/uiKit/input/input';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { cls } from '@/presentation/web-ui/utils/classnames';
+import { delay } from '@/presentation/web-ui/utils/delay';
 
 export function useLoginForm() {
 	let authService = useService(EServiceToken.AUTH_SERVICE);

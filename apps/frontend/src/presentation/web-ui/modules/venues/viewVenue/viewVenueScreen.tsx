@@ -1,31 +1,29 @@
-import { useParams } from 'react-router';
-
-import { Id } from '@root/core/domain/types';
-
-import { INVALID_ID } from '@root/presentation/web-ui/constants/invalidId';
-import { useAppNavigation } from '@root/presentation/web-ui/hooks/useNavigation';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { VenueCategoryActionSheet } from '@root/presentation/web-ui/modules/venues/components/venueCategoryActionSheet/venueCategoryActionSheet';
+import { Id } from '@/core/domain/types';
+import { INVALID_ID } from '@/presentation/web-ui/constants/invalidId';
+import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
+import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { VenueCategoryActionSheet } from '@/presentation/web-ui/modules/venues/components/venueCategoryActionSheet/venueCategoryActionSheet';
 import {
 	useVenueArchiveMutation,
 	useVenueOneByIdQuery,
 	useVenueRemoveMutation,
 	useVenueUnarchiveMutation,
-} from '@root/presentation/web-ui/modules/venues/queries/venues.query';
-import { VenueNameActionSheet } from '@root/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
-import { venueViewScreenI18n } from '@root/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
-import { Button } from '@root/presentation/web-ui/uiKit/button/button';
-import { Card } from '@root/presentation/web-ui/uiKit/card/card';
-import { useDialog } from '@root/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
-import { Icon } from '@root/presentation/web-ui/uiKit/icon/icon';
-import { EIconName } from '@root/presentation/web-ui/uiKit/icon/icons';
-import { IconButton } from '@root/presentation/web-ui/uiKit/iconButton/iconButton';
-import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
+} from '@/presentation/web-ui/modules/venues/queries/venues.query';
+import { VenueNameActionSheet } from '@/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
+import { venueViewScreenI18n } from '@/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
+import { Button } from '@/presentation/web-ui/uiKit/button/button';
+import { Card } from '@/presentation/web-ui/uiKit/card/card';
+import { useDialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
+import { Icon } from '@/presentation/web-ui/uiKit/icon/icon';
+import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
+import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import {
 	ValueAction,
 	ValueActionLeading,
 	ValueActionTrailing,
-} from '@root/presentation/web-ui/uiKit/valueAction/valueAction';
+} from '@/presentation/web-ui/uiKit/valueAction/valueAction';
+import { useParams } from 'react-router';
 
 export function VenueViewScreen() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();

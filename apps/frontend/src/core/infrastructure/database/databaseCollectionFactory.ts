@@ -1,10 +1,10 @@
-import { DatabaseCollection } from '@root/core/infrastructure/database/databaseCollection';
-import { DatabaseCollectionCacheDecorator } from '@root/core/infrastructure/database/databaseCollectionDecorator/databaseCollectionCache';
+import { DatabaseCollection } from '@/core/infrastructure/database/databaseCollection';
+import { DatabaseCollectionCacheDecorator } from '@/core/infrastructure/database/databaseCollectionDecorator/databaseCollectionCache';
 import type {
-	IDatabaseCollectionFactory,
 	IDatabaseCollection,
+	IDatabaseCollectionFactory,
 	IStorage,
-} from '@root/core/infrastructure/database/types';
+} from '@/core/infrastructure/database/types';
 
 export class DatabaseCollectionFactory implements IDatabaseCollectionFactory {
 	public create(

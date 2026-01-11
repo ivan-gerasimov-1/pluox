@@ -1,7 +1,7 @@
-import { ECurrency } from '@root/core/modules/currency/domain/types';
-import { ExpenseForm } from '@root/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
-import { createDateViewValue } from '@root/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
-import { useExpenseCreateMutation } from '@root/presentation/web-ui/modules/expenses/expenses.query';
+import { ECurrency } from '@/core/modules/currency/domain/types';
+import { ExpenseForm } from '@/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
+import { createDateViewValue } from '@/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
+import { useExpenseCreateMutation } from '@/presentation/web-ui/modules/expenses/expenses.query';
 
 export function ExpenseNew() {
 	let { mutate: createExpense } = useExpenseCreateMutation();

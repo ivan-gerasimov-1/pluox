@@ -1,7 +1,7 @@
 import type {
 	IDialogObserver,
 	TObserver,
-} from '@root/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
+} from '@/presentation/web-ui/uiKit/dialog/core/dialogObserver/types';
 
 export class DialogObserver implements IDialogObserver {
 	private readonly observers: Set<TObserver>;

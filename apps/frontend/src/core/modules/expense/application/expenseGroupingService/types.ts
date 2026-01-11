@@ -1,5 +1,5 @@
-import type { TCategory } from '@root/core/domain/types';
-import type { TExpenseDTO } from '@root/core/modules/expense/application/dto/expenseDTO';
+import type { TCategory } from '@/core/domain/types';
+import type { TExpenseDTO } from '@/core/modules/expense/application/dto/expenseDTO';
 
 export interface IExpenseGroupingService {
 	groupByDay(expenses: TExpenseDTO[]): TExpenseGroupByDate[];

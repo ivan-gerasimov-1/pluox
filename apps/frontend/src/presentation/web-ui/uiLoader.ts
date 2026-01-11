@@ -1,5 +1,5 @@
-import type { IUIElement } from '@root/presentation/web-ui/uiElement';
-import { delay } from '@root/presentation/web-ui/utils/delay';
+import type { IUIElement } from '@/presentation/web-ui/uiElement';
+import { delay } from '@/presentation/web-ui/utils/delay';
 
 export interface IUILoader {
 	hide(): void;

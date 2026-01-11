@@ -1,7 +1,6 @@
-import type { Id } from '@root/core/domain/types';
-
-import type { ICategoryService } from '@root/core/modules/category/application/categoryService/types';
-import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
+import type { Id } from '@/core/domain/types';
+import type { ICategoryService } from '@/core/modules/category/application/categoryService/types';
+import type { ICategoryRepository } from '@/core/modules/category/domain/categoryRepository/types';
 
 export class CategoryService implements ICategoryService {
 	constructor(private readonly categoryRepository: ICategoryRepository) {}

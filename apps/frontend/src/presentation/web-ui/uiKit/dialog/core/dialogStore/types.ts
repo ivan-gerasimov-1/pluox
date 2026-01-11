@@ -1,4 +1,4 @@
-import type { IDisposable } from '@root/presentation/web-ui/uiKit/dialog/core/types';
+import type { IDisposable } from '@/presentation/web-ui/uiKit/dialog/core/types';
 
 export interface IDialogStore<T extends { id: string }> extends IDisposable {
 	add(item: T): T;

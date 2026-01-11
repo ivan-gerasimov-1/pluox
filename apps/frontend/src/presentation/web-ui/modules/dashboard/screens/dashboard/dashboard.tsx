@@ -1,16 +1,16 @@
-import { dashboardI18n } from '@root/presentation/web-ui/modules/dashboard/screens/dashboard/dashboard.i18n';
+import { dashboardI18n } from '@/presentation/web-ui/modules/dashboard/screens/dashboard/dashboard.i18n';
 import {
 	useExpenseAmountByCategoryQuery,
 	useExpenseAmountByDayQuery,
 	useExpenseAmountByMonthQuery,
-} from '@root/presentation/web-ui/modules/expenses/expenses.query';
-import { useIntl } from '@root/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@root/presentation/web-ui/modules/serviceContainer/useService';
-import { useAppConfigBudgetQuery } from '@root/presentation/web-ui/modules/settings/queries/appConfig';
-import { Card, CardHeader } from '@root/presentation/web-ui/uiKit/card/card';
-import { DotSpace } from '@root/presentation/web-ui/uiKit/dotSpace/dotSpace';
-import { Grid } from '@root/presentation/web-ui/uiKit/layout/layout';
+} from '@/presentation/web-ui/modules/expenses/expenses.query';
+import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
+import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { useAppConfigBudgetQuery } from '@/presentation/web-ui/modules/settings/queries/appConfig';
+import { Card, CardHeader } from '@/presentation/web-ui/uiKit/card/card';
+import { DotSpace } from '@/presentation/web-ui/uiKit/dotSpace/dotSpace';
+import { Grid } from '@/presentation/web-ui/uiKit/layout/layout';
 
 export function DashboardScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);

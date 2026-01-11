@@ -1,6 +1,6 @@
-import type { Id } from '@root/core/domain/types';
-import type { IVenueDeleteUseCase } from '@root/core/modules/venue/application/venueUseCase/types';
-import type { IVenueRepository } from '@root/core/modules/venue/domain/venueRepository/types';
+import type { Id } from '@/core/domain/types';
+import type { IVenueDeleteUseCase } from '@/core/modules/venue/application/venueUseCase/types';
+import type { IVenueRepository } from '@/core/modules/venue/domain/venueRepository/types';
 
 /**
  * @todo LV-104

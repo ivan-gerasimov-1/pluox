@@ -1,10 +1,10 @@
-import type { Id } from '@root/core/domain/types';
-import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
-import { ClientId } from '@root/core/modules/identity/domain/clientId/clientId';
+import type { IIdGenerator } from '@/core/domain/idGenerator/types';
+import type { Id } from '@/core/domain/types';
+import { ClientId } from '@/core/modules/identity/domain/clientId/clientId';
 import type {
 	IClientId,
 	IClientIdFactory,
-} from '@root/core/modules/identity/domain/clientId/types';
+} from '@/core/modules/identity/domain/clientId/types';
 
 export class ClientIdFactory implements IClientIdFactory {
 	constructor(private readonly idGenerator: IIdGenerator) {}

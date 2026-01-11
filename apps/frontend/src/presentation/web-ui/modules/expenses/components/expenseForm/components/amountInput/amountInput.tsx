@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
-
-import { resolveService } from '@root/core/infrastructure/serviceContainer/resolveService';
-
+import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
 import {
 	validateKey,
 	validateNumber,
-} from '@root/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/helpers';
-import { EServiceToken } from '@root/presentation/web-ui/modules/serviceContainer/enums';
-import { Input } from '@root/presentation/web-ui/uiKit/input/input';
-import { cls } from '@root/presentation/web-ui/utils/classnames';
+} from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/helpers';
+import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
+import { Input } from '@/presentation/web-ui/uiKit/input/input';
+import { cls } from '@/presentation/web-ui/utils/classnames';
+import { useEffect, useState } from 'react';
 
 type TAmountInputProps = Omit<
 	React.InputHTMLAttributes<HTMLInputElement>,

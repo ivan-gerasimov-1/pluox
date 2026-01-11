@@ -1,7 +1,7 @@
 import type {
 	TDialogStatus,
 	TDialogType,
-} from '@root/presentation/web-ui/uiKit/dialog/core/types';
+} from '@/presentation/web-ui/uiKit/dialog/core/types';
 
 export const EDialogType: Record<string, TDialogType> = {
 	SHEET: 'sheet',

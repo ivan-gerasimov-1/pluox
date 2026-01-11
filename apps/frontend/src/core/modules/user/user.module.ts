@@ -1,12 +1,11 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-
-import { UserService } from '@root/core/modules/user/application/userService/userService';
-import { userDataSourceFactory } from '@root/core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
-import { UserMapper } from '@root/core/modules/user/infrastructure/userMapper/userMapper';
-import { UserRepository } from '@root/core/modules/user/infrastructure/userRepository/userRepository';
+} from '@/core/infrastructure/serviceContainer/types';
+import { UserService } from '@/core/modules/user/application/userService/userService';
+import { userDataSourceFactory } from '@/core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
+import { UserMapper } from '@/core/modules/user/infrastructure/userMapper/userMapper';
+import { UserRepository } from '@/core/modules/user/infrastructure/userRepository/userRepository';
 
 export const userModule: IModule = {
 	providers: [

@@ -1,9 +1,9 @@
-import type { Id, IUseCase } from '@root/core/domain/types';
+import type { Id, IUseCase } from '@/core/domain/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
-} from '@root/core/modules/expense/application/dto/expenseDTO';
-import { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
+} from '@/core/modules/expense/application/dto/expenseDTO';
+import { IExpense } from '@/core/modules/expense/domain/expenseEntity/types';
 
 export interface IExpenseUseCase {
 	create(expense: TExpenseCreateDTO): void;

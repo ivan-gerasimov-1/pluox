@@ -1,5 +1,5 @@
-import type { TISODateString } from '@root/core/domain/temporal/types';
-import type { Id } from '@root/core/domain/types';
+import type { TISODateString } from '@/core/domain/temporal/types';
+import type { Id } from '@/core/domain/types';
 
 export type TProductDTO = {
 	id: Id;

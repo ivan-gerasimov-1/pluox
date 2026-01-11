@@ -1,9 +1,9 @@
-import type { Id } from '@root/core/domain/types';
+import type { Id } from '@/core/domain/types';
 import type {
 	TUserCreateDTO,
 	TUserDTO,
 	TUserUpdateDTO,
-} from '@root/core/modules/user/application/dto/userDTO';
+} from '@/core/modules/user/application/dto/userDTO';
 
 export interface IUserService {
 	createUser(payload: TUserCreateDTO): TUserDTO;

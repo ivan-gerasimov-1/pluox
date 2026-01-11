@@ -1,9 +1,9 @@
-import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
-import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { ICategoryCreateUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
-import type { TCategoryCreateDTO } from '@root/core/modules/category/application/dto/categoryDTO';
-import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
-import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
+import type { IIdGenerator } from '@/core/domain/idGenerator/types';
+import type { ITemporal } from '@/core/domain/temporal/types';
+import type { ICategoryCreateUseCase } from '@/core/modules/category/application/categoryUseCase/types';
+import type { TCategoryCreateDTO } from '@/core/modules/category/application/dto/categoryDTO';
+import type { ICategoryRepository } from '@/core/modules/category/domain/categoryRepository/types';
+import type { ICategoryMapper } from '@/core/modules/category/infrastructure/categoryMapper/types';
 
 export class CategoryCreateUseCase implements ICategoryCreateUseCase {
 	constructor(

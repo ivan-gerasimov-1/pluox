@@ -1,4 +1,4 @@
-import type { IModule } from '@root/core/infrastructure/serviceContainer/types';
+import type { IModule } from '@/core/infrastructure/serviceContainer/types';
 
 export const productModule: IModule = {
 	providers: [],

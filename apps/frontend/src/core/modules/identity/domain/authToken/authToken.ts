@@ -1,8 +1,8 @@
-import { ValueObject } from '@root/core/domain/valueObject/valueObject';
+import { ValueObject } from '@/core/domain/valueObject/valueObject';
 import type {
 	IAuthToken,
 	TAuthTokenValue,
-} from '@root/core/modules/identity/domain/authToken/types';
+} from '@/core/modules/identity/domain/authToken/types';
 
 export class AuthToken
 	extends ValueObject<TAuthTokenValue>

@@ -1,15 +1,15 @@
 import {
 	ContainerNotSealedError,
 	ContainerSealedError,
-} from '@root/core/infrastructure/serviceContainer/errors';
+} from '@/core/infrastructure/serviceContainer/errors';
 import {
 	EServiceScope,
 	type IContainer,
+	type IModule,
 	type IServiceMap,
 	type IServiceProvider,
-	type IModule,
 	type TServiceToken,
-} from '@root/core/infrastructure/serviceContainer/types';
+} from '@/core/infrastructure/serviceContainer/types';
 
 export class Container implements IContainer {
 	readonly #providers = new Map<TServiceToken, IServiceProvider>();

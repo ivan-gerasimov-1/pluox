@@ -1,14 +1,13 @@
-import { categoryTemplates } from '@root/core/modules/category/domain/categoryTemplate/templates';
-
-import type { ITemporal } from '@root/core/domain/temporal/types';
-import type { Id } from '@root/core/domain/types';
-import type { ICategoryInitializeUseCase } from '@root/core/modules/category/application/categoryUseCase/types';
-import type { ICategory } from '@root/core/modules/category/domain/categoryEntity/types';
-import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
-import type { ICategoryMapper } from '@root/core/modules/category/infrastructure/categoryMapper/types';
-import type { IExpenseRepository } from '@root/core/modules/expense/domain/expenseRepository/types';
-import type { IIdGenerator } from '@root/core/domain/idGenerator/types';
-import type { ISessionService } from '@root/core/modules/identity/application/sessionService/types';
+import type { IIdGenerator } from '@/core/domain/idGenerator/types';
+import type { ITemporal } from '@/core/domain/temporal/types';
+import type { Id } from '@/core/domain/types';
+import type { ICategoryInitializeUseCase } from '@/core/modules/category/application/categoryUseCase/types';
+import type { ICategory } from '@/core/modules/category/domain/categoryEntity/types';
+import type { ICategoryRepository } from '@/core/modules/category/domain/categoryRepository/types';
+import { categoryTemplates } from '@/core/modules/category/domain/categoryTemplate/templates';
+import type { ICategoryMapper } from '@/core/modules/category/infrastructure/categoryMapper/types';
+import type { IExpenseRepository } from '@/core/modules/expense/domain/expenseRepository/types';
+import type { ISessionService } from '@/core/modules/identity/application/sessionService/types';
 
 export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 	constructor(

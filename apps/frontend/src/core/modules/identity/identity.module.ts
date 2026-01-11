@@ -1,16 +1,15 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-
-import { AuthService } from '@root/core/modules/identity/application/authService/authService';
-import { SessionService } from '@root/core/modules/identity/application/sessionService/sessionService';
-import { AuthTokenFactory } from '@root/core/modules/identity/domain/authToken/authTokenFactory';
-import { ClientIdFactory } from '@root/core/modules/identity/domain/clientId/clientIdFactory';
-import { IClientIdFactory } from '@root/core/modules/identity/domain/clientId/types';
-import { SessionFactory } from '@root/core/modules/identity/domain/session/sessionFactory';
-import { AuthApi } from '@root/core/modules/identity/infrastructure/authApi/authApi';
-import { sessionDataSourceFactory } from '@root/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
+} from '@/core/infrastructure/serviceContainer/types';
+import { AuthService } from '@/core/modules/identity/application/authService/authService';
+import { SessionService } from '@/core/modules/identity/application/sessionService/sessionService';
+import { AuthTokenFactory } from '@/core/modules/identity/domain/authToken/authTokenFactory';
+import { ClientIdFactory } from '@/core/modules/identity/domain/clientId/clientIdFactory';
+import { IClientIdFactory } from '@/core/modules/identity/domain/clientId/types';
+import { SessionFactory } from '@/core/modules/identity/domain/session/sessionFactory';
+import { AuthApi } from '@/core/modules/identity/infrastructure/authApi/authApi';
+import { sessionDataSourceFactory } from '@/core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
 
 export const identityModule: IModule = {
 	providers: [

@@ -1,18 +1,17 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@root/core/infrastructure/serviceContainer/types';
-
-import { VenueQueryService } from '@root/core/modules/venue/application/venueQueryService/venueQueryService';
-import { VenueArchiveUseCase } from '@root/core/modules/venue/application/venueUseCase/venueArchiveUseCase';
-import { VenueCreateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueCreateUseCase';
-import { VenueDeleteUseCase } from '@root/core/modules/venue/application/venueUseCase/venueDeleteUseCase';
-import { VenueUnarchiveUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUnarchiveUseCase';
-import { VenueUpdateUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUpdateUseCase';
-import { VenueUseCase } from '@root/core/modules/venue/application/venueUseCase/venueUseCase';
-import { venueDataSourceFactory } from '@root/core/modules/venue/infrastructure/venueDataSource/venueDataSourceFactory';
-import { VenueMapper } from '@root/core/modules/venue/infrastructure/venueMapper/venueMapper';
-import { VenueRepository } from '@root/core/modules/venue/infrastructure/venueRepository/venueRepository';
+} from '@/core/infrastructure/serviceContainer/types';
+import { VenueQueryService } from '@/core/modules/venue/application/venueQueryService/venueQueryService';
+import { VenueArchiveUseCase } from '@/core/modules/venue/application/venueUseCase/venueArchiveUseCase';
+import { VenueCreateUseCase } from '@/core/modules/venue/application/venueUseCase/venueCreateUseCase';
+import { VenueDeleteUseCase } from '@/core/modules/venue/application/venueUseCase/venueDeleteUseCase';
+import { VenueUnarchiveUseCase } from '@/core/modules/venue/application/venueUseCase/venueUnarchiveUseCase';
+import { VenueUpdateUseCase } from '@/core/modules/venue/application/venueUseCase/venueUpdateUseCase';
+import { VenueUseCase } from '@/core/modules/venue/application/venueUseCase/venueUseCase';
+import { venueDataSourceFactory } from '@/core/modules/venue/infrastructure/venueDataSource/venueDataSourceFactory';
+import { VenueMapper } from '@/core/modules/venue/infrastructure/venueMapper/venueMapper';
+import { VenueRepository } from '@/core/modules/venue/infrastructure/venueRepository/venueRepository';
 
 export const venueModule: IModule = {
 	providers: [

@@ -1,4 +1,4 @@
-import type { TValueOf } from '@root/core/types';
+import type { TValueOf } from '@/core/types';
 
 export const ECurrency = {
 	EUR: 'EUR',

@@ -1,13 +1,13 @@
-import type { Id } from '@root/core/domain/types';
+import type { Id } from '@/core/domain/types';
 import {
 	CategoryNotFoundError,
 	InvalidCategoryWeightChangeCommandError,
-} from '@root/core/modules/category/application/categoryUseCase/errors';
+} from '@/core/modules/category/application/categoryUseCase/errors';
 import type {
 	ICategoryWeightUseCase,
 	TCategoryWeightChangeCommand,
-} from '@root/core/modules/category/application/categoryUseCase/types';
-import type { ICategoryRepository } from '@root/core/modules/category/domain/categoryRepository/types';
+} from '@/core/modules/category/application/categoryUseCase/types';
+import type { ICategoryRepository } from '@/core/modules/category/domain/categoryRepository/types';
 
 export class CategoryWeightUseCase implements ICategoryWeightUseCase {
 	constructor(private readonly categoryRepository: ICategoryRepository) {}

@@ -1,10 +1,9 @@
+import { deepMerge } from '@/core/infrastructure/database/deepMerge';
+import { parseSafeToObject } from '@/core/infrastructure/database/parseSafe';
 import type {
 	IDatabaseCollection,
 	IStorage,
-} from '@root/core/infrastructure/database/types';
-
-import { deepMerge } from '@root/core/infrastructure/database/deepMerge';
-import { parseSafeToObject } from '@root/core/infrastructure/database/parseSafe';
+} from '@/core/infrastructure/database/types';
 
 export class DatabaseCollection implements IDatabaseCollection {
 	private readonly id: string;

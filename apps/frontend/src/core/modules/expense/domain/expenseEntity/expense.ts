@@ -1,9 +1,8 @@
-import { Entity } from '@root/core/domain/entity/entity';
-import type { TISODateString } from '@root/core/domain/temporal/types';
-import type { Id, TCategory, TDescription } from '@root/core/domain/types';
-
-import type { TCurrency } from '@root/core/modules/currency/domain/types';
-import type { IExpense } from '@root/core/modules/expense/domain/expenseEntity/types';
+import { Entity } from '@/core/domain/entity/entity';
+import type { TISODateString } from '@/core/domain/temporal/types';
+import type { Id, TCategory, TDescription } from '@/core/domain/types';
+import type { TCurrency } from '@/core/modules/currency/domain/types';
+import type { IExpense } from '@/core/modules/expense/domain/expenseEntity/types';
 
 export class Expense extends Entity implements IExpense {
 	#userId: Id;

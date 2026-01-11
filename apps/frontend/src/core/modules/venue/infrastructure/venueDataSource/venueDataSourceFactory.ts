@@ -1,8 +1,8 @@
-import type { IDatabase } from '@root/core/infrastructure/database/types';
-import { DataSource } from '@root/core/infrastructure/dataSource/dataSource';
-import type { TVenueDTO } from '@root/core/modules/venue/application/dto/venueDTO';
-import type { TVenueFindOptions } from '@root/core/modules/venue/domain/venueRepository/types';
-import type { IVenueDataSource } from '@root/core/modules/venue/infrastructure/venueDataSource/types';
+import type { IDatabase } from '@/core/infrastructure/database/types';
+import { DataSource } from '@/core/infrastructure/dataSource/dataSource';
+import type { TVenueDTO } from '@/core/modules/venue/application/dto/venueDTO';
+import type { TVenueFindOptions } from '@/core/modules/venue/domain/venueRepository/types';
+import type { IVenueDataSource } from '@/core/modules/venue/infrastructure/venueDataSource/types';
 
 const VENUE_STORAGE_ID = 'venues';
 

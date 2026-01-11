@@ -1,4 +1,4 @@
-import type { ISession } from '@root/core/modules/identity/domain/session/types';
+import type { ISession } from '@/core/modules/identity/domain/session/types';
 
 export interface ISessionService {
 	readonly session: ISession;

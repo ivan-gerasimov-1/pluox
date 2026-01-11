@@ -1,15 +1,12 @@
+import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
+import type { IUserInterface } from '@/presentation/shared/types';
+import { createDevToolsConfig } from '@/presentation/web-ui/devtoolsConfig';
+import { ReactUI } from '@/presentation/web-ui/reactUI';
+import { createAppRouter } from '@/presentation/web-ui/router';
+import type { IWindow } from '@/presentation/web-ui/types';
+import { UIElement } from '@/presentation/web-ui/uiElement';
+import { UILoader } from '@/presentation/web-ui/uiLoader';
 import { QueryClient } from '@tanstack/react-query';
-
-import type { IContainer } from '@root/core/infrastructure/serviceContainer/types';
-
-import type { IUserInterface } from '@root/presentation/shared/types';
-
-import { createDevToolsConfig } from '@root/presentation/web-ui/devtoolsConfig';
-import { ReactUI } from '@root/presentation/web-ui/reactUI';
-import { createAppRouter } from '@root/presentation/web-ui/router';
-import type { IWindow } from '@root/presentation/web-ui/types';
-import { UIElement } from '@root/presentation/web-ui/uiElement';
-import { UILoader } from '@root/presentation/web-ui/uiLoader';
 
 export async function createUI(
 	window: IWindow,
