@@ -5,12 +5,14 @@ import type { TSlottable } from '@root/presentation/web-ui/uiKit/types';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TBaseProps = {
+	id?: string;
 	className?: string;
 };
 
 type TStackProps = TBaseProps & TSlottable;
 
 export function Stack({
+	id,
 	className,
 	asChild,
 	children,
@@ -18,7 +20,7 @@ export function Stack({
 	let Component = asChild ? Slot : 'div';
 
 	return (
-		<Component className={cls('gap-4 flex flex-col', className)}>
+		<Component id={id} className={cls('gap-4 flex flex-col', className)}>
 			{children}
 		</Component>
 	);
