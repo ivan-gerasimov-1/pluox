@@ -54,171 +54,169 @@ export function SettingsScreen() {
 
 	return (
 		<>
-			<Stack>
-				<Card>
-					<CardHeader>{intl.translate('userSectionTitle')}</CardHeader>
+			<Card>
+				<CardHeader>{intl.translate('userSectionTitle')}</CardHeader>
 
-					<ValueAction>
-						<ValueActionLeading label={intl.translate('userName')}>
-							{user.name}
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading label={intl.translate('userName')}>
+						{user.name}
+					</ValueActionLeading>
 
-						<IconButton
-							iconName={EIconName.Edit}
-							onClick={() => {
-								let actionSheetApi = dialog.render(UserNameEditActionSheet, {
-									userName: user.name,
+					<IconButton
+						iconName={EIconName.Edit}
+						onClick={() => {
+							let actionSheetApi = dialog.render(UserNameEditActionSheet, {
+								userName: user.name,
 
-									close: (payload: { userName: string }) => {
-										updateUser({
-											name: payload.userName,
-										});
+								close: (payload: { userName: string }) => {
+									updateUser({
+										name: payload.userName,
+									});
 
-										actionSheetApi.close();
-									},
-								});
-							}}
-						/>
-					</ValueAction>
+									actionSheetApi.close();
+								},
+							});
+						}}
+					/>
+				</ValueAction>
 
-					<ValueAction>
-						<ValueActionLeading label={intl.translate('userAccount')}>
-							—
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading label={intl.translate('userAccount')}>
+						—
+					</ValueActionLeading>
 
-						<Button
-							className="mr-1"
-							size="s"
-							onClick={() => {
-								navigation.loginPage();
-							}}
-						>
-							{intl.translate('loginButton')}
-						</Button>
-					</ValueAction>
-				</Card>
+					<Button
+						className="mr-1"
+						size="s"
+						onClick={() => {
+							navigation.loginPage();
+						}}
+					>
+						{intl.translate('loginButton')}
+					</Button>
+				</ValueAction>
+			</Card>
 
-				<Card>
-					<CardHeader>{intl.translate('appSectionTitle')}</CardHeader>
+			<Card>
+				<CardHeader>{intl.translate('appSectionTitle')}</CardHeader>
 
-					<ValueAction>
-						<ValueActionLeading label={intl.translate('appLanguage')}>
-							{getLanguageNameByLocale(appConfig.locale)}
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading label={intl.translate('appLanguage')}>
+						{getLanguageNameByLocale(appConfig.locale)}
+					</ValueActionLeading>
 
-						<IconButton
-							iconName={EIconName.CaretDown}
-							onClick={() => dialog.render(LocaleActionSheet)}
-						/>
-					</ValueAction>
-				</Card>
+					<IconButton
+						iconName={EIconName.CaretDown}
+						onClick={() => dialog.render(LocaleActionSheet)}
+					/>
+				</ValueAction>
+			</Card>
 
-				<Card>
-					<CardHeader>{intl.translate('currencySectionTitle')}</CardHeader>
+			<Card>
+				<CardHeader>{intl.translate('currencySectionTitle')}</CardHeader>
 
-					<ValueAction>
-						<ValueActionLeading label={intl.translate('currencyMain')}>
-							{appConfig.currency}
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading label={intl.translate('currencyMain')}>
+						{appConfig.currency}
+					</ValueActionLeading>
 
-						<IconButton
-							iconName={EIconName.CaretDown}
-							onClick={() => dialog.render(CurrencyActionSheet)}
-						/>
-					</ValueAction>
+					<IconButton
+						iconName={EIconName.CaretDown}
+						onClick={() => dialog.render(CurrencyActionSheet)}
+					/>
+				</ValueAction>
 
-					<ValueAction>
-						<ValueActionLeading
-							className="gap-2"
-							label={intl.translate('currencyAvailable')}
-						>
-							<Badges>
-								{appConfig.availabelCurrencies.map((currency) => (
-									<Badge key={currency}>{currency}</Badge>
-								))}
-							</Badges>
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading
+						className="gap-2"
+						label={intl.translate('currencyAvailable')}
+					>
+						<Badges>
+							{appConfig.availabelCurrencies.map((currency) => (
+								<Badge key={currency}>{currency}</Badge>
+							))}
+						</Badges>
+					</ValueActionLeading>
 
-						<IconButton
-							iconName={EIconName.Settings}
-							onClick={() => {
-								// eslint-disable-next-line no-alert
-								window.alert('Not Implemented');
-							}}
-						/>
-					</ValueAction>
-				</Card>
+					<IconButton
+						iconName={EIconName.Settings}
+						onClick={() => {
+							// eslint-disable-next-line no-alert
+							window.alert('Not Implemented');
+						}}
+					/>
+				</ValueAction>
+			</Card>
 
-				<Card>
-					<CardHeader>{intl.translate('budgetSectionTitle')}</CardHeader>
+			<Card>
+				<CardHeader>{intl.translate('budgetSectionTitle')}</CardHeader>
 
-					<ValueAction>
-						<ValueActionLeading label={appConfig.currency}>
-							{intlService.formatCurrency(appConfig.budget || 0)}
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading label={appConfig.currency}>
+						{intlService.formatCurrency(appConfig.budget || 0)}
+					</ValueActionLeading>
 
-						<IconButton
-							iconName={EIconName.Edit}
-							onClick={() => {
-								let actionSheetApi = dialog.render(BudgetEditActionsSheet, {
-									budget: appConfig.budget ?? 0,
-									currency: appConfig.currency,
+					<IconButton
+						iconName={EIconName.Edit}
+						onClick={() => {
+							let actionSheetApi = dialog.render(BudgetEditActionsSheet, {
+								budget: appConfig.budget ?? 0,
+								currency: appConfig.currency,
 
-									close: (payload: { budget: number }) => {
-										updateAppConfig({
-											budget: payload.budget,
-										});
+								close: (payload: { budget: number }) => {
+									updateAppConfig({
+										budget: payload.budget,
+									});
 
-										actionSheetApi.close();
-									},
-								});
-							}}
-						/>
-					</ValueAction>
-				</Card>
+									actionSheetApi.close();
+								},
+							});
+						}}
+					/>
+				</ValueAction>
+			</Card>
 
-				<Card>
-					<CardHeader>{intl.translate('categoriesSectionTitle')}</CardHeader>
+			<Card>
+				<CardHeader>{intl.translate('categoriesSectionTitle')}</CardHeader>
 
-					<ValueAction>
-						<ValueActionLeading>
-							<Badges>
-								{categoryTemplates.map((category) => (
-									<Badge key={category.id}>{category.name}</Badge>
-								))}
-							</Badges>
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading>
+						<Badges>
+							{categoryTemplates.map((category) => (
+								<Badge key={category.id}>{category.name}</Badge>
+							))}
+						</Badges>
+					</ValueActionLeading>
 
-						<IconButton
-							iconName={EIconName.Settings}
-							onClick={() => {
-								navigation.categoryListPage();
-							}}
-						/>
-					</ValueAction>
-				</Card>
+					<IconButton
+						iconName={EIconName.Settings}
+						onClick={() => {
+							navigation.categoryListPage();
+						}}
+					/>
+				</ValueAction>
+			</Card>
 
-				<Card>
-					<CardHeader>{intl.translate('venuesSectionTitle')}</CardHeader>
+			<Card>
+				<CardHeader>{intl.translate('venuesSectionTitle')}</CardHeader>
 
-					<ValueAction>
-						<ValueActionLeading>
-							<Badges>
-								{venueListQuery.map((venue) => (
-									<Badge key={venue.id}>{venue.name}</Badge>
-								))}
-							</Badges>
-						</ValueActionLeading>
+				<ValueAction>
+					<ValueActionLeading>
+						<Badges>
+							{venueListQuery.map((venue) => (
+								<Badge key={venue.id}>{venue.name}</Badge>
+							))}
+						</Badges>
+					</ValueActionLeading>
 
-						<IconButton
-							iconName={EIconName.Settings}
-							onClick={() => {
-								navigation.venueListPage();
-							}}
-						/>
-					</ValueAction>
-				</Card>
-			</Stack>
+					<IconButton
+						iconName={EIconName.Settings}
+						onClick={() => {
+							navigation.venueListPage();
+						}}
+					/>
+				</ValueAction>
+			</Card>
 		</>
 	);
 }
