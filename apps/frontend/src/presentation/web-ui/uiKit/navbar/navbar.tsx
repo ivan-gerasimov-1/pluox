@@ -1,10 +1,17 @@
 import { Stack } from '@root/presentation/web-ui/uiKit/layout/layout';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
+type TNavbarProps = {
+	id?: string;
+};
 
-export function Navbar({ children }: React.PropsWithChildren) {
+export function Navbar({
+	id,
+	children,
+}: React.PropsWithChildren<TNavbarProps>) {
 	return (
 		<Stack
+			id={id}
 			className={cls(
 				'gap-0!',
 				'left-0 bottom-0 fixed w-full',
