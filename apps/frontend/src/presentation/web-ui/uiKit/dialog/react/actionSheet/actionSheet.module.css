@@ -1,15 +1,3 @@
-:global(.action-sheet-open) {
-	transform: scale(0.95);
-
-	transition: transform var(--transition-100);
-}
-
-:global(.action-sheet-before-close) {
-	transform: scale(1);
-
-	transition: transform var(--transition-100);
-}
-
 .actionSheetContainer {
 	--blur-size: 25px;
 	--scale-factor: 0.875;

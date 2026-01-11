@@ -1,5 +1,11 @@
 import { useEffect } from 'react';
 
+let classNames = {
+	open: ['transition', 'scale-95'],
+	beforeClose: ['transition', 'scale-100'],
+};
+let allClassNames = [...classNames.open, ...classNames.beforeClose];
+
 export function useAppScale(isScaled: boolean): void {
 	useEffect(() => {
 		let appRoot = window.document.getElementById('appScreen');
@@ -7,11 +13,11 @@ export function useAppScale(isScaled: boolean): void {
 
 		let animationFrame = requestAnimationFrame(() => {
 			if (isScaled) {
-				appRoot?.classList.add('action-sheet-open');
-				navbar?.classList.add('action-sheet-open');
+				appRoot?.classList.add(...classNames.open);
+				navbar?.classList.add(...classNames.open);
 			} else {
-				appRoot?.classList.add('action-sheet-before-close');
-				navbar?.classList.add('action-sheet-before-close');
+				appRoot?.classList.add(...classNames.beforeClose);
+				navbar?.classList.add(...classNames.beforeClose);
 			}
 		});
 
@@ -19,15 +25,8 @@ export function useAppScale(isScaled: boolean): void {
 			cancelAnimationFrame(animationFrame);
 
 			requestAnimationFrame(() => {
-				appRoot?.classList.remove(
-					'action-sheet-open',
-					'action-sheet-before-close',
-				);
-
-				navbar?.classList.remove(
-					'action-sheet-open',
-					'action-sheet-before-close',
-				);
+				appRoot?.classList.remove(...allClassNames);
+				navbar?.classList.remove(...allClassNames);
 			});
 		};
 	}, [isScaled]);
