@@ -8,16 +8,20 @@ let allClassNames = [...classNames.open, ...classNames.beforeClose];
 
 export function useAppScale(isScaled: boolean): void {
 	useEffect(() => {
-		let appRoot = window.document.getElementById('appScreen');
-		let navbar = window.document.getElementById('appNavbar');
+		let elements = [
+			window.document.getElementById('appScreen'),
+			window.document.getElementById('appNavbar'),
+		];
 
 		let animationFrame = requestAnimationFrame(() => {
 			if (isScaled) {
-				appRoot?.classList.add(...classNames.open);
-				navbar?.classList.add(...classNames.open);
+				for (let element of elements) {
+					element?.classList.add(...classNames.open);
+				}
 			} else {
-				appRoot?.classList.add(...classNames.beforeClose);
-				navbar?.classList.add(...classNames.beforeClose);
+				for (let element of elements) {
+					element?.classList.add(...classNames.beforeClose);
+				}
 			}
 		});
 
@@ -25,8 +29,9 @@ export function useAppScale(isScaled: boolean): void {
 			cancelAnimationFrame(animationFrame);
 
 			requestAnimationFrame(() => {
-				appRoot?.classList.remove(...allClassNames);
-				navbar?.classList.remove(...allClassNames);
+				for (let element of elements) {
+					element?.classList.add(...allClassNames);
+				}
 			});
 		};
 	}, [isScaled]);
