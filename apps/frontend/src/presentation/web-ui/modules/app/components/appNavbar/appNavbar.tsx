@@ -6,12 +6,13 @@ import { Navbar } from '@root/presentation/web-ui/uiKit/navbar/navbar';
 import { cls } from '@root/presentation/web-ui/utils/classnames';
 
 type TAppNavbarProps = {
+	id?: string;
 	Actions?: React.ComponentType;
 };
 
-export function AppNavbar({ Actions }: TAppNavbarProps) {
+export function AppNavbar({ id, Actions }: TAppNavbarProps) {
 	return (
-		<Navbar>
+		<Navbar id={id}>
 			{Actions && <Actions />}
 
 			<div
