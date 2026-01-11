@@ -48,7 +48,10 @@ export function ActionSheet({
 					id={id}
 					className={styles.actionSheetContainer}
 				>
-					<div className={styles.pinch} onClick={close} />
+					<div
+						className="h-1 rounded-3xl bg-neutral-400 mx-auto -mt-[15px] mb-[25px] w-[10%]"
+						onClick={close}
+					/>
 
 					{children}
 				</div>

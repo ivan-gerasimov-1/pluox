@@ -26,19 +26,6 @@
 	overflow: scroll;
 }
 
-.pinch {
-	display: block;
-
-	width: 10%;
-	height: 5px;
-
-	margin: -15px auto 25px auto;
-
-	border-radius: var(--radius-3xl);
-
-	background-color: var(--color-neutral-400);
-}
-
 .appear,
 .enter {
 	filter: blur(var(--blur-size));
