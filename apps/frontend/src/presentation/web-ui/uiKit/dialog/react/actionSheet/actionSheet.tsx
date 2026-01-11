@@ -20,31 +20,37 @@ type TActionSheetProps = {
 	isOpen: boolean;
 };
 
-export function ActionSheet(props: React.PropsWithChildren<TActionSheetProps>) {
+export function ActionSheet({
+	id,
+	isOpen,
+	close,
+	onUnmount,
+	children,
+}: React.PropsWithChildren<TActionSheetProps>) {
 	let actionSheetRef = useRef(null);
 
-	useAppScale(props.isOpen);
+	useAppScale(isOpen);
 
 	return (
 		<>
-			<Backdrop onClick={props.close} isVisible={props.isOpen} />
+			<Backdrop onClick={close} isVisible={isOpen} />
 
 			<CSSTransition
 				nodeRef={actionSheetRef}
-				in={props.isOpen}
+				in={isOpen}
 				timeout={TRANSITION_DURATION}
 				classNames={styles}
-				onExited={props.onUnmount}
+				onExited={onUnmount}
 				appear
 			>
 				<div
 					ref={actionSheetRef}
-					id={props.id}
+					id={id}
 					className={styles.actionSheetContainer}
 				>
-					<div className={styles.pinch} onClick={props.close} />
+					<div className={styles.pinch} onClick={close} />
 
-					{props.children}
+					{children}
 				</div>
 			</CSSTransition>
 		</>
