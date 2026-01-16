@@ -1,10 +1,7 @@
 import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
 import { useCategoryListQuery } from '@/presentation/web-ui/modules/categories/queries/categories.queries';
-import {
-	List,
-	ListIcon,
-	ListItem,
-} from '@/presentation/web-ui/uiKit/list/list';
+import { Grid } from '@/presentation/web-ui/uiKit/layout/layout';
+import { ListIcon, ListItem } from '@/presentation/web-ui/uiKit/list/list';
 import {
 	ValueAction,
 	ValueActionLeading,
@@ -15,7 +12,7 @@ export function CategoryList() {
 	let categories = useCategoryListQuery();
 
 	return (
-		<List>
+		<Grid>
 			{categories.map((category) => (
 				<ListItem key={category.id} asChild>
 					<button
@@ -30,6 +27,6 @@ export function CategoryList() {
 					</button>
 				</ListItem>
 			))}
-		</List>
+		</Grid>
 	);
 }
