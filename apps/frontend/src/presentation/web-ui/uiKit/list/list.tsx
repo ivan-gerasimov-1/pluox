@@ -3,25 +3,6 @@ import { Slot } from '@radix-ui/react-slot';
 import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 import { cls } from '@/presentation/web-ui/utils/classnames';
 
-type TListProps = {
-	className?: string;
-};
-
-/** @deprecated In favor of Stack or Grid */
-export function List({
-	className,
-	children,
-}: React.PropsWithChildren<TListProps>) {
-	return (
-		<div
-			className={cls('gap-2.5 m-0 p-0 flex list-none flex-col', className)}
-			role="list"
-		>
-			{children}
-		</div>
-	);
-}
-
 type TListItemProps = TSlottable & {
 	className?: string;
 };
