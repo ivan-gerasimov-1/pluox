@@ -50,9 +50,9 @@ export function VenueViewScreen() {
 	}
 
 	return (
-		<>
-			<Stack>
-				<Card>
+		<Stack>
+			<Card asChild>
+				<Stack>
 					<ValueAction>
 						<ValueActionLeading label="ID">{venue.id}</ValueActionLeading>
 					</ValueAction>
@@ -84,10 +84,10 @@ export function VenueViewScreen() {
 							/>
 						</ValueActionTrailing>
 					</ValueAction>
-				</Card>
-			</Stack>
+				</Stack>
+			</Card>
 
-			<div className="gap-4 flex">
+			<Stack row>
 				<Button
 					onClick={() => {
 						if (venue.isArchived) {
@@ -109,7 +109,7 @@ export function VenueViewScreen() {
 				>
 					<Icon name={EIconName.Trash} />
 				</Button>
-			</div>
-		</>
+			</Stack>
+		</Stack>
 	);
 }
