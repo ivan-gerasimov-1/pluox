@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot';
 import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 import { cls } from '@/presentation/web-ui/utils/classnames';
 
-type TListItemProps = TSlottable & {
+type TBaseProps = {
 	className?: string;
 };
 
@@ -11,7 +11,7 @@ export function ListItem({
 	className,
 	asChild,
 	children,
-}: React.PropsWithChildren<TListItemProps>) {
+}: React.PropsWithChildren<TBaseProps & TSlottable>) {
 	let Component = asChild ? Slot : 'div';
 
 	return (
@@ -34,8 +34,7 @@ export function ListItem({
 	);
 }
 
-export type TListIconProps = {
-	className?: string;
+export type TListIconProps = TBaseProps & {
 	onClick?(): void;
 };
 
