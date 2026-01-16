@@ -9,18 +9,27 @@ type TBaseProps = {
 	className?: string;
 };
 
-type TStackProps = TBaseProps & TSlottable;
+type TStackProps = TBaseProps &
+	TSlottable & {
+		row?: boolean;
+	};
 
 export function Stack({
 	id,
 	className,
+	row,
 	asChild,
 	children,
 }: React.PropsWithChildren<TStackProps>) {
 	let Component = asChild ? Slot : 'div';
 
 	return (
-		<Component id={id} className={cls('gap-4 flex flex-col', className)}>
+		<Component
+			id={id}
+			className={cls('gap-4 flex flex-col', className, {
+				'flex-row': row,
+			})}
+		>
 			{children}
 		</Component>
 	);
