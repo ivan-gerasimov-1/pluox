@@ -7,6 +7,7 @@ type TListProps = {
 	className?: string;
 };
 
+/** @deprecated In favor of Stack or Grid */
 export function List({
 	className,
 	children,
