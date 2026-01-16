@@ -8,11 +8,8 @@ import {
 } from '@/presentation/web-ui/modules/venues/queries/venues.query';
 import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Badge } from '@/presentation/web-ui/uiKit/badge/badge';
-import {
-	List,
-	ListIcon,
-	ListItem,
-} from '@/presentation/web-ui/uiKit/list/list';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { ListIcon, ListItem } from '@/presentation/web-ui/uiKit/list/list';
 import {
 	ValueAction,
 	ValueActionLeading,
@@ -25,7 +22,7 @@ export function VenueListScreen() {
 	let venueListArchived = useVenueListArchivedQuery();
 
 	return (
-		<List>
+		<Stack>
 			{venueList.map((venue) => (
 				<ListItem key={venue.id} asChild>
 					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
@@ -57,6 +54,6 @@ export function VenueListScreen() {
 					</AppLink>
 				</ListItem>
 			))}
-		</List>
+		</Stack>
 	);
 }
