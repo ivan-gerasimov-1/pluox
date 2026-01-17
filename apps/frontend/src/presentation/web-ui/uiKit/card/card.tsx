@@ -27,16 +27,10 @@ let cardVariants = cva(
 				base: 'px-5 py-6',
 				lg: '',
 			},
-			/** @deprecated */
-			summary: {
-				false: null,
-				true: 'px-4! py-5!',
-			},
 		},
 		defaultVariants: {
 			gap: 'base',
 			interactive: false,
-			summary: false,
 		},
 	},
 );
@@ -50,7 +44,6 @@ export function Card({
 	className,
 	gap,
 	interactive,
-	summary,
 	asChild,
 	children,
 }: React.PropsWithChildren<TCardProps>) {
@@ -62,7 +55,6 @@ export function Card({
 				className,
 				gap,
 				interactive,
-				summary,
 			})}
 		>
 			{children}
