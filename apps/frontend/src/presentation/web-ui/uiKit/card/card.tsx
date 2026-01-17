@@ -2,7 +2,6 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'cva';
 
 import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
-import { cls } from '@/presentation/web-ui/utils/classnames';
 
 let cardVariants = cva(
 	[
@@ -71,26 +70,5 @@ export function Card({
 		>
 			{children}
 		</Component>
-	);
-}
-
-type TitleProps = {
-	className?: string;
-	as?: React.ElementType;
-};
-
-/**
- * @todo
- * 1. Add level prop: top (h1), base (h2), sub (h3).
- *   - Default is base
- *   - Top is visually hidden by default (?) or add hidden prop
- */
-export function Title({
-	className,
-	as: As = 'h2',
-	children,
-}: React.PropsWithChildren<TitleProps>) {
-	return (
-		<As className={cls('text-sm tracking-tight', className)}>{children}</As>
 	);
 }

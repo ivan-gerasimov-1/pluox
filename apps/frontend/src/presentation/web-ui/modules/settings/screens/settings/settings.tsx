@@ -21,11 +21,12 @@ import { settingsI18n } from '@/presentation/web-ui/modules/settings/screens/set
 import { useVenueListUnarchivedQuery } from '@/presentation/web-ui/modules/venues/queries/venues.query';
 import { Badge, Badges } from '@/presentation/web-ui/uiKit/badge/badge';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
-import { Card, Title } from '@/presentation/web-ui/uiKit/card/card';
+import { Card } from '@/presentation/web-ui/uiKit/card/card';
 import { useDialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { Title } from '@/presentation/web-ui/uiKit/title/title';
 import {
 	ValueAction,
 	ValueActionLeading,

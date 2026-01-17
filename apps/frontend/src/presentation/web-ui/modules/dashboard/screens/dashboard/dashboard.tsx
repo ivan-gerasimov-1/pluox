@@ -8,9 +8,10 @@ import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@/presentation/web-ui/modules/settings/queries/appConfig';
-import { Card, Title } from '@/presentation/web-ui/uiKit/card/card';
+import { Card } from '@/presentation/web-ui/uiKit/card/card';
 import { DotSpace } from '@/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { Grid, Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { Title } from '@/presentation/web-ui/uiKit/title/title';
 
 export function DashboardScreen() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
