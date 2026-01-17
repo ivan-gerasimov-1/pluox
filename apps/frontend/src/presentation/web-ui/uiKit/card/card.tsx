@@ -13,6 +13,11 @@ let cardVariants = cva(
 	],
 	{
 		variants: {
+			gap: {
+				sm: 'px-4 py-5',
+				base: 'px-5 py-6',
+				lg: '',
+			},
 			interactive: {
 				false: null,
 				true: [
@@ -22,10 +27,9 @@ let cardVariants = cva(
 					'focus-visible:border-neutral-900',
 				],
 			},
-			gap: {
-				sm: 'px-4 py-5',
-				base: 'px-5 py-6',
-				lg: '',
+			disabled: {
+				false: null,
+				true: 'opacity-50 pointer-events-none',
 			},
 		},
 		defaultVariants: {
@@ -44,6 +48,7 @@ export function Card({
 	className,
 	gap,
 	interactive,
+	disabled,
 	asChild,
 	children,
 }: React.PropsWithChildren<TCardProps>) {
@@ -55,6 +60,7 @@ export function Card({
 				className,
 				gap,
 				interactive,
+				disabled,
 			})}
 		>
 			{children}
