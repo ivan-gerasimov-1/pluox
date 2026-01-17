@@ -26,6 +26,10 @@ let paperVariants = cva(
 					'focus-visible:border-neutral-900',
 				],
 			},
+			transparent: {
+				false: null,
+				true: 'backdrop-blur-sm bg-white/25',
+			},
 			scrollable: {
 				false: null,
 				true: 'overflow-y-auto',
@@ -52,6 +56,7 @@ export function Paper({
 	gap,
 	interactive,
 	scrollable,
+	transparent,
 	disabled,
 	asChild,
 	children,
@@ -64,6 +69,7 @@ export function Paper({
 				className,
 				gap,
 				interactive,
+				transparent,
 				scrollable,
 				disabled,
 			})}
