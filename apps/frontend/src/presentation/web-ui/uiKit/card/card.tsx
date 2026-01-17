@@ -27,6 +27,10 @@ let cardVariants = cva(
 					'focus-visible:border-neutral-900',
 				],
 			},
+			scrollable: {
+				false: null,
+				true: 'overflow-y-auto',
+			},
 			disabled: {
 				false: null,
 				true: 'opacity-50 pointer-events-none',
@@ -48,6 +52,7 @@ export function Card({
 	className,
 	gap,
 	interactive,
+	scrollable,
 	disabled,
 	asChild,
 	children,
@@ -60,6 +65,7 @@ export function Card({
 				className,
 				gap,
 				interactive,
+				scrollable,
 				disabled,
 			})}
 		>
