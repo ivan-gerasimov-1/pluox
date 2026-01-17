@@ -57,6 +57,7 @@ export function SignUpScreen() {
 							label="Почта"
 							autoComplete="email"
 							autoFocus
+							required
 						/>
 					</FormGroup>
 
@@ -66,6 +67,7 @@ export function SignUpScreen() {
 							name="password"
 							label="Пароль"
 							autoComplete="new-password"
+							required
 						/>
 					</FormGroup>
 

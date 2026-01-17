@@ -69,6 +69,7 @@ export function LogInForm() {
 							label="Почта"
 							autoComplete="email"
 							autoFocus
+							required
 						/>
 					</FormGroup>
 
@@ -78,6 +79,7 @@ export function LogInForm() {
 							name="password"
 							label="Пароль"
 							autoComplete="current-password"
+							required
 						/>
 
 						<AppLink
