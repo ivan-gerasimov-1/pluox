@@ -7,7 +7,7 @@ let paperVariants = cva(
 	[
 		'bg-white',
 		'border-gray-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
-		'shadow-xl shadow-gray-200/25',
+		'shadow-xl shadow-gray-200/50',
 		'z-10 transition outline-none',
 	],
 	{
