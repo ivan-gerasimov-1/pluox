@@ -9,14 +9,8 @@ export function useSignup() {
 	const navigation = useAppNavigation();
 
 	return useMutation({
-		async mutationFn({
-			email,
-			password,
-		}: {
-			email: { value: string };
-			password: { value: string };
-		}) {
-			return authService.signUp(email.value, password.value);
+		mutationFn({ email, password }: { email: string; password: string }) {
+			return authService.signUp(email, password);
 		},
 		onSuccess() {
 			navigation.loginPage();

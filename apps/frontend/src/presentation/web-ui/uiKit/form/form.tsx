@@ -1,7 +1,8 @@
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 
-export function Form<T>({
+/** @todo Remove @ts-expect-error and clean up types */
+export function Form<T extends {}>({
 	className,
 	name,
 	onSubmit,
@@ -14,11 +15,14 @@ export function Form<T>({
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		onSubmit(
-			/** @todo Remove @ts-expect-error */
-			// @ts-expect-error | Use proper types
-			event.target.elements,
-		);
+		let payload: T = {} as T;
+
+		// @ts-expect-error | Use proper types
+		for (let element of event.target.elements) {
+			Reflect.set(payload, element.name, element.value);
+		}
+
+		onSubmit(payload);
 	}
 
 	return (
