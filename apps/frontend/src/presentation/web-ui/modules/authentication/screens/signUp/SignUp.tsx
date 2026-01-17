@@ -1,8 +1,5 @@
 import { EAppPath } from '@/presentation/web-ui/appPath';
-import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
-import { usePending } from '@/presentation/web-ui/hooks/usePending';
-import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { useSignup } from '@/presentation/web-ui/modules/authentication/hooks/useSignup/useSignup';
 import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import {
@@ -13,34 +10,9 @@ import {
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
-import { delay } from '@/presentation/web-ui/utils/delay';
 
 export function SignUpScreen() {
-	let authService = useService(EServiceToken.AUTH_SERVICE);
-
-	const navigation = useAppNavigation();
-	const { pending, setPending } = usePending();
-
-	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-		event.preventDefault();
-
-		/** @todo Remove @ts-expect-error */
-		// @ts-expect-error | Use proper types
-		const formElements = event.target.elements;
-
-		const email = formElements.email.value;
-		const password = formElements.password.value;
-
-		try {
-			setPending(true);
-
-			await authService.signUp(email, password);
-			navigation.loginPage();
-		} finally {
-			await delay(500);
-			setPending(false);
-		}
-	}
+	let { mutate: signup, isPending } = useSignup();
 
 	return (
 		<Paper className="px-10 py-15 w-96 max-w-full" asChild>
@@ -49,7 +21,7 @@ export function SignUpScreen() {
 					Pluox
 				</Title>
 
-				<Form name="signIn" onSubmit={onSubmit}>
+				<Form name="signIn" onSubmit={signup}>
 					<FormGroup>
 						<FormInput
 							type="email"
@@ -71,8 +43,8 @@ export function SignUpScreen() {
 						/>
 					</FormGroup>
 
-					<Button type="submit" disabled={pending}>
-						{pending ? 'Регистрация…' : 'Зарегистрироваться'}
+					<Button type="submit" disabled={isPending}>
+						{isPending ? 'Регистрация…' : 'Зарегистрироваться'}
 					</Button>
 				</Form>
 
