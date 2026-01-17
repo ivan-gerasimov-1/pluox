@@ -27,6 +27,7 @@ let cardVariants = cva(
 				base: 'px-5 py-6',
 				lg: '',
 			},
+			/** @deprecated */
 			summary: {
 				false: null,
 				true: 'px-4! py-5!',
