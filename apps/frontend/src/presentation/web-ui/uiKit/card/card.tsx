@@ -10,7 +10,7 @@ let cardVariants = cva(
 		'bg-white',
 		'border-neutral-200/50 rounded-2xl border',
 		'shadow-xl shadow-neutral-200/25',
-		'z-1 transition outline-none',
+		'z-10 transition outline-none',
 	],
 	{
 		variants: {

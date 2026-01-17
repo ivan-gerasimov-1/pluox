@@ -22,7 +22,7 @@
 
 	will-change: filter, opacity, transform;
 
-	z-index: 2;
+	z-index: 50;
 	overflow: scroll;
 }
 

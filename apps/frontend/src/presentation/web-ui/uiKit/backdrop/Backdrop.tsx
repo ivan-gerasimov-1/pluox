@@ -38,7 +38,7 @@ export function Backdrop({ isVisible, onClick }: TBackdropProps) {
 		>
 			<div
 				ref={backdropRef}
-				className="inset-0 fixed transition will-change-[backdrop-filter]"
+				className="inset-0 fixed z-50 transition will-change-[backdrop-filter]"
 				onClick={onClick}
 			/>
 		</CSSTransition>
