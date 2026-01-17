@@ -5,8 +5,14 @@ import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/en
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
 import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
-import { Input } from '@/presentation/web-ui/uiKit/input/input';
+import {
+	Form,
+	FormGroup,
+	FormInput,
+} from '@/presentation/web-ui/uiKit/form/form';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Title } from '@/presentation/web-ui/uiKit/title/title';
 import { delay } from '@/presentation/web-ui/utils/delay';
 
 export function SignUpScreen() {
@@ -37,52 +43,44 @@ export function SignUpScreen() {
 	}
 
 	return (
-		<Stack className="gap-10 px-10 py-15 w-96 rounded-3xl border-gray-200/50 bg-white max-w-full border shadow-(--box-shadow-100)">
-			<h1 className="text-2xl font-semibold">Pluox</h1>
+		<Paper className="px-10 py-15 w-96 max-w-full" asChild>
+			<Stack className="gap-10">
+				<Title as="h1" className="text-2xl!">
+					Pluox
+				</Title>
 
-			<Stack asChild>
-				<form name="signIn" className="gap-5" onSubmit={onSubmit}>
-					<label htmlFor="email" className="*:mt-3 flex flex-col">
-						<div className="text-sm font-semibold mt-0!">Эл. почта</div>
-
-						<Input
+				<Form name="signIn" onSubmit={onSubmit}>
+					<FormGroup>
+						<FormInput
 							type="email"
-							id="email"
 							name="email"
+							label="Почта"
 							autoComplete="email"
 							autoFocus
 						/>
-					</label>
+					</FormGroup>
 
-					<label htmlFor="password" className="*:mt-3 flex flex-col">
-						<div className="text-sm font-semibold mt-0!">Пароль</div>
-
-						<Input
+					<FormGroup>
+						<FormInput
 							type="password"
-							id="password"
 							name="password"
-							autoComplete="current-password"
+							label="Пароль"
+							autoComplete="new-password"
 						/>
-					</label>
+					</FormGroup>
 
-					<div>
-						{pending ? (
-							<div className="text-sm text-center">Регистрация…</div>
-						) : (
-							<Button type="submit" wide>
-								Зарегистрироваться
-							</Button>
-						)}
-					</div>
-				</form>
-			</Stack>
+					<Button type="submit" disabled={pending}>
+						{pending ? 'Регистрация…' : 'Зарегистрироваться'}
+					</Button>
+				</Form>
 
-			<Stack className="gap-1! text-sm flex-row items-center justify-center">
-				Есть аккаунт?
-				<AppLink className="text-indigo-600" to={EAppPath.LOG_IN}>
+				<AppLink
+					className="text-sm text-indigo-500! text-center"
+					to={EAppPath.LOG_IN}
+				>
 					Войти
 				</AppLink>
 			</Stack>
-		</Stack>
+		</Paper>
 	);
 }
