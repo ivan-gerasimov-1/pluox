@@ -7,6 +7,7 @@ type TBaseProps = {
 	className?: string;
 };
 
+/** @deprecated */
 export function ListItem({
 	className,
 	asChild,
