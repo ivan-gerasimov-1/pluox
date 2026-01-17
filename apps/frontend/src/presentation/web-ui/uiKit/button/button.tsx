@@ -8,6 +8,7 @@ const buttonVariants = cva(
 		'text-xs font-bold font-[inherit]',
 		'text-center leading-none whitespace-nowrap uppercase',
 		'outline-0 transition',
+		'disabled:opacity-75 disabled:pointer-events-none',
 		'hover:shadow-[0_0_0_2px_var(--color-gray-50)_inset]',
 		'focus:shadow-[0_0_0_2px_var(--color-gray-50)_inset]',
 		'active:shadow-[0_0_0_4px_var(--color-gray-50)_inset]',
@@ -46,6 +47,7 @@ const buttonVariants = cva(
 export type TButtonProps = VariantProps<typeof buttonVariants> & {
 	className?: string;
 	onClick?: () => void;
+	disabled?: boolean;
 	asChild?: boolean;
 } & (
 		| {
