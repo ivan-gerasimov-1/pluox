@@ -73,12 +73,7 @@ export function DashboardScreen() {
 				</Stack>
 			</Card>
 
-			<Card
-				className="col-1 row-span-2 overflow-auto"
-				gap="sm"
-				disabled
-				asChild
-			>
+			<Card className="col-1 row-span-2" gap="sm" scrollable disabled asChild>
 				<Stack>
 					<CardHeader>{intl.translate('venues')}</CardHeader>
 				</Stack>
