@@ -74,8 +74,9 @@ export function DashboardScreen() {
 			</Card>
 
 			<Card
-				className="col-1 row-span-2 overflow-auto opacity-50"
+				className="col-1 row-span-2 overflow-auto"
 				gap="sm"
+				disabled
 				asChild
 			>
 				<Stack>
