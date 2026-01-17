@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { Badge, Badges } from '@/presentation/web-ui/uiKit/badge/badge';
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TPillsSelectProps<T> = {
 	value?: string | null;
@@ -48,7 +48,7 @@ export function PillsSelect<T extends { id: string; name: string }>({
 						<button
 							id={item.id}
 							type="button"
-							className={cls(
+							className={cn(
 								'py-3',
 								'appearance-none font-[inherit]',
 								'transition-colors',

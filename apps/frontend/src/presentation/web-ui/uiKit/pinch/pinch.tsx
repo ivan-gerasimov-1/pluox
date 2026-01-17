@@ -1,4 +1,4 @@
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TPinchProps = {
 	className?: string;
@@ -7,7 +7,7 @@ type TPinchProps = {
 export function Pinch({ className }: TPinchProps) {
 	return (
 		<div
-			className={cls(
+			className={cn(
 				className,
 				'h-1 rounded-3xl bg-neutral-400 -mt-4 mb-6 mx-auto w-[10%]',
 			)}

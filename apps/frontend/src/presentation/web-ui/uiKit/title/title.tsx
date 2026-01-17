@@ -1,4 +1,4 @@
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TitleProps = {
 	className?: string;
@@ -17,6 +17,6 @@ export function Title({
 	children,
 }: React.PropsWithChildren<TitleProps>) {
 	return (
-		<As className={cls('text-sm tracking-tight', className)}>{children}</As>
+		<As className={cn('text-sm tracking-tight', className)}>{children}</As>
 	);
 }

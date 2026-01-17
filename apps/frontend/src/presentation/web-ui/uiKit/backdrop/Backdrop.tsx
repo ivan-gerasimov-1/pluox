@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 export type TBackdropProps = {
 	isVisible: boolean;

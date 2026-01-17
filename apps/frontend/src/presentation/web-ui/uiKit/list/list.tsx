@@ -1,4 +1,4 @@
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 export type TListIconProps = {
 	className?: string;
@@ -12,7 +12,7 @@ export function ListIcon({
 }: React.PropsWithChildren<TListIconProps>) {
 	return (
 		<span
-			className={cls(
+			className={cn(
 				'min-w-12 min-h-12 p-3',
 				'flex items-center justify-center',
 				'rounded-ss-xl rounded-se-md rounded-es-md rounded-ee-2xl rounded',

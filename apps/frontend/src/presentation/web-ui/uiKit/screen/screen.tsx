@@ -1,5 +1,5 @@
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TScreenProps = {
 	id?: string;
@@ -12,7 +12,7 @@ export function Screen({
 	children,
 }: React.PropsWithChildren<TScreenProps>) {
 	return (
-		<Stack id={id} className={cls('p-4 pt-2', className)}>
+		<Stack id={id} className={cn('p-4 pt-2', className)}>
 			{children}
 		</Stack>
 	);

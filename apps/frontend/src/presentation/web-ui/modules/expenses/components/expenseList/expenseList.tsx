@@ -24,7 +24,7 @@ import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
 
 import 'react-swipeable-list/dist/styles.css';
 
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 export type TExpenseListProps = {
 	dateFrom?: TISODateString;
@@ -59,7 +59,7 @@ export function ExpenseList(props: TExpenseListProps) {
 							<SwipeableListItem
 								key={item.id}
 								listType={Type.IOS}
-								className={cls(
+								className={cn(
 									'px-3 py-4 mt-3',
 									'rounded-2xl border-neutral-200/50 border',
 									'bg-white',

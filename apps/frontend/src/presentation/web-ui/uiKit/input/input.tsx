@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 
 import { TSlottable } from '@/presentation/web-ui/uiKit/types';
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TInputProps = React.InputHTMLAttributes<HTMLInputElement> &
 	TSlottable & {
@@ -14,7 +14,7 @@ export function Input({ className, asChild, ...props }: TInputProps) {
 
 	return (
 		<Component
-			className={cls(
+			className={cn(
 				'px-4 py-3 w-full',
 				'bg-white',
 				'border-neutral-200/50 rounded-2xl border',

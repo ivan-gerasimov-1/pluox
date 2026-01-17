@@ -1,4 +1,4 @@
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 import styles from './actionSheetSelect.module.css';
 
@@ -67,7 +67,7 @@ export function ActionSheetSelect<T extends { id: string; name: string }>({
 				return (
 					<li
 						key={item.id}
-						className={cls(styles.listItem, {
+						className={cn(styles.listItem, {
 							[styles.selected]: isSelectedItem,
 						})}
 						data-item={item.id}

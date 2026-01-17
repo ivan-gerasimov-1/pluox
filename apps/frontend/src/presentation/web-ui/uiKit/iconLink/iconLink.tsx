@@ -5,7 +5,7 @@ import {
 	EIconSize,
 	type TIconSize,
 } from '@/presentation/web-ui/uiKit/icon/iconSize';
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TIconLinkProps = {
 	className?: string;
@@ -20,7 +20,7 @@ export function IconLink(props: TIconLinkProps) {
 	return (
 		<AppLink
 			to={props.to}
-			className={cls(
+			className={cn(
 				'm-0 p-3 flex items-center justify-center',
 				props.className,
 			)}

@@ -7,7 +7,7 @@ import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 import { delay } from '@/presentation/web-ui/utils/delay';
 
 export function useLoginForm() {
@@ -114,7 +114,7 @@ function FormGroup({
 	children,
 }: React.PropsWithChildren<{ className?: string }>) {
 	return (
-		<div className={cls('[&+&]:mt-5 flex flex-col', className)}>{children}</div>
+		<div className={cn('[&+&]:mt-5 flex flex-col', className)}>{children}</div>
 	);
 }
 

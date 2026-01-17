@@ -1,6 +1,6 @@
 import type React from 'react';
 
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TValueActionBaseProps = {
 	className?: string;
@@ -14,10 +14,7 @@ export function ValueAction({
 }: React.PropsWithChildren<TValueActionProps>) {
 	return (
 		<div
-			className={cls(
-				'gap-4 flex w-full items-start justify-between',
-				className,
-			)}
+			className={cn('gap-4 flex w-full items-start justify-between', className)}
 		>
 			{children}
 		</div>
@@ -35,7 +32,7 @@ export function ValueActionLeading({
 }: React.PropsWithChildren<TValueActionLeadingProps>) {
 	return (
 		<div
-			className={cls(
+			className={cn(
 				'gap-1 text-sm flex grow flex-col overflow-hidden text-left',
 				className,
 			)}
@@ -52,7 +49,7 @@ export function ValueActionTrailing({
 	className,
 	children,
 }: React.PropsWithChildren<TValueActionTrailingProps>) {
-	return <div className={cls('m-1', className)}>{children}</div>;
+	return <div className={cn('m-1', className)}>{children}</div>;
 }
 
 /** @deprecated */
@@ -63,7 +60,7 @@ export function ValueActionLabel({
 	className,
 	children,
 }: React.PropsWithChildren<TValueActionLabelProps>) {
-	return <div className={cls('text-neutral-600', className)}>{children}</div>;
+	return <div className={cn('text-neutral-600', className)}>{children}</div>;
 }
 
 /** @deprecated */

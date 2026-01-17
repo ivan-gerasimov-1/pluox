@@ -8,7 +8,7 @@ import {
 } from '@/presentation/web-ui/modules/expenses/components/expenseForm/components/amountInput/helpers';
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TAmountInputProps = Omit<
 	React.InputHTMLAttributes<HTMLInputElement>,
@@ -53,7 +53,7 @@ export function AmountInput({
 			{...props}
 			type="text"
 			inputMode={inputMode}
-			className={cls('rounded-tl-none rounded-bl-none', className)}
+			className={cn('rounded-tl-none rounded-bl-none', className)}
 			value={amount}
 			onChange={handleChange}
 			onKeyDown={validateKey}

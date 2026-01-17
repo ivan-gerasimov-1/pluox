@@ -4,7 +4,7 @@ import {
 	EIconSize,
 	type TIconSize,
 } from '@/presentation/web-ui/uiKit/icon/iconSize';
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 export type TIconButtonProps = {
 	className?: string;
@@ -24,7 +24,7 @@ export function IconButton({
 	return (
 		<button
 			type="button"
-			className={cls(
+			className={cn(
 				'm-0 p-2 flex items-center border-0 bg-transparent text-inherit',
 				className,
 			)}

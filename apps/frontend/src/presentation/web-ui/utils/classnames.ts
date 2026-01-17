@@ -1,1 +1,1 @@
-export { default as cls } from 'clsx';
+export { default as cn } from 'clsx';

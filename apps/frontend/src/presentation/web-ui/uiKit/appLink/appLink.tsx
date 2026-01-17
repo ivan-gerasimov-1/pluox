@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router';
 
-import { cls } from '@/presentation/web-ui/utils/classnames';
+import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TNavigableProps = {
 	to: string;
@@ -14,7 +14,7 @@ export function AppLink({
 }: React.PropsWithChildren<TNavigableProps>) {
 	return (
 		<NavLink
-			className={cls('leading-none text-inherit no-underline', className)}
+			className={cn('leading-none text-inherit no-underline', className)}
 			to={to}
 		>
 			{children}
