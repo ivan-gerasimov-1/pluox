@@ -6,7 +6,6 @@ import { cls } from '@/presentation/web-ui/utils/classnames';
 
 let cardVariants = cva(
 	[
-		'px-5 py-6',
 		'bg-white',
 		'border-neutral-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
 		'shadow-xl shadow-neutral-200/25',
@@ -23,14 +22,20 @@ let cardVariants = cva(
 					'focus-visible:border-neutral-900',
 				],
 			},
+			gap: {
+				sm: 'px-4 py-5',
+				base: 'px-5 py-6',
+				lg: '',
+			},
 			summary: {
 				false: null,
 				true: 'px-4! py-5!',
 			},
 		},
 		defaultVariants: {
-			summary: false,
+			gap: 'base',
 			interactive: false,
+			summary: false,
 		},
 	},
 );
@@ -42,6 +47,7 @@ type TCardProps = VariantProps<typeof cardVariants> &
 
 export function Card({
 	className,
+	gap,
 	interactive,
 	summary,
 	asChild,
@@ -53,6 +59,7 @@ export function Card({
 		<Component
 			className={cardVariants({
 				className,
+				gap,
 				interactive,
 				summary,
 			})}
