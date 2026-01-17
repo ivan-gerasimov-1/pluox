@@ -48,8 +48,8 @@ a {
 
 :root {
 	/** Box shadow */
-	--box-shadow-90: 0 15px 10px -5px var(--color-neutral-100);
-	--box-shadow-100: 0 10px 15px -5px var(--color-neutral-300);
+	--box-shadow-90: 0 15px 10px -5px var(--color-gray-100);
+	--box-shadow-100: 0 10px 15px -5px var(--color-gray-300);
 
 	/* misc */
 	--transition-100: 200ms ease-in-out;
@@ -69,6 +69,6 @@ body {
 		'Inter Variable', system-ui, BlinkMacSystemFont, 'Segoe UI', Helvetica,
 		'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
 
-	color: var(--color-neutral-800);
-	background-color: var(--color-neutral-50);
+	color: var(--color-gray-800);
+	background-color: var(--color-gray-50);
 }

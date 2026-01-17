@@ -9,7 +9,7 @@ export function Pinch({ className }: TPinchProps) {
 		<div
 			className={cn(
 				className,
-				'h-1 rounded-3xl bg-neutral-400 -mt-4 mb-6 mx-auto w-[10%]',
+				'h-1 rounded-3xl bg-gray-400 -mt-4 mb-6 mx-auto w-[10%]',
 			)}
 		/>
 	);

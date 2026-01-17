@@ -11,14 +11,14 @@ export type TBackdropProps = {
 
 let classNames = {
 	appear: 'bg-transparent backdrop-blur-none',
-	appearActive: 'bg-neutral-100/75! backdrop-blur-xs!',
-	appearDone: 'bg-neutral-100/75! backdrop-blur-xs!',
+	appearActive: 'bg-gray-100/75! backdrop-blur-xs!',
+	appearDone: 'bg-gray-100/75! backdrop-blur-xs!',
 
 	enter: 'bg-transparent backdrop-blur-none',
-	enterActive: 'bg-neutral-100/75! backdrop-blur-xs!',
-	enterDone: 'bg-neutral-100/75! backdrop-blur-xs!',
+	enterActive: 'bg-gray-100/75! backdrop-blur-xs!',
+	enterDone: 'bg-gray-100/75! backdrop-blur-xs!',
 
-	exit: 'bg-neutral-100/75 backdrop-blur-xs',
+	exit: 'bg-gray-100/75 backdrop-blur-xs',
 	exitActive: 'bg-transparent! backdrop-blur-none!',
 	exitDone: 'bg-transparent! backdrop-blur-none!',
 };

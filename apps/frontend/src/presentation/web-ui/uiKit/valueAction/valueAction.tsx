@@ -60,7 +60,7 @@ export function ValueActionLabel({
 	className,
 	children,
 }: React.PropsWithChildren<TValueActionLabelProps>) {
-	return <div className={cn('text-neutral-600', className)}>{children}</div>;
+	return <div className={cn('text-gray-500', className)}>{children}</div>;
 }
 
 /** @deprecated */

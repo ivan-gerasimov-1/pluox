@@ -52,7 +52,7 @@ export function PillsSelect<T extends { id: string; name: string }>({
 								'py-3',
 								'appearance-none font-[inherit]',
 								'transition-colors',
-								'aria-pressed:bg-neutral-100 aria-pressed:border-neutral-900',
+								'aria-pressed:border-gray-500',
 							)}
 							aria-pressed={item.id === value}
 							onClick={handleSelect}

@@ -18,7 +18,7 @@ export function AppNavbar({ id, Actions }: TAppNavbarProps) {
 			<div
 				className={cn(
 					'flex justify-between',
-					'*:p-5 *:text-neutral-600 *:[.active]:text-neutral-900 *:transition-colors',
+					'*:p-5 *:text-gray-600 *:[.active]:text-gray-900 *:transition-colors',
 				)}
 			>
 				<IconLink

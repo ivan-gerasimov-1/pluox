@@ -37,7 +37,7 @@ export function SignUpScreen() {
 	}
 
 	return (
-		<Stack className="gap-10 px-10 py-15 w-96 rounded-3xl border-neutral-200/50 max-w-full border shadow-(--box-shadow-100)">
+		<Stack className="gap-10 px-10 py-15 w-96 rounded-3xl border-gray-200/50 bg-white max-w-full border shadow-(--box-shadow-100)">
 			<h1 className="text-2xl font-semibold">Pluox</h1>
 
 			<Stack asChild>

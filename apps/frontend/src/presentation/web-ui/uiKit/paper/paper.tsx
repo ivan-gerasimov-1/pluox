@@ -6,8 +6,8 @@ import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 let paperVariants = cva(
 	[
 		'bg-white',
-		'border-neutral-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
-		'shadow-xl shadow-neutral-200/25',
+		'border-gray-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
+		'shadow-xl shadow-gray-200/25',
 		'z-10 transition outline-none',
 	],
 	{
@@ -25,9 +25,9 @@ let paperVariants = cva(
 				false: null,
 				true: [
 					'',
-					'hover:border-neutral-200 hover:translate-y-0.5 hover:shadow-neutral-50',
+					'hover:border-gray-200 hover:translate-y-0.5 hover:shadow-gray-50',
 					'active:translate-y-1',
-					'focus-visible:border-neutral-900',
+					'focus-visible:border-gray-900',
 				],
 			},
 			scrollable: {

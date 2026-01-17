@@ -16,7 +16,7 @@ export function Error({
 				{title}
 			</h1>
 
-			<h2 className="text-sm text-neutral-600 font-normal text-center">
+			<h2 className="text-sm text-gray-500 font-normal text-center">
 				{message}
 			</h2>
 

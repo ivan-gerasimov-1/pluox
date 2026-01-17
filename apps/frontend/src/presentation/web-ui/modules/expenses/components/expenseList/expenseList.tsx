@@ -61,7 +61,7 @@ export function ExpenseList(props: TExpenseListProps) {
 								listType={Type.IOS}
 								className={cn(
 									'px-3 py-4 mt-3',
-									'rounded-2xl border-neutral-200/50 border',
+									'rounded-2xl border-gray-200/50 border',
 									'bg-white',
 								)}
 								trailingActions={
@@ -108,7 +108,7 @@ export function ExpenseList(props: TExpenseListProps) {
 									</div>
 
 									{(item.description || item.venue) && (
-										<div className="mt-2 text-xs text-neutral-600">
+										<div className="mt-2 text-xs text-gray-600">
 											{item.venue && <span>⚲ {getVenueName(item.venue)}</span>}
 											{item.venue && item.description && <span> | </span>}
 											{item.description}
