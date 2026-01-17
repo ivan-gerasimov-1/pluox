@@ -16,7 +16,7 @@ const buttonVariants = cva(
 	{
 		variants: {
 			intent: {
-				primary: ['border-gray-900', 'bg-gray-900 text-gray-50'],
+				primary: ['border-gray-900 bg-gray-900', ' text-gray-50!'],
 				danger: [
 					'border-red-500',
 					'bg-gray-50 text-red-500',
