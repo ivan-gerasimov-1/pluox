@@ -12,6 +12,10 @@ let paperVariants = cva(
 	],
 	{
 		variants: {
+			material: {
+				opaque: 'bg-white',
+				crystal: 'backdrop-blur-sm bg-white/50',
+			},
 			gap: {
 				sm: 'px-4 py-5',
 				base: 'px-5 py-6',
@@ -26,10 +30,6 @@ let paperVariants = cva(
 					'focus-visible:border-neutral-900',
 				],
 			},
-			transparent: {
-				false: null,
-				true: 'backdrop-blur-sm bg-white/25',
-			},
 			scrollable: {
 				false: null,
 				true: 'overflow-y-auto',
@@ -40,6 +40,7 @@ let paperVariants = cva(
 			},
 		},
 		defaultVariants: {
+			material: 'opaque',
 			gap: 'base',
 			interactive: false,
 		},
@@ -53,10 +54,10 @@ type TPaperProps = VariantProps<typeof paperVariants> &
 
 export function Paper({
 	className,
+	material,
 	gap,
 	interactive,
 	scrollable,
-	transparent,
 	disabled,
 	asChild,
 	children,
@@ -67,9 +68,9 @@ export function Paper({
 		<Component
 			className={paperVariants({
 				className,
+				material,
 				gap,
 				interactive,
-				transparent,
 				scrollable,
 				disabled,
 			})}
