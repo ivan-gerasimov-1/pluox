@@ -33,7 +33,7 @@ export function Badge({
 		<Component
 			className={cn(
 				'px-4 py-2.5',
-				'text-xs bg-white text-neutral-800 text-center leading-none whitespace-nowrap',
+				'text-xs bg-neutral-50 text-neutral-800 text-center leading-none whitespace-nowrap',
 				'border-neutral-200/50 rounded-2xl border',
 				className,
 			)}

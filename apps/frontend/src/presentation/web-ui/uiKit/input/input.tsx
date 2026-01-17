@@ -16,7 +16,7 @@ export function Input({ className, asChild, ...props }: TInputProps) {
 		<Component
 			className={cn(
 				'px-4 py-3 w-full',
-				'bg-white',
+				'bg-neutral-50',
 				'border-neutral-200/50 rounded-2xl border',
 				'text-sm placeholder:text-neutral-500 font-[inherit] text-inherit',
 				'appearance-none outline-0',

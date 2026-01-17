@@ -14,7 +14,7 @@
 	margin: 15px 15px 0 15px;
 	padding: 30px 25px;
 
-	background-color: var(--color-neutral-50);
+	background-color: var(--color-white);
 	box-shadow: var(--box-shadow-100);
 
 	border: 1px solid var(--color-neutral-200);
@@ -22,7 +22,7 @@
 
 	will-change: filter, opacity, transform;
 
-	z-index: 50;
+	z-index: 50 !important;
 	overflow: scroll;
 }
 
