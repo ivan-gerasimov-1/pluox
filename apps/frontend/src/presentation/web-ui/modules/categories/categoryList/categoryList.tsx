@@ -4,10 +4,6 @@ import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Grid, Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
 import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
-import {
-	ValueAction,
-	ValueActionLeading,
-} from '@/presentation/web-ui/uiKit/valueAction/valueAction';
 
 export function CategoryList() {
 	let categories = useCategoryListQuery();
@@ -16,13 +12,13 @@ export function CategoryList() {
 		<Grid>
 			{categories.map((category) => (
 				<Paper key={category.id} interactive asChild>
-					<Stack row asChild>
+					<Stack className="relative" asChild>
 						<AppLink to={`${EAppPath.CATEGORIES}/${category.id}`}>
-							<ListIcon>{category.icon ?? category.name[0]}</ListIcon>
+							<div className="text-sm">{category.name}</div>
 
-							<ValueAction>
-								<ValueActionLeading label={category.name} />
-							</ValueAction>
+							<ListIcon className="-right-0.5 -bottom-0.5 absolute">
+								{category.icon ?? category.name[0]}
+							</ListIcon>
 						</AppLink>
 					</Stack>
 				</Paper>
