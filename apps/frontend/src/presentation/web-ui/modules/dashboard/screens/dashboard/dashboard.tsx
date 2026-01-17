@@ -28,7 +28,7 @@ export function DashboardScreen() {
 
 	return (
 		<Grid className="grow" cols="2" rows="6">
-			<Card className="col-span-2 row-1" summary asChild>
+			<Card className="col-span-2 row-1" gap="sm" asChild>
 				<Stack className="items-center justify-center" row>
 					<CardHeader className="text-4xl!">
 						{intlService.formatCurrency(monthlyTotal, {
@@ -38,7 +38,7 @@ export function DashboardScreen() {
 				</Stack>
 			</Card>
 
-			<Card className="-rotate-z-2 justify-between" summary asChild>
+			<Card className="-rotate-z-2 justify-between" gap="sm" asChild>
 				<Stack>
 					<CardHeader>{intl.translate('today')}</CardHeader>
 
@@ -50,7 +50,7 @@ export function DashboardScreen() {
 				</Stack>
 			</Card>
 
-			<Card className="col-2 row-span-2 overflow-auto" summary asChild>
+			<Card className="col-2 row-span-2 overflow-auto" gap="sm" asChild>
 				<Stack>
 					<CardHeader>{intl.translate('categories')}</CardHeader>
 
@@ -75,7 +75,7 @@ export function DashboardScreen() {
 
 			<Card
 				className="col-1 row-span-2 overflow-auto opacity-50"
-				summary
+				gap="sm"
 				asChild
 			>
 				<Stack>
@@ -83,7 +83,7 @@ export function DashboardScreen() {
 				</Stack>
 			</Card>
 
-			<Card className="justify-between" summary asChild>
+			<Card className="justify-between" gap="sm" asChild>
 				<Stack>
 					<CardHeader>{intl.translate('leftover')}</CardHeader>
 
