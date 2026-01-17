@@ -8,8 +8,9 @@ import {
 } from '@/presentation/web-ui/modules/venues/queries/venues.query';
 import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Badge } from '@/presentation/web-ui/uiKit/badge/badge';
+import { Card } from '@/presentation/web-ui/uiKit/card/card';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { ListIcon, ListItem } from '@/presentation/web-ui/uiKit/list/list';
+import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
 import {
 	ValueAction,
 	ValueActionLeading,
@@ -24,35 +25,39 @@ export function VenueListScreen() {
 	return (
 		<Stack>
 			{venueList.map((venue) => (
-				<ListItem key={venue.id} asChild>
+				<Card key={venue.id} interactive asChild>
 					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
-						<ListIcon>{venue.name?.[0]}</ListIcon>
+						<Stack row>
+							<ListIcon>{venue.name?.[0]}</ListIcon>
 
-						<ValueAction>
-							<ValueActionLeading label={venue.name}>
-								{venue.categoryName}
-							</ValueActionLeading>
-						</ValueAction>
+							<ValueAction>
+								<ValueActionLeading label={venue.name}>
+									{venue.categoryName}
+								</ValueActionLeading>
+							</ValueAction>
+						</Stack>
 					</AppLink>
-				</ListItem>
+				</Card>
 			))}
 
 			{venueListArchived.map((venue) => (
-				<ListItem key={venue.id} asChild>
+				<Card key={venue.id} interactive asChild>
 					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
-						<ListIcon>{venue.name?.[0]}</ListIcon>
+						<Stack row>
+							<ListIcon>{venue.name?.[0]}</ListIcon>
 
-						<ValueAction>
-							<ValueActionLeading label={venue.name}>
-								{venue.categoryName}
-							</ValueActionLeading>
+							<ValueAction>
+								<ValueActionLeading label={venue.name}>
+									{venue.categoryName}
+								</ValueActionLeading>
 
-							<ValueActionTrailing>
-								<Badge>{intl.translate('archived')}</Badge>
-							</ValueActionTrailing>
-						</ValueAction>
+								<ValueActionTrailing>
+									<Badge>{intl.translate('archived')}</Badge>
+								</ValueActionTrailing>
+							</ValueAction>
+						</Stack>
 					</AppLink>
-				</ListItem>
+				</Card>
 			))}
 		</Stack>
 	);
