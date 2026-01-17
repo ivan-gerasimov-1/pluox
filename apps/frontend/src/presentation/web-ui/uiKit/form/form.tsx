@@ -64,12 +64,14 @@ export function FormInput({
 	autoFocus,
 	type,
 	autoComplete,
+	required,
 }: {
 	type: 'email' | 'password';
 	name: string;
 	label?: string;
 	autoFocus?: boolean;
 	autoComplete?: string;
+	required?: boolean;
 }) {
 	return (
 		<FormLabel for={name} text={label}>
@@ -79,6 +81,7 @@ export function FormInput({
 				name={name}
 				autoComplete={autoComplete}
 				autoFocus={autoFocus}
+				required={required}
 			/>
 		</FormLabel>
 	);
