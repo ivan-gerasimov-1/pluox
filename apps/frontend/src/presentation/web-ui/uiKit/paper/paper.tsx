@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'cva';
 
 import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 
-let cardVariants = cva(
+let paperVariants = cva(
 	[
 		'bg-white',
 		'border-neutral-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
@@ -42,12 +42,12 @@ let cardVariants = cva(
 	},
 );
 
-type TCardProps = VariantProps<typeof cardVariants> &
+type TPaperProps = VariantProps<typeof paperVariants> &
 	TSlottable & {
 		className?: string;
 	};
 
-export function Card({
+export function Paper({
 	className,
 	gap,
 	interactive,
@@ -55,12 +55,12 @@ export function Card({
 	disabled,
 	asChild,
 	children,
-}: React.PropsWithChildren<TCardProps>) {
+}: React.PropsWithChildren<TPaperProps>) {
 	let Component = asChild ? Slot : 'div';
 
 	return (
 		<Component
-			className={cardVariants({
+			className={paperVariants({
 				className,
 				gap,
 				interactive,

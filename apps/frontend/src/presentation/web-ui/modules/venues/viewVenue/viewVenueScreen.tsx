@@ -15,12 +15,12 @@ import {
 import { VenueNameActionSheet } from '@/presentation/web-ui/modules/venues/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
 import { venueViewScreenI18n } from '@/presentation/web-ui/modules/venues/viewVenue/viewVenueScreen.i18n';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
-import { Card } from '@/presentation/web-ui/uiKit/card/card';
 import { useDialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { Icon } from '@/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
 import {
 	ValueAction,
 	ValueActionLeading,
@@ -51,7 +51,7 @@ export function VenueViewScreen() {
 
 	return (
 		<Stack>
-			<Card asChild>
+			<Paper asChild>
 				<Stack>
 					<ValueAction>
 						<ValueActionLeading label="ID">{venue.id}</ValueActionLeading>
@@ -85,7 +85,7 @@ export function VenueViewScreen() {
 						</ValueActionTrailing>
 					</ValueAction>
 				</Stack>
-			</Card>
+			</Paper>
 
 			<Stack row>
 				<Button
