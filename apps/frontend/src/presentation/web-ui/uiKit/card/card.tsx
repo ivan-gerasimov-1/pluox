@@ -8,7 +8,7 @@ let cardVariants = cva(
 	[
 		'px-5 py-6',
 		'bg-white',
-		'border-neutral-200/50 rounded-2xl border',
+		'border-neutral-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
 		'shadow-xl shadow-neutral-200/25',
 		'z-10 transition outline-none',
 	],
@@ -25,7 +25,7 @@ let cardVariants = cva(
 			},
 			summary: {
 				false: null,
-				true: 'px-4! py-5! rounded-tl-lg rounded-br-3xl',
+				true: 'px-4! py-5!',
 			},
 		},
 		defaultVariants: {
