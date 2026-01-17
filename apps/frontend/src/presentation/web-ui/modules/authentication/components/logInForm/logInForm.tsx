@@ -63,7 +63,13 @@ export function LogInForm() {
 
 				<Form name="signIn" onSubmit={onSubmit}>
 					<FormGroup>
-						<FormInput type="email" name="email" label="Почта" autoFocus />
+						<FormInput
+							type="email"
+							name="email"
+							label="Почта"
+							autoComplete="email"
+							autoFocus
+						/>
 					</FormGroup>
 
 					<FormGroup className="gap-2!">
@@ -85,14 +91,14 @@ export function LogInForm() {
 					<Button type="submit" disabled={pending}>
 						{pending ? 'Загрузка…' : 'Войти'}
 					</Button>
-
-					<AppLink
-						className="text-sm text-indigo-500! text-center"
-						to={EAppPath.SIGN_UP}
-					>
-						Создать аккаунт
-					</AppLink>
 				</Form>
+
+				<AppLink
+					className="text-sm text-indigo-500! text-center"
+					to={EAppPath.SIGN_UP}
+				>
+					Создать аккаунт
+				</AppLink>
 			</Stack>
 		</Paper>
 	);
