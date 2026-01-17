@@ -1,8 +1,5 @@
 import { EAppPath } from '@/presentation/web-ui/appPath';
-import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
-import { usePending } from '@/presentation/web-ui/hooks/usePending';
-import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
-import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
+import { useLogin } from '@/presentation/web-ui/modules/authentication/hooks/useLogin/useLogin';
 import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import {
@@ -13,46 +10,9 @@ import {
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
-import { delay } from '@/presentation/web-ui/utils/delay';
-
-export function useLoginForm() {
-	let authService = useService(EServiceToken.AUTH_SERVICE);
-	let navigation = useAppNavigation();
-
-	let { pending, setPending } = usePending();
-
-	async function onSubmit(payload: {
-		email: {
-			value: string;
-		};
-		password: {
-			value: string;
-		};
-	}) {
-		let email = payload.email.value;
-		let password = payload.password.value;
-
-		try {
-			setPending(true);
-
-			await authService.logIn(email, password);
-
-			navigation.mainPage();
-		} finally {
-			await delay(500);
-
-			setPending(false);
-		}
-	}
-
-	return {
-		pending,
-		onSubmit,
-	};
-}
 
 export function LogInForm() {
-	let { onSubmit, pending } = useLoginForm();
+	let { mutate: login, isPending } = useLogin();
 
 	return (
 		<Paper className="px-10 py-15 w-96 max-w-full" asChild>
@@ -61,7 +21,7 @@ export function LogInForm() {
 					Pluox
 				</Title>
 
-				<Form name="signIn" onSubmit={onSubmit}>
+				<Form name="signIn" onSubmit={login}>
 					<FormGroup>
 						<FormInput
 							type="email"
@@ -90,8 +50,8 @@ export function LogInForm() {
 						</AppLink>
 					</FormGroup>
 
-					<Button type="submit" disabled={pending}>
-						{pending ? 'Загрузка…' : 'Войти'}
+					<Button type="submit" disabled={isPending}>
+						{isPending ? 'Загрузка…' : 'Войти'}
 					</Button>
 				</Form>
 
