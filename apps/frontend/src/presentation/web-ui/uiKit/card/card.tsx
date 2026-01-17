@@ -74,16 +74,22 @@ export function Card({
 	);
 }
 
-type CardHeaderProps = {
+type TitleProps = {
 	className?: string;
 	as?: React.ElementType;
 };
 
-export function CardHeader({
+/**
+ * @todo
+ * 1. Add level prop: top (h1), base (h2), sub (h3).
+ *   - Default is base
+ *   - Top is visually hidden by default (?) or add hidden prop
+ */
+export function Title({
 	className,
 	as: As = 'h2',
 	children,
-}: React.PropsWithChildren<CardHeaderProps>) {
+}: React.PropsWithChildren<TitleProps>) {
 	return (
 		<As className={cls('text-sm tracking-tight', className)}>{children}</As>
 	);

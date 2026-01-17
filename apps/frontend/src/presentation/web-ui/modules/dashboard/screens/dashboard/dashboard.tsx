@@ -8,7 +8,7 @@ import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@/presentation/web-ui/modules/settings/queries/appConfig';
-import { Card, CardHeader } from '@/presentation/web-ui/uiKit/card/card';
+import { Card, Title } from '@/presentation/web-ui/uiKit/card/card';
 import { DotSpace } from '@/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { Grid, Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 
@@ -30,17 +30,17 @@ export function DashboardScreen() {
 		<Grid className="grow" cols="2" rows="6">
 			<Card className="col-span-2 row-1" gap="sm" asChild>
 				<Stack className="items-center justify-center" row>
-					<CardHeader className="text-4xl!">
+					<Title className="text-4xl!">
 						{intlService.formatCurrency(monthlyTotal, {
 							hideDecimal: true,
 						})}
-					</CardHeader>
+					</Title>
 				</Stack>
 			</Card>
 
 			<Card className="-rotate-z-2 justify-between" gap="sm" asChild>
 				<Stack>
-					<CardHeader>{intl.translate('today')}</CardHeader>
+					<Title>{intl.translate('today')}</Title>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
 						{intlService.formatCurrency(dailyTotal, {
@@ -52,7 +52,7 @@ export function DashboardScreen() {
 
 			<Card className="col-2 row-span-2 overflow-auto" gap="sm" asChild>
 				<Stack>
-					<CardHeader>{intl.translate('categories')}</CardHeader>
+					<Title>{intl.translate('categories')}</Title>
 
 					<ul className="gap-2 m-0 p-0 font-semibold flex w-full flex-col">
 						{categories.map(({ id, total }) => (
@@ -75,13 +75,13 @@ export function DashboardScreen() {
 
 			<Card className="col-1 row-span-2" gap="sm" scrollable disabled asChild>
 				<Stack>
-					<CardHeader>{intl.translate('venues')}</CardHeader>
+					<Title>{intl.translate('venues')}</Title>
 				</Stack>
 			</Card>
 
 			<Card className="justify-between" gap="sm" asChild>
 				<Stack>
-					<CardHeader>{intl.translate('leftover')}</CardHeader>
+					<Title>{intl.translate('leftover')}</Title>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
 						{intlService.formatCurrency(leftover, {

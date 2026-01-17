@@ -21,7 +21,7 @@ import { settingsI18n } from '@/presentation/web-ui/modules/settings/screens/set
 import { useVenueListUnarchivedQuery } from '@/presentation/web-ui/modules/venues/queries/venues.query';
 import { Badge, Badges } from '@/presentation/web-ui/uiKit/badge/badge';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
-import { Card, CardHeader } from '@/presentation/web-ui/uiKit/card/card';
+import { Card, Title } from '@/presentation/web-ui/uiKit/card/card';
 import { useDialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
@@ -56,7 +56,7 @@ export function SettingsScreen() {
 		<>
 			<Card asChild>
 				<Stack>
-					<CardHeader>{intl.translate('userSectionTitle')}</CardHeader>
+					<Title>{intl.translate('userSectionTitle')}</Title>
 
 					<ValueAction>
 						<ValueActionLeading label={intl.translate('userName')}>
@@ -101,7 +101,7 @@ export function SettingsScreen() {
 
 			<Card asChild>
 				<Stack>
-					<CardHeader>{intl.translate('appSectionTitle')}</CardHeader>
+					<Title>{intl.translate('appSectionTitle')}</Title>
 
 					<ValueAction>
 						<ValueActionLeading label={intl.translate('appLanguage')}>
@@ -118,7 +118,7 @@ export function SettingsScreen() {
 
 			<Card asChild>
 				<Stack>
-					<CardHeader>{intl.translate('currencySectionTitle')}</CardHeader>
+					<Title>{intl.translate('currencySectionTitle')}</Title>
 
 					<ValueAction>
 						<ValueActionLeading label={intl.translate('currencyMain')}>
@@ -156,7 +156,7 @@ export function SettingsScreen() {
 
 			<Card asChild>
 				<Stack>
-					<CardHeader>{intl.translate('budgetSectionTitle')}</CardHeader>
+					<Title>{intl.translate('budgetSectionTitle')}</Title>
 
 					<ValueAction>
 						<ValueActionLeading label={appConfig.currency}>
@@ -186,7 +186,7 @@ export function SettingsScreen() {
 
 			<Card asChild>
 				<Stack>
-					<CardHeader>{intl.translate('categoriesSectionTitle')}</CardHeader>
+					<Title>{intl.translate('categoriesSectionTitle')}</Title>
 
 					<ValueAction>
 						<ValueActionLeading>
@@ -209,7 +209,7 @@ export function SettingsScreen() {
 
 			<Card asChild>
 				<Stack>
-					<CardHeader>{intl.translate('venuesSectionTitle')}</CardHeader>
+					<Title>{intl.translate('venuesSectionTitle')}</Title>
 
 					<ValueAction>
 						<ValueActionLeading>
