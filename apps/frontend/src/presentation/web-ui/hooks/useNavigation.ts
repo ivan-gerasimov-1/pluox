@@ -7,9 +7,12 @@ import { EAppPath } from '@/presentation/web-ui/appPath';
 interface IAppNavigation {
 	to: (path: string, options?: { replace?: boolean }) => void;
 
-	mainPage(): void;
 	loginPage(): void;
 	signupPage(): void;
+
+	mainPage(): void;
+
+	dashboardPage(): void;
 
 	categoryListPage(): void;
 	categoryPage(id: Id): void;
@@ -22,7 +25,7 @@ interface IAppNavigation {
 export function useAppNavigation(): IAppNavigation {
 	const navigate = useNavigate();
 
-	function goToMainPage() {
+	function goToDashboardPage() {
 		navigate(EAppPath.DASHBOARD, {
 			replace: true,
 		});
@@ -63,9 +66,12 @@ export function useAppNavigation(): IAppNavigation {
 	return {
 		to: navigate,
 
-		mainPage: goToMainPage,
 		loginPage: goToLoginPage,
 		signupPage: goToSignupPage,
+
+		mainPage: goToDashboardPage,
+
+		dashboardPage: goToDashboardPage,
 
 		categoryListPage: goToCategoryListPage,
 		categoryPage: goToCategoryPage,
