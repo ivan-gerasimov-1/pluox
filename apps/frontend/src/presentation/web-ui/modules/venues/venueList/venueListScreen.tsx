@@ -10,7 +10,7 @@ import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Badge } from '@/presentation/web-ui/uiKit/badge/badge';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import {
 	ValueAction,
 	ValueActionLeading,
@@ -25,7 +25,7 @@ export function VenueListScreen() {
 	return (
 		<Stack>
 			{venueList.map((venue) => (
-				<Paper key={venue.id} interactive asChild>
+				<Sheet key={venue.id} interactive asChild>
 					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
 						<Stack row>
 							<ListIcon>{venue.name?.[0]}</ListIcon>
@@ -37,11 +37,11 @@ export function VenueListScreen() {
 							</ValueAction>
 						</Stack>
 					</AppLink>
-				</Paper>
+				</Sheet>
 			))}
 
 			{venueListArchived.map((venue) => (
-				<Paper key={venue.id} interactive asChild>
+				<Sheet key={venue.id} interactive asChild>
 					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
 						<Stack row>
 							<ListIcon>{venue.name?.[0]}</ListIcon>
@@ -57,7 +57,7 @@ export function VenueListScreen() {
 							</ValueAction>
 						</Stack>
 					</AppLink>
-				</Paper>
+				</Sheet>
 			))}
 		</Stack>
 	);

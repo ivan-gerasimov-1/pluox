@@ -20,7 +20,7 @@ import { Icon } from '@/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import {
 	ValueAction,
 	ValueActionLeading,
@@ -51,7 +51,7 @@ export function VenueViewScreen() {
 
 	return (
 		<Stack>
-			<Paper asChild>
+			<Sheet asChild>
 				<Stack>
 					<ValueAction>
 						<ValueActionLeading label="ID">{venue.id}</ValueActionLeading>
@@ -85,7 +85,7 @@ export function VenueViewScreen() {
 						</ValueActionTrailing>
 					</ValueAction>
 				</Stack>
-			</Paper>
+			</Sheet>
 
 			<Stack row>
 				<Button

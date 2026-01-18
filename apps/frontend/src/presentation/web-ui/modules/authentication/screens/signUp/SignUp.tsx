@@ -8,14 +8,14 @@ import {
 	FormInput,
 } from '@/presentation/web-ui/uiKit/form/form';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
 
 export function SignUpScreen() {
 	let { mutate: signup, isPending } = useSignup();
 
 	return (
-		<Paper className="px-10 py-15 w-96 max-w-full" asChild>
+		<Sheet className="px-10 py-15 w-96 max-w-full" asChild>
 			<Stack className="gap-10">
 				<Title as="h1" className="text-2xl!">
 					Pluox
@@ -55,6 +55,6 @@ export function SignUpScreen() {
 					Войти
 				</AppLink>
 			</Stack>
-		</Paper>
+		</Sheet>
 	);
 }

@@ -1,5 +1,5 @@
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TNavbarProps = {
@@ -11,7 +11,7 @@ export function Navbar({
 	children,
 }: React.PropsWithChildren<TNavbarProps>) {
 	return (
-		<Paper material="crystal" asChild>
+		<Sheet material="crystal" asChild>
 			<Stack
 				id={id}
 				className={cn(
@@ -23,6 +23,6 @@ export function Navbar({
 			>
 				{children}
 			</Stack>
-		</Paper>
+		</Sheet>
 	);
 }

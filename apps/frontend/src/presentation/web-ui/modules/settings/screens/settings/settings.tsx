@@ -25,7 +25,7 @@ import { useDialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/useDi
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
 import {
 	ValueAction,
@@ -55,7 +55,7 @@ export function SettingsScreen() {
 
 	return (
 		<>
-			<Paper asChild>
+			<Sheet asChild>
 				<Stack>
 					<Title>{intl.translate('userSectionTitle')}</Title>
 
@@ -98,9 +98,9 @@ export function SettingsScreen() {
 						</Button>
 					</ValueAction>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper asChild>
+			<Sheet asChild>
 				<Stack>
 					<Title>{intl.translate('appSectionTitle')}</Title>
 
@@ -115,9 +115,9 @@ export function SettingsScreen() {
 						/>
 					</ValueAction>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper asChild>
+			<Sheet asChild>
 				<Stack>
 					<Title>{intl.translate('currencySectionTitle')}</Title>
 
@@ -153,9 +153,9 @@ export function SettingsScreen() {
 						/>
 					</ValueAction>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper asChild>
+			<Sheet asChild>
 				<Stack>
 					<Title>{intl.translate('budgetSectionTitle')}</Title>
 
@@ -183,9 +183,9 @@ export function SettingsScreen() {
 						/>
 					</ValueAction>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper asChild>
+			<Sheet asChild>
 				<Stack>
 					<Title>{intl.translate('categoriesSectionTitle')}</Title>
 
@@ -206,9 +206,9 @@ export function SettingsScreen() {
 						/>
 					</ValueAction>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper asChild>
+			<Sheet asChild>
 				<Stack>
 					<Title>{intl.translate('venuesSectionTitle')}</Title>
 
@@ -229,7 +229,7 @@ export function SettingsScreen() {
 						/>
 					</ValueAction>
 				</Stack>
-			</Paper>
+			</Sheet>
 		</>
 	);
 }

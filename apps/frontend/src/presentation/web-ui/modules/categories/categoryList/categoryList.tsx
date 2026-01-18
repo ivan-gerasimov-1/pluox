@@ -3,7 +3,7 @@ import { useCategoryListQuery } from '@/presentation/web-ui/modules/categories/q
 import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Grid, Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 
 export function CategoryList() {
 	let categories = useCategoryListQuery();
@@ -11,7 +11,7 @@ export function CategoryList() {
 	return (
 		<Grid>
 			{categories.map((category) => (
-				<Paper key={category.id} interactive asChild>
+				<Sheet key={category.id} interactive asChild>
 					<Stack className="relative" asChild>
 						<AppLink to={`${EAppPath.CATEGORIES}/${category.id}`}>
 							<div className="text-sm">{category.name}</div>
@@ -21,7 +21,7 @@ export function CategoryList() {
 							</ListIcon>
 						</AppLink>
 					</Stack>
-				</Paper>
+				</Sheet>
 			))}
 		</Grid>
 	);

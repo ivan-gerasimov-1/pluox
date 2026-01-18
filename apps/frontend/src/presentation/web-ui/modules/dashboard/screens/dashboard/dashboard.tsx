@@ -10,7 +10,7 @@ import { useService } from '@/presentation/web-ui/modules/serviceContainer/useSe
 import { useAppConfigBudgetQuery } from '@/presentation/web-ui/modules/settings/queries/appConfig';
 import { DotSpace } from '@/presentation/web-ui/uiKit/dotSpace/dotSpace';
 import { Grid, Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
 
 export function DashboardScreen() {
@@ -29,7 +29,7 @@ export function DashboardScreen() {
 
 	return (
 		<Grid className="grow" cols="2" rows="6">
-			<Paper className="col-span-2 row-1" gap="sm" asChild>
+			<Sheet className="col-span-2 row-1" gap="sm" asChild>
 				<Stack className="items-center justify-center" row>
 					<Title className="text-4xl!">
 						{intlService.formatCurrency(monthlyTotal, {
@@ -37,9 +37,9 @@ export function DashboardScreen() {
 						})}
 					</Title>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper className="-rotate-z-2 justify-between" gap="sm" asChild>
+			<Sheet className="-rotate-z-2 justify-between" gap="sm" asChild>
 				<Stack>
 					<Title>{intl.translate('today')}</Title>
 
@@ -49,9 +49,9 @@ export function DashboardScreen() {
 						})}
 					</div>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper className="col-2 row-span-2 overflow-auto" gap="sm" asChild>
+			<Sheet className="col-2 row-span-2 overflow-auto" gap="sm" asChild>
 				<Stack>
 					<Title>{intl.translate('categories')}</Title>
 
@@ -72,15 +72,15 @@ export function DashboardScreen() {
 						))}
 					</ul>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper className="col-1 row-span-2" gap="sm" scrollable disabled asChild>
+			<Sheet className="col-1 row-span-2" gap="sm" scrollable disabled asChild>
 				<Stack>
 					<Title>{intl.translate('venues')}</Title>
 				</Stack>
-			</Paper>
+			</Sheet>
 
-			<Paper className="justify-between" gap="sm" asChild>
+			<Sheet className="justify-between" gap="sm" asChild>
 				<Stack>
 					<Title>{intl.translate('leftover')}</Title>
 
@@ -90,7 +90,7 @@ export function DashboardScreen() {
 						})}
 					</div>
 				</Stack>
-			</Paper>
+			</Sheet>
 		</Grid>
 	);
 }

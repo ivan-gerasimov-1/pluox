@@ -12,7 +12,7 @@ import { useVenueCreateMutation } from '@/presentation/web-ui/modules/venues/que
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
-import { Paper } from '@/presentation/web-ui/uiKit/paper/paper';
+import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import {
 	ValueAction,
 	ValueActionLeading,
@@ -50,7 +50,7 @@ export function CreateVenueScreen() {
 
 	return (
 		<Stack>
-			<Paper asChild>
+			<Sheet asChild>
 				<form id="createVenueForm" onSubmit={onSubmit}>
 					<ValueAction>
 						<ValueActionLeading
@@ -89,7 +89,7 @@ export function CreateVenueScreen() {
 						</ValueActionLeading>
 					</ValueAction>
 				</form>
-			</Paper>
+			</Sheet>
 
 			<Button type="submit" form="createVenueForm" wide>
 				{intl.translate('add')}
