@@ -15,6 +15,7 @@ interface IAppNavigation {
 
 	venueListPage(): void;
 	venuePage(id: Id): void;
+	venueCreatePage(): void;
 }
 
 export function useAppNavigation(): IAppNavigation {
@@ -48,6 +49,10 @@ export function useAppNavigation(): IAppNavigation {
 		navigate(`${EAppPath.VENUES}/${id}`);
 	}
 
+	function goToVenueCreatePage() {
+		navigate(EAppPath.VENUES_CREATE);
+	}
+
 	return {
 		to: navigate,
 		mainPage: goToMainPage,
@@ -56,5 +61,6 @@ export function useAppNavigation(): IAppNavigation {
 		categoryPage: goToCategoryPage,
 		venueListPage: goToVenueListPage,
 		venuePage: goToVenuePage,
+		venueCreatePage: goToVenueCreatePage,
 	};
 }
