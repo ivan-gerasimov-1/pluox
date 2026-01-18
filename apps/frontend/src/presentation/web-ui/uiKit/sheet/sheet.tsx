@@ -7,9 +7,7 @@ let sheetVariants = cva(
 	[
 		'border-gray-200/50 border',
 		'rounded-2xl rounded-tl-xl rounded-br-3xl',
-		'shadow-xl shadow-gray-200/50',
-		'z-10 transition',
-		'overflow-x-hidden overflow-y-scroll',
+		'shadow-xl shadow-gray-100',
 	],
 	{
 		variants: {
@@ -18,18 +16,24 @@ let sheetVariants = cva(
 				glass: 'backdrop-blur-sm bg-white/50',
 			},
 			gap: {
+				xs: 'px-3 py-4',
 				sm: 'px-4 py-5',
 				base: 'px-5 py-6',
-				lg: '',
+				lg: 'px-6 py-7',
 			},
 			interactive: {
 				false: null,
 				true: [
+					'transition',
 					'outline-none',
 					'hover:border-gray-200 hover:translate-y-0.5 hover:shadow-gray-50',
 					'focus-visible:border-gray-900',
 					'active:translate-y-1',
 				],
+			},
+			scrollable: {
+				false: 'overflow-hidden',
+				true: 'overflow-y-auto',
 			},
 			disabled: {
 				false: null,
@@ -40,6 +44,8 @@ let sheetVariants = cva(
 			material: 'paper',
 			gap: 'base',
 			interactive: false,
+			scrollable: false,
+			disabled: false,
 		},
 	},
 );
