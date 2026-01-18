@@ -26,21 +26,15 @@ export function useAppNavigation(): IAppNavigation {
 	const navigate = useNavigate();
 
 	function goToDashboardPage() {
-		navigate(EAppPath.DASHBOARD, {
-			replace: true,
-		});
+		navigate(EAppPath.DASHBOARD);
 	}
 
 	function goToLoginPage() {
-		navigate(EAppPath.LOG_IN, {
-			replace: true,
-		});
+		navigate(EAppPath.LOG_IN);
 	}
 
 	function goToSignupPage() {
-		navigate(EAppPath.LOG_IN, {
-			replace: true,
-		});
+		navigate(EAppPath.SIGN_UP);
 	}
 
 	function goToCategoryListPage() {
