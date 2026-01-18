@@ -11,7 +11,7 @@ export function Navbar({
 	children,
 }: React.PropsWithChildren<TNavbarProps>) {
 	return (
-		<Sheet material="crystal" asChild>
+		<Sheet material="glass" asChild>
 			<Stack
 				id={id}
 				className={cn(

@@ -41,7 +41,7 @@ let sheetVariants = cva(
 			},
 		},
 		defaultVariants: {
-			material: 'opaque',
+			material: 'paper',
 			gap: 'base',
 			interactive: false,
 		},
