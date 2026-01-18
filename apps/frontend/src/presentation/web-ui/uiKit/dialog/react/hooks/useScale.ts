@@ -4,7 +4,6 @@ let classNames = {
 	open: ['transition', 'scale-95'],
 	beforeClose: ['transition', 'scale-100'],
 };
-let allClassNames = [...classNames.open, ...classNames.beforeClose];
 
 export function useScale(isScaled: boolean): void {
 	useEffect(() => {
@@ -30,7 +29,10 @@ export function useScale(isScaled: boolean): void {
 
 			requestAnimationFrame(() => {
 				for (let element of elements) {
-					element?.classList.add(...allClassNames);
+					element?.classList.remove(
+						...classNames.open,
+						...classNames.beforeClose,
+					);
 				}
 			});
 		};
