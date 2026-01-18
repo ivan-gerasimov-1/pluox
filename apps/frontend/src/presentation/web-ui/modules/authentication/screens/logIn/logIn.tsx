@@ -1,6 +1,5 @@
 import { EAppPath } from '@/presentation/web-ui/appPath';
 import { useLogin } from '@/presentation/web-ui/modules/authentication/hooks/useLogin/useLogin';
-import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import {
 	Form,
@@ -8,6 +7,7 @@ import {
 	FormInput,
 } from '@/presentation/web-ui/uiKit/form/form';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
+import { NavLink } from '@/presentation/web-ui/uiKit/navLink/navLink';
 import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
 
@@ -42,12 +42,12 @@ export function LogInScreen() {
 							required
 						/>
 
-						<AppLink
+						<NavLink
 							className="text-sm text-indigo-500! text-right"
 							to={EAppPath.SIGN_UP}
 						>
 							Забыли пароль?
-						</AppLink>
+						</NavLink>
 					</FormGroup>
 
 					<Button type="submit" disabled={isPending}>
@@ -55,12 +55,12 @@ export function LogInScreen() {
 					</Button>
 				</Form>
 
-				<AppLink
+				<NavLink
 					className="text-sm text-indigo-500! text-center"
 					to={EAppPath.SIGN_UP}
 				>
 					Создать аккаунт
-				</AppLink>
+				</NavLink>
 			</Stack>
 		</Sheet>
 	);

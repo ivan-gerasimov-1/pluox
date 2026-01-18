@@ -6,10 +6,10 @@ import {
 	useVenueListArchivedQuery,
 	useVenueListUnarchivedQuery,
 } from '@/presentation/web-ui/modules/venues/queries/venues.query';
-import { AppLink } from '@/presentation/web-ui/uiKit/appLink/appLink';
 import { Badge } from '@/presentation/web-ui/uiKit/badge/badge';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { ListIcon } from '@/presentation/web-ui/uiKit/list/list';
+import { NavLink } from '@/presentation/web-ui/uiKit/navLink/navLink';
 import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import {
 	ValueAction,
@@ -26,7 +26,7 @@ export function VenueListScreen() {
 		<Stack>
 			{venueList.map((venue) => (
 				<Sheet key={venue.id} interactive asChild>
-					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
+					<NavLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
 						<Stack row>
 							<ListIcon>{venue.name?.[0]}</ListIcon>
 
@@ -36,13 +36,13 @@ export function VenueListScreen() {
 								</ValueActionLeading>
 							</ValueAction>
 						</Stack>
-					</AppLink>
+					</NavLink>
 				</Sheet>
 			))}
 
 			{venueListArchived.map((venue) => (
 				<Sheet key={venue.id} interactive asChild>
-					<AppLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
+					<NavLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
 						<Stack row>
 							<ListIcon>{venue.name?.[0]}</ListIcon>
 
@@ -56,7 +56,7 @@ export function VenueListScreen() {
 								</ValueActionTrailing>
 							</ValueAction>
 						</Stack>
-					</AppLink>
+					</NavLink>
 				</Sheet>
 			))}
 		</Stack>

@@ -1,24 +1,24 @@
-import { NavLink } from 'react-router';
+import { NavLink as RouterLink } from 'react-router';
 
 import { cn } from '@/presentation/web-ui/utils/classnames';
 
-type TAppLinkProps = {
+type TNavLinkProps = {
 	className?: string;
 
 	to: string;
 };
 
-export function AppLink({
+export function NavLink({
 	className,
 	to,
 	children,
-}: React.PropsWithChildren<TAppLinkProps>) {
+}: React.PropsWithChildren<TNavLinkProps>) {
 	return (
-		<NavLink
+		<RouterLink
 			className={cn('leading-none text-inherit no-underline', className)}
 			to={to}
 		>
 			{children}
-		</NavLink>
+		</RouterLink>
 	);
 }
