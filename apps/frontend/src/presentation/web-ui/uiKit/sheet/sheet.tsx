@@ -5,16 +5,16 @@ import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 
 let sheetVariants = cva(
 	[
-		'bg-white',
 		'border-gray-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
 		'shadow-xl shadow-gray-200/50',
-		'z-10 transition outline-none overflow-hidden',
+		'z-10 transition',
+		'overflow-x-hidden overflow-y-scroll',
 	],
 	{
 		variants: {
 			material: {
-				opaque: 'bg-white',
-				crystal: 'backdrop-blur-sm bg-white/50',
+				paper: 'bg-white',
+				glass: 'backdrop-blur-sm bg-white/50',
 			},
 			gap: {
 				sm: 'px-4 py-5',
@@ -24,12 +24,13 @@ let sheetVariants = cva(
 			interactive: {
 				false: null,
 				true: [
-					'',
+					'outline-none',
 					'hover:border-gray-200 hover:translate-y-0.5 hover:shadow-gray-50',
-					'active:translate-y-1',
 					'focus-visible:border-gray-900',
+					'active:translate-y-1',
 				],
 			},
+			/** @deprecated */
 			scrollable: {
 				false: null,
 				true: 'overflow-y-auto',
@@ -58,9 +59,9 @@ export function Sheet({
 	gap,
 	interactive,
 	scrollable,
-	disabled,
 	asChild,
 	children,
+	...props
 }: React.PropsWithChildren<TSheetProps>) {
 	let Component = asChild ? Slot : 'div';
 
@@ -72,8 +73,9 @@ export function Sheet({
 				gap,
 				interactive,
 				scrollable,
-				disabled,
+				disabled: props.disabled,
 			})}
+			{...props}
 		>
 			{children}
 		</Component>
