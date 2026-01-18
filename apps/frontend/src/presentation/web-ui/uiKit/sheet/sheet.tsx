@@ -5,7 +5,8 @@ import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 
 let sheetVariants = cva(
 	[
-		'border-gray-200/50 rounded-2xl rounded-tl-xl rounded-br-3xl border',
+		'border-gray-200/50 border',
+		'rounded-2xl rounded-tl-xl rounded-br-3xl',
 		'shadow-xl shadow-gray-200/50',
 		'z-10 transition',
 		'overflow-x-hidden overflow-y-scroll',
@@ -30,11 +31,6 @@ let sheetVariants = cva(
 					'active:translate-y-1',
 				],
 			},
-			/** @deprecated */
-			scrollable: {
-				false: null,
-				true: 'overflow-y-auto',
-			},
 			disabled: {
 				false: null,
 				true: 'opacity-50 pointer-events-none',
@@ -58,7 +54,6 @@ export function Sheet({
 	material,
 	gap,
 	interactive,
-	scrollable,
 	asChild,
 	children,
 	...props
@@ -72,7 +67,6 @@ export function Sheet({
 				material,
 				gap,
 				interactive,
-				scrollable,
 				disabled: props.disabled,
 			})}
 			{...props}
