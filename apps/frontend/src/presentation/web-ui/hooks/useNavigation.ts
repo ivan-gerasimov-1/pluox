@@ -9,6 +9,7 @@ interface IAppNavigation {
 
 	mainPage(): void;
 	loginPage(): void;
+	signupPage(): void;
 
 	categoryListPage(): void;
 	categoryPage(id: Id): void;
@@ -28,6 +29,12 @@ export function useAppNavigation(): IAppNavigation {
 	}
 
 	function goToLoginPage() {
+		navigate(EAppPath.LOG_IN, {
+			replace: true,
+		});
+	}
+
+	function goToSignupPage() {
 		navigate(EAppPath.LOG_IN, {
 			replace: true,
 		});
@@ -55,10 +62,14 @@ export function useAppNavigation(): IAppNavigation {
 
 	return {
 		to: navigate,
+
 		mainPage: goToMainPage,
 		loginPage: goToLoginPage,
+		signupPage: goToSignupPage,
+
 		categoryListPage: goToCategoryListPage,
 		categoryPage: goToCategoryPage,
+
 		venueListPage: goToVenueListPage,
 		venuePage: goToVenuePage,
 		venueCreatePage: goToVenueCreatePage,
