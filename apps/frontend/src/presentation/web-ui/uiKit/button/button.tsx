@@ -10,8 +10,8 @@ const buttonVariants = cva(
 		'outline-0 transition',
 		'disabled:opacity-75 disabled:pointer-events-none',
 		'hover:scale-98 hover:translate-y-0.5 hover:shadow-[0_0_0_3px_var(--color-gray-50)_inset]',
-		'focus:shadow-[0_0_0_3px_var(--color-gray-50)_inset]',
-		'active:shadow-[0_0_0_5px_var(--color-gray-50)_inset]',
+		'focus:scale-98 focus:translate-y-0.5 focus:shadow-[0_0_0_3px_var(--color-gray-50)_inset]',
+		'active:scale-98 active:translate-y-0.5 active:shadow-[0_0_0_5px_var(--color-gray-50)_inset]',
 	],
 	{
 		variants: {
