@@ -12,12 +12,16 @@ type TBaseProps = {
 type TStackProps = TBaseProps &
 	TSlottable & {
 		row?: boolean;
+		center?: boolean;
+		between?: boolean;
 	};
 
 export function Stack({
 	id,
 	className,
 	row,
+	center,
+	between,
 	asChild,
 	children,
 }: React.PropsWithChildren<TStackProps>) {
@@ -28,6 +32,8 @@ export function Stack({
 			id={id}
 			className={cn('gap-4 flex flex-col', className, {
 				'flex-row': row,
+				'items-center justify-center': center,
+				'justify-between': between,
 			})}
 		>
 			{children}
