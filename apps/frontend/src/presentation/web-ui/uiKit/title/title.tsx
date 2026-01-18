@@ -17,6 +17,8 @@ export function Title({
 	children,
 }: React.PropsWithChildren<TitleProps>) {
 	return (
-		<As className={cn('text-sm tracking-tight', className)}>{children}</As>
+		<As className={cn('text-sm tracking-tight font-semibold', className)}>
+			{children}
+		</As>
 	);
 }
