@@ -1,7 +1,10 @@
+import { NavLink as RouterLink } from 'react-router';
+
 import { EAppPath } from '@/presentation/web-ui/appPath';
+import { Icon } from '@/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { EIconSize } from '@/presentation/web-ui/uiKit/icon/iconSize';
-import { IconLink } from '@/presentation/web-ui/uiKit/iconLink/iconLink';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { Navbar } from '@/presentation/web-ui/uiKit/navbar/navbar';
 import { cn } from '@/presentation/web-ui/utils/classnames';
 
@@ -15,32 +18,28 @@ export function AppNavbar({ id, Actions }: TAppNavbarProps) {
 		<Navbar id={id}>
 			{Actions && <Actions />}
 
-			<div
-				className={cn(
-					'flex justify-between',
-					'*:p-5 *:text-gray-500 *:[.active]:text-gray-800 *:transition-colors',
-				)}
+			<Stack
+				className={cn([
+					'*:flex',
+					'*:p-5',
+					'*:text-gray-500 *:[.active]:text-gray-800',
+					'*:transition-colors',
+				])}
+				row
+				between
 			>
-				<IconLink
-					className="-ml-2.5"
-					to={EAppPath.DASHBOARD}
-					iconName={EIconName.Circle}
-					iconSize={EIconSize.LARGE}
-				/>
+				<RouterLink className="-ml-2.5" to={EAppPath.DASHBOARD}>
+					<Icon name={EIconName.Circle} size={EIconSize.LARGE} />
+				</RouterLink>
 
-				<IconLink
-					to={EAppPath.EXPENSES}
-					iconName={EIconName.Infinite}
-					iconSize={EIconSize.LARGE}
-				/>
+				<RouterLink to={EAppPath.EXPENSES}>
+					<Icon name={EIconName.Infinite} size={EIconSize.LARGE} />
+				</RouterLink>
 
-				<IconLink
-					className="-mr-2.5"
-					to={EAppPath.SETTINGS}
-					iconName={EIconName.Triangle}
-					iconSize={EIconSize.LARGE}
-				/>
-			</div>
+				<RouterLink className="-mr-2.5" to={EAppPath.SETTINGS}>
+					<Icon name={EIconName.Triangle} size={EIconSize.LARGE} />
+				</RouterLink>
+			</Stack>
 		</Navbar>
 	);
 }
