@@ -5,6 +5,7 @@ import {
 	EIconSize,
 	type TIconSize,
 } from '@/presentation/web-ui/uiKit/icon/iconSize';
+import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { cn } from '@/presentation/web-ui/utils/classnames';
 
 type TIconLinkProps = {
@@ -16,16 +17,17 @@ type TIconLinkProps = {
 	iconSize?: TIconSize;
 };
 
-export function IconLink(props: TIconLinkProps) {
+export function IconLink({
+	className,
+	to,
+	iconName,
+	iconSize = EIconSize.MEDIUM,
+}: TIconLinkProps) {
 	return (
-		<AppLink
-			to={props.to}
-			className={cn(
-				'm-0 p-3 flex items-center justify-center',
-				props.className,
-			)}
-		>
-			<Icon name={props.iconName} size={props.iconSize || EIconSize.MEDIUM} />
-		</AppLink>
+		<Stack center asChild>
+			<AppLink to={to} className={cn('m-0 p-3', className)}>
+				<Icon name={iconName} size={iconSize} />
+			</AppLink>
+		</Stack>
 	);
 }
