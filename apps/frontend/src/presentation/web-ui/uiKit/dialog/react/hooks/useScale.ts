@@ -6,7 +6,7 @@ let classNames = {
 };
 let allClassNames = [...classNames.open, ...classNames.beforeClose];
 
-export function useAppScale(isScaled: boolean): void {
+export function useScale(isScaled: boolean): void {
 	useEffect(() => {
 		let elements = [
 			window.document.getElementById('appScreen'),
