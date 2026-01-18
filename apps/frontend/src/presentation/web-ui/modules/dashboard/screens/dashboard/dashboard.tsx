@@ -29,8 +29,8 @@ export function DashboardScreen() {
 
 	return (
 		<Grid className="grow" cols="2" rows="6">
-			<Sheet className="col-span-2 row-1" gap="sm" asChild>
-				<Stack className="items-center justify-center" row>
+			<Sheet className="col-span-2 row-1" gap="xs" asChild>
+				<Stack center>
 					<Title className="text-4xl!">
 						{intlService.formatCurrency(monthlyTotal, {
 							hideDecimal: true,
@@ -39,8 +39,8 @@ export function DashboardScreen() {
 				</Stack>
 			</Sheet>
 
-			<Sheet className="-rotate-z-2 justify-between" gap="sm" asChild>
-				<Stack>
+			<Sheet className="-rotate-z-2 justify-between" gap="xs" asChild>
+				<Stack between>
 					<Title>{intl.translate('today')}</Title>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
@@ -51,11 +51,11 @@ export function DashboardScreen() {
 				</Stack>
 			</Sheet>
 
-			<Sheet className="col-2 row-span-2" gap="sm" asChild>
+			<Sheet className="col-2 row-span-2" gap="xs" scrollable asChild>
 				<Stack>
 					<Title>{intl.translate('categories')}</Title>
 
-					<ul className="gap-2 m-0 p-0 font-semibold flex w-full flex-col">
+					<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">
 						{categories.map(({ id, total }) => (
 							<li
 								key={id}
@@ -74,14 +74,14 @@ export function DashboardScreen() {
 				</Stack>
 			</Sheet>
 
-			<Sheet className="col-1 row-span-2" gap="sm" disabled asChild>
+			<Sheet className="col-1 row-span-2" gap="xs" scrollable disabled asChild>
 				<Stack>
 					<Title>{intl.translate('venues')}</Title>
 				</Stack>
 			</Sheet>
 
-			<Sheet gap="sm" asChild>
-				<Stack>
+			<Sheet gap="xs" asChild>
+				<Stack between>
 					<Title>{intl.translate('leftover')}</Title>
 
 					<div className="font-mono font-semibold text-base tracking-tight self-end">
