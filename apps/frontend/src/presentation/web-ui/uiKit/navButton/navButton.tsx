@@ -1,16 +1,19 @@
 import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 
+type TNavButtonProps = {
+	className?: string;
+
+	to: 'loginPage' | 'mainPage' | 'dashboardPage' | 'venueCreatePage';
+	wide?: boolean;
+};
+
 export function NavButton({
 	className,
 	to,
 	wide,
 	children,
-}: React.PropsWithChildren<{
-	className?: string;
-	to: 'loginPage' | 'mainPage' | 'dashboardPage' | 'venueCreatePage';
-	wide?: boolean;
-}>) {
+}: React.PropsWithChildren<TNavButtonProps>) {
 	let navigate = useAppNavigation();
 
 	return (
