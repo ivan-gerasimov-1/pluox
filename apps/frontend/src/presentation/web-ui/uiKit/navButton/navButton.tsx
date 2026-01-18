@@ -8,7 +8,7 @@ export function NavButton({
 	children,
 }: React.PropsWithChildren<{
 	className?: string;
-	to: 'venueCreatePage';
+	to: 'loginPage' | 'mainPage' | 'dashboardPage' | 'venueCreatePage';
 	wide?: boolean;
 }>) {
 	let navigate = useAppNavigation();
