@@ -51,7 +51,7 @@ export function DashboardScreen() {
 				</Stack>
 			</Sheet>
 
-			<Sheet className="col-2 row-span-2 overflow-auto" gap="sm" asChild>
+			<Sheet className="col-2 row-span-2" gap="sm" asChild>
 				<Stack>
 					<Title>{intl.translate('categories')}</Title>
 
@@ -74,13 +74,13 @@ export function DashboardScreen() {
 				</Stack>
 			</Sheet>
 
-			<Sheet className="col-1 row-span-2" gap="sm" scrollable disabled asChild>
+			<Sheet className="col-1 row-span-2" gap="sm" disabled asChild>
 				<Stack>
 					<Title>{intl.translate('venues')}</Title>
 				</Stack>
 			</Sheet>
 
-			<Sheet className="justify-between" gap="sm" asChild>
+			<Sheet gap="sm" asChild>
 				<Stack>
 					<Title>{intl.translate('leftover')}</Title>
 
