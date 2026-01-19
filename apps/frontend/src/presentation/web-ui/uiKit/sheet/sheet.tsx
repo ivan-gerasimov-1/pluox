@@ -4,11 +4,7 @@ import { cva, type VariantProps } from 'cva';
 import type { TSlottable } from '@/presentation/web-ui/uiKit/types';
 
 let sheetVariants = cva(
-	[
-		'border-gray-200/50 border',
-		'rounded-2xl rounded-tl-xl rounded-br-3xl',
-		'shadow-xl shadow-gray-100',
-	],
+	['rounded-2xl rounded-tl-xl rounded-br-3xl', 'shadow-xl shadow-gray-100'],
 	{
 		variants: {
 			material: {
