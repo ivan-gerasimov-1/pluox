@@ -47,10 +47,6 @@ a {
 }
 
 :root {
-	/** Box shadow */
-	--box-shadow-90: 0 15px 10px -5px var(--color-gray-100);
-	--box-shadow-100: 0 10px 15px -5px var(--color-gray-300);
-
 	/* misc */
 	--transition-100: 200ms ease-in-out;
 
