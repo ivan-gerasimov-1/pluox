@@ -17,7 +17,8 @@ export function Input({ className, asChild, ...props }: TInputProps) {
 			className={cn(
 				'px-4 py-3 w-full',
 				'bg-gray-100',
-				'rounded-2xl border-0',
+				'border border-transparent',
+				'rounded-2xl',
 				'text-sm placeholder:text-gray-500 font-[inherit] text-inherit',
 				'appearance-none outline-0',
 				'focus:border-gray-900 transition-colors',
