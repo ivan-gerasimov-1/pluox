@@ -35,7 +35,7 @@ export function Badge({
 				'px-4 py-2.5',
 				'text-xs bg-gray-100 text-gray-800 text-center leading-none whitespace-nowrap',
 				'rounded-2xl',
-				'border-0',
+				'border border-transparent',
 				className,
 			)}
 		>
