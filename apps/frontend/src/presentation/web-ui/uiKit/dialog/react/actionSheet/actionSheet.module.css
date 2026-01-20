@@ -15,7 +15,7 @@
 	padding: 30px 25px;
 
 	background-color: var(--color-white);
-	box-shadow: var(--box-shadow-100);
+	box-shadow: 0 10px 50px -5px var(--color-gray-400);
 
 	border-radius: var(--radius-3xl);
 
