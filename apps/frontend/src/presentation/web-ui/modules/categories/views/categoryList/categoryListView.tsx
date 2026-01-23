@@ -6,7 +6,7 @@ import { NavLink } from '@/presentation/web-ui/uiKit/navLink/navLink';
 import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
 
-export function CategoryList() {
+export function CategoryListView() {
 	let categories = useCategoryListQuery();
 
 	return (

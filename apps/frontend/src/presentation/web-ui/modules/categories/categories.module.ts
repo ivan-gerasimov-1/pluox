@@ -1,12 +1,12 @@
 import { EAppPath } from '@/presentation/web-ui/appPath';
 import type { TRouteObject } from '@/presentation/web-ui/hooks/useScreenMeta/types';
-import { CategoryList } from '@/presentation/web-ui/modules/categories/categoryList/categoryList';
-import { CategoryView } from '@/presentation/web-ui/modules/categories/categoryView/categoryView';
+import { CategoryListView } from '@/presentation/web-ui/modules/categories/views/categoryList/categoryListView';
+import { CategoryView } from '@/presentation/web-ui/modules/categories/views/categoryView/categoryView';
 
 export const categoryRoutes: TRouteObject[] = [
 	{
 		path: EAppPath.CATEGORIES,
-		Component: CategoryList,
+		Component: CategoryListView,
 		handle: {},
 	},
 	{
