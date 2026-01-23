@@ -9,7 +9,7 @@ import {
 import { createUI } from '@/presentation/web-ui';
 import type { IWindow } from '@/presentation/web-ui/types';
 
-export async function app(window: IWindow): Promise<void> {
+export async function runApplication(window: IWindow): Promise<void> {
 	let diContainer = createDIContainer({
 		isGlobal: true,
 		isDevelopment: import.meta.env.MODE === 'development',

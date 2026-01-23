@@ -1,10 +1,9 @@
+import type { IUserInterface } from '@/presentation/types';
 import type { QueryClient } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
-
-import type { IUserInterface } from '@/presentation/shared/types';
 
 import type { TDevToolsConfig } from '@/presentation/web-ui/devtoolsConfig';
 import { AppContainerNotInitializedError } from '@/presentation/web-ui/errors';

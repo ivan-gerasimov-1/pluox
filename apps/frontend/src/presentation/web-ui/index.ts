@@ -1,8 +1,7 @@
+import type { IUserInterface } from '@/presentation/types';
 import { QueryClient } from '@tanstack/react-query';
 
 import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
-
-import type { IUserInterface } from '@/presentation/shared/types';
 
 import { createDevToolsConfig } from '@/presentation/web-ui/devtoolsConfig';
 import { ReactUI } from '@/presentation/web-ui/reactUI';
