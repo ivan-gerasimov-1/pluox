@@ -8,7 +8,7 @@ const config = {
 	/** prettier-plugin-tailwindcss */
 	tailwindFunctions: ['clsx'],
 	tailwindStylesheet:
-		'./src/presentation/web-ui/modules/app/components/app/app.css',
+		'./src/presentation/web/modules/app/components/app/app.css',
 
 	/** @ianvs/prettier-plugin-sort-imports */
 	importOrder: [
@@ -24,7 +24,7 @@ const config = {
 		'',
 		'^@/presentation/shared/(.*)$',
 		'',
-		'^@/presentation/web-ui(.*)$',
+		'^@/presentation/web(.*)$',
 		'',
 		'.css$',
 	],

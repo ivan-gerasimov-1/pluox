@@ -6,8 +6,8 @@ import {
 	type IContainer,
 } from '@/core/infrastructure/serviceContainer/types';
 
-import { createUI } from '@/presentation/web-ui';
-import type { IWindow } from '@/presentation/web-ui/types';
+import { createUI } from '@/presentation/web';
+import type { IWindow } from '@/presentation/web/types';
 
 export async function runApplication(window: IWindow): Promise<void> {
 	let diContainer = createDIContainer({
