@@ -5,7 +5,7 @@ import type { Id } from '@/core/domain/types';
 import { INVALID_ID } from '@/presentation/web-ui/constants/invalidId';
 import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { viewVenueActionsI18n } from '@/presentation/web-ui/modules/venues/components/viewVenueActions/viewVenueActions.i18n';
+import { venueViewActionsI18n } from '@/presentation/web-ui/modules/venues/components/venueActions/venueViewActions.i18n';
 import {
 	useVenueArchiveMutation,
 	useVenueOneByIdQuery,
@@ -17,9 +17,9 @@ import { Icon } from '@/presentation/web-ui/uiKit/icon/icon';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 
-export function ViewVenueActions() {
+export function VenueViewActions() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();
-	let intl = useIntl(viewVenueActionsI18n);
+	let intl = useIntl(venueViewActionsI18n);
 	let navigation = useAppNavigation();
 
 	let venue = useVenueOneByIdQuery(id);

@@ -1,4 +1,4 @@
-import { venueListScreenI18n } from './venueListScreen.i18n';
+import { venueListViewI18n } from './venueListView.i18n';
 
 import { EAppPath } from '@/presentation/web-ui/appPath';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
@@ -17,8 +17,8 @@ import {
 	ValueActionTrailing,
 } from '@/presentation/web-ui/uiKit/valueAction/valueAction';
 
-export function VenueListScreen() {
-	let intl = useIntl(venueListScreenI18n);
+export function VenueListView() {
+	let intl = useIntl(venueListViewI18n);
 	let venueList = useVenueListUnarchivedQuery();
 	let venueListArchived = useVenueListArchivedQuery();
 

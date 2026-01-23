@@ -5,9 +5,9 @@ import { Id } from '@/core/domain/types';
 import { INVALID_ID } from '@/presentation/web-ui/constants/invalidId';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { VenueCategoryActionSheet } from '@/presentation/web-ui/modules/venues/components/venueCategoryActionSheet/venueCategoryActionSheet';
+import { VenueNameActionSheet } from '@/presentation/web-ui/modules/venues/components/venueNameActionSheet/venueNameActionSheet';
 import { useVenueOneByIdQuery } from '@/presentation/web-ui/modules/venues/queries/venues.query';
-import { VenueNameActionSheet } from '@/presentation/web-ui/modules/venues/views/viewVenue/components/venueNameActionSheet/venueNameActionSheet';
-import { venueViewScreenI18n } from '@/presentation/web-ui/modules/venues/views/viewVenue/viewVenueScreen.i18n';
+import { venueViewI18n } from '@/presentation/web-ui/modules/venues/views/venue/venueView.i18n';
 import { useDialog } from '@/presentation/web-ui/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@/presentation/web-ui/uiKit/icon/icons';
 import { IconButton } from '@/presentation/web-ui/uiKit/iconButton/iconButton';
@@ -19,11 +19,11 @@ import {
 	ValueActionTrailing,
 } from '@/presentation/web-ui/uiKit/valueAction/valueAction';
 
-export function VenueViewScreen() {
+export function VenueView() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();
 
 	let dialog = useDialog();
-	let intl = useIntl(venueViewScreenI18n);
+	let intl = useIntl(venueViewI18n);
 
 	let venue = useVenueOneByIdQuery(id);
 

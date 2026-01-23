@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 
-export const venueListScreenI18n = {
+export const venueListViewI18n = {
 	[ELocaleCode.RU_RU]: {
 		add: 'Создать',
 		archived: 'В архиве',

@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 
-export const createVenueScreenI18n = {
+export const venueCreateViewI18n = {
 	[ELocaleCode.RU_RU]: {
 		venueName: 'Название',
 		required: 'Обязательно',

@@ -8,7 +8,7 @@ import { useAppNavigation } from '@/presentation/web-ui/hooks/useNavigation';
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
 import { useVenueCreateMutation } from '@/presentation/web-ui/modules/venues/queries/venues.query';
-import { createVenueScreenI18n } from '@/presentation/web-ui/modules/venues/views/createVenue/createVenueScreen.i18n';
+import { venueCreateViewI18n } from '@/presentation/web-ui/modules/venues/views/venueCreate/venueCreateView.i18n';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';
 import { Stack } from '@/presentation/web-ui/uiKit/layout/layout';
@@ -18,9 +18,9 @@ import {
 	ValueActionLeading,
 } from '@/presentation/web-ui/uiKit/valueAction/valueAction';
 
-export function CreateVenueScreen() {
+export function VenueCreateView() {
 	let navigation = useAppNavigation();
-	let intl = useIntl(createVenueScreenI18n);
+	let intl = useIntl(venueCreateViewI18n);
 
 	let categoryQueryService = useService(EServiceToken.CATEGORY_QUERY_SERVICE);
 	let categories = categoryQueryService.getAll();
