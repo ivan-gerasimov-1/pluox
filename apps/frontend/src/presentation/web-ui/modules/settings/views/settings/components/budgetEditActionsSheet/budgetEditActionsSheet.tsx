@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { TCurrency } from '@/core/modules/currency/domain/types';
 
 import { useIntl } from '@/presentation/web-ui/modules/intl/useIntl/useIntl';
-import { budgetEditActionsSheetI18n } from '@/presentation/web-ui/modules/settings/screens/settings/components/budgetEditActionsSheet/budgetEditActionsSheet.i18n';
+import { budgetEditActionsSheetI18n } from '@/presentation/web-ui/modules/settings/views/settings/components/budgetEditActionsSheet/budgetEditActionsSheet.i18n';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
 import type { TDialogComponentProps } from '@/presentation/web-ui/uiKit/dialog/core/types';
 import { Input } from '@/presentation/web-ui/uiKit/input/input';

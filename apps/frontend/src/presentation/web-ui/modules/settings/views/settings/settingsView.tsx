@@ -13,11 +13,11 @@ import {
 	useUserOneByIdQuery,
 	useUserUpdateMutation,
 } from '@/presentation/web-ui/modules/settings/queries/user';
-import { BudgetEditActionsSheet } from '@/presentation/web-ui/modules/settings/screens/settings/components/budgetEditActionsSheet/budgetEditActionsSheet';
-import { CurrencyActionSheet } from '@/presentation/web-ui/modules/settings/screens/settings/components/currencyActionSheet/currencyActionSheet';
-import { LocaleActionSheet } from '@/presentation/web-ui/modules/settings/screens/settings/components/localeActionSheet/localeActionSheet';
-import { UserNameEditActionSheet } from '@/presentation/web-ui/modules/settings/screens/settings/components/userNameEditActionSheet/userNameEditActionSheet';
-import { settingsI18n } from '@/presentation/web-ui/modules/settings/screens/settings/settings.i18n';
+import { BudgetEditActionsSheet } from '@/presentation/web-ui/modules/settings/views/settings/components/budgetEditActionsSheet/budgetEditActionsSheet';
+import { CurrencyActionSheet } from '@/presentation/web-ui/modules/settings/views/settings/components/currencyActionSheet/currencyActionSheet';
+import { LocaleActionSheet } from '@/presentation/web-ui/modules/settings/views/settings/components/localeActionSheet/localeActionSheet';
+import { UserNameEditActionSheet } from '@/presentation/web-ui/modules/settings/views/settings/components/userNameEditActionSheet/userNameEditActionSheet';
+import { settingsViewI18n } from '@/presentation/web-ui/modules/settings/views/settings/settingsView.i18n';
 import { useVenueListUnarchivedQuery } from '@/presentation/web-ui/modules/venues/queries/venues.query';
 import { Badge, Badges } from '@/presentation/web-ui/uiKit/badge/badge';
 import { Button } from '@/presentation/web-ui/uiKit/button/button';
@@ -39,10 +39,10 @@ import {
  *    For some reason, *appConfig* is not invalidated on mutation if
  *    *queryKey* contains *QUERY_APP_CONFIG_BUDGET*
  */
-export function SettingsScreen() {
+export function SettingsView() {
 	let dialog = useDialog();
 	let intlService = useService(EServiceToken.INTL_SERVICE);
-	let intl = useIntl(settingsI18n);
+	let intl = useIntl(settingsViewI18n);
 	let navigation = useAppNavigation();
 
 	let user = useUserOneByIdQuery();

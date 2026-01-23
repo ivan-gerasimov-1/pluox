@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 
-export const settingsI18n = {
+export const settingsViewI18n = {
 	[ELocaleCode.RU_RU]: {
 		screenTitle: 'Настройки',
 		userSectionTitle: 'Пользователь',

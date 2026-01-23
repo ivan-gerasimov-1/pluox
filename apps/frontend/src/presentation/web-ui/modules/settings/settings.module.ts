@@ -1,11 +1,11 @@
 import { EAppPath } from '@/presentation/web-ui/appPath';
 import type { TRouteObject } from '@/presentation/web-ui/hooks/useScreenMeta/types';
-import { SettingsScreen } from '@/presentation/web-ui/modules/settings/screens/settings/settings';
+import { SettingsView } from '@/presentation/web-ui/modules/settings/views/settings/settingsView';
 
 export const settingsRoutes: TRouteObject[] = [
 	{
 		path: EAppPath.SETTINGS,
-		Component: SettingsScreen,
+		Component: SettingsView,
 		handle: {},
 	},
 ];
