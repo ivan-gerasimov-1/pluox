@@ -11,7 +11,7 @@ import { NavLink } from '@/presentation/web-ui/uiKit/navLink/navLink';
 import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
 
-export function LogInScreen() {
+export function LogInView() {
 	let { mutate: login, isPending } = useLogin();
 
 	return (

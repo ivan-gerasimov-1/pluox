@@ -1,14 +1,14 @@
 import { EAppPath } from '@/presentation/web-ui/appPath';
-import { LogInScreen } from '@/presentation/web-ui/modules/authentication/screens/logIn/logIn';
-import { SignUpScreen } from '@/presentation/web-ui/modules/authentication/screens/signUp/SignUp';
+import { LogInView } from '@/presentation/web-ui/modules/authentication/views/logIn/logInView';
+import { SignUpView } from '@/presentation/web-ui/modules/authentication/views/signUp/signUpView';
 
 export const authenticationRoutes = [
 	{
 		path: EAppPath.SIGN_UP,
-		Component: SignUpScreen,
+		Component: SignUpView,
 	},
 	{
 		path: EAppPath.LOG_IN,
-		Component: LogInScreen,
+		Component: LogInView,
 	},
 ];
