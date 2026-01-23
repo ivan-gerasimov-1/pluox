@@ -1,30 +1,29 @@
-import { ApiClient } from '@/core/infrastructure/apiClient/apiClient';
-import { ApiClientConfigProvider } from '@/core/infrastructure/apiClient/configProvider';
-import { DatabaseCollectionFactory } from '@/core/infrastructure/database/databaseCollectionFactory';
-import { databaseFactory } from '@/core/infrastructure/database/databaseFactory';
+import { ApiClient } from '@pluox/core/src/infrastructure/apiClient/apiClient';
+import { ApiClientConfigProvider } from '@pluox/core/src/infrastructure/apiClient/configProvider';
+import { DatabaseCollectionFactory } from '@pluox/core/src/infrastructure/database/databaseCollectionFactory';
+import { databaseFactory } from '@pluox/core/src/infrastructure/database/databaseFactory';
 import {
 	IdGeneratorFactory,
 	type IIdGeneratorFactory,
-} from '@/core/infrastructure/idGenerator/factory';
-import { containerFactory } from '@/core/infrastructure/serviceContainer/containerFactory';
+} from '@pluox/core/src/infrastructure/idGenerator/factory';
+import { containerFactory } from '@pluox/core/src/infrastructure/serviceContainer/containerFactory';
 import {
 	EServiceToken,
 	type IModule,
-} from '@/core/infrastructure/serviceContainer/types';
-import { Temporal } from '@/core/infrastructure/temporal/temporal';
-
-import { bootstrapModule } from '@/core/modules/bootstrap/bootstrap.module';
-import { categoryModule } from '@/core/modules/category/category.module';
-import { currencyModule } from '@/core/modules/currency/currency.module';
-import { expenseModule } from '@/core/modules/expense/expense.module';
-import { identityModule } from '@/core/modules/identity/identity.module';
-import { intlModule } from '@/core/modules/intl/intl.module';
-import { productModule } from '@/core/modules/product/product.module';
-import { Environment } from '@/core/modules/settings/infrastructure/environment/environment';
-import { settingsModule } from '@/core/modules/settings/settings.module';
-import { syncModule } from '@/core/modules/sync/sync.module';
-import { userModule } from '@/core/modules/user/user.module';
-import { venueModule } from '@/core/modules/venue/venue.module';
+} from '@pluox/core/src/infrastructure/serviceContainer/types';
+import { Temporal } from '@pluox/core/src/infrastructure/temporal/temporal';
+import { bootstrapModule } from '@pluox/core/src/modules/bootstrap/bootstrap.module';
+import { categoryModule } from '@pluox/core/src/modules/category/category.module';
+import { currencyModule } from '@pluox/core/src/modules/currency/currency.module';
+import { expenseModule } from '@pluox/core/src/modules/expense/expense.module';
+import { identityModule } from '@pluox/core/src/modules/identity/identity.module';
+import { intlModule } from '@pluox/core/src/modules/intl/intl.module';
+import { productModule } from '@pluox/core/src/modules/product/product.module';
+import { Environment } from '@pluox/core/src/modules/settings/infrastructure/environment/environment';
+import { settingsModule } from '@pluox/core/src/modules/settings/settings.module';
+import { syncModule } from '@pluox/core/src/modules/sync/sync.module';
+import { userModule } from '@pluox/core/src/modules/user/user.module';
+import { venueModule } from '@pluox/core/src/modules/venue/venue.module';
 
 export function createDIContainer(options?: {
 	isGlobal?: boolean;

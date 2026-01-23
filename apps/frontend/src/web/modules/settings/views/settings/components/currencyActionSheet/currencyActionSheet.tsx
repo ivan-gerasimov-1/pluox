@@ -1,7 +1,9 @@
 import { currencyActionSheetI18n } from './currencyActionSheet.i18n';
+import {
+	ECurrency,
+	TCurrency,
+} from '@pluox/core/src/modules/currency/domain/types';
 import { useState } from 'react';
-
-import { ECurrency, TCurrency } from '@/core/modules/currency/domain/types';
 
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import {

@@ -1,4 +1,4 @@
-import { ELocaleCode } from '@/core/modules/intl/domain/enums';
+import { ELocaleCode } from '@pluox/core/src/modules/intl/domain/enums';
 
 export const venueListViewI18n = {
 	[ELocaleCode.RU_RU]: {

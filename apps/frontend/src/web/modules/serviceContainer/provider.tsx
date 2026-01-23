@@ -1,6 +1,5 @@
+import type { IContainer } from '@pluox/core/src/infrastructure/serviceContainer/types';
 import { createContext } from 'react';
-
-import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
 
 export let ContainerContext = createContext<IContainer | null>(null);
 

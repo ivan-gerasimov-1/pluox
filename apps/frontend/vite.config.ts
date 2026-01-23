@@ -113,12 +113,12 @@ export default defineConfig(({ mode }) => {
 							return 'vendors';
 						}
 
-						if (id.includes('src/core')) {
+						if (id.includes('apps/core')) {
 							return 'core';
 						}
 
-						if (id.includes('src/presentation')) {
-							return 'ui';
+						if (id.includes('src/web')) {
+							return 'web';
 						}
 					},
 				},

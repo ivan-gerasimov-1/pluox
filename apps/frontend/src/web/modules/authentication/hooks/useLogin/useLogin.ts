@@ -1,6 +1,5 @@
+import { EServiceToken } from '@pluox/core/src/infrastructure/serviceContainer/types';
 import { useMutation } from '@tanstack/react-query';
-
-import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
 
 import { useAppNavigation } from '@/web/hooks/useNavigation';
 import { useService } from '@/web/modules/serviceContainer/useService';

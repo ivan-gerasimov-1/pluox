@@ -1,6 +1,5 @@
+import { resolveService } from '@pluox/core/src/infrastructure/serviceContainer/resolveService';
 import { useEffect, useState } from 'react';
-
-import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
 
 import {
 	validateKey,

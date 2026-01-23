@@ -1,20 +1,17 @@
+import { Id } from '@pluox/core/src/domain/types';
+import { resolveService } from '@pluox/core/src/infrastructure/serviceContainer/resolveService';
+import { EServiceToken } from '@pluox/core/src/infrastructure/serviceContainer/types';
+import { ELocaleCode } from '@pluox/core/src/modules/intl/domain/enums';
+import type {
+	TUserDTO,
+	TUserUpdateDTO,
+} from '@pluox/core/src/modules/user/application/dto/userDTO';
 import {
 	useMutation,
 	useQuery,
 	useQueryClient,
 	type QueryClient,
 } from '@tanstack/react-query';
-
-import { Id } from '@/core/domain/types';
-
-import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
-import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
-
-import { ELocaleCode } from '@/core/modules/intl/domain/enums';
-import type {
-	TUserDTO,
-	TUserUpdateDTO,
-} from '@/core/modules/user/application/dto/userDTO';
 
 type TUserQueryType = 'one:id';
 

@@ -1,12 +1,8 @@
+import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
 import { useMemo } from 'react';
 
-import type { TLocaleCode } from '@/core/modules/intl/domain/types';
-
 import { createScopedTranslateFunction } from '@/web/modules/intl/useIntl/translateFunction';
-import {
-	TBaseScope,
-	TUseIntl,
-} from '@/web/modules/intl/useIntl/types';
+import { TBaseScope, TUseIntl } from '@/web/modules/intl/useIntl/types';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
 import { useService } from '@/web/modules/serviceContainer/useService';
 

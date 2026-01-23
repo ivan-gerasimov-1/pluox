@@ -7,7 +7,7 @@ import {
 	registerMigrations,
 	removeSaveeMigrations,
 	saveMigrationsToStorage,
-} from '@/core/migrations/migrations';
+} from '@pluox/core/src/migrations/migrations';
 
 /**
  * @todo

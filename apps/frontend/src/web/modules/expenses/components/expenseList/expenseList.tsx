@@ -1,3 +1,4 @@
+import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
 import {
 	SwipeableList,
 	SwipeableListItem,
@@ -5,8 +6,6 @@ import {
 	TrailingActions,
 	Type,
 } from 'react-swipeable-list';
-
-import type { TISODateString } from '@/core/domain/temporal/types';
 
 import { EditExpenseActionSheet } from '@/web/modules/expenses/components/expenseEditActionSheet/expenseEditActionSheet';
 import {

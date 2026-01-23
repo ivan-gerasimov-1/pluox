@@ -1,6 +1,5 @@
+import { Id } from '@pluox/core/src/domain/types';
 import { useParams } from 'react-router';
-
-import { Id } from '@/core/domain/types';
 
 import { INVALID_ID } from '@/web/constants/invalidId';
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';

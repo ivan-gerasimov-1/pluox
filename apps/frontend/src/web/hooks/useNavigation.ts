@@ -1,6 +1,5 @@
+import { Id } from '@pluox/core/src/domain/types';
 import { useNavigate } from 'react-router';
-
-import { Id } from '@/core/domain/types';
 
 import { EAppPath } from '@/web/appPath';
 

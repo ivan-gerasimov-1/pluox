@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
+import type { IContainer } from '@pluox/core/src/infrastructure/serviceContainer/types';
 
 import { createDevToolsConfig } from '@/web/devtoolsConfig';
 import { ReactUI } from '@/web/reactUI';

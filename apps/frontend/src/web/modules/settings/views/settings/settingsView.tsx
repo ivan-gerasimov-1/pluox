@@ -1,5 +1,5 @@
-import { categoryTemplates } from '@/core/modules/category/domain/categoryTemplate/templates';
-import { getLanguageNameByLocale } from '@/core/modules/intl/application/helpers';
+import { categoryTemplates } from '@pluox/core/src/modules/category/domain/categoryTemplate/templates';
+import { getLanguageNameByLocale } from '@pluox/core/src/modules/intl/application/helpers';
 
 import { useAppNavigation } from '@/web/hooks/useNavigation';
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';

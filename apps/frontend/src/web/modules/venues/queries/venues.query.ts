@@ -1,14 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
-import type { Id } from '@/core/domain/types';
-
-import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
-
+import type { Id } from '@pluox/core/src/domain/types';
+import { EServiceToken } from '@pluox/core/src/infrastructure/serviceContainer/types';
 import type {
 	TVenueCreateDTO,
 	TVenueDTO,
 	TVenueUpdateDTO,
-} from '@/core/modules/venue/application/dto/venueDTO';
+} from '@pluox/core/src/modules/venue/application/dto/venueDTO';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useService } from '@/web/modules/serviceContainer/useService';
 import { createVenueQuery } from '@/web/modules/venues/queries/createVenueQuery';

@@ -1,8 +1,7 @@
+import type { IContainer } from '@pluox/core/src/infrastructure/serviceContainer/types';
 import type { QueryClient } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-
-import type { IContainer } from '@/core/infrastructure/serviceContainer/types';
 
 import type { TDevToolsConfig } from '@/web/devtoolsConfig';
 import { AppContainerNotInitializedError } from '@/web/errors';

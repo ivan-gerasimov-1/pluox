@@ -1,0 +1,74 @@
+import type { TCategoryTemplate } from '@pluox/core/src/modules/category/domain/categoryTemplate/types';
+
+export const categoryTemplates: TCategoryTemplate[] = [
+	{
+		id: 'auto',
+		name: 'Авто',
+		icon: '🚗',
+	},
+	{
+		id: 'pharmacy',
+		name: 'Медицина',
+		icon: '💊',
+	},
+	{
+		id: 'hygiene',
+		name: 'Гигиена / Уход',
+		icon: '🧴',
+	},
+	{
+		id: 'rent',
+		name: 'Аренда',
+		icon: '🏡',
+	},
+	{
+		id: 'coffee',
+		name: 'Кофе',
+		icon: '☕',
+	},
+	{
+		id: 'food',
+		name: 'Еда',
+		icon: '🍲',
+	},
+	{
+		id: 'groceries',
+		name: 'Продукты / дом',
+		icon: '🛒',
+	},
+	{
+		id: 'tobacco',
+		name: 'Табак',
+		icon: '💨',
+	},
+	{
+		id: 'subscriptions',
+		name: 'Подписки',
+		icon: '☁️',
+	},
+	{
+		id: 'transport',
+		name: 'Транспорт',
+		icon: '🚕',
+	},
+	{
+		id: 'taxes',
+		name: 'Налоги',
+		icon: '🪙',
+	},
+	{
+		id: 'leisure',
+		name: 'Досуг',
+		icon: '👝',
+	},
+	{
+		id: 'pets',
+		name: 'Питомцы',
+		icon: '🐀',
+	},
+	{
+		id: 'other',
+		name: 'Другое',
+		icon: '📦',
+	},
+];

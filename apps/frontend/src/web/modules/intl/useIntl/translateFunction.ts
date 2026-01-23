@@ -1,4 +1,4 @@
-import type { TLocaleCode } from '@/core/modules/intl/domain/types';
+import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
 
 import {
 	TBaseScope,
