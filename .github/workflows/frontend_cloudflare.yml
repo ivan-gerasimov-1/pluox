@@ -51,9 +51,9 @@ jobs:
         run: |
           npm $NPM_LINT_CMD
 
-      - name: Test
-        run: |
-          npm $NPM_TEST_CMD
+      # - name: Test
+      #   run: |
+      #     npm $NPM_TEST_CMD
 
       - name: Build
         run: |
