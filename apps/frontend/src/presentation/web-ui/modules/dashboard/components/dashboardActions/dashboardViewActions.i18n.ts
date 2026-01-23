@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@/core/modules/intl/domain/enums';
 
-export const dashboardActionsI18n = {
+export const dashboardViewActionsI18n = {
 	[ELocaleCode.RU_RU]: {
 		addExpense: 'Добавить',
 	},

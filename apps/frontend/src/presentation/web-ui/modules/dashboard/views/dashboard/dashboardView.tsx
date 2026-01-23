@@ -1,4 +1,4 @@
-import { dashboardI18n } from '@/presentation/web-ui/modules/dashboard/screens/dashboard/dashboard.i18n';
+import { dashboardViewI18n } from '@/presentation/web-ui/modules/dashboard/views/dashboard/dashboardView.i18n';
 import {
 	useExpenseAmountByCategoryQuery,
 	useExpenseAmountByDayQuery,
@@ -13,11 +13,11 @@ import { Grid, Stack } from '@/presentation/web-ui/uiKit/layout/layout';
 import { Sheet } from '@/presentation/web-ui/uiKit/sheet/sheet';
 import { Title } from '@/presentation/web-ui/uiKit/title/title';
 
-export function DashboardScreen() {
+export function DashboardView() {
 	let intlService = useService(EServiceToken.INTL_SERVICE);
 	let categoryService = useService(EServiceToken.CATEGORY_SERVICE);
 
-	let intl = useIntl(dashboardI18n);
+	let intl = useIntl(dashboardViewI18n);
 
 	let monthlyTotal = useExpenseAmountByMonthQuery();
 	let dailyTotal = useExpenseAmountByDayQuery();
