@@ -7,7 +7,7 @@ import {
 	registerMigrations,
 	removeSaveeMigrations,
 	saveMigrationsToStorage,
-} from '@/migrations/migrations';
+} from '@/core/migrations/migrations';
 
 /**
  * @todo

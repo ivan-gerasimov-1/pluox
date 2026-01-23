@@ -1,4 +1,7 @@
-import type { TMigrationCreateDTO, TMigrationDTO } from '@/migrations/types';
+import type {
+	TMigrationCreateDTO,
+	TMigrationDTO,
+} from '@/core/migrations/types';
 
 import { resolveService } from '@/core/infrastructure/serviceContainer/resolveService';
 import { EServiceToken } from '@/core/infrastructure/serviceContainer/types';
