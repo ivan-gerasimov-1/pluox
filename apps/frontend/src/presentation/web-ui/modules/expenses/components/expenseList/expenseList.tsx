@@ -8,7 +8,7 @@ import {
 
 import type { TISODateString } from '@/core/domain/temporal/types';
 
-import { EditExpenseActionSheet } from '@/presentation/web-ui/modules/expenses/components/expenseEdit/editExpenseActionSheet';
+import { EditExpenseActionSheet } from '@/presentation/web-ui/modules/expenses/components/expenseEditActionSheet/expenseEditActionSheet';
 import {
 	useExpenseDeleteMutation,
 	useExpenseListQuery,

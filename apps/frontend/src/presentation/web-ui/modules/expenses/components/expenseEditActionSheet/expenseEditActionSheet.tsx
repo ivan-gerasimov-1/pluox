@@ -1,7 +1,7 @@
 import type { TExpenseDTO } from '@/core/modules/expense/application/dto/expenseDTO';
 
+import { createDateViewValue } from '@/presentation/web-ui/modules/expenses/components/expenseCreate/helpers/createDateViewValue';
 import { ExpenseForm } from '@/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
-import { createDateViewValue } from '@/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
 import { useExpenseUpdateMutation } from '@/presentation/web-ui/modules/expenses/expenses.query';
 import type { TDialogComponentProps } from '@/presentation/web-ui/uiKit/dialog/core/types';
 

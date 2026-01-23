@@ -1,7 +1,7 @@
 import { ECurrency } from '@/core/modules/currency/domain/types';
 
+import { createDateViewValue } from '@/presentation/web-ui/modules/expenses/components/expenseCreate/helpers/createDateViewValue';
 import { ExpenseForm } from '@/presentation/web-ui/modules/expenses/components/expenseForm/expenseForm';
-import { createDateViewValue } from '@/presentation/web-ui/modules/expenses/components/expenseNew/helpers/createDateViewValue';
 import { useExpenseCreateMutation } from '@/presentation/web-ui/modules/expenses/expenses.query';
 
 export function ExpenseNew() {

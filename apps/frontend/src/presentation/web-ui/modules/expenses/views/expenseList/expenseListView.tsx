@@ -4,7 +4,7 @@ import { ExpenseList } from '@/presentation/web-ui/modules/expenses/components/e
 import { EServiceToken } from '@/presentation/web-ui/modules/serviceContainer/enums';
 import { useService } from '@/presentation/web-ui/modules/serviceContainer/useService';
 
-export function ExpenseListScreen() {
+export function ExpenseListView() {
 	let temporal = useService(EServiceToken.TEMPORAL);
 	let [searchParams] = useSearchParams();
 
