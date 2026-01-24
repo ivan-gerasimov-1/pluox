@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { Backdrop } from '@kit/backdrop/Backdrop';
+import { Backdrop } from '@kit/dialog/react/backdrop/backdrop';
 import { useScale } from '@kit/dialog/react/hooks/useScale';
 import { Pinch } from '@kit/pinch/pinch';
 
