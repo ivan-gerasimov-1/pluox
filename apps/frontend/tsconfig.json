@@ -1,4 +1,14 @@
 {
+	"references": [
+		/** @pluox/core */
+		{
+			"path": "../core"
+		},
+		/** @pluox/core */
+		{
+			"path": "../kit"
+		}
+	],
 	"compilerOptions": {
 		"target": "ES2021",
 		"moduleResolution": "node",
