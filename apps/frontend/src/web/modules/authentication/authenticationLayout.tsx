@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router';
 
-import { Screen } from '@kit/screen/screen';
+import { View } from '@kit/view/view';
 
 export function AuthenticationLayout() {
 	return (
-		<Screen className="h-screen items-center justify-center">
+		<View className="h-screen items-center justify-center">
 			<Outlet />
-		</Screen>
+		</View>
 	);
 }

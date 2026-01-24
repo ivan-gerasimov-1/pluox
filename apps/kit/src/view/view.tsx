@@ -2,16 +2,16 @@ import { cn } from '@kit/utils/classnames';
 
 import { Stack } from '@kit/layout/layout';
 
-type TScreenProps = {
+type TViewProps = {
 	id?: string;
 	className?: string;
 };
 
-export function Screen({
+export function View({
 	id,
 	className,
 	children,
-}: React.PropsWithChildren<TScreenProps>) {
+}: React.PropsWithChildren<TViewProps>) {
 	return (
 		<Stack id={id} className={cn('p-4 pt-2', className)}>
 			{children}

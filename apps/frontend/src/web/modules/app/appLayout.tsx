@@ -4,16 +4,16 @@ import { useRouteMeta } from '@/web/hooks/useScreenMeta/useScreenMeta';
 
 import { AppNavbar } from '@/web/modules/app/components/appNavbar/appNavbar';
 
-import { Screen } from '@kit/screen/screen';
+import { View } from '@kit/view/view';
 
 export function AppLayout() {
 	let { Actions } = useRouteMeta();
 
 	return (
 		<>
-			<Screen id="appScreen" className="mb-(--navbar-height)">
+			<View id="appScreen" className="mb-(--navbar-height)">
 				<Outlet />
-			</Screen>
+			</View>
 
 			<AppNavbar id="appNavbar" Actions={Actions} />
 		</>
