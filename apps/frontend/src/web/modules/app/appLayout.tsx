@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 
-import { useRouteMeta } from '@/web/hooks/useScreenMeta/useScreenMeta';
+import { useRouteMeta } from '@/web/hooks/useRouteMeta/useRouteMeta';
 
 import { AppNavbar } from '@/web/modules/app/components/appNavbar/appNavbar';
 

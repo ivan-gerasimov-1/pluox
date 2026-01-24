@@ -1,6 +1,6 @@
 import { EAppPath } from '@/web/appPath';
 
-import type { TRouteObject } from '@/web/hooks/useScreenMeta/types';
+import type { TRouteObject } from '@/web/hooks/useRouteMeta/types';
 
 import { ExpenseListView } from '@/web/modules/expenses/views/expenseList/expenseListView';
 

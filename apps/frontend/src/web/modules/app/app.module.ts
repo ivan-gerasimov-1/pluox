@@ -1,11 +1,11 @@
-import type { TRouteObject } from '@/web/hooks/useScreenMeta/types';
+import type { TRouteObject } from '@/web/hooks/useRouteMeta/types';
 
-import { NotFoundError } from '@/web/modules/errors/screens/notFoundError/notFoundError';
+import { NotFoundErrorView } from '@/web/modules/errors/views/notFoundError/notFoundErrorView';
 
 export const appRoutes: TRouteObject[] = [
 	{
 		path: '*',
-		Component: NotFoundError,
+		Component: NotFoundErrorView,
 		handle: {},
 	},
 ];

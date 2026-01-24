@@ -1,6 +1,6 @@
 import { ELocaleCode } from '@core/modules/intl/domain/enums';
 
-export const notFoundErrorI18n = {
+export const notFoundErrorViewI18n = {
 	[ELocaleCode.RU_RU]: {
 		title: 'Ошибка',
 		message: 'Страница не найдена',

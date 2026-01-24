@@ -1,6 +1,6 @@
 import { EAppPath } from '@/web/appPath';
 
-import type { TRouteObject } from '@/web/hooks/useScreenMeta/types';
+import type { TRouteObject } from '@/web/hooks/useRouteMeta/types';
 
 import { CategoryView } from '@/web/modules/categories/views/category/categoryView';
 import { CategoryListView } from '@/web/modules/categories/views/categoryList/categoryListView';
