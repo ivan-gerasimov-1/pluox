@@ -5,8 +5,10 @@
 	"scripts": {
 		"__run__": "",
 		"preview": "vite preview",
+		"prestart": "npm run projects:build",
 		"start": "vite --mode development",
 		"__build__": "",
+		"prebuild": "npm run projects:build",
 		"build": "npm run build:production",
 		"build:development": "vite build --mode development",
 		"build:production": "vite build --mode production",
@@ -19,15 +21,17 @@
 		"test": "vitest run",
 		"test:coverage": "vitest run --coverage",
 		"test:start": "vitest",
-		"test:start:ui": "vitest --ui --coverage"
+		"test:start:ui": "vitest --ui --coverage",
+		"__projects__": "",
+		"projects:build": "npx tsc -b ../core ../kit"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"private": true,
 	"dependencies": {
 		"@fontsource-variable/inter": "5.2.8",
-		"@pluox/core": "0.1.0",
-		"@pluox/kit": "",
+		"@pluox/core": "*",
+		"@pluox/kit": "*",
 		"@radix-ui/react-slot": "1.2.4",
 		"@sentry/react": "10.36.0",
 		"@tanstack/react-query": "5.90.20",
