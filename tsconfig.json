@@ -1,0 +1,17 @@
+{
+	"files": [],
+	"references": [
+		/** @pluox/core */
+		{
+			"path": "./apps/core"
+		},
+		/** @pluox/kit */
+		{
+			"path": "./apps/kit"
+		},
+		/** @pluox/frontend */
+		{
+			"path": "./apps/frontend"
+		}
+	]
+}
