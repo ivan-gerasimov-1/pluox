@@ -22,7 +22,7 @@
 		"jsx": "react-jsx",
 
 		"paths": {
-			"@kit/*": ["src/web/uiKit/*"],
+			"@kit/*": ["src/web/kit/*"],
 			"@/*": ["src/*"],
 			"@core/*": ["../core/src/*"]
 		}
