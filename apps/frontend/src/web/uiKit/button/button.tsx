@@ -8,15 +8,15 @@ const buttonVariants = cva(
 		'text-xs font-bold font-[inherit]',
 		'text-center leading-none whitespace-nowrap uppercase',
 		'outline-0 transition',
-		'disabled:opacity-75 disabled:pointer-events-none',
-		'hover:scale-98 hover:translate-y-0.5 hover:shadow-[0_0_0_3px_var(--color-gray-50)_inset]',
-		'focus:scale-98 focus:translate-y-0.5 focus:shadow-[0_0_0_3px_var(--color-gray-50)_inset]',
-		'active:scale-98 active:translate-y-0.5 active:shadow-[0_0_0_5px_var(--color-gray-50)_inset]',
+		'disabled:pointer-events-none disabled:opacity-75',
+		'hover:translate-y-0.5 hover:scale-98 hover:shadow-[0_0_0_3px_var(--color-gray-50)_inset]',
+		'focus:translate-y-0.5 focus:scale-98 focus:shadow-[0_0_0_3px_var(--color-gray-50)_inset]',
+		'active:translate-y-0.5 active:scale-98 active:shadow-[0_0_0_5px_var(--color-gray-50)_inset]',
 	],
 	{
 		variants: {
 			intent: {
-				primary: ['border-gray-900 bg-gray-900', ' text-gray-50!'],
+				primary: ['border-gray-900 bg-gray-900', 'text-gray-50!'],
 				danger: [
 					'border-red-500',
 					'bg-gray-50 text-red-500',

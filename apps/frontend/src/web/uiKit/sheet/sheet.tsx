@@ -33,7 +33,7 @@ let sheetVariants = cva(
 			},
 			disabled: {
 				false: null,
-				true: 'opacity-50 pointer-events-none',
+				true: 'pointer-events-none opacity-50',
 			},
 		},
 		defaultVariants: {
