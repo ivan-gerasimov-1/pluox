@@ -6,7 +6,7 @@ const config = {
 	],
 
 	/** prettier-plugin-tailwindcss */
-	tailwindFunctions: ['clsx'],
+	tailwindFunctions: ['cn', 'cva'],
 	tailwindStylesheet: './src/web/modules/app/components/app/app.css',
 
 	/** @ianvs/prettier-plugin-sort-imports */
