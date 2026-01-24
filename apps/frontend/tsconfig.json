@@ -4,7 +4,7 @@
 		{
 			"path": "../core"
 		},
-		/** @pluox/core */
+		/** @pluox/kit */
 		{
 			"path": "../kit"
 		}
