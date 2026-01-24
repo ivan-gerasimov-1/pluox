@@ -1,10 +1,9 @@
-import type { Id, IUseCase } from '@pluox/core/src/domain/types';
-
+import type { Id, IUseCase } from '@core/domain/types';
 import type {
 	TExpenseCreateDTO,
 	TExpenseUpdateDTO,
-} from '@pluox/core/src/modules/expense/application/dto/expenseDTO';
-import { IExpense } from '@pluox/core/src/modules/expense/domain/expenseEntity/types';
+} from '@core/modules/expense/application/dto/expenseDTO';
+import { IExpense } from '@core/modules/expense/domain/expenseEntity/types';
 
 export interface IExpenseUseCase {
 	create(expense: TExpenseCreateDTO): void;

@@ -1,4 +1,4 @@
-import { IdentityError } from '@pluox/core/src/modules/identity/domain/errors';
+import { IdentityError } from '@core/modules/identity/domain/errors';
 
 export class InvalidCredentialsError extends IdentityError {
 	constructor() {

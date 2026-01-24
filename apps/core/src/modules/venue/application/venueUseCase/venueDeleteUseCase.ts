@@ -1,7 +1,6 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { IVenueDeleteUseCase } from '@pluox/core/src/modules/venue/application/venueUseCase/types';
-import type { IVenueRepository } from '@pluox/core/src/modules/venue/domain/venueRepository/types';
+import type { Id } from '@core/domain/types';
+import type { IVenueDeleteUseCase } from '@core/modules/venue/application/venueUseCase/types';
+import type { IVenueRepository } from '@core/modules/venue/domain/venueRepository/types';
 
 /**
  * @todo LV-104

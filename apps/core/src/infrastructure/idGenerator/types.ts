@@ -1,3 +1,3 @@
-import type { Id } from '@pluox/core/src/domain/types';
+import type { Id } from '@core/domain/types';
 
 export type TIdSource = () => Id;

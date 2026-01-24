@@ -1,14 +1,13 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
+import type { Id } from '@core/domain/types';
 import {
 	CategoryNotFoundError,
 	InvalidCategoryWeightChangeCommandError,
-} from '@pluox/core/src/modules/category/application/categoryUseCase/errors';
+} from '@core/modules/category/application/categoryUseCase/errors';
 import type {
 	ICategoryWeightUseCase,
 	TCategoryWeightChangeCommand,
-} from '@pluox/core/src/modules/category/application/categoryUseCase/types';
-import type { ICategoryRepository } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
+} from '@core/modules/category/application/categoryUseCase/types';
+import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
 
 export class CategoryWeightUseCase implements ICategoryWeightUseCase {
 	constructor(private readonly categoryRepository: ICategoryRepository) {}

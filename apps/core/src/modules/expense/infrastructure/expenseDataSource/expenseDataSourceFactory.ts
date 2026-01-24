@@ -1,8 +1,7 @@
-import type { IDatabase } from '@pluox/core/src/infrastructure/database/types';
-
-import { EXPENSE_STORAGE_ID } from '@pluox/core/src/modules/expense/infrastructure/expenseDataSource/constants';
-import { ExpenseDataSource } from '@pluox/core/src/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
-import type { IExpenseDataSource } from '@pluox/core/src/modules/expense/infrastructure/expenseDataSource/types';
+import type { IDatabase } from '@core/infrastructure/database/types';
+import { EXPENSE_STORAGE_ID } from '@core/modules/expense/infrastructure/expenseDataSource/constants';
+import { ExpenseDataSource } from '@core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
+import type { IExpenseDataSource } from '@core/modules/expense/infrastructure/expenseDataSource/types';
 
 export function expenseDataSourceFactory(
 	customStorage: IDatabase,

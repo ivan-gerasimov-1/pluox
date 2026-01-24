@@ -1,7 +1,7 @@
-import type { TUserDTO } from '@pluox/core/src/modules/user/application/dto/userDTO';
-import type { IUser } from '@pluox/core/src/modules/user/domain/userEntity/types';
-import { User } from '@pluox/core/src/modules/user/domain/userEntity/user';
-import type { IUserMapper } from '@pluox/core/src/modules/user/infrastructure/userMapper/types';
+import type { TUserDTO } from '@core/modules/user/application/dto/userDTO';
+import type { IUser } from '@core/modules/user/domain/userEntity/types';
+import { User } from '@core/modules/user/domain/userEntity/user';
+import type { IUserMapper } from '@core/modules/user/infrastructure/userMapper/types';
 
 export class UserMapper implements IUserMapper {
 	public toDTO(user: IUser): TUserDTO {

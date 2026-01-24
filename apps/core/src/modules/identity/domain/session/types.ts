@@ -1,9 +1,8 @@
-import type { Id } from '@pluox/core/src/domain/types';
-import type { ValueObject } from '@pluox/core/src/domain/valueObject/valueObject';
-
-import type { TSessionDTO } from '@pluox/core/src/modules/identity/application/dto/sessionDTO';
-import type { IAuthToken } from '@pluox/core/src/modules/identity/domain/authToken/types';
-import type { IClientId } from '@pluox/core/src/modules/identity/domain/clientId/types';
+import type { Id } from '@core/domain/types';
+import type { ValueObject } from '@core/domain/valueObject/valueObject';
+import type { TSessionDTO } from '@core/modules/identity/application/dto/sessionDTO';
+import type { IAuthToken } from '@core/modules/identity/domain/authToken/types';
+import type { IClientId } from '@core/modules/identity/domain/clientId/types';
 
 export type TSessionValue = {
 	clientId: IClientId;

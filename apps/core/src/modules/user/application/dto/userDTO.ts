@@ -1,7 +1,6 @@
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
+import type { TISODateString } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
 
 export type TUserDTO = {
 	id: string;

@@ -1,10 +1,11 @@
-import type { IRepository } from '@pluox/core/src/domain/repository/types';
-import type { Id } from '@pluox/core/src/domain/types';
+import type { IRepository } from '@core/domain/repository/types';
+import type { Id } from '@core/domain/types';
+import type { IVenue } from '@core/modules/venue/domain/venueEntity/types';
 
-import type { IVenue } from '@pluox/core/src/modules/venue/domain/venueEntity/types';
-
-export interface IVenueRepository
-	extends IRepository<IVenue, TVenueFindOptions> {}
+export interface IVenueRepository extends IRepository<
+	IVenue,
+	TVenueFindOptions
+> {}
 
 export type TVenueFindOptions = {
 	id?: Id;

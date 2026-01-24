@@ -1,16 +1,15 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { AuthService } from '@pluox/core/src/modules/identity/application/authService/authService';
-import { SessionService } from '@pluox/core/src/modules/identity/application/sessionService/sessionService';
-import { AuthTokenFactory } from '@pluox/core/src/modules/identity/domain/authToken/authTokenFactory';
-import { ClientIdFactory } from '@pluox/core/src/modules/identity/domain/clientId/clientIdFactory';
-import { IClientIdFactory } from '@pluox/core/src/modules/identity/domain/clientId/types';
-import { SessionFactory } from '@pluox/core/src/modules/identity/domain/session/sessionFactory';
-import { AuthApi } from '@pluox/core/src/modules/identity/infrastructure/authApi/authApi';
-import { sessionDataSourceFactory } from '@pluox/core/src/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
+} from '@core/infrastructure/serviceContainer/types';
+import { AuthService } from '@core/modules/identity/application/authService/authService';
+import { SessionService } from '@core/modules/identity/application/sessionService/sessionService';
+import { AuthTokenFactory } from '@core/modules/identity/domain/authToken/authTokenFactory';
+import { ClientIdFactory } from '@core/modules/identity/domain/clientId/clientIdFactory';
+import { IClientIdFactory } from '@core/modules/identity/domain/clientId/types';
+import { SessionFactory } from '@core/modules/identity/domain/session/sessionFactory';
+import { AuthApi } from '@core/modules/identity/infrastructure/authApi/authApi';
+import { sessionDataSourceFactory } from '@core/modules/identity/infrastructure/sessionDataSource/sessionDataSourceFactory';
 
 export const identityModule: IModule = {
 	providers: [

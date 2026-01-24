@@ -1,6 +1,6 @@
 import { localeActionSheetI18n } from './localeActionSheet.i18n';
-import { ELocaleCode } from '@pluox/core/src/modules/intl/domain/enums';
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
+import { ELocaleCode } from '@core/modules/intl/domain/enums';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
 import { useState } from 'react';
 
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';

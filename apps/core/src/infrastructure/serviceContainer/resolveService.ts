@@ -1,5 +1,5 @@
-import { getGlobalContainer } from '@pluox/core/src/infrastructure/serviceContainer/containerFactory';
-import type { IServiceMap } from '@pluox/core/src/infrastructure/serviceContainer/types';
+import { getGlobalContainer } from '@core/infrastructure/serviceContainer/containerFactory';
+import type { IServiceMap } from '@core/infrastructure/serviceContainer/types';
 
 export function resolveService<T extends keyof IServiceMap = keyof IServiceMap>(
 	serviceId: T,

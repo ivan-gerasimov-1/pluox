@@ -1,8 +1,6 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { IApiClient } from '@pluox/core/src/infrastructure/apiClient/types';
-
-import type { IExpenseApi } from '@pluox/core/src/modules/expense/infrastructure/expenseApi/types';
+import type { Id } from '@core/domain/types';
+import type { IApiClient } from '@core/infrastructure/apiClient/types';
+import type { IExpenseApi } from '@core/modules/expense/infrastructure/expenseApi/types';
 
 export class ExpenseApi implements IExpenseApi {
 	constructor(private readonly apiClient: IApiClient) {}

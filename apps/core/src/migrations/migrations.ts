@@ -1,12 +1,10 @@
+import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
+import { EServiceToken } from '@core/infrastructure/serviceContainer/types';
 import type {
 	TMigrationCreateDTO,
 	TMigrationDTO,
-} from '@pluox/core/src/migrations/types';
-
-import { resolveService } from '@pluox/core/src/infrastructure/serviceContainer/resolveService';
-import { EServiceToken } from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { ELocaleCode } from '@pluox/core/src/modules/intl/domain/enums';
+} from '@core/migrations/types';
+import { ELocaleCode } from '@core/modules/intl/domain/enums';
 
 type TMigrations = Record<string, TMigrationDTO>;
 

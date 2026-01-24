@@ -1,7 +1,6 @@
-import type { IRepository } from '@pluox/core/src/domain/repository/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { IUser } from '@pluox/core/src/modules/user/domain/userEntity/types';
+import type { IRepository } from '@core/domain/repository/types';
+import type { Id } from '@core/domain/types';
+import type { IUser } from '@core/modules/user/domain/userEntity/types';
 
 export interface IUserRepository extends IRepository<IUser, TUserFindOptions> {}
 

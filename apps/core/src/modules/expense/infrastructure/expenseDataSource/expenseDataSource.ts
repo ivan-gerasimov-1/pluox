@@ -1,13 +1,11 @@
 import type {
 	TFindManyOptions,
 	TFindManyResult,
-} from '@pluox/core/src/domain/repository/types';
-
-import { DataSource } from '@pluox/core/src/infrastructure/dataSource/dataSource';
-
-import type { TExpenseDTO } from '@pluox/core/src/modules/expense/application/dto/expenseDTO';
-import type { TExpenseFindOptions } from '@pluox/core/src/modules/expense/domain/expenseRepository/types';
-import type { IExpenseDataSource } from '@pluox/core/src/modules/expense/infrastructure/expenseDataSource/types';
+} from '@core/domain/repository/types';
+import { DataSource } from '@core/infrastructure/dataSource/dataSource';
+import type { TExpenseDTO } from '@core/modules/expense/application/dto/expenseDTO';
+import type { TExpenseFindOptions } from '@core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseDataSource } from '@core/modules/expense/infrastructure/expenseDataSource/types';
 
 export class ExpenseDataSource
 	extends DataSource<TExpenseDTO, TExpenseFindOptions>

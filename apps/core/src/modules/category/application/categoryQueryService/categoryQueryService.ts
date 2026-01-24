@@ -1,9 +1,8 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { ICategoryQueryService } from '@pluox/core/src/modules/category/application/categoryQueryService/types';
-import type { TCategoryDTO } from '@pluox/core/src/modules/category/application/dto/categoryDTO';
-import type { ICategoryRepository } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
-import type { ICategoryMapper } from '@pluox/core/src/modules/category/infrastructure/categoryMapper/types';
+import type { Id } from '@core/domain/types';
+import type { ICategoryQueryService } from '@core/modules/category/application/categoryQueryService/types';
+import type { TCategoryDTO } from '@core/modules/category/application/dto/categoryDTO';
+import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
+import type { ICategoryMapper } from '@core/modules/category/infrastructure/categoryMapper/types';
 
 export class CategoryQueryService implements ICategoryQueryService {
 	constructor(

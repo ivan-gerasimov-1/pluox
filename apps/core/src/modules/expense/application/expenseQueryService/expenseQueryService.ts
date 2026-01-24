@@ -1,10 +1,9 @@
-import type { ITemporal, TMonth, TYear } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { TExpenseDTO } from '@pluox/core/src/modules/expense/application/dto/expenseDTO';
-import type { IExpenseQueryService } from '@pluox/core/src/modules/expense/application/expenseQueryService/types';
-import type { IExpenseRepository } from '@pluox/core/src/modules/expense/domain/expenseRepository/types';
-import type { IExpenseMapper } from '@pluox/core/src/modules/expense/infrastructure/expenseMapper/types';
+import type { ITemporal, TMonth, TYear } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
+import type { TExpenseDTO } from '@core/modules/expense/application/dto/expenseDTO';
+import type { IExpenseQueryService } from '@core/modules/expense/application/expenseQueryService/types';
+import type { IExpenseRepository } from '@core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseMapper } from '@core/modules/expense/infrastructure/expenseMapper/types';
 
 export class ExpenseQueryService implements IExpenseQueryService {
 	constructor(

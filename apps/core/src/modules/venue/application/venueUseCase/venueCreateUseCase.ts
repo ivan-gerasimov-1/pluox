@@ -1,14 +1,13 @@
-import type { IIdGenerator } from '@pluox/core/src/domain/idGenerator/types';
-import type { ITemporal } from '@pluox/core/src/domain/temporal/types';
-
+import type { IIdGenerator } from '@core/domain/idGenerator/types';
+import type { ITemporal } from '@core/domain/temporal/types';
 import type {
 	TVenueCreateDTO,
 	TVenueDTO,
-} from '@pluox/core/src/modules/venue/application/dto/venueDTO';
-import type { IVenueCreateUseCase } from '@pluox/core/src/modules/venue/application/venueUseCase/types';
-import type { IVenue } from '@pluox/core/src/modules/venue/domain/venueEntity/types';
-import type { IVenueRepository } from '@pluox/core/src/modules/venue/domain/venueRepository/types';
-import type { IVenueMapper } from '@pluox/core/src/modules/venue/infrastructure/venueMapper/types';
+} from '@core/modules/venue/application/dto/venueDTO';
+import type { IVenueCreateUseCase } from '@core/modules/venue/application/venueUseCase/types';
+import type { IVenue } from '@core/modules/venue/domain/venueEntity/types';
+import type { IVenueRepository } from '@core/modules/venue/domain/venueRepository/types';
+import type { IVenueMapper } from '@core/modules/venue/infrastructure/venueMapper/types';
 
 export class VenueCreateUseCase implements IVenueCreateUseCase {
 	constructor(

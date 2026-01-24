@@ -1,4 +1,4 @@
-import type { TCategoryTemplate } from '@pluox/core/src/modules/category/domain/categoryTemplate/types';
+import type { TCategoryTemplate } from '@core/modules/category/domain/categoryTemplate/types';
 
 export const categoryTemplates: TCategoryTemplate[] = [
 	{

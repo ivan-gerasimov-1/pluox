@@ -1,4 +1,4 @@
-import type { IValueObject } from '@pluox/core/src/domain/valueObject/types';
+import type { IValueObject } from '@core/domain/valueObject/types';
 
 export abstract class ValueObject<T> implements IValueObject<T> {
 	protected value: T;

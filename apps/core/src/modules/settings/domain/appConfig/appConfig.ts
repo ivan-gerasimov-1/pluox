@@ -1,9 +1,6 @@
-import {
-	ECurrency,
-	type TCurrency,
-} from '@pluox/core/src/modules/currency/domain/types';
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
-import type { IAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
+import { ECurrency, type TCurrency } from '@core/modules/currency/domain/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
+import type { IAppConfig } from '@core/modules/settings/domain/appConfig/types';
 
 export class AppConfig implements IAppConfig {
 	#locale: TLocaleCode;

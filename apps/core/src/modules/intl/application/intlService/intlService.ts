@@ -1,15 +1,15 @@
-import type { TCurrency } from '@pluox/core/src/modules/currency/domain/types';
-import type { IIntlService } from '@pluox/core/src/modules/intl/application/intlService/types';
-import { DECIMAL_SEPARATORS } from '@pluox/core/src/modules/intl/domain/constants';
-import type { ICurrencyFormatter } from '@pluox/core/src/modules/intl/domain/currencyFormatter/types';
-import type { IDateFormatter } from '@pluox/core/src/modules/intl/domain/dateFormatter/types';
-import { UnsupportedDecimalSeparatorError } from '@pluox/core/src/modules/intl/domain/errors';
-import type { INumberParser } from '@pluox/core/src/modules/intl/domain/numberParser/types';
+import type { TCurrency } from '@core/modules/currency/domain/types';
+import type { IIntlService } from '@core/modules/intl/application/intlService/types';
+import { DECIMAL_SEPARATORS } from '@core/modules/intl/domain/constants';
+import type { ICurrencyFormatter } from '@core/modules/intl/domain/currencyFormatter/types';
+import type { IDateFormatter } from '@core/modules/intl/domain/dateFormatter/types';
+import { UnsupportedDecimalSeparatorError } from '@core/modules/intl/domain/errors';
+import type { INumberParser } from '@core/modules/intl/domain/numberParser/types';
 import type {
 	TDecimalSeparator,
 	TLocaleCode,
-} from '@pluox/core/src/modules/intl/domain/types';
-import type { IAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
+} from '@core/modules/intl/domain/types';
+import type { IAppConfig } from '@core/modules/settings/domain/appConfig/types';
 
 export class IntlService implements IIntlService {
 	constructor(

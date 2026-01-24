@@ -1,6 +1,5 @@
+import { Entity } from '@core/domain/entity/entity';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-
-import { Entity } from '@pluox/core/src/domain/entity/entity';
 
 describe('Entity', () => {
 	const TEST_ID = 'ID';

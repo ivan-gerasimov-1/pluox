@@ -1,20 +1,19 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { ExpenseAmountService } from '@pluox/core/src/modules/expense/application/expenseAmountService/expenseAmountService';
-import { ExpenseGroupingService } from '@pluox/core/src/modules/expense/application/expenseGroupingService/expenseGroupingService';
-import { ExpenseQueryService } from '@pluox/core/src/modules/expense/application/expenseQueryService/expenseQueryService';
-import { ExpenseService } from '@pluox/core/src/modules/expense/application/expenseService/expenseService';
-import { CreateExpenseUseCase } from '@pluox/core/src/modules/expense/application/expenseUseCases/createExpenseUseCase';
-import { DeleteExpenseUseCase } from '@pluox/core/src/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
-import { ExpenseUseCase } from '@pluox/core/src/modules/expense/application/expenseUseCases/expenseUseCase';
-import { UpdateExpenseUseCase } from '@pluox/core/src/modules/expense/application/expenseUseCases/updateExpenseUseCase';
-import { ExpenseApi } from '@pluox/core/src/modules/expense/infrastructure/expenseApi/expenseApi';
-import { expenseDataSourceFactory } from '@pluox/core/src/modules/expense/infrastructure/expenseDataSource/expenseDataSourceFactory';
-import { ExpenseMapper } from '@pluox/core/src/modules/expense/infrastructure/expenseMapper/expenseMapper';
-import { ExpenseRepository } from '@pluox/core/src/modules/expense/infrastructure/expenseRepository/expenseRepository';
+} from '@core/infrastructure/serviceContainer/types';
+import { ExpenseAmountService } from '@core/modules/expense/application/expenseAmountService/expenseAmountService';
+import { ExpenseGroupingService } from '@core/modules/expense/application/expenseGroupingService/expenseGroupingService';
+import { ExpenseQueryService } from '@core/modules/expense/application/expenseQueryService/expenseQueryService';
+import { ExpenseService } from '@core/modules/expense/application/expenseService/expenseService';
+import { CreateExpenseUseCase } from '@core/modules/expense/application/expenseUseCases/createExpenseUseCase';
+import { DeleteExpenseUseCase } from '@core/modules/expense/application/expenseUseCases/deleteExpenseUseCase';
+import { ExpenseUseCase } from '@core/modules/expense/application/expenseUseCases/expenseUseCase';
+import { UpdateExpenseUseCase } from '@core/modules/expense/application/expenseUseCases/updateExpenseUseCase';
+import { ExpenseApi } from '@core/modules/expense/infrastructure/expenseApi/expenseApi';
+import { expenseDataSourceFactory } from '@core/modules/expense/infrastructure/expenseDataSource/expenseDataSourceFactory';
+import { ExpenseMapper } from '@core/modules/expense/infrastructure/expenseMapper/expenseMapper';
+import { ExpenseRepository } from '@core/modules/expense/infrastructure/expenseRepository/expenseRepository';
 
 export const expenseModule: IModule = {
 	providers: [

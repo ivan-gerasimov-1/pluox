@@ -1,7 +1,6 @@
-import type { IApiClientConfigProvider } from '@pluox/core/src/infrastructure/apiClient/types';
-
-import type { ISessionService } from '@pluox/core/src/modules/identity/application/sessionService/types';
-import type { IEnvironment } from '@pluox/core/src/modules/settings/infrastructure/environment/types';
+import type { IApiClientConfigProvider } from '@core/infrastructure/apiClient/types';
+import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
+import type { IEnvironment } from '@core/modules/settings/infrastructure/environment/types';
 
 export class ApiClientConfigProvider implements IApiClientConfigProvider {
 	constructor(

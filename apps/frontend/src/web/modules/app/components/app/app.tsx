@@ -1,4 +1,4 @@
-import type { IContainer } from '@pluox/core/src/infrastructure/serviceContainer/types';
+import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router';
 

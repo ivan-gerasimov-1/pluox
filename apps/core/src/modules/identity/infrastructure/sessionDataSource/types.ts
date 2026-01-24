@@ -1,5 +1,4 @@
-import type { IDataSource } from '@pluox/core/src/infrastructure/dataSource/types';
-
-import type { TSessionDTO } from '@pluox/core/src/modules/identity/application/dto/sessionDTO';
+import type { IDataSource } from '@core/infrastructure/dataSource/types';
+import type { TSessionDTO } from '@core/modules/identity/application/dto/sessionDTO';
 
 export interface ISessionDataSource extends IDataSource<TSessionDTO> {}

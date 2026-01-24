@@ -1,8 +1,7 @@
-import { Entity } from '@pluox/core/src/domain/entity/entity';
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { ICategory } from '@pluox/core/src/modules/category/domain/categoryEntity/types';
+import { Entity } from '@core/domain/entity/entity';
+import type { TISODateString } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
+import type { ICategory } from '@core/modules/category/domain/categoryEntity/types';
 
 export class Category extends Entity implements ICategory {
 	#userId: Id;

@@ -1,13 +1,12 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
+import type { Id } from '@core/domain/types';
 import type {
 	TVenueDTO,
 	TVenueUpdateDTO,
-} from '@pluox/core/src/modules/venue/application/dto/venueDTO';
-import type { IVenueUpdateUseCase } from '@pluox/core/src/modules/venue/application/venueUseCase/types';
-import type { IVenue } from '@pluox/core/src/modules/venue/domain/venueEntity/types';
-import type { IVenueRepository } from '@pluox/core/src/modules/venue/domain/venueRepository/types';
-import type { IVenueMapper } from '@pluox/core/src/modules/venue/infrastructure/venueMapper/types';
+} from '@core/modules/venue/application/dto/venueDTO';
+import type { IVenueUpdateUseCase } from '@core/modules/venue/application/venueUseCase/types';
+import type { IVenue } from '@core/modules/venue/domain/venueEntity/types';
+import type { IVenueRepository } from '@core/modules/venue/domain/venueRepository/types';
+import type { IVenueMapper } from '@core/modules/venue/infrastructure/venueMapper/types';
 
 export class VenueUpdateUseCase implements IVenueUpdateUseCase {
 	constructor(

@@ -1,21 +1,20 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { TSessionDTO } from '@pluox/core/src/modules/identity/application/dto/sessionDTO';
+import type { Id } from '@core/domain/types';
+import type { TSessionDTO } from '@core/modules/identity/application/dto/sessionDTO';
 import type {
 	IAuthToken,
 	IAuthTokenFactory,
-} from '@pluox/core/src/modules/identity/domain/authToken/types';
+} from '@core/modules/identity/domain/authToken/types';
 import type {
 	IClientId,
 	IClientIdFactory,
-} from '@pluox/core/src/modules/identity/domain/clientId/types';
-import { InvalidSessionFactoryArgumentsError } from '@pluox/core/src/modules/identity/domain/session/errors';
-import { Session } from '@pluox/core/src/modules/identity/domain/session/session';
+} from '@core/modules/identity/domain/clientId/types';
+import { InvalidSessionFactoryArgumentsError } from '@core/modules/identity/domain/session/errors';
+import { Session } from '@core/modules/identity/domain/session/session';
 import type {
 	ISession,
 	ISessionFactory,
-} from '@pluox/core/src/modules/identity/domain/session/types';
-import type { IUserService } from '@pluox/core/src/modules/user/application/userService/types';
+} from '@core/modules/identity/domain/session/types';
+import type { IUserService } from '@core/modules/user/application/userService/types';
 
 export class SessionFactory implements ISessionFactory {
 	constructor(

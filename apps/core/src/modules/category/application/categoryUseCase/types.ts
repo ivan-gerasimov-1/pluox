@@ -1,9 +1,8 @@
-import type { Id, IUseCase } from '@pluox/core/src/domain/types';
-
+import type { Id, IUseCase } from '@core/domain/types';
 import type {
 	TCategoryCreateDTO,
 	TCategoryUpdateDTO,
-} from '@pluox/core/src/modules/category/application/dto/categoryDTO';
+} from '@core/modules/category/application/dto/categoryDTO';
 
 export interface ICategoryUseCase {
 	initialize(): void;

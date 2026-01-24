@@ -1,4 +1,4 @@
-import { ECurrency } from '@pluox/core/src/modules/currency/domain/types';
+import { ECurrency } from '@core/modules/currency/domain/types';
 
 import { createDateViewValue } from '@/web/modules/expenses/components/expenseCreate/helpers/createDateViewValue';
 import { ExpenseForm } from '@/web/modules/expenses/components/expenseForm/expenseForm';

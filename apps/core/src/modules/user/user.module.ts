@@ -1,12 +1,11 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { UserService } from '@pluox/core/src/modules/user/application/userService/userService';
-import { userDataSourceFactory } from '@pluox/core/src/modules/user/infrastructure/userDataSource/userDataSourceFactory';
-import { UserMapper } from '@pluox/core/src/modules/user/infrastructure/userMapper/userMapper';
-import { UserRepository } from '@pluox/core/src/modules/user/infrastructure/userRepository/userRepository';
+} from '@core/infrastructure/serviceContainer/types';
+import { UserService } from '@core/modules/user/application/userService/userService';
+import { userDataSourceFactory } from '@core/modules/user/infrastructure/userDataSource/userDataSourceFactory';
+import { UserMapper } from '@core/modules/user/infrastructure/userMapper/userMapper';
+import { UserRepository } from '@core/modules/user/infrastructure/userRepository/userRepository';
 
 export const userModule: IModule = {
 	providers: [

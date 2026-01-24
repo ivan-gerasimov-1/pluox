@@ -1,4 +1,4 @@
-import type { IDatabaseCollection } from '@pluox/core/src/infrastructure/database/types';
+import type { IDatabaseCollection } from '@core/infrastructure/database/types';
 
 export class DatabaseCollectionDecorator implements IDatabaseCollection {
 	constructor(public decoratee: IDatabaseCollection) {}

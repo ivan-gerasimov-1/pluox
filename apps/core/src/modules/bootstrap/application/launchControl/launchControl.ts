@@ -1,10 +1,10 @@
-import type { ILauchControl } from '@pluox/core/src/modules/bootstrap/application/launchControl/types';
-import type { ICategoryUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/types';
-import { ECurrency } from '@pluox/core/src/modules/currency/domain/types';
-import type { ICurrencyRateAPI } from '@pluox/core/src/modules/currency/infrastructure/currencyRateAPI/types';
-import type { ICurrencyRateDataSource } from '@pluox/core/src/modules/currency/infrastructure/currencyRateDataSource/types';
-import type { ISessionService } from '@pluox/core/src/modules/identity/application/sessionService/types';
-import type { IAppConfigService } from '@pluox/core/src/modules/settings/application/appConfigService/types';
+import type { ILauchControl } from '@core/modules/bootstrap/application/launchControl/types';
+import type { ICategoryUseCase } from '@core/modules/category/application/categoryUseCase/types';
+import { ECurrency } from '@core/modules/currency/domain/types';
+import type { ICurrencyRateAPI } from '@core/modules/currency/infrastructure/currencyRateAPI/types';
+import type { ICurrencyRateDataSource } from '@core/modules/currency/infrastructure/currencyRateDataSource/types';
+import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
+import type { IAppConfigService } from '@core/modules/settings/application/appConfigService/types';
 
 export class LaunchControl implements ILauchControl {
 	constructor(

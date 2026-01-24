@@ -1,16 +1,15 @@
-import type { TMonth, TYear } from '@pluox/core/src/domain/temporal/types';
-
-import type { TExpenseDTO } from '@pluox/core/src/modules/expense/application/dto/expenseDTO';
+import type { TMonth, TYear } from '@core/domain/temporal/types';
+import type { TExpenseDTO } from '@core/modules/expense/application/dto/expenseDTO';
 import type {
 	IExpenseAmountService,
 	TAmountByCategory,
-} from '@pluox/core/src/modules/expense/application/expenseAmountService/types';
+} from '@core/modules/expense/application/expenseAmountService/types';
 import type {
 	IExpenseGroupingService,
 	TExpenseGroupByDate,
-} from '@pluox/core/src/modules/expense/application/expenseGroupingService/types';
-import type { IExpenseQueryService } from '@pluox/core/src/modules/expense/application/expenseQueryService/types';
-import type { IExpenseService } from '@pluox/core/src/modules/expense/application/expenseService/types';
+} from '@core/modules/expense/application/expenseGroupingService/types';
+import type { IExpenseQueryService } from '@core/modules/expense/application/expenseQueryService/types';
+import type { IExpenseService } from '@core/modules/expense/application/expenseService/types';
 
 export class ExpenseService implements IExpenseService {
 	constructor(

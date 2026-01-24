@@ -1,4 +1,4 @@
-import type { TValueOf } from '@pluox/core/src/types';
+import type { TValueOf } from '@core/types';
 
 export const EEnvironment = {
 	DEVELOPMENT: 'development',

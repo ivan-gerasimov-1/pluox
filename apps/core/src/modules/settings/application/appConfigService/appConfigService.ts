@@ -1,9 +1,9 @@
-import type { IAppConfigService } from '@pluox/core/src/modules/settings/application/appConfigService/types';
+import type { IAppConfigService } from '@core/modules/settings/application/appConfigService/types';
 import type {
 	IAppConfig,
 	TAppConfig,
-} from '@pluox/core/src/modules/settings/domain/appConfig/types';
-import type { IAppConfigDataSource } from '@pluox/core/src/modules/settings/infrastructure/appConfigDataSource/types';
+} from '@core/modules/settings/domain/appConfig/types';
+import type { IAppConfigDataSource } from '@core/modules/settings/infrastructure/appConfigDataSource/types';
 
 export class AppConfigService implements IAppConfigService {
 	constructor(

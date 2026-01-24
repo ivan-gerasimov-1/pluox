@@ -1,12 +1,11 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { IntlService } from '@pluox/core/src/modules/intl/application/intlService/intlService';
-import { CurrencyFormatter } from '@pluox/core/src/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
-import { DateFormatter } from '@pluox/core/src/modules/intl/infrastructure/dateFormatter/dateFormatter';
-import { NumberParser } from '@pluox/core/src/modules/intl/infrastructure/numberParser/numberParser';
+} from '@core/infrastructure/serviceContainer/types';
+import { IntlService } from '@core/modules/intl/application/intlService/intlService';
+import { CurrencyFormatter } from '@core/modules/intl/infrastructure/currencyFormatter/currencyFormatter';
+import { DateFormatter } from '@core/modules/intl/infrastructure/dateFormatter/dateFormatter';
+import { NumberParser } from '@core/modules/intl/infrastructure/numberParser/numberParser';
 
 export const intlModule: IModule = {
 	providers: [

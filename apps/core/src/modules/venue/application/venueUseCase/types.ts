@@ -1,10 +1,9 @@
-import type { Id, IUseCase } from '@pluox/core/src/domain/types';
-
+import type { Id, IUseCase } from '@core/domain/types';
 import type {
 	TVenueCreateDTO,
 	TVenueDTO,
 	TVenueUpdateDTO,
-} from '@pluox/core/src/modules/venue/application/dto/venueDTO';
+} from '@core/modules/venue/application/dto/venueDTO';
 
 export interface IVenueUseCase {
 	create(venueCreateDTO: TVenueCreateDTO): TVenueDTO;

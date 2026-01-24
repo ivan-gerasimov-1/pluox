@@ -1,10 +1,9 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
+import type { Id } from '@core/domain/types';
 import type {
 	TVenueCreateDTO,
 	TVenueDTO,
 	TVenueUpdateDTO,
-} from '@pluox/core/src/modules/venue/application/dto/venueDTO';
+} from '@core/modules/venue/application/dto/venueDTO';
 import type {
 	IVenueArchiveUseCase,
 	IVenueCreateUseCase,
@@ -12,7 +11,7 @@ import type {
 	IVenueUnarchiveUseCase,
 	IVenueUpdateUseCase,
 	IVenueUseCase,
-} from '@pluox/core/src/modules/venue/application/venueUseCase/types';
+} from '@core/modules/venue/application/venueUseCase/types';
 
 export class VenueUseCase implements IVenueUseCase {
 	constructor(

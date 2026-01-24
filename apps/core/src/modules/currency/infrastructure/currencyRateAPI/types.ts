@@ -1,4 +1,4 @@
-import type { TCurrencyRates } from '@pluox/core/src/modules/currency/domain/types';
+import type { TCurrencyRates } from '@core/modules/currency/domain/types';
 
 export interface ICurrencyRateAPI {
 	get(): Promise<TCurrencyRates>;

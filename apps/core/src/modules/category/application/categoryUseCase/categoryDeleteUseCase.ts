@@ -1,7 +1,6 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { ICategoryDeleteUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/types';
-import type { ICategoryRepository } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
+import type { Id } from '@core/domain/types';
+import type { ICategoryDeleteUseCase } from '@core/modules/category/application/categoryUseCase/types';
+import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
 
 export class CategoryDeleteUseCase implements ICategoryDeleteUseCase {
 	constructor(private readonly categoryRepository: ICategoryRepository) {}

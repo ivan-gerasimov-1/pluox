@@ -1,4 +1,4 @@
-import type { ISession } from '@pluox/core/src/modules/identity/domain/session/types';
+import type { ISession } from '@core/modules/identity/domain/session/types';
 
 export interface ISessionService {
 	readonly session: ISession;

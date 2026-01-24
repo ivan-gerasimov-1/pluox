@@ -1,4 +1,4 @@
-import { Id } from '@pluox/core/src/domain/types';
+import { Id } from '@core/domain/types';
 import { QueryClient } from '@tanstack/react-query';
 
 import { createVenueQuery } from '@/web/modules/venues/queries/createVenueQuery';

@@ -1,7 +1,6 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { ICategoryService } from '@pluox/core/src/modules/category/application/categoryService/types';
-import type { ICategoryRepository } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
+import type { Id } from '@core/domain/types';
+import type { ICategoryService } from '@core/modules/category/application/categoryService/types';
+import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
 
 export class CategoryService implements ICategoryService {
 	constructor(private readonly categoryRepository: ICategoryRepository) {}

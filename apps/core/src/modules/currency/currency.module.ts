@@ -1,13 +1,12 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { CurrencyConverter } from '@pluox/core/src/modules/currency/application/currencyConverter/currencyConverter';
-import { CurrencyRateService } from '@pluox/core/src/modules/currency/application/currencyRateService/currencyRateService';
-import { CurrencyRateAPI } from '@pluox/core/src/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
-import { currencyRateDataSourceFactory } from '@pluox/core/src/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSourceFactory';
-import { CurrencyRateRepository } from '@pluox/core/src/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
+} from '@core/infrastructure/serviceContainer/types';
+import { CurrencyConverter } from '@core/modules/currency/application/currencyConverter/currencyConverter';
+import { CurrencyRateService } from '@core/modules/currency/application/currencyRateService/currencyRateService';
+import { CurrencyRateAPI } from '@core/modules/currency/infrastructure/currencyRateAPI/currencyRateAPI';
+import { currencyRateDataSourceFactory } from '@core/modules/currency/infrastructure/currencyRateDataSource/currencyRateDataSourceFactory';
+import { CurrencyRateRepository } from '@core/modules/currency/infrastructure/currencyRateRepository/currencyRateRepository';
 
 export const currencyModule: IModule = {
 	providers: [

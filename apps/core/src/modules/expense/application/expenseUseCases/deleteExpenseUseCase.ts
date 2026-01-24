@@ -1,8 +1,7 @@
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { ICategoryUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/types';
-import type { IDeleteExpenseUseCase } from '@pluox/core/src/modules/expense/application/expenseUseCases/types';
-import type { IExpenseRepository } from '@pluox/core/src/modules/expense/domain/expenseRepository/types';
+import type { Id } from '@core/domain/types';
+import type { ICategoryUseCase } from '@core/modules/category/application/categoryUseCase/types';
+import type { IDeleteExpenseUseCase } from '@core/modules/expense/application/expenseUseCases/types';
+import type { IExpenseRepository } from '@core/modules/expense/domain/expenseRepository/types';
 
 export class DeleteExpenseUseCase implements IDeleteExpenseUseCase {
 	constructor(

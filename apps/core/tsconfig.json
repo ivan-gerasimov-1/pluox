@@ -19,10 +19,8 @@
 		"forceConsistentCasingInFileNames": true,
 		"incremental": true,
 
-		"jsx": "react-jsx",
-
 		"paths": {
-			"@/*": ["src/*"]
+			"@core/*": ["src/*"]
 		}
 	},
 	"include": ["src/**/*"]

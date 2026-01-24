@@ -1,17 +1,16 @@
-import type { IIdGenerator } from '@pluox/core/src/domain/idGenerator/types';
-import type { ITemporal } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import { ELocaleCode } from '@pluox/core/src/modules/intl/domain/enums';
+import type { IIdGenerator } from '@core/domain/idGenerator/types';
+import type { ITemporal } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
+import { ELocaleCode } from '@core/modules/intl/domain/enums';
 import type {
 	TUserCreateDTO,
 	TUserDTO,
 	TUserUpdateDTO,
-} from '@pluox/core/src/modules/user/application/dto/userDTO';
-import { UserNotFoundError } from '@pluox/core/src/modules/user/application/userService/errors';
-import type { IUserService } from '@pluox/core/src/modules/user/application/userService/types';
-import type { IUserRepository } from '@pluox/core/src/modules/user/domain/userRepository/types';
-import type { IUserMapper } from '@pluox/core/src/modules/user/infrastructure/userMapper/types';
+} from '@core/modules/user/application/dto/userDTO';
+import { UserNotFoundError } from '@core/modules/user/application/userService/errors';
+import type { IUserService } from '@core/modules/user/application/userService/types';
+import type { IUserRepository } from '@core/modules/user/domain/userRepository/types';
+import type { IUserMapper } from '@core/modules/user/infrastructure/userMapper/types';
 
 export class UserService implements IUserService {
 	constructor(

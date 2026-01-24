@@ -1,7 +1,7 @@
-import type { ICurrencyConverter } from '@pluox/core/src/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRateService } from '@pluox/core/src/modules/currency/application/currencyRateService/types';
-import type { ICurrencyRateRepository } from '@pluox/core/src/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-import type { TCurrency } from '@pluox/core/src/modules/currency/domain/types';
+import type { ICurrencyConverter } from '@core/modules/currency/application/currencyConverter/types';
+import type { ICurrencyRateService } from '@core/modules/currency/application/currencyRateService/types';
+import type { ICurrencyRateRepository } from '@core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
+import type { TCurrency } from '@core/modules/currency/domain/types';
 
 export class CurrencyRateService implements ICurrencyRateService {
 	constructor(

@@ -1,9 +1,6 @@
-import type { ICurrencyConverter } from '@pluox/core/src/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRateRepository } from '@pluox/core/src/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-import {
-	ECurrency,
-	type TCurrency,
-} from '@pluox/core/src/modules/currency/domain/types';
+import type { ICurrencyConverter } from '@core/modules/currency/application/currencyConverter/types';
+import type { ICurrencyRateRepository } from '@core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
+import { ECurrency, type TCurrency } from '@core/modules/currency/domain/types';
 
 export class CurrencyConverter implements ICurrencyConverter {
 	constructor(

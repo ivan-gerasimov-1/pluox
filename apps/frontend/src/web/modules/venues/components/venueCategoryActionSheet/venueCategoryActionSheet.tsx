@@ -1,5 +1,5 @@
 import { venueCategoryActionSheetI18n } from './venueCategoryActionSheet.i18n';
-import type { TVenueDTO } from '@pluox/core/src/modules/venue/application/dto/venueDTO';
+import type { TVenueDTO } from '@core/modules/venue/application/dto/venueDTO';
 import { useState } from 'react';
 
 import { useCategoryListQuery } from '@/web/modules/categories/queries/categories.queries';

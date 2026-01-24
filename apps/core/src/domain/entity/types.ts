@@ -1,5 +1,5 @@
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
+import type { TISODateString } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
 
 export interface IEntity {
 	readonly id: Id;

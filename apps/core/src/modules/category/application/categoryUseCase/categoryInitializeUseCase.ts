@@ -1,14 +1,13 @@
-import type { IIdGenerator } from '@pluox/core/src/domain/idGenerator/types';
-import type { ITemporal } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { ICategoryInitializeUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/types';
-import type { ICategory } from '@pluox/core/src/modules/category/domain/categoryEntity/types';
-import type { ICategoryRepository } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
-import { categoryTemplates } from '@pluox/core/src/modules/category/domain/categoryTemplate/templates';
-import type { ICategoryMapper } from '@pluox/core/src/modules/category/infrastructure/categoryMapper/types';
-import type { IExpenseRepository } from '@pluox/core/src/modules/expense/domain/expenseRepository/types';
-import type { ISessionService } from '@pluox/core/src/modules/identity/application/sessionService/types';
+import type { IIdGenerator } from '@core/domain/idGenerator/types';
+import type { ITemporal } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
+import type { ICategoryInitializeUseCase } from '@core/modules/category/application/categoryUseCase/types';
+import type { ICategory } from '@core/modules/category/domain/categoryEntity/types';
+import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
+import { categoryTemplates } from '@core/modules/category/domain/categoryTemplate/templates';
+import type { ICategoryMapper } from '@core/modules/category/infrastructure/categoryMapper/types';
+import type { IExpenseRepository } from '@core/modules/expense/domain/expenseRepository/types';
+import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
 
 export class CategoryInitializeUseCase implements ICategoryInitializeUseCase {
 	constructor(

@@ -1,7 +1,7 @@
-import { ELocaleCode } from '@pluox/core/src/modules/intl/domain/enums';
-import type { INumberParser } from '@pluox/core/src/modules/intl/domain/numberParser/types';
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
-import type { IAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
+import { ELocaleCode } from '@core/modules/intl/domain/enums';
+import type { INumberParser } from '@core/modules/intl/domain/numberParser/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
+import type { IAppConfig } from '@core/modules/settings/domain/appConfig/types';
 
 type IndexReplacer = (digit: string) => string;
 type NumberFormatterCache = Map<TLocaleCode, Intl.NumberFormat>;

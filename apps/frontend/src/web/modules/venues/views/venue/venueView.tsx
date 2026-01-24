@@ -1,4 +1,4 @@
-import { Id } from '@pluox/core/src/domain/types';
+import { Id } from '@core/domain/types';
 import { useParams } from 'react-router';
 
 import { INVALID_ID } from '@/web/constants/invalidId';

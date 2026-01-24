@@ -1,5 +1,5 @@
-import { EServiceToken } from '@pluox/core/src/infrastructure/serviceContainer/types';
-import type { TVenueDTO } from '@pluox/core/src/modules/venue/application/dto/venueDTO';
+import { EServiceToken } from '@core/infrastructure/serviceContainer/types';
+import type { TVenueDTO } from '@core/modules/venue/application/dto/venueDTO';
 import { useForm } from 'react-hook-form';
 
 import { useAppNavigation } from '@/web/hooks/useNavigation';

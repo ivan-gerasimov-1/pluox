@@ -1,8 +1,8 @@
 import type {
 	TFindManyOptions,
 	TFindManyResult,
-} from '@pluox/core/src/domain/repository/types';
-import type { Id } from '@pluox/core/src/domain/types';
+} from '@core/domain/repository/types';
+import type { Id } from '@core/domain/types';
 
 export interface IDataSource<TDto, TFindOptions = {}> {
 	upsert(id: Id, dto: TDto): void;

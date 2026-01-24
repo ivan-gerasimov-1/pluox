@@ -1,10 +1,10 @@
-import { SessionNotFoundError } from '@pluox/core/src/modules/identity/application/sessionService/errors';
-import type { ISessionService } from '@pluox/core/src/modules/identity/application/sessionService/types';
+import { SessionNotFoundError } from '@core/modules/identity/application/sessionService/errors';
+import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
 import type {
 	ISession,
 	ISessionFactory,
-} from '@pluox/core/src/modules/identity/domain/session/types';
-import type { ISessionDataSource } from '@pluox/core/src/modules/identity/infrastructure/sessionDataSource/types';
+} from '@core/modules/identity/domain/session/types';
+import type { ISessionDataSource } from '@core/modules/identity/infrastructure/sessionDataSource/types';
 
 export class SessionService implements ISessionService {
 	#session: ISession | null;

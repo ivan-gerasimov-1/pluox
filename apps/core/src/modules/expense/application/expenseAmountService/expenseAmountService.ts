@@ -1,12 +1,11 @@
-import type { Id, TCategory } from '@pluox/core/src/domain/types';
-
-import type { ICurrencyRateService } from '@pluox/core/src/modules/currency/application/currencyRateService/types';
-import type { TExpenseDTO } from '@pluox/core/src/modules/expense/application/dto/expenseDTO';
+import type { Id, TCategory } from '@core/domain/types';
+import type { ICurrencyRateService } from '@core/modules/currency/application/currencyRateService/types';
+import type { TExpenseDTO } from '@core/modules/expense/application/dto/expenseDTO';
 import type {
 	IExpenseAmountService,
 	TAmountByCategory,
-} from '@pluox/core/src/modules/expense/application/expenseAmountService/types';
-import type { IAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
+} from '@core/modules/expense/application/expenseAmountService/types';
+import type { IAppConfig } from '@core/modules/settings/domain/appConfig/types';
 
 export class ExpenseAmountService implements IExpenseAmountService {
 	constructor(

@@ -1,10 +1,10 @@
-import { DatabaseCollection } from '@pluox/core/src/infrastructure/database/databaseCollection';
-import { DatabaseCollectionCacheDecorator } from '@pluox/core/src/infrastructure/database/databaseCollectionDecorator/databaseCollectionCache';
+import { DatabaseCollection } from '@core/infrastructure/database/databaseCollection';
+import { DatabaseCollectionCacheDecorator } from '@core/infrastructure/database/databaseCollectionDecorator/databaseCollectionCache';
 import type {
 	IDatabaseCollection,
 	IDatabaseCollectionFactory,
 	IStorage,
-} from '@pluox/core/src/infrastructure/database/types';
+} from '@core/infrastructure/database/types';
 
 export class DatabaseCollectionFactory implements IDatabaseCollectionFactory {
 	public create(

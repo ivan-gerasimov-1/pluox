@@ -1,10 +1,10 @@
-import type { IDateFormatter } from '@pluox/core/src/modules/intl/domain/dateFormatter/types';
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
+import type { IDateFormatter } from '@core/modules/intl/domain/dateFormatter/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
 import {
 	EDay,
 	EMonth,
 	EYear,
-} from '@pluox/core/src/modules/intl/infrastructure/dateFormatter/types';
+} from '@core/modules/intl/infrastructure/dateFormatter/types';
 
 export class DateFormatter implements IDateFormatter {
 	format(value: number | string | Date, locale: TLocaleCode): string {

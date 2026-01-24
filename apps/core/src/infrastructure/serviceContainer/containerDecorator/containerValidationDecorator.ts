@@ -1,4 +1,4 @@
-import { ContainerDecorator } from '@pluox/core/src/infrastructure/serviceContainer/containerDecorator/containerDecorator';
+import { ContainerDecorator } from '@core/infrastructure/serviceContainer/containerDecorator/containerDecorator';
 import {
 	InvalidProviderConfigurationError,
 	MissingDependencyError,
@@ -6,11 +6,11 @@ import {
 	MissingProviderTokenError,
 	MultipleImplementationError,
 	NotImplementedError,
-} from '@pluox/core/src/infrastructure/serviceContainer/containerDecorator/errors';
+} from '@core/infrastructure/serviceContainer/containerDecorator/errors';
 import type {
 	IContainer,
 	IServiceProvider,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
+} from '@core/infrastructure/serviceContainer/types';
 
 /**
  * @todo

@@ -1,7 +1,8 @@
-import type { IDataSource } from '@pluox/core/src/infrastructure/dataSource/types';
+import type { IDataSource } from '@core/infrastructure/dataSource/types';
+import type { TCategoryDTO } from '@core/modules/category/application/dto/categoryDTO';
+import type { TCategoryFindOptions } from '@core/modules/category/domain/categoryRepository/types';
 
-import type { TCategoryDTO } from '@pluox/core/src/modules/category/application/dto/categoryDTO';
-import type { TCategoryFindOptions } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
-
-export interface ICategoryDataSource
-	extends IDataSource<TCategoryDTO, TCategoryFindOptions> {}
+export interface ICategoryDataSource extends IDataSource<
+	TCategoryDTO,
+	TCategoryFindOptions
+> {}

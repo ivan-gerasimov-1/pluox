@@ -3,7 +3,7 @@ import type {
 	IDatabaseCollection,
 	IDatabaseCollectionFactory,
 	IStorage,
-} from '@pluox/core/src/infrastructure/database/types';
+} from '@core/infrastructure/database/types';
 
 export class Database implements IDatabase {
 	readonly #collections: Map<string, IDatabaseCollection>;

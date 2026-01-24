@@ -1,10 +1,10 @@
-import type { TCurrency } from '@pluox/core/src/modules/currency/domain/types';
-import type { ICurrencyFormatter } from '@pluox/core/src/modules/intl/domain/currencyFormatter/types';
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
+import type { TCurrency } from '@core/modules/currency/domain/types';
+import type { ICurrencyFormatter } from '@core/modules/intl/domain/currencyFormatter/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
 import {
 	ECurrencyDisplay,
 	ENumberFormatStyle,
-} from '@pluox/core/src/modules/intl/infrastructure/currencyFormatter/types';
+} from '@core/modules/intl/infrastructure/currencyFormatter/types';
 
 /**
  * @todo

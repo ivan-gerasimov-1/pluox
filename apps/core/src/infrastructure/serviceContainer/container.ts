@@ -1,7 +1,7 @@
 import {
 	ContainerNotSealedError,
 	ContainerSealedError,
-} from '@pluox/core/src/infrastructure/serviceContainer/errors';
+} from '@core/infrastructure/serviceContainer/errors';
 import {
 	EServiceScope,
 	type IContainer,
@@ -9,7 +9,7 @@ import {
 	type IServiceMap,
 	type IServiceProvider,
 	type TServiceToken,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
+} from '@core/infrastructure/serviceContainer/types';
 
 export class Container implements IContainer {
 	readonly #providers = new Map<TServiceToken, IServiceProvider>();

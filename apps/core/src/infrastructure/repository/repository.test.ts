@@ -1,10 +1,8 @@
+import type { Id } from '@core/domain/types';
+import type { IDataSource } from '@core/infrastructure/dataSource/types';
+import type { IMapper } from '@core/infrastructure/mapper/types';
+import { Repository } from '@core/infrastructure/repository/repository';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { IDataSource } from '@pluox/core/src/infrastructure/dataSource/types';
-import type { IMapper } from '@pluox/core/src/infrastructure/mapper/types';
-import { Repository } from '@pluox/core/src/infrastructure/repository/repository';
 
 describe('Repository', () => {
 	const TEST_ID = 'ID';

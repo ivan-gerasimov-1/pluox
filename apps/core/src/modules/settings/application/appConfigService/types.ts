@@ -1,4 +1,4 @@
-import type { TAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
+import type { TAppConfig } from '@core/modules/settings/domain/appConfig/types';
 
 export interface IAppConfigService {
 	initialize(): IAppConfigService;

@@ -1,6 +1,5 @@
-import type { TCategory } from '@pluox/core/src/domain/types';
-
-import type { TExpenseDTO } from '@pluox/core/src/modules/expense/application/dto/expenseDTO';
+import type { TCategory } from '@core/domain/types';
+import type { TExpenseDTO } from '@core/modules/expense/application/dto/expenseDTO';
 
 export interface IExpenseGroupingService {
 	groupByDay(expenses: TExpenseDTO[]): TExpenseGroupByDate[];

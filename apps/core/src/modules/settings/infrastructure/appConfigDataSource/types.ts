@@ -1,5 +1,4 @@
-import type { IDataSource } from '@pluox/core/src/infrastructure/dataSource/types';
-
-import type { TAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
+import type { IDataSource } from '@core/infrastructure/dataSource/types';
+import type { TAppConfig } from '@core/modules/settings/domain/appConfig/types';
 
 export interface IAppConfigDataSource extends IDataSource<TAppConfig> {}

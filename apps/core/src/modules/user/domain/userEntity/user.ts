@@ -1,9 +1,8 @@
-import { Entity } from '@pluox/core/src/domain/entity/entity';
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
-import type { IUser } from '@pluox/core/src/modules/user/domain/userEntity/types';
+import { Entity } from '@core/domain/entity/entity';
+import type { TISODateString } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
+import type { IUser } from '@core/modules/user/domain/userEntity/types';
 
 export class User extends Entity implements IUser {
 	#email: string;

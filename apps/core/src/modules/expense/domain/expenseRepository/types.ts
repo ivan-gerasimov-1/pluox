@@ -1,10 +1,11 @@
-import type { IRepository } from '@pluox/core/src/domain/repository/types';
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
+import type { IRepository } from '@core/domain/repository/types';
+import type { TISODateString } from '@core/domain/temporal/types';
+import type { IExpense } from '@core/modules/expense/domain/expenseEntity/types';
 
-import type { IExpense } from '@pluox/core/src/modules/expense/domain/expenseEntity/types';
-
-export interface IExpenseRepository
-	extends IRepository<IExpense, TExpenseFindOptions> {}
+export interface IExpenseRepository extends IRepository<
+	IExpense,
+	TExpenseFindOptions
+> {}
 
 /**
  * @todo

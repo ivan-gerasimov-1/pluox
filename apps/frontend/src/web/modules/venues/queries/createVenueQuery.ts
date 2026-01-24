@@ -1,4 +1,4 @@
-import type { Id } from '@pluox/core/src/domain/types';
+import type { Id } from '@core/domain/types';
 
 type TVenueQueryType = 'list' | 'one:id';
 

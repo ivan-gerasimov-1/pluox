@@ -1,11 +1,10 @@
-import { DataSource } from '@pluox/core/src/infrastructure/dataSource/dataSource';
-
+import { DataSource } from '@core/infrastructure/dataSource/dataSource';
 import type {
 	TCurrency,
 	TCurrencyRates,
-} from '@pluox/core/src/modules/currency/domain/types';
-import { CurrencyRatesNotAvailableError } from '@pluox/core/src/modules/currency/infrastructure/currencyRateDataSource/errors';
-import type { ICurrencyRateDataSource } from '@pluox/core/src/modules/currency/infrastructure/currencyRateDataSource/types';
+} from '@core/modules/currency/domain/types';
+import { CurrencyRatesNotAvailableError } from '@core/modules/currency/infrastructure/currencyRateDataSource/errors';
+import type { ICurrencyRateDataSource } from '@core/modules/currency/infrastructure/currencyRateDataSource/types';
 
 export class CurrencyRateDataSource
 	extends DataSource<TCurrencyRates>

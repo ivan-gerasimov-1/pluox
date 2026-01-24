@@ -1,13 +1,11 @@
 import type {
 	TFindManyOptions,
 	TFindManyResult,
-} from '@pluox/core/src/domain/repository/types';
-
-import { DataSource } from '@pluox/core/src/infrastructure/dataSource/dataSource';
-
-import type { TCategoryDTO } from '@pluox/core/src/modules/category/application/dto/categoryDTO';
-import type { TCategoryFindOptions } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
-import type { ICategoryDataSource } from '@pluox/core/src/modules/category/infrastructure/categoryDataSource/types';
+} from '@core/domain/repository/types';
+import { DataSource } from '@core/infrastructure/dataSource/dataSource';
+import type { TCategoryDTO } from '@core/modules/category/application/dto/categoryDTO';
+import type { TCategoryFindOptions } from '@core/modules/category/domain/categoryRepository/types';
+import type { ICategoryDataSource } from '@core/modules/category/infrastructure/categoryDataSource/types';
 
 export class CategoryDataSource
 	extends DataSource<TCategoryDTO, TCategoryFindOptions>

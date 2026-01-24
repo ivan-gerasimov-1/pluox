@@ -1,6 +1,5 @@
-import type { IApiClient } from '@pluox/core/src/infrastructure/apiClient/types';
-
-import type { IAuthApi } from '@pluox/core/src/modules/identity/infrastructure/authApi/types';
+import type { IApiClient } from '@core/infrastructure/apiClient/types';
+import type { IAuthApi } from '@core/modules/identity/infrastructure/authApi/types';
 
 export class AuthApi implements IAuthApi {
 	constructor(private readonly apiClient: IApiClient) {}

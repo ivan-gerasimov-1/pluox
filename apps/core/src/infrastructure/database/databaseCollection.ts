@@ -1,9 +1,9 @@
-import { deepMerge } from '@pluox/core/src/infrastructure/database/deepMerge';
-import { parseSafeToObject } from '@pluox/core/src/infrastructure/database/parseSafe';
+import { deepMerge } from '@core/infrastructure/database/deepMerge';
+import { parseSafeToObject } from '@core/infrastructure/database/parseSafe';
 import type {
 	IDatabaseCollection,
 	IStorage,
-} from '@pluox/core/src/infrastructure/database/types';
+} from '@core/infrastructure/database/types';
 
 export class DatabaseCollection implements IDatabaseCollection {
 	private readonly id: string;

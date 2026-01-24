@@ -1,19 +1,19 @@
 import type {
 	TFindManyOptions,
 	TFindManyResult,
-} from '@pluox/core/src/domain/repository/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { IDatabaseCollection } from '@pluox/core/src/infrastructure/database/types';
+} from '@core/domain/repository/types';
+import type { Id } from '@core/domain/types';
+import type { IDatabaseCollection } from '@core/infrastructure/database/types';
 import {
 	DuplicateItemError,
 	ItemNotFoundError,
-} from '@pluox/core/src/infrastructure/dataSource/errors';
-import type { IDataSource } from '@pluox/core/src/infrastructure/dataSource/types';
+} from '@core/infrastructure/dataSource/errors';
+import type { IDataSource } from '@core/infrastructure/dataSource/types';
 
-export class DataSource<TDto, TFindOptions = {}>
-	implements IDataSource<TDto, TFindOptions>
-{
+export class DataSource<TDto, TFindOptions = {}> implements IDataSource<
+	TDto,
+	TFindOptions
+> {
 	constructor(private readonly collection: IDatabaseCollection) {}
 
 	public upsert(id: Id, dto: TDto): void {

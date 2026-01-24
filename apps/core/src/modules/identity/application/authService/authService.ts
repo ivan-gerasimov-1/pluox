@@ -1,12 +1,12 @@
-import { InvalidCredentialsError } from '@pluox/core/src/modules/identity/application/authService/errors';
-import type { IAuthSerivce } from '@pluox/core/src/modules/identity/application/authService/types';
+import { InvalidCredentialsError } from '@core/modules/identity/application/authService/errors';
+import type { IAuthSerivce } from '@core/modules/identity/application/authService/types';
 import type {
 	TLogInResponseDTO,
 	TSignUpResponseDTO,
-} from '@pluox/core/src/modules/identity/application/dto/authDTO';
-import type { ISessionService } from '@pluox/core/src/modules/identity/application/sessionService/types';
-import type { IAuthApi } from '@pluox/core/src/modules/identity/infrastructure/authApi/types';
-import type { IUserService } from '@pluox/core/src/modules/user/application/userService/types';
+} from '@core/modules/identity/application/dto/authDTO';
+import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
+import type { IAuthApi } from '@core/modules/identity/infrastructure/authApi/types';
+import type { IUserService } from '@core/modules/user/application/userService/types';
 
 /**
  * @todo

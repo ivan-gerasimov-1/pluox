@@ -1,6 +1,5 @@
-import type { IEntity } from '@pluox/core/src/domain/entity/types';
-
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
+import type { IEntity } from '@core/domain/entity/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
 
 export interface IUser extends IEntity {
 	readonly id: string;

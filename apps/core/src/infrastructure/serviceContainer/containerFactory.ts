@@ -1,6 +1,6 @@
-import { Container } from '@pluox/core/src/infrastructure/serviceContainer/container';
-import { ContainerValidationDecorator } from '@pluox/core/src/infrastructure/serviceContainer/containerDecorator/containerValidationDecorator';
-import type { IContainer } from '@pluox/core/src/infrastructure/serviceContainer/types';
+import { Container } from '@core/infrastructure/serviceContainer/container';
+import { ContainerValidationDecorator } from '@core/infrastructure/serviceContainer/containerDecorator/containerValidationDecorator';
+import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 
 export let globalContainer: IContainer;
 

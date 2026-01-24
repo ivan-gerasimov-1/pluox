@@ -1,9 +1,9 @@
-import { STORAGE_NAMESPACE } from '@pluox/core/src/modules/settings/infrastructure/environment/constants';
+import { STORAGE_NAMESPACE } from '@core/modules/settings/infrastructure/environment/constants';
 import {
 	EEnvironment,
 	type IEnvironment,
 	type TMetaEnv,
-} from '@pluox/core/src/modules/settings/infrastructure/environment/types';
+} from '@core/modules/settings/infrastructure/environment/types';
 
 export class Environment implements IEnvironment {
 	readonly #isDevelopment: boolean;

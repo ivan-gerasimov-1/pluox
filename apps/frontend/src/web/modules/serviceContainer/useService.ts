@@ -1,4 +1,4 @@
-import { IServiceMap } from '@pluox/core/src/infrastructure/serviceContainer/types';
+import { IServiceMap } from '@core/infrastructure/serviceContainer/types';
 import { useContext } from 'react';
 
 import { ContainerContext } from '@/web/modules/serviceContainer/provider';

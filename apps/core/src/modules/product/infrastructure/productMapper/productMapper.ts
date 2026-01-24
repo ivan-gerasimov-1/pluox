@@ -1,7 +1,7 @@
-import type { TProductDTO } from '@pluox/core/src/modules/product/application/dto/productDTO';
-import { Product } from '@pluox/core/src/modules/product/domain/productEntity/product';
-import type { IProduct } from '@pluox/core/src/modules/product/domain/productEntity/types';
-import type { IProductMapper } from '@pluox/core/src/modules/product/infrastructure/productMapper/types';
+import type { TProductDTO } from '@core/modules/product/application/dto/productDTO';
+import { Product } from '@core/modules/product/domain/productEntity/product';
+import type { IProduct } from '@core/modules/product/domain/productEntity/types';
+import type { IProductMapper } from '@core/modules/product/infrastructure/productMapper/types';
 
 export class ProductMapper implements IProductMapper {
 	public toDTO(entity: Product): TProductDTO {

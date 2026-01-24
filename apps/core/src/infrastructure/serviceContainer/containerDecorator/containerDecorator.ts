@@ -4,7 +4,7 @@ import type {
 	IServiceMap,
 	IServiceProvider,
 	TServiceToken,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
+} from '@core/infrastructure/serviceContainer/types';
 
 export class ContainerDecorator implements IContainer {
 	constructor(protected readonly decoratee: IContainer) {}

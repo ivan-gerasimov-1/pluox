@@ -1,4 +1,4 @@
-import { resolveService } from '@pluox/core/src/infrastructure/serviceContainer/resolveService';
+import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
 
 import { getAllowedSymbols } from '@/web/modules/expenses/components/expenseForm/components/amountInput/constants';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';

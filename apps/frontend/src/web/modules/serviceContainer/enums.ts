@@ -1,1 +1,1 @@
-export { EServiceToken } from '@pluox/core/src/infrastructure/serviceContainer/types';
+export { EServiceToken } from '@core/infrastructure/serviceContainer/types';

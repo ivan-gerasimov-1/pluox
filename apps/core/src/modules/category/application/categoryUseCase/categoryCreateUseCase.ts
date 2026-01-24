@@ -1,10 +1,9 @@
-import type { IIdGenerator } from '@pluox/core/src/domain/idGenerator/types';
-import type { ITemporal } from '@pluox/core/src/domain/temporal/types';
-
-import type { ICategoryCreateUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/types';
-import type { TCategoryCreateDTO } from '@pluox/core/src/modules/category/application/dto/categoryDTO';
-import type { ICategoryRepository } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
-import type { ICategoryMapper } from '@pluox/core/src/modules/category/infrastructure/categoryMapper/types';
+import type { IIdGenerator } from '@core/domain/idGenerator/types';
+import type { ITemporal } from '@core/domain/temporal/types';
+import type { ICategoryCreateUseCase } from '@core/modules/category/application/categoryUseCase/types';
+import type { TCategoryCreateDTO } from '@core/modules/category/application/dto/categoryDTO';
+import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
+import type { ICategoryMapper } from '@core/modules/category/infrastructure/categoryMapper/types';
 
 export class CategoryCreateUseCase implements ICategoryCreateUseCase {
 	constructor(

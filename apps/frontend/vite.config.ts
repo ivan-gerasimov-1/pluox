@@ -32,7 +32,11 @@ export default defineConfig(({ mode }) => {
 			enableBuild: true,
 		}),
 		tsconfigPaths({
-			root: './',
+			projects: [
+				'./',
+				/** @pluox/core */
+				'../core/',
+			],
 		}),
 		VitePWA({
 			manifest: false,
@@ -82,7 +86,7 @@ export default defineConfig(({ mode }) => {
 				'/api': {
 					target: 'http://localhost:8787',
 					changeOrigin: true,
-					rewrite: (path) => path.replace(/^\/api/, ''),
+					rewrite: (path) => path.replace(/^\/api/u, ''),
 				},
 			},
 		},

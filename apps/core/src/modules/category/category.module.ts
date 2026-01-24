@@ -1,19 +1,18 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { CategoryQueryService } from '@pluox/core/src/modules/category/application/categoryQueryService/categoryQueryService';
-import { CategoryService } from '@pluox/core/src/modules/category/application/categoryService/categoryService';
-import { CategoryCreateUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/categoryCreateUseCase';
-import { CategoryDeleteUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/categoryDeleteUseCase';
-import { CategoryInitializeUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/categoryInitializeUseCase';
-import { CategoryUpdateUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/categoryUpdateUseCase';
-import { CategoryUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/categoryUseCase';
-import { CategoryWeightUseCase } from '@pluox/core/src/modules/category/application/categoryUseCase/categoryWeightUseCase';
-import { categoryDataSourceFactory } from '@pluox/core/src/modules/category/infrastructure/categoryDataSource/categoryDataSourceFactory';
-import { CategoryMapper } from '@pluox/core/src/modules/category/infrastructure/categoryMapper/categoryMapper';
-import { CategoryRepository } from '@pluox/core/src/modules/category/infrastructure/categoryRepository/categoryRepository';
+} from '@core/infrastructure/serviceContainer/types';
+import { CategoryQueryService } from '@core/modules/category/application/categoryQueryService/categoryQueryService';
+import { CategoryService } from '@core/modules/category/application/categoryService/categoryService';
+import { CategoryCreateUseCase } from '@core/modules/category/application/categoryUseCase/categoryCreateUseCase';
+import { CategoryDeleteUseCase } from '@core/modules/category/application/categoryUseCase/categoryDeleteUseCase';
+import { CategoryInitializeUseCase } from '@core/modules/category/application/categoryUseCase/categoryInitializeUseCase';
+import { CategoryUpdateUseCase } from '@core/modules/category/application/categoryUseCase/categoryUpdateUseCase';
+import { CategoryUseCase } from '@core/modules/category/application/categoryUseCase/categoryUseCase';
+import { CategoryWeightUseCase } from '@core/modules/category/application/categoryUseCase/categoryWeightUseCase';
+import { categoryDataSourceFactory } from '@core/modules/category/infrastructure/categoryDataSource/categoryDataSourceFactory';
+import { CategoryMapper } from '@core/modules/category/infrastructure/categoryMapper/categoryMapper';
+import { CategoryRepository } from '@core/modules/category/infrastructure/categoryRepository/categoryRepository';
 
 export const categoryModule: IModule = {
 	providers: [

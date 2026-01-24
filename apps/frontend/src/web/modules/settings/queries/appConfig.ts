@@ -1,7 +1,7 @@
-import { resolveService } from '@pluox/core/src/infrastructure/serviceContainer/resolveService';
-import { ECurrency } from '@pluox/core/src/modules/currency/domain/types';
-import { ELocaleCode } from '@pluox/core/src/modules/intl/domain/enums';
-import type { TAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
+import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
+import { ECurrency } from '@core/modules/currency/domain/types';
+import { ELocaleCode } from '@core/modules/intl/domain/enums';
+import type { TAppConfig } from '@core/modules/settings/domain/appConfig/types';
 import {
 	useMutation,
 	useQuery,

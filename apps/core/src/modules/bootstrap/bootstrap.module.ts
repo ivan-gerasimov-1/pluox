@@ -1,9 +1,8 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { LaunchControl } from '@pluox/core/src/modules/bootstrap/application/launchControl/launchControl';
+} from '@core/infrastructure/serviceContainer/types';
+import { LaunchControl } from '@core/modules/bootstrap/application/launchControl/launchControl';
 
 export const bootstrapModule: IModule = {
 	providers: [

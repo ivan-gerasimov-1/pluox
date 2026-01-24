@@ -1,8 +1,7 @@
-import { Entity } from '@pluox/core/src/domain/entity/entity';
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { IVenue } from '@pluox/core/src/modules/venue/domain/venueEntity/types';
+import { Entity } from '@core/domain/entity/entity';
+import type { TISODateString } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
+import type { IVenue } from '@core/modules/venue/domain/venueEntity/types';
 
 export class Venue extends Entity implements IVenue {
 	#name: string;

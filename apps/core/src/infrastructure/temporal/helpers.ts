@@ -1,7 +1,6 @@
-import type { TDateParts, TISODateString } from '@pluox/core/src/domain/temporal/types';
-
-import { InvalidMonthError } from '@pluox/core/src/infrastructure/temporal/errors';
-import { monthGuard } from '@pluox/core/src/infrastructure/temporal/typeGuards';
+import type { TDateParts, TISODateString } from '@core/domain/temporal/types';
+import { InvalidMonthError } from '@core/infrastructure/temporal/errors';
+import { monthGuard } from '@core/infrastructure/temporal/typeGuards';
 
 /**
  * @throws InvalidMonthError

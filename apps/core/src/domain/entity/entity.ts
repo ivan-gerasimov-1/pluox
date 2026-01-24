@@ -1,6 +1,6 @@
-import type { IEntity } from '@pluox/core/src/domain/entity/types';
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
-import type { Id } from '@pluox/core/src/domain/types';
+import type { IEntity } from '@core/domain/entity/types';
+import type { TISODateString } from '@core/domain/temporal/types';
+import type { Id } from '@core/domain/types';
 
 export abstract class Entity implements IEntity {
 	readonly #id: Id;

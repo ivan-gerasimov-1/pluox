@@ -1,9 +1,8 @@
 import {
 	EServiceToken,
 	type IModule,
-} from '@pluox/core/src/infrastructure/serviceContainer/types';
-
-import { SyncService } from '@pluox/core/src/modules/sync/application/syncService/syncService';
+} from '@core/infrastructure/serviceContainer/types';
+import { SyncService } from '@core/modules/sync/application/syncService/syncService';
 
 export const syncModule: IModule = {
 	providers: [

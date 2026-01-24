@@ -1,4 +1,4 @@
-import type { TExpenseDTO } from '@pluox/core/src/modules/expense/application/dto/expenseDTO';
+import type { TExpenseDTO } from '@core/modules/expense/application/dto/expenseDTO';
 
 import { createDateViewValue } from '@/web/modules/expenses/components/expenseCreate/helpers/createDateViewValue';
 import { ExpenseForm } from '@/web/modules/expenses/components/expenseForm/expenseForm';

@@ -1,4 +1,4 @@
-import type { TISODateString } from '@pluox/core/src/domain/temporal/types';
+import type { TISODateString } from '@core/domain/temporal/types';
 
 export function createDateViewValue(
 	initialDate?: string | null,

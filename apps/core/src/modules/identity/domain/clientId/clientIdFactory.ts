@@ -1,11 +1,10 @@
-import type { IIdGenerator } from '@pluox/core/src/domain/idGenerator/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import { ClientId } from '@pluox/core/src/modules/identity/domain/clientId/clientId';
+import type { IIdGenerator } from '@core/domain/idGenerator/types';
+import type { Id } from '@core/domain/types';
+import { ClientId } from '@core/modules/identity/domain/clientId/clientId';
 import type {
 	IClientId,
 	IClientIdFactory,
-} from '@pluox/core/src/modules/identity/domain/clientId/types';
+} from '@core/modules/identity/domain/clientId/types';
 
 export class ClientIdFactory implements IClientIdFactory {
 	constructor(private readonly idGenerator: IIdGenerator) {}

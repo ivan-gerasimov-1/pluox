@@ -2,18 +2,16 @@ import type {
 	IRepository,
 	TFindManyOptions,
 	TFindManyResult,
-} from '@pluox/core/src/domain/repository/types';
-import type { Id } from '@pluox/core/src/domain/types';
-
-import type { IDataSource } from '@pluox/core/src/infrastructure/dataSource/types';
-import type { IMapper } from '@pluox/core/src/infrastructure/mapper/types';
+} from '@core/domain/repository/types';
+import type { Id } from '@core/domain/types';
+import type { IDataSource } from '@core/infrastructure/dataSource/types';
+import type { IMapper } from '@core/infrastructure/mapper/types';
 
 export class Repository<
 	TEntity extends { id: Id },
 	TDto extends { id: Id },
 	TFindOptions = {},
-> implements IRepository<TEntity, TFindOptions>
-{
+> implements IRepository<TEntity, TFindOptions> {
 	constructor(
 		protected readonly dataSource: IDataSource<TDto, TFindOptions>,
 		protected readonly mapper: IMapper<TDto, TEntity>,

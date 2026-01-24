@@ -1,4 +1,4 @@
-import { resolveService } from '@pluox/core/src/infrastructure/serviceContainer/resolveService';
+import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
 
 import { EKey } from '@/web/modules/expenses/components/expenseForm/components/amountInput/enums';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';

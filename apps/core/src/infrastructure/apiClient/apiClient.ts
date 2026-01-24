@@ -5,7 +5,7 @@ import {
 	type IApiClientConfigProvider,
 	type THttpHeaders,
 	type THttpMethod,
-} from '@pluox/core/src/infrastructure/apiClient/types';
+} from '@core/infrastructure/apiClient/types';
 
 export class ApiClient implements IApiClient {
 	constructor(private readonly configProvider: IApiClientConfigProvider) {}

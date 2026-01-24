@@ -1,22 +1,18 @@
-import type { TValueOf } from '@pluox/core/src/types';
-
-import type { IIdGenerator } from '@pluox/core/src/domain/idGenerator/types';
-import type { ITemporal } from '@pluox/core/src/domain/temporal/types';
-
+import type { IIdGenerator } from '@core/domain/idGenerator/types';
+import type { ITemporal } from '@core/domain/temporal/types';
 import type {
 	IApiClient,
 	IApiClientConfigProvider,
-} from '@pluox/core/src/infrastructure/apiClient/types';
+} from '@core/infrastructure/apiClient/types';
 import type {
 	IDatabase,
 	IDatabaseCollectionFactory,
 	IStorage,
-} from '@pluox/core/src/infrastructure/database/types';
-import type { IIdGeneratorFactory } from '@pluox/core/src/infrastructure/idGenerator/factory';
-
-import type { ILauchControl } from '@pluox/core/src/modules/bootstrap/application/launchControl/types';
-import type { ICategoryQueryService } from '@pluox/core/src/modules/category/application/categoryQueryService/types';
-import type { ICategoryService } from '@pluox/core/src/modules/category/application/categoryService/types';
+} from '@core/infrastructure/database/types';
+import type { IIdGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
+import type { ILauchControl } from '@core/modules/bootstrap/application/launchControl/types';
+import type { ICategoryQueryService } from '@core/modules/category/application/categoryQueryService/types';
+import type { ICategoryService } from '@core/modules/category/application/categoryService/types';
 import type {
 	ICategoryCreateUseCase,
 	ICategoryDeleteUseCase,
@@ -24,56 +20,56 @@ import type {
 	ICategoryUpdateUseCase,
 	ICategoryUseCase,
 	ICategoryWeightUseCase,
-} from '@pluox/core/src/modules/category/application/categoryUseCase/types';
-import type { ICategoryRepository } from '@pluox/core/src/modules/category/domain/categoryRepository/types';
-import type { ICategoryDataSource } from '@pluox/core/src/modules/category/infrastructure/categoryDataSource/types';
-import type { ICategoryMapper } from '@pluox/core/src/modules/category/infrastructure/categoryMapper/types';
-import type { ICurrencyConverter } from '@pluox/core/src/modules/currency/application/currencyConverter/types';
-import type { ICurrencyRateService } from '@pluox/core/src/modules/currency/application/currencyRateService/types';
-import type { ICurrencyRateRepository } from '@pluox/core/src/modules/currency/domain/currencyRateRepository/currencyRateRepository';
-import type { ICurrencyRateAPI } from '@pluox/core/src/modules/currency/infrastructure/currencyRateAPI/types';
-import type { ICurrencyRateDataSource } from '@pluox/core/src/modules/currency/infrastructure/currencyRateDataSource/types';
-import type { IExpenseAmountService } from '@pluox/core/src/modules/expense/application/expenseAmountService/types';
-import type { IExpenseGroupingService } from '@pluox/core/src/modules/expense/application/expenseGroupingService/types';
-import type { IExpenseQueryService } from '@pluox/core/src/modules/expense/application/expenseQueryService/types';
-import type { IExpenseService } from '@pluox/core/src/modules/expense/application/expenseService/types';
+} from '@core/modules/category/application/categoryUseCase/types';
+import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
+import type { ICategoryDataSource } from '@core/modules/category/infrastructure/categoryDataSource/types';
+import type { ICategoryMapper } from '@core/modules/category/infrastructure/categoryMapper/types';
+import type { ICurrencyConverter } from '@core/modules/currency/application/currencyConverter/types';
+import type { ICurrencyRateService } from '@core/modules/currency/application/currencyRateService/types';
+import type { ICurrencyRateRepository } from '@core/modules/currency/domain/currencyRateRepository/currencyRateRepository';
+import type { ICurrencyRateAPI } from '@core/modules/currency/infrastructure/currencyRateAPI/types';
+import type { ICurrencyRateDataSource } from '@core/modules/currency/infrastructure/currencyRateDataSource/types';
+import type { IExpenseAmountService } from '@core/modules/expense/application/expenseAmountService/types';
+import type { IExpenseGroupingService } from '@core/modules/expense/application/expenseGroupingService/types';
+import type { IExpenseQueryService } from '@core/modules/expense/application/expenseQueryService/types';
+import type { IExpenseService } from '@core/modules/expense/application/expenseService/types';
 import type {
 	ICreateExpenseUseCase,
 	IDeleteExpenseUseCase,
 	IExpenseUseCase,
 	IUpdateExpenseUseCase,
-} from '@pluox/core/src/modules/expense/application/expenseUseCases/types';
-import type { IExpenseRepository } from '@pluox/core/src/modules/expense/domain/expenseRepository/types';
-import type { IExpenseApi } from '@pluox/core/src/modules/expense/infrastructure/expenseApi/types';
-import type { IExpenseDataSource } from '@pluox/core/src/modules/expense/infrastructure/expenseDataSource/types';
-import type { IExpenseMapper } from '@pluox/core/src/modules/expense/infrastructure/expenseMapper/types';
-import type { IAuthSerivce } from '@pluox/core/src/modules/identity/application/authService/types';
-import type { ISessionService } from '@pluox/core/src/modules/identity/application/sessionService/types';
-import type { IAuthTokenFactory } from '@pluox/core/src/modules/identity/domain/authToken/types';
+} from '@core/modules/expense/application/expenseUseCases/types';
+import type { IExpenseRepository } from '@core/modules/expense/domain/expenseRepository/types';
+import type { IExpenseApi } from '@core/modules/expense/infrastructure/expenseApi/types';
+import type { IExpenseDataSource } from '@core/modules/expense/infrastructure/expenseDataSource/types';
+import type { IExpenseMapper } from '@core/modules/expense/infrastructure/expenseMapper/types';
+import type { IAuthSerivce } from '@core/modules/identity/application/authService/types';
+import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
+import type { IAuthTokenFactory } from '@core/modules/identity/domain/authToken/types';
 import type {
 	IClientId,
 	IClientIdFactory,
-} from '@pluox/core/src/modules/identity/domain/clientId/types';
-import type { ISessionFactory } from '@pluox/core/src/modules/identity/domain/session/types';
-import type { IAuthApi } from '@pluox/core/src/modules/identity/infrastructure/authApi/types';
-import type { ISessionDataSource } from '@pluox/core/src/modules/identity/infrastructure/sessionDataSource/types';
-import type { IIntlService } from '@pluox/core/src/modules/intl/application/intlService/types';
-import type { ICurrencyFormatter } from '@pluox/core/src/modules/intl/domain/currencyFormatter/types';
-import type { IDateFormatter } from '@pluox/core/src/modules/intl/domain/dateFormatter/types';
-import type { INumberParser } from '@pluox/core/src/modules/intl/domain/numberParser/types';
-import type { IAppConfigService } from '@pluox/core/src/modules/settings/application/appConfigService/types';
-import type { IAppConfig } from '@pluox/core/src/modules/settings/domain/appConfig/types';
-import type { IAppConfigDataSource } from '@pluox/core/src/modules/settings/infrastructure/appConfigDataSource/types';
+} from '@core/modules/identity/domain/clientId/types';
+import type { ISessionFactory } from '@core/modules/identity/domain/session/types';
+import type { IAuthApi } from '@core/modules/identity/infrastructure/authApi/types';
+import type { ISessionDataSource } from '@core/modules/identity/infrastructure/sessionDataSource/types';
+import type { IIntlService } from '@core/modules/intl/application/intlService/types';
+import type { ICurrencyFormatter } from '@core/modules/intl/domain/currencyFormatter/types';
+import type { IDateFormatter } from '@core/modules/intl/domain/dateFormatter/types';
+import type { INumberParser } from '@core/modules/intl/domain/numberParser/types';
+import type { IAppConfigService } from '@core/modules/settings/application/appConfigService/types';
+import type { IAppConfig } from '@core/modules/settings/domain/appConfig/types';
+import type { IAppConfigDataSource } from '@core/modules/settings/infrastructure/appConfigDataSource/types';
 import type {
 	IEnvironment,
 	TMetaEnv,
-} from '@pluox/core/src/modules/settings/infrastructure/environment/types';
-import type { ISyncService } from '@pluox/core/src/modules/sync/application/syncService/types';
-import type { IUserService } from '@pluox/core/src/modules/user/application/userService/types';
-import type { IUserRepository } from '@pluox/core/src/modules/user/domain/userRepository/types';
-import type { IUserDataSource } from '@pluox/core/src/modules/user/infrastructure/userDataSource/types';
-import type { IUserMapper } from '@pluox/core/src/modules/user/infrastructure/userMapper/types';
-import type { IVenueQueryService } from '@pluox/core/src/modules/venue/application/venueQueryService/types';
+} from '@core/modules/settings/infrastructure/environment/types';
+import type { ISyncService } from '@core/modules/sync/application/syncService/types';
+import type { IUserService } from '@core/modules/user/application/userService/types';
+import type { IUserRepository } from '@core/modules/user/domain/userRepository/types';
+import type { IUserDataSource } from '@core/modules/user/infrastructure/userDataSource/types';
+import type { IUserMapper } from '@core/modules/user/infrastructure/userMapper/types';
+import type { IVenueQueryService } from '@core/modules/venue/application/venueQueryService/types';
 import type {
 	IVenueArchiveUseCase,
 	IVenueCreateUseCase,
@@ -81,10 +77,11 @@ import type {
 	IVenueUnarchiveUseCase,
 	IVenueUpdateUseCase,
 	IVenueUseCase,
-} from '@pluox/core/src/modules/venue/application/venueUseCase/types';
-import type { IVenueRepository } from '@pluox/core/src/modules/venue/domain/venueRepository/types';
-import type { IVenueDataSource } from '@pluox/core/src/modules/venue/infrastructure/venueDataSource/types';
-import type { IVenueMapper } from '@pluox/core/src/modules/venue/infrastructure/venueMapper/types';
+} from '@core/modules/venue/application/venueUseCase/types';
+import type { IVenueRepository } from '@core/modules/venue/domain/venueRepository/types';
+import type { IVenueDataSource } from '@core/modules/venue/infrastructure/venueDataSource/types';
+import type { IVenueMapper } from '@core/modules/venue/infrastructure/venueMapper/types';
+import type { TValueOf } from '@core/types';
 
 export interface IContainer {
 	readonly providers: Map<TServiceToken, IServiceProvider>;

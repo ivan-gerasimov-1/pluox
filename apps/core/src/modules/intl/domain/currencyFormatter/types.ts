@@ -1,5 +1,5 @@
-import type { TCurrency } from '@pluox/core/src/modules/currency/domain/types';
-import type { TLocaleCode } from '@pluox/core/src/modules/intl/domain/types';
+import type { TCurrency } from '@core/modules/currency/domain/types';
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
 
 export interface ICurrencyFormatter {
 	format(

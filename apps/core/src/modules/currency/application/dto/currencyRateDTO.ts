@@ -1,4 +1,4 @@
-import type { TCurrency } from '@pluox/core/src/modules/currency/domain/types';
+import type { TCurrency } from '@core/modules/currency/domain/types';
 
 export type TCurrencyRateDTO = {
 	code: TCurrency;

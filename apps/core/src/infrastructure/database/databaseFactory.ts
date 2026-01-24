@@ -1,11 +1,10 @@
-import { Database } from '@pluox/core/src/infrastructure/database/database';
+import { Database } from '@core/infrastructure/database/database';
 import type {
 	IDatabase,
 	IDatabaseCollectionFactory,
 	IStorage,
-} from '@pluox/core/src/infrastructure/database/types';
-
-import type { IEnvironment } from '@pluox/core/src/modules/settings/infrastructure/environment/types';
+} from '@core/infrastructure/database/types';
+import type { IEnvironment } from '@core/modules/settings/infrastructure/environment/types';
 
 export function databaseFactory(
 	storage: IStorage,

@@ -1,5 +1,5 @@
-import type { TCurrencyRateDTO } from '@pluox/core/src/modules/currency/application/dto/currencyRateDTO';
-import type { TCurrency } from '@pluox/core/src/modules/currency/domain/types';
+import type { TCurrencyRateDTO } from '@core/modules/currency/application/dto/currencyRateDTO';
+import type { TCurrency } from '@core/modules/currency/domain/types';
 
 export interface ICurrencyRateRepository {
 	/** @todo Not Implemented */

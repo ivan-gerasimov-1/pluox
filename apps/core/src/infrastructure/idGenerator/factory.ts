@@ -1,8 +1,6 @@
+import type { IIdGenerator } from '@core/domain/idGenerator/types';
+import { IdGenerator } from '@core/infrastructure/idGenerator/idGenerator';
 import { customAlphabet } from 'nanoid';
-
-import type { IIdGenerator } from '@pluox/core/src/domain/idGenerator/types';
-
-import { IdGenerator } from '@pluox/core/src/infrastructure/idGenerator/idGenerator';
 
 export interface IIdGeneratorFactory {
 	create(options?: { length?: number; alphabet?: string }): IIdGenerator;
