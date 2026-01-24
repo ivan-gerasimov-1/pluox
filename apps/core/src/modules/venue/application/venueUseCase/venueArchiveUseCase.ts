@@ -1,4 +1,5 @@
 import type { Id } from '@core/domain/types';
+
 import type { IVenueArchiveUseCase } from '@core/modules/venue/application/venueUseCase/types';
 import type { IVenue } from '@core/modules/venue/domain/venueEntity/types';
 import type { IVenueRepository } from '@core/modules/venue/domain/venueRepository/types';

@@ -1,5 +1,3 @@
 import { frontend as eslintConfig } from '@lv48/eslint-config';
 
-export default [
-	...eslintConfig,
-];
+export default [...eslintConfig];

@@ -1,4 +1,5 @@
 import type { Id } from '@core/domain/types';
+
 import type { ICategoryQueryService } from '@core/modules/category/application/categoryQueryService/types';
 import type { TCategoryDTO } from '@core/modules/category/application/dto/categoryDTO';
 import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';

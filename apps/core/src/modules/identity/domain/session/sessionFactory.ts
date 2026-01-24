@@ -1,4 +1,5 @@
 import type { Id } from '@core/domain/types';
+
 import type { TSessionDTO } from '@core/modules/identity/application/dto/sessionDTO';
 import type {
 	IAuthToken,

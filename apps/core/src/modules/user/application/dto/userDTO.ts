@@ -1,5 +1,6 @@
 import type { TISODateString } from '@core/domain/temporal/types';
 import type { Id } from '@core/domain/types';
+
 import type { TLocaleCode } from '@core/modules/intl/domain/types';
 
 export type TUserDTO = {

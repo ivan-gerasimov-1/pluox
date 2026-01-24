@@ -1,5 +1,7 @@
 import type { Id } from '@core/domain/types';
+
 import type { IApiClient } from '@core/infrastructure/apiClient/types';
+
 import type { IExpenseApi } from '@core/modules/expense/infrastructure/expenseApi/types';
 
 export class ExpenseApi implements IExpenseApi {

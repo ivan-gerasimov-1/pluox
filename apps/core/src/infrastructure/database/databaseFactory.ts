@@ -4,6 +4,7 @@ import type {
 	IDatabaseCollectionFactory,
 	IStorage,
 } from '@core/infrastructure/database/types';
+
 import type { IEnvironment } from '@core/modules/settings/infrastructure/environment/types';
 
 export function databaseFactory(

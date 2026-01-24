@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@core/infrastructure/serviceContainer/types';
+
 import { VenueQueryService } from '@core/modules/venue/application/venueQueryService/venueQueryService';
 import { VenueArchiveUseCase } from '@core/modules/venue/application/venueUseCase/venueArchiveUseCase';
 import { VenueCreateUseCase } from '@core/modules/venue/application/venueUseCase/venueCreateUseCase';

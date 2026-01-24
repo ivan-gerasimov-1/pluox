@@ -1,9 +1,11 @@
-import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
-import { EServiceToken } from '@core/infrastructure/serviceContainer/types';
 import type {
 	TMigrationCreateDTO,
 	TMigrationDTO,
 } from '@core/migrations/types';
+
+import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
+import { EServiceToken } from '@core/infrastructure/serviceContainer/types';
+
 import { ELocaleCode } from '@core/modules/intl/domain/enums';
 
 type TMigrations = Record<string, TMigrationDTO>;

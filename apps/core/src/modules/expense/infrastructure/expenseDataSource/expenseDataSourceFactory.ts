@@ -1,4 +1,5 @@
 import type { IDatabase } from '@core/infrastructure/database/types';
+
 import { EXPENSE_STORAGE_ID } from '@core/modules/expense/infrastructure/expenseDataSource/constants';
 import { ExpenseDataSource } from '@core/modules/expense/infrastructure/expenseDataSource/expenseDataSource';
 import type { IExpenseDataSource } from '@core/modules/expense/infrastructure/expenseDataSource/types';

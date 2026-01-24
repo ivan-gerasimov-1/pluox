@@ -1,4 +1,5 @@
 import type { Id } from '@core/domain/types';
+
 import type { ICategoryDeleteUseCase } from '@core/modules/category/application/categoryUseCase/types';
 import type { ICategoryRepository } from '@core/modules/category/domain/categoryRepository/types';
 

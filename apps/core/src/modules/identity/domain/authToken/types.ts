@@ -1,4 +1,5 @@
 import type { IValueObject } from '@core/domain/valueObject/types';
+
 import type { TAuthTokenDTO } from '@core/modules/identity/application/dto/authTokenDTO';
 
 export type TAuthTokenValue = {

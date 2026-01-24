@@ -1,4 +1,5 @@
 import type { IApiClientConfigProvider } from '@core/infrastructure/apiClient/types';
+
 import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
 import type { IEnvironment } from '@core/modules/settings/infrastructure/environment/types';
 

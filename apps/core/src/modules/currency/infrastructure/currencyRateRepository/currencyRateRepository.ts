@@ -1,4 +1,5 @@
 import type { Id } from '@core/domain/types';
+
 import type { TCurrencyRateDTO } from '@core/modules/currency/application/dto/currencyRateDTO';
 import type {
 	ICurrencyRateRepository,

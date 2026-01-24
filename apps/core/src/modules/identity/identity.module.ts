@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@core/infrastructure/serviceContainer/types';
+
 import { AuthService } from '@core/modules/identity/application/authService/authService';
 import { SessionService } from '@core/modules/identity/application/sessionService/sessionService';
 import { AuthTokenFactory } from '@core/modules/identity/domain/authToken/authTokenFactory';

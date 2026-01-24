@@ -2,6 +2,7 @@ import {
 	EServiceToken,
 	type IModule,
 } from '@core/infrastructure/serviceContainer/types';
+
 import { SyncService } from '@core/modules/sync/application/syncService/syncService';
 
 export const syncModule: IModule = {
