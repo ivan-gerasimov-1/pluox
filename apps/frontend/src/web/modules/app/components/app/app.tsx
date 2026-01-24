@@ -1,11 +1,15 @@
-import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router';
 
+import type { IContainer } from '@core/infrastructure/serviceContainer/types';
+
 import type { TDevToolsConfig } from '@/web/devtoolsConfig';
-import { useEffectOnce } from '@/web/hooks/useEffectOnce';
-import { ContainerProvider } from '@/web/modules/serviceContainer/provider';
 import { IRouter } from '@/web/router';
+
+import { useEffectOnce } from '@/web/hooks/useEffectOnce';
+
+import { ContainerProvider } from '@/web/modules/serviceContainer/provider';
+
 import { Dialog } from '@/web/uiKit/dialog/react/dialog/dialog';
 import { DialogClientProvider } from '@/web/uiKit/dialog/react/dialogClient/dialogClientProvider';
 

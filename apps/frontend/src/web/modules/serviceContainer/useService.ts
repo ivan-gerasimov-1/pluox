@@ -1,5 +1,6 @@
-import { IServiceMap } from '@core/infrastructure/serviceContainer/types';
 import { useContext } from 'react';
+
+import { IServiceMap } from '@core/infrastructure/serviceContainer/types';
 
 import { ContainerContext } from '@/web/modules/serviceContainer/provider';
 

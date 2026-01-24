@@ -1,8 +1,11 @@
-import type { Id } from '@core/domain/types';
 import { useParams } from 'react-router';
 
+import type { Id } from '@core/domain/types';
+
 import { INVALID_ID } from '@/web/constants/invalidId';
+
 import { useAppNavigation } from '@/web/hooks/useNavigation';
+
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { venueViewActionsI18n } from '@/web/modules/venues/components/venueActions/venueViewActions.i18n';
 import {
@@ -11,6 +14,7 @@ import {
 	useVenueRemoveMutation,
 	useVenueUnarchiveMutation,
 } from '@/web/modules/venues/queries/venues.query';
+
 import { Button } from '@/web/uiKit/button/button';
 import { Icon } from '@/web/uiKit/icon/icon';
 import { EIconName } from '@/web/uiKit/icon/icons';

@@ -1,4 +1,3 @@
-import type { TISODateString } from '@core/domain/temporal/types';
 import {
 	SwipeableList,
 	SwipeableListItem,
@@ -6,6 +5,8 @@ import {
 	TrailingActions,
 	Type,
 } from 'react-swipeable-list';
+
+import type { TISODateString } from '@core/domain/temporal/types';
 
 import { EditExpenseActionSheet } from '@/web/modules/expenses/components/expenseEditActionSheet/expenseEditActionSheet';
 import {
@@ -15,6 +16,7 @@ import {
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
 import { useService } from '@/web/modules/serviceContainer/useService';
 import { useVenueName } from '@/web/modules/venues/hooks/useVenueName';
+
 import { useDialog } from '@/web/uiKit/dialog/react/dialog/useDialog';
 import { DotSpace } from '@/web/uiKit/dotSpace/dotSpace';
 import { EIconName } from '@/web/uiKit/icon/icons';

@@ -1,13 +1,15 @@
-import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
-import { ECurrency } from '@core/modules/currency/domain/types';
-import { ELocaleCode } from '@core/modules/intl/domain/enums';
-import type { TAppConfig } from '@core/modules/settings/domain/appConfig/types';
 import {
 	useMutation,
 	useQuery,
 	useQueryClient,
 	type QueryClient,
 } from '@tanstack/react-query';
+
+import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
+
+import { ECurrency } from '@core/modules/currency/domain/types';
+import { ELocaleCode } from '@core/modules/intl/domain/enums';
+import type { TAppConfig } from '@core/modules/settings/domain/appConfig/types';
 
 import { invalidateExpenseQuery } from '@/web/modules/expenses/expenses.query';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';

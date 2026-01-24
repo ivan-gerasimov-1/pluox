@@ -8,6 +8,7 @@ import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
 import { useService } from '@/web/modules/serviceContainer/useService';
 import { useAppConfigBudgetQuery } from '@/web/modules/settings/queries/appConfig';
+
 import { DotSpace } from '@/web/uiKit/dotSpace/dotSpace';
 import { Grid, Stack } from '@/web/uiKit/layout/layout';
 import { Sheet } from '@/web/uiKit/sheet/sheet';

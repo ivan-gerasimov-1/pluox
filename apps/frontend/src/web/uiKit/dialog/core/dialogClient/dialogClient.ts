@@ -1,10 +1,7 @@
 import type { IDialogClient } from '@/web/uiKit/dialog/core/dialogClient/types';
 import type { IDialogObserver } from '@/web/uiKit/dialog/core/dialogObserver/types';
 import type { IDialogStore } from '@/web/uiKit/dialog/core/dialogStore/types';
-import {
-	EDialogStatus,
-	EDialogType,
-} from '@/web/uiKit/dialog/core/enums';
+import { EDialogStatus, EDialogType } from '@/web/uiKit/dialog/core/enums';
 import type {
 	IIdGenerator,
 	TDialog,

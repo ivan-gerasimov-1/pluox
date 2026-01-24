@@ -1,11 +1,13 @@
 import { venueListViewI18n } from './venueListView.i18n';
 
 import { EAppPath } from '@/web/appPath';
+
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import {
 	useVenueListArchivedQuery,
 	useVenueListUnarchivedQuery,
 } from '@/web/modules/venues/queries/venues.query';
+
 import { Badge } from '@/web/uiKit/badge/badge';
 import { Stack } from '@/web/uiKit/layout/layout';
 import { ListIcon } from '@/web/uiKit/list/list';

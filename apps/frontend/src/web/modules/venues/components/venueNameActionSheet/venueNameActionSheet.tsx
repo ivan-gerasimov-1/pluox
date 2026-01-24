@@ -1,9 +1,11 @@
 import { venueNameActionSheetI18n } from './venueNameActionSheet.i18n';
-import { TVenueDTO } from '@core/modules/venue/application/dto/venueDTO';
 import { useState } from 'react';
+
+import { TVenueDTO } from '@core/modules/venue/application/dto/venueDTO';
 
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { useVenueUpdateMutation } from '@/web/modules/venues/queries/venues.query';
+
 import { Button } from '@/web/uiKit/button/button';
 import type { TDialogComponentProps } from '@/web/uiKit/dialog/core/types';
 import { Input } from '@/web/uiKit/input/input';

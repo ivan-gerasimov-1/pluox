@@ -1,6 +1,7 @@
 import type { Id } from '@core/domain/types';
 
 import { useVenueListUnarchivedQuery } from '@/web/modules/venues/queries/venues.query';
+
 import { PillsSelect } from '@/web/uiKit/pillsSelect/pillsSelect';
 
 type TVenuePillsProps = {

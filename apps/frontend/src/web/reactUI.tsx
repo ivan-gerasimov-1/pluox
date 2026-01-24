@@ -1,15 +1,17 @@
-import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 import type { QueryClient } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import type { IContainer } from '@core/infrastructure/serviceContainer/types';
+
 import type { TDevToolsConfig } from '@/web/devtoolsConfig';
 import { AppContainerNotInitializedError } from '@/web/errors';
-import { App } from '@/web/modules/app/components/app/app';
 import type { IRouter } from '@/web/router';
 import type { IRoot, IUserInterface } from '@/web/types';
 import type { IUIElement } from '@/web/uiElement';
 import type { IUILoader } from '@/web/uiLoader';
+
+import { App } from '@/web/modules/app/components/app/app';
 
 export class ReactUI implements IUserInterface {
 	#appContainer?: IRoot;

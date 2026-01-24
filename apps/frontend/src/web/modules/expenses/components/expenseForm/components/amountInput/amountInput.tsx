@@ -1,13 +1,16 @@
-import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
 import { useEffect, useState } from 'react';
+
+import { resolveService } from '@core/infrastructure/serviceContainer/resolveService';
+
+import { cn } from '@/web/utils/classnames';
 
 import {
 	validateKey,
 	validateNumber,
 } from '@/web/modules/expenses/components/expenseForm/components/amountInput/helpers';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
+
 import { Input } from '@/web/uiKit/input/input';
-import { cn } from '@/web/utils/classnames';
 
 type TAmountInputProps = Omit<
 	React.InputHTMLAttributes<HTMLInputElement>,

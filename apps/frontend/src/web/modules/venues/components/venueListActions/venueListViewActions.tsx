@@ -1,5 +1,6 @@
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { venueListViewActionsI18n } from '@/web/modules/venues/components/venueListActions/venueListViewActions.i18n';
+
 import { NavButton } from '@/web/uiKit/navButton/navButton';
 
 export function VenueListViewActions() {

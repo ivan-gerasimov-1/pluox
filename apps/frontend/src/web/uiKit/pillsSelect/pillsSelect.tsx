@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 
-import { Badge, Badges } from '@/web/uiKit/badge/badge';
 import { cn } from '@/web/utils/classnames';
+
+import { Badge, Badges } from '@/web/uiKit/badge/badge';
 
 type TPillsSelectProps<T> = {
 	value?: string | null;

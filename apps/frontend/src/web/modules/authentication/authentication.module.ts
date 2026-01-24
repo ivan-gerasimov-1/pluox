@@ -1,4 +1,5 @@
 import { EAppPath } from '@/web/appPath';
+
 import { LogInView } from '@/web/modules/authentication/views/logIn/logInView';
 import { SignUpView } from '@/web/modules/authentication/views/signUp/signUpView';
 

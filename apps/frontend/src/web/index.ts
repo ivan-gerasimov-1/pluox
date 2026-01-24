@@ -1,5 +1,6 @@
-import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 import { QueryClient } from '@tanstack/react-query';
+
+import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 
 import { createDevToolsConfig } from '@/web/devtoolsConfig';
 import { ReactUI } from '@/web/reactUI';

@@ -2,6 +2,7 @@ import { categoryTemplates } from '@core/modules/category/domain/categoryTemplat
 import { getLanguageNameByLocale } from '@core/modules/intl/application/helpers';
 
 import { useAppNavigation } from '@/web/hooks/useNavigation';
+
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
 import { useService } from '@/web/modules/serviceContainer/useService';
@@ -19,6 +20,7 @@ import { LocaleActionSheet } from '@/web/modules/settings/views/settings/compone
 import { UserNameEditActionSheet } from '@/web/modules/settings/views/settings/components/userNameEditActionSheet/userNameEditActionSheet';
 import { settingsViewI18n } from '@/web/modules/settings/views/settings/settingsView.i18n';
 import { useVenueListUnarchivedQuery } from '@/web/modules/venues/queries/venues.query';
+
 import { Badge, Badges } from '@/web/uiKit/badge/badge';
 import { Button } from '@/web/uiKit/button/button';
 import { useDialog } from '@/web/uiKit/dialog/react/dialog/useDialog';

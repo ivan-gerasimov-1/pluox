@@ -1,5 +1,7 @@
 import { EAppPath } from '@/web/appPath';
+
 import type { TRouteObject } from '@/web/hooks/useScreenMeta/types';
+
 import { VenueViewActions } from '@/web/modules/venues/components/venueActions/venueViewActions';
 import { VenueListViewActions } from '@/web/modules/venues/components/venueListActions/venueListViewActions';
 import { VenueView } from '@/web/modules/venues/views/venue/venueView';

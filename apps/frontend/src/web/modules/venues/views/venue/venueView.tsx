@@ -1,12 +1,15 @@
-import { Id } from '@core/domain/types';
 import { useParams } from 'react-router';
 
+import { Id } from '@core/domain/types';
+
 import { INVALID_ID } from '@/web/constants/invalidId';
+
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { VenueCategoryActionSheet } from '@/web/modules/venues/components/venueCategoryActionSheet/venueCategoryActionSheet';
 import { VenueNameActionSheet } from '@/web/modules/venues/components/venueNameActionSheet/venueNameActionSheet';
 import { useVenueOneByIdQuery } from '@/web/modules/venues/queries/venues.query';
 import { venueViewI18n } from '@/web/modules/venues/views/venue/venueView.i18n';
+
 import { useDialog } from '@/web/uiKit/dialog/react/dialog/useDialog';
 import { EIconName } from '@/web/uiKit/icon/icons';
 import { IconButton } from '@/web/uiKit/iconButton/iconButton';

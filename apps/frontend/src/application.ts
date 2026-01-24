@@ -1,9 +1,10 @@
-import { createDIContainer } from '@/diContainer';
-import { runMigrations } from '@/migrations';
 import {
 	EServiceToken,
 	type IContainer,
 } from '@pluox/core/src/infrastructure/serviceContainer/types';
+
+import { createDIContainer } from '@/diContainer';
+import { runMigrations } from '@/migrations';
 
 import { createUI } from '@/web';
 import type { IWindow } from '@/web/types';

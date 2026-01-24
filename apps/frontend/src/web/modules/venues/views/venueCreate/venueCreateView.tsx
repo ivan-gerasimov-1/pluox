@@ -1,12 +1,16 @@
-import { EServiceToken } from '@core/infrastructure/serviceContainer/types';
-import type { TVenueDTO } from '@core/modules/venue/application/dto/venueDTO';
 import { useForm } from 'react-hook-form';
 
+import { EServiceToken } from '@core/infrastructure/serviceContainer/types';
+
+import type { TVenueDTO } from '@core/modules/venue/application/dto/venueDTO';
+
 import { useAppNavigation } from '@/web/hooks/useNavigation';
+
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { useService } from '@/web/modules/serviceContainer/useService';
 import { useVenueCreateMutation } from '@/web/modules/venues/queries/venues.query';
 import { venueCreateViewI18n } from '@/web/modules/venues/views/venueCreate/venueCreateView.i18n';
+
 import { Button } from '@/web/uiKit/button/button';
 import { Input } from '@/web/uiKit/input/input';
 import { Stack } from '@/web/uiKit/layout/layout';

@@ -1,5 +1,7 @@
 import { EAppPath } from '@/web/appPath';
+
 import { useCategoryListQuery } from '@/web/modules/categories/queries/categories.queries';
+
 import { Grid, Stack } from '@/web/uiKit/layout/layout';
 import { ListIcon } from '@/web/uiKit/list/list';
 import { NavLink } from '@/web/uiKit/navLink/navLink';

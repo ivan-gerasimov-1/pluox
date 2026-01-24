@@ -1,8 +1,9 @@
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'cva';
 
-import type { TSlottable } from '@/web/uiKit/types';
 import { cn } from '@/web/utils/classnames';
+
+import type { TSlottable } from '@/web/uiKit/types';
 
 type TBaseProps = {
 	id?: string;

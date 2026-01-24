@@ -1,10 +1,8 @@
+import { cn } from '@/web/utils/classnames';
+
 import { Icon } from '@/web/uiKit/icon/icon';
 import type { TIconName } from '@/web/uiKit/icon/icons';
-import {
-	EIconSize,
-	type TIconSize,
-} from '@/web/uiKit/icon/iconSize';
-import { cn } from '@/web/utils/classnames';
+import { EIconSize, type TIconSize } from '@/web/uiKit/icon/iconSize';
 
 export type TIconButtonProps = {
 	className?: string;

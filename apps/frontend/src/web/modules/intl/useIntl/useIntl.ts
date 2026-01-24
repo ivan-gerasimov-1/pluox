@@ -1,5 +1,6 @@
-import type { TLocaleCode } from '@core/modules/intl/domain/types';
 import { useMemo } from 'react';
+
+import type { TLocaleCode } from '@core/modules/intl/domain/types';
 
 import { createScopedTranslateFunction } from '@/web/modules/intl/useIntl/translateFunction';
 import { TBaseScope, TUseIntl } from '@/web/modules/intl/useIntl/types';

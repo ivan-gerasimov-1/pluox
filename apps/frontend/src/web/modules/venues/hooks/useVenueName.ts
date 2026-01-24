@@ -1,5 +1,6 @@
-import type { Id } from '@core/domain/types';
 import { useCallback } from 'react';
+
+import type { Id } from '@core/domain/types';
 
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
 import { useService } from '@/web/modules/serviceContainer/useService';

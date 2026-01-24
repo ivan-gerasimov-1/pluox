@@ -1,4 +1,5 @@
 import type { IUIElement } from '@/web/uiElement';
+
 import { delay } from '@/web/utils/delay';
 
 export interface IUILoader {
