@@ -22,9 +22,9 @@
 		"jsx": "react-jsx",
 
 		"paths": {
-			"@kit/*": ["src/web/kit/*"],
 			"@/*": ["src/*"],
-			"@core/*": ["../core/src/*"]
+			"@core/*": ["../core/src/*"],
+			"@kit/*": ["../kit/src/*"]
 		}
 	},
 	"include": ["src/**/*"]

@@ -27,6 +27,7 @@
 	"dependencies": {
 		"@fontsource-variable/inter": "5.2.8",
 		"@pluox/core": "0.1.0",
+		"@pluox/kit": "",
 		"@radix-ui/react-slot": "1.2.4",
 		"@sentry/react": "10.36.0",
 		"@tanstack/react-query": "5.90.20",

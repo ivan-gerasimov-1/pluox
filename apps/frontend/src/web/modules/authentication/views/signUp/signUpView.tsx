@@ -2,10 +2,11 @@ import { EAppPath } from '@/web/appPath';
 
 import { useSignup } from '@/web/modules/authentication/hooks/useSignup/useSignup';
 
+import { NavLink } from '@/web/components/navLink/navLink';
+
 import { Button } from '@kit/button/button';
 import { Form, FormGroup, FormInput } from '@kit/form/form';
 import { Stack } from '@kit/layout/layout';
-import { NavLink } from '@kit/navLink/navLink';
 import { Sheet } from '@kit/sheet/sheet';
 import { Title } from '@kit/title/title';
 

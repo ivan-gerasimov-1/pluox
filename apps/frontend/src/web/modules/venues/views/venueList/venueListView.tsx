@@ -8,10 +8,11 @@ import {
 	useVenueListUnarchivedQuery,
 } from '@/web/modules/venues/queries/venues.query';
 
+import { NavLink } from '@/web/components/navLink/navLink';
+
 import { Badge } from '@kit/badge/badge';
 import { Stack } from '@kit/layout/layout';
 import { ListIcon } from '@kit/list/list';
-import { NavLink } from '@kit/navLink/navLink';
 import { Sheet } from '@kit/sheet/sheet';
 import {
 	ValueAction,

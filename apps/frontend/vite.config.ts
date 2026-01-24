@@ -36,6 +36,8 @@ export default defineConfig(({ mode }) => {
 				'./',
 				/** @pluox/core */
 				'../core/',
+				/** @pluox/kit */
+				'../kit/',
 			],
 		}),
 		VitePWA({
@@ -98,7 +100,7 @@ export default defineConfig(({ mode }) => {
 
 		build: {
 			sourcemap: true,
-			cssMinify: 'lightningcss',
+			// cssMinify: 'lightningcss',
 			modulePreload: {
 				polyfill: false,
 			},
@@ -121,7 +123,7 @@ export default defineConfig(({ mode }) => {
 							return 'core';
 						}
 
-						if (id.includes('src/web')) {
+						if (id.includes('src/web') || id.includes('apps/kit')) {
 							return 'web';
 						}
 					},
