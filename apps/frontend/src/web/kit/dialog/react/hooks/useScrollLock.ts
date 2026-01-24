@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+/** @deprecated */
 export function useScrollLock(isLocked: boolean) {
 	useEffect(() => {
 		if (isLocked) {
