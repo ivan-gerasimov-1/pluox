@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 
 import { cn } from '@/web/utils/classnames';
 
-import { TSlottable } from '@/web/uiKit/types';
+import { TSlottable } from '@kit/types';
 
 type TInputProps = React.InputHTMLAttributes<HTMLInputElement> &
 	TSlottable & {

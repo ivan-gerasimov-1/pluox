@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 
-import { Screen } from '@/web/uiKit/screen/screen';
+import { Screen } from '@kit/screen/screen';
 
 export function AuthenticationLayout() {
 	return (

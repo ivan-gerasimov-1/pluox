@@ -10,16 +10,16 @@ import { VenueNameActionSheet } from '@/web/modules/venues/components/venueNameA
 import { useVenueOneByIdQuery } from '@/web/modules/venues/queries/venues.query';
 import { venueViewI18n } from '@/web/modules/venues/views/venue/venueView.i18n';
 
-import { useDialog } from '@/web/uiKit/dialog/react/dialog/useDialog';
-import { EIconName } from '@/web/uiKit/icon/icons';
-import { IconButton } from '@/web/uiKit/iconButton/iconButton';
-import { Stack } from '@/web/uiKit/layout/layout';
-import { Sheet } from '@/web/uiKit/sheet/sheet';
+import { useDialog } from '@kit/dialog/react/dialog/useDialog';
+import { EIconName } from '@kit/icon/icons';
+import { IconButton } from '@kit/iconButton/iconButton';
+import { Stack } from '@kit/layout/layout';
+import { Sheet } from '@kit/sheet/sheet';
 import {
 	ValueAction,
 	ValueActionLeading,
 	ValueActionTrailing,
-} from '@/web/uiKit/valueAction/valueAction';
+} from '@kit/valueAction/valueAction';
 
 export function VenueView() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();

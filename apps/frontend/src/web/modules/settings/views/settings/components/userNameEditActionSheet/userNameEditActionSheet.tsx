@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { UserNameEditActionSheetI18n } from '@/web/modules/settings/views/settings/components/userNameEditActionSheet/userNameEditActionSheet.i18n';
 
-import { Button } from '@/web/uiKit/button/button';
-import type { TDialogComponentProps } from '@/web/uiKit/dialog/core/types';
-import { Input } from '@/web/uiKit/input/input';
+import { Button } from '@kit/button/button';
+import type { TDialogComponentProps } from '@kit/dialog/core/types';
+import { Input } from '@kit/input/input';
 
 type UserNameEditActionSheetProps = TDialogComponentProps<
 	{

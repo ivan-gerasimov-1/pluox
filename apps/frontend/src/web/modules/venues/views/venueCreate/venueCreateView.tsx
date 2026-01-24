@@ -11,14 +11,11 @@ import { useService } from '@/web/modules/serviceContainer/useService';
 import { useVenueCreateMutation } from '@/web/modules/venues/queries/venues.query';
 import { venueCreateViewI18n } from '@/web/modules/venues/views/venueCreate/venueCreateView.i18n';
 
-import { Button } from '@/web/uiKit/button/button';
-import { Input } from '@/web/uiKit/input/input';
-import { Stack } from '@/web/uiKit/layout/layout';
-import { Sheet } from '@/web/uiKit/sheet/sheet';
-import {
-	ValueAction,
-	ValueActionLeading,
-} from '@/web/uiKit/valueAction/valueAction';
+import { Button } from '@kit/button/button';
+import { Input } from '@kit/input/input';
+import { Stack } from '@kit/layout/layout';
+import { Sheet } from '@kit/sheet/sheet';
+import { ValueAction, ValueActionLeading } from '@kit/valueAction/valueAction';
 
 export function VenueCreateView() {
 	let navigation = useAppNavigation();

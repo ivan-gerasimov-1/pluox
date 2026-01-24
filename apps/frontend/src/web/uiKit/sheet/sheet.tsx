@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'cva';
 
-import type { TSlottable } from '@/web/uiKit/types';
+import type { TSlottable } from '@kit/types';
 
 let sheetVariants = cva(
 	['rounded-2xl rounded-tl-xl rounded-br-3xl', 'shadow-xl shadow-gray-100'],

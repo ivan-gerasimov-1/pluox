@@ -2,11 +2,11 @@ import { EAppPath } from '@/web/appPath';
 
 import { useCategoryListQuery } from '@/web/modules/categories/queries/categories.queries';
 
-import { Grid, Stack } from '@/web/uiKit/layout/layout';
-import { ListIcon } from '@/web/uiKit/list/list';
-import { NavLink } from '@/web/uiKit/navLink/navLink';
-import { Sheet } from '@/web/uiKit/sheet/sheet';
-import { Title } from '@/web/uiKit/title/title';
+import { Grid, Stack } from '@kit/layout/layout';
+import { ListIcon } from '@kit/list/list';
+import { NavLink } from '@kit/navLink/navLink';
+import { Sheet } from '@kit/sheet/sheet';
+import { Title } from '@kit/title/title';
 
 export function CategoryListView() {
 	let categories = useCategoryListQuery();

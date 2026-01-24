@@ -1,7 +1,7 @@
 import { cn } from '@/web/utils/classnames';
 
-import { Stack } from '@/web/uiKit/layout/layout';
-import { Sheet } from '@/web/uiKit/sheet/sheet';
+import { Stack } from '@kit/layout/layout';
+import { Sheet } from '@kit/sheet/sheet';
 
 type TNavbarProps = {
 	id?: string;

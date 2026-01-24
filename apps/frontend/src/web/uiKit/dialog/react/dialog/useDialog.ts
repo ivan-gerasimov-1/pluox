@@ -4,8 +4,8 @@ import type {
 	IDialogApi,
 	TDialogComponent,
 	TDialogProps,
-} from '@/web/uiKit/dialog/core/types';
-import { useDialogClient } from '@/web/uiKit/dialog/react/dialogClient/useDialogClient';
+} from '@kit/dialog/core/types';
+import { useDialogClient } from '@kit/dialog/react/dialogClient/useDialogClient';
 
 export function useDialog() {
 	let client = useDialogClient();

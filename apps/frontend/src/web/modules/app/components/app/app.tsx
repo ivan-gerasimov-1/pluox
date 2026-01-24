@@ -10,8 +10,8 @@ import { useEffectOnce } from '@/web/hooks/useEffectOnce';
 
 import { ContainerProvider } from '@/web/modules/serviceContainer/provider';
 
-import { Dialog } from '@/web/uiKit/dialog/react/dialog/dialog';
-import { DialogClientProvider } from '@/web/uiKit/dialog/react/dialogClient/dialogClientProvider';
+import { Dialog } from '@kit/dialog/react/dialog/dialog';
+import { DialogClientProvider } from '@kit/dialog/react/dialogClient/dialogClientProvider';
 
 import '@/web/modules/app/components/app/app.css';
 import '@/web/modules/app/components/app/tailwind.css';

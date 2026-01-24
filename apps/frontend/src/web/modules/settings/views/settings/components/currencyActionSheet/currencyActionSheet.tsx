@@ -9,9 +9,9 @@ import {
 	useAppConfigUpdateMutation,
 } from '@/web/modules/settings/queries/appConfig';
 
-import { Button } from '@/web/uiKit/button/button';
-import type { TDialogComponentProps } from '@/web/uiKit/dialog/core/types';
-import { ActionSheetSelect } from '@/web/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
+import { Button } from '@kit/button/button';
+import type { TDialogComponentProps } from '@kit/dialog/core/types';
+import { ActionSheetSelect } from '@kit/dialog/react/actionSheetSelect/actionSheetSelect';
 
 export function CurrencyActionSheet({
 	close,

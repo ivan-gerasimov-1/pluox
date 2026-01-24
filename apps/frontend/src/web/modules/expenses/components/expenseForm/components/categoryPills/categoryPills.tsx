@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
 import { useService } from '@/web/modules/serviceContainer/useService';
 
-import { PillsSelect } from '@/web/uiKit/pillsSelect/pillsSelect';
+import { PillsSelect } from '@kit/pillsSelect/pillsSelect';
 
 type TCategoryPillsProps = {
 	value?: string | null;

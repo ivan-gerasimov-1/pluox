@@ -1,5 +1,5 @@
-import { Input } from '@/web/uiKit/input/input';
-import { Stack } from '@/web/uiKit/layout/layout';
+import { Input } from '@kit/input/input';
+import { Stack } from '@kit/layout/layout';
 
 /** @todo Remove @ts-expect-error and clean up types */
 export function Form<T extends {}>({

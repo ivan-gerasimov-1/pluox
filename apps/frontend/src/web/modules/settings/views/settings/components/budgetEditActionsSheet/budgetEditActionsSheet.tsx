@@ -5,9 +5,9 @@ import type { TCurrency } from '@core/modules/currency/domain/types';
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { budgetEditActionsSheetI18n } from '@/web/modules/settings/views/settings/components/budgetEditActionsSheet/budgetEditActionsSheet.i18n';
 
-import { Button } from '@/web/uiKit/button/button';
-import type { TDialogComponentProps } from '@/web/uiKit/dialog/core/types';
-import { Input } from '@/web/uiKit/input/input';
+import { Button } from '@kit/button/button';
+import type { TDialogComponentProps } from '@kit/dialog/core/types';
+import { Input } from '@kit/input/input';
 
 type BudgetEditActionsSheetProps = TDialogComponentProps<
 	{

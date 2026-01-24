@@ -4,7 +4,7 @@ import { createDateViewValue } from '@/web/modules/expenses/components/expenseCr
 import { ExpenseForm } from '@/web/modules/expenses/components/expenseForm/expenseForm';
 import { useExpenseUpdateMutation } from '@/web/modules/expenses/expenses.query';
 
-import type { TDialogComponentProps } from '@/web/uiKit/dialog/core/types';
+import type { TDialogComponentProps } from '@kit/dialog/core/types';
 
 export function EditExpenseActionSheet({
 	expense,

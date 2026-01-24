@@ -1,13 +1,13 @@
-import type { IDialogClient } from '@/web/uiKit/dialog/core/dialogClient/types';
-import type { IDialogObserver } from '@/web/uiKit/dialog/core/dialogObserver/types';
-import type { IDialogStore } from '@/web/uiKit/dialog/core/dialogStore/types';
-import { EDialogStatus, EDialogType } from '@/web/uiKit/dialog/core/enums';
+import type { IDialogClient } from '@kit/dialog/core/dialogClient/types';
+import type { IDialogObserver } from '@kit/dialog/core/dialogObserver/types';
+import type { IDialogStore } from '@kit/dialog/core/dialogStore/types';
+import { EDialogStatus, EDialogType } from '@kit/dialog/core/enums';
 import type {
 	IIdGenerator,
 	TDialog,
 	TDialogComponent,
 	TDialogProps,
-} from '@/web/uiKit/dialog/core/types';
+} from '@kit/dialog/core/types';
 
 export class DialogClient implements IDialogClient {
 	constructor(

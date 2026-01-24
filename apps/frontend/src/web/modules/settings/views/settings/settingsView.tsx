@@ -21,18 +21,15 @@ import { UserNameEditActionSheet } from '@/web/modules/settings/views/settings/c
 import { settingsViewI18n } from '@/web/modules/settings/views/settings/settingsView.i18n';
 import { useVenueListUnarchivedQuery } from '@/web/modules/venues/queries/venues.query';
 
-import { Badge, Badges } from '@/web/uiKit/badge/badge';
-import { Button } from '@/web/uiKit/button/button';
-import { useDialog } from '@/web/uiKit/dialog/react/dialog/useDialog';
-import { EIconName } from '@/web/uiKit/icon/icons';
-import { IconButton } from '@/web/uiKit/iconButton/iconButton';
-import { Stack } from '@/web/uiKit/layout/layout';
-import { Sheet } from '@/web/uiKit/sheet/sheet';
-import { Title } from '@/web/uiKit/title/title';
-import {
-	ValueAction,
-	ValueActionLeading,
-} from '@/web/uiKit/valueAction/valueAction';
+import { Badge, Badges } from '@kit/badge/badge';
+import { Button } from '@kit/button/button';
+import { useDialog } from '@kit/dialog/react/dialog/useDialog';
+import { EIconName } from '@kit/icon/icons';
+import { IconButton } from '@kit/iconButton/iconButton';
+import { Stack } from '@kit/layout/layout';
+import { Sheet } from '@kit/sheet/sheet';
+import { Title } from '@kit/title/title';
+import { ValueAction, ValueActionLeading } from '@kit/valueAction/valueAction';
 
 /**
  * @todo

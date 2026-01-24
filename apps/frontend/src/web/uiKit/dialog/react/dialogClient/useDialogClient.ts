@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { DialogClientContext } from '@/web/uiKit/dialog/react/dialogClient/dialogClientProvider';
+import { DialogClientContext } from '@kit/dialog/react/dialogClient/dialogClientProvider';
 
 export function useDialogClient() {
 	let client = useContext(DialogClientContext);

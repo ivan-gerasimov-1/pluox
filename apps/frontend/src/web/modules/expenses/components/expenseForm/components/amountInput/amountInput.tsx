@@ -10,7 +10,7 @@ import {
 } from '@/web/modules/expenses/components/expenseForm/components/amountInput/helpers';
 import { EServiceToken } from '@/web/modules/serviceContainer/enums';
 
-import { Input } from '@/web/uiKit/input/input';
+import { Input } from '@kit/input/input';
 
 type TAmountInputProps = Omit<
 	React.InputHTMLAttributes<HTMLInputElement>,

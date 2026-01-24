@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid';
 
-import { DialogClient } from '@/web/uiKit/dialog/core/dialogClient/dialogClient';
-import type { IDialogClient } from '@/web/uiKit/dialog/core/dialogClient/types';
-import { DialogObserver } from '@/web/uiKit/dialog/core/dialogObserver/dialogObserver';
-import { DialogStore } from '@/web/uiKit/dialog/core/dialogStore/dialogStore';
-import type { TDialog } from '@/web/uiKit/dialog/core/types';
+import { DialogClient } from '@kit/dialog/core/dialogClient/dialogClient';
+import type { IDialogClient } from '@kit/dialog/core/dialogClient/types';
+import { DialogObserver } from '@kit/dialog/core/dialogObserver/dialogObserver';
+import { DialogStore } from '@kit/dialog/core/dialogStore/dialogStore';
+import type { TDialog } from '@kit/dialog/core/types';
 
 export function createDialogClient(): IDialogClient {
 	let store = new DialogStore<TDialog>();

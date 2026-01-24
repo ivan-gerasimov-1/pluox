@@ -1,7 +1,7 @@
 import { descriptionInputI18n } from '@/web/modules/expenses/components/expenseForm/components/commentInput/descriptionInput.i18n';
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 
-import { Input } from '@/web/uiKit/input/input';
+import { Input } from '@kit/input/input';
 
 export function DescriptionInput(
 	props: React.TextareaHTMLAttributes<HTMLTextAreaElement>,

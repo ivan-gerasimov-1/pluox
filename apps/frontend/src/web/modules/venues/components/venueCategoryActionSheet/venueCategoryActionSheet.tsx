@@ -7,9 +7,9 @@ import { useCategoryListQuery } from '@/web/modules/categories/queries/categorie
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 import { useVenueUpdateMutation } from '@/web/modules/venues/queries/venues.query';
 
-import { Button } from '@/web/uiKit/button/button';
-import type { TDialogComponentProps } from '@/web/uiKit/dialog/core/types';
-import { ActionSheetSelect } from '@/web/uiKit/dialog/react/actionSheetSelect/actionSheetSelect';
+import { Button } from '@kit/button/button';
+import type { TDialogComponentProps } from '@kit/dialog/core/types';
+import { ActionSheetSelect } from '@kit/dialog/react/actionSheetSelect/actionSheetSelect';
 
 export function VenueCategoryActionSheet({
 	venue,

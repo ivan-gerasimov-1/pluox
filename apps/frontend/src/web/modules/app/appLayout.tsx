@@ -4,7 +4,7 @@ import { useRouteMeta } from '@/web/hooks/useScreenMeta/useScreenMeta';
 
 import { AppNavbar } from '@/web/modules/app/components/appNavbar/appNavbar';
 
-import { Screen } from '@/web/uiKit/screen/screen';
+import { Screen } from '@kit/screen/screen';
 
 export function AppLayout() {
 	let { Actions } = useRouteMeta();

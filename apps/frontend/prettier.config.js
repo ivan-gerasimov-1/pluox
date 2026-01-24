@@ -35,7 +35,7 @@ const config = {
 		'',
 		'^@/web/modules(.*)$',
 		'',
-		'^@/web/uiKit(.*)$',
+		'^@kit(.*)$',
 		'',
 		'.css$',
 	],

@@ -17,8 +17,8 @@ import { VenuePills } from '@/web/modules/expenses/components/expenseForm/compon
 import { expenseFormI18n } from '@/web/modules/expenses/components/expenseForm/expenseForm.i18n';
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 
-import { Button } from '@/web/uiKit/button/button';
-import { Input } from '@/web/uiKit/input/input';
+import { Button } from '@kit/button/button';
+import { Input } from '@kit/input/input';
 
 export type TExpenseFormProps = {
 	amount: number;

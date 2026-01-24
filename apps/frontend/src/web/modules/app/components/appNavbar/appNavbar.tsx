@@ -4,11 +4,11 @@ import { EAppPath } from '@/web/appPath';
 
 import { cn } from '@/web/utils/classnames';
 
-import { Icon } from '@/web/uiKit/icon/icon';
-import { EIconName } from '@/web/uiKit/icon/icons';
-import { EIconSize } from '@/web/uiKit/icon/iconSize';
-import { Stack } from '@/web/uiKit/layout/layout';
-import { Navbar } from '@/web/uiKit/navbar/navbar';
+import { Icon } from '@kit/icon/icon';
+import { EIconName } from '@kit/icon/icons';
+import { EIconSize } from '@kit/icon/iconSize';
+import { Stack } from '@kit/layout/layout';
+import { Navbar } from '@kit/navbar/navbar';
 
 type TAppNavbarProps = {
 	id?: string;

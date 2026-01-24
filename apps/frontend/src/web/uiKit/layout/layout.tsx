@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'cva';
 
 import { cn } from '@/web/utils/classnames';
 
-import type { TSlottable } from '@/web/uiKit/types';
+import type { TSlottable } from '@kit/types';
 
 type TBaseProps = {
 	id?: string;

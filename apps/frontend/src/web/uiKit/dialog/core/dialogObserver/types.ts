@@ -1,4 +1,4 @@
-import type { IDisposable } from '@/web/uiKit/dialog/core/types';
+import type { IDisposable } from '@kit/dialog/core/types';
 
 export type TObserver = () => void;
 

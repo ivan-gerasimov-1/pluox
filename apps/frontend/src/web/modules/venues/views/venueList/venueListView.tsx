@@ -8,16 +8,16 @@ import {
 	useVenueListUnarchivedQuery,
 } from '@/web/modules/venues/queries/venues.query';
 
-import { Badge } from '@/web/uiKit/badge/badge';
-import { Stack } from '@/web/uiKit/layout/layout';
-import { ListIcon } from '@/web/uiKit/list/list';
-import { NavLink } from '@/web/uiKit/navLink/navLink';
-import { Sheet } from '@/web/uiKit/sheet/sheet';
+import { Badge } from '@kit/badge/badge';
+import { Stack } from '@kit/layout/layout';
+import { ListIcon } from '@kit/list/list';
+import { NavLink } from '@kit/navLink/navLink';
+import { Sheet } from '@kit/sheet/sheet';
 import {
 	ValueAction,
 	ValueActionLeading,
 	ValueActionTrailing,
-} from '@/web/uiKit/valueAction/valueAction';
+} from '@kit/valueAction/valueAction';
 
 export function VenueListView() {
 	let intl = useIntl(venueListViewI18n);

@@ -2,12 +2,12 @@ import { EAppPath } from '@/web/appPath';
 
 import { useLogin } from '@/web/modules/authentication/hooks/useLogin/useLogin';
 
-import { Button } from '@/web/uiKit/button/button';
-import { Form, FormGroup, FormInput } from '@/web/uiKit/form/form';
-import { Stack } from '@/web/uiKit/layout/layout';
-import { NavLink } from '@/web/uiKit/navLink/navLink';
-import { Sheet } from '@/web/uiKit/sheet/sheet';
-import { Title } from '@/web/uiKit/title/title';
+import { Button } from '@kit/button/button';
+import { Form, FormGroup, FormInput } from '@kit/form/form';
+import { Stack } from '@kit/layout/layout';
+import { NavLink } from '@kit/navLink/navLink';
+import { Sheet } from '@kit/sheet/sheet';
+import { Title } from '@kit/title/title';
 
 export function LogInView() {
 	let { mutate: login, isPending } = useLogin();

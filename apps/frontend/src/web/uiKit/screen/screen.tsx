@@ -1,6 +1,6 @@
 import { cn } from '@/web/utils/classnames';
 
-import { Stack } from '@/web/uiKit/layout/layout';
+import { Stack } from '@kit/layout/layout';
 
 type TScreenProps = {
 	id?: string;

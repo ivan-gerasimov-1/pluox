@@ -2,7 +2,7 @@ import type { Id } from '@core/domain/types';
 
 import { useVenueListUnarchivedQuery } from '@/web/modules/venues/queries/venues.query';
 
-import { PillsSelect } from '@/web/uiKit/pillsSelect/pillsSelect';
+import { PillsSelect } from '@kit/pillsSelect/pillsSelect';
 
 type TVenuePillsProps = {
 	value: Id | null;

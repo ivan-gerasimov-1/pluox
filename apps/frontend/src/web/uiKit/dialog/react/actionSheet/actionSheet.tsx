@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { Backdrop } from '@/web/uiKit/backdrop/Backdrop';
-import { useScale } from '@/web/uiKit/dialog/react/hooks/useScale';
-import { Pinch } from '@/web/uiKit/pinch/pinch';
+import { Backdrop } from '@kit/backdrop/Backdrop';
+import { useScale } from '@kit/dialog/react/hooks/useScale';
+import { Pinch } from '@kit/pinch/pinch';
 
 import styles from './actionSheet.module.css';
 

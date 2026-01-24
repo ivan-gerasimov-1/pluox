@@ -1,8 +1,8 @@
 import { notFoundErrorI18n } from '@/web/modules/errors/screens/notFoundError/notFoundError.i18n';
 import { useIntl } from '@/web/modules/intl/useIntl/useIntl';
 
-import { Error } from '@/web/uiKit/error/error';
-import { NavButton } from '@/web/uiKit/navButton/navButton';
+import { Error } from '@kit/error/error';
+import { NavButton } from '@kit/navButton/navButton';
 
 export function NotFoundError() {
 	let intl = useIntl(notFoundErrorI18n);

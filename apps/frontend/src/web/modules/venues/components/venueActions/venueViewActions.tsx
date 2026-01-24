@@ -15,10 +15,10 @@ import {
 	useVenueUnarchiveMutation,
 } from '@/web/modules/venues/queries/venues.query';
 
-import { Button } from '@/web/uiKit/button/button';
-import { Icon } from '@/web/uiKit/icon/icon';
-import { EIconName } from '@/web/uiKit/icon/icons';
-import { Stack } from '@/web/uiKit/layout/layout';
+import { Button } from '@kit/button/button';
+import { Icon } from '@kit/icon/icon';
+import { EIconName } from '@kit/icon/icons';
+import { Stack } from '@kit/layout/layout';
 
 export function VenueViewActions() {
 	let { id = INVALID_ID } = useParams<{ id: Id }>();

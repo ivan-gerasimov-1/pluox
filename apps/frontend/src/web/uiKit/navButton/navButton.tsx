@@ -1,6 +1,6 @@
 import { useAppNavigation } from '@/web/hooks/useNavigation';
 
-import { Button } from '@/web/uiKit/button/button';
+import { Button } from '@kit/button/button';
 
 type TNavButtonProps = {
 	className?: string;
