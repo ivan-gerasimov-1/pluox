@@ -1,20 +1,12 @@
 {
 	"folders": [
 		{
-			"name": "Web",
-			"path": "../apps/frontend",
-		},
-		{
-			"name": "Core",
-			"path": "../apps/core",
-		},
-		{
-			"name": "API",
-			"path": "../apps/backend",
-		},
-		{
 			"name": "root",
 			"path": "../",
+		},
+		{
+			"name": "apps",
+			"path": "../apps",
 		},
 	],
 	"settings": {
