@@ -13,7 +13,7 @@
 		"baseUrl": "./",
 		"outDir": "build/",
 
-		"tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
+		"tsBuildInfoFile": "./node_modules/.cache/.tsbuildinfo",
 
 		"sourceMap": true,
 
@@ -26,8 +26,8 @@
 		"jsx": "react-jsx",
 
 		"paths": {
-			"@kit/*": ["src/*"]
+			"@kit/*": ["./src/*"]
 		}
 	},
-	"include": ["src/**/*"]
+	"include": ["./src/**/*"]
 }
