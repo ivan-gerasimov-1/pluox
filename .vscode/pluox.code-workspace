@@ -2,16 +2,16 @@
 	"folders": [
 		{
 			"name": "root",
-			"path": "../"
+			"path": "../",
 		},
 		{
 			"name": "apps",
-			"path": "../apps"
+			"path": "../apps",
 		},
 	],
 	"settings": {
 		"typescript.preferences.importModuleSpecifier": "shortest",
 		"typescript.preferences.preferTypeOnlyAutoImports": true,
-		"typescript.tsdk": "root/node_modules/typescript/lib"
-	}
+		"typescript.tsdk": "root/node_modules/typescript/lib",
+	},
 }
