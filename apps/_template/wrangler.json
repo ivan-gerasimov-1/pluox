@@ -1,0 +1,10 @@
+{
+	"name": "[[NAME]]",
+	"compatibility_date": "2025-11-11",
+	"workers_dev": false,
+
+	"assets": {
+		"directory": "./build",
+		"not_found_handling": "single-page-application"
+	}
+}
