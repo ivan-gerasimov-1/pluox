@@ -1,0 +1,10 @@
+@config '../../../../../../tailwind.config.ts';
+
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+	--default-transition-duration: 200ms;
+}
