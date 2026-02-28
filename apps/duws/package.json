@@ -39,7 +39,7 @@
 		"cn": "npm:clsx@2.1.1",
 		"cva": "npm:class-variance-authority@0.7.1",
 		"dayjs": "1.11.19",
-		"fast-xml-parser": "5.3.3",
+		"fast-xml-parser": "5.3.8",
 		"lucide-react": "0.563.0",
 		"nanoid": "5.1.6",
 		"react": "19.2.3",
