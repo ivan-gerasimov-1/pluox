@@ -1,4 +1,4 @@
-import type { ILauchControl } from '@core/modules/bootstrap/application/launchControl/types';
+import type { ILaunchControl } from '@core/modules/bootstrap/application/launchControl/types';
 import type { ICategoryUseCase } from '@core/modules/category/application/categoryUseCase/types';
 import { ECurrency } from '@core/modules/currency/domain/types';
 import type { ICurrencyRateAPI } from '@core/modules/currency/infrastructure/currencyRateAPI/types';
@@ -6,7 +6,7 @@ import type { ICurrencyRateDataSource } from '@core/modules/currency/infrastruct
 import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
 import type { IAppConfigService } from '@core/modules/settings/application/appConfigService/types';
 
-export class LaunchControl implements ILauchControl {
+export class LaunchControl implements ILaunchControl {
 	constructor(
 		private readonly sessionService: ISessionService,
 		private readonly appConfigService: IAppConfigService,

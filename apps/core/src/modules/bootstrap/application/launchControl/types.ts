@@ -1,3 +1,3 @@
-export interface ILauchControl {
+export interface ILaunchControl {
 	start(): Promise<void>;
 }

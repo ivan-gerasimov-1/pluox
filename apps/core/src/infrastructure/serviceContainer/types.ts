@@ -14,7 +14,7 @@ import type {
 } from '@core/infrastructure/database/types';
 import type { IIdGeneratorFactory } from '@core/infrastructure/idGenerator/factory';
 
-import type { ILauchControl } from '@core/modules/bootstrap/application/launchControl/types';
+import type { ILaunchControl } from '@core/modules/bootstrap/application/launchControl/types';
 import type { ICategoryQueryService } from '@core/modules/category/application/categoryQueryService/types';
 import type { ICategoryService } from '@core/modules/category/application/categoryService/types';
 import type {
@@ -287,7 +287,7 @@ export interface IServiceMap {
 	[EServiceToken.CURRENCY_RATE_API]: ICurrencyRateAPI;
 	[EServiceToken.CURRENCY_RATE_REPOSITORY]: ICurrencyRateRepository;
 
-	[EServiceToken.LAUNCH_CONTROL]: ILauchControl;
+	[EServiceToken.LAUNCH_CONTROL]: ILaunchControl;
 
 	[EServiceToken.API_CLIENT]: IApiClient;
 	[EServiceToken.API_CLIENT_CONFIG_PROVIDER]: IApiClientConfigProvider;
