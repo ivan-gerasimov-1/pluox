@@ -2,7 +2,7 @@ import { Container } from '@core/infrastructure/serviceContainer/container';
 import { ContainerValidationDecorator } from '@core/infrastructure/serviceContainer/containerDecorator/containerValidationDecorator';
 import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 
-export let globalContainer: IContainer;
+let globalContainer: IContainer | undefined;
 
 export function containerFactory(options?: {
 	isGlobal?: boolean;
@@ -27,6 +27,15 @@ export function getGlobalContainer(): IContainer {
 	}
 
 	return globalContainer;
+}
+
+export function resetGlobalContainer(): void {
+	if (!globalContainer) {
+		throw new GlobalContainerNotInitializedError();
+	}
+
+	globalContainer.disposeAll();
+	globalContainer = undefined;
 }
 
 export class GlobalContainerNotInitializedError extends Error {
