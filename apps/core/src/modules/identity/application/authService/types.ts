@@ -1,4 +1,4 @@
-export interface IAuthSerivce {
+export interface IAuthService {
 	signUp(
 		email: string,
 		password: string,

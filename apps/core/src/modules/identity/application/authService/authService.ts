@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from '@core/modules/identity/application/authService/errors';
-import type { IAuthSerivce } from '@core/modules/identity/application/authService/types';
+import type { IAuthService } from '@core/modules/identity/application/authService/types';
 import type {
 	TLogInResponseDTO,
 	TSignUpResponseDTO,
@@ -12,7 +12,7 @@ import type { IUserService } from '@core/modules/user/application/userService/ty
  * @todo
  * 1. Add proper management of users
  */
-export class AuthService implements IAuthSerivce {
+export class AuthService implements IAuthService {
 	constructor(
 		private readonly authApi: IAuthApi,
 		private readonly userService: IUserService,

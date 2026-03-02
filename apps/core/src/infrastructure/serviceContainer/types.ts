@@ -47,7 +47,7 @@ import type { IExpenseRepository } from '@core/modules/expense/domain/expenseRep
 import type { IExpenseApi } from '@core/modules/expense/infrastructure/expenseApi/types';
 import type { IExpenseDataSource } from '@core/modules/expense/infrastructure/expenseDataSource/types';
 import type { IExpenseMapper } from '@core/modules/expense/infrastructure/expenseMapper/types';
-import type { IAuthSerivce } from '@core/modules/identity/application/authService/types';
+import type { IAuthService } from '@core/modules/identity/application/authService/types';
 import type { ISessionService } from '@core/modules/identity/application/sessionService/types';
 import type { IAuthTokenFactory } from '@core/modules/identity/domain/authToken/types';
 import type {
@@ -123,7 +123,6 @@ export interface IServiceProvider<T = unknown> {
 export interface IModule {
 	imports?: Array<IModule>;
 	providers: Array<IServiceProvider>;
-	exports?: Array<IServiceProvider>;
 }
 
 export const EServiceToken = {
@@ -295,7 +294,7 @@ export interface IServiceMap {
 	[EServiceToken.EXPENSE_API]: IExpenseApi;
 
 	[EServiceToken.AUTH_API]: IAuthApi;
-	[EServiceToken.AUTH_SERVICE]: IAuthSerivce;
+	[EServiceToken.AUTH_SERVICE]: IAuthService;
 	[EServiceToken.AUTH_TOKEN_FACTORY]: IAuthTokenFactory;
 
 	[EServiceToken.USER_SERVICE]: IUserService;
