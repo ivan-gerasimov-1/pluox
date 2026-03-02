@@ -55,7 +55,7 @@ export class DatabaseCollection implements IDatabaseCollection {
 		let data = this.readData();
 		let item = Reflect.get(data, id);
 
-		if (item === null) {
+		if (!item) {
 			return null;
 		}
 
