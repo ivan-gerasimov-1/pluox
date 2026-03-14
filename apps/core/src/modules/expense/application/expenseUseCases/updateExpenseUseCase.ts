@@ -4,11 +4,8 @@ import type { ICategoryUseCase } from '@core/modules/category/application/catego
 import type { TExpenseUpdateDTO } from '@core/modules/expense/application/dto/expenseDTO';
 import type { IUpdateExpenseUseCase } from '@core/modules/expense/application/expenseUseCases/types';
 import type { IExpenseRepository } from '@core/modules/expense/domain/expenseRepository/types';
+import { ExpenseNotFoundError } from '@core/modules/expense/infrastructure/expenseRepository/errors';
 
-/**
- * @todo
- * 1. Handle missing expense case
- */
 export class UpdateExpenseUseCase implements IUpdateExpenseUseCase {
 	constructor(
 		private readonly expenseRepository: IExpenseRepository,
@@ -21,9 +18,8 @@ export class UpdateExpenseUseCase implements IUpdateExpenseUseCase {
 		let prevCategory = null;
 		let isCategoryChanged = false;
 
-		/** @todo №1 */
 		if (!expense) {
-			return;
+			throw new ExpenseNotFoundError(id);
 		}
 
 		if (payload.category) {
