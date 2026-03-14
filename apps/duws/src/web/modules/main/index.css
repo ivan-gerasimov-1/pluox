@@ -1,9 +1,0 @@
-@import "tailwindcss";
-
-:root {
-  font-size: 20px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  cursor: default;
-}
