@@ -13,6 +13,8 @@ import type {
 } from '@core/infrastructure/serviceContainer/types';
 
 /**
+ * Validator only works in development (i.e. non-minified) environment
+ *
  * @todo
  * 1. Implement useFactory validation
  * 2. Compare dependency name with param name
