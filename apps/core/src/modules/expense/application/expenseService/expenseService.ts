@@ -19,9 +19,9 @@ export class ExpenseService implements IExpenseService {
 		private readonly expenseQueryService: IExpenseQueryService,
 	) {}
 	public getTotalByYear(year: TYear = new Date().getFullYear()): number {
-		let epxenses = this.expenseQueryService.getYearlyExpenses(year);
+		let expenses = this.expenseQueryService.getYearlyExpenses(year);
 
-		return this.expenseAmountService.calculateAmount(epxenses);
+		return this.expenseAmountService.calculateAmount(expenses);
 	}
 
 	public getTotalByMonth(
@@ -34,9 +34,9 @@ export class ExpenseService implements IExpenseService {
 	}
 
 	public getTotalByDay(): number {
-		let epxenses = this.expenseQueryService.getDailyExpenses();
+		let expenses = this.expenseQueryService.getDailyExpenses();
 
-		return this.expenseAmountService.calculateAmount(epxenses);
+		return this.expenseAmountService.calculateAmount(expenses);
 	}
 
 	public getMonthlyTotalByCategory(
