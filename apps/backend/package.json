@@ -27,20 +27,20 @@
 	"imports": {
 		"#app/*": "./src/*.ts"
 	},
-	"packageManager": "npm@11.8.0",
+	"packageManager": "npm@11.11.1",
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"description": "Pluox app backend (lite)",
 	"dependencies": {
-		"@hono/node-server": "1.19.9",
+		"@hono/node-server": "1.19.11",
 		"@hono/zod-validator": "0.7.6",
-		"hono": "4.11.5",
+		"hono": "4.12.8",
 		"zod": "3.25.74"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20260123.0",
+		"@cloudflare/workers-types": "4.20260313.1",
 		"@lv48/eslint-config": "",
 		"@types/node": "24.10.9",
-		"wrangler": "4.60.0"
+		"wrangler": "4.73.0"
 	}
 }
