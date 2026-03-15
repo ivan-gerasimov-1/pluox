@@ -7,13 +7,6 @@
 	"compatibility_flags": ["nodejs_compat"],
 	"tsconfig": "./tsconfig.cloudflare.json",
 	"minify": true,
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_id": "bd07d79d-f9d7-446c-b6a1-6369f13f2421",
-			"database_name": "pluox"
-		}
-	],
 	"kv_namespaces": [
 		{
 			"binding": "CURRENCIES_KV",
@@ -21,7 +14,6 @@
 		}
 	],
 	"vars": {
-		"AUTH_COOKIE_NAME": "session",
 		"APP_OPEN_EXCHANGE_RATES_API_URL": "https://openexchangerates.org/api"
 	}
 }

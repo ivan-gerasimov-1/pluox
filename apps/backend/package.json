@@ -5,10 +5,6 @@
 	"type": "module",
 	"scripts": {
 		"___start___": "",
-		"start": "npm run start:dev",
-		"start:dev": "node --env-file=.env --experimental-transform-types --watch ./src/index.ts",
-		"start:prod": "node --env-file=.env --experimental-transform-types ./src/index.ts",
-		"___start___next___": "",
 		"start:next": "npm run start:dev:next",
 		"start:dev:next": "node --env-file=.env --experimental-transform-types --watch ./src/index.node.ts",
 		"start:prod:next": "node --env-file=.env --experimental-transform-types ./src/index.node.ts",
@@ -25,19 +21,6 @@
 		"_build:createDist": "mkdir dist",
 		"_build:copyApp": "cp -r src dist",
 		"_build:copyAssets": "cp package.json .env dist",
-		"___docker___": "",
-		"docker:build": "npm run _docker:copyFiles && cd dist && npm run _docker:buildImage",
-		"docker:compose:up": "cd .docker && docker-compose up -d",
-		"docker:compose:down": "cd .docker && docker-compose down",
-		"_docker:copyFiles": "cp -r .docker/Dockerfile dist",
-		"_docker:buildImage": "docker build -t pluox-api-lite:latest .",
-		"___db___": "",
-		"db:init": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/init.ts",
-		"db:reset": "echo 'Not Implemented' && exit 0 && npm run db:delete && npm run db:init",
-		"db:delete": "rm -rf ./db.sqlite",
-		"db:migrate": "echo 'Not Implemented' && exit 0 && node --experimental-transform-types ./database/migrate.ts",
-		"___D1___": "",
-		"d1:init": "wrangler d1 execute pluox -j --local --file .db/schema.sql",
 		"__lint__": "",
 		"lint": "eslint ./src"
 	},
@@ -51,14 +34,12 @@
 	"dependencies": {
 		"@hono/node-server": "1.19.9",
 		"@hono/zod-validator": "0.7.6",
-		"better-sqlite3": "12.6.2",
 		"hono": "4.11.5",
 		"zod": "3.25.74"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "4.20260123.0",
 		"@lv48/eslint-config": "",
-		"@types/better-sqlite3": "7.6.13",
 		"@types/node": "24.10.9",
 		"wrangler": "4.60.0"
 	}
