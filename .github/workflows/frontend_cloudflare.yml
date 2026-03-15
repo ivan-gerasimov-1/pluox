@@ -15,12 +15,16 @@ on:
   pull_request:
     paths:
       - 'apps/frontend/**'
+      - 'apps/core/**'
+      - 'apps/kit/**'
       - '.github/workflows/frontend_cloudflare.yml'
   push:
     branches:
       - main
     paths:
       - 'apps/frontend/**'
+      - 'apps/core/**'
+      - 'apps/kit/**'
       - '.github/workflows/frontend_cloudflare.yml'
 
 jobs:
