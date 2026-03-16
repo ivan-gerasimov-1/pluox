@@ -13,7 +13,6 @@
 		"module": "ES2022",
 		"lib": ["ES2022", "DOM"],
 
-		"baseUrl": "./",
 		"outDir": "./build/",
 
 		"noEmit": true,
