@@ -31,7 +31,7 @@ export function VenueListView() {
 				<Sheet key={venue.id} interactive asChild>
 					<NavLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
 						<Stack row>
-							<ListIcon>{venue.name?.[0]}</ListIcon>
+							<ListIcon>{venue.name[0]}</ListIcon>
 
 							<ValueAction>
 								<ValueActionLeading label={venue.name}>
@@ -47,7 +47,7 @@ export function VenueListView() {
 				<Sheet key={venue.id} interactive asChild>
 					<NavLink to={EAppPath.VENUES_VIEW.replace(':id', venue.id)}>
 						<Stack row>
-							<ListIcon>{venue.name?.[0]}</ListIcon>
+							<ListIcon>{venue.name[0]}</ListIcon>
 
 							<ValueAction>
 								<ValueActionLeading label={venue.name}>

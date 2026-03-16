@@ -1,5 +1,5 @@
 import { currencyActionSheetI18n } from './currencyActionSheet.i18n';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { ECurrency, TCurrency } from '@core/modules/currency/domain/types';
 
@@ -25,10 +25,14 @@ export function CurrencyActionSheet({
 		appConfig.currency,
 	);
 
-	const currencies = Object.values(ECurrency).map((currency) => ({
-		id: currency,
-		name: currency,
-	}));
+	const currencies = useMemo(
+		() =>
+			Object.values(ECurrency).map((currency) => ({
+				id: currency,
+				name: currency,
+			})),
+		[],
+	);
 
 	function handleSave() {
 		updateAppConfig(

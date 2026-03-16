@@ -31,7 +31,7 @@ export function BudgetEditActionsSheet(props: BudgetEditActionsSheetProps) {
 				<Input
 					type="number"
 					className="border-0"
-					value={budget ?? 0}
+					value={budget}
 					onChange={(event) => {
 						let budgetValue = Number.parseInt(event.target.value, 10);
 

@@ -1,5 +1,5 @@
 import { localeActionSheetI18n } from './localeActionSheet.i18n';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { ELocaleCode } from '@core/modules/intl/domain/enums';
 import type { TLocaleCode } from '@core/modules/intl/domain/types';
@@ -24,6 +24,20 @@ export function LocaleActionSheet({ close }: TDialogComponentProps<{}, void>) {
 		appConfig.locale,
 	);
 
+	let localeList = useMemo(
+		() => [
+			{
+				id: ELocaleCode.RU_RU,
+				name: 'Русский',
+			},
+			{
+				id: ELocaleCode.EN_US,
+				name: 'English',
+			},
+		],
+		[],
+	);
+
 	function handleSave() {
 		updateAppConfig(
 			{
@@ -41,16 +55,7 @@ export function LocaleActionSheet({ close }: TDialogComponentProps<{}, void>) {
 		<>
 			<ActionSheetSelect
 				value={selectedLocale}
-				items={[
-					{
-						id: ELocaleCode.RU_RU,
-						name: 'Русский',
-					},
-					{
-						id: ELocaleCode.EN_US,
-						name: 'English',
-					},
-				]}
+				items={localeList}
 				onSelect={setSelectedLocale}
 			/>
 

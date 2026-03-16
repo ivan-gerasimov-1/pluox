@@ -7,8 +7,3 @@ declare module '*.module.css' {
 
 	export = classNames;
 }
-
-// declare module '*.svg' {
-// 	const value: React.StatelessComponent<React.SVGAttributes<SVGElement>>;
-// 	export default value;
-// }

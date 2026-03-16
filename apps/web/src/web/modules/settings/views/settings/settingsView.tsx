@@ -160,7 +160,7 @@ export function SettingsView() {
 
 					<ValueAction>
 						<ValueActionLeading label={appConfig.currency}>
-							{intlService.formatCurrency(appConfig.budget || 0)}
+							{intlService.formatCurrency(appConfig.budget ?? 0)}
 						</ValueActionLeading>
 
 						<IconButton

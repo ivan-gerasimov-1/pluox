@@ -2,6 +2,8 @@ import { createContext } from 'react';
 
 import type { IContainer } from '@core/infrastructure/serviceContainer/types';
 
+/** @todo */
+// oxlint-disable react/only-export-components
 export let ContainerContext = createContext<IContainer | null>(null);
 
 export function ContainerProvider(

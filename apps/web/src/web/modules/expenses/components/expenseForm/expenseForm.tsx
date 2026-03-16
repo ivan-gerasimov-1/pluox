@@ -67,8 +67,8 @@ export function ExpenseForm(props: TExpenseFormProps) {
 			amount: formState.amount,
 			currency: formState.currency,
 			description: formState.description,
-			category: formState.category || null,
-			venue: formState.venue || null,
+			category: formState.category ?? null,
+			venue: formState.venue ?? null,
 			date: new Date(formState.date).toISOString(),
 		});
 
@@ -117,6 +117,8 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	);
 }
 
+/** @todo */
+// oxlint-disable react/no-multi-comp
 export function AmountInputController({
 	control,
 	setValue,
@@ -139,6 +141,8 @@ export function AmountInputController({
 	);
 }
 
+/** @todo */
+// oxlint-disable react/no-multi-comp
 export function VenuePillsController(props: {
 	control: Control<TExpenseFormState>;
 	setValue: UseFormSetValue<TExpenseFormState>;
@@ -163,6 +167,8 @@ export function VenuePillsController(props: {
 	);
 }
 
+/** @todo */
+// oxlint-disable react/no-multi-comp
 export function CategoryPillsController(props: {
 	control: Control<TExpenseFormState>;
 }) {

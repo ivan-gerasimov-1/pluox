@@ -24,6 +24,7 @@ function createUserQuery(
 ): [TUserQueryType, Id];
 function createUserQuery(type: TUserQueryType, options?: { id?: Id }) {
 	switch (type) {
+		/* oxlint-disable typescript/no-unnecessary-condition */
 		case 'one:id':
 			return ['user:one:id', options?.id];
 		default: {

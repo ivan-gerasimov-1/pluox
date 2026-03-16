@@ -38,6 +38,8 @@ export function useVenueListQuery(options?: {
 		queryFn: () => {
 			let venues = venueQueryService.getAll(queryParams);
 
+			/** @todo */
+			// oxlint-disable oxc/no-map-spread
 			return venues.map((venue) => ({
 				...venue,
 				categoryName: categoryService.getCategoryName(venue.categoryId),

@@ -3,6 +3,7 @@ import type { TISODateString } from '@core/domain/temporal/types';
 export function createDateViewValue(
 	initialDate?: string | null,
 ): TISODateString {
+	// oxlint-disable typescript/strict-boolean-expressions
 	const date = initialDate ? new Date(initialDate) : new Date();
 
 	function format(value: number): string {

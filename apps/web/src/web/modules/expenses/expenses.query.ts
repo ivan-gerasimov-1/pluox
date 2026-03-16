@@ -163,14 +163,12 @@ export function useExpenseListQuery(options: {
 		refetchOnMount: false,
 		queryKey: createExpenseQuery('list', options),
 		queryFn: ({ queryKey: [, , queryOptions] }) => {
-			let expenses = expenseRepository.findMany(
-				queryOptions && {
-					filter: {
-						dateFrom: queryOptions.dateFrom,
-						dateTo: queryOptions.dateTo,
-					},
+			let expenses = expenseRepository.findMany({
+				filter: {
+					dateFrom: queryOptions.dateFrom,
+					dateTo: queryOptions.dateTo,
 				},
-			);
+			});
 
 			let expenseList = expenses.items.map((expense) => {
 				return expenseMapper.toDTO(expense);

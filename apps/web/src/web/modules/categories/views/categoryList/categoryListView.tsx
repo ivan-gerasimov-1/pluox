@@ -21,7 +21,7 @@ export function CategoryListView() {
 							<Title>{category.name}</Title>
 
 							<ListIcon className="-right-0.5 -bottom-0.5 absolute">
-								{category.icon ?? category.name[0]}
+								{category.icon}
 							</ListIcon>
 						</NavLink>
 					</Stack>

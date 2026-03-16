@@ -55,7 +55,7 @@ export function ExpenseList(props: TExpenseListProps) {
 				</div>
 
 				<SwipeableList className="font-mono">
-					{group.items?.map((item) => {
+					{group.items.map((item) => {
 						return (
 							<SwipeableListItem
 								key={item.id}
@@ -108,13 +108,20 @@ export function ExpenseList(props: TExpenseListProps) {
 										</span>
 									</div>
 
-									{(item.description || item.venue) && (
-										<div className="mt-2 text-xs text-gray-600">
-											{item.venue && <span>⚲ {getVenueName(item.venue)}</span>}
-											{item.venue && item.description && <span> | </span>}
-											{item.description}
-										</div>
-									)}
+									{
+										// oxlint-disable typescript/strict-boolean-expressions
+										(item.description ?? item.venue) && (
+											<div className="mt-2 text-xs text-gray-600">
+												{/* oxlint-disable typescript/strict-boolean-expressions */}
+												{item.venue && (
+													<span>⚲ {getVenueName(item.venue)}</span>
+												)}
+												{/* oxlint-disable typescript/strict-boolean-expressions */}
+												{item.venue && item.description && <span> | </span>}
+												{item.description}
+											</div>
+										)
+									}
 								</div>
 							</SwipeableListItem>
 						);

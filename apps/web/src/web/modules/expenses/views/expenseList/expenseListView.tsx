@@ -8,8 +8,8 @@ export function ExpenseListView() {
 	let temporal = useService(EServiceToken.TEMPORAL);
 	let [searchParams] = useSearchParams();
 
-	let dateFrom = searchParams.get('dateFrom') || temporal.getStartOfMonth();
-	let dateTo = searchParams.get('dateTo') || temporal.getEndOfMonth();
+	let dateFrom = searchParams.get('dateFrom') ?? temporal.getStartOfMonth();
+	let dateTo = searchParams.get('dateTo') ?? temporal.getEndOfMonth();
 
 	return <ExpenseList dateFrom={dateFrom} dateTo={dateTo} />;
 }
