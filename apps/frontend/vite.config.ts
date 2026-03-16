@@ -7,7 +7,6 @@ import { analyzer } from 'vite-bundle-analyzer';
 import { checker } from 'vite-plugin-checker';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
@@ -31,15 +30,6 @@ export default defineConfig(({ mode }) => {
 			},
 			enableBuild: true,
 		}),
-		tsconfigPaths({
-			projects: [
-				'./',
-				/** @pluox/core */
-				'../core/',
-				/** @pluox/kit */
-				'../kit/',
-			],
-		}),
 		VitePWA({
 			manifest: false,
 		}),
@@ -53,10 +43,8 @@ export default defineConfig(({ mode }) => {
 		plugins,
 		envPrefix,
 
-		optimizeDeps: {
-			esbuildOptions: {
-				target: 'es2021',
-			},
+		resolve: {
+			tsconfigPaths: true,
 		},
 
 		typescript: {
@@ -100,12 +88,11 @@ export default defineConfig(({ mode }) => {
 
 		build: {
 			sourcemap: true,
-			// cssMinify: 'lightningcss',
 			modulePreload: {
 				polyfill: false,
 			},
 			outDir: 'build',
-			rollupOptions: {
+			rolldownOptions: {
 				output: {
 					manualChunks(id) {
 						if (
