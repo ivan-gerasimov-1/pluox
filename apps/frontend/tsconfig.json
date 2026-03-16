@@ -1,10 +1,8 @@
 {
 	"references": [
-		/** @pluox/core */
 		{
 			"path": "../core"
 		},
-		/** @pluox/kit */
 		{
 			"path": "../kit"
 		}
