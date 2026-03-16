@@ -17,7 +17,7 @@ type TAmountInputProps = Omit<
 	'onChange' | 'value'
 > & {
 	value: number;
-	onChange(value: number): void;
+	onChange: (value: number) => void;
 };
 
 export function AmountInput({
