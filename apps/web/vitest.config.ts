@@ -2,6 +2,7 @@ import path from 'path';
 
 import { defineConfig } from 'vitest/config';
 
+// oxlint-disable import/no-default-export
 export default defineConfig({
 	test: {
 		globals: true,

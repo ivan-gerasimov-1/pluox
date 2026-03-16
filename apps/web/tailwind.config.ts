@@ -1,7 +1,4 @@
+// oxlint-disable import/no-default-export
 export default {
-	content: [
-		'./src/**/*.{ts,tsx}',
-		/** @pluox/kit */
-		'../kit/src/**/*.{ts,tsx}',
-	],
+	content: ['./src/**/*.{ts,tsx}', '../kit/src/**/*.{ts,tsx}'],
 };

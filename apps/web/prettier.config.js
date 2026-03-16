@@ -43,4 +43,5 @@ const config = {
 	],
 };
 
+// oxlint-disable import/no-default-export
 export default config;

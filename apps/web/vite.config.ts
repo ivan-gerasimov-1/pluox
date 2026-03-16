@@ -6,6 +6,7 @@ import { checker } from 'vite-plugin-checker';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
 
+// oxlint-disable import/no-default-export
 export default defineConfig(({ mode }) => {
 	const isDevelopment = mode === 'development';
 
@@ -94,9 +95,8 @@ export default defineConfig(({ mode }) => {
 							return 'core';
 						}
 
-						if (id.includes('src/web') || id.includes('apps/kit')) {
-							return 'web';
-						}
+						/** `id` is 'src/web' or 'apps/kit' */
+						return 'web';
 					},
 				},
 			},
