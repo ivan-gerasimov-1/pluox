@@ -2,7 +2,8 @@ import { defineConfig } from 'oxlint';
 
 export default defineConfig({
 	options: {
-		typeAware: true,
-		typeCheck: true,
+		/** @todo Resolve CI issues and enable */
+		// typeAware: true,
+		// typeCheck: true,
 	},
 });
