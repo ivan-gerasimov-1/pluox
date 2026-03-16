@@ -38,7 +38,7 @@
 		"zod": "3.25.74"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20260313.1",
+		"@cloudflare/workers-types": "4.20260316.1",
 		"@lv48/eslint-config": "",
 		"@types/node": "24.10.9",
 		"wrangler": "4.73.0"
