@@ -4,6 +4,7 @@
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"private": true,
+	"type": "module",
 	"workspaces": [
 		"apps/*",
 		"packages/*"
