@@ -19,6 +19,8 @@
 		"deprecated_lint": "eslint ./src",
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
+		"lint:ci": "npm run lint:gihub",
+		"lint:gihub": "oxlint --format=github",
 		"__test__": "",
 		"test": "vitest run",
 		"test:coverage": "vitest run --coverage",
