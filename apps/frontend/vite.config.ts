@@ -7,9 +7,10 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
+	const isDevelopment = mode === 'development';
+
 	const env = loadEnv(mode, process.cwd(), '');
 	const envPrefix = ['APP_'];
-	const isDevelopment = mode === 'development';
 
 	if (isDevelopment) {
 		envPrefix.push('DEV_');
