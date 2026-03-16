@@ -3,29 +3,29 @@ name: Frontend (Cloudflare)
 env:
   NODE_VERSION: 24.1.0
 
-  NPM_BUILD_CMD: --workspace=@pluox/frontend run build
-  NPM_LINT_CMD: --workspace=@pluox/frontend run lint
-  NPM_TEST_CMD: --workspace=@pluox/frontend run test
+  NPM_BUILD_CMD: --workspace=@pluox/web run build
+  NPM_LINT_CMD: --workspace=@pluox/web run lint
+  NPM_TEST_CMD: --workspace=@pluox/web run test
 
-  ARTIFACTS_DIR: apps/frontend/build
+  ARTIFACTS_DIR: apps/web/build
   ARTIFACT_NAME: build
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'apps/frontend/**'
+      - 'apps/web/**'
       - 'apps/core/**'
       - 'apps/kit/**'
-      - '.github/workflows/frontend_cloudflare.yml'
+      - '.github/workflows/web_cloudflare.yml'
   push:
     branches:
       - main
     paths:
-      - 'apps/frontend/**'
+      - 'apps/web/**'
       - 'apps/core/**'
       - 'apps/kit/**'
-      - '.github/workflows/frontend_cloudflare.yml'
+      - '.github/workflows/web_cloudflare.yml'
 
 jobs:
   build:
@@ -61,7 +61,7 @@ jobs:
 
       - name: Build
         run: |
-          echo -e "$ENV_FILE" > apps/frontend/.env
+          echo -e "$ENV_FILE" > apps/web/.env
           npm $NPM_BUILD_CMD
 
       - name: Upload build artifact
@@ -109,5 +109,5 @@ jobs:
           wranglerVersion: '4.73.0'
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: 'apps/frontend'
+          workingDirectory: 'apps/web'
           command: deploy

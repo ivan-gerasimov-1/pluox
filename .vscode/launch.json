@@ -8,9 +8,9 @@
 		{
 			"name": "UI",
 			"type": "node-terminal",
-			"command": "npm --workspace=@pluox/frontend start",
+			"command": "npm --workspace=@pluox/web start",
 			"request": "launch",
-			"cwd": "${workspaceFolder}/apps/frontend",
+			"cwd": "${workspaceFolder}/apps/web",
 			"sourceMaps": true,
 			"skipFiles": ["<node_internals>/**"]
 		},
@@ -19,7 +19,7 @@
 			"type": "chrome",
 			"request": "launch",
 			"url": "http://localhost:5173",
-			"webRoot": "${workspaceFolder}/apps/frontend",
+			"webRoot": "${workspaceFolder}/apps/web",
 			"skipFiles": ["<node_internals>/**"],
 			"port": 9222
 		},
