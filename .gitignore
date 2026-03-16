@@ -1,13 +1,11 @@
-.astro/
-.cache
+.env*
+!.env.local
+
 .dev.vars
 .DS_Store
-.env
-.generated/
-.vercel
 .windsurfrules
+
 .wrangler/
-*.sqlite
 build/
 coverage/
 dist/
