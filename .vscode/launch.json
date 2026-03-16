@@ -18,7 +18,7 @@
 			"name": "Browser (Debug Mode)",
 			"type": "chrome",
 			"request": "launch",
-			"url": "http://localhost:3000",
+			"url": "http://localhost:5173",
 			"webRoot": "${workspaceFolder}/apps/frontend",
 			"skipFiles": ["<node_internals>/**"],
 			"port": 9222

@@ -64,8 +64,6 @@ export default defineConfig(({ mode }) => {
 		},
 
 		server: {
-			port: 3000,
-			host: true,
 			overlay: {
 				errors: true,
 				warnings: false,
@@ -77,11 +75,6 @@ export default defineConfig(({ mode }) => {
 					rewrite: (path) => path.replace(/^\/api/u, ''),
 				},
 			},
-		},
-
-		preview: {
-			port: 3001,
-			host: true,
 		},
 
 		build: {
