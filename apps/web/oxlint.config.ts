@@ -36,13 +36,14 @@ export default defineConfig({
 		},
 	},
 	rules: {
-		'@tanstack/query/exhaustive-deps': 'error',
-		'@tanstack/query/no-rest-destructuring': 'warn',
-		'@tanstack/query/stable-query-client': 'error',
-		'@tanstack/query/no-unstable-deps': 'error',
-		'@tanstack/query/infinite-query-property-order': 'error',
-		'@tanstack/query/no-void-query-fn': 'error',
-		'@tanstack/query/mutation-property-order': 'error',
+		'oxc/no-optional-chaining': 'off',
+		'oxc/no-rest-spread-properties': 'off',
+		'oxc/no-async-await': 'off',
+
+		'eslint/require-await': 'off',
+		'eslint/max-lines-per-function': 'off',
+		'eslint/max-classes-per-file': 'off',
+		'eslint/no-use-before-define': 'off',
 
 		'typescript/no-floating-promises': 'off',
 		'typescript/restrict-template-expressions': 'off',
@@ -57,23 +58,11 @@ export default defineConfig({
 		'typescript/class-methods-use-this': 'off',
 		'typescript/explicit-module-boundary-types': 'off',
 		'typescript/no-empty-object-type': 'off',
-
 		/** @todo | Add configuration */
 		'typescript/ban-types': 'off',
 
 		'import/max-dependencies': 'off',
 		'import/prefer-default-export': 'off',
-
-		'oxc/no-optional-chaining': 'off',
-		'oxc/no-rest-spread-properties': 'off',
-		'oxc/no-async-await': 'off',
-
-		'eslint/require-await': 'off',
-		'eslint/max-lines-per-function': 'off',
-		'eslint/max-classes-per-file': 'off',
-		'eslint/no-use-before-define': 'off',
-
-		'jsx-a11y/no-autofocus': 'off',
 
 		'react/react-in-jsx-scope': 'off',
 		'react/jsx-filename-extension': [
@@ -85,5 +74,15 @@ export default defineConfig({
 
 		'react-perf/jsx-no-new-function-as-prop': 'off',
 		'react-perf/jsx-no-jsx-as-prop': 'off',
+
+		'jsx-a11y/no-autofocus': 'off',
+
+		'@tanstack/query/exhaustive-deps': 'error',
+		'@tanstack/query/no-rest-destructuring': 'warn',
+		'@tanstack/query/stable-query-client': 'error',
+		'@tanstack/query/no-unstable-deps': 'error',
+		'@tanstack/query/infinite-query-property-order': 'error',
+		'@tanstack/query/no-void-query-fn': 'error',
+		'@tanstack/query/mutation-property-order': 'error',
 	},
 });
