@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
-	"main": "index.js",
+	"main": "index.ts",
 	"dependencies": {
 		"@tanstack/eslint-plugin-query": "5.91.4",
 		"oxlint": "1.56.0",
