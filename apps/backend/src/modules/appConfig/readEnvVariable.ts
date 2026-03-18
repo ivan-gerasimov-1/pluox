@@ -1,4 +1,4 @@
-import { EEnvVariable } from '#app/modules/appConfig/enums';
+import type { EEnvVariable } from '#app/modules/appConfig/enums';
 import {
 	EnvVariableEmptyError,
 	EnvVariableNotDefinedError,
@@ -8,7 +8,7 @@ import { isDefined, isEmptyString } from '#app/modules/appConfig/validators';
 
 export function createEnvVariableReader(targetEnv: TProcessEnv) {
 	return function readEnvVariable<T>(
-		variableName: EEnvVariable,
+		variableName: keyof typeof EEnvVariable,
 		parser: (value: string) => T,
 		options?: {
 			allowEmpty: boolean;
