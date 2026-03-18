@@ -10,7 +10,7 @@
 		"packages/*"
 	],
 	"scripts": {
-		"dependencies:update": "ncu --deep -u -x globals,@lv48/eslint-config,zod,@types/node,@eslint/js,eslint"
+		"dependencies:update": "ncu --deep -u -x @types/node,zod"
 	},
 	"devDependencies": {
 		"npm-check-updates": "19.6.3",
