@@ -16,7 +16,6 @@
 		"analyze": "npm run analyze:production",
 		"analyze:production": "DEV_BUNDLE_ANALYZER='on' vite build --mode production",
 		"__lint__": "",
-		"deprecated_lint": "eslint ./src",
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"lint:ci": "npm run lint:gihub",
