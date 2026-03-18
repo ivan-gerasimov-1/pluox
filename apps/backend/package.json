@@ -23,7 +23,10 @@
 		"_build:copyAssets": "cp package.json .env dist",
 		"__lint__": "",
 		"lint": "oxlint",
-		"lint:fix": "oxlint --fix"
+		"lint:fix": "oxlint --fix",
+		"__format__": "",
+		"format": "prettier --write ./src",
+		"format:check": "prettier --check ./src"
 	},
 	"imports": {
 		"#app/*": "./src/*.ts"

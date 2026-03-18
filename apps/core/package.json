@@ -4,7 +4,9 @@
 	"type": "module",
 	"scripts": {
 		"lint": "oxlint",
-		"lint:fix": "oxlint --fix"
+		"lint:fix": "oxlint --fix",
+		"format": "prettier --write ./src",
+		"format:check": "prettier --check ./src"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
