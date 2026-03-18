@@ -4,8 +4,8 @@ env:
   NODE_VERSION: 24.1.0
 
   NPM_BUILD_CMD: --workspace=@pluox/web run build
-  NPM_LINT_CMD: --workspace=@pluox/web run lint:ci
-  NPM_FORMAT_CMD: --workspace=@pluox/web run format:check
+  NPM_LINT_CMD: --workspace=@pluox/web --workspace=@pluox/core --workspace=@pluox/kit run lint:ci
+  NPM_FORMAT_CMD: --workspace=@pluox/web --workspace=@pluox/core --workspace=@pluox/kit run format:check
   NPM_TEST_CMD: --workspace=@pluox/web run test
 
   ARTIFACTS_DIR: apps/web/build
