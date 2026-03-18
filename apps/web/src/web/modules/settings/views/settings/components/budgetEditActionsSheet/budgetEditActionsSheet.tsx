@@ -25,8 +25,8 @@ export function BudgetEditActionsSheet(props: BudgetEditActionsSheetProps) {
 
 	return (
 		<>
-			<div className="border-gray-200/50 rounded-2xl bg-white flex items-center border">
-				<span className="p-2 pl-5 pr-1 text-xs">{props.currency}</span>
+			<div className="flex items-center rounded-2xl border border-gray-200/50 bg-white">
+				<span className="p-2 pr-1 pl-5 text-xs">{props.currency}</span>
 
 				<Input
 					type="number"

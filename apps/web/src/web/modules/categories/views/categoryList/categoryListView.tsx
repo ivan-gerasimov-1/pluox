@@ -20,7 +20,7 @@ export function CategoryListView() {
 						<NavLink to={`${EAppPath.CATEGORIES}/${category.id}`}>
 							<Title>{category.name}</Title>
 
-							<ListIcon className="-right-0.5 -bottom-0.5 absolute">
+							<ListIcon className="absolute -right-0.5 -bottom-0.5">
 								{category.icon}
 							</ListIcon>
 						</NavLink>

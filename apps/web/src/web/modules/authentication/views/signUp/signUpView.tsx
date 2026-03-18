@@ -14,7 +14,7 @@ export function SignUpView() {
 	let { mutate: signup, isPending } = useSignup();
 
 	return (
-		<Sheet className="px-10 py-15 w-96 max-w-full" asChild>
+		<Sheet className="w-96 max-w-full px-10 py-15" asChild>
 			<Stack className="gap-10">
 				<Title as="h1" className="text-2xl!">
 					Pluox
@@ -48,7 +48,7 @@ export function SignUpView() {
 				</Form>
 
 				<NavLink
-					className="text-sm text-indigo-500! text-center"
+					className="text-center text-sm text-indigo-500!"
 					to={EAppPath.LOG_IN}
 				>
 					Войти

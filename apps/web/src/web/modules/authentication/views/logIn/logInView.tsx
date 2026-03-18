@@ -14,7 +14,7 @@ export function LogInView() {
 	let { mutate: login, isPending } = useLogin();
 
 	return (
-		<Sheet className="px-10 py-15 w-96 max-w-full" asChild>
+		<Sheet className="w-96 max-w-full px-10 py-15" asChild>
 			<Stack className="gap-10">
 				<Title className="text-2xl!" as="h1">
 					Pluox
@@ -42,7 +42,7 @@ export function LogInView() {
 						/>
 
 						<NavLink
-							className="text-sm text-indigo-500! text-right"
+							className="text-right text-sm text-indigo-500!"
 							to={EAppPath.SIGN_UP}
 						>
 							Забыли пароль?
@@ -55,7 +55,7 @@ export function LogInView() {
 				</Form>
 
 				<NavLink
-					className="text-sm text-indigo-500! text-center"
+					className="text-center text-sm text-indigo-500!"
 					to={EAppPath.SIGN_UP}
 				>
 					Создать аккаунт

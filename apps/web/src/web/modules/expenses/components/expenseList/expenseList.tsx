@@ -61,8 +61,8 @@ export function ExpenseList(props: TExpenseListProps) {
 								key={item.id}
 								listType={Type.IOS}
 								className={cn(
-									'px-3 py-4 mt-3',
-									'rounded-2xl border-gray-200/50 border',
+									'mt-3 px-3 py-4',
+									'rounded-2xl border border-gray-200/50',
 									'bg-white',
 								)}
 								trailingActions={
@@ -89,7 +89,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 								<div className="ml-3 flex grow flex-col">
 									<div className="flex items-end justify-start">
-										<span className="text-sm grow text-left leading-none">
+										<span className="grow text-left text-sm leading-none">
 											{intlService.formatCurrency(item.amount, {
 												currency: item.currency,
 											})}
@@ -97,7 +97,7 @@ export function ExpenseList(props: TExpenseListProps) {
 
 										<DotSpace />
 
-										<span className="text-base font-semibold leading-none">
+										<span className="text-base leading-none font-semibold">
 											{intlService.formatCurrency(
 												currencyRatesService.convert(
 													item.amount,

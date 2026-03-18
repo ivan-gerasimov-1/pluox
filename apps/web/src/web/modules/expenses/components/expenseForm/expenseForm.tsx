@@ -78,7 +78,7 @@ export function ExpenseForm(props: TExpenseFormProps) {
 	return (
 		<form
 			name="expenseForm"
-			className="gap-6 flex flex-col"
+			className="flex flex-col gap-6"
 			onSubmit={onSubmit}
 		>
 			<div className="flex">

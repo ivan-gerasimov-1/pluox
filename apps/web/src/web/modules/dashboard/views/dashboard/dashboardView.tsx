@@ -44,7 +44,7 @@ export function DashboardView() {
 				<Stack between>
 					<Title>{intl.translate('today')}</Title>
 
-					<div className="font-mono font-semibold text-base tracking-tight self-end">
+					<div className="self-end font-mono text-base font-semibold tracking-tight">
 						{intlService.formatCurrency(dailyTotal, {
 							hideDecimal: true,
 						})}
@@ -56,11 +56,11 @@ export function DashboardView() {
 				<Stack>
 					<Title>{intl.translate('categories')}</Title>
 
-					<ul className="gap-3 m-0 p-0 font-semibold flex w-full flex-col">
+					<ul className="m-0 flex w-full flex-col gap-3 p-0 font-semibold">
 						{categories.map(({ id, total }) => (
 							<li
 								key={id}
-								className="start-end text-sm tracking-tight flex justify-between leading-none"
+								className="start-end flex justify-between text-sm leading-none tracking-tight"
 							>
 								{categoryService.getCategoryIcon(id)}
 
@@ -85,7 +85,7 @@ export function DashboardView() {
 				<Stack between>
 					<Title>{intl.translate('leftover')}</Title>
 
-					<div className="font-mono font-semibold text-base tracking-tight self-end">
+					<div className="self-end font-mono text-base font-semibold tracking-tight">
 						{intlService.formatCurrency(leftover, {
 							hideDecimal: true,
 						})}

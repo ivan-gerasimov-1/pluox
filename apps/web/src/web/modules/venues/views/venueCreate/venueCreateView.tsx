@@ -64,7 +64,7 @@ export function VenueCreateView() {
 							/>
 
 							{errors.venueName && (
-								<div className="ml-2 mt-1 text-red-600">
+								<div className="mt-1 ml-2 text-red-600">
 									{errors.venueName.message}
 								</div>
 							)}
