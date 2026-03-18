@@ -22,7 +22,8 @@
 		"_build:copyApp": "cp -r src dist",
 		"_build:copyAssets": "cp package.json .env dist",
 		"__lint__": "",
-		"lint": "eslint ./src"
+		"lint": "oxlint",
+		"lint:fix": "oxlint --fix"
 	},
 	"imports": {
 		"#app/*": "./src/*.ts"
@@ -39,7 +40,7 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "4.20260316.1",
-		"@lv48/eslint-config": "",
+		"@lv48/oxlint-config": "",
 		"@types/node": "24.10.9",
 		"wrangler": "4.73.0"
 	}
