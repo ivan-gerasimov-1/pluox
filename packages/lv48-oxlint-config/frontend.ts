@@ -44,6 +44,11 @@ export default defineConfig({
 		'eslint/max-lines-per-function': 'off',
 		'eslint/max-classes-per-file': 'off',
 		'eslint/no-use-before-define': 'off',
+		'eslint/max-lines': 'off',
+		/** @todo Consider re-evaluation */
+		'eslint/no-undefined': 'off',
+		'eslint/no-inline-comments': 'off',
+		'eslint/no-useless-constructor': 'off',
 
 		'typescript/no-floating-promises': 'off',
 		'typescript/restrict-template-expressions': 'off',
@@ -58,7 +63,8 @@ export default defineConfig({
 		'typescript/class-methods-use-this': 'off',
 		'typescript/explicit-module-boundary-types': 'off',
 		'typescript/no-empty-object-type': 'off',
-		/** @todo | Add configuration */
+		'typescript/no-extraneous-class': 'off',
+		/** @todo Consider re-evaluation */
 		'typescript/ban-types': 'off',
 
 		'import/max-dependencies': 'off',
