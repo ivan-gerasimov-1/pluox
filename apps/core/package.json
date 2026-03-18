@@ -5,6 +5,8 @@
 	"scripts": {
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
+		"lint:ci": "npm run lint:github",
+		"lint:github": "oxlint --format=github",
 		"format": "prettier --write ./src",
 		"format:check": "prettier --check ./src"
 	},
