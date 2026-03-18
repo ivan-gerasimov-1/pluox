@@ -41,6 +41,7 @@
 	"devDependencies": {
 		"@cloudflare/workers-types": "4.20260316.1",
 		"@lv48/oxlint-config": "",
+		"@lv48/prettier-config": "",
 		"@types/node": "24.10.9",
 		"wrangler": "4.73.0"
 	}

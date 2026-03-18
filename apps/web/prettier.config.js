@@ -1,20 +1,13 @@
-/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
-const config = {
+import { defineConfig, tailwind } from '@lv48/prettier-config';
+
+// oxlint-disable import/no-default-export
+export default defineConfig({
 	plugins: [
-		'@ianvs/prettier-plugin-sort-imports',
-		'prettier-plugin-tailwindcss',
+		tailwind({
+			tailwindStylesheet: './src/web/modules/app/components/app/tailwind.css',
+		}),
 	],
-
-	/** prettier-plugin-tailwindcss */
-	tailwindFunctions: ['cn', 'cva'],
-	tailwindStylesheet: './src/web/modules/app/components/app/app.css',
-
-	/** @ianvs/prettier-plugin-sort-imports */
 	importOrder: [
-		'<BUILTIN_MODULES>',
-		'',
-		'<THIRD_PARTY_MODULES>',
-		'',
 		'^@core/types(.*)$',
 		'',
 		'^@core/domain(.*)$',
@@ -41,7 +34,4 @@ const config = {
 		'',
 		'.css$',
 	],
-};
-
-// oxlint-disable import/no-default-export
-export default config;
+});

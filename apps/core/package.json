@@ -14,9 +14,8 @@
 		"nanoid": "5.1.7"
 	},
 	"devDependencies": {
-		"@ianvs/prettier-plugin-sort-imports": "4.7.1",
 		"@lv48/oxlint-config": "",
-		"prettier": "3.8.1",
+		"@lv48/prettier-config": "",
 		"typescript": "5.9.3"
 	}
 }

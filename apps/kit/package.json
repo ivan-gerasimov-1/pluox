@@ -4,7 +4,9 @@
 	"type": "module",
 	"scripts": {
 		"lint": "oxlint",
-		"lint:fix": "oxlint --fix"
+		"lint:fix": "oxlint --fix",
+		"format": "prettier --write ./src",
+		"format:check": "prettier --check ./src"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
@@ -19,13 +21,11 @@
 		"react-transition-group": "4.4.5"
 	},
 	"devDependencies": {
-		"@ianvs/prettier-plugin-sort-imports": "4.7.1",
 		"@lv48/oxlint-config": "",
+		"@lv48/prettier-config": "",
 		"@types/react": "19.2.14",
 		"@types/react-dom": "19.2.3",
 		"@types/react-transition-group": "4.4.12",
-		"prettier": "3.8.1",
-		"prettier-plugin-tailwindcss": "0.7.2",
 		"typescript": "5.9.3",
 		"vitest": "4.1.0"
 	}

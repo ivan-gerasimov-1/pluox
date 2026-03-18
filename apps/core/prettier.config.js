@@ -1,13 +1,8 @@
-/** @type {import('prettier').Config */
-const config = {
-	plugins: ['@ianvs/prettier-plugin-sort-imports'],
+import { defineConfig } from '@lv48/prettier-config';
 
-	/** @ianvs/prettier-plugin-sort-imports */
+// oxlint-disable import/no-default-export
+export default defineConfig({
 	importOrder: [
-		'<BUILTIN_MODULES>',
-		'',
-		'<THIRD_PARTY_MODULES>',
-		'',
 		'^@core/types(.*)$',
 		'',
 		'^@core/domain(.*)$',
@@ -16,7 +11,4 @@ const config = {
 		'',
 		'^@core/modules(.*)$',
 	],
-};
-
-// oxlint-disable-next-line import/no-default-export
-export default config;
+});
