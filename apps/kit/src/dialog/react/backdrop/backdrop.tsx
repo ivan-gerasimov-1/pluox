@@ -35,6 +35,7 @@ export function Backdrop({ isVisible, onClick }: TBackdropProps) {
 			unmountOnExit
 		>
 			<div
+				role="presentation"
 				ref={backdropRef}
 				className="fixed inset-0 z-50 transition will-change-[backdrop-filter]"
 				onClick={onClick}

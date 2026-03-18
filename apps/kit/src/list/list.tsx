@@ -11,19 +11,20 @@ export function ListIcon({
 	onClick,
 }: React.PropsWithChildren<TListIconProps>) {
 	return (
-		<span
+		<button
+			type="button"
 			className={cn(
 				'min-h-12 min-w-12 p-3',
 				'flex items-center justify-center',
 				'rounded-full',
 				'font-sans text-xl leading-none font-semibold text-gray-700',
+				'border-none',
 				'bg-linear-315 from-gray-100 to-white',
-				'select-none',
 				className,
 			)}
 			onClick={onClick}
 		>
 			{children}
-		</span>
+		</button>
 	);
 }

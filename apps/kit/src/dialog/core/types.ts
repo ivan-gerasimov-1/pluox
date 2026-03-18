@@ -21,6 +21,7 @@ export type TDialogComponent<
 
 export type TDialogComponentProps<TProps = {}, TClosePayload = TProps> = {
 	id: string;
+	// oxlint-disable-next-line typescript/no-invalid-void-type
 	close: TClosePayload extends void
 		? () => void
 		: (payload: TClosePayload) => void;
