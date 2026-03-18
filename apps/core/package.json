@@ -2,7 +2,10 @@
 	"name": "@pluox/core",
 	"version": "0.1.0",
 	"type": "module",
-	"scripts": {},
+	"scripts": {
+		"lint": "oxlint",
+		"lint:fix": "oxlint --fix"
+	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
 	"license": "UNLICENSED",
 	"private": true,
@@ -12,7 +15,7 @@
 	},
 	"devDependencies": {
 		"@ianvs/prettier-plugin-sort-imports": "4.7.1",
-		"@lv48/eslint-config": "",
+		"@lv48/oxlint-config": "",
 		"prettier": "3.8.1",
 		"typescript": "5.9.3"
 	}
