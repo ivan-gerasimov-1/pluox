@@ -71,6 +71,7 @@ export default defineConfig({
 		'import/prefer-default-export': 'off',
 
 		'react/react-in-jsx-scope': 'off',
+		'react/no-multi-comp': 'off',
 		'react/jsx-filename-extension': [
 			'error',
 			{
