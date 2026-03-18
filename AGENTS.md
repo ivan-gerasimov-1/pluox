@@ -4,7 +4,7 @@ The role of this file is to describe common mistakes and confusion points that a
 
 If you encounter anything in the project that is surprising, unclear, or worth preserving as a recurring preference, convention, constraint, or project-specific rule, alert the developer you are working with and record it in the `Learned Conventions` section.
 
-## General guardrails
+## General Guardrails
 
 - Avoid editing automatically generated files.
 - Install dependencies using `--save-exact` to ensure deterministic builds.
@@ -29,8 +29,8 @@ Example commit message:
 chore(*): cleanup code
 ```
 
-## Development
+## Engineering Conventions
 
-See the main development documentation in [development.md](./docs/development.md)
+See the main development documentation in [engineering-conventions.md](./docs/engineering-conventions.md).
 
 ## Learned Conventions
