@@ -31,6 +31,6 @@ chore(*): cleanup code
 
 ## Engineering Conventions
 
-See the main development documentation in [engineering-conventions.md](./docs/engineering-conventions.md).
+Before writing or changing code, read [engineering-conventions.md](./docs/engineering-conventions.md).
 
 ## Learned Conventions
