@@ -1,0 +1,12 @@
+{
+	"name": "@lv48/prettier-config",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"main": "index.ts",
+	"dependencies": {
+		"@ianvs/prettier-plugin-sort-imports": "4.7.1",
+		"prettier": "3.8.1",
+		"prettier-plugin-tailwindcss": "0.7.2"
+	}
+}
