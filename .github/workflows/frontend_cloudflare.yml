@@ -1,7 +1,7 @@
 name: Frontend (Cloudflare)
 
 env:
-  NODE_VERSION: 24.14
+  NODE_VERSION: 24
 
   NPM_BUILD_CMD: --workspace=@pluox/web run build
   NPM_LINT_CMD: --workspace=@pluox/web --workspace=@pluox/core --workspace=@pluox/kit run lint:ci
