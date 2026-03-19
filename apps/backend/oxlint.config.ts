@@ -1,4 +1,4 @@
-import { backend as oxlintConfig } from '@lv48/oxlint-config';
+import { backend, extendConfig } from '@lv48/oxlint-config';
 
-// oxlint-disable-next-line import/no-default-export
-export default oxlintConfig;
+// oxlint-disable import/no-default-export
+export default extendConfig(backend);

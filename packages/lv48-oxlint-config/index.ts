@@ -1,2 +1,5 @@
-export { default as frontend } from './frontend.ts';
-export { default as backend } from './backend.ts';
+export { extendConfig } from './extendConfig.ts';
+
+export { backend } from './backend.ts';
+export { frontend } from './frontend.ts';
+export { types } from './types.ts';
