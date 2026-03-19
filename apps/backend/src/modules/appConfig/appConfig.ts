@@ -8,24 +8,9 @@ export function createAppConfig(processEnv: TProcessEnv): TAppConfig {
 	let readEnvVariable = createEnvVariableReader(processEnv);
 
 	return {
-		env: readEnvVariable(EEnvVariable.ENV, identity),
+		env: readEnvVariable(EEnvVariable.APP_ENV, identity),
 
-		host: readEnvVariable(EEnvVariable.HOST, identity),
-		port: readEnvVariable(EEnvVariable.PORT, parseNumber),
-
-		db: {
-			filename: readEnvVariable(EEnvVariable.DB_FILENAME, identity),
-		},
-
-		email: {
-			provider: readEnvVariable(EEnvVariable.EMAIL_PROVIDER, identity),
-			host: readEnvVariable(EEnvVariable.EMAIL_HOST, identity),
-			port: readEnvVariable(EEnvVariable.EMAIL_PORT, parseNumber),
-			auth: {
-				user: readEnvVariable(EEnvVariable.EMAIL_USER, identity),
-				password: readEnvVariable(EEnvVariable.EMAIL_PASSWORD, identity),
-			},
-			from: readEnvVariable(EEnvVariable.EMAIL_FROM, identity),
-		},
+		host: readEnvVariable(EEnvVariable.APP_HOST, identity),
+		port: readEnvVariable(EEnvVariable.APP_PORT, parseNumber),
 	};
 }

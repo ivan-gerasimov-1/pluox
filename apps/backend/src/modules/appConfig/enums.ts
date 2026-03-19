@@ -1,5 +1,5 @@
 export const EEnvVariable = {
-	ENV: 'APP_ENV',
-	HOST: 'APP_HOST',
-	PORT: 'APP_PORT',
+	APP_ENV: 'APP_ENV',
+	APP_HOST: 'APP_HOST',
+	APP_PORT: 'APP_PORT',
 } as const;
