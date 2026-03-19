@@ -16,12 +16,14 @@ on:
   pull_request:
     paths:
       - 'apps/backend/**'
+      - './package-lock.json'
       - '.github/workflows/backend_cloudflare.yml'
   push:
     branches:
       - main
     paths:
       - 'apps/backend/**'
+      - './package-lock.json'
       - '.github/workflows/backend_cloudflare.yml'
 
 jobs:

@@ -27,6 +27,7 @@ on:
       - 'apps/web/**'
       - 'apps/core/**'
       - 'apps/kit/**'
+      - './package-lock.json'
       - '.github/workflows/web_cloudflare.yml'
   push:
     branches:
@@ -35,6 +36,7 @@ on:
       - 'apps/web/**'
       - 'apps/core/**'
       - 'apps/kit/**'
+      - './package-lock.json'
       - '.github/workflows/web_cloudflare.yml'
 
 jobs:
