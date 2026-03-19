@@ -1,7 +1,7 @@
 name: Frontend (Cloudflare)
 
 env:
-  NODE_VERSION: 24.1.0
+  NODE_VERSION: 24.14
 
   NPM_BUILD_CMD: --workspace=@pluox/web run build
   NPM_LINT_CMD: --workspace=@pluox/web --workspace=@pluox/core --workspace=@pluox/kit run lint:ci
@@ -30,7 +30,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - uses: actions/checkout@v4
@@ -77,7 +77,7 @@ jobs:
           path: ${{ env.ARTIFACTS_DIR }}
 
   deploy:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     needs: build
     if: github.ref == 'refs/heads/main'
 
