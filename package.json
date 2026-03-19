@@ -27,7 +27,7 @@
 		"dependencies:update": "ncu --deep -u -x @types/node"
 	},
 	"devDependencies": {
-		"npm-check-updates": "19.6.3",
+		"npm-check-updates": "19.6.5",
 		"typescript": "5.9.3"
 	}
 }
