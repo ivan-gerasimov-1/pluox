@@ -71,7 +71,7 @@ jobs:
 
       - name: Build
         run: |
-          echo -e "$ENV_FILE" > apps/web/.env
+          echo -e "$ENV_FILE" > ${{ env.WORKING_DIRECTORY }}/.env
           npm $NPM_BUILD_CMD
 
       - name: Upload build artifact
