@@ -11,6 +11,8 @@ env:
   NPM_FORMAT_CMD: --workspace=@pluox/web --workspace=@pluox/core --workspace=@pluox/kit run format:check
   NPM_TEST_CMD: --workspace=@pluox/web run test
 
+  WORKING_DIRECTORY: apps/web
+
   ARTIFACTS_DIR: apps/web/build
   ARTIFACT_NAME: build
 
@@ -117,5 +119,5 @@ jobs:
           wranglerVersion: ${{ env.WRANGLER_VERSION }}
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: 'apps/web'
+          workingDirectory: ${{ env.WORKING_DIRECTORY }}
           command: deploy
