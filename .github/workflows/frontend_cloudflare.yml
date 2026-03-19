@@ -1,6 +1,8 @@
 name: Frontend (Cloudflare)
 
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
   NODE_VERSION: 24
 
   NPM_BUILD_CMD: --workspace=@pluox/web run build
@@ -10,7 +12,6 @@ env:
 
   ARTIFACTS_DIR: apps/web/build
   ARTIFACT_NAME: build
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   workflow_dispatch:
