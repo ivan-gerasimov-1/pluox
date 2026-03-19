@@ -25,7 +25,7 @@ export const base = defineConfig({
 		'eslint/max-classes-per-file': 'off',
 		'eslint/no-use-before-define': 'off',
 		'eslint/max-lines': 'off',
-		/** @todo Consider re-evaluation */
+		/** @todo Consider re-evaluation of rules below */
 		'eslint/no-undef': 'off',
 		'eslint/no-undefined': 'off',
 		'eslint/no-inline-comments': 'off',
@@ -45,8 +45,9 @@ export const base = defineConfig({
 		'typescript/explicit-module-boundary-types': 'off',
 		'typescript/no-empty-object-type': 'off',
 		'typescript/no-extraneous-class': 'off',
-		/** @todo Consider re-evaluation */
+		/** @todo Consider re-evaluation of rules below */
 		'typescript/ban-types': 'off',
+		'typescript/unbound-method': 'off',
 
 		'import/max-dependencies': 'off',
 		'import/prefer-default-export': 'off',
