@@ -104,7 +104,10 @@ export class NumberParser implements INumberParser {
 			useGrouping: false,
 		});
 
-		let numerals = [...numberFormatter.format(9876543210)].reverse();
+		let numerals = [
+			// oxlint-disable-next-line typescript/no-misused-spread
+			...numberFormatter.format(9876543210),
+		].reverse();
 
 		return numerals;
 	}
