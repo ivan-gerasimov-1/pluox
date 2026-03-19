@@ -2,10 +2,6 @@ import { defineConfig } from 'oxlint';
 
 // oxlint-disable import/no-default-export
 export default defineConfig({
-	options: {
-		typeAware: true,
-		typeCheck: true,
-	},
 	categories: {
 		correctness: 'error',
 		nursery: 'warn',
