@@ -8,8 +8,11 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
   NODE_VERSION_FILE: .nvmrc
+  WRANGLER_VERSION: 4.75.0
 
   NPM_LINT_CMD: --workspace=@pluox/backend run lint
+
+  WORKING_DIRECTORY: apps/backend
 
 on:
   workflow_dispatch:
@@ -79,10 +82,10 @@ jobs:
       - name: Deploy
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
         with:
-          wranglerVersion: '4.75.0'
+          wranglerVersion: ${{ env.WRANGLER_VERSION }}
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: 'apps/backend'
+          workingDirectory: ${{ env.WORKING_DIRECTORY }}
           secrets: |
             APP_OPEN_EXCHANGE_RATES_API_KEY
           command: deploy
