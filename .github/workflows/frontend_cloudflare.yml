@@ -10,6 +10,7 @@ env:
 
   ARTIFACTS_DIR: apps/web/build
   ARTIFACT_NAME: build
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   workflow_dispatch:
