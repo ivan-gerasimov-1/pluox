@@ -1,4 +1,4 @@
-name: Frontend (Cloudflare)
+name: Web (Cloudflare)
 
 permissions:
   contents: read
