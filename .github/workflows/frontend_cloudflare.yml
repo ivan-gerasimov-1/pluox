@@ -4,6 +4,7 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
   NODE_VERSION: 24
+  WRANGLER_VERSION: 4.73.0
 
   NPM_BUILD_CMD: --workspace=@pluox/web run build
   NPM_LINT_CMD: --workspace=@pluox/web --workspace=@pluox/core --workspace=@pluox/kit run lint:ci
@@ -113,7 +114,7 @@ jobs:
       - name: Deploy
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
         with:
-          wranglerVersion: '4.73.0'
+          wranglerVersion: ${{ env.WRANGLER_VERSION }}
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: 'apps/web'
