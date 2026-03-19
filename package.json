@@ -9,6 +9,10 @@
 		"apps/*",
 		"packages/*"
 	],
+	"engines": {
+		"node": "24",
+		"npm": "11"
+	},
 	"devEngines": {
 		"runtime": {
 			"name": "node",
@@ -18,10 +22,6 @@
 			"name": "npm",
 			"version": "11"
 		}
-	},
-	"engines": {
-		"node": "24",
-		"npm": "11"
 	},
 	"scripts": {
 		"dependencies:update": "ncu --deep -u -x @types/node,zod"
