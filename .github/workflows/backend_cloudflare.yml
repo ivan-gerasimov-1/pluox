@@ -1,6 +1,8 @@
 name: Backend (Cloudflare)
 
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
   NODE_VERSION: 24.1.0
 
   NPM_LINT_CMD: --workspace=@pluox/backend run lint
