@@ -1,9 +1,13 @@
 name: Backend (Cloudflare)
 
+permissions:
+  contents: read
+  actions: write
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
-  NODE_VERSION: 24.1.0
+  NODE_VERSION_FILE: .nvmrc
 
   NPM_LINT_CMD: --workspace=@pluox/backend run lint
 
@@ -22,15 +26,14 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
+          node-version-file: ${{ env.NODE_VERSION_FILE }}
 
       - name: Install dependencies
         run: |
@@ -41,17 +44,16 @@ jobs:
           npm $NPM_LINT_CMD
 
   deploy:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     needs: lint
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
+          node-version-file: ${{ env.NODE_VERSION_FILE }}
 
       - name: Load secrets from 1Password
         uses: 1Password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3
