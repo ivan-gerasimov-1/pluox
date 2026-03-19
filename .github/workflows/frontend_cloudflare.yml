@@ -41,7 +41,7 @@ jobs:
           cache: npm
 
       - name: Load secrets from 1Password
-        uses: 1Password/load-secrets-action@v2.0.0
+        uses: 1Password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3.2.1
         with:
           export-env: true
         env:
@@ -90,7 +90,7 @@ jobs:
           cache: npm
 
       - name: Load secrets from 1Password
-        uses: 1Password/load-secrets-action@v2.0.0
+        uses: 1Password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3.2.1
         with:
           export-env: true
         env:
