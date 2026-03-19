@@ -27,6 +27,7 @@
 		"dependencies:update": "ncu --deep -u -x @types/node"
 	},
 	"devDependencies": {
+		"@lv48/oxlint-config": "",
 		"npm-check-updates": "19.6.5",
 		"typescript": "5.9.3"
 	}
