@@ -3,7 +3,7 @@ name: Frontend (Cloudflare)
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
-  NODE_VERSION: 24
+  NODE_VERSION_FILE: .nvmrc
   WRANGLER_VERSION: 4.73.0
 
   NPM_BUILD_CMD: --workspace=@pluox/web run build
@@ -42,7 +42,7 @@ jobs:
 
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version-file: ${{ env.NODE_VERSION_FILE }}
           cache: npm
 
       - name: Load secrets from 1Password
@@ -91,7 +91,7 @@ jobs:
 
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version-file: ${{ env.NODE_VERSION_FILE }}
           cache: npm
 
       - name: Load secrets from 1Password
