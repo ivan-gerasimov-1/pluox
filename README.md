@@ -4,6 +4,12 @@ A personal expense tracking app. Hobby project — used daily, but also a playgr
 
 > **Pre-alpha warning:** This is early-stage software. Use at your own risk — things can break, APIs can change, and data loss is possible.
 
+## Local-first
+
+All data is stored locally in the browser's `localStorage` — no account or server required to use the app. It works offline out of the box.
+
+> **No sync yet:** Cross-device sync is not implemented. Your data lives only in the browser where you entered it. Clearing browser storage will permanently erase everything.
+
 ## Architecture
 
 ### core
