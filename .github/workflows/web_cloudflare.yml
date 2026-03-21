@@ -97,7 +97,6 @@ jobs:
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version-file: ${{ env.NODE_VERSION_FILE }}
-          cache: npm
 
       - name: Load secrets from 1Password
         uses: 1Password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3
