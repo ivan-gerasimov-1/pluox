@@ -4,6 +4,10 @@ A personal expense tracking app. Hobby project — used daily, but also a playgr
 
 > **Pre-alpha warning:** This is early-stage software. Use at your own risk — things can break, APIs can change, and data loss is possible.
 
+## Installation
+
+Pluox is a PWA — it can be installed directly from the browser to your home screen and used like a native app, including offline.
+
 ## Local-first
 
 All data is stored locally in the browser's `localStorage` — no account or server required to use the app. It works offline out of the box.
