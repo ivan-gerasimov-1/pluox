@@ -16,6 +16,10 @@ All data is stored locally in the browser's `localStorage` — no account or ser
 
 ## Architecture
 
+### Backend
+
+Minimal Hono API with a single purpose: proxying and caching currency exchange rates from Open Exchange Rates. Deployable to Cloudflare Workers.
+
 ### Core
 
 All business logic, structured around Domain-Driven Design. Each module (expense, category, venue, currency, etc.) follows a three-layer layout:
@@ -25,10 +29,6 @@ All business logic, structured around Domain-Driven Design. Each module (expense
 - **infrastructure** — concrete repository implementations (localStorage-backed)
 
 The shared `domain/` layer provides base classes (`Entity`, `ValueObject`) and interfaces (`Repository`, `IdGenerator`, `Temporal`) used across all modules.
-
-### Backend
-
-Minimal Hono API with a single purpose: proxying and caching currency exchange rates from Open Exchange Rates. Deployable to Cloudflare Workers.
 
 ### Web
 
