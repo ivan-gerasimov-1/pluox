@@ -32,7 +32,7 @@
 		"#app/*": "./src/*.ts"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
-	"license": "UNLICENSED",
+	"license": "Apache-2.0",
 	"description": "Pluox app backend (lite)",
 	"dependencies": {
 		"@hono/node-server": "1.19.11",
