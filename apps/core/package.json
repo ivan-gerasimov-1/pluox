@@ -11,7 +11,7 @@
 		"format:check": "prettier --check ./src"
 	},
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
-	"license": "Apache-2.0",
+	"license": "LicenseRef-OSAAsy",
 	"private": true,
 	"dependencies": {
 		"dayjs": "1.11.20",

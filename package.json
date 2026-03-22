@@ -2,7 +2,7 @@
 	"name": "pluox",
 	"version": "0.1.0",
 	"author": "Ivan Gerasimov <ivangerasimow@gmail.com> (https://gerasimov.dev)",
-	"license": "Apache-2.0",
+	"license": "LicenseRef-OSAAsy",
 	"private": true,
 	"type": "module",
 	"workspaces": [
