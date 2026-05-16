@@ -10,8 +10,17 @@
 		},
 	],
 	"settings": {
-		"typescript.preferences.importModuleSpecifier": "shortest",
-		"typescript.preferences.preferTypeOnlyAutoImports": true,
-		"typescript.tsdk": "root/node_modules/typescript/lib",
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"js/ts.preferences.importModuleSpecifier": "shortest",
+		"js/ts.preferences.preferTypeOnlyAutoImports": true,
+		"js/ts.tsdk.path": "root/node_modules/typescript/lib",
+	},
+	"extensions": {
+		"recommendations": [
+			"editorconfig.editorconfig",
+			"esbenp.prettier-vscode",
+			"bradlc.vscode-tailwindcss",
+			"yoavbls.pretty-ts-errors"
+		]
 	},
 }
