@@ -3,7 +3,6 @@
 
 .dev.vars
 .DS_Store
-.windsurfrules
 
 .wrangler/
 build/
