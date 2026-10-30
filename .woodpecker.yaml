@@ -1,0 +1,21 @@
+# Run trusted repository pushes and manual jobs on our ARM64 runner.
+# Pull requests are intentionally excluded from this shared VPS.
+when:
+  - event: [push, manual]
+
+steps:
+  - name: install
+    image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
+    environment:
+      CI: 'true'
+    commands:
+      - node --version
+      - npm --version
+      - npm ci --no-audit --no-fund
+
+  - name: unitTests
+    image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
+    environment:
+      CI: 'true'
+    commands:
+      - npm --workspace=@pluox/web run test -- --maxWorkers=1

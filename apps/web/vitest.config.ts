@@ -5,6 +5,10 @@ import { defineConfig } from 'vitest/config';
 // oxlint-disable import/no-default-export
 export default defineConfig({
 	test: {
+		include: [
+			'src/**/*.{test,spec}.{ts,tsx}',
+			'../core/src/**/*.{test,spec}.{ts,tsx}',
+		],
 		globals: true,
 		environment: 'node',
 		coverage: {
