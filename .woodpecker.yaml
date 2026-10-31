@@ -47,12 +47,6 @@ steps:
       - test -s apps/web/build/index.html
       - test -s apps/web/build/sw.js
 
-  # Infra implementation tests run in vps CI; this public repo tests only its bridge.
-  - name: deploymentBridgeTests
-    image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
-    commands:
-      - node --test deploy/infraRelease.test.mjs
-
   - name: previewDeployment
     image: docker:29.9.2-cli
     when:
@@ -66,13 +60,13 @@ steps:
       PLUOX_PREVIEW_SHA: ${PLUOX_PREVIEW_SHA}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/vps-infra/releases:/opt/vps-infra/releases:ro
+      - /opt/vps-infra:/opt/vps-infra:ro
       - /etc/pluoxPreviews.env:/etc/pluoxPreviews.env:ro
       - /etc/caddy:/etc/caddy:ro
       - /run/lock/pluox-deploy.lock:/run/lock/pluox-deploy.lock
     commands:
       - apk add --no-cache util-linux
-      - flock --exclusive --no-fork /run/lock/pluox-deploy.lock sh deploy/infraRelease.sh preview
+      - flock --exclusive --no-fork /run/lock/pluox-deploy.lock sh /opt/vps-infra/current/apps/pluox/deploy/run.sh preview
 
   - name: deployFrontend
     image: docker:29.9.2-cli
@@ -88,9 +82,9 @@ steps:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/pluox-buildx:/root/.docker/buildx
-      - /opt/vps-infra/releases:/opt/vps-infra/releases:ro
+      - /opt/vps-infra:/opt/vps-infra:ro
       - /opt/pluox:/opt/pluox
       - /run/lock/pluox-deploy.lock:/run/lock/pluox-deploy.lock
     commands:
       - apk add --no-cache 'nodejs~24' util-linux git
-      - flock --exclusive --no-fork /run/lock/pluox-deploy.lock sh deploy/infraRelease.sh production
+      - flock --exclusive --no-fork /run/lock/pluox-deploy.lock sh /opt/vps-infra/current/apps/pluox/deploy/run.sh production
