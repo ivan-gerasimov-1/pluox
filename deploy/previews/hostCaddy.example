@@ -1,9 +1,0 @@
-# Append to the existing host Caddyfile. Replace both placeholders locally.
-*.preview.example.com {
-	bind PUBLIC_IPV4
-	@previewWebhook host hooks.preview.example.com
-	handle @previewWebhook {
-		reverse_proxy 127.0.0.1:8091
-	}
-	import /opt/pluox-previews/routes.caddy
-}
