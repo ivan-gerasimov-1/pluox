@@ -1,11 +1,13 @@
 import { spawn } from 'node:child_process';
 import { buildImage } from './buildImage.mjs';
+import { captureRelease } from './releaseHistory.mjs';
 import { readFile, writeFile, chmod, rename } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export async function main() {
-	let { sha, number, manualDeployment } = pipelineIdentity(process.env);
+	let identity = pipelineIdentity(process.env);
+	let { sha, number, manualDeployment } = identity;
 	let source = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 	let head = await command('git', ['-C', source, 'rev-parse', 'HEAD'], {
 		capture: true,
@@ -18,12 +20,15 @@ export async function main() {
 	process.on('SIGINT', cancel);
 	try {
 		// The workflow holds the host flock for this process and all Docker commands.
-		await deploy({
+		let action = deploy;
+		if (identity.rollback) action = (await import('./rollback.mjs')).rollback;
+		await action({
 			state: '/opt/pluox',
 			source,
 			sha,
 			number,
 			manualDeployment,
+			targetSha: identity.targetSha,
 			apiOrigin: process.env.PLUOX_API_ORIGIN,
 			signal: controller.signal,
 		});
@@ -39,14 +44,14 @@ export function pipelineIdentity(env) {
 		env.CI_PIPELINE_EVENT === 'push' ||
 		(manualDeployment &&
 			env.CI_PIPELINE_DEPLOY_TARGET === 'production' &&
-			env.CI_PIPELINE_DEPLOY_TASK === 'deploy');
+			['deploy', 'rollback'].includes(env.CI_PIPELINE_DEPLOY_TASK));
 	if (
 		!allowedEvent ||
 		env.CI_COMMIT_BRANCH !== 'main' ||
 		env.CI_REPO !== 'ivan-gerasimov-1/pluox'
 	) {
 		throw new Error(
-			'Deployment requires main: push or deployment with target production and task deploy.',
+			'Deployment requires main: push or deployment with target production and task deploy or rollback.',
 		);
 	}
 	let sha = env.CI_COMMIT_SHA ?? '';
@@ -58,6 +63,18 @@ export function pipelineIdentity(env) {
 		number < 1
 	) {
 		throw new Error('Invalid commit SHA or pipeline number.');
+	}
+	if (manualDeployment && env.CI_PIPELINE_DEPLOY_TASK === 'rollback') {
+		let targetSha = env.PLUOX_ROLLBACK_SHA;
+		if (targetSha && !/^[a-f0-9]{40}$/u.test(targetSha))
+			throw new Error('Invalid rollback SHA.');
+		return {
+			sha,
+			number,
+			manualDeployment: true,
+			rollback: true,
+			...(targetSha ? { targetSha } : {}),
+		};
 	}
 	return manualDeployment
 		? { sha, number, manualDeployment: true }
@@ -100,6 +117,12 @@ export async function deploy({
 		}
 	}
 	let oldEnv = await readFile(join(state, '.env'), 'utf8');
+	let oldMarker;
+	try {
+		oldMarker = JSON.parse(await readFile(marker, 'utf8'));
+	} catch (error) {
+		if (error.code !== 'ENOENT') throw error;
+	}
 	let oldCompose = await readFile(join(state, 'compose.yaml'), 'utf8');
 	if (
 		!/^PLUOX_IMAGE=\S+\n?(?:PLUOX_API_ORIGIN=https:\/\/\S+\n?)?$/u.test(oldEnv)
@@ -108,6 +131,15 @@ export async function deploy({
 			'Expected .env to contain PLUOX_IMAGE and optional PLUOX_API_ORIGIN.',
 		);
 	}
+	let oldRelease = null;
+	if (/^[a-f0-9]{40}$/u.test(oldMarker?.sha ?? ''))
+		oldRelease = await captureRelease({
+			state,
+			sha: oldMarker.sha,
+			env: oldEnv,
+			compose: oldCompose,
+			run,
+		});
 	let image = `pluox/web:${sha}`;
 	signal?.throwIfAborted();
 	await buildImage({ image, source, run, signal });
@@ -127,6 +159,17 @@ export async function deploy({
 		});
 		await check({ state, run, signal });
 		signal?.throwIfAborted();
+		await captureRelease({
+			state,
+			sha,
+			env: `PLUOX_IMAGE=${image}\nPLUOX_API_ORIGIN=${apiOrigin}\n`,
+			compose: await readFile(join(state, 'compose.yaml'), 'utf8'),
+			run,
+		});
+		await atomicWrite(
+			join(state, 'previous.release.json'),
+			JSON.stringify(oldRelease) + '\n',
+		);
 		await atomicWrite(join(state, 'previous.env'), oldEnv);
 		await atomicWrite(join(state, 'previous.compose.yaml'), oldCompose);
 		signal?.throwIfAborted();
@@ -253,13 +296,13 @@ export function command(
 	});
 }
 
-async function atomicWrite(path, text) {
+export async function atomicWrite(path, text) {
 	await writeFile(path + '.new', text);
 	await chmod(path + '.new', 0o644);
 	await rename(path + '.new', path);
 }
 
-function compose(run, state, args, options) {
+export function compose(run, state, args, options) {
 	let env = { ...process.env };
 	// Compose must use the saved release configuration, including during rollback.
 	delete env.PLUOX_API_ORIGIN;

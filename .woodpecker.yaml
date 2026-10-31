@@ -4,10 +4,14 @@ when:
   - event: [push, manual]
   - event: deployment
     branch: main
-    evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && CI_PIPELINE_DEPLOY_TASK == "deploy"'
+    evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && (CI_PIPELINE_DEPLOY_TASK == "deploy" || CI_PIPELINE_DEPLOY_TASK == "rollback")'
 
 steps:
   - name: install
+    when: &buildChecks
+      - event: [push, manual]
+      - event: deployment
+        evaluate: 'CI_PIPELINE_DEPLOY_TASK == "deploy"'
     image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
     environment:
       CI: 'true'
@@ -17,6 +21,7 @@ steps:
       - npm ci --no-audit --no-fund
 
   - name: unitTests
+    when: *buildChecks
     image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
     environment:
       CI: 'true'
@@ -24,6 +29,7 @@ steps:
       - npm --workspace=@pluox/web run test -- --maxWorkers=1
 
   - name: buildWeb
+    when: *buildChecks
     image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
     environment:
       CI: 'true'
@@ -52,7 +58,7 @@ steps:
         branch: main
       - event: deployment
         branch: main
-        evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && CI_PIPELINE_DEPLOY_TASK == "deploy"'
+        evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && (CI_PIPELINE_DEPLOY_TASK == "deploy" || CI_PIPELINE_DEPLOY_TASK == "rollback")'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/pluox-buildx:/root/.docker/buildx

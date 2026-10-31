@@ -30,7 +30,7 @@ commit and select **Deploy**:
 - Additional pipeline variables: leave empty.
 
 This creates a `deployment` event and reruns all checks before deploying.
-Other targets/tasks are filtered out. Under the deployment lock, the script
+Other targets/tasks are filtered out except the rollback action below. Under the deployment lock, the script
 verifies the selected SHA still matches remote `main`; older commits are
 rejected. Use the rollback procedure for an intentional rollback.
 
@@ -47,17 +47,26 @@ and API origin. Hard termination can interrupt recovery. State is kept in
 
 ## Rollback
 
-Pause automatic runs, then on the VPS:
+After the first successful deployment with this workflow, open a pipeline for the
+**current main commit** and select **Deploy**:
 
-```sh
-sudo cp /opt/pluox/previous.env /opt/pluox/.env
-sudo cp /opt/pluox/previous.compose.yaml /opt/pluox/compose.yaml
-sudo docker compose --env-file /opt/pluox/.env -f /opt/pluox/compose.yaml up -d --wait
-```
+- Target environment: `production`.
+- Deployment task: `rollback`.
+- Additional variables: leave empty for the previous verified release, or set
+  `PLUOX_ROLLBACK_SHA` to a saved release's full commit SHA.
 
-Keep `release.json` unchanged to prevent old retries from redeploying the bad
-release. Verify the site before resuming updates. Code rollback does not undo
-browser data migrations.
+Rollback runs deployment tests, skips dependency installation and frontend
+compilation, and uses the saved local image ID without rebuilding or pulling.
+The release restores its Compose file and API origin. Health, SPA, assets, API,
+and public HTTPS are checked; a failure restores the release that was running.
+Older workflow commits, unknown releases, and missing cached images are rejected
+before switching containers. The new pipeline marker prevents stale retries.
+
+Verified release records are kept in `/opt/pluox/releases/<SHA>.json`; the default
+target is `previous.release.json`. Keep their images when cleaning Docker storage.
+Rebuilding the same SHA preserves the previous image ID for default rollback.
+Code rollback does not undo browser data migrations. To deliberately roll forward,
+use the current main pipeline with task `deploy`.
 
 ## Configuration and tests
 
