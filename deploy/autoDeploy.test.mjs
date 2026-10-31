@@ -126,7 +126,7 @@ test('cancellation restores the previous stack with an un-aborted rollback comma
 	});
 });
 
-test('only main pushes with valid identities can deploy', () => {
+test('main pushes require valid repository and pipeline identities', () => {
 	let env = {
 		CI_PIPELINE_EVENT: 'push',
 		CI_COMMIT_BRANCH: 'main',
@@ -146,6 +146,71 @@ test('only main pushes with valid identities can deploy', () => {
 	]) {
 		assert.throws(() => pipelineIdentity({ ...env, [key]: value }));
 	}
+});
+
+test('deployment events require main, production, and task deploy', () => {
+	let env = {
+		CI_PIPELINE_EVENT: 'deployment',
+		CI_COMMIT_BRANCH: 'main',
+		CI_REPO: 'ivan-gerasimov-1/pluox',
+		CI_COMMIT_SHA: 'a'.repeat(40),
+		CI_PIPELINE_NUMBER: '15',
+		CI_PIPELINE_DEPLOY_TARGET: 'production',
+		CI_PIPELINE_DEPLOY_TASK: 'deploy',
+	};
+	assert.deepEqual(pipelineIdentity(env), {
+		sha: 'a'.repeat(40),
+		number: 15,
+		manualDeployment: true,
+	});
+	for (let [key, value] of [
+		['CI_PIPELINE_DEPLOY_TARGET', 'staging'],
+		['CI_PIPELINE_DEPLOY_TARGET', ''],
+		['CI_PIPELINE_DEPLOY_TASK', 'migration'],
+		['CI_PIPELINE_DEPLOY_TASK', ''],
+		['CI_COMMIT_BRANCH', 'feature'],
+	]) {
+		assert.throws(() => pipelineIdentity({ ...env, [key]: value }));
+	}
+});
+
+test('a deployment event can redeploy the current main commit', async (t) => {
+	let options = await fixture(t);
+	options.manualDeployment = true;
+	let originalRun = options.run;
+	options.run = async (program, args, settings) => {
+		await originalRun(program, args, settings);
+		if (program === 'git') return `${options.sha}\trefs/heads/main`;
+	};
+	await deploy(options);
+	assert.equal(options.calls[0].program, 'git');
+	assert.equal(
+		JSON.parse(await readFile(join(options.state, 'release.json'), 'utf8')).sha,
+		options.sha,
+	);
+});
+
+test('a selected old main commit cannot replace a newer release', async (t) => {
+	let options = await fixture(t);
+	options.manualDeployment = true;
+	options.run = async (program, args, settings) => {
+		options.calls.push({ program, args, settings });
+		return `${'b'.repeat(40)}\trefs/heads/main`;
+	};
+	await assert.rejects(deploy(options), /current main commit/u);
+	await assertPrevious(options.state);
+	assert.equal(options.calls.length, 1);
+	assert.equal(options.calls[0].program, 'git');
+});
+
+test('failure to resolve main stops a deployment event before building', async (t) => {
+	let options = await fixture(t);
+	options.manualDeployment = true;
+	options.run = async () => {
+		throw new Error('Cannot reach forge');
+	};
+	await assert.rejects(deploy(options), /Cannot reach forge/u);
+	await assertPrevious(options.state);
 });
 
 test('API configuration requires a plain HTTPS origin', () => {
