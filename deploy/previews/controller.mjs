@@ -22,6 +22,20 @@ export function configuration(env) {
 	};
 }
 
+export function pipelineTarget(env) {
+	let number = Number(env.PLUOX_PREVIEW_PR);
+	let sha = env.PLUOX_PREVIEW_SHA ?? '';
+	let action = env.PLUOX_PREVIEW_ACTION;
+	if (
+		!/^[1-9]\d*$/u.test(env.PLUOX_PREVIEW_PR ?? '') ||
+		number > 20000 ||
+		!/^[a-f0-9]{40}$/u.test(sha) ||
+		!['deploy', 'remove'].includes(action)
+	)
+		throw new Error('Expected a preview action, PR number and full SHA.');
+	return { action, number, sha };
+}
+
 export function selectPulls(pulls) {
 	return pulls
 		.filter(
@@ -103,11 +117,33 @@ export async function synchronize({
 	run = command,
 	check = checkPreview,
 	reporter = NO_REPORTER,
+	target,
 }) {
 	await mkdir(state, { recursive: true });
 	let previous = await releases(state, 'applied.json');
-	let selected = selectPulls(await listPulls(api));
+	let eligible = selectPulls(await listPulls(api));
+	let selected = eligible;
 	let next = [];
+	if (target) {
+		let current = eligible.find((pr) => pr.number === target.number);
+		let old = previous.find((release) => release.number === target.number);
+		let stale =
+			target.action === 'deploy'
+				? current?.head.sha !== target.sha
+				: Boolean(current) || Boolean(old && old.sha !== target.sha);
+		if (stale) {
+			console.log(
+				`Skipping stale ${target.action} for PR #${target.number} (${target.sha}).`,
+			);
+			next = [...previous];
+			selected = [];
+		} else {
+			next = previous.filter((release) => release.number !== target.number);
+			selected = eligible.filter(
+				(pr) => target.action === 'deploy' && pr.number === target.number,
+			);
+		}
+	}
 	let failures = [];
 	for (let pr of selected) {
 		let old = previous.find((release) => release.number === pr.number);
@@ -179,7 +215,7 @@ export async function synchronize({
 	await atomic(
 		join(state, 'desired.json'),
 		JSON.stringify(
-			selected.map((pr) => ({ number: pr.number, sha: pr.head.sha })),
+			eligible.map((pr) => ({ number: pr.number, sha: pr.head.sha })),
 		) + '\n',
 	);
 	await atomic(join(state, 'planned.json'), JSON.stringify(next) + '\n');
@@ -299,11 +335,19 @@ export async function finalize({
 	state,
 	run = command,
 	reporter = NO_REPORTER,
+	target,
 }) {
 	let planned = await releases(state, 'planned.json');
 	// Persist applied state first. Cleanup is retryable if Docker fails partway through.
 	await atomic(join(state, 'applied.json'), JSON.stringify(planned) + '\n');
-	for (let release of planned)
+	let reported = planned.filter(
+		(release) =>
+			!target ||
+			(target.action === 'deploy' &&
+				release.number === target.number &&
+				release.sha === target.sha),
+	);
+	for (let release of reported)
 		await reportSafely(() =>
 			reporter.send(release, 'success', 'Preview is ready.'),
 		);
@@ -386,6 +430,8 @@ if (
 		token: process.env.PREVIEW_GITHUB_TOKEN,
 		pipelineUrl: process.env.PREVIEW_PIPELINE_URL,
 	});
+	if (['sync', 'finalize'].includes(process.argv[2]))
+		config.target = pipelineTarget(process.env);
 	let action = { sync: synchronize, finalize, restore }[process.argv[2]];
 	if (!action) throw new Error('Expected sync, finalize, or restore.');
 	action(config).catch((error) => {

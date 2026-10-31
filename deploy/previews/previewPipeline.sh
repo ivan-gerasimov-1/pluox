@@ -6,6 +6,7 @@ controller() {
     docker run --rm --init --network host --memory 256m --cpus 0.5 --cpuset-cpus 0 \
         --env-file /etc/pluoxPreviews.env \
         -e PREVIEW_PIPELINE_URL \
+        -e PLUOX_PREVIEW_ACTION -e PLUOX_PREVIEW_PR -e PLUOX_PREVIEW_SHA \
         -v /var/run/docker.sock:/var/run/docker.sock \
         -v /opt/pluox-buildx:/root/.docker/buildx \
         -v /opt/pluox-previews:/opt/pluox-previews \
