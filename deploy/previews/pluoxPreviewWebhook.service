@@ -1,0 +1,15 @@
+[Unit]
+Description=Receive signed GitHub events for Pluox previews
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker rm -f pluox-preview-webhook
+ExecStart=/usr/bin/docker run --rm --init --name pluox-preview-webhook --network host --user 10001:10001 --read-only --cap-drop ALL --security-opt no-new-privileges:true --memory 64m --cpus 0.1 --pids-limit 50 --env-file /etc/pluoxPreviewWebhook.env -v /opt/pluox-preview-events:/events --entrypoint node pluox/preview-controller:installed /app/previews/webhook.mjs
+ExecStop=/usr/bin/docker stop -t 10 pluox-preview-webhook
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+
+[Install]
+WantedBy=multi-user.target

@@ -39,7 +39,7 @@ steps:
   - name: deploymentTests
     image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
     commands:
-      - node --test deploy/autoDeploy.test.mjs deploy/previews/controller.test.mjs
+      - node --test deploy/*.test.mjs deploy/previews/*.test.mjs
 
   - name: deployFrontend
     image: docker:29.9.2-cli
@@ -54,6 +54,7 @@ steps:
         evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && CI_PIPELINE_DEPLOY_TASK == "deploy"'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/pluox-buildx:/root/.docker/buildx
       - /opt/pluox:/opt/pluox
       - /run/lock/pluox-deploy.lock:/run/lock/pluox-deploy.lock
     commands:

@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { buildImage } from './buildImage.mjs';
 import { readFile, writeFile, chmod, rename } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -109,11 +110,7 @@ export async function deploy({
 	}
 	let image = `pluox/web:${sha}`;
 	signal?.throwIfAborted();
-	await run(
-		'docker',
-		['build', '--build-arg', 'APP_API_URL=/api', '-t', image, source],
-		{ signal },
-	);
+	await buildImage({ image, source, run, signal });
 	try {
 		signal?.throwIfAborted();
 		await atomicWrite(

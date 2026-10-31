@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { command, validateApiOrigin } from '../autoDeploy.mjs';
+import { buildImage } from '../buildImage.mjs';
 
 const REPOSITORY = 'ivan-gerasimov-1/pluox';
 const OWNER = 'ivan-gerasimov-1';
@@ -164,14 +165,7 @@ async function buildPreview({ state, release, apiOrigin, run }) {
 	let head = await git(['rev-parse', 'FETCH_HEAD'], { capture: true });
 	if (head !== release.sha) throw new Error('PR head changed before checkout.');
 	await git(['checkout', '--detach', '--quiet', 'FETCH_HEAD']);
-	await run('docker', [
-		'build',
-		'--build-arg',
-		'APP_API_URL=/api',
-		'-t',
-		release.image,
-		source,
-	]);
+	await buildImage({ image: release.image, source, run });
 	// Recover a candidate left by an interrupted cycle. The applied release has a different SHA.
 	let found = await run(
 		'docker',

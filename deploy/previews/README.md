@@ -1,83 +1,73 @@
 # PR previews
 
-A host timer checks GitHub every five minutes. It deploys the three oldest open,
-non-draft PRs authored by the repository owner, from this repository to `main`.
-Forks are excluded. The head SHA must have successful Woodpecker push CI.
-Keep Woodpecker PR builds disabled: PR pipelines never receive the Docker socket.
-All repository writers remain trusted, as in production.
+Signed GitHub `pull_request` and successful Woodpecker `status` events queue a
+host reconciliation. A timer checks hourly if an event is missed. The controller
+deploys the three oldest open, non-draft PRs authored by the owner, from this
+repository to `main`, after successful push CI. Forks are excluded. Keep
+Woodpecker PR builds disabled and trust all repository writers.
 
-Each preview uses `https://pr-N.<PREVIEW_DOMAIN>`, the existing API, and separate
-browser storage. There is no isolated backend or database. Preview code is public;
-use test data. Closing, merging, drafting, or making a PR ineligible removes its
-preview on the next successful cycle. PRs beyond the limit wait for a free slot.
+Preview URLs are `https://pr-N.<PREVIEW_DOMAIN>`. They share the existing API and
+have separate browser storage. Closing, merging, or drafting a PR removes its
+preview. PRs beyond the limit wait. The webhook only queues work; it cannot select
+arbitrary commits or execute payload commands.
 
-## Install on the VPS
+## Host setup
 
-Install only from a reviewed commit merged into `main`. The controller image and
-host script are snapshots; PRs cannot replace them. After controller changes,
-stop the timer, rebuild the image, and reinstall the host files.
+Install from reviewed `main`, not a PR checkout. The installed controller image
+and scripts are snapshots. Keep domain, API origin, and credentials outside Git.
 
-1. Add a **DNS-only** wildcard A record for `*.preview.<your-domain>` pointing to
-   the VPS. Use the same suffix in `PREVIEW_DOMAIN`. The host Caddy's existing
-   DNS-01 provider obtains the wildcard certificate; its token needs zone access.
-2. In a checkout of the reviewed commit, run:
+- `/etc/pluoxPreviews.env`: `PREVIEW_DOMAIN` and `PLUOX_API_ORIGIN`, as in
+  `config.env.example`. Optional read-only `PREVIEW_GITHUB_TOKEN` raises API limits.
+- `/etc/pluoxPreviewWebhook.env`: a random `PLUOX_WEBHOOK_SECRET` of at least
+  32 characters; root-owned, mode 0600. Never send it in chat or logs.
+- `/opt/pluox-previews`: controller state and generated routes, directory 0755.
+- `/opt/pluox-preview-events`: queue directory, owned by UID/GID 10001, mode 0700.
+- `/opt/pluox-buildx`: shared Buildx configuration, mounted at
+  `/root/.docker/buildx` in production deploy and controller containers.
 
-   ```sh
-   sudo docker build -f deploy/previews/Dockerfile -t pluox/preview-controller:installed .
-   sudo install -d -m 0755 /opt/pluox-previews /opt/pluox-preview-controller
-   sudo install -m 0755 deploy/previews/previewCycle.sh /opt/pluox-preview-controller/
-   sudo install -m 0644 deploy/previews/pluoxPreviews.service deploy/previews/pluoxPreviews.timer /etc/systemd/system/
-   sudo install -m 0600 deploy/previews/config.env.example /etc/pluoxPreviews.env
-   sudoedit /etc/pluoxPreviews.env
-   ```
+Build `deploy/previews/Dockerfile` into `pluox/preview-controller:installed`.
+Install `previewCycle.sh` executable under `/opt/pluox-preview-controller`, and
+all `.service`, `.timer`, and `.path` files from this directory under
+`/etc/systemd/system`. The service shares production's existing deployment lock.
 
-   Set the real domain and HTTPS API origin in that file, without quotes. Optional
-   `PREVIEW_GITHUB_TOKEN` is a fine-grained token with read-only commit statuses;
-   public PR reads need no additional access. Without it GitHub's shared anonymous
-   rate limit can delay previews. Never add the file or token to Git.
+Configure DNS-only `*.PREVIEW_DOMAIN` to the VPS. Add the block in
+`hostCaddy.example` to host Caddy, replacing its placeholders locally. Existing
+DNS-01 configuration supplies TLS. Initialize `routes.caddy` with
+`handle { respond 404 }` before importing it; preserve existing routes on upgrades.
+Reload Caddy and systemd, then enable/start `pluoxPreviewWebhook.service`,
+`pluoxPreviewEvents.path`, and `pluoxPreviews.timer`.
 
-3. Create an initial route file:
+Create a GitHub repository webhook at `https://hooks.PREVIEW_DOMAIN/github`, with
+JSON content, SSL verification enabled, the matching secret, and events
+**Pull requests** and **Statuses**. `setupWebhook.mjs` can configure only that
+endpoint using an administrative token supplied to a one-shot container; it
+preserves the existing CI webhook. Do not store that token in the listener or CI.
 
-   ```sh
-   sudo sh -c 'printf "handle {\n respond 404\n}\n" > /opt/pluox-previews/routes.caddy'
-   ```
+## One-core build budget
 
-   Append the block in `hostCaddy.example` to `/etc/caddy/Caddyfile`, replacing
-   its domain and public address locally. Keep the existing production blocks.
-   Reload Caddy using its existing service environment:
+Configure the Woodpecker agent with `WOODPECKER_MAX_WORKFLOWS=1`,
+`WOODPECKER_BACKEND_DOCKER_LIMIT_CPU_QUOTA=100000`, and
+`WOODPECKER_BACKEND_DOCKER_LIMIT_CPU_SET=0`; restart it while idle.
 
-   ```sh
-   sudo systemctl reload caddy-gerasimov.service
-   sudo systemctl daemon-reload
-   sudo systemctl start pluoxPreviews.service
-   sudo systemctl enable --now pluoxPreviews.timer
-   ```
+Both deployment scripts use `pluox-one-cpu`, a Docker-container Buildx builder
+with a 100000/100000 CPU quota, CPU set 0, and 2 GiB memory. CI steps and image
+builds share that logical CPU, bounding their aggregate compute even when a
+preview build overlaps CI. Host daemon overhead is outside this budget. Images
+are loaded into the local engine; there is no fallback to unrestricted builds.
 
-## Operation
+## Verification and recovery
 
-The service shares production's deployment lock, so builds and deployments do
-not overlap. New containers use a second localhost port and are checked for
-health, SPA routing, and API rates before routes change. A failed update keeps
-the previous preview. Caddy reload failure restores its previous routes; cleanup
-runs only after a successful reload. GitHub listing failures preserve previews.
+The receiver verifies HMAC-SHA256 over the raw body, limits requests to 1 MiB,
+and acknowledges only after a queue marker is written. Repeated events coalesce;
+events arriving during a build queue another cycle. Failed deliveries can be
+redelivered in GitHub; the hourly timer repairs missed work.
 
-Each serving container is limited to 128 MiB and 0.5 CPU. An update temporarily
-needs another container; builds consume additional resources. Containers receive
-neither host mounts nor GitHub credentials. This supports trusted author code,
-not hostile builds; Docker builds still use the host daemon.
+A new container uses a second localhost port. Health, SPA, and API checks precede
+route reload. Failed updates keep the prior preview; failed reloads restore its
+routes. Cleanup follows successful reload and removes only obsolete preview
+containers and image tags. Build cache remains; monitor `docker system df`.
 
-Old preview containers and tagged images are removed without pruning production
-images. Docker build cache is retained; monitor disk usage with `docker system df`.
-A stopped or forcibly killed cycle may leave candidates until a successful cycle.
-The service restarts neither production nor CI.
-
-```sh
-sudo journalctl -u pluoxPreviews.service -n 100 --no-pager
-sudo systemctl list-timers pluoxPreviews.timer
-curl --fail https://pr-N.YOUR_PREVIEW_DOMAIN/healthz
-```
-
-Verify creation, a second commit, a failing build, and PR closure after installation.
-Public HTTPS and DNS require this live check; unit tests do not verify them.
-Stop previews with `sudo systemctl disable --now pluoxPreviews.timer` and wait for
-any running service to finish. Existing previews remain until a successful cleanup.
+Check `journalctl -u pluoxPreviews.service` and GitHub webhook deliveries. Verify
+create/update/close and public HTTPS after installation. Each preview serves with
+128 MiB and 0.5 CPU. Stop the timer and path unit to pause reconciliation; stop
+the listener to pause webhook intake. Existing previews remain running.

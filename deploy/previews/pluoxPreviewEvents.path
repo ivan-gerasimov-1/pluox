@@ -1,0 +1,9 @@
+[Unit]
+Description=Reconcile queued Pluox preview events
+
+[Path]
+PathExists=/opt/pluox-preview-events/pending
+Unit=pluoxPreviews.service
+
+[Install]
+WantedBy=multi-user.target
