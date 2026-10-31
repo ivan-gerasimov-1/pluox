@@ -1,0 +1,10 @@
+[Unit]
+Description=Reconcile trusted Pluox PR previews
+After=docker.service caddy-gerasimov.service network-online.target
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flock --exclusive /run/lock/pluox-deploy.lock /opt/pluox-preview-controller/previewCycle.sh
+TimeoutStartSec=30min

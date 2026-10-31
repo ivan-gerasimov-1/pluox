@@ -18,6 +18,8 @@ The VPS must have the Compose stack in `/opt/pluox`, working HTTPS, and
 Successful pushes to `main` deploy automatically. Branch pushes and ordinary
 manual runs validate without deploying.
 
+For optional per-PR frontend environments, see [PR previews](previews/README.md).
+
 ## Manual deployment
 
 After merging this workflow, open a successful pipeline for the current `main`

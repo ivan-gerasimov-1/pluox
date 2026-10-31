@@ -1,0 +1,5 @@
+# Append to the existing host Caddyfile. Replace both placeholders locally.
+*.preview.example.com {
+	bind PUBLIC_IPV4
+	import /opt/pluox-previews/routes.caddy
+}
