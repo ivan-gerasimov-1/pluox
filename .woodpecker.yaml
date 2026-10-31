@@ -40,6 +40,9 @@ steps:
 
   - name: deployFrontend
     image: docker:29.9.2-cli
+    environment:
+      PLUOX_API_ORIGIN:
+        from_secret: pluox_api_origin
     when:
       - event: push
         branch: main

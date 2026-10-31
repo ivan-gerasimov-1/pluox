@@ -7,7 +7,7 @@ services:
     ports:
       - '127.0.0.1:8080:8080'
     environment:
-      PLUOX_API_ORIGIN: https://pluox-api.gerasimov.dev
+      PLUOX_API_ORIGIN: ${PLUOX_API_ORIGIN:?Set PLUOX_API_ORIGIN to the HTTPS API origin}
     read_only: true
     tmpfs:
       - /config:uid=10001,gid=10001,mode=0700

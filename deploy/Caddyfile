@@ -16,7 +16,7 @@
 	@api path /api /api/*
 	handle @api {
 		uri strip_prefix /api
-		reverse_proxy {$PLUOX_API_ORIGIN:https://pluox-api.gerasimov.dev}
+		reverse_proxy {$PLUOX_API_ORIGIN}
 	}
 
 	handle /assets/* {

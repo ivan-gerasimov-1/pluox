@@ -12,6 +12,8 @@ and initial provisioning belong in private infrastructure configuration.
 
 In Woodpecker repository settings:
 
+- Add secret `pluox_api_origin`: the HTTPS API origin, with no path or credentials;
+  enable it for **push** events. It is passed to the deployment step only.
 - Enable **Trusted → Volumes**; leave trusted network/security disabled.
 - Keep PR builds disabled and **Cancel previous pipelines** off for push events.
 - Trust every repository writer and protect `main`: the Docker socket gives
@@ -33,6 +35,7 @@ Hard termination or host failure can interrupt recovery; avoid cancelling an
 active deployment.
 
 State is stored in `.env`, `compose.yaml`, and `release.json` under `/opt/pluox`.
+The saved API origin is restored during rollback.
 Images remain local; publishing, cleanup, and backups are configured separately.
 
 ## Rollback

@@ -22,6 +22,7 @@ export async function main() {
 			source,
 			sha,
 			number,
+			apiOrigin: process.env.PLUOX_API_ORIGIN,
 			signal: controller.signal,
 		});
 	} finally {
@@ -58,10 +59,12 @@ export async function deploy({
 	source,
 	sha,
 	number,
+	apiOrigin,
 	signal,
 	run = command,
 	check = checkApplication,
 }) {
+	apiOrigin = validateApiOrigin(apiOrigin);
 	let marker = join(state, 'release.json');
 	try {
 		let release = JSON.parse(await readFile(marker, 'utf8'));
@@ -74,8 +77,12 @@ export async function deploy({
 	}
 	let oldEnv = await readFile(join(state, '.env'), 'utf8');
 	let oldCompose = await readFile(join(state, 'compose.yaml'), 'utf8');
-	if (!/^PLUOX_IMAGE=\S+\n?$/u.test(oldEnv)) {
-		throw new Error('Expected .env to contain only PLUOX_IMAGE.');
+	if (
+		!/^PLUOX_IMAGE=\S+\n?(?:PLUOX_API_ORIGIN=https:\/\/\S+\n?)?$/u.test(oldEnv)
+	) {
+		throw new Error(
+			'Expected .env to contain PLUOX_IMAGE and optional PLUOX_API_ORIGIN.',
+		);
 	}
 	let image = `pluox/web:${sha}`;
 	signal?.throwIfAborted();
@@ -86,7 +93,10 @@ export async function deploy({
 	);
 	try {
 		signal?.throwIfAborted();
-		await atomicWrite(join(state, '.env'), `PLUOX_IMAGE=${image}\n`);
+		await atomicWrite(
+			join(state, '.env'),
+			`PLUOX_IMAGE=${image}\nPLUOX_API_ORIGIN=${apiOrigin}\n`,
+		);
 		await atomicWrite(
 			join(state, 'compose.yaml'),
 			await readFile(join(source, 'deploy/compose.yaml'), 'utf8'),
@@ -195,9 +205,14 @@ export async function checkApplication({
 	}
 }
 
-export function command(program, args, { capture = false, signal } = {}) {
+export function command(
+	program,
+	args,
+	{ capture = false, signal, env = process.env } = {},
+) {
 	return new Promise((resolveCommand, reject) => {
 		let child = spawn(program, args, {
+			env,
 			signal,
 			stdio: ['ignore', capture ? 'pipe' : 'inherit', 'inherit'],
 		});
@@ -225,6 +240,10 @@ async function atomicWrite(path, text) {
 }
 
 function compose(run, state, args, options) {
+	let env = { ...process.env };
+	// Compose must use the saved release configuration, including during rollback.
+	delete env.PLUOX_API_ORIGIN;
+	delete env.PLUOX_IMAGE;
 	return run(
 		'docker',
 		[
@@ -237,7 +256,23 @@ function compose(run, state, args, options) {
 			join(state, 'compose.yaml'),
 			...args,
 		],
-		options,
+		{ ...options, env },
+	);
+}
+
+export function validateApiOrigin(value) {
+	try {
+		let url = new URL(value);
+		if (
+			url.protocol === 'https:' &&
+			!url.username &&
+			!url.password &&
+			(value === url.origin || value === url.origin + '/')
+		)
+			return url.origin;
+	} catch {}
+	throw new Error(
+		'Set PLUOX_API_ORIGIN to an HTTPS origin without credentials, path, or query.',
 	);
 }
 

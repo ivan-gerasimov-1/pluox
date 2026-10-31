@@ -8,6 +8,7 @@ import {
 	pipelineIdentity,
 	checkApplication,
 	command,
+	validateApiOrigin,
 } from './autoDeploy.mjs';
 
 async function fixture(t) {
@@ -26,6 +27,7 @@ async function fixture(t) {
 		source,
 		sha: 'a'.repeat(40),
 		number: 12,
+		apiOrigin: 'https://api.example.test',
 		calls,
 		run: async (program, args, options) => {
 			calls.push({ program, args, options });
@@ -50,7 +52,7 @@ test('successful deployment records the release and retains rollback files', asy
 	await deploy(options);
 	assert.equal(
 		await readFile(join(options.state, '.env'), 'utf8'),
-		`PLUOX_IMAGE=pluox/web:${options.sha}\n`,
+		`PLUOX_IMAGE=pluox/web:${options.sha}\nPLUOX_API_ORIGIN=${options.apiOrigin}\n`,
 	);
 	assert.equal(
 		await readFile(join(options.state, 'previous.env'), 'utf8'),
@@ -144,6 +146,47 @@ test('only main pushes with valid identities can deploy', () => {
 	]) {
 		assert.throws(() => pipelineIdentity({ ...env, [key]: value }));
 	}
+});
+
+test('API configuration requires a plain HTTPS origin', () => {
+	assert.equal(
+		validateApiOrigin('https://api.example.test/'),
+		'https://api.example.test',
+	);
+	for (let value of [
+		undefined,
+		'',
+		'http://api.example.test',
+		'https://user:password@api.example.test',
+		'https://api.example.test/path',
+		'https://api.example.test?token=value',
+	]) {
+		assert.throws(() => validateApiOrigin(value), /PLUOX_API_ORIGIN/u);
+	}
+});
+
+test('missing API configuration fails before building or changing the release', async (t) => {
+	let options = await fixture(t);
+	delete options.apiOrigin;
+	await assert.rejects(deploy(options), /PLUOX_API_ORIGIN/u);
+	assert.equal(options.calls.length, 0);
+	await assertPrevious(options.state);
+});
+
+test('rollback restores the previous API origin rather than the CI environment', async (t) => {
+	let options = await fixture(t);
+	let oldEnv =
+		'PLUOX_IMAGE=pluox/web:previous\nPLUOX_API_ORIGIN=https://previous.example.test\n';
+	await writeFile(join(options.state, '.env'), oldEnv);
+	options.check = async () => {
+		throw new Error('API failed');
+	};
+	await assert.rejects(deploy(options), /API failed/u);
+	assert.equal(await readFile(join(options.state, '.env'), 'utf8'), oldEnv);
+	assert.equal(
+		Object.hasOwn(options.calls.at(-1).options.env, 'PLUOX_API_ORIGIN'),
+		false,
+	);
 });
 
 function applicationResponses() {
