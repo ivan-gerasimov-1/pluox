@@ -8,6 +8,7 @@ import { IRouter } from '@/web/router';
 
 import { useEffectOnce } from '@/web/hooks/useEffectOnce';
 
+import { PreviewControls } from '@/web/modules/previews/previewControls';
 import { ContainerProvider } from '@/web/modules/serviceContainer/provider';
 
 import { Dialog } from '@kit/dialog/react/dialog/dialog';
@@ -44,6 +45,7 @@ export function App(props: IAppProps) {
 				<ReactQueryDevtools initialIsOpen={false} />
 
 				<DialogClientProvider>
+					{import.meta.env.APP_PREVIEW === 'true' && <PreviewControls />}
 					<RouterProvider router={props.router} />
 
 					<Dialog />

@@ -1,7 +1,13 @@
 const BUILDER = 'pluox-one-cpu';
 
 // CI steps and this builder share CPU 0, keeping their aggregate compute to one core.
-export async function buildImage({ image, source, run, signal }) {
+export async function buildImage({
+	image,
+	source,
+	run,
+	signal,
+	preview = false,
+}) {
 	try {
 		await run('docker', ['buildx', 'inspect', BUILDER], {
 			capture: true,
@@ -34,6 +40,8 @@ export async function buildImage({ image, source, run, signal }) {
 			'--load',
 			'--build-arg',
 			'APP_API_URL=/api',
+			'--build-arg',
+			`APP_PREVIEW=${preview}`,
 			'-t',
 			image,
 			source,

@@ -320,3 +320,32 @@ test('GitHub failures never expose tokens in the error', async () => {
 		/^Error: GitHub returned 403/u,
 	);
 });
+
+test('ready status is published only after routing has been applied by finalize', async (t) => {
+	let options = await fixture(t);
+	let states = [];
+	options.reporter = {
+		send: async (release, state) => states.push(state),
+		reconcile: async () => {},
+	};
+	await synchronize(options);
+	assert.deepEqual(states, ['in_progress']);
+	await finalize(options);
+	assert.deepEqual(states, ['in_progress', 'success']);
+});
+
+test('reporting failure does not stop deployment or route activation', async (t) => {
+	let options = await fixture(t);
+	options.reporter = {
+		send: async () => {
+			throw new Error('GitHub unavailable');
+		},
+		reconcile: async () => {},
+	};
+	await synchronize(options);
+	await finalize(options);
+	assert.equal(
+		(await json(options.state, 'applied.json'))[0].sha,
+		pull().head.sha,
+	);
+});

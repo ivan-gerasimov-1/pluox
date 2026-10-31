@@ -20,6 +20,8 @@ test('builds require the named builder and load images into the host engine', as
 		'--load',
 		'--build-arg',
 		'APP_API_URL=/api',
+		'--build-arg',
+		'APP_PREVIEW=false',
 		'-t',
 		'pluox/test:sha',
 		'/source',
@@ -78,4 +80,15 @@ test('cancellation does not create another builder', async () => {
 		/cancelled/u,
 	);
 	assert.equal(calls.length, 1);
+});
+
+test('preview builds explicitly opt into demo mode', async () => {
+	let calls = [];
+	await buildImage({
+		image: 'preview',
+		source: '/source',
+		preview: true,
+		run: async (program, args) => calls.push(args),
+	});
+	assert.ok(calls.at(-1).includes('APP_PREVIEW=true'));
 });

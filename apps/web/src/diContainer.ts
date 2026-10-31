@@ -25,6 +25,8 @@ import { syncModule } from '@pluox/core/src/modules/sync/sync.module';
 import { userModule } from '@pluox/core/src/modules/user/user.module';
 import { venueModule } from '@pluox/core/src/modules/venue/venue.module';
 
+import { PREVIEW_NAMESPACE } from '@/web/modules/previews/demoData';
+
 export function createDIContainer(options?: {
 	isGlobal?: boolean;
 	isDevelopment?: boolean;
@@ -49,7 +51,12 @@ const sharedModule: IModule = {
 	providers: [
 		{
 			token: EServiceToken.PROCESS_ENV,
-			useValue: import.meta.env,
+			useValue: {
+				...import.meta.env,
+				...(import.meta.env.APP_PREVIEW === 'true'
+					? { STORAGE_NAMESPACE: PREVIEW_NAMESPACE }
+					: {}),
+			},
 		},
 
 		{

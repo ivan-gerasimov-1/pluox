@@ -28,6 +28,7 @@ steps:
     environment:
       CI: 'true'
       APP_API_URL: /api
+      APP_PREVIEW: 'false'
       APP_UMAMI_SCRIPT_URL: ''
       APP_UMAMI_WEBSITE_ID: ''
       APP_SENTRY_DSN: ''
