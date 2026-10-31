@@ -53,6 +53,12 @@ named manual pipelines from trusted app `main` for eligible owner PRs after
 successful push CI. GitHub Deployments publish the exact SHA, environment URL and
 pipeline log link. Closing, merging or drafting a PR removes its preview.
 
+Each preview has its own browser-storage namespace and demo data, but shares the
+existing external API: it is not a separate backend/database environment.
+**Reset demo** clears only that preview namespace. Production builds disable demo
+mode. For a failed preview, follow the GitHub Deployment pipeline log link;
+do not run legacy host scripts from an application branch.
+
 Host setup, controller behavior and recovery are documented in the private
 [infra preview guide](https://github.com/ivan-gerasimov-1/vps/blob/main/apps/pluox/deploy/previews/README.md).
 Do not copy controllers or host credentials back into this repository.
