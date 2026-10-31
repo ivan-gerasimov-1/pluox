@@ -30,11 +30,7 @@ export function DashboardView() {
 
 	return (
 		<Grid className="grow" cols="2" rows="6">
-			<Sheet
-				className="col-span-2 row-1 bg-linear-to-br from-violet-600 to-indigo-700 text-white"
-				gap="xs"
-				asChild
-			>
+			<Sheet className="col-span-2 row-1" gap="xs" asChild>
 				<Stack center>
 					<Title className="text-4xl!">
 						{intlService.formatCurrency(monthlyTotal, {
