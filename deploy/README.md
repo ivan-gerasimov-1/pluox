@@ -9,10 +9,10 @@ and a small verified-release bridge.
 ## Pinned infrastructure release
 
 `infraRelease.lock` pins a full infra commit and the SHA-256 digest of its source
-manifest. Before merging this workflow, an administrator must install that release
+manifest. Before merging a pin update, an administrator must install that release
 at `/opt/vps-infra/releases/<commit>` using the infra repository's
-`scripts/installPluoxRelease.sh`. Installation is a separate operational step;
-this PR does not install a bundle or change running services.
+`scripts/installPluoxRelease.sh`. Installing a bundle and changing the app pin are
+separate operations; application CI does not install host infrastructure.
 
 Both deployment steps mount that directory read-only. `infraRelease.sh` verifies
 the manifest and source files before executing anything. It uses no network,
@@ -25,10 +25,11 @@ from the bundle, verifies its OCI revision label, and preserves the per-PR actio
 SHA and pipeline URL. Existing locks, state paths and resource limits stay in place.
 The receiver/dispatcher remain the installed compatible per-PR version.
 
-Legacy `autoDeploy`, rollback and preview implementation files are temporarily
-retained for rollback of this wiring. CI no longer runs their implementation tests.
-Remove them only after production deploy/rollback and preview create/update/close
-have been verified. Keep the application runtime `deploy/Caddyfile`.
+Deployment/rollback implementation, Compose, preview controllers, systemd units
+and their tests belong only to the infra repository. This directory keeps runtime
+`Caddyfile`, deployment documentation and the verified-release bridge/lock/tests.
+Previous app wiring remains available in Git history; keep its compatible bundles
+and images when planning a rollback.
 
 ## CI setup
 
@@ -45,7 +46,22 @@ The VPS must have the Compose stack in `/opt/pluox`, working HTTPS, and
 Successful pushes to `main` deploy automatically. Branch pushes and ordinary
 manual runs validate without deploying.
 
-For optional per-PR frontend environments, see [PR previews](previews/README.md).
+## PR previews
+
+Preview workers also use the pinned infrastructure release. The dispatcher starts
+named manual pipelines from trusted app `main` for eligible owner PRs after
+successful push CI. GitHub Deployments publish the exact SHA, environment URL and
+pipeline log link. Closing, merging or drafting a PR removes its preview.
+
+Each preview has its own browser-storage namespace and demo data, but shares the
+existing external API: it is not a separate backend/database environment.
+**Reset demo** clears only that preview namespace. Production builds disable demo
+mode. For a failed preview, follow the GitHub Deployment pipeline log link;
+do not run legacy host scripts from an application branch.
+
+Host setup, controller behavior and recovery are documented in the private
+[infra preview guide](https://github.com/ivan-gerasimov-1/vps/blob/main/apps/pluox/deploy/previews/README.md).
+Do not copy controllers or host credentials back into this repository.
 
 ## Manual deployment
 
