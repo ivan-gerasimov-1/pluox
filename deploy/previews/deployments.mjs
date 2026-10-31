@@ -3,7 +3,13 @@ import { join } from 'node:path';
 
 const REPOSITORY = 'ivan-gerasimov-1/pluox';
 
-export function deploymentReporter({ state, domain, token, request = fetch }) {
+export function deploymentReporter({
+	state,
+	domain,
+	token,
+	pipelineUrl = '',
+	request = fetch,
+}) {
 	let file = join(state, 'githubDeployments.json');
 	async function records() {
 		try {
@@ -47,7 +53,7 @@ export function deploymentReporter({ state, domain, token, request = fetch }) {
 			throw new Error('Invalid preview identity.');
 		let cache = await records();
 		let key = `${number}:${sha}`;
-		let url = `https://pr-${number}.${domain}`;
+		let url = status === 'success' ? `https://pr-${number}.${domain}` : '';
 		let record = cache[key];
 		if (!record) {
 			let deployment = await api('deployments', {
@@ -69,16 +75,18 @@ export function deploymentReporter({ state, domain, token, request = fetch }) {
 		if (
 			record.status === status &&
 			record.url === url &&
-			record.description === description
+			record.description === description &&
+			record.pipelineUrl === pipelineUrl
 		)
 			return;
 		await api(`deployments/${record.id}/statuses`, {
 			state: status,
 			environment_url: url,
+			log_url: pipelineUrl,
 			description: description.slice(0, 140),
 			auto_inactive: false,
 		});
-		cache[key] = { ...record, status, url, description };
+		cache[key] = { ...record, status, url, description, pipelineUrl };
 		await save(cache);
 	}
 	async function reconcile(active) {

@@ -108,6 +108,7 @@ export async function synchronize({
 	let previous = await releases(state, 'applied.json');
 	let selected = selectPulls(await listPulls(api));
 	let next = [];
+	let failures = [];
 	for (let pr of selected) {
 		let old = previous.find((release) => release.number === pr.number);
 		if (old?.sha === pr.head.sha) {
@@ -170,6 +171,7 @@ export async function synchronize({
 					'Preview build or application checks failed.',
 				),
 			);
+			failures.push(pr.number);
 			console.error(`PR #${pr.number}: ${error.message}`);
 			if (old) next.push(old);
 		}
@@ -182,6 +184,10 @@ export async function synchronize({
 	);
 	await atomic(join(state, 'planned.json'), JSON.stringify(next) + '\n');
 	await atomic(join(state, 'routes.caddy'), routes(next, domain));
+	if (failures.length)
+		throw new Error(
+			`Preview reconciliation failed for PRs: ${failures.join(', ')}.`,
+		);
 }
 
 async function buildPreview({ state, release, apiOrigin, run }) {
@@ -360,7 +366,7 @@ export async function restore({ state, domain, reporter = NO_REPORTER }) {
 				reporter.send(
 					release,
 					'failure',
-					'Caddy rejected the preview routes; previous version retained.',
+					'Preview pipeline failed; previous version retained.',
 				),
 			);
 	}
@@ -378,6 +384,7 @@ if (
 	config.reporter = deploymentReporter({
 		...config,
 		token: process.env.PREVIEW_GITHUB_TOKEN,
+		pipelineUrl: process.env.PREVIEW_PIPELINE_URL,
 	});
 	let action = { sync: synchronize, finalize, restore }[process.argv[2]];
 	if (!action) throw new Error('Expected sync, finalize, or restore.');
