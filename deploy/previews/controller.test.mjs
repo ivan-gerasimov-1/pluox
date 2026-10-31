@@ -228,7 +228,7 @@ test('a head changed during checkout cannot be built', async (t) => {
 		args.includes('rev-parse') ? 'c'.repeat(40) : original(program, args);
 	await synchronize(options);
 	assert.deepEqual(await json(options.state, 'planned.json'), []);
-	assert.ok(!options.calls.some(({ args }) => args[0] === 'build'));
+	assert.ok(!options.calls.some(({ args }) => args.includes('build')));
 });
 
 test('unchanged heads do not rebuild', async (t) => {

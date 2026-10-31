@@ -96,8 +96,8 @@ test('failed builds leave the running application untouched', async (t) => {
 		throw new Error('Build failed');
 	};
 	await assert.rejects(deploy(options), /Build failed/u);
-	assert.equal(commands.length, 1);
-	assert.equal(commands[0][0], 'build');
+	assert.ok(commands.every((args) => args[0] === 'buildx'));
+	assert.ok(!commands.some((args) => args[0] === 'compose'));
 	await assertPrevious(options.state);
 });
 

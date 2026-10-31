@@ -36,7 +36,7 @@ rejected. Use the rollback procedure for an intentional rollback.
 
 ## Checks and state
 
-Node 24 runs `autoDeploy.mjs` under a shared `flock`, builds
+Node 24 runs `autoDeploy.mjs` under a shared `flock`, uses the shared one-core Buildx builder to build
 `pluox/web:<commit SHA>`, and updates Compose. Older or repeated pipeline numbers
 are skipped. Before accepting a release it checks health, SPA routing, asset
 404s, currency rates, and public HTTPS.
