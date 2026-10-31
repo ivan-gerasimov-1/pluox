@@ -1,10 +1,16 @@
 # PR previews
 
 Signed GitHub `pull_request` and successful Woodpecker `status` events queue a
-host reconciliation. A timer checks hourly if an event is missed. The controller
-deploys the three oldest open, non-draft PRs authored by the owner, from this
-repository to `main`, after successful push CI. Forks are excluded. Keep
-Woodpecker PR builds disabled and trust all repository writers.
+host dispatcher. Every two minutes a timer retries missed events and updates
+that arrived during a running pipeline. The dispatcher starts a **manual
+Woodpecker pipeline on current `main`**, with `PLUOX_PREVIEW_RECONCILE=true`.
+It never builds images, runs PR code, or changes routes.
+
+The pipeline's `previewReconciliation` step synchronously builds, checks, and
+activates the three oldest open, non-draft PRs authored by the owner, from this
+repository to `main`, after successful push CI. Its logs and exit status belong
+to Woodpecker. Forks are excluded. Keep Woodpecker PR builds disabled and trust
+all repository writers. PRs cannot choose the workflow ref or dispatch arguments.
 
 Preview URLs are `https://pr-N.<PREVIEW_DOMAIN>`. They share the existing API and
 have separate browser storage. Closing, merging, or drafting a PR removes its
@@ -17,7 +23,15 @@ Install from reviewed `main`, not a PR checkout. The installed controller image
 and scripts are snapshots. Keep domain, API origin, and credentials outside Git.
 
 - `/etc/pluoxPreviews.env`: `PREVIEW_DOMAIN` and `PLUOX_API_ORIGIN`, as in
-  `config.env.example`. Optional read-only `PREVIEW_GITHUB_TOKEN` raises API limits.
+  `config.env.example`, plus the deployment reporting token described below.
+  This file is mounted only into the trusted main preview job.
+- `/etc/pluoxPreviewDispatch.env`: `PREVIEW_CI_ORIGIN` (HTTPS origin),
+  `PREVIEW_CI_REPOSITORY` (numeric Woodpecker repository ID), `PREVIEW_CI_TOKEN`
+  (a Woodpecker user API token allowed to read/start pipelines), and optional
+  read-only `PREVIEW_GITHUB_TOKEN` for PR/status API limits. Root-owned, mode
+  0600. Never pass the CI token to PR builds or the preview worker.
+  Woodpecker user tokens are not repository-scoped: use a dedicated account
+  limited to this repository where available; treat this token as sensitive.
 - `/etc/pluoxPreviewWebhook.env`: a random `PLUOX_WEBHOOK_SECRET` of at least
   32 characters; root-owned, mode 0600. Never send it in chat or logs.
 - `/opt/pluox-previews`: controller state and generated routes, directory 0755.
@@ -26,9 +40,20 @@ and scripts are snapshots. Keep domain, API origin, and credentials outside Git.
   `/root/.docker/buildx` in production deploy and controller containers.
 
 Build `deploy/previews/Dockerfile` into `pluox/preview-controller:installed`.
-Install `previewCycle.sh` executable under `/opt/pluox-preview-controller`, and
+Install `previewCycle.sh` and `previewPipeline.sh` executable under
+`/opt/pluox-preview-controller`, and
 all `.service`, `.timer`, and `.path` files from this directory under
-`/etc/systemd/system`. The service shares production's existing deployment lock.
+`/etc/systemd/system`. The dispatcher uses its own lock; the Woodpecker preview
+step holds production's existing deployment lock until activation and cleanup
+finish. The installed controller must match the reviewed workflow release.
+
+The trusted main job mounts `/etc/caddy` read-only. The worker uses the installed
+static `/usr/local/bin/caddy` (including DNS plugins) in a host-network container
+with `/etc/caddy/gerasimov.env` to reload the host's loopback admin endpoint.
+Do not expose that endpoint publicly. This uses the same configuration and
+credentials as the existing systemd reload; it needs neither privileged mode,
+SSH access, nor host PID access. These mounts and Docker access are restricted
+to a manual `main` preview job, not an ordinary branch push.
 
 Configure DNS-only `*.PREVIEW_DOMAIN` to the VPS. Add the block in
 `hostCaddy.example` to host Caddy, replacing its placeholders locally. Existing
@@ -42,6 +67,33 @@ JSON content, SSL verification enabled, the matching secret, and events
 **Pull requests** and **Statuses**. `setupWebhook.mjs` can configure only that
 endpoint using an administrative token supplied to a one-shot container; it
 preserves the existing CI webhook. Do not store that token in the listener or CI.
+
+## Migrating from background deployment
+
+Merge and review the workflow on `main` **before** enabling the new dispatcher.
+Do not install a PR snapshot with Docker socket or Caddy configuration access.
+
+1. Stop `pluoxPreviews.timer` and `pluoxPreviewEvents.path`. Wait for any running
+   `pluoxPreviews.service` and production/preview pipelines to finish; do not
+   interrupt a route switch.
+2. Create `/etc/pluoxPreviewDispatch.env` from `dispatch.env.example` with mode
+   0600 and a dedicated Woodpecker API token. Keep deployment reporting
+   credentials in `/etc/pluoxPreviews.env`; they are not needed by the dispatcher.
+3. Build the controller image from the reviewed main checkout and install both
+   shell scripts and the updated service/timer as described above. Preserve all
+   state files, routes, existing containers, and the webhook secret.
+4. Run `systemctl daemon-reload`, start `pluoxPreviews.service`, then enable/start
+   the timer and path unit. The journal should show only a queued pipeline ID,
+   not application build output.
+5. Open that pipeline in Woodpecker. Verify `previewReconciliation` logs the
+   build/check/reload work, its result is green, and GitHub Deployment links its
+   logs and the ready environment. Push an update to the test PR and verify the
+   new SHA. Close the PR and verify cleanup runs in another pipeline.
+
+To roll back, pause the timer/path unit, wait for CI to finish, and reinstall the
+previous reviewed controller image, shell script, and service/timer. Preserve
+preview state and routes. Never run the old background worker alongside the new
+CI worker.
 
 ## One-core build budget
 
@@ -60,14 +112,24 @@ are loaded into the local engine; there is no fallback to unrestricted builds.
 The receiver verifies HMAC-SHA256 over the raw body, limits requests to 1 MiB,
 and acknowledges only after a queue marker is written. Repeated events coalesce;
 events arriving during a build queue another cycle. Failed deliveries can be
-redelivered in GitHub; the hourly timer repairs missed work.
+redelivered in GitHub; the two-minute timer repairs missed work. Pending/running
+pipelines coalesce events; changed heads and CI readiness are dispatched after
+the current pipeline completes. Failed/cancelled pipelines retry on the next
+cycle. A successful unchanged reconciliation does not dispatch another pipeline.
+A crash between CI accepting a dispatch and its ID being saved can create a
+duplicate pipeline; the shared deployment lock and unchanged-head check prevent
+concurrent activation or unnecessary rebuilding.
 
 A new container uses a second localhost port. Health, SPA, and API checks precede
 route reload. Failed updates keep the prior preview; failed reloads restore its
 routes. Cleanup follows successful reload and removes only obsolete preview
 containers and image tags. Build cache remains; monitor `docker system df`.
 
-Check `journalctl -u pluoxPreviews.service` and GitHub webhook deliveries. Verify
+Check the Woodpecker `previewReconciliation` logs for build, application-check,
+and route-reload failures. A failed candidate makes the pipeline fail instead
+of silently succeeding; previous applied routes remain active. Check
+`journalctl -u pluoxPreviews.service` for dispatch/API failures, and GitHub
+webhook deliveries for intake failures. Verify
 create/update/close and public HTTPS after installation. Each preview serves with
 128 MiB and 0.5 CPU. Stop the timer and path unit to pause reconciliation; stop
 the listener to pause webhook intake. Existing previews remain running.
@@ -79,7 +141,9 @@ restricted to this repository: **Deployments: read/write**, **Commit statuses:
 read**. The controller publishes pending, building, failure, ready, and inactive
 states to native GitHub Deployments, with the preview URL and exact SHA. It never
 auto-merges branches. Reporting failures are logged and retried without stopping
-serving containers; ready is published only after Caddy reload succeeds.
+serving containers; ready is published only after Caddy reload succeeds. Pending/building/failure
+statuses link to the Woodpecker pipeline logs, not an unready environment URL;
+the environment URL is published only with success.
 
 Preview image builds pass `APP_PREVIEW=true`. They initialize a separate browser
 storage namespace with a guest user, categories, venues, sample expenses, and

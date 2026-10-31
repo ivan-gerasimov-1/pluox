@@ -1,9 +1,9 @@
 [Unit]
-Description=Check Pluox PR previews hourly as a webhook fallback
+Description=Retry Pluox preview dispatch and follow updates during CI
 
 [Timer]
 OnBootSec=2min
-OnUnitInactiveSec=1h
+OnUnitInactiveSec=2min
 Unit=pluoxPreviews.service
 
 [Install]

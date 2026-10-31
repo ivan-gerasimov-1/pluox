@@ -13,6 +13,7 @@ async function fixture(t) {
 		state,
 		domain: 'preview.example.test',
 		token: 'test-token',
+		pipelineUrl: 'https://ci.example.test/repos/1/pipeline/42',
 		request: async (url, options) => {
 			calls.push({ url, body: JSON.parse(options.body) });
 			return Response.json({ id: 123 });
@@ -26,7 +27,7 @@ async function fixture(t) {
 	};
 }
 
-test('deployment uses the exact PR SHA and publishes a URL without merging branches', async (t) => {
+test('deployment uses the exact PR SHA and links CI logs, not an unready preview', async (t) => {
 	let { reporter, release, calls } = await fixture(t);
 	await reporter.send(release, 'in_progress', 'Building');
 	assert.equal(calls[0].body.ref, release.sha);
@@ -36,10 +37,18 @@ test('deployment uses the exact PR SHA and publishes a URL without merging branc
 	assert.equal(calls[0].body.production_environment, false);
 	assert.equal(calls[0].body.environment, 'preview-pr-136');
 	assert.equal(calls[1].body.state, 'in_progress');
+	assert.equal(calls[1].body.environment_url, '');
 	assert.equal(
-		calls[1].body.environment_url,
+		calls[1].body.log_url,
+		'https://ci.example.test/repos/1/pipeline/42',
+	);
+	await reporter.send(release, 'success', 'Ready');
+	assert.equal(
+		calls.at(-1).body.environment_url,
 		'https://pr-136.preview.example.test',
 	);
+	await reporter.send(release, 'failure', 'Failed');
+	assert.equal(calls.at(-1).body.environment_url, '');
 });
 
 test('a repeated cycle reuses the deployment and does not spam unchanged statuses', async (t) => {

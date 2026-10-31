@@ -180,7 +180,7 @@ test('a failed replacement keeps the old preview and uses a separate port', asyn
 	options.check = async () => {
 		throw new Error('Cloudflare challenge');
 	};
-	await synchronize(options);
+	await assert.rejects(synchronize(options), /failed for PRs: 133/u);
 	assert.deepEqual(await json(options.state, 'planned.json'), [old]);
 	assert.ok(
 		options.calls.some(({ args }) => args.includes('127.0.0.1:20267:8080')),
@@ -226,7 +226,7 @@ test('a head changed during checkout cannot be built', async (t) => {
 	let original = options.run;
 	options.run = (program, args) =>
 		args.includes('rev-parse') ? 'c'.repeat(40) : original(program, args);
-	await synchronize(options);
+	await assert.rejects(synchronize(options), /failed for PRs: 133/u);
 	assert.deepEqual(await json(options.state, 'planned.json'), []);
 	assert.ok(!options.calls.some(({ args }) => args.includes('build')));
 });

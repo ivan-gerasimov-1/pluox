@@ -1,7 +1,9 @@
 # Run trusted repository pushes and manual jobs on our ARM64 runner.
 # Pull requests are intentionally excluded from this shared VPS.
 when:
-  - event: [push, manual]
+  - event: push
+  - event: manual
+    evaluate: 'PLUOX_PREVIEW_RECONCILE != "true" || CI_COMMIT_BRANCH == "main"'
   - event: deployment
     branch: main
     evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && (CI_PIPELINE_DEPLOY_TASK == "deploy" || CI_PIPELINE_DEPLOY_TASK == "rollback")'
@@ -9,7 +11,9 @@ when:
 steps:
   - name: install
     when: &buildChecks
-      - event: [push, manual]
+      - event: push
+      - event: manual
+        evaluate: 'PLUOX_PREVIEW_RECONCILE != "true"'
       - event: deployment
         evaluate: 'CI_PIPELINE_DEPLOY_TASK == "deploy"'
     image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
@@ -47,6 +51,24 @@ steps:
     image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
     commands:
       - node --test deploy/*.test.mjs deploy/previews/*.test.mjs
+
+  - name: previewReconciliation
+    image: docker:29.9.2-cli
+    when:
+      - event: manual
+        branch: main
+        evaluate: 'PLUOX_PREVIEW_RECONCILE == "true"'
+    environment:
+      PREVIEW_PIPELINE_URL: ${CI_PIPELINE_URL}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/pluox-preview-controller:/opt/pluox-preview-controller:ro
+      - /etc/pluoxPreviews.env:/etc/pluoxPreviews.env:ro
+      - /etc/caddy:/etc/caddy:ro
+      - /run/lock/pluox-deploy.lock:/run/lock/pluox-deploy.lock
+    commands:
+      - apk add --no-cache util-linux
+      - flock --exclusive --no-fork /run/lock/pluox-deploy.lock sh /opt/pluox-preview-controller/previewPipeline.sh
 
   - name: deployFrontend
     image: docker:29.9.2-cli
