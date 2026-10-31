@@ -54,7 +54,9 @@ implemented yet.
 Woodpecker runs installation, unit tests, a production web build, and deployment
 script tests on repository pushes and manual runs, with one Vitest worker.
 Pull request events are excluded on the shared self-hosted server. Successful
-pushes to `main` also deploy the frontend using the host Docker socket. This
+pushes to `main` also deploy the frontend using the host Docker socket. A
+deployment event for `production` with task `deploy` can redeploy the current
+`main` commit after the same checks. This
 requires trusted volumes in Woodpecker; no registry or SSH secrets are needed.
 
 ## VPS deployment

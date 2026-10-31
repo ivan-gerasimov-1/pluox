@@ -4,7 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export async function main() {
-	let { sha, number } = pipelineIdentity(process.env);
+	let { sha, number, manualDeployment } = pipelineIdentity(process.env);
 	let source = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 	let head = await command('git', ['-C', source, 'rev-parse', 'HEAD'], {
 		capture: true,
@@ -22,6 +22,7 @@ export async function main() {
 			source,
 			sha,
 			number,
+			manualDeployment,
 			apiOrigin: process.env.PLUOX_API_ORIGIN,
 			signal: controller.signal,
 		});
@@ -32,13 +33,19 @@ export async function main() {
 }
 
 export function pipelineIdentity(env) {
+	let manualDeployment = env.CI_PIPELINE_EVENT === 'deployment';
+	let allowedEvent =
+		env.CI_PIPELINE_EVENT === 'push' ||
+		(manualDeployment &&
+			env.CI_PIPELINE_DEPLOY_TARGET === 'production' &&
+			env.CI_PIPELINE_DEPLOY_TASK === 'deploy');
 	if (
-		env.CI_PIPELINE_EVENT !== 'push' ||
+		!allowedEvent ||
 		env.CI_COMMIT_BRANCH !== 'main' ||
 		env.CI_REPO !== 'ivan-gerasimov-1/pluox'
 	) {
 		throw new Error(
-			'Deployment requires a push to this repository main branch.',
+			'Deployment requires main: push or deployment with target production and task deploy.',
 		);
 	}
 	let sha = env.CI_COMMIT_SHA ?? '';
@@ -51,7 +58,9 @@ export function pipelineIdentity(env) {
 	) {
 		throw new Error('Invalid commit SHA or pipeline number.');
 	}
-	return { sha, number };
+	return manualDeployment
+		? { sha, number, manualDeployment: true }
+		: { sha, number };
 }
 
 export async function deploy({
@@ -59,6 +68,7 @@ export async function deploy({
 	source,
 	sha,
 	number,
+	manualDeployment = false,
 	apiOrigin,
 	signal,
 	run = command,
@@ -74,6 +84,19 @@ export async function deploy({
 		}
 	} catch (error) {
 		if (error.code !== 'ENOENT') throw error;
+	}
+	if (manualDeployment) {
+		// Check after acquiring the host lock: a selected pipeline may now be stale.
+		let head = await run(
+			'git',
+			['-C', source, 'ls-remote', 'origin', 'refs/heads/main'],
+			{ capture: true, signal },
+		);
+		if (head !== `${sha}\trefs/heads/main`) {
+			throw new Error(
+				'Select a successful pipeline for the current main commit; older commits cannot be deployed here.',
+			);
+		}
 	}
 	let oldEnv = await readFile(join(state, '.env'), 'utf8');
 	let oldCompose = await readFile(join(state, 'compose.yaml'), 'utf8');

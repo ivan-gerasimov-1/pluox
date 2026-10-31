@@ -2,6 +2,9 @@
 # Pull requests are intentionally excluded from this shared VPS.
 when:
   - event: [push, manual]
+  - event: deployment
+    branch: main
+    evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && CI_PIPELINE_DEPLOY_TASK == "deploy"'
 
 steps:
   - name: install
@@ -46,6 +49,9 @@ steps:
     when:
       - event: push
         branch: main
+      - event: deployment
+        branch: main
+        evaluate: 'CI_PIPELINE_DEPLOY_TARGET == "production" && CI_PIPELINE_DEPLOY_TASK == "deploy"'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/pluox:/opt/pluox
