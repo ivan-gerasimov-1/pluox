@@ -2,7 +2,7 @@ import { ELocaleCode } from '@core/modules/intl/domain/enums';
 
 export const previewControlsI18n = {
 	[ELocaleCode.RU_RU]: {
-		label: 'Preview · демоданные',
+		label: 'PR preview · демоданные',
 		description:
 			'Тестовые расходы и примерные курсы валют. Изменения сохраняются только в этом браузере.',
 		reset: 'Сбросить демо',
@@ -12,7 +12,7 @@ export const previewControlsI18n = {
 			'Не удалось сбросить демоданные. Проверьте доступное место в хранилище браузера.',
 	},
 	[ELocaleCode.EN_US]: {
-		label: 'Preview · demo data',
+		label: 'PR preview · demo data',
 		description:
 			'Sample expenses and illustrative exchange rates. Changes are saved only in this browser.',
 		reset: 'Reset demo',
