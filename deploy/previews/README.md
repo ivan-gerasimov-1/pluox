@@ -35,6 +35,7 @@ stop the timer, rebuild the image, and reinstall the host files.
    `PREVIEW_GITHUB_TOKEN` is a fine-grained token with read-only commit statuses;
    public PR reads need no additional access. Without it GitHub's shared anonymous
    rate limit can delay previews. Never add the file or token to Git.
+
 3. Create an initial route file:
 
    ```sh
