@@ -3,11 +3,13 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { command, validateApiOrigin } from '../autoDeploy.mjs';
 import { buildImage } from '../buildImage.mjs';
+import { deploymentReporter, reportSafely } from './deployments.mjs';
 
 const REPOSITORY = 'ivan-gerasimov-1/pluox';
 const OWNER = 'ivan-gerasimov-1';
 const CONTEXT = 'ci/woodpecker/push/woodpecker';
 const LABEL = 'dev.pluox.preview=true';
+const NO_REPORTER = { send: async () => {}, reconcile: async () => {} };
 
 export function configuration(env) {
 	let domain = env.PREVIEW_DOMAIN ?? '';
@@ -100,6 +102,7 @@ export async function synchronize({
 	api = github,
 	run = command,
 	check = checkPreview,
+	reporter = NO_REPORTER,
 }) {
 	await mkdir(state, { recursive: true });
 	let previous = await releases(state, 'applied.json');
@@ -111,7 +114,17 @@ export async function synchronize({
 			next.push(old);
 			continue;
 		}
-		if (!passed(await api(`commits/${pr.head.sha}/status`))) {
+		let identity = { number: pr.number, sha: pr.head.sha };
+		let status = await api(`commits/${pr.head.sha}/status`);
+		if (!passed(status)) {
+			let failed = ['failure', 'error'].includes(status.state);
+			await reportSafely(() =>
+				reporter.send(
+					identity,
+					failed ? 'failure' : 'pending',
+					failed ? 'CI checks failed.' : 'Waiting for successful CI checks.',
+				),
+			);
 			if (old) next.push(old);
 			continue;
 		}
@@ -125,21 +138,48 @@ export async function synchronize({
 			image: `pluox/preview:${pr.number}-${pr.head.sha}`,
 		};
 		try {
+			await reportSafely(() =>
+				reporter.send(
+					identity,
+					'in_progress',
+					'Building and checking the preview.',
+				),
+			);
 			await buildPreview({ state, release, apiOrigin, run });
 			await check({ release, run });
 			// A PR can close or receive another commit during a long build.
 			let current = await api(`pulls/${pr.number}`);
 			if (!selectPulls([current]).length || current.head.sha !== release.sha) {
+				await reportSafely(() =>
+					reporter.send(
+						identity,
+						'inactive',
+						'PR head changed or PR is no longer eligible.',
+					),
+				);
 				if (old && current.state === 'open') next.push(old);
 				continue;
 			}
 			next.push(release);
 			console.log(`Ready: https://pr-${pr.number}.${domain} (${release.sha})`);
 		} catch (error) {
+			await reportSafely(() =>
+				reporter.send(
+					identity,
+					'failure',
+					'Preview build or application checks failed.',
+				),
+			);
 			console.error(`PR #${pr.number}: ${error.message}`);
 			if (old) next.push(old);
 		}
 	}
+	await atomic(
+		join(state, 'desired.json'),
+		JSON.stringify(
+			selected.map((pr) => ({ number: pr.number, sha: pr.head.sha })),
+		) + '\n',
+	);
 	await atomic(join(state, 'planned.json'), JSON.stringify(next) + '\n');
 	await atomic(join(state, 'routes.caddy'), routes(next, domain));
 }
@@ -165,7 +205,7 @@ async function buildPreview({ state, release, apiOrigin, run }) {
 	let head = await git(['rev-parse', 'FETCH_HEAD'], { capture: true });
 	if (head !== release.sha) throw new Error('PR head changed before checkout.');
 	await git(['checkout', '--detach', '--quiet', 'FETCH_HEAD']);
-	await buildImage({ image: release.image, source, run });
+	await buildImage({ image: release.image, source, run, preview: true });
 	// Recover a candidate left by an interrupted cycle. The applied release has a different SHA.
 	let found = await run(
 		'docker',
@@ -249,10 +289,24 @@ export async function checkPreview({ release, run = command }) {
 	}
 }
 
-export async function finalize({ state, run = command }) {
+export async function finalize({
+	state,
+	run = command,
+	reporter = NO_REPORTER,
+}) {
 	let planned = await releases(state, 'planned.json');
 	// Persist applied state first. Cleanup is retryable if Docker fails partway through.
 	await atomic(join(state, 'applied.json'), JSON.stringify(planned) + '\n');
+	for (let release of planned)
+		await reportSafely(() =>
+			reporter.send(release, 'success', 'Preview is ready.'),
+		);
+	await reportSafely(async () =>
+		reporter.reconcile([
+			...planned,
+			...(await releases(state, 'desired.json')),
+		]),
+	);
 	let containers = await run(
 		'docker',
 		['ps', '-a', '--filter', `label=${LABEL}`, '--format', '{{.Names}}'],
@@ -294,7 +348,22 @@ async function atomic(path, text) {
 	await rename(path + '.new', path);
 }
 
-export async function restore({ state, domain }) {
+export async function restore({ state, domain, reporter = NO_REPORTER }) {
+	let applied = await releases(state, 'applied.json');
+	for (let release of await releases(state, 'planned.json')) {
+		if (
+			!applied.some(
+				(old) => old.sha === release.sha && old.number === release.number,
+			)
+		)
+			await reportSafely(() =>
+				reporter.send(
+					release,
+					'failure',
+					'Caddy rejected the preview routes; previous version retained.',
+				),
+			);
+	}
 	await atomic(
 		join(state, 'routes.caddy'),
 		routes(await releases(state, 'applied.json'), domain),
@@ -306,6 +375,10 @@ if (
 	pathToFileURL(resolve(process.argv[1])).href === import.meta.url
 ) {
 	let config = configuration(process.env);
+	config.reporter = deploymentReporter({
+		...config,
+		token: process.env.PREVIEW_GITHUB_TOKEN,
+	});
 	let action = { sync: synchronize, finalize, restore }[process.argv[2]];
 	if (!action) throw new Error('Expected sync, finalize, or restore.');
 	action(config).catch((error) => {

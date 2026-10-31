@@ -71,3 +71,19 @@ Check `journalctl -u pluoxPreviews.service` and GitHub webhook deliveries. Verif
 create/update/close and public HTTPS after installation. Each preview serves with
 128 MiB and 0.5 CPU. Stop the timer and path unit to pause reconciliation; stop
 the listener to pause webhook intake. Existing previews remain running.
+
+## Deployment links and demo data
+
+Set `PREVIEW_GITHUB_TOKEN` in `/etc/pluoxPreviews.env` to a fine-grained token
+restricted to this repository: **Deployments: read/write**, **Commit statuses:
+read**. The controller publishes pending, building, failure, ready, and inactive
+states to native GitHub Deployments, with the preview URL and exact SHA. It never
+auto-merges branches. Reporting failures are logged and retried without stopping
+serving containers; ready is published only after Caddy reload succeeds.
+
+Preview image builds pass `APP_PREVIEW=true`. They initialize a separate browser
+storage namespace with a guest user, categories, venues, sample expenses, and
+illustrative exchange rates. A visible preview banner offers **Reset demo** with
+confirmation. Edits persist across reloads; reset only clears that namespace.
+Production builds explicitly pass `APP_PREVIEW=false`. Existing PRs gain demo
+mode after their branches include this change and a new head is built.

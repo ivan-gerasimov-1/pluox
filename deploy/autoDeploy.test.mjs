@@ -31,6 +31,8 @@ async function fixture(t) {
 		calls,
 		run: async (program, args, options) => {
 			calls.push({ program, args, options });
+			if (args[0] === 'image' && args[1] === 'inspect')
+				return `sha256:${'1'.repeat(64)}`;
 		},
 		check: async () => {},
 	};
@@ -179,8 +181,9 @@ test('a deployment event can redeploy the current main commit', async (t) => {
 	options.manualDeployment = true;
 	let originalRun = options.run;
 	options.run = async (program, args, settings) => {
-		await originalRun(program, args, settings);
+		let result = await originalRun(program, args, settings);
 		if (program === 'git') return `${options.sha}\trefs/heads/main`;
+		return result;
 	};
 	await deploy(options);
 	assert.equal(options.calls[0].program, 'git');
@@ -324,4 +327,31 @@ test('aborting a running command waits for child termination', async () => {
 	);
 	setTimeout(() => controller.abort(), 30);
 	await assert.rejects(running, { name: 'AbortError' });
+});
+
+test('redeploying the same SHA preserves the previous immutable image for rollback', async (t) => {
+	let options = await fixture(t);
+	let env = `PLUOX_IMAGE=pluox/web:${options.sha}\nPLUOX_API_ORIGIN=https://api.example.test\n`;
+	await writeFile(join(options.state, '.env'), env);
+	await writeFile(
+		join(options.state, 'release.json'),
+		JSON.stringify({ pipeline: 10, sha: options.sha }),
+	);
+	let images = 0;
+	options.run = async (program, args) => {
+		if (args[0] === 'image') return `sha256:${String(++images).repeat(64)}`;
+		return '';
+	};
+	await deploy(options);
+	let previous = JSON.parse(
+		await readFile(join(options.state, 'previous.release.json'), 'utf8'),
+	);
+	let current = JSON.parse(
+		await readFile(
+			join(options.state, 'releases', `${options.sha}.json`),
+			'utf8',
+		),
+	);
+	assert.equal(previous.imageId, `sha256:${'1'.repeat(64)}`);
+	assert.equal(current.imageId, `sha256:${'2'.repeat(64)}`);
 });

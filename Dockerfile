@@ -5,6 +5,7 @@ RUN npm ci --no-audit --no-fund
 
 # These values are public: Vite embeds them in browser JavaScript.
 ARG APP_API_URL=/api
+ARG APP_PREVIEW=false
 ARG APP_UMAMI_SCRIPT_URL=""
 ARG APP_UMAMI_WEBSITE_ID=""
 ARG APP_SENTRY_DSN=""

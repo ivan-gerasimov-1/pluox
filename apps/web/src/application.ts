@@ -9,13 +9,18 @@ import { runMigrations } from '@/migrations';
 import { createUI } from '@/web';
 import type { IWindow } from '@/web/types';
 
+import { initializeDemo } from '@/web/modules/previews/demoData';
+
 export async function runApplication(window: IWindow): Promise<void> {
+	let preview = import.meta.env.APP_PREVIEW === 'true';
+	initializeDemo(window.localStorage, preview);
+
 	let diContainer = createDIContainer({
 		isGlobal: true,
 		isDevelopment: import.meta.env.MODE === 'development',
 	});
 
-	runMigrations();
+	if (!preview) runMigrations();
 
 	await runCore(diContainer);
 	await runUI(window, diContainer);
