@@ -35,4 +35,9 @@ Before writing or changing code, read [engineering-conventions.md](./docs/engine
 
 ## Learned Conventions
 
+- Pluox is public, but VPS infrastructure is private. Deployment CI consumes an
+  administrator-published read-only bundle pinned in `deploy/infraRelease.lock`.
+  Do not copy private infra into this repo or add a GitHub token to app CI.
+  Keep the application Dockerfile and runtime `deploy/Caddyfile` in Pluox.
+
 - Core unit tests are run with the Vitest configuration in `apps/web`; its include patterns must cover `apps/core/src` as well as web tests. The backend test script is currently a placeholder and must not be treated as an implemented test suite.
