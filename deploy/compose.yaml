@@ -1,0 +1,25 @@
+name: pluox
+
+services:
+  web:
+    image: ${PLUOX_IMAGE:?Set PLUOX_IMAGE to a tested image tag or digest}
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:8080:8080'
+    environment:
+      PLUOX_API_ORIGIN: https://pluox-api.gerasimov.dev
+    read_only: true
+    tmpfs:
+      - /config:uid=10001,gid=10001,mode=0700
+      - /data:uid=10001,gid=10001,mode=0700
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    cpus: 0.5
+    logging:
+      driver: local
+      options:
+        max-size: '10m'
+        max-file: '3'

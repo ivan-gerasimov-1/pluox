@@ -1,0 +1,10 @@
+.git
+**/node_modules
+**/build
+**/dist
+**/coverage
+**/.wrangler
+**/.env*
+**/.dev.vars*
+**/*.tsbuildinfo
+**/*.log
