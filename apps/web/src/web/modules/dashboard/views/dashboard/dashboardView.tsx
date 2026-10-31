@@ -32,7 +32,7 @@ export function DashboardView() {
 		<Grid className="grow" cols="2" rows="6">
 			<Sheet className="col-span-2 row-1" gap="xs" asChild>
 				<Stack center>
-					<div className="text-sm font-bold text-violet-600">PR preview · v1</div>
+					<div className="text-sm font-bold text-violet-600">PR preview · v2</div>
 					<Title className="text-4xl!">
 						{intlService.formatCurrency(monthlyTotal, {
 							hideDecimal: true,
