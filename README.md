@@ -37,3 +37,20 @@ React 19 SPA built with Vite, React Router 7, and TanStack Query. PWA-enabled. W
 ### Kit
 
 Shared React UI component library used by `web`. Built with CVA and Radix UI primitives.
+
+## Unit tests
+
+Use Node.js 24 and npm 11 (see `.nvmrc` and `package.json`):
+
+```sh
+npm ci
+npm --workspace=@pluox/web run test
+```
+
+The web Vitest configuration discovers tests in both `apps/web/src` and
+`apps/core/src`. A missing test suite fails the run. Backend tests are not
+implemented yet.
+
+Woodpecker runs installation and unit tests on repository pushes and manual
+runs, with one Vitest worker. Pull request events are excluded on the shared
+self-hosted server. The workflow requires no deployment or registry secrets.

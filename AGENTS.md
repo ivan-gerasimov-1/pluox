@@ -34,3 +34,5 @@ chore(*): cleanup code
 Before writing or changing code, read [engineering-conventions.md](./docs/engineering-conventions.md).
 
 ## Learned Conventions
+
+- Core unit tests are run with the Vitest configuration in `apps/web`; its include patterns must cover `apps/core/src` as well as web tests. The backend test script is currently a placeholder and must not be treated as an implemented test suite.
