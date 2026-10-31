@@ -1,5 +1,12 @@
 # PR previews
 
+> Infrastructure implementation now lives in the private
+> [VPS repo](https://github.com/ivan-gerasimov-1/vps). The new app workflow runs the
+> worker from a pinned, verified host bundle; see [deployment wiring](../README.md).
+> The files and host setup instructions below describe the retained legacy
+> implementation. Do not reinstall them or delete them until the new wiring has
+> passed production deploy/rollback and preview create/update/close acceptance.
+
 Signed GitHub `pull_request` and successful Woodpecker `status` events queue a
 host dispatcher. Every two minutes a timer retries missed events and updates
 that arrived during a running pipeline. The dispatcher starts a **manual
