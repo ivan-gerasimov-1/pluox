@@ -52,7 +52,7 @@ steps:
     commands:
       - node --test deploy/*.test.mjs deploy/previews/*.test.mjs
 
-  - name: previewReconciliation
+  - name: previewDeployment
     image: docker:29.9.2-cli
     when:
       - event: manual
@@ -60,6 +60,9 @@ steps:
         evaluate: 'PLUOX_PREVIEW_RECONCILE == "true"'
     environment:
       PREVIEW_PIPELINE_URL: ${CI_PIPELINE_URL}
+      PLUOX_PREVIEW_ACTION: ${PLUOX_PREVIEW_ACTION}
+      PLUOX_PREVIEW_PR: ${PLUOX_PREVIEW_PR}
+      PLUOX_PREVIEW_SHA: ${PLUOX_PREVIEW_SHA}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/pluox-preview-controller:/opt/pluox-preview-controller:ro

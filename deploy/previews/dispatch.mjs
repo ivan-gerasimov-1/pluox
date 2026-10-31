@@ -37,6 +37,15 @@ export function woodpecker({ origin, token, repository, request = fetch }) {
 export async function dispatch({ state, ci, api = github }) {
 	await mkdir(state, { recursive: true });
 	let selected = selectPulls(await listPulls(api));
+	let applied = await readState(join(state, 'applied.json'), []);
+	let file = join(state, 'pipelineDispatch.json');
+	let previous = await readState(file, undefined);
+	let retry;
+	if (previous) {
+		let pipeline = await ci(`pipelines/${previous.number}`);
+		if (['pending', 'running', 'blocked'].includes(pipeline.status)) return;
+		if (pipeline.status !== 'success') retry = previous.target;
+	}
 	let desired = [];
 	for (let pr of selected) {
 		let status = await api(`commits/${pr.head.sha}/status`);
@@ -44,40 +53,67 @@ export async function dispatch({ state, ci, api = github }) {
 			number: pr.number,
 			sha: pr.head.sha,
 			ready: passed(status),
-			status: status.state,
 		});
 	}
-	let fingerprint = JSON.stringify(desired);
-	let file = join(state, 'pipelineDispatch.json');
-	let previous;
-	try {
-		previous = JSON.parse(await readFile(file, 'utf8'));
-	} catch (error) {
-		if (error.code !== 'ENOENT') throw error;
-	}
-	if (previous) {
-		let pipeline = await ci(`pipelines/${previous.number}`);
-		// Serialize reconciliations; an event while running is retried by the timer.
-		if (['pending', 'running', 'blocked'].includes(pipeline.status)) return;
-		if (pipeline.status === 'success' && previous.fingerprint === fingerprint)
-			return;
-	}
+	let target = nextTarget({ desired, applied, retry });
+	if (!target) return;
+	let prefix = target.action === 'remove' ? 'Remove preview' : 'Preview';
+	let message = `${prefix} PR #${target.number} · ${target.sha.slice(0, 8)}`;
 	let pipeline = await ci('pipelines', {
 		branch: 'main',
-		variables: { PLUOX_PREVIEW_RECONCILE: 'true' },
-		message: 'Reconcile trusted PR previews',
+		variables: {
+			PLUOX_PREVIEW_RECONCILE: 'true',
+			PLUOX_PREVIEW_ACTION: target.action,
+			PLUOX_PREVIEW_PR: String(target.number),
+			PLUOX_PREVIEW_SHA: target.sha,
+		},
+		message,
 	});
 	if (!Number.isSafeInteger(pipeline.number) || pipeline.number < 1)
 		throw new Error('Invalid Woodpecker pipeline response.');
 	await writeFile(
 		file + '.new',
-		JSON.stringify({ number: pipeline.number, fingerprint }) + '\n',
+		JSON.stringify({ number: pipeline.number, target }) + '\n',
 		{ mode: 0o600 },
 	);
 	await rename(file + '.new', file);
-	console.log(
-		`Preview reconciliation queued as Woodpecker pipeline #${pipeline.number}.`,
+	console.log(`${message}: Woodpecker pipeline #${pipeline.number}.`);
+}
+
+export function nextTarget({ desired, applied, retry }) {
+	// Retry failed cleanup even if finalize already persisted applied state.
+	if (retry && !desired.some((pr) => pr.number === retry.number))
+		return { action: 'remove', number: retry.number, sha: retry.sha };
+	if (
+		retry?.action === 'deploy' &&
+		desired.some(
+			(pr) => pr.number === retry.number && pr.sha === retry.sha && pr.ready,
+		)
+	)
+		return retry;
+	let obsolete = applied.find(
+		(release) => !desired.some((pr) => pr.number === release.number),
 	);
+	if (obsolete)
+		return { action: 'remove', number: obsolete.number, sha: obsolete.sha };
+	let pending = desired.find(
+		(pr) =>
+			pr.ready &&
+			!applied.some(
+				(release) => release.number === pr.number && release.sha === pr.sha,
+			),
+	);
+	if (pending)
+		return { action: 'deploy', number: pending.number, sha: pending.sha };
+}
+
+async function readState(file, fallback) {
+	try {
+		return JSON.parse(await readFile(file, 'utf8'));
+	} catch (error) {
+		if (error.code === 'ENOENT') return fallback;
+		throw error;
+	}
 }
 
 if (

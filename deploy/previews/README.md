@@ -4,13 +4,24 @@ Signed GitHub `pull_request` and successful Woodpecker `status` events queue a
 host dispatcher. Every two minutes a timer retries missed events and updates
 that arrived during a running pipeline. The dispatcher starts a **manual
 Woodpecker pipeline on current `main`**, with `PLUOX_PREVIEW_RECONCILE=true`.
-It never builds images, runs PR code, or changes routes.
+It never builds images, runs PR code, or changes routes. The dispatcher compares
+selected PRs with `applied.json`; empty checks, pending CI, and already deployed
+heads do not create pipelines.
 
-The pipeline's `previewReconciliation` step synchronously builds, checks, and
-activates the three oldest open, non-draft PRs authored by the owner, from this
-repository to `main`, after successful push CI. Its logs and exit status belong
-to Woodpecker. Forks are excluded. Keep Woodpecker PR builds disabled and trust
-all repository writers. PRs cannot choose the workflow ref or dispatch arguments.
+Each pipeline targets one PR and exact SHA. Its title is **Preview PR #139 ·
+9608536d**, or **Remove preview PR #139 · 9608536d** for cleanup. Woodpecker still
+adds its native `MANUAL` and `@ main` decorations: the job is API-triggered, and
+its workflow comes from trusted `main`, not the PR branch.
+
+The pipeline's `previewDeployment` step synchronously builds, checks, and
+activates only that PR, or removes only its preview. The three oldest open,
+non-draft PRs authored by the owner, from this repository to `main`, are eligible
+after successful push CI. Its logs and exit status belong to Woodpecker. Forks
+are excluded. Keep Woodpecker PR builds disabled and trust all repository
+writers. PRs cannot choose the workflow ref or dispatch arguments. Before acting,
+the worker validates `PLUOX_PREVIEW_ACTION`, `PLUOX_PREVIEW_PR`, and
+`PLUOX_PREVIEW_SHA`, rechecks eligibility and CI, and skips stale requests. Other
+applied previews and their deployment log links are preserved.
 
 Preview URLs are `https://pr-N.<PREVIEW_DOMAIN>`. They share the existing API and
 have separate browser storage. Closing, merging, or drafting a PR removes its
@@ -83,12 +94,21 @@ Do not install a PR snapshot with Docker socket or Caddy configuration access.
    shell scripts and the updated service/timer as described above. Preserve all
    state files, routes, existing containers, and the webhook secret.
 4. Run `systemctl daemon-reload`, start `pluoxPreviews.service`, then enable/start
-   the timer and path unit. The journal should show only a queued pipeline ID,
+   the timer and path unit. If previews already match selected PR heads, no
+   pipeline should appear. The journal logs queued PR/SHA/pipeline identities,
    not application build output.
-5. Open that pipeline in Woodpecker. Verify `previewReconciliation` logs the
-   build/check/reload work, its result is green, and GitHub Deployment links its
-   logs and the ready environment. Push an update to the test PR and verify the
-   new SHA. Close the PR and verify cleanup runs in another pipeline.
+5. Open or update a test PR and wait for successful push CI. Open its named
+   pipeline in Woodpecker. Verify `previewDeployment` logs the build/check/reload
+   work, its result is green, and GitHub Deployment links its logs and the ready
+   environment. Push another update and verify the new SHA. Close the PR and
+   verify a named removal pipeline cleans it up.
+
+When upgrading from the earlier generic CI reconciliation release, pause the
+same units and wait for running pipelines, then update **both** the trusted main
+workflow and installed controller/scripts before resuming dispatch. Old dispatch
+records are accepted, but cannot produce empty jobs. No new credentials are
+needed. Do not mix a targeted worker with an older dispatcher that sends no
+PR/SHA identity.
 
 To roll back, pause the timer/path unit, wait for CI to finish, and reinstall the
 previous reviewed controller image, shell script, and service/timer. Preserve
@@ -113,9 +133,11 @@ The receiver verifies HMAC-SHA256 over the raw body, limits requests to 1 MiB,
 and acknowledges only after a queue marker is written. Repeated events coalesce;
 events arriving during a build queue another cycle. Failed deliveries can be
 redelivered in GitHub; the two-minute timer repairs missed work. Pending/running
-pipelines coalesce events; changed heads and CI readiness are dispatched after
-the current pipeline completes. Failed/cancelled pipelines retry on the next
-cycle. A successful unchanged reconciliation does not dispatch another pipeline.
+pipelines coalesce events; after completion the next cycle schedules one PR
+that still needs work. Removals take priority, then eligible undeployed heads.
+Failed/cancelled jobs retry while their target remains relevant, including
+cleanup failures after applied state was persisted. A successful unchanged
+preview does not dispatch another pipeline.
 A crash between CI accepting a dispatch and its ID being saved can create a
 duplicate pipeline; the shared deployment lock and unchanged-head check prevent
 concurrent activation or unnecessary rebuilding.
@@ -125,7 +147,7 @@ route reload. Failed updates keep the prior preview; failed reloads restore its
 routes. Cleanup follows successful reload and removes only obsolete preview
 containers and image tags. Build cache remains; monitor `docker system df`.
 
-Check the Woodpecker `previewReconciliation` logs for build, application-check,
+Check the Woodpecker `previewDeployment` logs for build, application-check,
 and route-reload failures. A failed candidate makes the pipeline fail instead
 of silently succeeding; previous applied routes remain active. Check
 `journalctl -u pluoxPreviews.service` for dispatch/API failures, and GitHub
