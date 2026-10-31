@@ -19,3 +19,37 @@ steps:
       CI: 'true'
     commands:
       - npm --workspace=@pluox/web run test -- --maxWorkers=1
+
+  - name: buildWeb
+    image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
+    environment:
+      CI: 'true'
+      APP_API_URL: /api
+      APP_UMAMI_SCRIPT_URL: ''
+      APP_UMAMI_WEBSITE_ID: ''
+      APP_SENTRY_DSN: ''
+    commands:
+      - npm --workspace=@pluox/web run build
+      - test -s apps/web/build/index.html
+      - test -s apps/web/build/sw.js
+
+  - name: deploymentTests
+    image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
+    commands:
+      - node --test deploy/autoDeploy.test.mjs
+
+  - name: deployFrontend
+    image: docker:29.9.2-cli
+    environment:
+      PLUOX_API_ORIGIN:
+        from_secret: pluox_api_origin
+    when:
+      - event: push
+        branch: main
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/pluox:/opt/pluox
+      - /run/lock/pluox-deploy.lock:/run/lock/pluox-deploy.lock
+    commands:
+      - apk add --no-cache 'nodejs~24' util-linux
+      - flock --exclusive --no-fork /run/lock/pluox-deploy.lock node deploy/autoDeploy.mjs
