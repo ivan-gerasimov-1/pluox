@@ -69,7 +69,8 @@ steps:
       - flock --exclusive --no-fork /run/lock/pluox-deploy.lock sh /opt/vps-infra/current/apps/pluox/deploy/run.sh preview
 
   - name: deployFrontend
-    image: docker:29.9.2-cli
+    image: pluox/preview-controller:central
+    pull: false
     environment:
       PLUOX_API_ORIGIN:
         from_secret: pluox_api_origin
@@ -86,5 +87,7 @@ steps:
       - /opt/pluox:/opt/pluox
       - /run/lock/pluox-deploy.lock:/run/lock/pluox-deploy.lock
     commands:
-      - apk add --no-cache 'nodejs~24' util-linux git
+      - apk add --no-cache util-linux
+      - node --version
+      - node -e 'if (Number(process.versions.node.split(".")[0]) < 26) process.exit(1)'
       - flock --exclusive --no-fork /run/lock/pluox-deploy.lock sh /opt/vps-infra/current/apps/pluox/deploy/run.sh production
